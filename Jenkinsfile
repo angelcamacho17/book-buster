@@ -1,7 +1,7 @@
  pipeline {
     agent any
     environment {
-        APPNAME="fe-commerce"
+        APPNAME="fecommerce"
         WEBAPPDIR="/data/webapp/${APPNAME}/${BRANCH_NAME}"
         BASEHREF="/${APPNAME}/${BRANCH_NAME}/"
         GITDIR="." // this is normally '.', except with sparse git directories (several projects in 1 git repo)
@@ -50,7 +50,7 @@
                     sh 'ng build --base-href ${BASEHREF} --progress=false'
                     sh 'rm -f build/logs/dist_${BRANCH_NAME}.tar'
                     sh 'chmod -R 755 dist/'
-                    sh 'tar -cf build/logs/dist_${BRANCH_NAME}.tar dist/* dist/.htaccess'
+                    sh 'tar -cf build/logs/dist_${BRANCH_NAME}.tar dist/* dist/${APPNAME}/.htaccess'
                     archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
                 }
             }
@@ -64,7 +64,7 @@
                     sh 'ng build --base-href ${BASEHREF} --build-optimizer --prod --progress=false'
                     sh 'rm -f build/logs/dist_${BRANCH_NAME}.tar'
                     sh 'chmod -R 755 dist/'
-                    sh 'tar -cf build/logs/dist_${BRANCH_NAME}.tar dist/* dist/.htaccess'
+                    sh 'tar -cf build/logs/dist_${BRANCH_NAME}.tar dist/* dist/${APPNAME}/.htaccess'
                     archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
                 }
             }
