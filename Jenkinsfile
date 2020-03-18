@@ -1,7 +1,7 @@
  pipeline {
     agent any
     environment {
-        APPNAME="fecommerce"
+        APPNAME="fe_commerce"
         WEBAPPDIR="/data/webapp/${APPNAME}/${BRANCH_NAME}"
         BASEHREF="/${APPNAME}/${BRANCH_NAME}/"
         GITDIR="." // this is normally '.', except with sparse git directories (several projects in 1 git repo)
