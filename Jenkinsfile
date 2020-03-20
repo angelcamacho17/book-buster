@@ -47,7 +47,7 @@
             }
             steps {
                 dir(env.GITDIR) {
-                    sh 'ng build --base-href ${BASEHREF} --progress=false'
+                    sh 'ng build --build --base-href ${BASEHREF} --progress=false'
                     sh 'rm -f build/logs/dist_${BRANCH_NAME}.tar'
                     sh 'chmod -R 755 dist/'
                     sh 'tar -cf build/logs/dist_${BRANCH_NAME}.tar dist/* dist/.htaccess'
