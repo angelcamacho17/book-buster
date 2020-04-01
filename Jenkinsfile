@@ -43,6 +43,7 @@
                     branch 'Feature*'
                     branch 'develop'
                     branch 'release*'
+                    branch 'experimental'
                 }
             }
             steps {
@@ -75,6 +76,7 @@
                     branch 'Feature*'
                     branch 'develop'
                     branch 'staging'
+                    branch 'experimental'
                     branch 'release*'
                 }
             }
