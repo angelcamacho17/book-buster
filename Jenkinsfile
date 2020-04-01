@@ -19,13 +19,6 @@
                     // https://askubuntu.com/questions/269727/npm-errors-when-installing-packages-on-windows-share/588962
                     sh 'npm install --no-optional --no-bin-links --registry http://srvsvn1:4873'
                 }
-                dir(env.GITDIR) {
-                    sh 'rm -rf build/experimental/logs && rm -rf dist/experimental/'
-                    sh 'mkdir -p build/experimental && mkdir -p build/experimental/logs'
-                    sh 'rm -rf dist'
-                    // https://askubuntu.com/questions/269727/npm-errors-when-installing-packages-on-windows-share/588962
-                    sh 'npm install --no-optional --no-bin-links --registry http://srvsvn1:4873'
-                }
             }
         }
         stage('lint') {
@@ -61,13 +54,6 @@
                     sh 'tar -cf build/logs/dist_${BRANCH_NAME}.tar dist/* dist/.htaccess'
                     archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
                 }
-                dir(env.GITDIR) {
-                    sh 'ng build --base-href /fecommerce/experimental-app --progress=false'
-                    sh 'rm -f build/logs/dist_experimental.tar'
-                    sh 'chmod -R 755 dist/experimental'
-                    sh 'tar -cf build/logs/dist_experimental.tar dist/experimental/* dist/experimental/.htaccess'
-                    archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
-                }
             }
         }
         stage('build prod') {
@@ -97,10 +83,10 @@
             steps {
               milestone(null)
               dir(env.GITDIR) {
-                    sh 'mkdir -p ${WEBAPPDIR}/config && mkdir -p ${WEBAPPDIR}/dist/experimental'
-                    sh 'rm -rf ${WEBAPPDIR}/dist/experimental'
-                    sh 'mkdir -p ${WEBAPPDIR}/dist/experimental && mkdir -p ${WEBAPPDIR}/config/experimental'
-                    sh 'tar -xf  build/logs/dist_experimental.tar --strip-components=1 -C ${WEBAPPDIR}/dist/experimental'
+                    sh 'mkdir -p ${WEBAPPDIR}/config && mkdir -p ${WEBAPPDIR}/dist'
+                    sh 'rm -rf ${WEBAPPDIR}/dist/'
+                    sh 'mkdir -p ${WEBAPPDIR}/dist/ && mkdir -p ${WEBAPPDIR}/config/'
+                    sh 'tar -xf  build/logs/dist_${BRANCH_NAME}.tar --strip-components=1 -C ${WEBAPPDIR}/dist/'
                     sh '/bin/cp -f ${WEBAPPDIR}/config/* ${WEBAPPDIR}/dist/assets/ 2>/dev/null || :'
                 }
             }
