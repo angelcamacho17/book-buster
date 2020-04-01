@@ -139,7 +139,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/experimental-app",
+            "outputPath": "dist/experimental",
             "index": "projects/experimental-app/src/index.html",
             "main": "projects/experimental-app/src/main.ts",
             "polyfills": "projects/experimental-app/src/polyfills.ts",
