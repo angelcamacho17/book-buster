@@ -54,6 +54,13 @@
                     sh 'tar -cf build/logs/dist_${BRANCH_NAME}.tar dist/* dist/.htaccess'
                     archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
                 }
+                dir(env.GITDIR) {
+                    sh 'ng build --base-href ${BASEHREF} --progress=false'
+                    sh 'rm -f build/logs/dist_experimental.tar'
+                    sh 'chmod -R 755 dist/experimental'
+                    sh 'tar -cf build/logs/dist_experimental.tar dist/experimental/* dist/experimental/.htaccess'
+                    archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
+                }
             }
         }
         stage('build prod') {
@@ -83,10 +90,10 @@
             steps {
               milestone(null)
               dir(env.GITDIR) {
-                    sh 'mkdir -p ${WEBAPPDIR}/config && mkdir -p ${WEBAPPDIR}/dist'
-                    sh 'rm -rf ${WEBAPPDIR}/dist/'
-                    sh 'mkdir -p ${WEBAPPDIR}/dist/ && mkdir -p ${WEBAPPDIR}/config/'
-                    sh 'tar -xf  build/logs/dist_${BRANCH_NAME}.tar --strip-components=1 -C ${WEBAPPDIR}/dist/'
+                    sh 'mkdir -p ${WEBAPPDIR}/config && mkdir -p ${WEBAPPDIR}/dist/experimental'
+                    sh 'rm -rf ${WEBAPPDIR}/dist/experimental'
+                    sh 'mkdir -p ${WEBAPPDIR}/dist/experimental && mkdir -p ${WEBAPPDIR}/config/experimental'
+                    sh 'tar -xf  build/logs/dist_experimental.tar --strip-components=1 -C ${WEBAPPDIR}/dist/experimental'
                     sh '/bin/cp -f ${WEBAPPDIR}/config/* ${WEBAPPDIR}/dist/assets/ 2>/dev/null || :'
                 }
             }
