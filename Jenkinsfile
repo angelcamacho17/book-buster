@@ -19,6 +19,13 @@
                     // https://askubuntu.com/questions/269727/npm-errors-when-installing-packages-on-windows-share/588962
                     sh 'npm install --no-optional --no-bin-links --registry http://srvsvn1:4873'
                 }
+                dir(env.GITDIR) {
+                    sh 'rm -rf build/experimental/logs && rm -rf dist/experimental/'
+                    sh 'mkdir -p build/experimental && mkdir -p build/experimental/logs'
+                    sh 'rm -rf dist'
+                    // https://askubuntu.com/questions/269727/npm-errors-when-installing-packages-on-windows-share/588962
+                    sh 'npm install --no-optional --no-bin-links --registry http://srvsvn1:4873'
+                }
             }
         }
         stage('lint') {
@@ -55,7 +62,7 @@
                     archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
                 }
                 dir(env.GITDIR) {
-                    sh 'ng build --base-href ${BASEHREF} --progress=false'
+                    sh 'ng build --base-href /fecommerce/experimental-app --progress=false'
                     sh 'rm -f build/logs/dist_experimental.tar'
                     sh 'chmod -R 755 dist/experimental'
                     sh 'tar -cf build/logs/dist_experimental.tar dist/experimental/* dist/experimental/.htaccess'
