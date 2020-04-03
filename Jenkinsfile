@@ -95,14 +95,15 @@
                     sh 'mkdir -p ${WEBAPPDIR}/dist/ && mkdir -p ${WEBAPPDIR}/config/'
                     sh 'tar -xf  build/logs/dist_${BRANCH_NAME}.tar --strip-components=1 -C ${WEBAPPDIR}/dist/'
                     sh '/bin/cp -f ${WEBAPPDIR}/config/* ${WEBAPPDIR}/dist/assets/ 2>/dev/null || :'
+                    sh 'pwd && ls'
                 }
               dir(env.GITDIR) {
                     sh 'mkdir -p /data/webapp/${APPNAME}/experimental/config && mkdir -p /data/webapp/${APPNAME}/experimental/dist'
                     sh 'rm -rf /data/webapp/${APPNAME}/experimental/dist/'
-                    sh 'pwd && ls'
                     sh 'mkdir -p /data/webapp/${APPNAME}/experimental/dist/ && mkdir -p /data/webapp/${APPNAME}/experimental/config/'
                     sh 'tar -xf  build/logs/dist_develop_experimental.tar --strip-components=1 -C /data/webapp/${APPNAME}/experimental/dist/'
                     sh '/bin/cp -f /data/webapp/${APPNAME}/experimental/config/* /data/webapp/${APPNAME}/experimental/dist/assets/ 2>/dev/null || :'
+                    sh 'pwd && ls'
                 }
             }
         }
