@@ -24,7 +24,7 @@
             "tsConfig": "projects/fecommerce/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "projects/fecommerce/src/favicon.ico",
+              "favicon.ico",
               "projects/fecommerce/src/assets",
               "projects/fecommerce/src/.htaccess"
             ],
@@ -148,7 +148,7 @@
             "assets": [
               "projects/experimental-app/src/favicon.ico",
               "projects/experimental-app/src/assets",
-              "projects/fecommerce/src/.htaccess"
+              "projects/experimental-app/src/.htaccess"
             ],
             "styles": [
               "projects/experimental-app/src/styles.scss"
