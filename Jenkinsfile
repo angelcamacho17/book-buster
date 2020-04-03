@@ -57,8 +57,8 @@
                 dir(env.GITDIR) {
                     sh 'ng build --project=experimental-app --base-href ${BASEHREF} --progress=false'
                     sh 'rm -f build/logs/dist_${BRANCH_NAME}_experimental.tar'
-                    sh 'chmod -R 755 dist/experimental'
-                    sh 'tar -cf build/logs/dist_${BRANCH_NAME}_experimental.tar dist/experimental/* dist/experimental/.htaccess'
+                    sh 'chmod -R 755 dist'
+                    sh 'tar -cf build/logs/dist_${BRANCH_NAME}_experimental.tar dist/* dist/.htaccess'
                     archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
                 }
             }
