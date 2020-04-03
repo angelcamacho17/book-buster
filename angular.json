@@ -148,7 +148,7 @@
             "assets": [
               "projects/experimental-app/src/favicon.ico",
               "projects/experimental-app/src/assets",
-              "projects/fecommerce/src/.htaccess"
+              "projects/experimental-app/src/.htaccess"
             ],
             "styles": [
               "projects/experimental-app/src/styles.scss"
@@ -246,6 +246,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "fecommerce"
+    }
+  },
+  "defaultProject": "fecommerce",
+  "cli": {
+    "analytics": false
+  }
 }
