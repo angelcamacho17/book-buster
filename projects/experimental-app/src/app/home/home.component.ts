@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Score } from '../store-data/models/score.model';
-import { AppState } from './../app.state';
 import { Observable } from 'rxjs';
-import { increment, decrement, reset } from '../store-data/actions/score.actions';
+import { Score } from 'projects/data-store/src/lib/models/score.model';
+import { increment, decrement, reset } from 'projects/data-store/src/lib/actions/score.actions';
+
 
 @Component({
   selector: 'app-home',
@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
   increment() {
     this.store.dispatch(increment());

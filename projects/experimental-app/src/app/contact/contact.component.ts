@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Score } from '../store-data/models/score.model';
 import { Store, select } from '@ngrx/store';
+import { Score } from 'dist/data-store/lib/models/score.model';
 
 @Component({
   selector: 'app-contact',

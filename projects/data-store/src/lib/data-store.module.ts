@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DataStoreComponent } from './data-store.component';
 import { StoreModule } from '@ngrx/store';
 import { scoreReducer } from './reducers/score.reducer';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [DataStoreComponent],
   imports: [
-    CommonModule,
     StoreModule.forRoot({
       score: scoreReducer
     })
-  ]
+  ],
+  exports: [DataStoreComponent]
 })
-export class StoreDataModule { }
+export class DataStoreModule { }
