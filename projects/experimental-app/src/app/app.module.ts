@@ -8,6 +8,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { HeaderComponent } from './header/header.component';
 import { DataStoreModule } from 'data-store';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DataStoreModule } from 'data-store';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DataStoreModule
+    DataStoreModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
