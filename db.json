@@ -1,0 +1,70 @@
+{
+  "cars": [
+    {
+      "make": "Ford",
+      "model": "Fusion Hybrid",
+      "year": 2018,
+      "color": "black",
+      "price": 25000,
+      "id": 1
+    },
+    {
+      "id": 2,
+      "make": "Tesla",
+      "model": "S",
+      "year": 2018,
+      "color": "red",
+      "price": 125000
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "articles": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": 2,
+      "articles": [
+        "d",
+        "e",
+        "f"
+      ]
+    },
+    {
+      "articles": [
+        "e",
+        "r",
+        "t"
+      ],
+      "id": 3
+    },
+    {
+      "articles": [
+        "e",
+        "r",
+        "t"
+      ],
+      "id": 4
+    },
+    {
+      "articles": [
+        "e",
+        "r",
+        "t"
+      ],
+      "id": 5
+    },
+    {
+      "articles": [
+        "e",
+        "r",
+        "t"
+      ],
+      "id": 6
+    }
+  ]
+}
