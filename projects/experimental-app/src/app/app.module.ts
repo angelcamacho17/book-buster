@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { DataStoreModule } from 'data-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MaterialLibModule } from 'material-lib';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrderModule } from './order/order.module';
 
 @NgModule({
@@ -24,6 +25,7 @@ import { OrderModule } from './order/order.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     DataStoreModule,
     MaterialLibModule,
     StoreDevtoolsModule.instrument(),

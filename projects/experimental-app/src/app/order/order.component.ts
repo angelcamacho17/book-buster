@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Order } from 'projects/models-lib/src/lib/models/order.model';
 import { Store } from '@ngrx/store';
 import { replaceOrderRequest, deleteOrderRequest } from 'projects/data-store/src/lib/order/order.actions';
@@ -19,7 +19,7 @@ export class OrderComponent implements OnInit {
   constructor(private _store: Store<Order>,
               private _formBuilder: FormBuilder ) {
     this.orderForm = this._formBuilder.group({
-      descrip: ['']
+      descrip: ''
     });
   }
 
@@ -28,6 +28,9 @@ export class OrderComponent implements OnInit {
 
   editOrder(): void {
     this.edit = true;
+    this.orderForm.patchValue({
+      descrip: this.order.descrip
+    });
   }
 
   deleteOrder(): void {

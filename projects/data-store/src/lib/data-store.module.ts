@@ -8,7 +8,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { OrderEffects } from './order/order.effects';
 import { HttpClientModule } from '@angular/common/http';
-import { ModelsLibComponent } from 'models-lib';
 
 
 @NgModule({

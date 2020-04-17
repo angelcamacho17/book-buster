@@ -16,7 +16,9 @@
     </div>
     <div *ngIf="edit" class="format-items">
       <form [formGroup]="orderForm" (ngSubmit)="saveOrder()">
-        <input matInput placeholder="{{order.descrip}}" formControlName="descrip">
+        <mat-form-field>
+          <input matInput name="input" #input id="input" formControlName="descrip">
+        </mat-form-field>
       </form>
       <button mat-raised-button class="mat-caption" color="primary" (click)="saveOrder()">
         Save

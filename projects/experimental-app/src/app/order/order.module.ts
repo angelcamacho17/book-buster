@@ -4,7 +4,6 @@ import { OrderComponent } from './order.component';
 import { RouterModule } from '@angular/router';
 import { ArticleComponent } from '../article/article.component';
 import { MaterialLibModule } from 'material-lib';
-import { ModelsLibModule } from 'models-lib';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -18,7 +17,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RouterModule.forChild([{ path: '', component: OrderComponent }]),
     MaterialLibModule,
-    ModelsLibModule,
     FormsModule,
     ReactiveFormsModule,
   ],
