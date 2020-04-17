@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
-import { MaterialComponent } from './material.component';
+import { MaterialLibComponent } from './material-lib.component';
 import { MatButtonModule } from '@angular/material/button'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatInputModule } from '@angular/material/input'
+import { MatCardModule } from '@angular/material/card'
 
 @NgModule({
-  declarations: [MaterialComponent],
+  declarations: [MaterialLibComponent],
   imports: [
     MatButtonModule,
     MatToolbarModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule
   ],
   exports: [
     MatButtonModule,
     MatToolbarModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule
   ]
 })
-export class MaterialModule { }
+export class MaterialLibModule { }

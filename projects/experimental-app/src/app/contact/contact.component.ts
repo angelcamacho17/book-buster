@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { ShoppingItem } from 'projects/data-store/src/lib/models/shopping,model';
 import { AppState } from 'projects/data-store/src/lib/models/app-state.model';
-import { Order } from 'projects/data-store/src/lib/models/order.model';
 import { appendOrderRequest, refreshOrdersRequest } from 'projects/data-store/src/lib/order/order.actions';
 import { Score } from 'projects/data-store/src/lib/models/score.model';
+import { Order } from 'dist/data-store/lib/models/order.model';
 
 @Component({
   selector: 'app-contact',
@@ -38,9 +38,9 @@ export class ContactComponent implements OnInit {
   }
 
   addOrder() {
-    const order: Order = {
-      articles: ['e', 'r', 't']
-    }
-    this.storeOrders.dispatch(appendOrderRequest({order}));
+    // const order: Order = {
+    //   articles: ['e', 'r', 't']
+    // }
+    // this.storeOrders.dispatch(appendOrderRequest({order}));
   }
 }

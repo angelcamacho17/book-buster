@@ -1,9 +1,4 @@
-<p>home works!</p>
-<button id="increment" (click)="increment()">Increment</button>
 
-<div>Current Team: {{ score.team }}</div>
-<div>Current Team: {{ score.goals }}</div>
-
-<button id="decrement" (click)="decrement()">Decrement</button>
-
-<button id="reset" (click)="reset()">Reset Counter</button>
+<div class="home">
+  <app-order *ngFor="let order of orders" [order]="order" ></app-order>
+</div>

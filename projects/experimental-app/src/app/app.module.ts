@@ -9,6 +9,9 @@ import { ContactComponent } from './contact/contact.component';
 import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
 import { DataStoreModule } from 'data-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MaterialLibModule } from 'material-lib';
+import { OrderModule } from './order/order.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { DataStoreModule } from 'data-store';
     BrowserModule,
     AppRoutingModule,
     DataStoreModule,
-    FormsModule
+    MaterialLibModule,
+    StoreDevtoolsModule.instrument(),
+    FormsModule,
+    OrderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

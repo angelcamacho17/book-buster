@@ -33,6 +33,8 @@ export class OrderEffects{
   replaceOrder$ = createEffect(():any => this.actions$.pipe(
     ofType(replaceOrderRequest),
     mergeMap((action) => {
+      console.log('replace effect');
+      console.log(action.order);
       return this.orderService.replace(action.order).pipe(
         map(() => refreshOrdersRequest()),
         catchError(() => EMPTY)

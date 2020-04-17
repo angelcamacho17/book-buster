@@ -326,6 +326,86 @@
           }
         }
       }
+    },
+    "material-lib": {
+      "projectType": "library",
+      "root": "projects/material-lib",
+      "sourceRoot": "projects/material-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/material-lib/tsconfig.lib.json",
+            "project": "projects/material-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/material-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/material-lib/src/test.ts",
+            "tsConfig": "projects/material-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/material-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/material-lib/tsconfig.lib.json",
+              "projects/material-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-lib": {
+      "projectType": "library",
+      "root": "projects/models-lib",
+      "sourceRoot": "projects/models-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/models-lib/tsconfig.lib.json",
+            "project": "projects/models-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/models-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/models-lib/src/test.ts",
+            "tsConfig": "projects/models-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/models-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/models-lib/tsconfig.lib.json",
+              "projects/models-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "fecommerce",

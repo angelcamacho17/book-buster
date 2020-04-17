@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-material',
+  selector: 'lib-models-lib',
   template: `
     <p>
-      material works!
+      models-lib works!
     </p>
   `,
   styles: [
   ],
 })
-export class MaterialComponent implements OnInit {
+export class ModelsLibComponent implements OnInit {
 
   constructor() { }
 

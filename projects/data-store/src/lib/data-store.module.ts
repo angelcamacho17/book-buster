@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { OrderEffects } from './order/order.effects';
 import { HttpClientModule } from '@angular/common/http';
+import { ModelsLibComponent } from 'models-lib';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
       orderEdit: editOrderReducer
     }),
     EffectsModule.forRoot([OrderEffects]),
-    StoreDevtoolsModule.instrument(),
+    StoreDevtoolsModule.instrument()
   ],
   exports: [
     DataStoreComponent

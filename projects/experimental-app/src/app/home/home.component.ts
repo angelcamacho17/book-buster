@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Score } from 'projects/data-store/src/lib/models/score.model';
 import { increment, decrement, reset } from 'projects/data-store/src/lib/actions/score.actions';
 import { HomeService } from './home.service';
+import { Order } from 'projects/models-lib/src/lib/models/order.model';
+import { refreshOrdersRequest } from 'projects/data-store/src/lib/order/order.actions';
 
 
 @Component({
@@ -13,37 +15,32 @@ import { HomeService } from './home.service';
 })
 export class HomeComponent implements OnInit {
 
-  public scores$: Observable<Score>;
+  public orders$: Observable<Order>;
+  public orders: Order;
   public score: Score;
 
-  constructor(private store: Store<{ score: Score}>,
-              private hs: HomeService) {
-    this.scores$ = store.pipe(select('score'));
-    this.scores$.subscribe(data => {
-      this.score = data;
+  constructor( private storeOrders: Store<{order: Order}>) {
+    this.orders$ = storeOrders.pipe(select('order'));
+    this.orders$.subscribe(data => {
+      this.orders = data;
     })
-
-    this.hs.all().subscribe(data=>{
-      console.log(data)
-    })
-
-
+    this.storeOrders.dispatch(refreshOrdersRequest());
   }
 
   ngOnInit(): void {
   }
 
 
-  increment() {
-    this.store.dispatch(increment());
-  }
+  // increment() {
+  //   this.store.dispatch(increment());
+  // }
 
-  decrement() {
-    this.store.dispatch(decrement());
-  }
+  // decrement() {
+  //   this.store.dispatch(decrement());
+  // }
 
-  reset() {
-    this.store.dispatch(reset());
-  }
+  // reset() {
+  //   this.store.dispatch(reset());
+  // }
 
 }

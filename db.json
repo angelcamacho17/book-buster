@@ -20,50 +20,32 @@
   "orders": [
     {
       "id": 1,
-      "articles": [
-        "a",
-        "b",
-        "c"
-      ]
+      "descrip": "repij",
+      "articles": []
     },
     {
-      "id": 2,
-      "articles": [
-        "d",
-        "e",
-        "f"
-      ]
+      "articles": [],
+      "descrip": "Order",
+      "id": 2
     },
     {
-      "articles": [
-        "e",
-        "r",
-        "t"
-      ],
-      "id": 3
+      "id": 3,
+      "descrip": "title",
+      "articles": []
     },
     {
-      "articles": [
-        "e",
-        "r",
-        "t"
-      ],
+      "articles": [],
+      "descrip": "Order",
       "id": 4
     },
     {
-      "articles": [
-        "e",
-        "r",
-        "t"
-      ],
+      "articles": [],
+      "descrip": "Order",
       "id": 5
     },
     {
-      "articles": [
-        "e",
-        "r",
-        "t"
-      ],
+      "articles": [],
+      "descrip": "Order",
       "id": 6
     }
   ]
