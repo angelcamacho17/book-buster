@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "run-p web rest",
-    "web": "ng serve --project=experimental-app",
+    "web": "ng serve --port=4500",
     "rest": "json-server --port 4250 db.json",
     "build": "ng build",
     "test": "ng test",

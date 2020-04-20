@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Order } from 'projects/models-lib/src/lib/models/order.model';
 import { refreshOrdersRequest, appendOrderRequest } from 'projects/data-store/src/lib/order/order.actions';
+import { Order } from 'projects/data-store/src/lib/models/order.model';
 
 @Component({
   selector: 'app-header',
@@ -11,11 +11,12 @@ import { refreshOrdersRequest, appendOrderRequest } from 'projects/data-store/sr
 })
 export class HeaderComponent implements OnInit {
   public orders$: Observable<Order>;
+  public orders: Order;
 
   constructor( private storeOrders: Store<{order: Order}>) {
     this.orders$ = storeOrders.pipe(select('order'));
     this.orders$.subscribe(data => {
-      console.log(data);
+      this.orders = data;
     })
   }
 

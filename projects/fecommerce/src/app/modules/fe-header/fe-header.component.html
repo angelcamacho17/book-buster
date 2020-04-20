@@ -1,12 +1,7 @@
 <mat-toolbar class="gradient-background"
               style="display: flex; justify-content: space-between; align-items: center;">
  <div class="mat-display-1" style="margin: 0 !important;">
-   Orders
+   {{title | titlecase}}
  </div>
- <div class="mat-caption">
-
- </div>
-  <button mat-raised-button class="mat-caption" color="accent" (click)="createOrder()">
-    Add order
-  </button>
 </mat-toolbar>
+

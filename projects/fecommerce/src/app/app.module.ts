@@ -3,16 +3,28 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { OrderComponent } from './order/order.component';
+import { FeHeaderComponent } from './modules/fe-header/fe-header.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DataStoreModule } from 'data-store';
+import { MaterialLibModule } from 'material-lib';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { FormsModule } from '@angular/forms';
+import { FeBottomNavComponent } from './modules/fe-bottom-nav/fe-bottom-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    OrderComponent
+    FeHeaderComponent,
+    FeBottomNavComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    DataStoreModule,
+    MaterialLibModule,
+    StoreDevtoolsModule.instrument(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
