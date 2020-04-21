@@ -54,13 +54,6 @@
                     sh 'tar -cf build/logs/dist_${BRANCH_NAME}.tar dist/* dist/.htaccess'
                     archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
                 }
-                dir(env.GITDIR) {
-                    sh 'ng build --project=experimental-app --base-href /fecommerce/experimental --progress=false'
-                    sh 'rm -f build/logs/dist_${BRANCH_NAME}_experimental.tar'
-                    sh 'chmod -R 755 dist'
-                    sh 'tar -cf build/logs/dist_${BRANCH_NAME}_experimental.tar dist/* dist/.htaccess'
-                    archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
-                }
             }
         }
         stage('build prod') {
@@ -95,15 +88,6 @@
                     sh 'mkdir -p ${WEBAPPDIR}/dist/ && mkdir -p ${WEBAPPDIR}/config/'
                     sh 'tar -xf  build/logs/dist_${BRANCH_NAME}.tar --strip-components=1 -C ${WEBAPPDIR}/dist/'
                     sh '/bin/cp -f ${WEBAPPDIR}/config/* ${WEBAPPDIR}/dist/assets/ 2>/dev/null || :'
-                    sh 'pwd && ls'
-                }
-              dir(env.GITDIR) {
-                    sh 'mkdir -p /data/webapp/${APPNAME}/experimental/config && mkdir -p /data/webapp/${APPNAME}/experimental/dist'
-                    sh 'rm -rf /data/webapp/${APPNAME}/experimental/dist/'
-                    sh 'mkdir -p /data/webapp/${APPNAME}/experimental/dist/ && mkdir -p /data/webapp/${APPNAME}/experimental/config/'
-                    sh 'tar -xf  build/logs/dist_develop_experimental.tar --strip-components=1 -C /data/webapp/${APPNAME}/experimental/dist/'
-                    sh '/bin/cp -f /data/webapp/${APPNAME}/experimental/config/* /data/webapp/${APPNAME}/experimental/dist/assets/ 2>/dev/null || :'
-                    sh 'pwd && ls'
                 }
             }
         }
