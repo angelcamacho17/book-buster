@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { setHeaderTitleRequest } from 'projects/data-store/src/lib/header/header.actions';
+import { setHeaderTitleRequest } from 'projects/data-store-lib/src/lib/header/header.actions';
 import { Router } from '@angular/router';
 
 @Component({
