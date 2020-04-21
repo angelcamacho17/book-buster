@@ -10,7 +10,7 @@ import { setHeaderTitleRequest } from 'projects/data-store/src/lib/header/header
 export class FeOrderComponent implements OnInit {
 
   constructor( private storeOrders: Store) {
-    this.storeOrders.dispatch(setHeaderTitleRequest({title: 'order'}));
+    this.storeOrders.dispatch(setHeaderTitleRequest({title: 'new order'}));
   }
 
   ngOnInit(): void {

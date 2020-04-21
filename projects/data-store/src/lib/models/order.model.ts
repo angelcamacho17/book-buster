@@ -5,3 +5,7 @@ export interface Order {
   descrip: string,
   articles: Article[]
 }
+
+export interface OrderState {
+  orders: Order[]
+}

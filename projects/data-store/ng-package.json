@@ -6,7 +6,8 @@
     "umdModuleIds": {
       "@ngrx/store": "@ngrx/store",
       "@ngrx/effects": "@ngrx/effects",
-      "@ngrx/store-devtools": "@ngrx/store-devtools"
+      "@ngrx/store-devtools": "@ngrx/store-devtools",
+      "@ngrx/router-store": "@ngrx/router-store"
     }
   }
 }

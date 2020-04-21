@@ -16,7 +16,11 @@ const routes: Routes = [
     path: 'article',
     loadChildren: () => import('./modules/fe-article/fe-article.module').then(m => m.FeArticleModule),
   },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: 'order',
+    loadChildren: () => import('./modules/fe-order/fe-order.module').then(m => m.FeOrderModule),
+  },
+  { path: '**', redirectTo: 'customer', pathMatch: 'full' },
 ];
 
 @NgModule({

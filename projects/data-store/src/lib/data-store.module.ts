@@ -3,6 +3,7 @@ import { DataStoreComponent } from './data-store.component';
 import { StoreModule } from '@ngrx/store';
 import { ordersReducer } from './order/order.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { routerReducer, StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { OrderEffects } from './order/order.effects';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,28 +11,29 @@ import { OrderService } from './order/order.service';
 import { HeaderService } from './header/header.service';
 import { headerReducer } from './header/header.reducer';
 import { HeaderEffects } from './header/header.effects';
-
+import { reducers } from './data-store.state';
+import { CustomSerializer } from './router/router.reducer';
 
 @NgModule({
   declarations: [DataStoreComponent],
   imports: [
     HttpClientModule,
-    StoreModule.forRoot({
-      order: ordersReducer,
-      header: headerReducer
-    }),
+    StoreModule.forRoot(reducers),
     EffectsModule.forRoot([
       OrderEffects,
       HeaderEffects
-    ]),
-    StoreDevtoolsModule.instrument()
+    ])
   ],
   exports: [
     DataStoreComponent
   ],
   providers: [
     OrderService,
-    HeaderService
+    HeaderService,
+    {
+      provide: RouterStateSerializer,
+      useClass: CustomSerializer
+    }
   ]
 })
 export class DataStoreModule { }

@@ -10,6 +10,7 @@ import { MaterialLibModule } from 'material-lib';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { FormsModule } from '@angular/forms';
 import { FeBottomNavComponent } from './modules/fe-bottom-nav/fe-bottom-nav.component';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FeBottomNavComponent } from './modules/fe-bottom-nav/fe-bottom-nav.comp
     DataStoreModule,
     MaterialLibModule,
     StoreDevtoolsModule.instrument(),
+    StoreRouterConnectingModule.forRoot(),
     FormsModule
   ],
   providers: [],
