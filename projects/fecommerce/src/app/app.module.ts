@@ -11,11 +11,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { FormsModule } from '@angular/forms';
 import { FeBottomNavComponent } from './modules/fe-bottom-nav/fe-bottom-nav.component';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { FeHeaderModule } from './modules/fe-header/fe-header.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FeHeaderComponent,
     FeBottomNavComponent
   ],
   imports: [
@@ -26,7 +26,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     MaterialLibModule,
     StoreDevtoolsModule.instrument(),
     StoreRouterConnectingModule.forRoot(),
-    FormsModule
+    FormsModule,
+    FeHeaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

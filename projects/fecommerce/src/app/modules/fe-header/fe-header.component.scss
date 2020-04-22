@@ -3,10 +3,14 @@
   width: 100%;
   background: linear-gradient(270deg, #1F51D2 0%, #1946B9 100%);
   color: #ffffff;
+  padding-left: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .oval-1 {
-  position: fixed;
+  position: absolute;
   border-radius: 50%;
   height: 188px;
   width: 188px;
@@ -17,7 +21,7 @@
 }
 
 .oval-2 {
-  position: fixed;
+  position: absolute;
   border-radius: 50%;
   height: 169px;
   width: 169px;
@@ -28,7 +32,7 @@
 }
 
 .oval-3 {
-  position: fixed;
+  position: absolute;
   border-radius: 50%;
   height: 253px;
   width: 253px;
@@ -39,7 +43,7 @@
 }
 
 .oval-4 {
-  position: fixed;
+  position: absolute;
   border-radius: 50%;
   height: 240px;
   width: 240px;
