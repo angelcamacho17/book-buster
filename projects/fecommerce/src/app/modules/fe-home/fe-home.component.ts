@@ -16,10 +16,10 @@ export class FeHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
   public createOrder(): void {
-    console.log('here');
     this._router.navigate(['/order']);
   }
 
