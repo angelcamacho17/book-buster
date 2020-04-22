@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { setHeaderTitleRequest } from 'projects/data-store-lib/src/lib/header/header.actions';
+import { Customer } from 'projects/data-store-lib/src/lib/models/customer.model';
+import { Observable } from 'rxjs';
+import { refreshCustomersRequest } from 'projects/data-store-lib/src/lib/customer/customer.actions';
 
 @Component({
   selector: 'app-fe-order',
@@ -9,8 +12,16 @@ import { setHeaderTitleRequest } from 'projects/data-store-lib/src/lib/header/he
 })
 export class FeOrderComponent implements OnInit {
 
-  constructor( private storeOrders: Store) {
-    this.storeOrders.dispatch(setHeaderTitleRequest({title: 'new order'}));
+  public $customers: Observable<Customer[]>;
+  public customers: Customer[];
+
+  constructor( private store: Store<{customers: Customer[]}>) {
+    this.store.dispatch(setHeaderTitleRequest({title: 'new order'}));
+    this.$customers = this.store.pipe(select('customers'));
+    this.$customers.subscribe(data => {
+      this.customers = data;
+    });
+    this.store.dispatch(refreshCustomersRequest());
   }
 
   ngOnInit(): void {

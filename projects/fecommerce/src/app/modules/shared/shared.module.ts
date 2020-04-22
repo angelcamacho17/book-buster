@@ -3,20 +3,26 @@ import { CommonModule } from '@angular/common';
 import { FeCreateButtonComponent } from './components/fe-create-button/fe-create-button.component';
 import { MaterialLibModule } from 'material-lib';
 import { FeCardComponent } from './components/fe-card/fe-card.component';
+import { FeSearchComponent } from './components/fe-search/fe-search.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     FeCreateButtonComponent,
-    FeCardComponent
+    FeCardComponent,
+    FeSearchComponent
   ],
   imports: [
     CommonModule,
-    MaterialLibModule
+    MaterialLibModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
-    FeCreateButtonComponent
+    FeCreateButtonComponent,
+    FeSearchComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

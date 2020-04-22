@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatOptionModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [MaterialLibComponent],
@@ -17,7 +19,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     MatInputModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatOptionModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatButtonModule,
@@ -26,7 +30,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     MatInputModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatOptionModule,
+    MatAutocompleteModule
   ]
 })
 export class MaterialLibModule { }

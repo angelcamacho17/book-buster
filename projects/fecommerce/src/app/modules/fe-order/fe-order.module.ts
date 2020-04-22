@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MaterialLibModule } from 'material-lib';
 import { FeHeaderModule } from '../fe-header/fe-header.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -15,7 +16,8 @@ import { FeHeaderModule } from '../fe-header/fe-header.module';
     HttpClientModule,
     RouterModule.forChild([{ path: '', component: FeOrderComponent }]),
     MaterialLibModule,
-    FeHeaderModule
+    FeHeaderModule,
+    SharedModule
   ],
   exports: [
     FeOrderComponent
