@@ -14,6 +14,7 @@ export class AppComponent {
   title = 'fecommerce';
 
   prepareRoute(outlet: RouterOutlet) {
+    /* tslint:disable:no-string-literal */
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
