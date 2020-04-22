@@ -2,49 +2,49 @@
   "orders": [
     {
       "id": 8,
-      "descrip": "Other Order",
+      "description": "Other Order",
       "amount": 65.22,
       "createdBy": "Federico Ribero",
       "articles": []
     },
     {
       "id": 9,
-      "descrip": "New order",
+      "description": "New order",
       "amount": 95.42,
       "createdBy": "Angel Camacho",
       "articles": []
     },
     {
       "id": 11,
-      "descrip": "other thing",
+      "description": "other thing",
       "amount": 83.00,
       "createdBy": "Federico Ribero",
       "articles": []
     },
     {
       "articles": [],
-      "descrip": "Order",
+      "description": "Order",
       "amount": 36.45,
       "createdBy": "Federico Ribero",
       "id": 12
     },
     {
       "articles": [],
-      "descrip": "Order",
+      "description": "Order",
       "amount": 88.44,
       "createdBy": "Rodrigo Martinez Jr",
       "id": 13
     },
     {
       "articles": [],
-      "descrip": "Order",
+      "description": "Order",
       "amount": 135.10,
       "createdBy": "Angel Camacho",
       "id": 14
     },
     {
       "articles": [],
-      "descrip": "Order",
+      "description": "Order",
       "amount": 96.92,
       "createdBy": "Federico Ribero",
       "id": 15

@@ -4,21 +4,21 @@
   <mat-card class="card">
     <mat-card-content>
       <mat-list class="list">
-        <mat-list-item class="list-item">
+        <mat-list-item class="list-item" *ngFor="let order of orders">
           <div mat-line class="mat-subheading-2 order-title">
             <div class="title">
-              O-20200217
+              {{order.id}}
             </div>
             <div class="mat-caption money">
-              € 79,30
+              € {{order.amount}}
             </div>
           </div>
           <div mat-line class="mat-body-1 order-subtitle">
-            <div class="line">ABC Developpement</div>
-            <div class="line">Created by Cyril Castelbou</div>
+            <div class="line">{{order.description}}</div>
+            <div class="line">Created by {{order.createdBy}}</div>
           </div>
+          <mat-divider class="divider"></mat-divider>
         </mat-list-item>
-        <mat-divider class="divider"></mat-divider>
       </mat-list>
     </mat-card-content>
   </mat-card>
