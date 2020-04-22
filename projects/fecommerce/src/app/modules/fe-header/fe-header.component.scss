@@ -1,57 +1,12 @@
 .gradient-background {
   height: 120px;
   width: 100%;
-  background: linear-gradient(270deg, #1F51D2 0%, #1946B9 100%);
+  background-image: url("/assets/img/header.png");
+  background-repeat: round;
   color: #ffffff;
-}
-
-.toolbar {
-  // display: flex;
-  // justify-content: space-between;
-  // align-items: center;
-}
-
-.oval-1 {
-  position: fixed;
-  border-radius: 50%;
-  height: 188px;
-  width: 188px;
-  right: -45px;
-  top: 79px;
-  box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
-  background-color: rgba(255, 255, 255, 0.25);
-}
-
-.oval-2 {
-  position: fixed;
-  border-radius: 50%;
-  height: 169px;
-  width: 169px;
-  top: 53px;
-  right: -91px;
-  box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
-  background-color: rgba(255, 255, 255, 0.25);
-}
-
-.oval-3 {
-  position: fixed;
-  border-radius: 50%;
-  height: 253px;
-  width: 253px;
-  top: -221px;
-  right: 65px;
-  box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
-  background-color: rgba(255, 255, 255, 0.25);
-}
-
-.oval-4 {
-  position: fixed;
-  border-radius: 50%;
-  height: 240px;
-  width: 240px;
-  top: -177px;
-  left: -143px;
-  box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
-  background-color: rgba(255, 255, 255, 0.25);
+  padding-left: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
