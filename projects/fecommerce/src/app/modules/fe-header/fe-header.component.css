@@ -1,14 +1,9 @@
 .gradient-background {
   height: 120px;
   width: 100%;
+  background: -webkit-gradient(linear, right top, left top, from(#1F51D2), to(#1946B9));
   background: linear-gradient(270deg, #1F51D2 0%, #1946B9 100%);
   color: #ffffff;
-}
-
-.toolbar {
-  // display: flex;
-  // justify-content: space-between;
-  // align-items: center;
 }
 
 .oval-1 {
@@ -18,7 +13,8 @@
   width: 188px;
   right: -45px;
   top: 79px;
-  box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
+  -webkit-box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
+          box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 255, 0.25);
 }
 
@@ -29,7 +25,8 @@
   width: 169px;
   top: 53px;
   right: -91px;
-  box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
+  -webkit-box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
+          box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 255, 0.25);
 }
 
@@ -40,7 +37,8 @@
   width: 253px;
   top: -221px;
   right: 65px;
-  box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
+  -webkit-box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
+          box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 255, 0.25);
 }
 
@@ -51,7 +49,8 @@
   width: 240px;
   top: -177px;
   left: -143px;
-  box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
+  -webkit-box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
+          box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 255, 0.25);
 }
-
+/*# sourceMappingURL=fe-header.component.css.map */

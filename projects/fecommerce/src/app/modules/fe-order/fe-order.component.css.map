@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "fe-order.component.scss"
+    ],
+    "names": [],
+    "file": "fe-order.component.css"
+}
