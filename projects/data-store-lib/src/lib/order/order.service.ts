@@ -9,7 +9,9 @@ export class OrderService {
 
   _baseUrl = 'http://localhost:4250/orders';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
   private getCollectionUrl() {
     return this._baseUrl;

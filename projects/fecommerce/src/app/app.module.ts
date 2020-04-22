@@ -31,6 +31,6 @@ import { FeHeaderModule } from './modules/fe-header/fe-header.module';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [  CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

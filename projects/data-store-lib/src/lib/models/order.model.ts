@@ -2,7 +2,9 @@ import { Article } from './article.model';
 
 export interface Order {
   id?: any,
-  descrip: string,
+  description: string,
+  amount: number,
+  createdBy: string, //User
   articles: Article[]
 }
 

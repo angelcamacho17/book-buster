@@ -6,16 +6,18 @@ import { setHeaderTitleRequest, refresHeaderDone } from './header.actions';
 import { HeaderService } from './header.service';
 
 @Injectable()
-export class HeaderEffects{
-  constructor(private actions$: Actions,
-              private headerService: HeaderService) { }
+export class HeaderEffects {
+  constructor(
+    private actions$: Actions,
+    private headerService: HeaderService
+  ) { }
 
-  setTitle$ = createEffect(():any => this.actions$.pipe(
+  setTitle$ = createEffect((): any => this.actions$.pipe(
     ofType(setHeaderTitleRequest),
     mergeMap((action) => {
       console.log(action);
       return this.headerService.setTitle(action.title).pipe(
-        map(title => refresHeaderDone({title})),
+        map(title => refresHeaderDone({ title })),
         catchError(() => EMPTY)
       );
     })
