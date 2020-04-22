@@ -1,0 +1,8 @@
+.gradient-background {
+  height: 72.14px;
+  width: 100%;
+  background: -webkit-gradient(linear, right top, left top, from(#1F51D2), to(#1946B9));
+  background: linear-gradient(270deg, #1F51D2 0%, #1946B9 100%);
+  color: #ffffff;
+}
+/*# sourceMappingURL=header.component.css.map */

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeHomeComponent } from './fe-home.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,6 +21,7 @@ import { FeHeaderModule } from '../fe-header/fe-header.module';
   ],
   exports: [
     FeHomeComponent
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FeHomeModule { }
