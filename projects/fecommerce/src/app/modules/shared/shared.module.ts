@@ -5,6 +5,7 @@ import { MaterialLibModule } from 'material-lib';
 import { FeCardComponent } from './components/fe-card/fe-card.component';
 import { FeSearchComponent } from './components/fe-search/fe-search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FeHeaderComponent } from './components/fe-header/fe-header.component';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     FeCreateButtonComponent,
     FeCardComponent,
-    FeSearchComponent
+    FeSearchComponent,
+    FeHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     FeCreateButtonComponent,
-    FeSearchComponent
+    FeSearchComponent,
+    FeHeaderComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

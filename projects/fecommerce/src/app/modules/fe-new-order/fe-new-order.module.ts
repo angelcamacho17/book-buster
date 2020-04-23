@@ -1,19 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FeArticleComponent } from './fe-article.component';
+import { FeNewOrderComponent } from './fe-new-order.component';
+import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MaterialLibModule } from 'material-lib';
-import { SharedModule } from '../shared/shared.module';
+
+
 
 @NgModule({
-  declarations: [FeArticleComponent],
+  declarations: [FeNewOrderComponent],
   imports: [
     CommonModule,
     HttpClientModule,
-    RouterModule.forChild([{ path: '', component: FeArticleComponent }]),
+    RouterModule.forChild([{ path: '', component: FeNewOrderComponent }]),
     MaterialLibModule,
     SharedModule
+  ],
+  exports: [
+    FeNewOrderComponent
   ]
 })
-export class FeArticleModule { }
+export class FeNewOrderModule { }

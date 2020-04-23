@@ -3,7 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FeHeaderComponent } from './modules/fe-header/fe-header.component';
+import { FeHeaderComponent } from './modules/shared/components/fe-header/fe-header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataStoreModule } from 'data-store';
 import { MaterialLibModule } from 'material-lib';
@@ -11,7 +11,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { FormsModule } from '@angular/forms';
 import { FeBottomNavComponent } from './modules/fe-bottom-nav/fe-bottom-nav.component';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { FeHeaderModule } from './modules/fe-header/fe-header.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import { FeHeaderModule } from './modules/fe-header/fe-header.module';
     StoreDevtoolsModule.instrument(),
     StoreRouterConnectingModule.forRoot(),
     FormsModule,
-    FeHeaderModule
   ],
   providers: [],
   bootstrap: [AppComponent],

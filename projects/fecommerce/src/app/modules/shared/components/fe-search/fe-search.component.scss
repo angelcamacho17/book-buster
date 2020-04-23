@@ -1,3 +1,65 @@
-.search-bar {
-  width: 100%;
+
+.search-container {
+  position: absolute;
+  padding: 0 !important;
+  top: 112px;
+  width: auto;
+  right: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 104px;
+
+  .title {
+    margin: 0 !important;
+    padding-top: 24px;
+    background: #ffffff;
+    width: -webkit-fill-available;
+
+  }
+
+  .search-field {
+    position: absolute;
+    padding: 16px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    height: 16px;
+    top: 56px;
+    right: 0;
+    left: 0;
+
+    .search-bar {
+      padding: 0 16px;
+      width: 100%;
+
+    }
+  }
+}
+
+::ng-deep .mat-autocomplete-panel:not([class*=mat-elevation-z]) {
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+              0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+              0px 0px 0px 0px rgba(0, 0, 0, 0.12)
+              !important;
+}
+
+::ng-deep .cdk-overlay-pane {
+  position: absolute;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 1000;
+  display: flex;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto !important;
+  left: 16px !important;
+  top: 216px !important;
+  right: 16px !important;
+  border-top: solid 1px #ebebeb;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
 }

@@ -1,5 +1,5 @@
 <mat-toolbar class="gradient-background">
-  <div class="mat-display-1" style="margin: 0 !important;">
+  <div [ngClass]="class" [ngStyle]="style" style="margin: 0 !important;">
     {{title | titlecase}}
   </div>
 </mat-toolbar>

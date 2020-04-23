@@ -24,6 +24,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/fe-order/fe-order.module').then(m => m.FeOrderModule),
     data: { animation: 'order' }
   },
+  {
+    path: 'neworder',
+    loadChildren: () => import('./modules/fe-new-order/fe-new-order.module').then(m => m.FeNewOrderModule),
+    data: { animation: 'neworder' }
+  },
   { path: '**', redirectTo: 'customer', pathMatch: 'full' },
 ];
 

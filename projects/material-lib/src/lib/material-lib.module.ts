@@ -21,7 +21,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatListModule,
     MatToolbarModule,
     MatOptionModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ],
   exports: [
     MatButtonModule,
