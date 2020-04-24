@@ -1,5 +1,8 @@
 <mat-toolbar class="gradient-background">
-  <div [ngClass]="class" [ngStyle]="style" style="margin: 0 !important;">
+  <mat-icon *ngIf="style === 'center'" class="close-icon" (click)="goLastVisited()">
+    close
+  </mat-icon>
+  <div [ngClass]="class" style="margin: 0 !important;">
     {{title | titlecase}}
   </div>
 </mat-toolbar>

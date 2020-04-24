@@ -1,7 +1,10 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, OnChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { Customer } from 'dist/data-store/lib/models/customer.model';
+import { Store } from '@ngrx/store';
+import { replaceCustomerRequest } from 'projects/data-store-lib/src/lib/customer/customer.actions';
 
 @Component({
   selector: 'app-fe-search',
@@ -10,13 +13,15 @@ import { startWith, map } from 'rxjs/operators';
 })
 export class FeSearchComponent {
 
-  @Input() list: [];
+  @Input() list: Customer[];
   @Input() searchTitle: string;
+  @Input() itemType: string;
   public filteredlist: Observable<any[]>;
   public stateCtrl = new FormControl();
   public showInitial = true;
 
-  constructor() {
+
+  constructor(public store: Store) {
     this.filteredlist = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
