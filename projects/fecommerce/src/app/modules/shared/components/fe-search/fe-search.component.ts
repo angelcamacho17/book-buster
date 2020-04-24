@@ -11,10 +11,11 @@ import { replaceCustomerRequest } from 'projects/data-store-lib/src/lib/customer
   templateUrl: './fe-search.component.html',
   styleUrls: ['./fe-search.component.scss']
 })
-export class FeSearchComponent implements OnChanges{
+export class FeSearchComponent {
 
   @Input() list: Customer[];
   @Input() searchTitle: string;
+  @Input() itemType: string;
   public filteredlist: Observable<any[]>;
   public stateCtrl = new FormControl();
   public showInitial = true;
@@ -55,37 +56,6 @@ export class FeSearchComponent implements OnChanges{
   public showInitialState(): void {
     this.stateCtrl.setValue('');
     this.showInitial = true;
-  }
-
-  ngOnChanges(value: any): void {
-    // if (value && value.list && value.list.currentValue) {
-    //   for (let customer of value.list.currentValue) {
-    //     let auxCustomer = null;
-    //     auxCustomer = this.getinitials(customer);
-    //     this.store.dispatch(replaceCustomerRequest({customer: auxCustomer}))
-    //   }
-    // }
-  }
-
-  public getInitials(customer: any): string {
-    const fullName = customer.name;
-    if (fullName) {
-      const name: string[] = fullName.split(' ');
-      let initials: string;
-      if (name.length > 2) {
-        customer.smaller = true;
-        initials = `${this.getChar(name[0], 0)}${this.getChar(name[1], 0)}${this.getChar(name[2], 0)}`;
-      } else if (name.length > 1) {
-        initials = `${this.getChar(name[0], 0)}${this.getChar(name[1], 0)}`;
-      } else {
-        initials = `${this.getChar(name[0], 0)}`;
-      }
-      return initials.toUpperCase();
-    }
-  }
-
-  private getChar(text: string, index: number) {
-    return text.charAt(index);
   }
 
 }

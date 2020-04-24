@@ -1,9 +1,7 @@
 export interface Customer {
   id?: number,
   name: string,
-  address: string,
-  initials?: string,
-  smaller?: boolean
+  address: string
 }
 
 export interface CustomerState {

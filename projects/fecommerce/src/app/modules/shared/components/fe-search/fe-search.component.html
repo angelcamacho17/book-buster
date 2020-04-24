@@ -22,25 +22,7 @@
                     style="height: 72px;
                           display: flex;
                           padding: 0;" >
-          <div class="avatar">
-            <div class="mat-body-2 initials-sidenav" [ngClass]="item.smaller ? 'mat-body-1' : ''">{{ getInitials(item) }}</div>
-          </div>
-          <div class="item">
-            <div class="item-info">
-              <h3 class="mat-headline" style="margin: 0 !important;
-                                              height: 28px;
-                                              color: rgba(0, 0, 0, 0.87);">
-                {{item?.name}}
-              </h3>
-              <div class="mat-body-1" style="margin: 0 !important;
-                                            color: rgba(0, 0, 0, 0.6);">
-                {{item?.address}}
-              </div>
-            </div>
-            <mat-icon>
-              keyboard_arrow_right
-            </mat-icon>
-          </div>
+          <app-fe-customer-row *ngIf="itemType === 'customer'" [customer]="item" class="item"></app-fe-customer-row>
           </mat-option>
       </mat-autocomplete>
     </mat-form-field>

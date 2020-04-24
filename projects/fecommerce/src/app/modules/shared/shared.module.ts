@@ -6,6 +6,7 @@ import { FeCardComponent } from './components/fe-card/fe-card.component';
 import { FeSearchComponent } from './components/fe-search/fe-search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeHeaderComponent } from './components/fe-header/fe-header.component';
+import { FeCustomerRowComponent } from './components/fe-customer-row/fe-customer-row.component';
 
 
 
@@ -14,7 +15,8 @@ import { FeHeaderComponent } from './components/fe-header/fe-header.component';
     FeCreateButtonComponent,
     FeCardComponent,
     FeSearchComponent,
-    FeHeaderComponent
+    FeHeaderComponent,
+    FeCustomerRowComponent
   ],
   imports: [
     CommonModule,
