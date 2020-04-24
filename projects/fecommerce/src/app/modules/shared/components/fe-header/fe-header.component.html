@@ -1,5 +1,5 @@
-<mat-toolbar class="gradient-background">
-  <div [ngClass]="class" [ngStyle]="style" style="margin: 0 !important;">
+<mat-toolbar [ngStyle]="{'justify-content': style === 'center' ? 'center': ''}" class="gradient-background">
+  <div [ngClass]="class" style="margin: 0 !important;">
     {{title | titlecase}}
   </div>
 </mat-toolbar>

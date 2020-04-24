@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Customer } from 'dist/data-store/lib/models/customer.model';
+import { Store } from '@ngrx/store';
+import { replaceCustomerRequest } from 'projects/data-store-lib/src/lib/customer/customer.actions';
 
 @Component({
   selector: 'app-fe-search',
@@ -18,7 +20,7 @@ export class FeSearchComponent implements OnChanges{
   public showInitial = true;
 
 
-  constructor() {
+  constructor(public store: Store) {
     this.filteredlist = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -56,15 +58,16 @@ export class FeSearchComponent implements OnChanges{
   }
 
   ngOnChanges(value: any): void {
-    if (value && value.list && value.list.currentValue) {
-      for (let customer of value.list.currentValue) {
-        console.log(customer);
-        //customer.initials = this.getinitials(customer);
-      }
-    }
+    // if (value && value.list && value.list.currentValue) {
+    //   for (let customer of value.list.currentValue) {
+    //     let auxCustomer = null;
+    //     auxCustomer = this.getinitials(customer);
+    //     this.store.dispatch(replaceCustomerRequest({customer: auxCustomer}))
+    //   }
+    // }
   }
 
-  private getinitials(customer: any) {
+  public getInitials(customer: any): string {
     const fullName = customer.name;
     if (fullName) {
       const name: string[] = fullName.split(' ');
