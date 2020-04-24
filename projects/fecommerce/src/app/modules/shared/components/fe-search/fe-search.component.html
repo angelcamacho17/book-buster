@@ -1,6 +1,4 @@
-<mat-card class="search-container"
-          style="border-bottom-right-radius: 0px !important;
-                 border-bottom-left-radius: 0px !important;">
+<mat-card class="search-container">
 <div class="mat-headline title">
   <span style="padding-left: 16px;">
     {{searchTitle }}
@@ -16,26 +14,15 @@
             [matAutocomplete]="auto"
             [formControl]="stateCtrl"
             class="mat-subheading-2"
+            color="accent"
             >
       <mat-placeholder class="mat-subheading-2">Search...</mat-placeholder>
       <mat-autocomplete #auto="matAutocomplete" class="autocomplete" (closed)="showInitialState()" (opened)="hideInitialState()">
         <mat-option *ngFor="let item of filteredlist | async" [value]="item.name"
                     style="height: 72px;
-                          display: flex;" >
-          <div class="avatar">
-            <div class="mat-body-2 initials-sidenav" [ngClass]="item.smaller ? 'mat-body-1' : ''">{{ item?.initials }}</div>
-          </div>
-          <div style="height: 72px;">
-            <h3 class="mat-headline" style="margin: 0 !important;
-                                            height: 28px;
-                                            color: rgba(0, 0, 0, 0.87);">
-              {{item?.name}}
-            </h3>
-            <div class="mat-body-1" style="margin: 0 !important;
-                                          color: rgba(0, 0, 0, 0.6);">
-              {{item?.address}}
-            </div>
-          </div>
+                          display: flex;
+                          padding: 0;" >
+          <app-fe-customer-row *ngIf="itemType === 'customer'" [customer]="item" class="item"></app-fe-customer-row>
           </mat-option>
       </mat-autocomplete>
     </mat-form-field>
@@ -45,25 +32,7 @@
 </div>
 </mat-card>
 <mat-card *ngIf="showInitial"
-           class="mat-subheading-2"
-           style="
-            position: absolute;
-            width: auto;
-            right: 16px;
-            left: 16px;
-            top: 216px;
-            border-top: solid 1px #d5d5d5;
-            box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-                        0px 4px 5px 0px rgba(0, 0, 0, 0.14),
-                        0px 0px 0px 0px rgba(0, 0, 0, 0.12)
-                        !important;
-            border-top-right-radius: 0;
-            border-top-left-radius: 0;
-            text-align: center;
-            height: 256px;
-            display: flex;
-            flex-flow: column;
-            justify-content: center;">
+           class="mat-subheading-2 no-data">
   <div>
     Please use the search bar on top to find the
   </div>

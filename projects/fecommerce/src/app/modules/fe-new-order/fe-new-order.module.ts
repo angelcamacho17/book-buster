@@ -6,8 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MaterialLibModule } from 'material-lib';
 
-
-
 @NgModule({
   declarations: [FeNewOrderComponent],
   imports: [

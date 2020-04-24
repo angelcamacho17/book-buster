@@ -17,7 +17,7 @@
     {
       "id": 11,
       "description": "other thing",
-      "amount": 83.00,
+      "amount": 83,
       "createdBy": "Federico Ribero",
       "articles": []
     },
@@ -38,7 +38,7 @@
     {
       "articles": [],
       "description": "Order",
-      "amount": 135.10,
+      "amount": 135.1,
       "createdBy": "Angel Camacho",
       "id": 14
     },
@@ -53,22 +53,75 @@
   "customers": [
     {
       "id": 1,
-      "name": "Angel Camacho",
+      "name": "Angel Andres Camacho",
       "address": "T. caceres de allende 454",
-      "inititals": null
+      "initials": null
     },
     {
       "id": 2,
       "name": "Robin Peerson",
       "address": "T. caceres de allende 454",
-      "inititals": null
-
+      "initials": null
     },
     {
       "id": 3,
       "name": "Federico Ribero",
       "address": "T. caceres de allende 454",
-      "inititals": null
+      "initials": null
+    },
+    {
+      "id": 4,
+      "name": "Angel Camacho",
+      "address": "T. caceres de allende 454",
+      "initials": null
+    },
+    {
+      "id": 5,
+      "name": "Robin Peerson",
+      "address": "T. caceres de allende 454",
+      "initials": null
+    },
+    {
+      "id": 6,
+      "name": "Federico Ribero",
+      "address": "T. caceres de allende 454",
+      "initials": null
+    },
+    {
+      "id": 7,
+      "name": "Angel Camacho",
+      "address": "T. caceres de allende 454",
+      "initials": null
+    },
+    {
+      "id": 8,
+      "name": "Robin Peerson",
+      "address": "T. caceres de allende 454",
+      "initials": null
+    },
+    {
+      "id": 9,
+      "name": "Federico Ribero",
+      "address": "T. caceres de allende 454",
+      "initials": null
+    },
+    {
+      "id": 10,
+      "name": "Angel Camacho",
+      "address": "T. caceres de allende 454",
+      "initials": null
+    },
+    {
+      "id": 11,
+      "name": "Robin Peerson",
+      "address": "T. caceres de allende 454",
+      "initials": null
+    },
+    {
+      "id": 12,
+      "name": "Federico Ribero",
+      "address": "T. caceres de allende 454",
+      "initials": null
     }
   ]
 }

@@ -27,4 +27,26 @@ export class FeNewOrderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public getInitials(customer: any): string {
+    const fullName = customer.name;
+    if (fullName) {
+      const name: string[] = fullName.split(' ');
+      let initials: string;
+      if (name.length > 2) {
+        customer.smaller = true;
+        initials = `${this.getChar(name[0], 0)}${this.getChar(name[1], 0)}${this.getChar(name[2], 0)}`;
+      } else if (name.length > 1) {
+        initials = `${this.getChar(name[0], 0)}${this.getChar(name[1], 0)}`;
+      } else {
+        initials = `${this.getChar(name[0], 0)}`;
+      }
+      return initials.toUpperCase();
+    }
+  }
+
+  private getChar(text: string, index: number) {
+    return text.charAt(index);
+  }
+
+
 }
