@@ -54,17 +54,21 @@
     {
       "id": 1,
       "name": "Angel Camacho",
-      "address": "T. caceres de allende 454"
+      "address": "T. caceres de allende 454",
+      "inititals": null
     },
     {
       "id": 2,
       "name": "Robin Peerson",
-      "address": "T. caceres de allende 454"
+      "address": "T. caceres de allende 454",
+      "inititals": null
+
     },
     {
       "id": 3,
       "name": "Federico Ribero",
-      "address": "T. caceres de allende 454"
+      "address": "T. caceres de allende 454",
+      "inititals": null
     }
   ]
 }

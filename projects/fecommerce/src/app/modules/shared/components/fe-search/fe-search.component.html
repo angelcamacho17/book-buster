@@ -19,16 +19,24 @@
             >
       <mat-placeholder class="mat-subheading-2">Search...</mat-placeholder>
       <mat-autocomplete #auto="matAutocomplete" class="autocomplete" (closed)="showInitialState()" (opened)="hideInitialState()">
-        <mat-option *ngFor="let item of filteredlist | async" [value]="item.name" style="height: 72px;" >
-          <div class="mat-subheading-2" style="margin: 0 !important;
-                                               height: fit-content !important;">
-            {{item?.name}}
+        <mat-option *ngFor="let item of filteredlist | async" [value]="item.name"
+                    style="height: 72px;
+                          display: flex;" >
+          <div class="avatar">
+            <div class="mat-body-2 initials-sidenav" [ngClass]="item.smaller ? 'mat-body-1' : ''">{{ item?.initials }}</div>
           </div>
-          <!-- <div class="mat-body-2" style="margin: 0 !important;
-                                         height: fit-content !important;">
-            {{item?.address}}
-          </div> -->
-        </mat-option>
+          <div style="height: 72px;">
+            <h3 class="mat-headline" style="margin: 0 !important;
+                                            height: 28px;
+                                            color: rgba(0, 0, 0, 0.87);">
+              {{item?.name}}
+            </h3>
+            <div class="mat-body-1" style="margin: 0 !important;
+                                          color: rgba(0, 0, 0, 0.6);">
+              {{item?.address}}
+            </div>
+          </div>
+          </mat-option>
       </mat-autocomplete>
     </mat-form-field>
     <button class="close-button" mat-icon-button disableRipple="true" (click)="clearSearch()">

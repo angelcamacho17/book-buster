@@ -34,6 +34,29 @@
       padding: 0 16px;
       width: 100%;
 
+      .mat-subheading-2 {
+
+        .mat-option-text {
+
+          .option-text {
+            margin: 0 !important;
+            height: 16px;
+            background-color: blue($color: #000000);
+          }
+        }
+      }
+    }
+    .avatar {
+      background-color: rgba(255, 255, 255, 0.6);
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: center;
+      align-content: center;
+      color: rgba(0, 0, 0, .87);
+      text-align: center;
     }
   }
 }
