@@ -1,0 +1,39 @@
+.container {
+    .list {
+        .list-item {
+            height: 64px;
+            .item-line {
+                display: flex;
+                flex-flow: row;
+                justify-content: space-between;
+                align-items: center;
+                // height: 24px;
+            }
+            
+            .description {
+                .title {
+                    color: rgba(0, 0, 0, 0.87);
+                    font-weight: 600;
+                }
+
+                .subtitle {
+                    color: rgba(0, 0, 0, 0.6);
+                }
+            }
+            // .order-subtitle {
+            //     height: 40px;
+            // }
+
+            .amount {
+                font-weight: 600;
+                color: #1666D8;
+            }
+        }
+
+        .divider {
+            // position: relative;
+            left: 16px;
+            width: calc(100% - 16px);
+        }
+    }
+}

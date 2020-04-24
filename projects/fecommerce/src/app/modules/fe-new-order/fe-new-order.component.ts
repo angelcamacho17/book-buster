@@ -15,7 +15,7 @@ export class FeNewOrderComponent implements OnInit {
   public $customers: Observable<Customer[]>;
   public customers: Customer[];
 
-  constructor( private store: Store<{customers: Customer[]}>) {
+  constructor(private store: Store<{customers: Customer[]}>) {
     this.store.dispatch(setHeaderTitleRequest({title: 'new order'}));
     this.$customers = this.store.pipe(select('customers'));
     this.$customers.subscribe(data => {

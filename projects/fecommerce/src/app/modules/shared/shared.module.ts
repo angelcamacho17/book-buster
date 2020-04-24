@@ -11,8 +11,8 @@ import { FeHeaderComponent } from './components/fe-header/fe-header.component';
 
 @NgModule({
   declarations: [
-    FeCreateButtonComponent,
     FeCardComponent,
+    FeCreateButtonComponent,
     FeSearchComponent,
     FeHeaderComponent
   ],
@@ -23,6 +23,7 @@ import { FeHeaderComponent } from './components/fe-header/fe-header.component';
     ReactiveFormsModule
   ],
   exports: [
+    FeCardComponent,
     FeCreateButtonComponent,
     FeSearchComponent,
     FeHeaderComponent
