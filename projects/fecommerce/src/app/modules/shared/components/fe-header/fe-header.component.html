@@ -1,4 +1,7 @@
-<mat-toolbar [ngStyle]="{'justify-content': style === 'center' ? 'center': ''}" class="gradient-background">
+<mat-toolbar class="gradient-background">
+  <mat-icon *ngIf="style === 'center'" class="close-icon">
+    close
+  </mat-icon>
   <div [ngClass]="class" style="margin: 0 !important;">
     {{title | titlecase}}
   </div>
