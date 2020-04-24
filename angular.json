@@ -29,6 +29,7 @@
               "projects/fecommerce/src/.htaccess"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/fecommerce/src/styles.scss"
             ],
             "scripts": []
@@ -93,6 +94,7 @@
               "projects/fecommerce/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/fecommerce/src/styles.scss"
             ],
             "scripts": []
@@ -279,46 +281,6 @@
             "tsConfig": [
               "projects/data-store-lib/tsconfig.lib.json",
               "projects/data-store-lib/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "material-lib": {
-      "projectType": "library",
-      "root": "projects/material-lib",
-      "sourceRoot": "projects/material-lib/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/material-lib/tsconfig.lib.json",
-            "project": "projects/material-lib/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/material-lib/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/material-lib/src/test.ts",
-            "tsConfig": "projects/material-lib/tsconfig.spec.json",
-            "karmaConfig": "projects/material-lib/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/material-lib/tsconfig.lib.json",
-              "projects/material-lib/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { HomeService } from './home.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialLibModule } from 'material-lib';
+import { MaterialModule } from 'projects/fecommerce/src/app/modules/shared/modules/material/material.module';
 
 @NgModule({
   declarations: [],
@@ -12,7 +12,7 @@ import { MaterialLibModule } from 'material-lib';
     CommonModule,
     HttpClientModule,
     RouterModule.forChild([{ path: '', component: HomeComponent }]),
-    MaterialLibModule
+    MaterialModule
   ],
   providers: [
     HomeService

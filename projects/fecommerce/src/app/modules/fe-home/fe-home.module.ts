@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FeHomeComponent } from './fe-home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { MaterialLibModule } from 'material-lib';
 import { SharedModule } from '../shared/shared.module';
 import { FeHeaderModule } from '../fe-header/fe-header.module';
+import { MaterialModule } from '../shared/modules/material/material.module';
 
 
 
@@ -15,7 +15,7 @@ import { FeHeaderModule } from '../fe-header/fe-header.module';
     CommonModule,
     HttpClientModule,
     RouterModule.forChild([{ path: '', component: FeHomeComponent }]),
-    MaterialLibModule,
+    MaterialModule,
     SharedModule,
     FeHeaderModule
   ],

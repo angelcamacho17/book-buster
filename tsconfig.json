@@ -20,10 +20,6 @@
         "dist/data-store/data-store",
         "dist/data-store"
       ],
-      "material-lib": [
-        "dist/material-lib/material-lib",
-        "dist/material-lib"
-      ],
       "models-lib": [
         "dist/models-lib/models-lib",
         "dist/models-lib"

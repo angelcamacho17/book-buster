@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeHeaderComponent } from './fe-header.component';
-import { MaterialLibModule } from 'material-lib';
+import { MaterialModule } from '../shared/modules/material/material.module';
 
 
 
@@ -9,7 +9,7 @@ import { MaterialLibModule } from 'material-lib';
   declarations: [FeHeaderComponent],
   imports: [
     CommonModule,
-    MaterialLibModule
+    MaterialModule
   ],
   exports: [
     FeHeaderComponent

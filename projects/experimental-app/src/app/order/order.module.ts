@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { OrderComponent } from './order.component';
 import { RouterModule } from '@angular/router';
 import { ArticleComponent } from '../article/article.component';
-import { MaterialLibModule } from 'material-lib';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from 'projects/fecommerce/src/app/modules/shared/modules/material/material.module';
 
 
 
@@ -16,7 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule.forChild([{ path: '', component: OrderComponent }]),
-    MaterialLibModule,
+    MaterialModule,
     FormsModule,
     ReactiveFormsModule,
   ],

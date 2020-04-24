@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MaterialLibComponent } from './material-lib.component';
+import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,8 +9,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
-  declarations: [MaterialLibComponent],
+  declarations: [],
   imports: [
+    CommonModule,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
@@ -29,4 +30,4 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatToolbarModule
   ]
 })
-export class MaterialLibModule { }
+export class MaterialModule { }

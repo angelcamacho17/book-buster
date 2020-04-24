@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { replaceOrderRequest, deleteOrderRequest } from 'projects/data-store/src/lib/order/order.actions';
 import { FormGroup, FormBuilder } from '@angular/forms';

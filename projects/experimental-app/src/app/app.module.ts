@@ -8,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
 import { DataStoreModule } from 'data-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { MaterialLibModule } from 'material-lib';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrderModule } from './order/order.module';
 
@@ -23,7 +22,7 @@ import { OrderModule } from './order/order.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     DataStoreModule,
-    MaterialLibModule,
+    MaterialModule,
     StoreDevtoolsModule.instrument(),
     FormsModule,
     OrderModule
