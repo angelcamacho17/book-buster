@@ -49,5 +49,22 @@
       "createdBy": "Federico Ribero",
       "id": 15
     }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "Angel Camacho",
+      "address": "T. caceres de allende 454"
+    },
+    {
+      "id": 2,
+      "name": "Robin Peerson",
+      "address": "T. caceres de allende 454"
+    },
+    {
+      "id": 3,
+      "name": "Federico Ribero",
+      "address": "T. caceres de allende 454"
+    }
   ]
 }

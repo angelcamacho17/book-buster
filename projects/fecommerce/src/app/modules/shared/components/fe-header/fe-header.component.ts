@@ -10,7 +10,9 @@ import { Observable } from 'rxjs';
 export class FeHeaderComponent implements OnInit {
 
   $header: Observable<string>;
-  title = 'Header';
+  @Input() title = '';
+  @Input() class = '';
+  @Input() style = '';
 
   constructor(private storeHeader: Store<{header: string}>) {
     this.$header = this.storeHeader.pipe(select('header'));

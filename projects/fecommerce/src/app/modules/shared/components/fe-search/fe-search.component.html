@@ -1,0 +1,65 @@
+<mat-card class="search-container"
+          style="border-bottom-right-radius: 0px !important;
+                 border-bottom-left-radius: 0px !important;">
+<div class="mat-headline title">
+  <span style="padding-left: 16px;">
+    {{searchTitle }}
+  </span>
+</div>
+<div class="search-field">
+  <mat-icon style="color:rgba(0, 0, 0, 0.6)">search</mat-icon>
+  <mat-form-field class="search-bar" floatLabel="never">
+    <input matInput
+            name="input"
+            #input
+            aria-label="State"
+            [matAutocomplete]="auto"
+            [formControl]="stateCtrl"
+            class="mat-subheading-2"
+            >
+      <mat-placeholder class="mat-subheading-2">Search...</mat-placeholder>
+      <mat-autocomplete #auto="matAutocomplete" class="autocomplete" (closed)="showInitialState()" (opened)="hideInitialState()">
+        <mat-option *ngFor="let item of filteredlist | async" [value]="item.name" style="height: 72px;" >
+          <div class="mat-subheading-2" style="margin: 0 !important;
+                                               height: fit-content !important;">
+            {{item?.name}}
+          </div>
+          <!-- <div class="mat-body-2" style="margin: 0 !important;
+                                         height: fit-content !important;">
+            {{item?.address}}
+          </div> -->
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button class="close-button" mat-icon-button disableRipple="true" (click)="clearSearch()">
+      <mat-icon style="color:rgba(0, 0, 0, 0.6)">close</mat-icon>
+    </button>
+</div>
+</mat-card>
+<mat-card *ngIf="showInitial"
+           class="mat-subheading-2"
+           style="
+            position: absolute;
+            width: auto;
+            right: 16px;
+            left: 16px;
+            top: 216px;
+            border-top: solid 1px #d5d5d5;
+            box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+                        0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+                        0px 0px 0px 0px rgba(0, 0, 0, 0.12)
+                        !important;
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+            text-align: center;
+            height: 256px;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;">
+  <div>
+    Please use the search bar on top to find the
+  </div>
+  <div>
+    customer you want to assign.
+  </div>
+</mat-card>

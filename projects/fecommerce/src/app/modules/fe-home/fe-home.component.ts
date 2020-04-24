@@ -34,7 +34,7 @@ export class FeHomeComponent implements OnInit {
   }
 
   public createOrder(): void {
-    this._router.navigate(['/order']);
+    this._router.navigate(['/neworder']);
   }
 
 }
