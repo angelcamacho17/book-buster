@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeCustomerComponent } from './fe-customer.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,8 +17,6 @@ import { SharedModule } from '../shared/shared.module';
     MaterialModule,
     SharedModule
   ],
-  exports: [
-    FeCustomerComponent
-  ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FeCustomerModule { }

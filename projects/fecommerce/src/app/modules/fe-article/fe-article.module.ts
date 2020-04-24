@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeArticleComponent } from './fe-article.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,6 +14,7 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule.forChild([{ path: '', component: FeArticleComponent }]),
     MaterialModule,
     SharedModule
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FeArticleModule { }

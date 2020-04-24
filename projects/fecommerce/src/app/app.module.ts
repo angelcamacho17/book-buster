@@ -8,7 +8,6 @@ import { DataStoreModule } from 'data-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { FormsModule } from '@angular/forms';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { FeHeaderModule } from './modules/fe-header/fe-header.module';
 import { MaterialModule } from './modules/shared/modules/material/material.module';
 
 @NgModule({
@@ -19,7 +18,6 @@ import { MaterialModule } from './modules/shared/modules/material/material.modul
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    FeHeaderModule,
     DataStoreModule,
     MaterialModule,
     AppRoutingModule,

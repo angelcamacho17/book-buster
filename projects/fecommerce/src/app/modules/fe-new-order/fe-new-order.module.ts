@@ -1,12 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeNewOrderComponent } from './fe-new-order.component';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { MaterialLibModule } from 'material-lib';
-
-
+import { MaterialModule } from '../shared/modules/material/material.module';
 
 @NgModule({
   declarations: [FeNewOrderComponent],
@@ -14,11 +12,9 @@ import { MaterialLibModule } from 'material-lib';
     CommonModule,
     HttpClientModule,
     RouterModule.forChild([{ path: '', component: FeNewOrderComponent }]),
-    MaterialLibModule,
+    MaterialModule,
     SharedModule
   ],
-  exports: [
-    FeNewOrderComponent
-  ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FeNewOrderModule { }
