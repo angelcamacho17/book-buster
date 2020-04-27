@@ -30,7 +30,7 @@ export const slider =
     transition('customer => article', slideTo('left')),
     transition('neworder => home', slideTo('left')),
     transition('neworder => order', slideTo('right')),
-    transition('neworder => articles', slideTo('right')),
+    transition('neworder => article', slideTo('right')),
     transition('neworder => customer', slideTo('right')),
   ]);
 

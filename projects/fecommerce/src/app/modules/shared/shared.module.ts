@@ -8,6 +8,7 @@ import { FeCardComponent } from './components/fe-card/fe-card.component';
 import { FeHeaderComponent } from './components/fe-header/fe-header.component';
 import { FeSearchComponent } from './components/fe-search/fe-search.component';
 import { FeCustomerRowComponent } from './components/fe-customer-row/fe-customer-row.component';
+import { FeArticleRowComponent } from './components/fe-article-row/fe-article-row.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FeCustomerRowComponent } from './components/fe-customer-row/fe-customer
     FeCreateButtonComponent,
     FeCustomerRowComponent,
     FeHeaderComponent,
-    FeSearchComponent
+    FeSearchComponent,
+    FeArticleRowComponent
   ],
   imports: [
     CommonModule,

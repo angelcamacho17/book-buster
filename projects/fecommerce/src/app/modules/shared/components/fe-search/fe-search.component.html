@@ -23,7 +23,8 @@
                           display: flex;
                           padding: 0;" >
           <app-fe-customer-row *ngIf="itemType === 'customer'" [customer]="item" class="item"></app-fe-customer-row>
-          </mat-option>
+          <app-fe-article-row *ngIf="itemType === 'article'" [article]="item" class="item"></app-fe-article-row>
+        </mat-option>
       </mat-autocomplete>
     </mat-form-field>
     <button class="close-button" mat-icon-button disableRipple="true" (click)="clearSearch()">
