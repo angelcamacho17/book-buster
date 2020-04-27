@@ -17,7 +17,7 @@
             color="accent"
             >
       <mat-placeholder class="mat-subheading-2">Search...</mat-placeholder>
-      <mat-autocomplete #auto="matAutocomplete" class="autocomplete" (closed)="showInitialState()" (opened)="hideInitialState()">
+      <mat-autocomplete #auto="matAutocomplete" class="autocomplete" (closed)="showInitialState()"   (opened)="hideInitialState()">
         <mat-option *ngFor="let item of filteredlist | async" [value]="item.name"
                     style="height: 72px;
                           display: flex;
@@ -31,8 +31,7 @@
     </button>
 </div>
 </mat-card>
-<mat-card *ngIf="showInitial"
-           class="mat-subheading-2 no-data">
+<mat-card *ngIf="showInitial" class="mat-subheading-2 no-data">
   <div>
     Please use the search bar on top to find the
   </div>
