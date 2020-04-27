@@ -14,14 +14,16 @@ import { replaceCustomerRequest } from 'projects/data-store-lib/src/lib/customer
 export class FeSearchComponent {
 
   @Input() list: Customer[];
-  @Input() searchTitle: string;
+  @Input() searchTitle = '';
   @Input() itemType: string;
+  @Input() small = false;
   private _filteredResult = [];
   public filteredlist: Observable<any[]>;
   public stateCtrl = new FormControl();
   public showInitial = true;
+  public expandBorder = false;
 
-  constructor(public store: Store) {
+  constructor() {
     this.filteredlist = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -29,6 +31,8 @@ export class FeSearchComponent {
           if(state) {
             this._filteredResult = this._filterStates(state);
             this.showInitial = this._filteredResult.length === 0;
+            this.expandBorder = !this.showInitial;
+            console.log(this._filteredResult.length === 0);
             return this._filteredResult;
           } else {
            return this.list.slice();

@@ -17,9 +17,11 @@
             color="accent"
             >
       <mat-placeholder class="mat-subheading-2">Search...</mat-placeholder>
-      <mat-autocomplete #auto="matAutocomplete" class="autocomplete" (closed)="showInitialState()"   (opened)="hideInitialState()">
-        <mat-option *ngFor="let item of filteredlist | async" [value]="item.name"
-                    style="height: 72px;
+      <mat-autocomplete #auto="matAutocomplete"
+                        class="autocomplete"
+                        (closed)="showInitialState()"
+                        (opened)="hideInitialState()">
+        <mat-option *ngFor="let item of filteredlist | async" style="height: 72px;
                           display: flex;
                           padding: 0;" >
           <app-fe-customer-row *ngIf="itemType === 'customer'" [customer]="item" class="item"></app-fe-customer-row>

@@ -55,7 +55,10 @@ export class FeCustomerRowComponent{
   }
 
   public selectedCustomer(): void {
-    this._router.navigate(['/article']);
+    setTimeout(()=> {
+      this._router.navigate(['/article']);
+    },500);
+
   }
 
 }
