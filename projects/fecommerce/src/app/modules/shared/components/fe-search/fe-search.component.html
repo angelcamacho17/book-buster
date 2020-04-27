@@ -17,13 +17,14 @@
             color="accent"
             >
       <mat-placeholder class="mat-subheading-2">Search...</mat-placeholder>
-      <mat-autocomplete #auto="matAutocomplete" class="autocomplete" (closed)="showInitialState()" (opened)="hideInitialState()">
+      <mat-autocomplete #auto="matAutocomplete" class="autocomplete" (closed)="showInitialState()"   (opened)="hideInitialState()">
         <mat-option *ngFor="let item of filteredlist | async" [value]="item.name"
                     style="height: 72px;
                           display: flex;
                           padding: 0;" >
           <app-fe-customer-row *ngIf="itemType === 'customer'" [customer]="item" class="item"></app-fe-customer-row>
-          </mat-option>
+          <app-fe-article-row *ngIf="itemType === 'article'" [article]="item" class="item"></app-fe-article-row>
+        </mat-option>
       </mat-autocomplete>
     </mat-form-field>
     <button class="close-button" mat-icon-button disableRipple="true" (click)="clearSearch()">
@@ -31,8 +32,7 @@
     </button>
 </div>
 </mat-card>
-<mat-card *ngIf="showInitial"
-           class="mat-subheading-2 no-data">
+<mat-card *ngIf="showInitial" class="mat-subheading-2 no-data">
   <div>
     Please use the search bar on top to find the
   </div>

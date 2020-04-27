@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Customer } from 'projects/data-store-lib/src/lib/models/customer.model';
 import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class FeCustomerRowComponent{
   public smaller: Observable<boolean>;
   public initials = '';
 
-  constructor() {
+  constructor(private _router: Router) {
     if (this.customer) {
       this.smaller = this.reduceLetterSize();
     }
@@ -51,6 +52,10 @@ export class FeCustomerRowComponent{
 
   private getChar(text: string, index: number) {
     return text.charAt(index);
+  }
+
+  public selectedCustomer(): void {
+    this._router.navigate(['/article']);
   }
 
 }

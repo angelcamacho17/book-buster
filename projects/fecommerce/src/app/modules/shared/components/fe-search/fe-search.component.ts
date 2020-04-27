@@ -16,16 +16,24 @@ export class FeSearchComponent {
   @Input() list: Customer[];
   @Input() searchTitle: string;
   @Input() itemType: string;
+  private _filteredResult = [];
   public filteredlist: Observable<any[]>;
   public stateCtrl = new FormControl();
   public showInitial = true;
-
 
   constructor(public store: Store) {
     this.filteredlist = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
-        map(state => state ? this._filterStates(state) : this.list.slice())
+        map(state => {
+          if(state) {
+            this._filteredResult = this._filterStates(state);
+            this.showInitial = this._filteredResult.length === 0;
+            return this._filteredResult;
+          } else {
+           return this.list.slice();
+          }
+        })
       );
   }
 
@@ -40,7 +48,7 @@ export class FeSearchComponent {
    */
   public clearSearch(): void {
     this.stateCtrl.setValue('');
-    this.showInitial = false;
+    this.showInitial = true;
   }
 
   /**
