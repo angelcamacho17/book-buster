@@ -5,9 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../shared/modules/material/material.module';
 import { SharedModule } from '../shared/shared.module';
+import { FeArticleDetailComponent } from './fe-article-detail/fe-article-detail.component';
 
 @NgModule({
-  declarations: [FeArticleComponent],
+  declarations: [FeArticleComponent, FeArticleDetailComponent],
   imports: [
     CommonModule,
     HttpClientModule,

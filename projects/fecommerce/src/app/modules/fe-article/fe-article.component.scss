@@ -1,4 +1,35 @@
 .container {
+    
+    .no-results {
+        text-align: center;
+        display: -webkit-flex;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+
+        .icon {
+            width: 99px;
+            height: 99px;
+            font-size: 99px;
+            color: rgba(0,0,0,0.54);
+        }
+        
+        .search-text {
+            color: rgba(0,0,0,0.87);
+            margin-bottom: 3px
+        }
+
+        .search-description {
+            color: rgba(0,0,0,0.6)
+        }
+    }
+}
+
+
+// ITEM LIST
+
+/* .container {
     .list {
         .list-item {
             height: 64px;
@@ -37,3 +68,4 @@
         }
     }
 }
+ */
