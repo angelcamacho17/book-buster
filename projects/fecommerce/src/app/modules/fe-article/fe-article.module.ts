@@ -12,7 +12,16 @@ import { FeArticleDetailComponent } from './fe-article-detail/fe-article-detail.
   imports: [
     CommonModule,
     HttpClientModule,
-    RouterModule.forChild([{ path: '', component: FeArticleComponent }]),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: FeArticleComponent
+      },
+      {
+        path: 'detail',
+        component: FeArticleDetailComponent
+      }
+    ]),
     MaterialModule,
     SharedModule
   ],
