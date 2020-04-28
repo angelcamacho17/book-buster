@@ -1,4 +1,4 @@
-<mat-card class="small-container" [ngClass]="expandBorder ? 'expand-card' : ''">
+<mat-card class="small-container mat-elevation-z2" [ngClass]="expandBorder ? 'expand-card' : ''">
   <div class="search-field">
     <mat-icon style="color:rgba(0, 0, 0, 0.6)">search</mat-icon>
     <mat-form-field class="search-bar" floatLabel="never">
@@ -9,9 +9,8 @@
               [matAutocomplete]="auto"
               [formControl]="stateCtrl"
               class="mat-subheading-2"
-              color="accent"
-              >
-        <mat-placeholder class="mat-subheading-2">Search...</mat-placeholder>
+              color="accent">
+        <mat-placeholder class="mat-subheading-2 placeholder">Search...</mat-placeholder>
         <mat-autocomplete #auto="matAutocomplete"
                           class="autocomplete"
                           (opened)="expandBorders()"
