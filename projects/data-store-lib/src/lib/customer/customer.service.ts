@@ -23,8 +23,8 @@ export class CustomerService {
     return this.httpClient.get<Customer[]>(this.getCollectionUrl());
   }
 
-  public append(Customer: Customer) {
-    return this.httpClient.post<Customer>(this.getCollectionUrl(), Customer);
+  public append(customer: Customer) {
+    return this.httpClient.post<Customer>(this.getCollectionUrl(), customer);
   }
 
   public replace(car: Customer) {

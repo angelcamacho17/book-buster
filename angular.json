@@ -3,6 +3,46 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "data-store-lib": {
+      "projectType": "library",
+      "root": "projects/data-store-lib",
+      "sourceRoot": "projects/data-store-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/data-store-lib/tsconfig.lib.json",
+            "project": "projects/data-store-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/data-store-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/data-store-lib/src/test.ts",
+            "tsConfig": "projects/data-store-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/data-store-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/data-store-lib/tsconfig.lib.json",
+              "projects/data-store-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
     "fecommerce": {
       "projectType": "application",
       "schematics": {
@@ -245,46 +285,6 @@
             "production": {
               "devServerTarget": "experimental-app:serve:production"
             }
-          }
-        }
-      }
-    },
-    "data-store-lib": {
-      "projectType": "library",
-      "root": "projects/data-store-lib",
-      "sourceRoot": "projects/data-store-lib/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/data-store-lib/tsconfig.lib.json",
-            "project": "projects/data-store-lib/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/data-store-lib/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/data-store-lib/src/test.ts",
-            "tsConfig": "projects/data-store-lib/tsconfig.spec.json",
-            "karmaConfig": "projects/data-store-lib/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/data-store-lib/tsconfig.lib.json",
-              "projects/data-store-lib/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
