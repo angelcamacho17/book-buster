@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FeSearchComponent } from '../fe-search/fe-search.component';
 
 @Component({

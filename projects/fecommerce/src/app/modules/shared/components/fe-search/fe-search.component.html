@@ -1,38 +1,37 @@
 <mat-card class="search-container">
-<div class="mat-headline title">
-  <span style="padding-left: 16px;">
-    {{searchTitle }}
-  </span>
-</div>
-<div class="search-field">
-  <mat-icon style="color:rgba(0, 0, 0, 0.6)">search</mat-icon>
-  <mat-form-field class="search-bar" floatLabel="never">
-    <input matInput
-            name="input"
-            #input
-            aria-label="State"
-            [matAutocomplete]="auto"
-            [formControl]="stateCtrl"
-            class="mat-subheading-2"
-            color="accent"
-            >
-      <mat-placeholder class="mat-subheading-2">Search...</mat-placeholder>
-      <mat-autocomplete #auto="matAutocomplete"
-                        class="autocomplete"
-                        (closed)="showInitialState()"
-                        (opened)="hideInitialState()">
-        <mat-option *ngFor="let item of filteredlist | async" style="height: 72px;
-                          display: flex;
-                          padding: 0;" >
-          <app-fe-customer-row *ngIf="itemType === 'customer'" [customer]="item" class="item"></app-fe-customer-row>
-          <app-fe-article-row *ngIf="itemType === 'article'" [article]="item" class="item"></app-fe-article-row>
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <button class="close-button" mat-icon-button disableRipple="true" (click)="clearSearch()">
-      <mat-icon style="color:rgba(0, 0, 0, 0.6)">close</mat-icon>
-    </button>
-</div>
+  <div class="mat-headline title">
+    <span style="padding-left: 16px;">
+      {{searchTitle }}
+    </span>
+  </div>
+  <div class="search-field">
+    <mat-icon style="color:rgba(0, 0, 0, 0.6)">search</mat-icon>
+    <mat-form-field class="search-bar" floatLabel="never">
+      <input matInput
+              name="input"
+              #input
+              aria-label="State"
+              [matAutocomplete]="auto"
+              [formControl]="stateCtrl"
+              class="mat-subheading-2"
+              color="accent">
+        <mat-placeholder class="mat-subheading-2">Search...</mat-placeholder>
+        <mat-autocomplete #auto="matAutocomplete"
+                          class="autocomplete"
+                          (closed)="showInitialState()"
+                          (opened)="hideInitialState()">
+          <mat-option *ngFor="let item of filteredlist | async" style="height: 72px;
+                            display: flex;
+                            padding: 0;" >
+            <app-fe-customer-row *ngIf="itemType === 'customer'" [customer]="item" class="item"></app-fe-customer-row>
+            <app-fe-article-row *ngIf="itemType === 'article'" [article]="item" class="item"></app-fe-article-row>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button class="close-button" mat-icon-button disableRipple="true" (click)="clearSearch()">
+        <mat-icon style="color:rgba(0, 0, 0, 0.6)">close</mat-icon>
+      </button>
+  </div>
 </mat-card>
 <mat-card *ngIf="showInitial" class="mat-subheading-2 no-data">
   <div>
