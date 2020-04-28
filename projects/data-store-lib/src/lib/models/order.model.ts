@@ -4,7 +4,7 @@ export interface Order {
   id?: any,
   description: string,
   amount: number,
-  createdBy: string, //User
+  createdBy: string, // User
   articles: Article[]
 }
 
