@@ -38,7 +38,7 @@
             }
         } */
         stage('build') {
-            when { 
+            when {
                 anyOf {
                     branch 'Feature*'
                     branch 'develop'
@@ -48,6 +48,7 @@
             }
             steps {
                 dir(env.GITDIR) {
+                    sh 'ng build data-store-lib'
                     sh 'ng build --project=fecommerce --base-href ${BASEHREF} --progress=false'
                     sh 'rm -f build/logs/dist_${BRANCH_NAME}.tar'
                     sh 'chmod -R 755 dist/'
@@ -57,7 +58,7 @@
             }
         }
         stage('build prod') {
-            when { 
+            when {
                 branch 'staging'
             }
             steps {
