@@ -63,6 +63,9 @@
             when {
                 anyOf {
                     branch 'staging'
+                    branch 'Feature*'
+                    branch 'develop'
+                    branch 'release*'
                 }
             }
             steps {
