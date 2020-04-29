@@ -12,52 +12,51 @@ import {
 
 export const slider =
   trigger('routeAnimations', [
-    transition('home => order', slideTo('right')),
-    transition('home => article', slideTo('right')),
-    transition('home => customer', slideTo('right')),
-    transition('home => neworder', slideTo('right')),
-    transition('order => home', slideToLeft('left')),
-    transition('order => neworder', slideToLeft('left')),
-    transition('order => article', slideTo('right')),
-    transition('order => customer', slideTo('right')),
-    transition('article => home', slideToLeft('left')),
-    transition('article => neworder', slideToLeft('left')),
-    transition('article => order', slideToLeft('left')),
-    transition('article => customer', slideTo('right')),
-    transition('customer => home', slideToLeft('left')),
-    transition('customer => neworder', slideToLeft('left')),
-    transition('customer => order', slideToLeft('left')),
-    transition('customer => article', slideToLeft('left')),
-    transition('neworder => home', slideToLeft('left')),
-    transition('neworder => order', slideTo('right')),
-    transition('neworder => article', slideTo('right')),
-    transition('neworder => customer', slideTo('right')),
+    transition('home => order', slideToRight()),
+    transition('home => article', slideToRight()),
+    transition('home => customer', slideToRight()),
+    transition('home => neworder', slideToRight()),
+    transition('order => home', slideToLeft()),
+    transition('order => neworder', slideToLeft()),
+    transition('order => article', slideToRight()),
+    transition('order => customer', slideToRight()),
+    transition('article => home', slideToLeft()),
+    transition('article => neworder', slideToLeft()),
+    transition('article => order', slideToLeft()),
+    transition('article => customer', slideToRight()),
+    transition('customer => home', slideToLeft()),
+    transition('customer => neworder', slideToLeft()),
+    transition('customer => order', slideToLeft()),
+    transition('customer => article', slideToLeft()),
+    transition('neworder => home', slideToLeft()),
+    transition('neworder => order', slideToRight()),
+    transition('neworder => article', slideToRight()),
+    transition('neworder => customer', slideToRight()),
   ]);
 
-function slideTo(direction) {
+function slideToRight() {
   const optional = { optional: true };
   return [
     query(':enter, :leave', [
       style({
         position: 'absolute',
         top: 0,
-        [direction]: 0,
+        right: 0,
         width: '100%',
         'box-shadow': '0px 0px 8px 1px rgba(0, 0, 0, 0.4)',
         height: '100%',
-        background: '#ffffff',
-        'z-index': 9999
+        background: '#ffffff'
       })
     ], optional),
     query(':enter', [
-      style({ [direction]: '-100%'})
+      style({ right: '-100%'})
     ]),
     group([
       query(':leave', [
-        animate('600ms ease', style({ [direction]: '0%'}))
+        animate('600ms ease', style({ right: '0%'}))
       ], optional),
       query(':enter', [
-        animate('600ms ease', style({ [direction]: '0%'}))
+        animate('600ms ease', style({ right: '0%'}))
       ])
     ]),
     // Normalize the page style... Might not be necessary
@@ -69,14 +68,14 @@ function slideTo(direction) {
 }
 
 
-function slideToLeft(direction) {
+function slideToLeft() {
   const optional = { optional: true };
   return [
     query(':enter, :leave', [
       style({
         position: 'absolute',
         top: '0',
-        [direction]: 0,
+        left: 0,
         width: '100%',
         'box-shadow': '0px 0px 8px 1px rgba(0, 0, 0, 0.4)',
         height: '100%',
@@ -85,19 +84,19 @@ function slideToLeft(direction) {
       })
     ], optional),
     query(':enter', [
-      style({ [direction]: '0%'})
+      style({ left: '0%'})
     ]),
     group([
       query(':leave', [
         animate('600ms ease',
         style({
-          [direction]: '100%',
+          left: '100%',
           'z-index': 10000
       }))
       ], optional),
       query(':enter', [
         animate('100ms ease', style({
-          [direction]: '0%',
+          left: '0%',
           'z-index': 0
         }))
       ])
