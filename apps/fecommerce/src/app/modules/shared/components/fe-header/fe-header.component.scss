@@ -1,9 +1,18 @@
-
-.gradient-background {
-  height: 178px;
+$toolbar-height: 178px;
+.overlay {
+  position: absolute;
+  left: 0; 
+  right: 0;
   width: 100%;
-  background-image: url('assets/img/header.png');
-  background-repeat: round;
+  height: $toolbar-height;
+  z-index: -1;
+}
+.gradient-background {
+  height: $toolbar-height;
+  width: 100%;
+  // background-image: url('assets/img/header.png');
+  // background-repeat: round;
+  background: transparent !important;
   color: #ffffff;
   padding-left: 16px;
   display: flex;
