@@ -16,7 +16,7 @@ pipeline {
                     sh 'rm -rf build/logs && rm -rf dist/'
                     sh 'mkdir -p build && mkdir -p build/logs'
                     sh 'rm -rf dist'
-                    sh 'npm install' // --no-optional --no-bin-links
+                    sh 'npm install --no-optional --no-bin-links'
                 }
             }
         }
