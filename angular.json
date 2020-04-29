@@ -23,7 +23,8 @@
             "aot": true,
             "assets": [
               "apps/fecommerce/src/favicon.ico",
-              "apps/fecommerce/src/assets"
+              "apps/fecommerce/src/assets",
+              "apps/fecommerce/src/.htaccess"
             ],
             "styles": ["apps/fecommerce/src/styles.scss"],
             "scripts": []
