@@ -1,85 +1,39 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
   "projects": {
-    "data-store-lib": {
-      "projectType": "library",
-      "root": "projects/data-store-lib",
-      "sourceRoot": "projects/data-store-lib/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/data-store-lib/tsconfig.lib.json",
-            "project": "projects/data-store-lib/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/data-store-lib/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/data-store-lib/src/test.ts",
-            "tsConfig": "projects/data-store-lib/tsconfig.spec.json",
-            "karmaConfig": "projects/data-store-lib/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/data-store-lib/tsconfig.lib.json",
-              "projects/data-store-lib/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "fecommerce": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
+        "@nrwl/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/fecommerce",
-      "sourceRoot": "projects/fecommerce/src",
-      "prefix": "app",
+      "root": "apps/fecommerce",
+      "sourceRoot": "apps/fecommerce/src",
+      "prefix": "fecommerce-workspace",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
-            "index": "projects/fecommerce/src/index.html",
-            "main": "projects/fecommerce/src/main.ts",
-            "polyfills": "projects/fecommerce/src/polyfills.ts",
-            "tsConfig": "projects/fecommerce/tsconfig.app.json",
+            "outputPath": "dist/apps/fecommerce",
+            "index": "apps/fecommerce/src/index.html",
+            "main": "apps/fecommerce/src/main.ts",
+            "polyfills": "apps/fecommerce/src/polyfills.ts",
+            "tsConfig": "apps/fecommerce/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "projects/fecommerce/src/favicon.ico",
-              "projects/fecommerce/src/assets",
-              "projects/fecommerce/src/.htaccess"
+              "apps/fecommerce/src/favicon.ico",
+              "apps/fecommerce/src/assets"
             ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/fecommerce/src/styles.scss"
-            ],
+            "styles": ["apps/fecommerce/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/fecommerce/src/environments/environment.ts",
-                  "with": "projects/fecommerce/src/environments/environment.prod.ts"
+                  "replace": "apps/fecommerce/src/environments/environment.ts",
+                  "with": "apps/fecommerce/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -122,41 +76,37 @@
             "browserTarget": "fecommerce:build"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/fecommerce/src/test.ts",
-            "polyfills": "projects/fecommerce/src/polyfills.ts",
-            "tsConfig": "projects/fecommerce/tsconfig.spec.json",
-            "karmaConfig": "projects/fecommerce/karma.conf.js",
-            "assets": [
-              "projects/fecommerce/src/favicon.ico",
-              "projects/fecommerce/src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/fecommerce/src/styles.scss"
-            ],
-            "scripts": []
-          }
-        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/fecommerce/tsconfig.app.json",
-              "projects/fecommerce/tsconfig.spec.json",
-              "projects/fecommerce/e2e/tsconfig.json"
+              "apps/fecommerce/tsconfig.app.json",
+              "apps/fecommerce/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/fecommerce/**"]
           }
         },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+        "test": {
+          "builder": "@nrwl/jest:jest",
           "options": {
-            "protractorConfig": "projects/fecommerce/e2e/protractor.conf.js",
+            "jestConfig": "apps/fecommerce/jest.config.js",
+            "tsConfig": "apps/fecommerce/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/fecommerce/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "fecommerce-e2e": {
+      "root": "apps/fecommerce-e2e",
+      "sourceRoot": "apps/fecommerce-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/fecommerce-e2e/cypress.json",
+            "tsConfig": "apps/fecommerce-e2e/tsconfig.e2e.json",
             "devServerTarget": "fecommerce:serve"
           },
           "configurations": {
@@ -164,134 +114,60 @@
               "devServerTarget": "fecommerce:serve:production"
             }
           }
-        }
-      }
-    },
-    "experimental-app": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "projects/experimental-app",
-      "sourceRoot": "projects/experimental-app/src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist",
-            "index": "projects/experimental-app/src/index.html",
-            "main": "projects/experimental-app/src/main.ts",
-            "polyfills": "projects/experimental-app/src/polyfills.ts",
-            "tsConfig": "projects/experimental-app/tsconfig.app.json",
-            "aot": true,
-            "assets": [
-              "projects/experimental-app/src/favicon.ico",
-              "projects/experimental-app/src/assets",
-              "projects/experimental-app/src/.htaccess"
-            ],
-            "styles": [
-              "projects/experimental-app/src/styles.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/experimental-app/src/environments/environment.ts",
-                  "with": "projects/experimental-app/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "experimental-app:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "experimental-app:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "experimental-app:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/experimental-app/src/test.ts",
-            "polyfills": "projects/experimental-app/src/polyfills.ts",
-            "tsConfig": "projects/experimental-app/tsconfig.spec.json",
-            "karmaConfig": "projects/experimental-app/karma.conf.js",
-            "assets": [
-              "projects/experimental-app/src/favicon.ico",
-              "projects/experimental-app/src/assets"
-            ],
-            "styles": [
-              "projects/experimental-app/src/styles.scss"
-            ],
-            "scripts": []
-          }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
+            "tsConfig": ["apps/fecommerce-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/fecommerce-e2e/**"]
+          }
+        }
+      }
+    },
+    "data-store-lib": {
+      "projectType": "library",
+      "root": "libs/data-store-lib",
+      "sourceRoot": "libs/data-store-lib/src",
+      "prefix": "fecommerce-workspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
             "tsConfig": [
-              "projects/experimental-app/tsconfig.app.json",
-              "projects/experimental-app/tsconfig.spec.json",
-              "projects/experimental-app/e2e/tsconfig.json"
+              "libs/data-store-lib/tsconfig.lib.json",
+              "libs/data-store-lib/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/data-store-lib/**"]
           }
         },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+        "test": {
+          "builder": "@nrwl/jest:jest",
           "options": {
-            "protractorConfig": "projects/experimental-app/e2e/protractor.conf.js",
-            "devServerTarget": "experimental-app:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "experimental-app:serve:production"
-            }
+            "jestConfig": "libs/data-store-lib/jest.config.js",
+            "tsConfig": "libs/data-store-lib/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/data-store-lib/src/test-setup.ts"
           }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
         }
       }
     }
   },
-  "defaultProject": "fecommerce",
   "cli": {
-    "analytics": false
-  }
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "fecommerce"
 }
