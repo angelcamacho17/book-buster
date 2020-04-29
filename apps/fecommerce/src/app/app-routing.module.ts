@@ -29,11 +29,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/fe-new-order/fe-new-order.module').then(m => m.FeNewOrderModule),
     data: { animation: 'neworder' }
   },
-  { path: '**', redirectTo: 'customer', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
