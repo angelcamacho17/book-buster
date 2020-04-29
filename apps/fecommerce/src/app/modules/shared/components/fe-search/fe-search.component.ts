@@ -1,10 +1,8 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, OnChanges, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { Customer } from 'libs/data-store-lib/src/lib/models/customer.model';
-import { Store } from '@ngrx/store';
-import { replaceCustomerRequest } from 'libs/data-store-lib/src/lib/customer/customer.actions';
+import { Customer } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
   selector: 'app-fe-search',

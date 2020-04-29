@@ -4,7 +4,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DataStoreModule } from 'libs/data-store-lib/src';
+import { DataStoreModule } from '@fecommerce-workspace/data-store-lib';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { FormsModule } from '@angular/forms';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';

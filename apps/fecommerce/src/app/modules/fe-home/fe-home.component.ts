@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { setHeaderTitleRequest } from 'libs/data-store-lib/src/lib/header/header.actions';
+import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Order } from 'libs/data-store-lib/src/lib/models/order.model';
-import { refreshOrdersRequest } from 'libs/data-store-lib/src/lib/order/order.actions';
+import { Order } from '@fecommerce-workspace/data-store-lib';
+import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib'
 
 @Component({
   selector: 'app-fe-home',

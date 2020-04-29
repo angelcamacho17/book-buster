@@ -10,7 +10,6 @@
     "component-selector": [
       true,
       "element",
-      "fecommerce-workspace",
       "kebab-case"
     ]
   },

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { setHeaderTitleRequest } from 'libs/data-store-lib/src/lib/header/header.actions';
-import { Article } from 'libs/data-store-lib/src/lib/models/article.model';
+import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
+import { Article } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
   selector: 'app-fe-article',

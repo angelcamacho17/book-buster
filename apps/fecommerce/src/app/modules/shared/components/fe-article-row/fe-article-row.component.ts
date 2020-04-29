@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Article } from 'libs/data-store-lib/src/lib/models/article.model';
+import { Article } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
   selector: 'app-fe-article-row',

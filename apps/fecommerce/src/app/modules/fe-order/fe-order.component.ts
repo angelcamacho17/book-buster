@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { setHeaderTitleRequest } from 'libs/data-store-lib/src/lib/header/header.actions';
-import { Customer } from 'libs/data-store-lib/src/lib/models/customer.model';
-import { Observable } from 'rxjs';
-import { refreshCustomersRequest } from 'libs/data-store-lib/src/lib/customer/customer.actions';
+import { Store } from '@ngrx/store';
+import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
+import { Customer } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
   selector: 'app-fe-order',

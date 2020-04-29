@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Customer } from 'libs/data-store-lib/src/lib/models/customer.model';
+import { Customer } from '@fecommerce-workspace/data-store-lib';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
