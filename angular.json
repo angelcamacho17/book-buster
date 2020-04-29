@@ -15,7 +15,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/fecommerce",
+            "outputPath": "dist",
             "index": "apps/fecommerce/src/index.html",
             "main": "apps/fecommerce/src/main.ts",
             "polyfills": "apps/fecommerce/src/polyfills.ts",
