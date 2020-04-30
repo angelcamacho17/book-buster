@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
 import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib'
+// import * as ordersData from '../../../assets/data/orders.json';
 
 @Component({
   selector: 'app-fe-home',
@@ -30,6 +31,7 @@ export class FeHomeComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.orders)
+    // console.log(ordersData.orders)
   }
 
   public createOrder(): void {

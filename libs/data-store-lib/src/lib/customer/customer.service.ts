@@ -7,7 +7,7 @@ import { Customer } from '../models/customer.model';
 })
 export class CustomerService {
 
-  _baseUrl = 'http://localhost:4250/customers';
+  _baseUrl = 'assets/data/customers.json';
 
   constructor(private httpClient: HttpClient) { }
 

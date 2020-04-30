@@ -16,11 +16,12 @@ export class OrderEffects {
     ofType(refreshOrdersRequest),
     mergeMap(() => {
       return this.orderService.all().pipe(
+        // map(orders => refreshOrdersDone({ orders })),
         map(orders => refreshOrdersDone({ orders })),
         catchError(() => EMPTY)
       );
     })
-  ))
+  ));
 
   appendOrder$ = createEffect((): any => this.actions$.pipe(
     ofType(appendOrderRequest),
