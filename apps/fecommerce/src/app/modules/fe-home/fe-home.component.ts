@@ -21,7 +21,7 @@ export class FeHomeComponent implements OnInit {
     private _router: Router,
     private _storeOrders: Store<{ orders: Order }>
   ) {
-    this._store.dispatch(setHeaderTitleRequest({ title: 'home' }));
+    this._store.dispatch(setHeaderTitleRequest({ title: 'Home' }));
     this.orders$ = this._storeOrders.pipe(select('orders'));
     this.orders$.subscribe(data => {
       this.orders = data;

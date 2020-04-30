@@ -35,6 +35,11 @@ import { FeRowComponent } from './components/fe-row/fe-row.component';
     FeHeaderComponent,
     FeCardComponent
   ],
+  entryComponents: [
+    FeCustomerRowComponent,
+    FeArticleRowComponent,
+    FeRowComponent
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SharedModule { }

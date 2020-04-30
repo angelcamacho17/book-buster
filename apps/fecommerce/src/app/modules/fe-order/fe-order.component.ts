@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
+import { setHeaderTitleRequest, Order } from '@fecommerce-workspace/data-store-lib';
 import { Customer } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
@@ -10,8 +10,25 @@ import { Customer } from '@fecommerce-workspace/data-store-lib';
 })
 export class FeOrderComponent implements OnInit {
 
+  @Input() order: Order = {
+    id: 8,
+    description: "Recent Order",
+    amount: 65.22,
+    createdBy: "Federico Ribero",
+    articles: [],
+    customer: {
+      id: 1,
+      name: "Angel Andres Camacho",
+      address: "T. caceres de allende 454",
+      email: "angel.camacho@sdp.biz",
+      initials: 'AAC',
+      smallIcon: true
+
+    }
+  }
+
   constructor( private store: Store<{customers: Customer[]}>) {
-    this.store.dispatch(setHeaderTitleRequest({title: 'order'}));
+    this.store.dispatch(setHeaderTitleRequest({title: 'Order overview'}));
   }
 
   ngOnInit(): void {

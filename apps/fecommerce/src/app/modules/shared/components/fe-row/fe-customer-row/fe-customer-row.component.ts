@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ComponentFactoryResolver } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { FeRowComponent } from '../fe-row.component';
+import { Store } from '@ngrx/store';
+import { appendOrderRequest, Order, Customer } from '@fecommerce-workspace/data-store-lib';
 
 
 @Component({
@@ -14,8 +16,10 @@ export class FeCustomerRowComponent extends FeRowComponent{
   public smaller: Observable<boolean>;
   public initials = '';
 
-  constructor(router: Router) {
-    super(router);
+  constructor(router: Router,
+              componentFactoryResolver: ComponentFactoryResolver,
+              store: Store<{orders: Order[]}>) {
+    super(router, componentFactoryResolver, store);
     if (this.item) {
       this.smaller = this.reduceLetterSize();
     }
@@ -55,9 +59,22 @@ export class FeCustomerRowComponent extends FeRowComponent{
   }
 
   public selectedCustomer(): void {
+    const customer: Customer = this.item;
+    customer.initials = this.getInitials();
+    this.smaller.subscribe(data=>{
+      customer.smallIcon = data;
+    })
+    const newOrder: Order = {
+      description: 'Latest order',
+      amount: 0,
+      createdBy: 'Robin Person',
+      articles: [],
+      customer
+    }
+    this.store.dispatch(appendOrderRequest({order: newOrder}));
     setTimeout(()=> {
       this.router.navigate(['/article']);
-    },500);
+    },300);
 
   }
 
