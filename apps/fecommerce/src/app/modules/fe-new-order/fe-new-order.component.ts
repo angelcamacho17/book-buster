@@ -6,7 +6,7 @@ import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
-  selector: 'app-fe-new-order',
+  selector: 'fe-new-order',
   templateUrl: './fe-new-order.component.html',
   styleUrls: ['./fe-new-order.component.scss']
 })

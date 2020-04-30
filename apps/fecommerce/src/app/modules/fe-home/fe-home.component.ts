@@ -8,7 +8,7 @@ import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib'
 // import * as ordersData from '../../../assets/data/orders.json';
 
 @Component({
-  selector: 'app-fe-home',
+  selector: 'fe-home',
   templateUrl: './fe-home.component.html',
   styleUrls: ['./fe-home.component.scss']
 })

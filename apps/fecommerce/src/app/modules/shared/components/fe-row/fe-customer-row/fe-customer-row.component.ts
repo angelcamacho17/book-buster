@@ -1,28 +1,28 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Customer } from '@fecommerce-workspace/data-store-lib';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { FeRowComponent } from '../fe-row.component';
 
 
 @Component({
-  selector: 'app-fe-customer-row',
+  selector: 'fe-customer-row',
   templateUrl: './fe-customer-row.component.html',
   styleUrls: ['./fe-customer-row.component.scss']
 })
-export class FeCustomerRowComponent{
+export class FeCustomerRowComponent extends FeRowComponent{
 
-  @Input() customer: Customer;
   public smaller: Observable<boolean>;
   public initials = '';
 
-  constructor(private _router: Router) {
-    if (this.customer) {
+  constructor(router: Router) {
+    super(router);
+    if (this.item) {
       this.smaller = this.reduceLetterSize();
     }
   }
 
   private reduceLetterSize(): Observable<boolean> {
-    const fullName = this.customer.name;
+    const fullName = this.item.name;
     if (fullName) {
       const name: string[] = fullName.split(' ');
       if (name.length > 2) {
@@ -35,7 +35,7 @@ export class FeCustomerRowComponent{
   }
 
   public getInitials(): string {
-    const fullName = this.customer.name;
+    const fullName = this.item.name;
     if (fullName) {
       const name: string[] = fullName.split(' ');
       let initials: string;
@@ -56,7 +56,7 @@ export class FeCustomerRowComponent{
 
   public selectedCustomer(): void {
     setTimeout(()=> {
-      this._router.navigate(['/article']);
+      this.router.navigate(['/article']);
     },500);
 
   }

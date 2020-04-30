@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
-  selector: 'app-fe-customer',
+  selector: 'fe-customer',
   templateUrl: './fe-customer.component.html',
   styleUrls: ['./fe-customer.component.scss']
 })

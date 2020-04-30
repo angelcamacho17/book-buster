@@ -4,7 +4,7 @@ import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
 import { Customer } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
-  selector: 'app-fe-order',
+  selector: 'fe-order',
   templateUrl: './fe-order.component.html',
   styleUrls: ['./fe-order.component.scss']
 })

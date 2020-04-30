@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { RouterReducerState } from '@ngrx/router-store';
 
 @Component({
-  selector: 'app-header',
+  selector: 'fe-header',
   templateUrl: './fe-header.component.html',
   styleUrls: ['./fe-header.component.scss']
 })

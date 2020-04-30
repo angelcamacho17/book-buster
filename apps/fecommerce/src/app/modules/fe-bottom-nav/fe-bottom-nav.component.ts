@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-bottom-nav',
+  selector: 'fe-bottom-nav',
   templateUrl: './fe-bottom-nav.component.html',
   styleUrls: ['./fe-bottom-nav.component.scss']
 })
