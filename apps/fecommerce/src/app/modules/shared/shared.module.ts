@@ -9,7 +9,6 @@ import { FeHeaderComponent } from './components/fe-header/fe-header.component';
 import { FeSearchComponent } from './components/fe-search/fe-search.component';
 import { FeCustomerRowComponent } from './components/fe-customer-row/fe-customer-row.component';
 import { FeArticleRowComponent } from './components/fe-article-row/fe-article-row.component';
-import { FeSearchSmallComponent } from './components/fe-search-small/fe-search-small.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +18,7 @@ import { FeSearchSmallComponent } from './components/fe-search-small/fe-search-s
     FeCustomerRowComponent,
     FeHeaderComponent,
     FeSearchComponent,
-    FeArticleRowComponent,
-    FeSearchSmallComponent
+    FeArticleRowComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +30,6 @@ import { FeSearchSmallComponent } from './components/fe-search-small/fe-search-s
     FeCardComponent,
     FeCreateButtonComponent,
     FeSearchComponent,
-    FeSearchSmallComponent,
     FeHeaderComponent,
     FeCardComponent
   ],

@@ -26,7 +26,9 @@
               "apps/fecommerce/src/assets",
               "apps/fecommerce/src/.htaccess"
             ],
-            "styles": ["apps/fecommerce/src/styles.scss"],
+            "styles": [
+              "apps/fecommerce/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -84,7 +86,10 @@
               "apps/fecommerce/tsconfig.app.json",
               "apps/fecommerce/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/fecommerce/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/fecommerce/**"
+            ]
           }
         },
         "test": {
@@ -119,8 +124,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/fecommerce-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/fecommerce-e2e/**"]
+            "tsConfig": [
+              "apps/fecommerce-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/fecommerce-e2e/**"
+            ]
           }
         }
       }
@@ -138,7 +148,10 @@
               "libs/data-store-lib/tsconfig.lib.json",
               "libs/data-store-lib/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/data-store-lib/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/data-store-lib/**"
+            ]
           }
         },
         "test": {
@@ -159,7 +172,8 @@
     }
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular"
+    "defaultCollection": "@nrwl/angular",
+    "analytics": "01366141-8924-48f7-8407-38946c1702cc"
   },
   "schematics": {
     "@nrwl/angular:application": {

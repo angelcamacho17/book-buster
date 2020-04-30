@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
@@ -9,12 +9,13 @@ import { Customer } from '@fecommerce-workspace/data-store-lib';
   templateUrl: './fe-search.component.html',
   styleUrls: ['./fe-search.component.scss']
 })
-export class FeSearchComponent {
+export class FeSearchComponent implements OnInit {
 
-  @Input() list: Customer[];
+  @Input() list: any[];
   @Input() searchTitle = '';
   @Input() itemType: string;
   @Input() small = false;
+  public noTitle = false;
   private _filteredResult = [];
   public filteredlist: Observable<any[]>;
   public stateCtrl = new FormControl();
@@ -29,7 +30,9 @@ export class FeSearchComponent {
           if(state) {
             this._filteredResult = this._filterStates(state);
             this.showInitial = this._filteredResult.length === 0;
-            this.expandBorder = !this.showInitial;
+            if (this.small) {
+              this.expandBorder = !this.showInitial;
+            }
             console.log(this._filteredResult.length === 0);
             return this._filteredResult;
           } else {
@@ -37,6 +40,12 @@ export class FeSearchComponent {
           }
         })
       );
+  }
+
+  ngOnInit(): void {
+    this._filteredResult = [];
+    this.showInitial = true;
+    this.expandBorder = false;
   }
 
   private _filterStates(value: string): any[] {
@@ -56,16 +65,24 @@ export class FeSearchComponent {
   /**
    * Hide initial state.
    */
-  public hideInitialState(): void {
-    this.showInitial = false;
+  public openSearch(): void {
+    if (this.small) {
+      this.expandBorder = true
+    } else {
+      this.showInitial = false;
+    }
   }
 
   /**
    * Show initial state.
    */
-  public showInitialState(): void {
+  public closeSearch(): void {
     this.stateCtrl.setValue('');
-    this.showInitial = true;
+    if (this.small) {
+      this.expandBorder = false;
+    } else {
+      this.showInitial = true;
+    }
   }
 
 }

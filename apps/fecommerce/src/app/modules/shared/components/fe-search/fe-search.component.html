@@ -1,10 +1,13 @@
-<mat-card class="search-container mat-elevation-z2" >
-  <div class="mat-headline title">
+<mat-card class="search-container mat-elevation-z2"
+          [ngClass]="!small ? 'shrink-borders' : ''"
+          [ngClass]="expandBorder ? 'expand-card' : ''">
+  <div class="mat-headline title" *ngIf="!small">
     <span style="padding-left: 16px;">
       {{searchTitle }}
     </span>
   </div>
-  <div class="search-field">
+  <div class="search-field shadow"
+       [ngStyle]="!small? {'top': '56px'} : {'top':'0px'}">
     <mat-icon style="color:rgba(0, 0, 0, 0.6)">search</mat-icon>
     <mat-form-field class="search-bar" floatLabel="never">
       <input matInput
@@ -18,8 +21,8 @@
         <mat-placeholder class="mat-subheading-2 placeholder">Search...</mat-placeholder>
         <mat-autocomplete #auto="matAutocomplete"
                           class="autocomplete"
-                          (closed)="showInitialState()"
-                          (opened)="hideInitialState()">
+                          (closed)="closeSearch()"
+                          (opened)="openSearch()">
           <mat-option *ngFor="let item of filteredlist | async" style="height: 72px;
                             display: flex;
                             padding: 0;" >
@@ -33,7 +36,7 @@
       </button>
   </div>
 </mat-card>
-<mat-card *ngIf="showInitial" class="mat-subheading-2 no-data">
+<mat-card *ngIf="showInitial && !small" class="mat-subheading-2 no-data">
   <div>
     Please use the search bar on top to find the
   </div>
