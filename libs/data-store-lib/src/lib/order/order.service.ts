@@ -7,7 +7,7 @@ import { Order } from '../models/order.model';
 })
 export class OrderService {
 
-  _baseUrl = 'db.json/orders';
+  _baseUrl = 'assets/data/orders.json';
 
   constructor(
     private httpClient: HttpClient

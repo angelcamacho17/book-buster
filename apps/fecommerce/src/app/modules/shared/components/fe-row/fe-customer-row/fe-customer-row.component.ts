@@ -59,17 +59,12 @@ export class FeCustomerRowComponent extends FeRowComponent{
   }
 
   public selectedCustomer(): void {
-    const customer: Customer = this.item;
-    customer.initials = this.getInitials();
-    this.smaller.subscribe(data=>{
-      customer.smallIcon = data;
-    })
     const newOrder: Order = {
       description: 'Latest order',
       amount: 0,
       createdBy: 'Robin Person',
       articles: [],
-      customer
+      customer: this.item
     }
     this.store.dispatch(appendOrderRequest({order: newOrder}));
     setTimeout(()=> {
