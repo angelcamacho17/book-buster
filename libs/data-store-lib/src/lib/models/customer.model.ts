@@ -3,6 +3,8 @@ export interface Customer {
   name: string;
   address: string;
   initials?: string;
+  smallIcon?: boolean,
+  email?: string
 }
 
 export interface CustomerState {

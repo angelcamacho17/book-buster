@@ -9,61 +9,101 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class OrderService {
 
   _baseUrl = 'assets/data/orders.json';
-  
-  private _orders: Order[] = [
-    {
-      "id": 8,
-      "description": "Other Order",
-      "amount": 65.22,
-      "createdBy": "Federico Ribero",
-      "articles": []
-    },
-    {
-      "id": 9,
-      "description": "New order",
-      "amount": 95.42,
-      "createdBy": "Angel Camacho",
-      "articles": []
-    },
-    {
-      "id": 11,
-      "description": "other thing",
-      "amount": 83,
-      "createdBy": "Federico Ribero",
-      "articles": []
-    },
-    {
-      "articles": [],
-      "description": "Order",
-      "amount": 36.45,
-      "createdBy": "Federico Ribero",
-      "id": 12
-    },
-    {
-      "articles": [],
-      "description": "Order",
-      "amount": 88.44,
-      "createdBy": "Rodrigo Martinez Jr",
-      "id": 13
-    },
-    {
-      "articles": [],
-      "description": "Order",
-      "amount": 135.1,
-      "createdBy": "Angel Camacho",
-      "id": 14
-    },
-    {
-      "articles": [],
-      "description": "Order",
-      "amount": 96.92,
-      "createdBy": "Federico Ribero",
-      "id": 15
+
+  private _orders: Order[] = [{
+    "id": 8,
+    "description": "Other Order",
+    "amount": 65.22,
+    "createdBy": "Federico Ribero",
+    "articles": [],
+    "customer": {
+      "id": 5,
+      "name": "Juan Pérez",
+      "address": "General Paz 665",
+      "initials": null
     }
-  ];
+  },
+  {
+    "id": 9,
+    "description": "New order",
+    "amount": 95.42,
+    "createdBy": "Angel Camacho",
+    "articles": [],
+    "customer": {
+      "id": 8,
+      "name": "Morena Moreno",
+      "address": "Belgrano 478",
+      "initials": null
+    }
+  },
+  {
+    "id": 11,
+    "description": "other thing",
+    "amount": 83,
+    "createdBy": "Federico Ribero",
+    "articles": [],
+    "customer": {
+      "id": 12,
+      "name": "Virginia Suarez",
+      "address": "Av. Los patitos 5500",
+      "initials": null
+    }
+  },
+  {
+    "id": 12,
+    "description": "Order",
+    "amount": 36.45,
+    "createdBy": "Federico Ribero",
+    "articles": [],
+    "customer": {
+      "id": 11,
+      "name": "Cecilia Rodriguez",
+      "address": "Libertad 740",
+      "initials": null
+    }
+  },
+  {
+    "id": 13,
+    "articles": [],
+    "description": "Order",
+    "amount": 88.44,
+    "createdBy": "Rodrigo Martinez Jr",
+    "customer": {
+      "id": 7,
+      "name": "Martina Briganti",
+      "address": "Lima 1540",
+      "initials": null
+    }
+  },
+  {
+    "id": 14,
+    "articles": [],
+    "description": "Order",
+    "amount": 135.1,
+    "createdBy": "Angel Camacho",
+    "customer": {
+      "id": 2,
+      "name": "Robin Peerson",
+      "address": "25 de Mayo 600",
+      "initials": null
+    }
+  },
+  {
+    "id": 15,
+    "articles": [],
+    "description": "Order",
+    "amount": 96.92,
+    "createdBy": "Federico Ribero",
+    "customer": {
+      "id": 4,
+      "name": "Rodrigo Martinez Jr",
+      "address": "Jujuy 800",
+      "initials": null
+    }
+  }];
 
   orders = new BehaviorSubject<Order[]>(this._orders);
-  
+
   constructor(
     private httpClient: HttpClient
   ) { }
@@ -88,8 +128,8 @@ export class OrderService {
     return this.orders.asObservable();
   }
 
-  public delete(order: Order): Observable<Order[]> {
-    const index = this._orders.findIndex(c => c.id === order.id);
+  public delete(orderId: any): Observable<Order[]> {
+    const index = this._orders.findIndex(c => c.id === orderId);
     this._orders.splice(index, 1);
     this.orders.next(this._orders);
     return this.orders.asObservable();
@@ -97,7 +137,7 @@ export class OrderService {
 }
 
 /**
- 
+
 
   private getCollectionUrl() {
     return this._baseUrl;
@@ -122,5 +162,5 @@ export class OrderService {
   public delete(carId: number) {
     return this.httpClient.delete<Order>(this.getElementUrl(carId));
   }
-  
+
  */

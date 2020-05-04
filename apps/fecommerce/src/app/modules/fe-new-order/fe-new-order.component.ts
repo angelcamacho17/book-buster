@@ -6,7 +6,7 @@ import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
-  selector: 'app-fe-new-order',
+  selector: 'fe-new-order',
   templateUrl: './fe-new-order.component.html',
   styleUrls: ['./fe-new-order.component.scss']
 })
@@ -16,7 +16,7 @@ export class FeNewOrderComponent implements OnInit {
   public customers: Customer[];
 
   constructor(private store: Store<{customers: Customer[]}>) {
-    this.store.dispatch(setHeaderTitleRequest({title: 'new order'}));
+    this.store.dispatch(setHeaderTitleRequest({title: 'New order'}));
     this.$customers = this.store.pipe(select('customers'));
     this.$customers.subscribe(data => {
       this.customers = data;

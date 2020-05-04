@@ -7,8 +7,9 @@ import { FeCreateButtonComponent } from './components/fe-create-button/fe-create
 import { FeCardComponent } from './components/fe-card/fe-card.component';
 import { FeHeaderComponent } from './components/fe-header/fe-header.component';
 import { FeSearchComponent } from './components/fe-search/fe-search.component';
-import { FeCustomerRowComponent } from './components/fe-customer-row/fe-customer-row.component';
-import { FeArticleRowComponent } from './components/fe-article-row/fe-article-row.component';
+import { FeCustomerRowComponent } from './components/fe-row/fe-customer-row/fe-customer-row.component';
+import { FeArticleRowComponent } from './components/fe-row/fe-article-row/fe-article-row.component';
+import { FeRowComponent } from './components/fe-row/fe-row.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FeArticleRowComponent } from './components/fe-article-row/fe-article-ro
     FeCustomerRowComponent,
     FeHeaderComponent,
     FeSearchComponent,
-    FeArticleRowComponent
+    FeArticleRowComponent,
+    FeRowComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,11 @@ import { FeArticleRowComponent } from './components/fe-article-row/fe-article-ro
     FeSearchComponent,
     FeHeaderComponent,
     FeCardComponent
+  ],
+  entryComponents: [
+    FeCustomerRowComponent,
+    FeArticleRowComponent,
+    FeRowComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

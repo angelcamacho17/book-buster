@@ -1,1 +1,28 @@
-<app-header [class]="'mat-display-1'"></app-header>
+<fe-header [icon]="'keyboard_arrow_left'" [class]="'mat-headline'" [style]="'center'"></fe-header>
+
+<div class="order-overview">
+  <mat-card class="customer-row mat-elevation-z2">
+    <div class="customer-info">
+      <div class="avatar">
+        <div class="mat-body-2 initials-sidenav" [ngClass]="order?.customer?.smallIcon ? 'mat-body-1' : ''">{{ order?.customer?.initials }}</div>
+      </div>
+      <div class="item">
+        <div class="item-info">
+          <h3 class="mat-headline" class="title">
+            {{order?.customer?.name}}
+          </h3>
+          <div class="mat-body-1" class="subtitle">
+            {{order?.customer?.email}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="total">
+      <h3 class="mat-headline" >
+        Total
+      </h3>
+    </div>
+  </mat-card>
+</div>
+

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
-  selector: 'app-fe-create-button',
+  selector: 'fe-create-button',
   animations: [
     trigger('appear', [
       // ...

@@ -1,28 +1,32 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Customer } from '@fecommerce-workspace/data-store-lib';
+import { Component, OnInit, Input, OnChanges, ComponentFactoryResolver } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { FeRowComponent } from '../fe-row.component';
+import { Store } from '@ngrx/store';
+import { appendOrderRequest, Order, Customer } from '@fecommerce-workspace/data-store-lib';
 
 
 @Component({
-  selector: 'app-fe-customer-row',
+  selector: 'fe-customer-row',
   templateUrl: './fe-customer-row.component.html',
   styleUrls: ['./fe-customer-row.component.scss']
 })
-export class FeCustomerRowComponent{
+export class FeCustomerRowComponent extends FeRowComponent{
 
-  @Input() customer: Customer;
   public smaller: Observable<boolean>;
   public initials = '';
 
-  constructor(private _router: Router) {
-    if (this.customer) {
+  constructor(router: Router,
+              componentFactoryResolver: ComponentFactoryResolver,
+              store: Store<{orders: Order[]}>) {
+    super(router, componentFactoryResolver, store);
+    if (this.item) {
       this.smaller = this.reduceLetterSize();
     }
   }
 
   private reduceLetterSize(): Observable<boolean> {
-    const fullName = this.customer.name;
+    const fullName = this.item.name;
     if (fullName) {
       const name: string[] = fullName.split(' ');
       if (name.length > 2) {
@@ -35,7 +39,7 @@ export class FeCustomerRowComponent{
   }
 
   public getInitials(): string {
-    const fullName = this.customer.name;
+    const fullName = this.item.name;
     if (fullName) {
       const name: string[] = fullName.split(' ');
       let initials: string;
@@ -55,9 +59,17 @@ export class FeCustomerRowComponent{
   }
 
   public selectedCustomer(): void {
+    const newOrder: Order = {
+      description: 'Latest order',
+      amount: 0,
+      createdBy: 'Robin Person',
+      articles: [],
+      customer: this.item
+    }
+    this.store.dispatch(appendOrderRequest({order: newOrder}));
     setTimeout(()=> {
-      this._router.navigate(['/article']);
-    },500);
+      this.router.navigate(['/article']);
+    },300);
 
   }
 

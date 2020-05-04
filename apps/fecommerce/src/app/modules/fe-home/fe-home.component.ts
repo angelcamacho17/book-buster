@@ -8,7 +8,7 @@ import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib'
 // import * as ordersData from '../../../assets/data/orders.json';
 
 @Component({
-  selector: 'app-fe-home',
+  selector: 'fe-home',
   templateUrl: './fe-home.component.html',
   styleUrls: ['./fe-home.component.scss']
 })
@@ -21,7 +21,7 @@ export class FeHomeComponent implements OnInit {
     private _router: Router,
     private _storeOrders: Store<{ orders: Order }>
   ) {
-    this._store.dispatch(setHeaderTitleRequest({ title: 'home' }));
+    this._store.dispatch(setHeaderTitleRequest({ title: 'Home' }));
     this.orders$ = this._storeOrders.pipe(select('orders'));
     this.orders$.subscribe(data => {
       this.orders = data;

@@ -4,7 +4,7 @@ import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
 import { Article } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
-  selector: 'app-fe-article',
+  selector: 'fe-article',
   templateUrl: './fe-article.component.html',
   styleUrls: ['./fe-article.component.scss']
 })
@@ -50,7 +50,7 @@ export class FeArticleComponent implements OnInit {
   ];
 
   constructor( private _store: Store) {
-    this._store.dispatch(setHeaderTitleRequest({title: 'new order'}));
+    this._store.dispatch(setHeaderTitleRequest({title: 'New order'}));
   }
 
   ngOnInit(): void {

@@ -26,9 +26,8 @@
           <mat-option *ngFor="let item of filteredlist | async" style="height: 72px;
                             display: flex;
                             padding: 0;" >
-            <app-fe-customer-row *ngIf="itemType === 'customer'" [customer]="item" class="item"></app-fe-customer-row>
-            <app-fe-article-row *ngIf="itemType === 'article'" [article]="item" class="item"></app-fe-article-row>
-          </mat-option>
+            <fe-row [itemType]="itemType" [item]="item" class="item"></fe-row>
+           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
       <button class="close-button" mat-icon-button disableRipple="true" (click)="clearSearch()">

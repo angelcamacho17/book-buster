@@ -105,8 +105,8 @@ export class CustomerService {
     return this.customers.asObservable();
   }
 
-  public delete(customer: Customer): Observable<Customer[]> {
-    const index = this._customers.findIndex(c => c.id === customer.id);
+  public delete(customerId: any): Observable<Customer[]> {
+    const index = this._customers.findIndex(c => c.id === customerId);
     this._customers.splice(index, 1);
     this.customers.next(this._customers);
     return this.customers.asObservable();

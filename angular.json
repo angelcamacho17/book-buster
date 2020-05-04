@@ -10,7 +10,7 @@
       },
       "root": "apps/fecommerce",
       "sourceRoot": "apps/fecommerce/src",
-      "prefix": "fecommerce-workspace",
+      "prefix": "fe",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
