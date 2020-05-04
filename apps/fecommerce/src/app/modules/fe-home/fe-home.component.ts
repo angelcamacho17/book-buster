@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
+import { setHeaderTitleRequest, orderOverviewRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
@@ -21,7 +21,6 @@ export class FeHomeComponent implements OnInit {
     private _router: Router,
     private _storeOrders: Store<{ orders: Order }>
   ) {
-    this._store.dispatch(setHeaderTitleRequest({ title: 'Home' }));
     this.orders$ = this._storeOrders.pipe(select('orders'));
     this.orders$.subscribe(data => {
       console.log(data);
@@ -37,6 +36,12 @@ export class FeHomeComponent implements OnInit {
 
   public createOrder(): void {
     this._router.navigate(['/neworder']);
+  }
+
+  public openOrder(order: Order): void {
+    console.log(order);
+    this._storeOrders.dispatch(orderOverviewRequest({order: order}))
+    this._router.navigate(['/order']);
   }
 
 }

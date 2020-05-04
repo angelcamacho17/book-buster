@@ -2,8 +2,8 @@ import { OrderService } from './order.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { map, mergeMap, catchError } from 'rxjs/operators';
-import { refreshOrdersRequest, refreshOrdersDone, appendOrderRequest, replaceOrderRequest, deleteOrderRequest } from './order.actions';
-import { EMPTY } from 'rxjs';
+import { refreshOrdersRequest, refreshOrdersDone, appendOrderRequest, replaceOrderRequest, deleteOrderRequest, orderOverviewRequest, refreshOrderDone } from './order.actions';
+import { EMPTY, of } from 'rxjs';
 
 @Injectable()
 export class OrderEffects {
@@ -22,6 +22,16 @@ export class OrderEffects {
       );
     })
   ));
+
+  orderOverview$ = createEffect((): any => this.actions$.pipe(
+    ofType(orderOverviewRequest),
+    mergeMap((action) => {
+      return of(action.order).pipe(
+        map(() => refreshOrderDone({order: action.order})),
+        catchError(() => EMPTY)
+      )
+    })
+  ))
 
   appendOrder$ = createEffect((): any => this.actions$.pipe(
     ofType(appendOrderRequest),

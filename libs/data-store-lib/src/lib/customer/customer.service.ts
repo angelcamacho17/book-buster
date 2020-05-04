@@ -8,78 +8,90 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class CustomerService {
   private _customers: Customer[] = [
-    {
-        "id": 1,
-        "name": "Angel Andres Camacho",
-        "address": "T. caceres de allende 454",
-        "initials": null
-    },
-    {
-        "id": 2,
-        "name": "Robin Peerson",
-        "address": "25 de Mayo 600",
-        "initials": null
-    },
-    {
-        "id": 3,
-        "name": "Federico Ribero",
-        "address": "24 de Septiembre 3500",
-        "initials": null
-    },
-    {
-        "id": 4,
-        "name": "Rodrigo Martinez Jr",
-        "address": "Jujuy 800",
-        "initials": null
-    },
-    {
-        "id": 5,
-        "name": "Juan Pérez",
-        "address": "General Paz 665",
-        "initials": null
-    },
-    {
-        "id": 6,
-        "name": "Luciana Fernandez",
-        "address": "Gramajo Gutierrez 66",
-        "initials": null
-    },
-    {
-        "id": 7,
-        "name": "Martina Briganti",
-        "address": "Lima 1540",
-        "initials": null
-    },
-    {
-        "id": 8,
-        "name": "Morena Moreno",
-        "address": "Belgrano 478",
-        "initials": null
-    },
-    {
-        "id": 9,
-        "name": "Esteban Quito",
-        "address": "San Juan 90",
-        "initials": null
-    },
-    {
-        "id": 10,
-        "name": "Angel Camacho",
-        "address": "Rincon 550",
-        "initials": null
-    },
-    {
-        "id": 11,
-        "name": "Cecilia Rodriguez",
-        "address": "Libertad 740",
-        "initials": null
-    },
-    {
-        "id": 12,
-        "name": "Virginia Suarez",
-        "address": "Av. Los patitos 5500",
-        "initials": null
-    }
+  {
+      "id": 1,
+      "name": "Angel Andres Camacho",
+      "address": "T. caceres de allende 454",
+      "initials": "AAC",
+      "smallIcon": true
+  },
+  {
+      "id": 2,
+      "name": "Robin Peerson",
+      "address": "25 de Mayo 600",
+      "initials": "RP",
+      "smallIcon": false
+  },
+  {
+      "id": 3,
+      "name": "Federico Ribero",
+      "address": "24 de Septiembre 3500",
+      "initials": "FR",
+      "smallIcon": false
+  },
+  {
+      "id": 4,
+      "name": "Rodrigo Martinez Jr",
+      "address": "Jujuy 800",
+      "initials": "RMJ",
+      "smallIcon": false
+  },
+  {
+      "id": 5,
+      "name": "Juan Pérez",
+      "address": "General Paz 665",
+      "initials": "JP",
+      "smallIcon": false
+  },
+  {
+      "id": 6,
+      "name": "Luciana Fernandez",
+      "address": "Gramajo Gutierrez 66",
+      "initials": "LF",
+      "smallIcon": false
+  },
+  {
+      "id": 7,
+      "name": "Martina Briganti",
+      "address": "Lima 1540",
+      "initials": "MB",
+      "smallIcon": false
+  },
+  {
+      "id": 8,
+      "name": "Morena Moreno",
+      "address": "Belgrano 478",
+      "initials": "MM",
+      "smallIcon": false
+  },
+  {
+      "id": 9,
+      "name": "Esteban Quito",
+      "address": "San Juan 90",
+      "initials": "EQ",
+      "smallIcon": false
+  },
+  {
+      "id": 10,
+      "name": "Angel Camacho",
+      "address": "Rincon 550",
+      "initials": "AC",
+      "smallIcon": false
+  },
+  {
+      "id": 11,
+      "name": "Cecilia Rodriguez",
+      "address": "Libertad 740",
+      "initials": "CR",
+      "smallIcon": false
+  },
+  {
+      "id": 12,
+      "name": "Virginia Suarez",
+      "address": "Av. Los patitos 5500",
+      "initials": "VS",
+      "smallIcon": false
+  }
   ];
   customers = new BehaviorSubject<Customer[]>(this._customers);
 
@@ -114,7 +126,7 @@ export class CustomerService {
 
 }
 
-/* 
+/*
 
   private getCollectionUrl() {
     return this._baseUrl;

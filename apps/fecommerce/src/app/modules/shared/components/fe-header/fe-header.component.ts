@@ -17,13 +17,12 @@ export class FeHeaderComponent implements OnInit{
   @Input() style = '';
   @Input() icon = 'close';
 
-  constructor(private _storeHeader: Store<{header: string}>,
-              private _storeRouter: Store<{router: RouterReducerState}>,
+  constructor(private _storeRouter: Store<{router: RouterReducerState}>,
               private _location: Location) {
-    this.$header = this._storeHeader.pipe(select('header'));
-    this.$header.subscribe(data => {
-      this.title = data;
-    })
+    // this.$header = this._storeHeader.pipe(select('header'));
+    // this.$header.subscribe(data => {
+    //   this.title = data;
+    // })
     console.log(this.style);
   }
 

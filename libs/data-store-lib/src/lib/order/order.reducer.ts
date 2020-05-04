@@ -1,12 +1,20 @@
 import { createReducer, on } from '@ngrx/store';
-import { refreshOrdersDone } from './order.actions';
-import { Order, OrderState } from '../models/order.model';
+import { refreshOrdersDone, refreshOrderDone } from './order.actions';
+import { Order, OrderState, OrdersState } from '../models/order.model';
 
-export const initialState: OrderState = {
+export const initialOrders: OrdersState = {
   orders: []
 };
 
-export const ordersReducer = createReducer<Order[]>(initialState.orders,
+export const initialOrder: OrderState = {
+  order: null
+};
+
+export const ordersReducer = createReducer<Order[]>(initialOrders.orders,
   on(refreshOrdersDone, (_, action) => action.orders),
+);
+
+export const currentOrderReducer = createReducer<Order>(initialOrder.order,
+  on(refreshOrderDone, (_, action) => action.order),
 );
 

@@ -50,7 +50,6 @@ export class FeArticleComponent implements OnInit {
   ];
 
   constructor( private _store: Store) {
-    this._store.dispatch(setHeaderTitleRequest({title: 'New order'}));
   }
 
   ngOnInit(): void {
