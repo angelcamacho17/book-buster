@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Customer } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
-import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 
 @Component({

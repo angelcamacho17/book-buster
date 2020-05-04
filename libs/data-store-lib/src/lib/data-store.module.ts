@@ -6,8 +6,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { OrderEffects } from './order/order.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderService } from './order/order.service';
-import { HeaderService } from './header/header.service';
-import { HeaderEffects } from './header/header.effects';
 import { reducers } from './data-store.state';
 import { CustomSerializer } from './router/router.reducer';
 import { CustomerEffects } from './customer/customer.effects';
@@ -20,7 +18,6 @@ import { CustomerService } from './customer/customer.service';
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([
       OrderEffects,
-      HeaderEffects,
       CustomerEffects
     ])
   ],
@@ -29,7 +26,6 @@ import { CustomerService } from './customer/customer.service';
   ],
   providers: [
     OrderService,
-    HeaderService,
     CustomerService,
     {
       provide: RouterStateSerializer,

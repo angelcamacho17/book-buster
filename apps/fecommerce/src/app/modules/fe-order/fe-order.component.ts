@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { setHeaderTitleRequest, Order } from '@fecommerce-workspace/data-store-lib';
+import { Order } from '@fecommerce-workspace/data-store-lib';
 import { Customer } from '@fecommerce-workspace/data-store-lib';
 import { Observable } from 'rxjs';
 

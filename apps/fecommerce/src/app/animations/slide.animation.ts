@@ -39,24 +39,28 @@ function slideToRight() {
   return [
     query(':enter, :leave', [
       style({
-        position: 'absolute',
-        top: 0,
-        right: 0,
+        position: 'fixed',
         width: '100%',
-        'box-shadow': '0px 0px 8px 1px rgba(0, 0, 0, 0.4)',
+        'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
         background: '#ffffff'
       })
     ], optional),
     query(':enter', [
-      style({ right: '-100%'})
+      style({
+        right: '-100%'
+      })
     ]),
     group([
       query(':leave', [
-        animate('600ms ease', style({ right: '0%'}))
+        animate('600ms ease', style({
+          right: '0%'
+        }))
       ], optional),
       query(':enter', [
-        animate('600ms ease', style({ right: '0%'}))
+        animate('600ms ease', style({
+          right: '0%'
+        }))
       ])
     ]),
     // Normalize the page style... Might not be necessary
@@ -73,11 +77,11 @@ function slideToLeft() {
   return [
     query(':enter, :leave', [
       style({
-        position: 'absolute',
+        position: 'fixed',
         top: '0',
         left: 0,
         width: '100%',
-        'box-shadow': '0px 0px 8px 1px rgba(0, 0, 0, 0.4)',
+        'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
         background: '#ffffff',
         'z-index': '0'
