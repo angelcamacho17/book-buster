@@ -61,9 +61,84 @@ export class FeCustomerRowComponent extends FeRowComponent{
   public selectedCustomer(): void {
     const newOrder: Order = {
       description: 'Latest order',
-      amount: 0,
+      amount: 178,
       createdBy: 'Robin Person',
-      articles: [],
+      articles: [{
+        id: 1,
+        name: 'Envelope',
+        description: 'articles envelope'
+      },
+      {
+        id: 2,
+        name: 'Box',
+        description: 'articles box'
+      },
+      {
+        id: 3,
+        name: 'Food',
+        description: 'articles foos'
+      },
+      {
+        id: 1,
+        name: 'Envelope',
+        description: 'articles envelope'
+      },
+      {
+        id: 2,
+        name: 'Box',
+        description: 'articles box'
+      },
+      {
+        id: 3,
+        name: 'Food',
+        description: 'articles foos'
+      },
+      {
+        id: 1,
+        name: 'Envelope',
+        description: 'articles envelope'
+      },
+      {
+        id: 2,
+        name: 'Box',
+        description: 'articles box'
+      },
+      {
+        id: 3,
+        name: 'Food',
+        description: 'articles foos'
+      },
+      {
+        id: 1,
+        name: 'Envelope',
+        description: 'articles envelope'
+      },
+      {
+        id: 2,
+        name: 'Box',
+        description: 'articles box'
+      },
+      {
+        id: 3,
+        name: 'Food',
+        description: 'articles foos'
+      },
+      {
+        id: 1,
+        name: 'Envelope',
+        description: 'articles envelope'
+      },
+      {
+        id: 2,
+        name: 'Box',
+        description: 'articles box'
+      },
+      {
+        id: 3,
+        name: 'Food',
+        description: 'articles foos'
+      }
+      ],
       customer: this.item
     }
     this.store.dispatch(appendOrderRequest({order: newOrder}));

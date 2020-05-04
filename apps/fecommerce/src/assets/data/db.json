@@ -2,10 +2,12 @@
   "orders": [
     {
       "id": 8,
-      "description": "Other Order",
+      "description": "Othersdfwer Order",
       "amount": 65.22,
       "createdBy": "Federico Ribero",
-      "articles": []
+      "articles": [],
+      "initials": "FR",
+      "smallIcon": false
     },
     {
       "id": 9,

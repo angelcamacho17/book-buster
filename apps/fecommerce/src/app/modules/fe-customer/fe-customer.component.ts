@@ -9,9 +9,7 @@ import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
 })
 export class FeCustomerComponent implements OnInit {
 
-  constructor( private _store: Store) {
-    this._store.dispatch(setHeaderTitleRequest({title: 'customer'}));
-  }
+  constructor( private _store: Store) {}
 
   ngOnInit(): void {
   }

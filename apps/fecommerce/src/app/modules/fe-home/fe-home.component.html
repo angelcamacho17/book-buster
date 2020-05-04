@@ -1,11 +1,11 @@
-<fe-header [class]="'mat-display-1'"></fe-header>
+<fe-header [class]="'mat-display-1'" [title]="'Home'"></fe-header>
 <div class="container">
   <div class="mat-headline headline">Recent orders</div>
 
-  <mat-card class="card">
+  <mat-card class="card mat-elevation-z4">
     <mat-card-content>
       <mat-list class="list">
-        <mat-list-item class="list-item" *ngFor="let order of orders">
+        <mat-list-item class="list-item" *ngFor="let order of orders" (click)="openOrder(order)">
           <div mat-line class="mat-subheading-2 order-title">
             <div class="title">
               {{order.id}}
