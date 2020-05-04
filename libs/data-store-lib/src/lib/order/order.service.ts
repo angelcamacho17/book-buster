@@ -116,6 +116,8 @@ export class OrderService {
     // const lastOrder = this._orders[this._orders.length - 1];
     // order = {...order, ...{ id: lastOrder.id + 1 }};
     // this._orders = {...this._orders, ...[order]};
+    const lastOrder = this._orders[this._orders.length - 1];
+    order = {...order, ...{ id: lastOrder.id + 1 }};
     this._orders = this._orders.concat(order);
     this.orders.next(this._orders);
 
