@@ -113,11 +113,8 @@ export class OrderService {
   }
 
   public append(order: Order): Observable<Order[]> {
-    // const lastOrder = this._orders[this._orders.length - 1];
-    // order = {...order, ...{ id: lastOrder.id + 1 }};
-    // this._orders = {...this._orders, ...[order]};
-    const lastOrder = this._orders[this._orders.length - 1];
-    order = {...order, ...{ id: lastOrder.id + 1 }};
+    const lastOrderId = this._orders[this._orders.length - 1].id;
+    order = {...order, ...{ id: lastOrderId + 1 }};
     this._orders = this._orders.concat(order);
     this.orders.next(this._orders);
 
