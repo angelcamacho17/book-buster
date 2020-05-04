@@ -24,6 +24,7 @@ export class FeHomeComponent implements OnInit {
     this._store.dispatch(setHeaderTitleRequest({ title: 'Home' }));
     this.orders$ = this._storeOrders.pipe(select('orders'));
     this.orders$.subscribe(data => {
+      console.log(data);
       this.orders = data;
     })
     this._storeOrders.dispatch(refreshOrdersRequest())

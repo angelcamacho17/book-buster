@@ -7,6 +7,7 @@
   .customer-row {
     padding: 0;
     border-radius: 8px;
+    margin-bottom: 32px;
 
     .customer-info {
       display: flex;
@@ -51,10 +52,30 @@
         }
       }
 
-      .total {
-        padding: 16px;
-      }
+    }
+    .total {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px;
     }
 
+    .amount {
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+  }
+
+  .order-items {
+    padding: 10px 16px;
+
+    .title {
+      color: rgba(0, 0, 0, .87);
+      margin: 0px;
+    }
+
+    .items {
+      color: rgba(0, 0, 0, 0.6);
+      margin: 0px;
+    }
   }
 }
