@@ -2,7 +2,7 @@
   <mat-icon *ngIf="style === 'center'" class="close-icon" (click)="goLastVisited()">
     {{icon}}
   </mat-icon>
-  <div [ngClass]="class" style="margin: 0 !important;">
+  <div class="title" [ngClass]="class">
     {{title | titlecase}}
   </div>
 </mat-toolbar>

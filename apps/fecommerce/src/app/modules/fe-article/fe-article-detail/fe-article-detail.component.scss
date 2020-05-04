@@ -1,7 +1,12 @@
 .container {
     .list {
         .list-item {
-            color: fuchsia;
+            height: 64px;
+
+            .divider {
+                left: 16px;
+                width: calc(100% - 16px);
+            }
         }
     }
 }

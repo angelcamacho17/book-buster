@@ -14,37 +14,37 @@ export class FeArticleComponent implements OnInit {
     {
       id: 1,
       name: 'Envelope',
-      descrip: 'articles envelope'
+      description: 'articles envelope'
     },
     {
       id: 2,
       name: 'Box',
-      descrip: 'articles box'
+      description: 'articles box'
     },
     {
       id: 3,
       name: 'Food',
-      descrip: 'articles foos'
+      description: 'articles foos'
     },
     {
       id: 4,
       name: 'Wood',
-      descrip: 'articles wood'
+      description: 'articles wood'
     },
     {
       id: 5,
       name: 'Wires',
-      descrip: 'articles wires'
+      description: 'articles wires'
     },
     {
       id: 6,
       name: 'Alcohol',
-      descrip: 'articles alcohol'
+      description: 'articles alcohol'
     },
     {
       id: 7,
       name: 'Wines',
-      descrip: 'articles wines'
+      description: 'articles wines'
     },
 
   ];
