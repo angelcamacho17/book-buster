@@ -15,52 +15,7 @@ export class OrderService {
     "description": "Other Order",
     "amount": 65.22,
     "createdBy": "Federico Ribero",
-    "articles": [{
-                  id: 1,
-                  name: 'Envelope',
-                  description: 'articles envelope'
-                },
-                {
-                  id: 2,
-                  name: 'Box',
-                  description: 'articles box'
-                },
-                {
-                  id: 3,
-                  name: 'Food',
-                  description: 'articles foos'
-                },
-                {
-                  id: 1,
-                  name: 'Envelope',
-                  description: 'articles envelope'
-                },
-                {
-                  id: 2,
-                  name: 'Box',
-                  description: 'articles box'
-                },
-                {
-                  id: 3,
-                  name: 'Food',
-                  description: 'articles foos'
-                },
-                {
-                  id: 1,
-                  name: 'Envelope',
-                  description: 'articles envelope'
-                },
-                {
-                  id: 2,
-                  name: 'Box',
-                  description: 'articles box'
-                },
-                {
-                  id: 3,
-                  name: 'Food',
-                  description: 'articles foos'
-                }
-    ],
+    "articles": [],
     "customer": {
       "id": 5,
       "name": "Juan Pérez",
@@ -74,21 +29,7 @@ export class OrderService {
     "description": "New order",
     "amount": 95.42,
     "createdBy": "Angel Camacho",
-    "articles": [{
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    }],
+    "articles": [],
     "customer": {
       "id": 8,
       "name": "Morena Moreno",
@@ -102,82 +43,7 @@ export class OrderService {
     "description": "other thing",
     "amount": 83,
     "createdBy": "Federico Ribero",
-    "articles": [{
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    },
-    {
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    },
-    {
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    },
-    {
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    },
-    {
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    }
-    ],
+    "articles": [],
     "customer": {
       "id": 12,
       "name": "Virginia Suarez",
@@ -191,37 +57,7 @@ export class OrderService {
     "description": "Order",
     "amount": 36.45,
     "createdBy": "Federico Ribero",
-    "articles": [{
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    },
-    {
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    }
-    ],
+    "articles": [],
     "customer": {
       "id": 11,
       "name": "Cecilia Rodriguez",
@@ -232,37 +68,7 @@ export class OrderService {
   },
   {
     "id": 13,
-    "articles": [{
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    },
-    {
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    }
-    ],
+    "articles": [],
     "description": "Order",
     "amount": 88.44,
     "createdBy": "Rodrigo Martinez Jr",
@@ -276,21 +82,7 @@ export class OrderService {
   },
   {
     "id": 14,
-    "articles": [{
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    }],
+    "articles": [],
     "description": "Order",
     "amount": 135.1,
     "createdBy": "Angel Camacho",
@@ -304,52 +96,7 @@ export class OrderService {
   },
   {
     "id": 15,
-    "articles": [{
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    },
-    {
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    },
-    {
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    }
-    ],
+    "articles": [],
     "description": "Order",
     "amount": 96.92,
     "createdBy": "Federico Ribero",
@@ -765,11 +512,8 @@ export class OrderService {
   }
 
   public append(order: Order): Observable<Order[]> {
-    // const lastOrder = this._orders[this._orders.length - 1];
-    // order = {...order, ...{ id: lastOrder.id + 1 }};
-    // this._orders = {...this._orders, ...[order]};
-    const lastOrder = this._orders[this._orders.length - 1];
-    order = {...order, ...{ id: lastOrder.id + 1 }};
+    const lastOrderId = this._orders[this._orders.length - 1].id;
+    order = {...order, ...{ id: lastOrderId + 1 }};
     this._orders = this._orders.concat(order);
     this.orders.next(this._orders);
 
