@@ -26,12 +26,9 @@ export class OrderEffects {
   appendOrder$ = createEffect((): any => this.actions$.pipe(
     ofType(appendOrderRequest),
     mergeMap((action) => {
-      console.log(action);
+      console.log(action.order)
       return this.orderService.append(action.order).pipe(
-        map(() => {
-          console.log('map append')
-          refreshOrdersRequest()
-        }),
+        map(() => refreshOrdersRequest()),
         catchError(() => EMPTY)
       );
     })

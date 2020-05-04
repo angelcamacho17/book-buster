@@ -10,7 +10,7 @@ export class OrderService {
 
   _baseUrl = 'assets/data/orders.json';
 
-  private _orders: Order[] = [{
+  private _orders: any[] = [{
     "id": 8,
     "description": "Other Order",
     "amount": 65.22,
@@ -113,7 +113,10 @@ export class OrderService {
   }
 
   public append(order: Order): Observable<Order[]> {
-    this.orders.next({ ...this._orders, ...order });
+    const lastOrder = this._orders[this._orders.length - 1];
+    order = {...order, ...{ id: lastOrder.id + 1 }};
+    this._orders = {...this._orders, ...[order]};
+    this.orders.next(this._orders);
     return this.orders.asObservable();
   }
 
@@ -123,7 +126,6 @@ export class OrderService {
     this._orders[index].articles = order.articles;
     this._orders[index].amount = order.amount;
     this._orders[index].createdBy = order.createdBy;
-
     this.orders.next(this._orders);
     return this.orders.asObservable();
   }
