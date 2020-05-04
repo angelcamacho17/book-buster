@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../models/order.model';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class OrderService {
 
   _baseUrl = 'assets/data/orders.json';
 
-  private _orders: any[] = [{
+  private _orders: Array<Order> = [{
     "id": 8,
     "description": "Other Order",
     "amount": 65.22,
@@ -113,11 +113,13 @@ export class OrderService {
   }
 
   public append(order: Order): Observable<Order[]> {
-    const lastOrder = this._orders[this._orders.length - 1];
-    order = {...order, ...{ id: lastOrder.id + 1 }};
-    this._orders = {...this._orders, ...[order]};
+    // const lastOrder = this._orders[this._orders.length - 1];
+    // order = {...order, ...{ id: lastOrder.id + 1 }};
+    // this._orders = {...this._orders, ...[order]};
+    this._orders = this._orders.concat(order);
     this.orders.next(this._orders);
-    return this.orders.asObservable();
+
+    return of(this._orders);
   }
 
   public replace(order: Order): Observable<Order[]> {
