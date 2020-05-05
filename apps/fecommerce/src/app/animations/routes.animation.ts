@@ -10,12 +10,12 @@ import {
   keyframes,
 } from '@angular/animations';
 
-export const slider =
+export const routesAnimations =
   trigger('routeAnimations', [
     transition('home => order', slideToRight()),
     transition('home => article', slideToRight()),
     transition('home => customer', slideToRight()),
-    transition('home => neworder', slideToRight()),
+    transition('home => neworder', fromBottom()),
     transition('order => home', slideToLeft()),
     transition('order => neworder', slideToLeft()),
     transition('order => article', slideToRight()),
@@ -28,7 +28,7 @@ export const slider =
     transition('customer => neworder', slideToLeft()),
     transition('customer => order', slideToLeft()),
     transition('customer => article', slideToLeft()),
-    transition('neworder => home', slideToLeft()),
+    transition('neworder => home', fromTop()),
     transition('neworder => order', slideToRight()),
     transition('neworder => article', slideToRight()),
     transition('neworder => customer', slideToRight()),
@@ -54,12 +54,14 @@ function slideToRight() {
     group([
       query(':leave', [
         animate('600ms ease', style({
-          right: '0%'
+          right: '0%',
+          'z-index': 0
         }))
       ], optional),
       query(':enter', [
         animate('600ms ease', style({
-          right: '0%'
+          right: '0%',
+          'z-index': 10000
         }))
       ])
     ]),
@@ -99,8 +101,87 @@ function slideToLeft() {
       }))
       ], optional),
       query(':enter', [
-        animate('100ms ease', style({
+        animate('600ms ease', style({
           left: '0%',
+          'z-index': 0
+        }))
+      ])
+    ]),
+    // Normalize the page style... Might not be necessary
+
+    // Required only if you have child animations on the page
+    query(':leave', animateChild()),
+    query(':enter', animateChild()),
+  ];
+}
+
+function fromBottom() {
+  const optional = { optional: true };
+  return [
+    query(':enter, :leave', [
+      style({
+        position: 'fixed',
+        top: '0',
+        width: '100%',
+        'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
+        height: '100%',
+        background: '#ffffff',
+        'z-index': '0'
+      })
+    ], optional),
+    query(':enter', [
+      style({ top: '100%'})
+    ]),
+    group([
+      query(':leave', [
+        animate('600ms ease',
+        style({
+          'z-index': 0
+      }))
+      ], optional),
+      query(':enter', [
+        animate('600ms ease', style({
+          top: '0%',
+          'z-index': 10000
+        }))
+      ])
+    ]),
+    // Normalize the page style... Might not be necessary
+
+    // Required only if you have child animations on the page
+    query(':leave', animateChild()),
+    query(':enter', animateChild()),
+  ];
+}
+
+function fromTop() {
+  const optional = { optional: true };
+  return [
+    query(':enter, :leave', [
+      style({
+        position: 'fixed',
+        top: '0',
+        width: '100%',
+        'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
+        height: '100%',
+        background: '#ffffff',
+        'z-index': '0'
+      })
+    ], optional),
+    query(':enter', [
+      style({ top: '0'})
+    ]),
+    group([
+      query(':leave', [
+        animate('600ms ease',
+        style({
+          top: '100%',
+          'z-index': 10000
+      }))
+      ], optional),
+      query(':enter', [
+        animate('600ms ease', style({
+          top: '0',
           'z-index': 0
         }))
       ])

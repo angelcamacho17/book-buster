@@ -106,8 +106,7 @@ export class OrderService {
       "address": "Jujuy 800",
       "initials": "RMJ",
       "smallIcon": true
-    },}
-    ,
+    },},
     {
       "id": 13,
       "articles": [{

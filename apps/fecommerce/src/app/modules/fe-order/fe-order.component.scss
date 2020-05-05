@@ -3,6 +3,7 @@
   right: 16px;
   left: 16px;
   top: 128px;
+  bottom: 16px;
 
   .customer-row {
     padding: 0;
@@ -77,5 +78,14 @@
       color: rgba(0, 0, 0, 0.6);
       margin: 0px;
     }
+  }
+
+  .fe-button {
+    position: absolute;
+    height: 48px;
+    width: -webkit-fill-available;
+    background-color: #1666D8;
+    color: #fff;
+    bottom: 0;
   }
 }

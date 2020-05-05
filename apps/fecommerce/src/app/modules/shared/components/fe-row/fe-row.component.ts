@@ -7,34 +7,30 @@ import { Store } from '@ngrx/store';
   templateUrl: './fe-row.component.html',
   styleUrls: ['./fe-row.component.css']
 })
-export class FeRowComponent implements OnInit, AfterViewInit {
+export class FeRowComponent implements OnInit {
 
   @Input() item: any;
   @Input() itemType: any;
-  @ViewChild("dynamic", { read: ViewContainerRef }) dynHost;
+  @ViewChild("dynamic", { static: true, read: ViewContainerRef }) dynHost;
   public componentRef: ComponentRef<any>;
 
   constructor(public router: Router,
               public componentFactoryResolver: ComponentFactoryResolver,
-              public store: Store) { }
+              public store: Store) {
+               }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit() {
-    // this.loadComponent();
+    this.loadComponent();
   }
 
   private loadComponent(): void {
-    // this.dynHost.clear();
-    // const factory: ComponentFactory<any> =
-    // this.componentFactoryResolver.resolveComponentFactory(FeCustomerRowComponent);
 
-    // this.componentRef = this.dynHost.createComponent(factory);
+    this.dynHost.clear();
+    const factory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(this.itemType);
 
-    // this.componentRef.instance.type = type;
-
-    // this.componentRef.instance.output.subscribe(event => console.log(event));
+    this.componentRef = this.dynHost.createComponent(factory);
+    (this.componentRef.instance).item = this.item;
+    (this.componentRef.location.nativeElement.setAttribute("style","width: 100%"));
   }
 
 }

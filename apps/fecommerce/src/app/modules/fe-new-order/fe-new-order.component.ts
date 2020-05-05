@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Customer } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
+import { FeCustomerRowComponent } from '../shared/components/fe-row/fe-customer-row/fe-customer-row.component';
 
 @Component({
   selector: 'fe-new-order',
@@ -13,6 +14,7 @@ export class FeNewOrderComponent implements OnInit {
 
   public $customers: Observable<Customer[]>;
   public customers: Customer[];
+  public rowType = FeCustomerRowComponent;
 
   constructor(private store: Store<{customers: Customer[]}>) {
     this.$customers = this.store.pipe(select('customers'));

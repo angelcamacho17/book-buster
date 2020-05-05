@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
@@ -13,8 +13,9 @@ export class FeSearchComponent implements OnInit {
 
   @Input() list: any[];
   @Input() searchTitle = '';
-  @Input() itemType: string;
+  @Input() itemType: any;
   @Input() small = false;
+  @Input() templateRef: TemplateRef<any>;
   public noTitle = false;
   private _filteredResult = [];
   public filteredlist: Observable<any[]>;

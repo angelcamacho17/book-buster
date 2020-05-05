@@ -33,12 +33,13 @@ import { FeRowComponent } from './components/fe-row/fe-row.component';
     FeCreateButtonComponent,
     FeSearchComponent,
     FeHeaderComponent,
-    FeCardComponent
+    FeCardComponent,
+    FeCustomerRowComponent,
+    FeArticleRowComponent
   ],
   entryComponents: [
     FeCustomerRowComponent,
-    FeArticleRowComponent,
-    FeRowComponent
+    FeArticleRowComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

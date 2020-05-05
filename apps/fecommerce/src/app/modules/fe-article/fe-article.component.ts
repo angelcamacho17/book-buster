@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Article } from '@fecommerce-workspace/data-store-lib';
+import { FeArticleRowComponent } from '../shared/components/fe-row/fe-article-row/fe-article-row.component';
 
 @Component({
   selector: 'fe-article',
@@ -9,6 +10,7 @@ import { Article } from '@fecommerce-workspace/data-store-lib';
 })
 export class FeArticleComponent implements OnInit {
 
+  public rowType = FeArticleRowComponent;
   public articles: Article[] = [
     {
       id: 1,

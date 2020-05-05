@@ -9,13 +9,11 @@ import { Store } from '@ngrx/store';
   templateUrl: './fe-article-row.component.html',
   styleUrls: ['./fe-article-row.component.scss']
 })
-export class FeArticleRowComponent extends FeRowComponent implements OnInit {
+export class FeArticleRowComponent implements OnInit {
 
-  constructor(router: Router,
-              componentFactoryResolver: ComponentFactoryResolver,
-              store: Store) {
-super(router, componentFactoryResolver, store);
-  }
+  @Input() item: any;
+
+  constructor() { }
 
   ngOnInit(): void {
   }
