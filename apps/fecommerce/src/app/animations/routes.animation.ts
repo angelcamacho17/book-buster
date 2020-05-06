@@ -80,7 +80,6 @@ function slideToLeft() {
     query(':enter, :leave', [
       style({
         position: 'fixed',
-        top: '0',
         left: 0,
         width: '100%',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
@@ -121,7 +120,6 @@ function fromBottom() {
     query(':enter, :leave', [
       style({
         position: 'fixed',
-        top: '0',
         width: '100%',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
@@ -160,7 +158,6 @@ function fromTop() {
     query(':enter, :leave', [
       style({
         position: 'fixed',
-        top: '0',
         width: '100%',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',

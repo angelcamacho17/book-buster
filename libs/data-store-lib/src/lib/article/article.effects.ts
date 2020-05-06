@@ -11,7 +11,7 @@ export class ArticleEffects {
         private articleService: ArticleService,
         private actions$: Actions
     ) { }
-z
+
     refreshArticles$ = createEffect(() => this.actions$.pipe(
         ofType(refreshArticlesRequest),
         mergeMap(() => {
