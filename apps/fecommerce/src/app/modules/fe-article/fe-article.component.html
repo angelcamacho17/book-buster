@@ -1,6 +1,6 @@
 <fe-header [icon]="'keyboard_arrow_left'" [class]="'mat-headline'" [title]="'New order'" [style]="'center'"></fe-header>
 <fe-search [list]="articles" [itemType]="rowType" [small]="true"></fe-search>
-<button mat-button class="fe-button">OVERVIEW</button>
+<button mat-button class="fe-button" (click)="overviewOrder()">OVERVIEW</button>
 
 <div class="container">
   <div class="no-results">

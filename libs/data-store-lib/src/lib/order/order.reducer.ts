@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { refreshOrdersDone, refreshOrderDone } from './order.actions';
+import { refreshOrdersDone, refreshOrderDone, refreshOrderSetted } from './order.actions';
 import { Order, OrderState, OrdersState } from '../models/order.model';
 
 export const initialOrders: OrdersState = {
@@ -16,5 +16,6 @@ export const ordersReducer = createReducer<Order[]>(initialOrders.orders,
 
 export const currentOrderReducer = createReducer<Order>(initialOrder.order,
   on(refreshOrderDone, (_, action) => action.order),
+  on(refreshOrderSetted, (_, action) => null),
 );
 

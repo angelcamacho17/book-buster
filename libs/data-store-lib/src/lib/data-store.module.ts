@@ -10,6 +10,8 @@ import { reducers } from './data-store.state';
 import { CustomSerializer } from './router/router.reducer';
 import { CustomerEffects } from './customer/customer.effects';
 import { CustomerService } from './customer/customer.service';
+import { ArticleEffects } from './article/article.effects';
+import { ArticleService } from './article/article.service';
 
 @NgModule({
   declarations: [DataStoreComponent],
@@ -18,7 +20,8 @@ import { CustomerService } from './customer/customer.service';
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([
       OrderEffects,
-      CustomerEffects
+      CustomerEffects,
+      ArticleEffects
     ])
   ],
   exports: [
@@ -27,6 +30,7 @@ import { CustomerService } from './customer/customer.service';
   providers: [
     OrderService,
     CustomerService,
+    ArticleService,
     {
       provide: RouterStateSerializer,
       useClass: CustomSerializer

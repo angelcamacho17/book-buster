@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../models/order.model';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { Observable, BehaviorSubject, of, EMPTY } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -500,6 +500,8 @@ export class OrderService {
           }}
   ];
 
+  public currentOrder: Order;
+
   orders = new BehaviorSubject<Order[]>(this._orders);
 
   constructor(
@@ -534,6 +536,15 @@ export class OrderService {
     this._orders.splice(index, 1);
     this.orders.next(this._orders);
     return this.orders.asObservable();
+  }
+
+  public setCurrentOrder(order: Order): Observable<any> {
+    this.currentOrder = order;
+    return of(null);
+  }
+
+  public getCurrentOrder(): Observable<Order> {
+    return of(this.currentOrder);
   }
 }
 

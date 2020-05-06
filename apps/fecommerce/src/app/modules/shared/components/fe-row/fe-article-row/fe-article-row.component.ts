@@ -13,7 +13,7 @@ export class FeArticleRowComponent implements OnInit {
 
   @Input() item: any;
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit(): void {
   }

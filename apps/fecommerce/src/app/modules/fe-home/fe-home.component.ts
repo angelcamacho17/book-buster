@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { orderOverviewRequest } from '@fecommerce-workspace/data-store-lib';
+import { setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
@@ -13,14 +13,14 @@ import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
   styleUrls: ['./fe-home.component.scss'],
 })
 export class FeHomeComponent implements OnInit {
-  public orders$: Observable<Order>;
-  public orders: Order;
+  public orders$: Observable<Order[]>;
+  public orders: Order[];
   public display = false;
 
   constructor(
     private _store: Store,
     private _router: Router,
-    private _storeOrders: Store<{ orders: Order }>
+    private _storeOrders: Store<{ orders: Order[] }>
   ) {
     this.orders$ = this._storeOrders.pipe(select('orders'));
     this.orders$.subscribe(data => {
@@ -40,8 +40,7 @@ export class FeHomeComponent implements OnInit {
   }
 
   public openOrder(order: Order): void {
-    console.log(order);
-    this._storeOrders.dispatch(orderOverviewRequest({order: order}))
+    this._storeOrders.dispatch(setCurrentOrderRequest({order}))
     this._router.navigate(['/order']);
   }
 

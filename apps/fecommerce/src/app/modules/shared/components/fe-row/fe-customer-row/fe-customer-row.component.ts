@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, OnChanges, ComponentFactoryResolver, AfterContentInit, AfterViewChecked } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { FeRowComponent } from '../fe-row.component';
 import { Store } from '@ngrx/store';
-import { appendOrderRequest, Order, Customer } from '@fecommerce-workspace/data-store-lib';
+import { appendOrderRequest, Order, Customer, setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 
 
 @Component({
@@ -141,9 +140,10 @@ export class FeCustomerRowComponent {
       customer: this.item
     }
     this.store.dispatch(appendOrderRequest({order: newOrder}));
+    this.store.dispatch(setCurrentOrderRequest({order: newOrder}));
     setTimeout(()=> {
       this.router.navigate(['/article']);
-    },300);
+    },100);
 
   }
 

@@ -19,11 +19,6 @@ export class FeHeaderComponent implements OnInit{
 
   constructor(private _storeRouter: Store<{router: RouterReducerState}>,
               private _location: Location) {
-    // this.$header = this._storeHeader.pipe(select('header'));
-    // this.$header.subscribe(data => {
-    //   this.title = data;
-    // })
-    console.log(this.style);
   }
 
   ngOnInit(): void {
