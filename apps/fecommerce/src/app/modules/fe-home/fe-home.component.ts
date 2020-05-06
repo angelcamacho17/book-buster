@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
   templateUrl: './fe-home.component.html',
   styleUrls: ['./fe-home.component.scss'],
 })
-export class FeHomeComponent implements OnInit {
+export class FeHomeComponent implements OnInit, OnDestroy {
   public orders$: Observable<Order[]>;
   public orders: Order[];
   public display = false;
