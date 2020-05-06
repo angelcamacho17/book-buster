@@ -13,19 +13,20 @@ import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib'
   styleUrls: ['./fe-home.component.scss']
 })
 export class FeHomeComponent implements OnInit {
-  public orders$: Observable<Order>;
-  public orders: Order;
+  public orders$: Observable<Order[]>;
+  public orders: Order[];
 
   constructor(
     private _store: Store,
     private _router: Router,
-    private _storeOrders: Store<{ orders: Order }>
+    private _storeOrders: Store<{ orders: Order[] }>
   ) {
     this.orders$ = this._storeOrders.pipe(select('orders'));
+    
     this.orders$.subscribe(data => {
-      console.log(data);
       this.orders = data;
     })
+    
     this._storeOrders.dispatch(refreshOrdersRequest())
   }
 

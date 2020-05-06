@@ -68,5 +68,7 @@ body {
 .container {
     // All main content of each router has to be wrapped by this class in order to apply
     // the same styles on a generic container
+    position: relative;
+    height: 100% !important;
     padding: 36px 16px;
 }

@@ -22,8 +22,9 @@ import { FeArticleDetailComponent } from './fe-article-detail/fe-article-detail.
         component: FeArticleDetailComponent
       }
     ]),
+    SharedModule,
     MaterialModule,
-    SharedModule
+    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
