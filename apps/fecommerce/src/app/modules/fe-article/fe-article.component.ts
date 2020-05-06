@@ -43,7 +43,6 @@ export class FeArticleComponent implements OnInit, OnDestroy {
     if(this._subs) {
       this._subs.unsubscribe();
     }
-
   }
 
   public overviewOrder(): void {

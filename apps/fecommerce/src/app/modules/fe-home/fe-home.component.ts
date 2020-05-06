@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
 import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
 // import * as ordersData from '../../../assets/data/orders.json';
@@ -16,6 +16,7 @@ export class FeHomeComponent implements OnInit {
   public orders$: Observable<Order[]>;
   public orders: Order[];
   public display = false;
+  private _subs: Subscription;
 
   constructor(
     private _store: Store,
@@ -23,7 +24,7 @@ export class FeHomeComponent implements OnInit {
     private _storeOrders: Store<{ orders: Order[] }>
   ) {
     this.orders$ = this._storeOrders.pipe(select('orders'));
-    this.orders$.subscribe(data => {
+    this._subs = this.orders$.subscribe(data => {
       console.log(data);
       this.orders = data;
     })
@@ -44,4 +45,9 @@ export class FeHomeComponent implements OnInit {
     this._router.navigate(['/order']);
   }
 
+  ngOnDestroy(): void {
+    if(this._subs) {
+      this._subs.unsubscribe();
+    }
+  }
 }
