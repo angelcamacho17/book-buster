@@ -443,7 +443,6 @@ export class ArticleService {
         this._articles.concat({...article, ...{ id: lastArticleId + 1 }});
         this.articles.next(this._articles);
         return this.articles.asObservable();
-
     }
 
     replace(article: Article): Observable<Article[]> {
