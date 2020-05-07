@@ -5,6 +5,8 @@ import { Customer } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { FeDialogComponent } from '../shared/components/fe-dialog/fe-dialog.component';
 
 @Component({
   selector: 'fe-order',
@@ -19,7 +21,8 @@ export class FeOrderComponent implements OnInit, OnDestroy {
 
   constructor(private _store: Store<{currentOrder: Order}>,
               private _snackBar: MatSnackBar,
-              private _router: Router) {
+              private _router: Router,
+              public dialog: MatDialog) {
     this.$order = this._store.pipe(select('currentOrder'));
     this._subs = this.$order.subscribe(data => {
       this.order = data;
@@ -43,6 +46,21 @@ export class FeOrderComponent implements OnInit, OnDestroy {
       this._snackBar.open(msg, '', {
         duration: 3000,
       });
+  }
+
+  public changeCustomer(): void {
+    const dialogRef = this.dialog.open(FeDialogComponent, {
+      width: '280px',
+      height: '248px',
+      data: {
+        title: 'Switch customer',
+        msg: 'Customer specific prices will be recalculated after asssigning a new customer.'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
 }
