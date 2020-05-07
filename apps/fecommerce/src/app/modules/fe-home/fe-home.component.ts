@@ -28,6 +28,7 @@ export class FeHomeComponent implements OnInit, OnDestroy {
       console.log(data);
       this.orders = data;
     })
+    
     this._storeOrders.dispatch(refreshOrdersRequest())
   }
 

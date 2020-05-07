@@ -15,7 +15,22 @@ export class OrderService {
     "description": "Other Order",
     "amount": 65.22,
     "createdBy": "Federico Ribero",
-    "articles": [],
+    "articles": [{
+      "id": 3,
+      "name": "Soy Protein",
+      "description": "Placental polyp, unspecified as to episode of care or not applicable",
+      "price": "98.57"
+    }, {
+      "id": 4,
+      "name": "Ocean Spray - Ruby Red",
+      "description": "Late effect of internal injury to chest",
+      "price": "8.94"
+    }, {
+      "id": 5,
+      "name": "Cheese - Le Cheve Noir",
+      "description": "Late effect of radiation",
+      "price": "89.72"
+    }],
     "customer": {
       "id": 5,
       "name": "Juan Pérez",
@@ -29,7 +44,17 @@ export class OrderService {
     "description": "New order",
     "amount": 95.42,
     "createdBy": "Angel Camacho",
-    "articles": [],
+    "articles": [{
+      "id": 1,
+      "name": "Southern Comfort",
+      "description": "Eosinophilic gastroenteritis",
+      "price": "56.87"
+    }, {
+      "id": 2,
+      "name": "Stock - Veal, White",
+      "description": "Malignant neoplasm of other specified sites of nasopharynx",
+      "price": "76.19"
+    }],
     "customer": {
       "id": 8,
       "name": "Morena Moreno",
@@ -43,7 +68,17 @@ export class OrderService {
     "description": "other thing",
     "amount": 83,
     "createdBy": "Federico Ribero",
-    "articles": [],
+    "articles": [{
+      "id": 69,
+      "name": "Cookie Dough - Double",
+      "description": "Other complications due to nervous system device, implant, and graft",
+      "price": "11.42"
+    }, {
+      "id": 70,
+      "name": "Ham - Black Forest",
+      "description": "Transient paralysis of limb",
+      "price": "40.36"
+    }],
     "customer": {
       "id": 12,
       "name": "Virginia Suarez",
@@ -57,7 +92,17 @@ export class OrderService {
     "description": "Order",
     "amount": 36.45,
     "createdBy": "Federico Ribero",
-    "articles": [],
+    "articles": [{
+      "id": 31,
+      "name": "Tea - Honey Green Tea",
+      "description": "Twin birth, mate liveborn, born in hospital, delivered without mention of cesarean section",
+      "price": "61.15"
+    }, {
+      "id": 32,
+      "name": "Soup - Knorr, Chicken Noodle",
+      "description": "Poisoning by erythromycin and other macrolides",
+      "price": "51.80"
+    }],
     "customer": {
       "id": 11,
       "name": "Cecilia Rodriguez",
@@ -68,7 +113,17 @@ export class OrderService {
   },
   {
     "id": 13,
-    "articles": [],
+    "articles": [{
+      "id": 74,
+      "name": "Sword Pick Asst",
+      "description": "Suicide and self-inflicted injury by electrocution",
+      "price": "35.09"
+    }, {
+      "id": 75,
+      "name": "Transfer Sheets",
+      "description": "Malignant neoplasm of ampulla of vater",
+      "price": "76.52"
+    }],
     "description": "Order",
     "amount": 88.44,
     "createdBy": "Rodrigo Martinez Jr",
@@ -82,7 +137,17 @@ export class OrderService {
   },
   {
     "id": 14,
-    "articles": [],
+    "articles": [{
+      "id": 83,
+      "name": "Bread - Roll, Calabrese",
+      "description": "Better eye: moderate vision impairment; lesser eye: profound vision impairment",
+      "price": "57.68"
+    }, {
+      "id": 84,
+      "name": "Squash - Pepper",
+      "description": "Psychosexual dysfunction with other specified psychosexual dysfunctions",
+      "price": "26.33"
+    }],
     "description": "Order",
     "amount": 135.1,
     "createdBy": "Angel Camacho",
@@ -96,7 +161,12 @@ export class OrderService {
   },
   {
     "id": 15,
-    "articles": [],
+    "articles": [{
+      "id": 85,
+      "name": "Wheat - Soft Kernal Of Wheat",
+      "description": "Other fetal and newborn aspiration without respiratory symptoms",
+      "price": "44.40"
+    }],
     "description": "Order",
     "amount": 96.92,
     "createdBy": "Federico Ribero",

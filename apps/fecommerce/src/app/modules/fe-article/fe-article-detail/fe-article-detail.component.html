@@ -1,21 +1,55 @@
 <fe-header [icon]="'keyboard_arrow_left'" [title]="'Article detail'" [class]="'mat-headline'" [style]="'center'"></fe-header>
 
 <div class="container">
-    <mat-list class="list">
-        <mat-list-item class="list-item">
-            <div mat-line class=" order-title">
-                <div class="title">
-                    <!-- {{article.name}} -->
-                    Envelope
-                </div>
+    <fe-card class="card">
+        <div class="content">
+            <mat-list class="list">
+                <mat-list-item class="list-item">
+                    <div mat-line class="order-title">
+                        <div class="mat-subheading-2 title">
+                            <!-- {{article.name}} -->
+                            Article code
+                        </div>
+                    </div>
+                    <div mat-line class="order-subtitle">
+                        <div class="mat-body-1 line">
+                            56468421354
+                            <!-- {{article.description}} -->
+                        </div>
+                    </div>
+                    <mat-divider class="divider"></mat-divider>
+                </mat-list-item>
+                <mat-list-item class="list-item">
+                    <div mat-line class="order-title">
+                        <div class="mat-subheading-2 title">
+                            <!-- {{article.name}} -->
+                            Article name
+                        </div>
+                    </div>
+                    <div mat-line class="order-subtitle">
+                        <div class="mat-body-1 line">
+                            Pencil
+                            <!-- {{article.description}} -->
+                        </div>
+                    </div>
+                    <mat-divider class="divider"></mat-divider>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </fe-card>
+    <fe-card class="quantity-card">
+        <div class="content">
+
+            <div class="mat-subheading-2 left">
+                Quantity
             </div>
-            <div mat-line class="mat-body-1 order-subtitle">
-                <div class="line">
-                    Descriptions
-                    <!-- {{article.description}} -->
-                </div>
+            <div class="mat-title right">
+                <mat-icon class="icon">remove_circle_outline</mat-icon>
+                <div class="amount">0</div>
+                <mat-icon class="icon">add_circle_outline</mat-icon>
             </div>
-            <mat-divider class="divider"></mat-divider>
-        </mat-list-item>
-    </mat-list>
+        </div>
+    </fe-card>
+
+    <button mat-stroked-button class="add-button mat-button">add to order</button>
 </div>

@@ -186,7 +186,6 @@ function fromTop() {
         style({
           top: '100%',
           'z-index': 10000
-
       }))
       ], optional),
       query(':enter', [
