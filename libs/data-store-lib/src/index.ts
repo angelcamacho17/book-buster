@@ -9,6 +9,7 @@ export * from './lib/data-store.module';
 /*  Actions exports */
 export * from './lib/customer/customer.actions';
 export * from './lib/order/order.actions';
+export * from './lib/article/article.actions'
 
 
 /*  Model exports  */

@@ -9,6 +9,7 @@ import {
   animate,
   keyframes,
 } from '@angular/animations';
+import { NONE_TYPE } from '@angular/compiler';
 
 export const routesAnimations =
   trigger('routeAnimations', [
@@ -48,20 +49,23 @@ function slideToRight() {
     ], optional),
     query(':enter', [
       style({
-        right: '-100%'
+        right: '-100%',
+
       })
     ]),
     group([
       query(':leave', [
         animate('600ms ease', style({
           right: '0%',
-          'z-index': 0
+          'z-index': 0,
+
         }))
       ], optional),
       query(':enter', [
         animate('600ms ease', style({
           right: '0%',
-          'z-index': 10000
+          'z-index': 10000,
+
         }))
       ])
     ]),
@@ -80,7 +84,6 @@ function slideToLeft() {
     query(':enter, :leave', [
       style({
         position: 'fixed',
-        top: '0',
         left: 0,
         width: '100%',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
@@ -90,20 +93,22 @@ function slideToLeft() {
       })
     ], optional),
     query(':enter', [
-      style({ left: '0%'})
+      style({
+        left: '0%',
+      })
     ]),
     group([
       query(':leave', [
         animate('600ms ease',
         style({
           left: '100%',
-          'z-index': 10000
+          'z-index': 10000,
       }))
       ], optional),
       query(':enter', [
         animate('600ms ease', style({
           left: '0%',
-          'z-index': 0
+          'z-index': 0,
         }))
       ])
     ]),
@@ -121,7 +126,6 @@ function fromBottom() {
     query(':enter, :leave', [
       style({
         position: 'fixed',
-        top: '0',
         width: '100%',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
@@ -130,19 +134,23 @@ function fromBottom() {
       })
     ], optional),
     query(':enter', [
-      style({ top: '100%'})
+      style({
+        top: '100%',
+    })
     ]),
     group([
       query(':leave', [
         animate('600ms ease',
         style({
-          'z-index': 0
+          'z-index': 0,
+
       }))
       ], optional),
       query(':enter', [
         animate('600ms ease', style({
           top: '0%',
-          'z-index': 10000
+          'z-index': 10000,
+
         }))
       ])
     ]),
@@ -160,8 +168,8 @@ function fromTop() {
     query(':enter, :leave', [
       style({
         position: 'fixed',
-        top: '0',
         width: '100%',
+        top: 0,
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
         background: '#ffffff',
@@ -169,7 +177,9 @@ function fromTop() {
       })
     ], optional),
     query(':enter', [
-      style({ top: '0'})
+      style({
+        top: 0,
+    })
     ]),
     group([
       query(':leave', [
@@ -181,8 +191,8 @@ function fromTop() {
       ], optional),
       query(':enter', [
         animate('600ms ease', style({
-          top: '0',
-          'z-index': 0
+          top: 0,
+          'z-index': 0,
         }))
       ])
     ]),

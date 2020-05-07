@@ -8,7 +8,10 @@ import { SharedModule } from '../shared/shared.module';
 import { FeArticleDetailComponent } from './fe-article-detail/fe-article-detail.component';
 
 @NgModule({
-  declarations: [FeArticleComponent, FeArticleDetailComponent],
+  declarations: [
+    FeArticleComponent,
+    FeArticleDetailComponent
+  ],
   imports: [
     CommonModule,
     HttpClientModule,

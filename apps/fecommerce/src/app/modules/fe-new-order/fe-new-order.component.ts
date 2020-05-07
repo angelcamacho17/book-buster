@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { Customer } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
@@ -10,15 +10,16 @@ import { FeCustomerRowComponent } from '../shared/components/fe-row/fe-customer-
   templateUrl: './fe-new-order.component.html',
   styleUrls: ['./fe-new-order.component.scss']
 })
-export class FeNewOrderComponent implements OnInit {
+export class FeNewOrderComponent implements OnInit, OnDestroy {
 
   public $customers: Observable<Customer[]>;
   public customers: Customer[];
   public rowType = FeCustomerRowComponent;
+  private _subs: Subscription;
 
   constructor(private store: Store<{customers: Customer[]}>) {
     this.$customers = this.store.pipe(select('customers'));
-    this.$customers.subscribe(data => {
+    this._subs = this.$customers.subscribe(data => {
       this.customers = data;
     });
     this.store.dispatch(refreshCustomersRequest());
@@ -48,5 +49,10 @@ export class FeNewOrderComponent implements OnInit {
     return text.charAt(index);
   }
 
+  ngOnDestroy(): void {
+    if(this._subs) {
+      this._subs.unsubscribe();
+    }
+  }
 
 }

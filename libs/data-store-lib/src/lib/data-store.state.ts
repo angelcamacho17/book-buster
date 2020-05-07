@@ -5,8 +5,8 @@ import { RouterStateUrl } from './router/router.reducer';
 import { ordersReducer, currentOrderReducer } from './order/order.reducer';
 import { customersReducer } from './customer/customer.reducer';
 import { Customer } from './models/customer.model';
-import { articlesReducer } from './article/article.reducer';
 import { Article } from './models/article.model';
+import { articlesReducer } from './article/article.reducer';
 
 export const FEATURE_NAME = 'examples';
 

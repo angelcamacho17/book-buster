@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Order, getCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Customer } from '@fecommerce-workspace/data-store-lib';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
@@ -11,16 +11,17 @@ import { Router } from '@angular/router';
   templateUrl: './fe-order.component.html',
   styleUrls: ['./fe-order.component.scss']
 })
-export class FeOrderComponent implements OnInit {
+export class FeOrderComponent implements OnInit, OnDestroy {
 
   public $order: Observable<Order>;
   public order: Order;
+  private _subs: Subscription;
 
   constructor(private _store: Store<{currentOrder: Order}>,
               private _snackBar: MatSnackBar,
               private _router: Router) {
     this.$order = this._store.pipe(select('currentOrder'));
-    this.$order.subscribe(data => {
+    this._subs = this.$order.subscribe(data => {
       this.order = data;
     })
 
@@ -28,6 +29,12 @@ export class FeOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    if(this._subs) {
+      this._subs.unsubscribe();
+    }
   }
 
   public orderConfirmed(): void {

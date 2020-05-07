@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Article, Order, getCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Article, Order, getCurrentOrderRequest, refreshArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { FeArticleRowComponent } from '../shared/components/fe-row/fe-article-row/fe-article-row.component';
 import { Observable, Subscription, Subscriber } from 'rxjs';
-import { refreshArticlesRequest } from 'libs/data-store-lib/src/lib/article/article.actions';
 import { Router } from '@angular/router';
 
 @Component({
@@ -44,7 +43,6 @@ export class FeArticleComponent implements OnInit, OnDestroy {
     if(this._subs) {
       this._subs.unsubscribe();
     }
-
   }
 
   public overviewOrder(): void {
