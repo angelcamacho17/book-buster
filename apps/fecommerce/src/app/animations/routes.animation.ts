@@ -77,7 +77,6 @@ function slideToRight() {
   ];
 }
 
-
 function slideToLeft() {
   const optional = { optional: true };
   return [
@@ -175,9 +174,10 @@ function fromTop() {
         'z-index': 1000
       })
     ], optional),
-    query(':leave', [
+    query(':enter', [
       style({
         top: 0,
+        'z-index': 0
     })
     ]),
     group([
