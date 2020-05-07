@@ -81,7 +81,7 @@ function slideToRight() {
 function slideToLeft() {
   const optional = { optional: true };
   return [
-    query(':enter, :leave', [
+    query(':leave, :enter', [
       style({
         position: 'fixed',
         left: 0,
@@ -89,26 +89,25 @@ function slideToLeft() {
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
         background: '#ffffff',
-        'z-index': '0'
+        'z-index': 10001
       })
     ], optional),
     query(':enter', [
       style({
         left: '0%',
+        'z-index':0
       })
     ]),
     group([
       query(':leave', [
         animate('600ms ease',
         style({
-          left: '100%',
-          'z-index': 10000,
+          left: '100%'
       }))
       ], optional),
       query(':enter', [
         animate('600ms ease', style({
-          left: '0%',
-          'z-index': 0,
+          left: '0%'
         }))
       ])
     ]),
@@ -165,18 +164,18 @@ function fromBottom() {
 function fromTop() {
   const optional = { optional: true };
   return [
-    query(':enter, :leave', [
+    query(':leave, :enter', [
       style({
         position: 'fixed',
         width: '100%',
-        top: 0,
+        top: '0',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
         background: '#ffffff',
-        'z-index': '0'
+        'z-index': 1000
       })
     ], optional),
-    query(':enter', [
+    query(':leave', [
       style({
         top: 0,
     })
