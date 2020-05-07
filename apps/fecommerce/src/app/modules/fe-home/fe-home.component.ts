@@ -25,10 +25,12 @@ export class FeHomeComponent implements OnInit, OnDestroy {
   ) {
     this.orders$ = this._storeOrders.pipe(select('orders'));
     this._subs = this.orders$.subscribe(data => {
-      console.log(data);
+      if (data.length) {
+        data = data.slice().sort((a, b) => b.id - a.id)
+      }
       this.orders = data;
     })
-    
+
     this._storeOrders.dispatch(refreshOrdersRequest())
   }
 

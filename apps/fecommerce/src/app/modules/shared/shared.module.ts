@@ -10,6 +10,7 @@ import { FeSearchComponent } from './components/fe-search/fe-search.component';
 import { FeCustomerRowComponent } from './components/fe-row/fe-customer-row/fe-customer-row.component';
 import { FeArticleRowComponent } from './components/fe-row/fe-article-row/fe-article-row.component';
 import { FeRowComponent } from './components/fe-row/fe-row.component';
+import { FeDialogComponent } from './components/fe-dialog/fe-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FeRowComponent } from './components/fe-row/fe-row.component';
     FeHeaderComponent,
     FeSearchComponent,
     FeArticleRowComponent,
-    FeRowComponent
+    FeRowComponent,
+    FeDialogComponent
   ],
   imports: [
     CommonModule,
