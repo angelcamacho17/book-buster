@@ -1,12 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
-import { refreshCustomersDone, editCustomer, cancelCustomer } from './customer.actions';
-import { Article } from '../models/article.model';
+import { refreshCurrentArticlesDone } from './current-articles.actions';
+import { Article, ArticleState } from '../models/article.model';
 
-export const initialState: CurrentArticlesState = {
+export const initialState: ArticleState = {
   articles: []
 };
 
-export const customersReducer = createReducer<Article[]>(initialState.articles,
-  on(refreshArticlesDone, (_, action) => action.articles),
+export const articlesReducer = createReducer<Article[]>(initialState.articles,
+  on(refreshCurrentArticlesDone, (_, action) => action.articles),
 );
 

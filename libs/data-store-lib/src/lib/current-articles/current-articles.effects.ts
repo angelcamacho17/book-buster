@@ -1,42 +1,40 @@
-import { ArticleService } from './Article.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { map, mergeMap, catchError } from 'rxjs/operators';
-import { refreshArticlesRequest, refreshArticlesDone, appendArticleRequest, replaceArticleRequest, deleteArticleRequest } from './Article.actions';
 import { EMPTY } from 'rxjs';
+import { CurrentArticlesService } from './current-articles.service';
+import { refreshCurrentArticlesRequest, refreshCurrentArticlesDone, replaceCurrentArticleRequest, appendCurrentArticleRequest, deleteCurrentArticleRequest } from './current-articles.actions';
 
 @Injectable()
 export class ArticleEffects{
-  constructor(private ArticleService: ArticleService,
+  constructor(private currentArticlesService: CurrentArticlesService,
               private actions$: Actions) { }
 
-  refreshArticles$ = createEffect(() =>this.actions$.pipe(
-    ofType(refreshArticlesRequest),
+  refreshCurrentArticles$ = createEffect(() => this.actions$.pipe(
+    ofType(refreshCurrentArticlesRequest),
     mergeMap(() => {
-      return this.ArticleService.all().pipe(
-        map(Articles => refreshArticlesDone({Articles})),
+      return this.currentArticlesService.all().pipe(
+        map(articles => refreshCurrentArticlesDone({ articles })),
         catchError(() => EMPTY)
       );
     })
   ))
 
   appendArticle$ = createEffect(():any => this.actions$.pipe(
-    ofType(appendArticleRequest),
+    ofType(appendCurrentArticleRequest),
     mergeMap((action) => {
-      return this.ArticleService.append(action.Article).pipe(
-        map(() => refreshArticlesRequest()),
+      return this.currentArticlesService.append(action.article).pipe(
+        map(() => refreshCurrentArticlesRequest()),
         catchError(() => EMPTY)
       );
     })
   ))
 
   replaceArticle$ = createEffect(():any => this.actions$.pipe(
-    ofType(replaceArticleRequest),
+    ofType(replaceCurrentArticleRequest),
     mergeMap((action) => {
-      console.log('replace effect');
-      console.log(action.Article);
-      return this.ArticleService.replace(action.Article).pipe(
-        map(() => refreshArticlesRequest()),
+      return this.currentArticlesService.replace(action.article).pipe(
+        map(() => refreshCurrentArticlesRequest()),
         catchError(() => EMPTY)
       );
     })
@@ -44,10 +42,10 @@ export class ArticleEffects{
 
   deleteArticle$ = createEffect(():any =>
     this.actions$.pipe(
-    ofType(deleteArticleRequest),
+    ofType(deleteCurrentArticleRequest),
     mergeMap((action) => {
-      return this.ArticleService.delete(action.ArticleId).pipe(
-        map(() => refreshArticlesRequest()),
+      return this.currentArticlesService.delete(action.articleId).pipe(
+        map(() => refreshCurrentArticlesRequest()),
         catchError(() => EMPTY)
       );
     })
