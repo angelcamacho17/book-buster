@@ -1,58 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { setHeaderTitleRequest } from '@fecommerce-workspace/data-store-lib';
-import { Article } from '@fecommerce-workspace/data-store-lib';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Article, Order, getCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { FeArticleRowComponent } from '../shared/components/fe-row/fe-article-row/fe-article-row.component';
+import { Observable, Subscription, Subscriber } from 'rxjs';
+import { refreshArticlesRequest } from 'libs/data-store-lib/src/lib/article/article.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'fe-article',
   templateUrl: './fe-article.component.html',
   styleUrls: ['./fe-article.component.scss']
 })
-export class FeArticleComponent implements OnInit {
+export class FeArticleComponent implements OnInit, OnDestroy {
 
-  public articles: Article[] = [
-    {
-      id: 1,
-      name: 'Envelope',
-      description: 'articles envelope'
-    },
-    {
-      id: 2,
-      name: 'Box',
-      description: 'articles box'
-    },
-    {
-      id: 3,
-      name: 'Food',
-      description: 'articles foos'
-    },
-    {
-      id: 4,
-      name: 'Wood',
-      description: 'articles wood'
-    },
-    {
-      id: 5,
-      name: 'Wires',
-      description: 'articles wires'
-    },
-    {
-      id: 6,
-      name: 'Alcohol',
-      description: 'articles alcohol'
-    },
-    {
-      id: 7,
-      name: 'Wines',
-      description: 'articles wines'
-    },
+  public rowType = FeArticleRowComponent;
+  public articles: Article[] = [];
+  private _articles$: Observable<Article[]>;
+  private _currentOrder$: Observable<Order>;
+  public currentOrder: Order;
+  private _subs: Subscription;
 
-  ];
+  constructor(private _store: Store<{articles: Article[], currentOrder: Order}>,
+              private _router: Router) {
+    this._articles$ = this._store.pipe(select('articles'));
+    this._subs = this._articles$.subscribe(data => {
+      this.articles = data;
+    });
 
-  constructor( private _store: Store) {
+    this._currentOrder$ = this._store.pipe(select('currentOrder'));
+    this._subs = this._currentOrder$.subscribe(data => {
+      console.log(data);
+      this.currentOrder = data;
+    });
+
+    this._store.dispatch(getCurrentOrderRequest());
+    this._store.dispatch(refreshArticlesRequest());
   }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    if(this._subs) {
+      this._subs.unsubscribe();
+    }
+
+  }
+
+  public overviewOrder(): void {
+
+    setTimeout(()=> {
+      this._router.navigate(['/order']);
+    },100);
+
+  }
 }

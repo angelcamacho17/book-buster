@@ -9,6 +9,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { FormsModule } from '@angular/forms';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { MaterialModule } from './modules/shared/modules/material/material.module';
+import { FeArticleRowComponent } from './modules/shared/components/fe-row/fe-article-row/fe-article-row.component';
+import { FeCustomerRowComponent } from './modules/shared/components/fe-row/fe-customer-row/fe-customer-row.component';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [

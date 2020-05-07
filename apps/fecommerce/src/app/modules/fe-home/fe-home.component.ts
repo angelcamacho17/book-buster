@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { setHeaderTitleRequest, orderOverviewRequest } from '@fecommerce-workspace/data-store-lib';
+import { setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
-import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib'
+import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
 // import * as ordersData from '../../../assets/data/orders.json';
 
 @Component({
   selector: 'fe-home',
   templateUrl: './fe-home.component.html',
-  styleUrls: ['./fe-home.component.scss']
+  styleUrls: ['./fe-home.component.scss'],
 })
 export class FeHomeComponent implements OnInit {
   public orders$: Observable<Order[]>;
   public orders: Order[];
+  public display = false;
 
   constructor(
     private _store: Store,
@@ -40,8 +41,7 @@ export class FeHomeComponent implements OnInit {
   }
 
   public openOrder(order: Order): void {
-    console.log(order);
-    this._storeOrders.dispatch(orderOverviewRequest({order: order}))
+    this._storeOrders.dispatch(setCurrentOrderRequest({order}))
     this._router.navigate(['/order']);
   }
 

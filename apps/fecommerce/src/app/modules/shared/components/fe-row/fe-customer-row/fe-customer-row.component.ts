@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, OnChanges, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ComponentFactoryResolver, AfterContentInit, AfterViewChecked } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { FeRowComponent } from '../fe-row.component';
 import { Store } from '@ngrx/store';
-import { appendOrderRequest, Order, Customer } from '@fecommerce-workspace/data-store-lib';
+import { appendOrderRequest, Order, Customer, setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 
 
 @Component({
@@ -11,15 +10,14 @@ import { appendOrderRequest, Order, Customer } from '@fecommerce-workspace/data-
   templateUrl: './fe-customer-row.component.html',
   styleUrls: ['./fe-customer-row.component.scss']
 })
-export class FeCustomerRowComponent extends FeRowComponent{
+export class FeCustomerRowComponent {
 
+  @Input() item: any;
   public smaller: Observable<boolean>;
   public initials = '';
 
-  constructor(router: Router,
-              componentFactoryResolver: ComponentFactoryResolver,
-              store: Store<{orders: Order[]}>) {
-    super(router, componentFactoryResolver, store);
+  constructor(private router: Router,
+              private store: Store<{orders: Order[]}>) {
     if (this.item) {
       this.smaller = this.reduceLetterSize();
     }
@@ -142,9 +140,10 @@ export class FeCustomerRowComponent extends FeRowComponent{
       customer: this.item
     }
     this.store.dispatch(appendOrderRequest({order: newOrder}));
+    this.store.dispatch(setCurrentOrderRequest({order: newOrder}));
     setTimeout(()=> {
       this.router.navigate(['/article']);
-    },300);
+    },100);
 
   }
 

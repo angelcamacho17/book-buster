@@ -27,12 +27,12 @@ export class FeCreateButtonComponent implements OnInit {
   public display = false;
 
   constructor() {
+  }
+
+  ngOnInit(): void {
     setTimeout(()=> {
       this.display = true;
     },100);
-   }
-
-  ngOnInit(): void {
   }
 
 }

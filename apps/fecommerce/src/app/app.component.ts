@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { slider } from './animations/slide.animation';
+import { routesAnimations } from './animations/routes.animation';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
-    slider
+    routesAnimations
   ]
 })
 export class AppComponent {
