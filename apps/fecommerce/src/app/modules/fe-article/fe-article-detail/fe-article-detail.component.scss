@@ -2,6 +2,7 @@
     position: relative;
     top: -64px;
     padding-top: 0 !important;
+
     .card {
         .content {
             .list {
@@ -37,6 +38,7 @@
                 margin: 0;
                 color: rgba(0, 0, 0, 0.87);
             }
+
             .right {
                 height: 32px;
                 margin: 0;
@@ -45,9 +47,11 @@
                 flex-flow: row;
                 justify-content: space-between;
                 align-items: center;
+
                 .amount {
                     color: rgba(0, 0, 0, 0.87);
                 }
+                
                 .icon {
                     color: rgba(0, 0, 0, 0.54);
                 }
@@ -58,7 +62,6 @@
     .add-button {
         position: relative;
         bottom: 0;
-        // margin: 32px 0;
         width: 100%;
         height: 56px;
         border-color: rgba(0,0,0,.12);

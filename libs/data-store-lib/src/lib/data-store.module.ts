@@ -12,6 +12,8 @@ import { CustomerEffects } from './customer/customer.effects';
 import { CustomerService } from './customer/customer.service';
 import { ArticleEffects } from './article/article.effects';
 import { ArticleService } from './article/article.service';
+import { OrderArticleEffects } from './order-articles/order-articles.effects';
+import { OrderArticlesService } from './order-articles/order-articles.service';
 
 @NgModule({
   declarations: [DataStoreComponent],
@@ -21,7 +23,8 @@ import { ArticleService } from './article/article.service';
     EffectsModule.forRoot([
       OrderEffects,
       CustomerEffects,
-      ArticleEffects
+      ArticleEffects,
+      OrderArticleEffects
     ])
   ],
   exports: [
@@ -31,6 +34,7 @@ import { ArticleService } from './article/article.service';
     OrderService,
     CustomerService,
     ArticleService,
+    OrderArticlesService,
     {
       provide: RouterStateSerializer,
       useClass: CustomSerializer

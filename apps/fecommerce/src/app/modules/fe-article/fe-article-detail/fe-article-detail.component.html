@@ -13,7 +13,7 @@
                     </div>
                     <div mat-line class="order-subtitle">
                         <div class="mat-body-1 line">
-                            56468421354
+                            {{article?.id}}
                             <!-- {{article.description}} -->
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                     </div>
                     <div mat-line class="order-subtitle">
                         <div class="mat-body-1 line">
-                            Pencil
+                            {{article?.description}}
                             <!-- {{article.description}} -->
                         </div>
                     </div>
@@ -44,9 +44,13 @@
                 Quantity
             </div>
             <div class="mat-title right">
-                <mat-icon class="icon">remove_circle_outline</mat-icon>
-                <div class="amount">0</div>
-                <mat-icon class="icon">add_circle_outline</mat-icon>
+                <button mat-icon-button (click)="removeQuantity()">
+                    <mat-icon class="icon">remove_circle_outline</mat-icon>
+                </button>
+                <div class="amount">{{amount}}</div>
+                <button mat-icon-button (click)="addQuantity()">
+                    <mat-icon class="icon">add_circle_outline</mat-icon>
+                </button>
             </div>
         </div>
     </fe-card>
