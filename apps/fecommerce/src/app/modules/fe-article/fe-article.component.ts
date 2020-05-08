@@ -24,6 +24,7 @@ export class FeArticleComponent implements OnInit, OnDestroy {
     this._articles$ = this._store.pipe(select('articles'));
     this._subs = this._articles$.subscribe(data => {
       this.articles = data;
+      console.log(data);
     });
 
     this._currentOrder$ = this._store.pipe(select('currentOrder'));
