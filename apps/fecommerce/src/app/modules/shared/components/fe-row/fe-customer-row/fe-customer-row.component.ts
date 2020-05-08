@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, OnChanges, ComponentFactoryResolver, AfterContentInit, AfterViewChecked } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, OnInit, Input, OnChanges, ComponentFactoryResolver, AfterContentInit, AfterViewChecked, OnDestroy } from '@angular/core';
+import { Observable, of, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { appendOrderRequest, Order, Customer, setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Store, select } from '@ngrx/store';
+import { appendOrderRequest, Order, Customer, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
 
 
 @Component({
@@ -10,14 +10,16 @@ import { appendOrderRequest, Order, Customer, setCurrentOrderRequest } from '@fe
   templateUrl: './fe-customer-row.component.html',
   styleUrls: ['./fe-customer-row.component.scss']
 })
-export class FeCustomerRowComponent {
+export class FeCustomerRowComponent implements OnDestroy{
 
   @Input() item: any;
   public smaller: Observable<boolean>;
   public initials = '';
+  private _subs: Subscription;
 
   constructor(private router: Router,
-              private store: Store<{orders: Order[]}>) {
+              private _store: Store<{currentOrder: Order}>) {
+
     if (this.item) {
       this.smaller = this.reduceLetterSize();
     }
@@ -57,7 +59,7 @@ export class FeCustomerRowComponent {
   }
 
   public selectedCustomer(): void {
-    const newOrder: Order = {
+    const order: Order = {
       description: 'Latest order',
       amount: 178,
       createdBy: 'Robin Person',
@@ -139,12 +141,20 @@ export class FeCustomerRowComponent {
       ],
       customer: this.item
     }
-    this.store.dispatch(appendOrderRequest({order: newOrder}));
-    this.store.dispatch(setCurrentOrderRequest({order: newOrder}));
+
+    this._store.dispatch(handleOrderRequest({order}));
+    this._store.dispatch(setCurrentOrderRequest({order}));
+    this._store.dispatch(refreshOrdersRequest())
     setTimeout(()=> {
       this.router.navigate(['/article']);
     },100);
 
+  }
+
+  ngOnDestroy(): void {
+    if(this._subs) {
+      this._subs.unsubscribe();
+    }
   }
 
 }

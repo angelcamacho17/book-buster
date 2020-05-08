@@ -2,7 +2,7 @@ import { OrderService } from './order.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { map, mergeMap, catchError } from 'rxjs/operators';
-import { refreshOrdersRequest, refreshOrdersDone, appendOrderRequest, replaceOrderRequest, deleteOrderRequest, refreshOrderDone, setCurrentOrderRequest, getCurrentOrderRequest, refreshOrderSetted } from './order.actions';
+import { refreshOrdersRequest, refreshOrdersDone, appendOrderRequest, replaceOrderRequest, deleteOrderRequest, refreshOrderDone, setCurrentOrderRequest, getCurrentOrderRequest, refreshOrderSetted, handleOrderRequest, clearCurrentOrderRequest } from './order.actions';
 import { EMPTY, of } from 'rxjs';
 
 @Injectable()
@@ -35,11 +35,38 @@ export class OrderEffects {
   getCurrentOrder$ = createEffect((): any => this.actions$.pipe(
     ofType(getCurrentOrderRequest),
     mergeMap((action) => {
-      console.log('get');
       return this.orderService.getCurrentOrder().pipe(
         map((order) => refreshOrderDone({order})),
         catchError(() => EMPTY)
       )
+    })
+  ))
+
+  clearCurrentOrder$ = createEffect((): any => this.actions$.pipe(
+    ofType(clearCurrentOrderRequest),
+    mergeMap(() => {
+      return this.orderService.clearCurrentOrder().pipe(
+        map(() => refreshOrderSetted()),
+        catchError(() => EMPTY)
+      )
+    })
+  ))
+
+
+  handleOrder$ = createEffect((): any => this.actions$.pipe(
+    ofType(handleOrderRequest),
+    mergeMap((action) => {
+      if (this.orderService.currentOrder) {
+        return this.orderService.replace(action.order).pipe(
+          map(() => refreshOrdersRequest()),
+          catchError(() => EMPTY)
+        );
+      } else {
+        return this.orderService.append(action.order).pipe(
+          map(() => refreshOrdersRequest()),
+          catchError(() => EMPTY)
+        );
+      }
     })
   ))
 

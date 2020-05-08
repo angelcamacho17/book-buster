@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { setCurrentOrderRequest, clearCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
@@ -30,14 +30,11 @@ export class FeHomeComponent implements OnInit, OnDestroy {
       }
       this.orders = data;
     })
-
+    this._store.dispatch(clearCurrentOrderRequest());
     this._storeOrders.dispatch(refreshOrdersRequest())
   }
 
-  ngOnInit(): void {
-    // console.log(this.orders)
-    // console.log(ordersData.orders)
-  }
+  ngOnInit(): void { }
 
   public createOrder(): void {
     this._router.navigate(['/neworder']);

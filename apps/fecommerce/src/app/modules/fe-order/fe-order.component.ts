@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Order, getCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Order, getCurrentOrderRequest, clearCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Customer } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -54,12 +54,16 @@ export class FeOrderComponent implements OnInit, OnDestroy {
       height: '248px',
       data: {
         title: 'Switch customer',
-        msg: 'Customer specific prices will be recalculated after asssigning a new customer.'
+        msg: 'Customer specific prices will be recalculated after asssigning a new customer.',
+        firstButton: 'CANCEL',
+        secondButton: 'SWITCH'
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+    dialogRef.afterClosed().subscribe(data => {
+      if(data.result === 'SWITCH') {
+        this._router.navigate(['/neworder', {order: this.order}]);
+      }
     });
   }
 

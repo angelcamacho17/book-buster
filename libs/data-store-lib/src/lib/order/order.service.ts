@@ -246,7 +246,7 @@ export class OrderService {
 
   public currentOrder: Order;
 
-  orders = new BehaviorSubject<Order[]>(this._orders);
+  public orders = new BehaviorSubject<Order[]>(this._orders);
 
   constructor(
     private httpClient: HttpClient
@@ -266,29 +266,63 @@ export class OrderService {
   }
 
   public replace(order: Order): Observable<Order[]> {
-    const index = this._orders.findIndex(c => c.id === order.id);
-    this._orders[index].description = order.description;
-    this._orders[index].articles = order.articles;
-    this._orders[index].amount = order.amount;
-    this._orders[index].createdBy = order.createdBy;
+    let orders = []; let index = 0;
+    let editedOrder = {
+      id: this.currentOrder.id,
+      customer: order.customer,
+      description: this.currentOrder.description,
+      amount: this.currentOrder.amount,
+      createdBy: this.currentOrder.createdBy,
+      articles: this.currentOrder.articles
+    };
+    console.log(this.currentOrder);
+    for (var i =0; i < this._orders.length; i++) {
+      if (this._orders[i].id !== this.currentOrder.id) {
+        orders.push(this._orders[i]);
+      }
+    }
+
+    this._orders = [];
+    this.currentOrder = editedOrder;
+    orders.push(editedOrder);
+    this._orders = orders;
     this.orders.next(this._orders);
-    return this.orders.asObservable();
+    console.log(this._orders);
+    return of(this._orders);
+
+    //const index = this._orders.findIndex(c => c.id === this.currentOrder.id);
+    //this._orders[index] = this.currentOrder;
+    // this._orders[index].description = this.currentOrder.description;
+    // this._orders[index].articles = this.currentOrder.articles;
+    // this._orders[index].amount = this.currentOrder.amount;
+    // this._orders[index].createdBy = this.currentOrder.createdBy;
+    //this.orders.next(this._orders);
   }
 
-  public delete(orderId: any): Observable<Order[]> {
-    const index = this._orders.findIndex(c => c.id === orderId);
-    this._orders.splice(index, 1);
-    this.orders.next(this._orders);
-    return this.orders.asObservable();
+  public delete(orderId: number): Observable<Order[]> {
+    let orders = [];
+    for (var i =0; i < this._orders.length; i++) {
+      if (this._orders[i].id !== orderId) {
+        orders.push(this._orders[i]);
+      }
+    }
+    return of(orders);
   }
 
   public setCurrentOrder(order: Order): Observable<any> {
-    this.currentOrder = order;
+    if (!this.currentOrder) {
+      this.currentOrder = order;
+    }
     return of(null);
   }
 
   public getCurrentOrder(): Observable<Order> {
     return of(this.currentOrder);
+  }
+
+  public clearCurrentOrder(): Observable<any> {
+    this.currentOrder = null;
+    return of(null);
   }
 }
 

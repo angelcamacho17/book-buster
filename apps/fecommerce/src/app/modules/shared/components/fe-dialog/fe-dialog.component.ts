@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface DialogData {
   title: string;
   msg: string;
+  firstButton: string;
+  secondButton: string;
 }
 
 
@@ -20,6 +22,10 @@ export class FeDialogComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onClick(result: string): void {
+    this.dialogRef.close({result});
   }
 
 

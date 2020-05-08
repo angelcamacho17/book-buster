@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Customer } from '@fecommerce-workspace/data-store-lib';
+import { Customer, Order, appendOrderRequest, setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 import { FeCustomerRowComponent } from '../shared/components/fe-row/fe-customer-row/fe-customer-row.component';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'fe-new-order',
@@ -17,12 +19,13 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public rowType = FeCustomerRowComponent;
   private _subs: Subscription;
 
-  constructor(private store: Store<{customers: Customer[]}>) {
-    this.$customers = this.store.pipe(select('customers'));
+  constructor(private _store: Store<{customers: Customer[]}>) {
+    this.$customers = this._store.pipe(select('customers'));
     this._subs = this.$customers.subscribe(data => {
       this.customers = data;
     });
-    this.store.dispatch(refreshCustomersRequest());
+
+    this._store.dispatch(refreshCustomersRequest());
   }
 
   ngOnInit(): void {
