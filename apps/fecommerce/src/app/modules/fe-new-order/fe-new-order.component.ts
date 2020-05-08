@@ -22,6 +22,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   constructor(private _store: Store<{customers: Customer[]}>) {
     this.$customers = this._store.pipe(select('customers'));
     this._subs = this.$customers.subscribe(data => {
+      console.log(data)
       this.customers = data;
     });
 

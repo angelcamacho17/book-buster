@@ -10,7 +10,7 @@ import { appendOrderRequest, Order, Customer, setCurrentOrderRequest, handleOrde
   templateUrl: './fe-customer-row.component.html',
   styleUrls: ['./fe-customer-row.component.scss']
 })
-export class FeCustomerRowComponent implements OnDestroy{
+export class FeCustomerRowComponent implements OnDestroy {
 
   @Input() item: any;
   public smaller: Observable<boolean>;
@@ -18,7 +18,7 @@ export class FeCustomerRowComponent implements OnDestroy{
   private _subs: Subscription;
 
   constructor(private router: Router,
-              private _store: Store<{currentOrder: Order}>) {
+    private _store: Store<{ currentOrder: Order }>) {
 
     if (this.item) {
       this.smaller = this.reduceLetterSize();
@@ -64,95 +64,34 @@ export class FeCustomerRowComponent implements OnDestroy{
       amount: 178,
       createdBy: 'Robin Person',
       articles: [{
-        id: 1,
-        name: 'Envelope',
-        description: 'articles envelope'
-      },
-      {
-        id: 2,
-        name: 'Box',
-        description: 'articles box'
-      },
-      {
-        id: 3,
-        name: 'Food',
-        description: 'articles foos'
-      },
-      {
-        id: 1,
-        name: 'Envelope',
-        description: 'articles envelope'
-      },
-      {
-        id: 2,
-        name: 'Box',
-        description: 'articles box'
-      },
-      {
-        id: 3,
-        name: 'Food',
-        description: 'articles foos'
-      },
-      {
-        id: 1,
-        name: 'Envelope',
-        description: 'articles envelope'
-      },
-      {
-        id: 2,
-        name: 'Box',
-        description: 'articles box'
-      },
-      {
-        id: 3,
-        name: 'Food',
-        description: 'articles foos'
-      },
-      {
-        id: 1,
-        name: 'Envelope',
-        description: 'articles envelope'
-      },
-      {
-        id: 2,
-        name: 'Box',
-        description: 'articles box'
-      },
-      {
-        id: 3,
-        name: 'Food',
-        description: 'articles foos'
-      },
-      {
-        id: 1,
-        name: 'Envelope',
-        description: 'articles envelope'
-      },
-      {
-        id: 2,
-        name: 'Box',
-        description: 'articles box'
-      },
-      {
-        id: 3,
-        name: 'Food',
-        description: 'articles foos'
-      }
-      ],
+        article: {
+          id: 31,
+          name: "Tea - Honey Green Tea",
+          description: "Twin birth, mate liveborn, born in hospital, delivered without mention of cesarean section",
+          price: "61.15"
+        }, quantity: 3
+      }, {
+        article: {
+          id: 32,
+          name: "Soup - Knorr, Chicken Noodle",
+          description: "Poisoning by erythromycin and other macrolides",
+          price: "51.80"
+        }, quantity: 8
+      }],
       customer: this.item
     }
 
-    this._store.dispatch(handleOrderRequest({order}));
-    this._store.dispatch(setCurrentOrderRequest({order}));
+    this._store.dispatch(handleOrderRequest({ order }));
+    this._store.dispatch(setCurrentOrderRequest({ order }));
     this._store.dispatch(refreshOrdersRequest())
-    setTimeout(()=> {
+    setTimeout(() => {
       this.router.navigate(['/article']);
-    },100);
+    }, 100);
 
   }
 
   ngOnDestroy(): void {
-    if(this._subs) {
+    if (this._subs) {
       this._subs.unsubscribe();
     }
   }

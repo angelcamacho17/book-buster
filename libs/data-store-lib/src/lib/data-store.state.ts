@@ -7,6 +7,8 @@ import { customersReducer } from './customer/customer.reducer';
 import { Customer } from './models/customer.model';
 import { Article } from './models/article.model';
 import { articlesReducer } from './article/article.reducer';
+import { orderArticlesReducer } from './order-articles/order-articles.reducer';
+import { OrderArticle } from './models/order-article.model';
 
 export const FEATURE_NAME = 'examples';
 
@@ -15,7 +17,8 @@ export const reducers: ActionReducerMap<AppState> = {
   router: routerReducer,
   customers: customersReducer,
   currentOrder: currentOrderReducer,
-  articles: articlesReducer
+  articles: articlesReducer,
+  orderArticles: orderArticlesReducer
 };
 
 export interface AppState {
@@ -23,5 +26,6 @@ export interface AppState {
   router: RouterReducerState<RouterStateUrl>,
   customers: Customer[],
   currentOrder: Order,
-  articles: Article[]
+  articles: Article[],
+  orderArticles: OrderArticle[]
 }
