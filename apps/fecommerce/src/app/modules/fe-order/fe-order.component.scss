@@ -87,3 +87,18 @@
     bottom: 0;
   }
 }
+
+::ng-deep .cdk-overlay-pane {
+  position: absolute;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 0;
+  display: flex;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto !important;
+  left: 16px !important;
+  margin-top: 11px !important;
+  right: 16px !important;
+}
+

@@ -44,7 +44,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
     this._router.navigate(['/home']);
     const msg = 'Order succesfully confirmed';
       this._snackBar.open(msg, '', {
-        duration: 3000,
+        duration: 300,
       });
   }
 

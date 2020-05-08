@@ -25,7 +25,7 @@ export class FeArticleComponent implements OnInit, OnDestroy {
 
     this._subs = this._articles$.subscribe(data => {
       this.articles = data;
-      console.log(data)
+      console.log(data);
     });
     this._store.dispatch(refreshArticlesRequest());
     // console.log("asd", data)
