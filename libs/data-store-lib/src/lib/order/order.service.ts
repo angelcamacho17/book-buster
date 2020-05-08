@@ -266,8 +266,8 @@ export class OrderService {
   }
 
   public replace(order: Order): Observable<Order[]> {
-    let orders = []; let index = 0;
-    let editedOrder = {
+    const orders = [];
+    const editedOrder = {
       id: this.currentOrder.id,
       customer: order.customer,
       description: this.currentOrder.description,
@@ -276,7 +276,7 @@ export class OrderService {
       articles: this.currentOrder.articles
     };
     console.log(this.currentOrder);
-    for (var i =0; i < this._orders.length; i++) {
+    for (let i =0; i < this._orders.length; i++) {
       if (this._orders[i].id !== this.currentOrder.id) {
         orders.push(this._orders[i]);
       }
@@ -290,18 +290,11 @@ export class OrderService {
     console.log(this._orders);
     return of(this._orders);
 
-    //const index = this._orders.findIndex(c => c.id === this.currentOrder.id);
-    //this._orders[index] = this.currentOrder;
-    // this._orders[index].description = this.currentOrder.description;
-    // this._orders[index].articles = this.currentOrder.articles;
-    // this._orders[index].amount = this.currentOrder.amount;
-    // this._orders[index].createdBy = this.currentOrder.createdBy;
-    //this.orders.next(this._orders);
   }
 
   public delete(orderId: number): Observable<Order[]> {
-    let orders = [];
-    for (var i =0; i < this._orders.length; i++) {
+    const orders = [];
+    for (let i =0; i < this._orders.length; i++) {
       if (this._orders[i].id !== orderId) {
         orders.push(this._orders[i]);
       }
