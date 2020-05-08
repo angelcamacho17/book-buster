@@ -1,7 +1,7 @@
 import { Injectable, ReflectiveInjector } from "@angular/core";
 import { ArticleService } from './article.service';
 import { Actions, ofType, createEffect, act } from '@ngrx/effects';
-import { refreshArticlesRequest, refreshArticlesDone, replaceArticleRequest, deleteArticleRequest } from './article.actions';
+import { refreshArticlesRequest, refreshArticlesDone, replaceArticleRequest, deleteArticleRequest, appendArticleRequest } from './article.actions';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { EMPTY, merge } from 'rxjs';
 
@@ -23,10 +23,10 @@ z
     ));
 
     appendArticle$ = createEffect((): any => this.actions$.pipe(
-        ofType(replaceArticleRequest),
+        ofType(appendArticleRequest),
         mergeMap((action) => {
             return this.articleService.replace(action.article).pipe(
-                map(articles => refreshArticlesDone)
+                map(articles => refreshArticlesDone({ articles }))
             )
         })
     ));
