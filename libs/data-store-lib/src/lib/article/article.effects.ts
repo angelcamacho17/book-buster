@@ -1,7 +1,7 @@
 import { Injectable, ReflectiveInjector } from "@angular/core";
 import { ArticleService } from './article.service';
 import { Actions, ofType, createEffect, act } from '@ngrx/effects';
-import { refreshArticlesRequest, refreshArticlesDone, replaceArticleRequest, deleteArticleRequest, appendArticleRequest } from './article.actions';
+import { refreshArticlesRequest, refreshArticlesDone, replaceArticleRequest, deleteArticleRequest, appendArticleRequest, getArticleRequest, getArticleDone } from './article.actions';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { EMPTY, merge } from 'rxjs';
 
@@ -11,7 +11,17 @@ export class ArticleEffects {
         private articleService: ArticleService,
         private actions$: Actions
     ) { }
-z
+
+    getArticle$ = createEffect(() => this.actions$.pipe(
+        ofType(getArticleRequest),
+        mergeMap((action) => {
+            return this.articleService.get(action.articleId).pipe(
+                map(article => getArticleDone({ article })),
+                catchError(() => EMPTY)
+            )
+        })
+    ));
+
     refreshArticles$ = createEffect(() => this.actions$.pipe(
         ofType(refreshArticlesRequest),
         mergeMap(() => {

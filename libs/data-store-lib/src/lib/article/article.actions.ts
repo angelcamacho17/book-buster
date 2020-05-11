@@ -7,3 +7,6 @@ export const appendArticleRequest = createAction('[Article] Append Article Reque
 export const replaceArticleRequest = createAction('[Article] Replace Article Request', props<{ article: Article }>());
 export const deleteArticleRequest = createAction('[Article] Delete Article Request', props<{ articleId: number }>());
 export const editArticle = createAction('[Article] Edit Article', props<{ articleId: number }>());
+
+export const getArticleRequest = createAction('[Article] Get Article Request', props<{ articleId: number }>());
+export const getArticleDone = createAction('[Article] Get Article Done', props<{ article: Article }>());
