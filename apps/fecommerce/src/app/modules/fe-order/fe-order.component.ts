@@ -62,9 +62,13 @@ export class FeOrderComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(data => {
       if(data.result === 'SWITCH') {
-        this._router.navigate(['/neworder', {order: this.order}]);
+        this._router.navigate(['/neworder']);
       }
     });
+  }
+
+  public openItems(): void {
+    this._router.navigate(['/orderitems']);
   }
 
 }
