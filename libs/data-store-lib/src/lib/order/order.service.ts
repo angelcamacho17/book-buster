@@ -22,7 +22,7 @@ export class OrderService {
           "id": 3,
           "name": "Soy Protein",
           "description": "Placental polyp, unspecified as to episode of care or not applicable",
-          "price": "98.57"
+          "price": 98.57
         },
         "quantity": 5
       },
@@ -45,7 +45,7 @@ export class OrderService {
           "id": 1,
           "name": "Southern Comfort",
           "description": "Eosinophilic gastroenteritis",
-          "price": "56.87"
+          "price": 56.87
         },
         "quantity": 2
       }, {
@@ -53,7 +53,7 @@ export class OrderService {
           "id": 2,
           "name": "Stock - Veal, White",
           "description": "Malignant neoplasm of other specified sites of nasopharynx",
-          "price": "76.19"
+          "price": 76.19
         }, "quantity": 3
       }],
       "customer": {
@@ -74,7 +74,7 @@ export class OrderService {
           "id": 69,
           "name": "Cookie Dough - Double",
           "description": "Other complications due to nervous system device, implant, and graft",
-          "price": "11.42"
+          "price": 11.42
         },
         "quantity": 6
       }, {
@@ -82,7 +82,7 @@ export class OrderService {
           "id": 70,
           "name": "Ham - Black Forest",
           "description": "Transient paralysis of limb",
-          "price": "40.36"
+          "price": 40.36
         },
         "quantity": 8
       }],
@@ -104,14 +104,14 @@ export class OrderService {
           "id": 31,
           "name": "Tea - Honey Green Tea",
           "description": "Twin birth, mate liveborn, born in hospital, delivered without mention of cesarean section",
-          "price": "61.15"
+          "price": 61.15
         }, "quantity": 3
       }, {
         "article": {
           "id": 32,
           "name": "Soup - Knorr, Chicken Noodle",
           "description": "Poisoning by erythromycin and other macrolides",
-          "price": "51.80"
+          "price": 51.80
         }, "quantity": 8
       }],
       "customer": {

@@ -5,7 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'fe-fe-order-items',
+  selector: 'fe-order-items',
   templateUrl: './fe-order-items.component.html',
   styleUrls: ['./fe-order-items.component.scss']
 })
@@ -33,6 +33,16 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
     if(this._subs) {
       this._subs.unsubscribe();
     }
+  }
+
+  public getTotal(): number {
+    let total = 0;
+
+    for (let orderArt of this.order.articles) {
+      total = total + orderArt.article.price;
+    }
+
+    return Math.round(total * 100) / 100;
   }
 
 }
