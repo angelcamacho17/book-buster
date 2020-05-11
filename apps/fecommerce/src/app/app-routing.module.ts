@@ -29,6 +29,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/fe-new-order/fe-new-order.module').then(m => m.FeNewOrderModule),
     data: { animation: 'neworder' }
   },
+  {
+    path: 'orderitems',
+    loadChildren: () => import('./modules/fe-order-items/fe-order-items.module').then(m => m.FeOrderItemsModule),
+    data: { animation: 'orderitems' }
+  },
   { path: '**', redirectTo: 'home' }
 ];
 

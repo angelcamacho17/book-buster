@@ -44,7 +44,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
     this._router.navigate(['/home']);
     const msg = 'Order succesfully confirmed';
       this._snackBar.open(msg, '', {
-        duration: 3000,
+        duration: 1000,
       });
   }
 
@@ -62,9 +62,13 @@ export class FeOrderComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(data => {
       if(data.result === 'SWITCH') {
-        this._router.navigate(['/neworder', {order: this.order}]);
+        this._router.navigate(['/neworder']);
       }
     });
+  }
+
+  public openItems(): void {
+    this._router.navigate(['/orderitems']);
   }
 
 }
