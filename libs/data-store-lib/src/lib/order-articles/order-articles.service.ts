@@ -15,7 +15,9 @@ export class OrderArticlesService {
     }
 
     public append(orderArticle: OrderArticle) {
-        const lastOrderArticleId = this._orderArticles[this._orderArticles.length - 1].id;
+        console.log('antes')
+        const lastOrderArticleId = this._orderArticles[this._orderArticles.length - 1]?.id ?? 0;
+        console.log('desp')
         orderArticle = { ...orderArticle, ...{ id: lastOrderArticleId + 1 } }
         this._orderArticles = this._orderArticles.concat(orderArticle);
         this.orderArticles.next(this._orderArticles);

@@ -5,6 +5,10 @@ export interface Article {
   price?: number;
 }
 
-export interface ArticleState {
+export interface ArticlesState {
   articles: Article[];
+}
+
+export interface ArticleState {
+  article: Article;
 }

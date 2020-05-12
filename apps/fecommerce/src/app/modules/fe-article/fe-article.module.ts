@@ -21,7 +21,7 @@ import { FeArticleDetailComponent } from './fe-article-detail/fe-article-detail.
         component: FeArticleComponent
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         component: FeArticleDetailComponent
       }
     ]),

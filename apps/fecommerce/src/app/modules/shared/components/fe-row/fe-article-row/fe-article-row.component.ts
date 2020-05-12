@@ -18,4 +18,8 @@ export class FeArticleRowComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openArticleDetail(item) {
+    console.log(item)
+    this._router.navigate(['/article/detail', item.id]);
+  }
 }

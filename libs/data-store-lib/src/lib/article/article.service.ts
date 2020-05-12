@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../models/article.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, EMPTY } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class ArticleService {
@@ -301,6 +301,13 @@ export class ArticleService {
 
     all(): Observable<Article[]> {
         return this.articles.asObservable();
+    }
+
+    get(articleId: number): Observable<Article> {
+      const article = this._articles.find((a) => {
+        return a.id === articleId;
+      });
+      return of(article ?? null); // ?? -> Si la izquierda es falso, null o undefined, devuelve valor de la derecha.
     }
 
     append(article: Article): Observable<Article[]> {
