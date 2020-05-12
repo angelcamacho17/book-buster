@@ -9,12 +9,13 @@ import { Observable, BehaviorSubject, of, EMPTY } from 'rxjs';
 export class OrderService {
 
   _baseUrl = 'assets/data/orders.json';
+  private totalsCalculated = false;
 
   private _orders: Array<Order> = [
     {
       "id": 8,
       "description": "Other Order",
-      "amount": 65.22,
+      "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
         // "id": 1,
@@ -38,7 +39,7 @@ export class OrderService {
     {
       "id": 9,
       "description": "New order",
-      "amount": 95.42,
+      "amount": null,
       "createdBy": "Angel Camacho",
       "articles": [{
         "article": {
@@ -67,7 +68,7 @@ export class OrderService {
     {
       "id": 11,
       "description": "other thing",
-      "amount": 83,
+      "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
         "article": {
@@ -97,7 +98,7 @@ export class OrderService {
     {
       "id": 12,
       "description": "Order",
-      "amount": 36.45,
+      "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
         "article": {
@@ -122,138 +123,6 @@ export class OrderService {
         "smallIcon": false
       }
     }
-    /* ,
-    {
-      "id": 14,
-      "articles": [{
-        id: 1,
-        name: 'Envelope',
-        description: 'articles envelope'
-      },
-      {
-        id: 2,
-        name: 'Box',
-        description: 'articles box'
-      },
-      {
-        id: 3,
-        name: 'Food',
-        description: 'articles foos'
-      }],
-      "description": "Order",
-      "amount": 135.1,
-      "createdBy": "Angel Camacho",
-      "customer": {
-        "id": 2,
-        "name": "Robin Peerson",
-        "address": "25 de Mayo 600",
-        "initials": "RP",
-        "smallIcon": false
-      }
-    },
-    {
-      "id": 13,
-      "articles": [{
-        id: 1,
-        name: 'Envelope',
-        description: 'articles envelope'
-      },
-      {
-        id: 2,
-        name: 'Box',
-        description: 'articles box'
-      },
-      {
-        id: 3,
-        name: 'Food',
-        description: 'articles foos'
-      },
-      {
-        id: 1,
-        name: 'Envelope',
-        description: 'articles envelope'
-      },
-      {
-        id: 2,
-        name: 'Box',
-        description: 'articles box'
-      },
-      {
-        id: 3,
-        name: 'Food',
-        description: 'articles foos'
-      }
-      ],
-      "description": "Order",
-      "amount": 88.44,
-      "createdBy": "Rodrigo Martinez Jr",
-      "customer": {
-        "id": 7,
-        "name": "Martina Briganti",
-        "address": "Lima 1540",
-        "initials": "MB",
-        "smallIcon": false
-      }
-    },
-    {
-      "id": 15,
-      "articles": [{
-        id: 1,
-        name: 'Envelope',
-        description: 'articles envelope'
-      },
-      {
-        id: 2,
-        name: 'Box',
-        description: 'articles box'
-      },
-      {
-        id: 3,
-        name: 'Food',
-        description: 'articles foos'
-      },
-      {
-        id: 1,
-        name: 'Envelope',
-        description: 'articles envelope'
-      },
-      {
-        id: 2,
-        name: 'Box',
-        description: 'articles box'
-      },
-      {
-        id: 3,
-        name: 'Food',
-        description: 'articles foos'
-      },
-      {
-        id: 1,
-        name: 'Envelope',
-        description: 'articles envelope'
-      },
-      {
-        id: 2,
-        name: 'Box',
-        description: 'articles box'
-      },
-      {
-        id: 3,
-        name: 'Food',
-        description: 'articles foos'
-      }
-      ],
-      "description": "Order",
-      "amount": 96.92,
-      "createdBy": "Federico Ribero",
-      "customer": {
-        "id": 4,
-        "name": "Rodrigo Martinez Jr",
-        "address": "Jujuy 800",
-        "initials": "RMJ",
-        "smallIcon": true
-      }
-    } */
   ];
 
   public currentOrder: Order;
@@ -265,12 +134,14 @@ export class OrderService {
   ) { }
 
   public all(): Observable<Order[]> {
+    this.setOrdersTotal();
     return this.orders.asObservable();
   }
 
   public append(order: Order): Observable<Order[]> {
     const lastOrderId = this._orders[this._orders.length - 1].id;
     order = { ...order, ...{ id: lastOrderId + 1 } };
+    order.amount = this.calculateTotal(order);
     this._orders = this._orders.concat(order);
     this.orders.next(this._orders);
     return of(this._orders);
@@ -286,7 +157,6 @@ export class OrderService {
       createdBy: this.currentOrder.createdBy,
       articles: this.currentOrder.articles
     };
-    console.log(this.currentOrder);
     for (let i = 0; i < this._orders.length; i++) {
       if (this._orders[i].id !== this.currentOrder.id) {
         orders.push(this._orders[i]);
@@ -298,7 +168,7 @@ export class OrderService {
     orders.push(editedOrder);
     this._orders = orders;
     this.orders.next(this._orders);
-    console.log(this._orders);
+
     return of(this._orders);
 
   }
@@ -327,6 +197,24 @@ export class OrderService {
   public clearCurrentOrder(): Observable<any> {
     this.currentOrder = null;
     return of(null);
+  }
+
+  private setOrdersTotal(): void {
+    if (this.totalsCalculated) {
+      return;
+    }
+    for (let order of this._orders) {
+      order.amount = this.calculateTotal(order);
+    }
+    this.totalsCalculated = true;
+  }
+
+  private calculateTotal(order: Order): number {
+    let total = 0;
+    for (let orderArticle of order.articles) {
+      total = total + orderArticle.article.price;
+    }
+    return Math.round(total * 100) / 100;
   }
 }
 

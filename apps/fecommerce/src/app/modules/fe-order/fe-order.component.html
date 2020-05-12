@@ -30,7 +30,7 @@
       </div>
     </div>
   </mat-card>
-  <mat-card class="order-items mat-elevation-z4">
+  <mat-card class="order-items mat-elevation-z4" (click)="openItems()">
     <div>
       <div class="title mat-subheading-2">
         Orders
@@ -39,7 +39,7 @@
         {{order?.articles?.length}} items
       </div>
     </div>
-    <mat-icon (click)="openItems()" style="align-self: center; color: rgba(0, 0, 0, 0.6)">
+    <mat-icon style="align-self: center; color: rgba(0, 0, 0, 0.6)">
       keyboard_arrow_right
     </mat-icon>
   </mat-card>

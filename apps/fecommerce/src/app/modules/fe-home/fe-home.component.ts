@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
 import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
+import { OrderService } from 'libs/data-store-lib/src/lib/order/order.service';
 // import * as ordersData from '../../../assets/data/orders.json';
 
 @Component({
@@ -21,7 +22,8 @@ export class FeHomeComponent implements OnInit, OnDestroy {
   constructor(
     private _store: Store,
     private _router: Router,
-    private _storeOrders: Store<{ orders: Order[] }>
+    private _storeOrders: Store<{ orders: Order[] }>,
+    private _orderService: OrderService
   ) {
     this.orders$ = this._storeOrders.pipe(select('orders'));
     this._subs = this.orders$.subscribe(data => {
