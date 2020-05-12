@@ -1,12 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Article, Order, getArticleRequest } from '@fecommerce-workspace/data-store-lib';
+import { Article, Order, getArticleRequest, OrderArticle, appendOrderArticleRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
-import { OrderArticle } from 'libs/data-store-lib/src/lib/models/order-article.model';
-import { appendOrderArticleRequest } from 'libs/data-store-lib/src/lib/order-articles/order-articles.actions';
-
 @Component({
   selector: 'fe-article-detail',
   templateUrl: './fe-article-detail.component.html',

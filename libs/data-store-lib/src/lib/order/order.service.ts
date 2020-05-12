@@ -203,7 +203,7 @@ export class OrderService {
     if (this.totalsCalculated) {
       return;
     }
-    for (let order of this._orders) {
+    for (const order of this._orders) {
       order.amount = this.calculateTotal(order);
     }
     this.totalsCalculated = true;
@@ -211,7 +211,7 @@ export class OrderService {
 
   private calculateTotal(order: Order): number {
     let total = 0;
-    for (let orderArticle of order.articles) {
+    for (const orderArticle of order.articles) {
       total = total + orderArticle.article.price;
     }
     return Math.round(total * 100) / 100;
