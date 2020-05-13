@@ -25,18 +25,8 @@ export class FeArticleComponent implements OnInit, OnDestroy {
 
     this._subs = this._articles$.subscribe(data => {
       this.articles = data;
-      console.log(data);
     });
     this._store.dispatch(refreshArticlesRequest());
-    // console.log("asd", data)
-    // console.log("articles", this.articles)
-
-    // this._currentOrder$ = this._store.pipe(select('currentOrder'));
-    // this._subs = this._currentOrder$.subscribe(data => {
-    //   this.currentOrder = data;
-    // });
-
-    // this._store.dispatch(getCurrentOrderRequest());
   }
 
   ngOnInit(): void {
