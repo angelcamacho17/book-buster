@@ -18,3 +18,7 @@ export * from './lib/models/article.model';
 export * from './lib/models/customer.model';
 export * from './lib/models/order.model';
 export * from './lib/models/order-article.model';
+
+/* Services exports */
+
+export * from './lib/order/order.service';

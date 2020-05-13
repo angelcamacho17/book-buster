@@ -431,9 +431,9 @@ export class ArticleService {
         "price": +"44.40"
       }];
     articles = new BehaviorSubject(this._articles);
-    
+
     constructor() { }
-    
+
     all(): Observable<Article[]> {
         return this.articles.asObservable();
     }
