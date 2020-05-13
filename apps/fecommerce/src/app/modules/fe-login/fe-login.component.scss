@@ -13,10 +13,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    justify-content: center;
 
     .logo {
       display: flex;
-      margin-top: 90px;
       width: fit-content;
     }
 
