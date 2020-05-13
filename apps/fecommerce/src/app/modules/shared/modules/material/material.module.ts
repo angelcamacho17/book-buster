@@ -10,7 +10,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatOptionModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialogModule } from '@angular/material/dialog'
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
@@ -26,7 +27,8 @@ import { MatDialogModule } from '@angular/material/dialog'
     MatOptionModule,
     MatAutocompleteModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressBarModule
   ],
   exports: [
     MatButtonModule,
@@ -39,7 +41,8 @@ import { MatDialogModule } from '@angular/material/dialog'
     MatOptionModule,
     MatAutocompleteModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressBarModule
   ]
 })
 export class MaterialModule { }

@@ -5,6 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
+    path: 'login',
+    loadChildren: () => import('./modules/fe-login/fe-login.module').then(m => m.FeLoginModule),
+    data: { animation: 'login' }
+  },
+  {
     path: 'home',
     loadChildren: () => import('./modules/fe-home/fe-home.module').then(m => m.FeHomeModule),
     data: { animation: 'home' }

@@ -1,0 +1,89 @@
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  padding: 36px 16px;
+  height: calc(100% - 72px) !important;
+  width: calc(100% - 32px) !important;
+  justify-content: space-between;
+
+  .top-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .logo {
+      display: flex;
+      margin-top: 90px;
+      width: fit-content;
+    }
+
+    .title {
+      display: flex;
+      color: rgba(0, 0, 0, 0.87);
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      @extend .title;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+
+  .fields {
+    display: flex;
+    flex-flow: column;
+
+    .mat-form-field {
+      display: inline-block;
+      position: relative;
+      text-align: left;
+      font-size: 14px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.1);
+      height: 50px;
+      padding: 8px;
+      margin: 8px 0;
+
+      .label {
+        color: rgba(0, 0, 0, 0.6);
+      }
+
+      .input {
+        color: rgba(0, 0, 0, 0.87);
+        font-family: 'Roboto';
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 0.15px;
+        line-height: 24px;
+      }
+
+    }
+
+    .login-btn {
+      background-color:#1666D8 !important;
+      color:#ffffff;
+
+    }
+
+    .disabled {
+      background-color: rgba(0, 0, 0, 0.2) !important;
+      color:rgba(0, 0, 0, 0.87);
+    }
+
+    .mat-form-field-label-wrapper {
+      top: -16px !important;
+      padding-top: 0.84375em;
+    }
+
+  }
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+
