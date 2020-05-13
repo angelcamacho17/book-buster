@@ -24,7 +24,7 @@ export class FeLoginComponent implements OnInit {
   ngOnInit() {
 
     this.hideCustomerKey = false;
-    let key;
+    const key = '';
     setTimeout(() => {
       this.displayTitle = true;
       setTimeout(() => {

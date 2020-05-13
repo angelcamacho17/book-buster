@@ -29,7 +29,7 @@
       </mat-error>
       <mat-form-field color="accent">
         <input matInput class="input mat-subheading-2"  [type]="hidePassword ? 'password' : 'text'" formControlName="password" (keyup)="cleanError($event)">
-        <mat-icon class="visibility-icon" matSuffix (mouseup)="showPassword()" (mousedown)="showPassword()">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-icon class="visibility-icon" matSuffix (click)="showPassword()">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
         <mat-label class="mat-caption label">Password</mat-label>
       </mat-form-field>
       <mat-error class="error mat-body-1" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
