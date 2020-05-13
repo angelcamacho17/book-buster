@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../models/order.model';
 import { Observable, BehaviorSubject, of, EMPTY } from 'rxjs';
+import { OrderArticle } from '../models/order-article.model';
 
 @Injectable({
   providedIn: 'root'
@@ -303,6 +304,12 @@ export class OrderService {
 
   }
 
+  replaceArticles(orderArticles: OrderArticle[]) {
+    this.currentOrder.articles = orderArticles;
+    this.setCurrentOrder(this.currentOrder);
+    return this.getCurrentOrder();
+  }
+
   public delete(orderId: number): Observable<Order[]> {
     const orders = [];
     for (let i = 0; i < this._orders.length; i++) {
@@ -317,6 +324,7 @@ export class OrderService {
     if (!this.currentOrder) {
       this.currentOrder = order;
     }
+    console.log("FEDERICO ", this.currentOrder)
     return of(null);
   }
 

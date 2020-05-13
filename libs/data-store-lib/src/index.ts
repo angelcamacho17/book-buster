@@ -10,9 +10,11 @@ export * from './lib/data-store.module';
 export * from './lib/customer/customer.actions';
 export * from './lib/order/order.actions';
 export * from './lib/article/article.actions'
+export * from './lib/order-articles/order-articles.actions';
 
 
 /*  Model exports  */
 export * from './lib/models/article.model';
 export * from './lib/models/customer.model';
 export * from './lib/models/order.model';
+export * from './lib/models/order-article.model';

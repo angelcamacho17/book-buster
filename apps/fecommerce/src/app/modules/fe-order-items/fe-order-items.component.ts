@@ -38,8 +38,8 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   public getTotal(): number {
     let total = 0;
 
-    for (const orderArt of this.order.articles) {
-      total = total + orderArt.article.price;
+    for (const orderArticle of this.order.articles) {
+      total = total + orderArticle.article.price;
     }
 
     return Math.round(total * 100) / 100;

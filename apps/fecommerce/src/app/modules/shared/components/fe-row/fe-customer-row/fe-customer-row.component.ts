@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, OnChanges, ComponentFactoryResolver, AfterContentInit, AfterViewChecked, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
-import { appendOrderRequest, Order, Customer, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
+import { Store } from '@ngrx/store';
+import { Order, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest, Customer } from '@fecommerce-workspace/data-store-lib';
 
 
 @Component({
@@ -61,23 +61,9 @@ export class FeCustomerRowComponent implements OnDestroy {
   public selectedCustomer(): void {
     const order: Order = {
       description: 'Latest order',
-      amount: 178,
-      createdBy: 'Robin Person',
-      articles: [{
-        article: {
-          id: 31,
-          name: "Tea - Honey Green Tea",
-          description: "Twin birth, mate liveborn, born in hospital, delivered without mention of cesarean section",
-          price: 61.15
-        }, quantity: 3
-      }, {
-        article: {
-          id: 32,
-          name: "Soup - Knorr, Chicken Noodle",
-          description: "Poisoning by erythromycin and other macrolides",
-          price: 51.80
-        }, quantity: 8
-      }],
+      amount: 0,
+      createdBy: 'Creator of the grid',
+      articles: [],
       customer: this.item
     }
 

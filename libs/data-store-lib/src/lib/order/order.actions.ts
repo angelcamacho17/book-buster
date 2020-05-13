@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Order } from '../models/order.model';
 import { Article } from '../models/article.model';
+import { OrderArticle } from '../models/order-article.model';
 
 // App Orders
 export const refreshOrdersRequest = createAction('[Order] Refresh Orders Request');
@@ -18,4 +19,4 @@ export const clearCurrentOrderRequest = createAction('[Current Order] Clear Curr
 export const getCurrentOrderRequest = createAction('[Current Order] Get Current Order Done');
 export const refreshOrderDone = createAction('[Current Order] Refresh Order Done', props<{ order: Order }>());
 export const refreshOrderSetted = createAction('[Current Order] Refresh Order Setted');
-export const appendArtsToOrdRequest = createAction('[Current Order] Edit Order', props<{ orderId: number, articles: Article[] }>());
+export const replaceArticlesOnCurrentOrder = createAction('[Current Order] Edit Order', props<{ orderArticles: OrderArticle[] }>());
