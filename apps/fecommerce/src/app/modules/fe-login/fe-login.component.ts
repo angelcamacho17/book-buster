@@ -1,9 +1,55 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { trigger, style, state, transition, animate } from '@angular/animations';
+import { KeyValueStoreService, HCSClient, ConfigService, LanguageService, AuthService, getLocales } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
   selector: 'fe-login',
+  animations: [
+    trigger('title', [
+      // ...
+      state('not-hide', style({
+        transform: 'translateY(0%)',
+        opacity: 1
+      })),
+      state('hide', style({
+        transform: 'translateY(-30%)',
+        opacity: 0
+      })),
+      transition('hide => not-hide', [
+        animate('0.4s')
+      ]),
+    ]),
+    trigger('content', [
+      // ...
+      state('not-hide', style({
+        transform: 'translateX(0%)',
+        opacity: 1
+      })),
+      state('hide', style({
+        transform: 'translateX(-30%)',
+        opacity: 0
+      })),
+      transition('hide => not-hide', [
+        animate('0.4s')
+      ]),
+    ]),
+    trigger('image', [
+      // ...
+      state('not-hide', style({
+        transform: 'translateX(0%)',
+        opacity: 1
+      })),
+      state('hide', style({
+        transform: 'translateX(30%)',
+        opacity: 0
+      })),
+      transition('hide => not-hide', [
+        animate('0.4s')
+      ]),
+    ]),
+  ],
   templateUrl: './fe-login.component.html',
   styleUrls: ['./fe-login.component.scss']
 })
@@ -19,12 +65,22 @@ export class FeLoginComponent implements OnInit {
   public displayImg = false;
   public layout: string;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _router: Router,
+              private _formBuilder: FormBuilder,
+              private _authService: AuthService,
+              private _store: KeyValueStoreService,
+              private _hcs: HCSClient,
+              private _lgs: LanguageService,
+              private _config: ConfigService) {
+    this._router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+}
 
   ngOnInit() {
 
     this.hideCustomerKey = false;
-    const key = '';
+    let key = '';
     setTimeout(() => {
       this.displayTitle = true;
       setTimeout(() => {
@@ -41,6 +97,14 @@ export class FeLoginComponent implements OnInit {
       password: ['', [Validators.required]]
     });
 
+    if (this._authService.getCustomerKey() !== '') {
+      key = this._authService.getCustomerKey();
+      // To hide customer key when it copmes from the url.
+      if (localStorage.getItem('HIDE_CUSTOMER_KEY') !== null) {
+        this.hideCustomerKey = true;
+      }
+    }
+
     // Set customer key value in the form.
     if (key !== undefined && key !== '') {
       this.loginForm.patchValue({
@@ -50,7 +114,21 @@ export class FeLoginComponent implements OnInit {
 
   }
 
-  public onSubmit(event) { }
+  public onSubmit(event) {
+    this.isSubmitted = true;
+    this._hcs.login(this.username, this.password, { customerKey: this.key }).subscribe(
+      (loginDetails) => {
+        localStorage.setItem('CUSTOMER_KEY', this.key);
+        this._lgs.resetLanguage(getLocales(this._store, this._config)).subscribe(() => {
+          this._router.navigate(['/home']).then(() => {
+            this.isSubmitted = false;
+          });
+        });
+      }, (err) => {
+        this.errorMessage = 'Your credentials are wrong, please check them.';
+        this.isSubmitted = false;
+      });
+  }
 
   cleanError(event): void {
     if (event.key !== 'Enter') {

@@ -1,0 +1,18 @@
+{
+  "NAME": "era-attboard-app",
+  "APPKEY": "ERAATTENDANCE",
+  "ENDPOINT": "https://hcsstaging.sdp.biz/api/proxy",
+  "REQUEST_TIMEOUT": 10000,
+  "LOGINURL": "/login",
+  "LOCALES": [
+      1034,
+      2057,
+      1036,
+      1043,
+      2067,
+      2060,
+      11274
+  ],
+  "DEFAULT_LOCALE": 2057,
+  "VERSION": "0.0.1"
+}
