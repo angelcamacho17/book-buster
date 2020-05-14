@@ -4,12 +4,11 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, Optional, LOCALE_ID } from '@angular/
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DataStoreModule, ConfigService, CustomerKeyResolver, SDPInitializer, SDP_INITIALIZER, SDP_PRIORITY_INITIALIZER, KeyValueStoreService, SDP_LOCALES, getLocales, LanguageService, MyHammerConfig, AuthTokenService, HCSClient, HcsModule, KeyvaluestoreModule, LanguageModule, TranslatePipeModule, FeAuthGuard, FeLoginGuard } from '@fecommerce-workspace/data-store-lib';
+import { DataStoreModule, ConfigService, CustomerKeyResolver, SDPInitializer, SDP_INITIALIZER, SDP_PRIORITY_INITIALIZER, KeyValueStoreService, SDP_LOCALES, getLocales, LanguageService, MyHammerConfig, AuthTokenService, HCSClient, HcsModule, KeyvaluestoreModule, LanguageModule, TranslatePipeModule, FeAuthGuard, FeLoginGuard, HCSLoad } from '@fecommerce-workspace/data-store-lib';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { FormsModule } from '@angular/forms';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { MaterialModule } from './modules/shared/modules/material/material.module';
-import { HCSLoad } from 'libs/data-store-lib/src/lib/sdp/hcs/hcs-client/hcs-load';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({

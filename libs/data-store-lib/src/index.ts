@@ -45,6 +45,8 @@ export * from './lib/sdp/translation/translation.service';
 
 export * from './lib/sdp/utils/locales/locales';
 
+export * from './lib/sdp/hcs/hcs-client/hcs-load';
+
 export * from './lib/resolvers/customer-key.resolver';
 
 export * from './lib/resolvers/customer-key.resolver';
