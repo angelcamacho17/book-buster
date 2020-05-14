@@ -62,7 +62,7 @@ export class AuthService {
   }
 
   public notificateLogout(message: string): void {
-    let msg = this._transServ.get('logoutInactive');
+    // const msg = this._transServ.get('logoutInactive');
     // if (message === 'Token not found') {
     //     msg = this._transServ.get('logoutUser');
     // }
