@@ -174,12 +174,6 @@ export class OrderService {
 
   }
 
-  replaceArticles(orderArticles: OrderArticle[]) {
-    this.currentOrder.articles = orderArticles;
-    this.setCurrentOrder(this.currentOrder);
-    return this.getCurrentOrder();
-  }
-
   public delete(orderId: number): Observable<Order[]> {
     const orders = [];
     for (let i = 0; i < this._orders.length; i++) {
@@ -194,7 +188,13 @@ export class OrderService {
     if (!this.currentOrder) {
       this.currentOrder = order;
     }
-    console.log("FEDERICO ", this.currentOrder)
+    return of(null);
+  }
+
+  public replaceCurrentOrder(order: Order): Observable<any> {
+    console.log("ORDER ORDER", order)
+    console.log("CURRENT ORDER", this.currentOrder)
+    this.currentOrder = order;
     return of(null);
   }
 

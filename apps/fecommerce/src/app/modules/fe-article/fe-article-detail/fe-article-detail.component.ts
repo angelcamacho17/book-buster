@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Article, Order, getArticleRequest, getCurrentOrderRequest, appendOrderArticleRequest, refreshOrderArticlesRequest, OrderArticle, replaceArticlesOnCurrentOrder } from '@fecommerce-workspace/data-store-lib';
+import { Article, Order, getArticleRequest, getCurrentOrderRequest, appendOrderArticleRequest, refreshOrderArticlesRequest, OrderArticle, replaceArticlesOnCurrentOrder, setCurrentOrderRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -16,8 +16,9 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
   private _article$: Observable<Article>;
   private _currentOrder$: Observable<Order>;
   private _orderArticles$: Observable<OrderArticle[]>
-  orderArticles: OrderArticle[];
   article: Article;
+  orderArticles: OrderArticle[];
+  currentOrder: Order;
   private _subs = new Subscription();
 
 
@@ -26,25 +27,26 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _router: Router
   ) {
-     this._article$ = this._store.pipe(select('article'));
-     this._subs = this._article$.subscribe(data => {
+    this._article$ = this._store.pipe(select('article'));
+    this._subs = this._article$.subscribe(data => {
       console.log(data)
       this.article = data;
     });
-    
+
     this._currentOrder$ = this._store.pipe(select('currentOrder'));
-    /* this._currentOrder$.subscribe(data => {
+    this._currentOrder$.subscribe(data => {
       console.log("current order data", data)
+      this.currentOrder = data;
     })
-    this._store.dispatch(getCurrentOrderRequest()) */
-    
+    this._store.dispatch(getCurrentOrderRequest())
+
     this._orderArticles$ = this._store.pipe(select('orderArticles'));
     this._orderArticles$.subscribe(data => {
       console.log("order articles updated.", data)
       this.orderArticles = data;
     })
   }
-  
+
   ngOnInit(): void {
     this.getArticle()
   }
@@ -75,11 +77,24 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
       article: this.article,
       quantity: this.amount
     }
+
     this._store.dispatch(appendOrderArticleRequest({ orderArticle }));
-    this._store.dispatch(refreshOrderArticlesRequest())
-    this._store.dispatch(getCurrentOrderRequest())
-    this._store.dispatch(replaceArticlesOnCurrentOrder({ orderArticles: this.orderArticles }));
+    this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
+    this._store.dispatch(getCurrentOrderRequest());
     this._router.navigate(['/article']);
+  }
+
+  updatedOrder(): Order {
+    console.log(this.orderArticles);
+    const order: Order = {
+      id: this.currentOrder.id,
+      description: this.currentOrder.description,
+      articles: this.orderArticles,
+      amount: this.currentOrder.amount,
+      customer: this.currentOrder.customer,
+      createdBy: this.currentOrder.createdBy
+    };
+    return order;
   }
 
   ngOnDestroy(): void {

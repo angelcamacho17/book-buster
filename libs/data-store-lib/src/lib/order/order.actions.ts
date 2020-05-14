@@ -15,8 +15,9 @@ export const cancelOrder = createAction('[Order] Cancel Order');
 
 // Current Order
 export const setCurrentOrderRequest = createAction('[Current Order] Set Current Order Done', props<{ order: Order }>());
+export const replaceCurrentOrderRequest = createAction('[Current Order] Replace Current Order Done', props<{ order: Order }>());
 export const clearCurrentOrderRequest = createAction('[Current Order] Clear Current Order Done');
 export const getCurrentOrderRequest = createAction('[Current Order] Get Current Order Done');
 export const refreshOrderDone = createAction('[Current Order] Refresh Order Done', props<{ order: Order }>());
 export const refreshOrderSetted = createAction('[Current Order] Refresh Order Setted');
-export const replaceArticlesOnCurrentOrder = createAction('[Current Order] Edit Order', props<{ orderArticles: OrderArticle[] }>());
+export const replaceArticlesOnCurrentOrder = createAction('[Current Order] Replace articles on Current Order', props<{ orderArticles: OrderArticle[] }>());

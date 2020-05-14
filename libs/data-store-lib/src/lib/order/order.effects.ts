@@ -2,7 +2,7 @@ import { OrderService } from './order.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { map, mergeMap, catchError } from 'rxjs/operators';
-import { refreshOrdersRequest, refreshOrdersDone, appendOrderRequest, replaceOrderRequest, deleteOrderRequest, refreshOrderDone, setCurrentOrderRequest, getCurrentOrderRequest, refreshOrderSetted, handleOrderRequest, clearCurrentOrderRequest, replaceArticlesOnCurrentOrder } from './order.actions';
+import { refreshOrdersRequest, refreshOrdersDone, appendOrderRequest, replaceOrderRequest, deleteOrderRequest, refreshOrderDone, setCurrentOrderRequest, getCurrentOrderRequest, refreshOrderSetted, handleOrderRequest, clearCurrentOrderRequest, replaceArticlesOnCurrentOrder, replaceCurrentOrderRequest } from './order.actions';
 import { EMPTY, of } from 'rxjs';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class OrderEffects {
     private actions$: Actions
   ) { }
 
-  replaceArticlesOnCurrentOrder$ = createEffect(() => this.actions$.pipe(
+  /* replaceArticlesOnCurrentOrder$ = createEffect(() => this.actions$.pipe(
     ofType(replaceArticlesOnCurrentOrder),
     mergeMap((action) => {
       return this.orderService.replaceArticles(action.orderArticles).pipe(
@@ -20,7 +20,7 @@ export class OrderEffects {
         catchError(() => EMPTY)
       );
     })
-  ));
+  )); */
 
   refreshOrders$ = createEffect(() => this.actions$.pipe(
     ofType(refreshOrdersRequest),
@@ -31,6 +31,18 @@ export class OrderEffects {
       );
     })
   ));
+
+  replaceCurrentOrder$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(replaceCurrentOrderRequest),
+      mergeMap((action) => {
+        return this.orderService.replaceCurrentOrder(action.order).pipe(
+          map(() => refreshOrderSetted()),
+          catchError(() => EMPTY)
+        )
+      })
+    )
+  })
 
   setCurrentOrder$ = createEffect((): any => this.actions$.pipe(
     ofType(setCurrentOrderRequest),
