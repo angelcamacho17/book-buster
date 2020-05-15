@@ -14,17 +14,18 @@ import { NONE_TYPE } from '@angular/compiler';
 export const routesAnimations =
   trigger('routeAnimations', [
     transition('login => home', slideToRight()),
-    transition('login => order', slideToLeft()),
-    transition('login => article', slideToLeft()),
-    transition('login => customer', slideToLeft()),
-    transition('login => orderitems', slideToLeft()),
-    transition('login => neworder', slideToLeft()),
+    transition('login => order', slideToRight()),
+    transition('login => article', slideToRight()),
+    transition('login => customer', slideToRight()),
+    transition('login => orderitems', slideToRight()),
+    transition('login => neworder', slideToRight()),
 
     transition('home => order', slideToRight()),
     transition('home => article', slideToRight()),
     transition('home => customer', slideToRight()),
     transition('home => orderitems', slideToRight()),
     transition('home => neworder', fromBottom()),
+    transition('home => login', slideToLeft()),
 
     transition('order => home', slideToLeft()),
     transition('order => neworder', slideToLeft()),
@@ -32,11 +33,13 @@ export const routesAnimations =
     transition('order => customer', slideToRight()),
     transition('order => orderitems', slideToRight()),
 
+
     transition('article => home', slideToLeft()),
     transition('article => neworder', slideToLeft()),
     transition('article => order', slideToRight()),
     transition('article => customer', slideToRight()),
     transition('article => orderitems', slideToRight()),
+
 
     transition('customer => home', slideToLeft()),
     transition('customer => neworder', slideToLeft()),
