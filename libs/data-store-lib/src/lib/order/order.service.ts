@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../models/order.model';
 import { Observable, BehaviorSubject, of, EMPTY } from 'rxjs';
+import { OrderArticle } from '../models/order-article.model';
 
 @Injectable({
   providedIn: 'root'
@@ -187,6 +188,13 @@ export class OrderService {
     if (!this.currentOrder) {
       this.currentOrder = order;
     }
+    return of(null);
+  }
+
+  public replaceCurrentOrder(order: Order): Observable<any> {
+    console.log("ORDER ORDER", order)
+    console.log("CURRENT ORDER", this.currentOrder)
+    this.currentOrder = order;
     return of(null);
   }
 

@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Order, getCurrentOrderRequest, clearCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
-import { Customer } from '@fecommerce-workspace/data-store-lib';
+import { Order, getCurrentOrderRequest, OrderArticle } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { FeDialogComponent } from '../shared/components/fe-dialog/fe-dialog.component';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'fe-order',
@@ -15,27 +15,36 @@ import { FeDialogComponent } from '../shared/components/fe-dialog/fe-dialog.comp
 })
 export class FeOrderComponent implements OnInit, OnDestroy {
 
-  public $order: Observable<Order>;
+  public order$: Observable<Order>;
   public order: Order;
+  public orderArticles$: Observable<OrderArticle[]>;
+  public orderArticle: OrderArticle[];
   private _subs: Subscription;
 
-  constructor(private _store: Store<{currentOrder: Order}>,
-              private _snackBar: MatSnackBar,
-              private _router: Router,
-              public dialog: MatDialog) {
-    this.$order = this._store.pipe(select('currentOrder'));
-    this._subs = this.$order.subscribe(data => {
+  constructor(
+    private _store: Store<{ currentOrder: Order, orderArticles: OrderArticle[] }>,
+    private _snackBar: MatSnackBar,
+    private _router: Router,
+    public dialog: MatDialog) {
+    // this.orderArticles$ = this._store.pipe(select('orderArticles'));
+    this.order$ = this._store.pipe(select('currentOrder'));
+    this._subs = this.order$.subscribe(data => {
       this.order = data;
-    })
-
+      console.log("Order has changed", data)
+    });
     this._store.dispatch(getCurrentOrderRequest());
+
+    // this._subs = this.orderArticles$.subscribe(data => {
+    //   this.orderArticle = data;
+    // })
+
   }
 
   ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
-    if(this._subs) {
+    if (this._subs) {
       this._subs.unsubscribe();
     }
   }
@@ -43,9 +52,9 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   public orderConfirmed(): void {
     this._router.navigate(['/home']);
     const msg = 'Order succesfully confirmed';
-      this._snackBar.open(msg, '', {
-        duration: 1000,
-      });
+    this._snackBar.open(msg, '', {
+      duration: 1000,
+    });
   }
 
   public changeCustomer(): void {
@@ -61,7 +70,12 @@ export class FeOrderComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(data => {
-      if(data.result === 'SWITCH') {
+      if (isUndefined(data)) {
+        // Is undefined when the user closes 
+        // the dialog without an action
+        return;
+      }
+      if (data?.result === 'SWITCH') {
         this._router.navigate(['/neworder']);
       }
     });
