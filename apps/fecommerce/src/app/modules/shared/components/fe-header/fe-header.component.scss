@@ -21,6 +21,11 @@
     //margin-right: 25%;
   }
 
+  .logout {
+    @extend .close-icon;
+    z-index: 4;
+  }
+
   .title-centered {
     width: calc(100% - 64px);
     text-align: center;

@@ -1,14 +1,14 @@
 <div class="container">
   <div class="top-content">
-    <img src="assets/img/commerce-logo.png" alt="" class="logo">
-    <div class="title mat-display-1">
+    <img [@image]="displayImg ? 'not-hide' : 'hide'" src="assets/img/commerce-logo.png" alt="" class="logo">
+    <div [@title]="displayTitle ? 'not-hide' : 'hide'" class="title mat-display-1">
       Welcome
     </div>
-    <div class="subtitle mat-headline">
+    <div [@title]="displayTitle ? 'not-hide' : 'hide'" class="subtitle mat-headline">
       Sign in to Commerce
     </div>
   </div>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)" disabled="isSubmitted"
+  <form [@content]="displayContent ? 'not-hide' : 'hide'" [formGroup]="loginForm" (ngSubmit)="onSubmit($event)" disabled="isSubmitted"
         style="width: 100%;">
 
     <div class="fields" >
@@ -45,7 +45,7 @@
               <mat-progress-bar
                 [style.display]="isSubmitted ? 'block' : 'none'"
                 mode="indeterminate"
-                style="position: absolute; left: 0; bottom: 0px;">
+                style="position: absolute; left: 0;">
               </mat-progress-bar>
         </button>
     </div>

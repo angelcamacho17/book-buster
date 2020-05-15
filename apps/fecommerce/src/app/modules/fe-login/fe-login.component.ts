@@ -82,11 +82,11 @@ export class FeLoginComponent implements OnInit {
     this.hideCustomerKey = false;
     let key = '';
     setTimeout(() => {
-      this.displayTitle = true;
+      this.displayImg = true;
       setTimeout(() => {
-        this.displayContent = true;
+        this.displayTitle = true;
         setTimeout(() => {
-          this.displayImg = true;
+          this.displayContent = true;
         }, 400);
       }, 400);
     }, 200);

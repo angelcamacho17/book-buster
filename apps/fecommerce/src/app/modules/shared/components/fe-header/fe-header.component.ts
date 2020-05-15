@@ -3,6 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
 import { RouterReducerState } from '@ngrx/router-store';
+import { AuthService } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
   selector: 'fe-header',
@@ -15,17 +16,22 @@ export class FeHeaderComponent implements OnInit{
   @Input() title = '';
   @Input() class = '';
   @Input() style = '';
+  @Input() logoutIcon = false;
   @Input() icon = 'close';
 
-  constructor(private _storeRouter: Store<{router: RouterReducerState}>,
-              private _location: Location) {
+  constructor(private _location: Location,
+              private _auth: AuthService) {
   }
 
   ngOnInit(): void {
   }
 
-  goLastVisited(): void {
+  public goLastVisited(): void {
     this._location.back();
+  }
+
+  public logout(): void {
+    this._auth.logout();
   }
 
   // ngOnChanges(value: any) {
