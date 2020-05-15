@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Order, getCurrentOrderRequest, OrderArticle } from '@fecommerce-workspace/data-store-lib';
+import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -50,6 +50,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   }
 
   public orderConfirmed(): void {
+    this._store.dispatch(appendOrderRequest({ order: this.order }));
     this._router.navigate(['/home']);
     const msg = 'Order succesfully confirmed';
     this._snackBar.open(msg, '', {
