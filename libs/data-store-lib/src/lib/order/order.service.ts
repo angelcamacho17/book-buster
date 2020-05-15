@@ -140,7 +140,7 @@ export class OrderService {
   }
 
   public append(order: Order): Observable<Order[]> {
-    const lastOrderId = this._orders[this._orders.length - 1].id;
+    const lastOrderId = this._orders[this._orders.length - 1]?.id ?? 0;
     order = { ...order, ...{ id: lastOrderId + 1 } };
     order.amount = this.calculateTotal(order);
     this._orders = this._orders.concat(order);

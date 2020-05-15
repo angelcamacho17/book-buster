@@ -11,13 +11,16 @@ import { getLocales } from '../sdp/utils/locales/locales';
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(private _key: KeyValueStoreService,
-              private _hcs: HCSClient,
-              private _lgs: LanguageService,
-              private _config: ConfigService,
-              private _rt: Router,
-              private _transServ: TranslationService) { }
+  public loggedInUser = 'loggedInUser';
+  
+  constructor(
+    private _key: KeyValueStoreService,
+    private _hcs: HCSClient,
+    private _lgs: LanguageService,
+    private _config: ConfigService,
+    private _rt: Router,
+    private _transServ: TranslationService
+  ) { }
 
   // public login( userInfo: User ): boolean {
   //   if ( userInfo.key === 'sdp'
@@ -47,8 +50,8 @@ export class AuthService {
     this._key.clearData();
   }
 
-  public setCustomerKey( key: string): void {
-    if ( key !== undefined ) {
+  public setCustomerKey(key: string): void {
+    if (key !== undefined) {
       localStorage.setItem('CUSTOMER_KEY', key);
     }
   }

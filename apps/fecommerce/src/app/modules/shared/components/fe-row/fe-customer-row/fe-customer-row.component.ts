@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Order, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest, Customer } from '@fecommerce-workspace/data-store-lib';
+import { Order, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest, Customer, AuthService } from '@fecommerce-workspace/data-store-lib';
 
 
 @Component({
@@ -17,8 +17,11 @@ export class FeCustomerRowComponent implements OnDestroy {
   public initials = '';
   private _subs: Subscription;
 
-  constructor(private router: Router,
-    private _store: Store<{ currentOrder: Order }>) {
+  constructor(
+    private router: Router,
+    private _store: Store<{ currentOrder: Order }>,
+    private authService: AuthService
+    ) {
 
     if (this.item) {
       this.smaller = this.reduceLetterSize();
@@ -62,14 +65,12 @@ export class FeCustomerRowComponent implements OnDestroy {
     const order: Order = {
       description: 'Latest order',
       amount: 0,
-      createdBy: 'Creator of the grid',
+      createdBy: this.authService.loggedInUser,
       articles: [],
       customer: this.item
     }
 
-    this._store.dispatch(handleOrderRequest({ order }));
     this._store.dispatch(setCurrentOrderRequest({ order }));
-    this._store.dispatch(refreshOrdersRequest())
     setTimeout(() => {
       this.router.navigate(['/article']);
     }, 100);
