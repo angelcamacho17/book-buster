@@ -39,7 +39,10 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public getTotal(): number {
-
+    if (this.order == null) {
+      return 0;
+    }
+    
     let total = 0;
     for (const orderArticle of this.order.articles) {
       total = total + orderArticle.article.price;
