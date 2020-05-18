@@ -19,7 +19,8 @@ export class FeArticleRowComponent implements OnInit {
   }
 
   openArticleDetail(item) {
-    console.log(item)
-    this._router.navigate(['/article/detail', item.id]);
+    setTimeout(()=> {
+      this._router.navigate(['/article/detail', item.id]);
+    },100)
   }
 }

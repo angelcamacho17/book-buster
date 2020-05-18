@@ -1,3 +1,12 @@
+@media screen and (max-height: 403px){
+  .search-container {
+    display: none;
+  }
+  .no-data {
+    display: none;
+  }
+}
+
 .search-container {
   position: absolute;
   padding: 0 !important;
@@ -19,6 +28,7 @@
     width: -webkit-fill-available;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
+    padding-bottom: 46px;
 
   }
 
@@ -137,7 +147,6 @@
   z-index: 0;
   display: flex;
   max-width: 100%;
-  max-height: 100%;
   width: auto !important;
   left: 16px !important;
   margin-top: 11px !important;
