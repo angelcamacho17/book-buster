@@ -16,7 +16,7 @@ export class FeHomeComponent implements OnInit, OnDestroy {
   public orders$: Observable<Order[]>;
   public orders: Order[];
   public display = false;
-  private _subs: Subscription;
+  private _subscriptions = new Subscription();
 
   constructor(
     private _store: Store,
@@ -25,12 +25,12 @@ export class FeHomeComponent implements OnInit, OnDestroy {
     private _orderService: OrderService
   ) {
     this.orders$ = this._storeOrders.pipe(select('orders'));
-    this._subs = this.orders$.subscribe(data => {
+    this._subscriptions.add(this.orders$.subscribe(data => {
       if (data.length) {
         data = data.slice().sort((a, b) => b.id - a.id)
       }
       this.orders = data;
-    })
+    }));
     this._store.dispatch(clearCurrentOrderRequest());
     this._storeOrders.dispatch(refreshOrdersRequest())
   }
@@ -47,8 +47,8 @@ export class FeHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this._subs) {
-      this._subs.unsubscribe();
+    if(this._subscriptions) {
+      this._subscriptions.unsubscribe();
     }
   }
 }

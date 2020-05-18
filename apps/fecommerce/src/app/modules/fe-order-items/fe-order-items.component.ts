@@ -13,17 +13,17 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
   public $order: Observable<Order>;
   public order: Order;
-  private _subs: Subscription;
+  private _subscriptions = new Subscription();
   public totalAmount = 0;
 
   constructor(
     private _store: Store<{ currentOrder: Order }>,
     private _router: Router) {
     this.$order = this._store.pipe(select('currentOrder'));
-    this._subs = this.$order.subscribe(data => {
+    this._subscriptions.add(this.$order.subscribe(data => {
       this.order = data;
       this.totalAmount = this.getTotal();
-    })
+    }));
 
     this._store.dispatch(getCurrentOrderRequest());
   }
@@ -33,8 +33,8 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._subs) {
-      this._subs.unsubscribe();
+    if (this._subscriptions) {
+      this._subscriptions.unsubscribe();
     }
   }
 

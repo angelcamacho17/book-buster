@@ -17,13 +17,14 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public $customers: Observable<Customer[]>;
   public customers: Customer[];
   public rowType = FeCustomerRowComponent;
-  private _subs: Subscription;
+  private _subscriptions = new Subscription();
 
-  constructor(private _store: Store<{customers: Customer[]}>) {
+  constructor(
+    private _store: Store<{ customers: Customer[] }>) {
     this.$customers = this._store.pipe(select('customers'));
-    this._subs = this.$customers.subscribe(data => {
+    this._subscriptions.add(this.$customers.subscribe(data => {
       this.customers = data;
-    });
+    }));
 
     this._store.dispatch(refreshCustomersRequest());
   }
@@ -53,8 +54,8 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this._subs) {
-      this._subs.unsubscribe();
+    if (this._subscriptions) {
+      this._subscriptions.unsubscribe();
     }
   }
 
