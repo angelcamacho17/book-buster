@@ -10,31 +10,31 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./modules/fe-login/fe-login.module').then(m => m.FeLoginModule),
     data: { animation: 'login' },
-    canActivate: [FeLoginGuard]
+    //canActivate: [FeLoginGuard]
   },
   {
     path: 'home',
     loadChildren: () => import('./modules/fe-home/fe-home.module').then(m => m.FeHomeModule),
     data: { animation: 'home' },
-    canActivate: [FeAuthGuard]
+    //canActivate: [FeAuthGuard]
   },
   {
     path: 'customer',
     loadChildren: () => import('./modules/fe-customer/fe-customer.module').then(m => m.FeCustomerModule),
     data: { animation: 'customer' },
-    canActivate: [FeAuthGuard]
+    //canActivate: [FeAuthGuard]
   },
   {
     path: 'article',
     loadChildren: () => import('./modules/fe-article/fe-article.module').then(m => m.FeArticleModule),
     data: { animation: 'article' },
-    canActivate: [FeAuthGuard]
+    //canActivate: [FeAuthGuard]
   },
   {
     path: 'order',
     loadChildren: () => import('./modules/fe-order/fe-order.module').then(m => m.FeOrderModule),
     data: { animation: 'order' },
-    canActivate: [FeAuthGuard]
+    //canActivate: [FeAuthGuard]
   },
   {
     path: 'neworder',
@@ -46,7 +46,7 @@ const routes: Routes = [
     path: 'orderitems',
     loadChildren: () => import('./modules/fe-order-items/fe-order-items.module').then(m => m.FeOrderItemsModule),
     data: { animation: 'orderitems' },
-    canActivate: [FeAuthGuard]
+    //canActivate: [FeAuthGuard]
   },
   {
     path: ':customerKey',

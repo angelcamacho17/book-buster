@@ -92,7 +92,7 @@ export class FeLoginComponent implements OnInit {
     }, 200);
 
     this.loginForm = this._formBuilder.group({
-      key: ['', [Validators.required]],
+      //key: ['', [Validators.required]],
       user: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
@@ -116,6 +116,13 @@ export class FeLoginComponent implements OnInit {
 
   public onSubmit(event) {
     this.isSubmitted = true;
+
+    setTimeout(()=> {
+      this._router.navigate(['/home']).then(() => {
+        this.isSubmitted = false;
+      });
+    },2000)
+    return;
     this._hcs.login(this.username, this.password, { customerKey: this.key }).subscribe(
       (loginDetails) => {
         localStorage.setItem('CUSTOMER_KEY', this.key);

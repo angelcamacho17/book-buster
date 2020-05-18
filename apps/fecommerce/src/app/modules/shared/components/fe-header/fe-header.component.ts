@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
 import { RouterReducerState } from '@ngrx/router-store';
 import { AuthService } from '@fecommerce-workspace/data-store-lib';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'fe-header',
@@ -20,7 +21,8 @@ export class FeHeaderComponent implements OnInit{
   @Input() icon = 'close';
 
   constructor(private _location: Location,
-              private _auth: AuthService) {
+              private _auth: AuthService,
+              private _router: Router) {
   }
 
   ngOnInit(): void {
@@ -31,7 +33,8 @@ export class FeHeaderComponent implements OnInit{
   }
 
   public logout(): void {
-    this._auth.logout();
+    this._router.navigate(['/login']);
+    //this._auth.logout();
   }
 
   // ngOnChanges(value: any) {
