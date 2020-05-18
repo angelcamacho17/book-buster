@@ -1,7 +1,7 @@
 .container {
     position: relative;
-    top: -64px;
-    padding-top: 0 !important;
+    top: 114px;
+    z-index: 0;
 
     .card {
         .content {
@@ -51,7 +51,7 @@
                 .amount {
                     color: rgba(0, 0, 0, 0.87);
                 }
-                
+
                 .icon {
                     color: rgba(0, 0, 0, 0.54);
                 }

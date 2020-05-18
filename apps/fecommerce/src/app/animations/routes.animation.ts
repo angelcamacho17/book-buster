@@ -39,7 +39,9 @@ export const routesAnimations =
     transition('article => order', slideToRight()),
     transition('article => customer', slideToRight()),
     transition('article => orderitems', slideToRight()),
+    transition('article => articledetail', slideToRight()),
 
+    transition('articledetail => article', slideToLeft()),
 
     transition('customer => home', slideToLeft()),
     transition('customer => neworder', slideToLeft()),

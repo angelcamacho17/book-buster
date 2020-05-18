@@ -29,6 +29,7 @@ export class FeHeaderComponent implements OnInit{
   }
 
   public goLastVisited(): void {
+    console.log('back')
     this._location.back();
   }
 
