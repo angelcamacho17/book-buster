@@ -40,7 +40,7 @@ const routes: Routes = [
     path: 'neworder',
     loadChildren: () => import('./modules/fe-new-order/fe-new-order.module').then(m => m.FeNewOrderModule),
     data: { animation: 'neworder' },
-    canActivate: [FeAuthGuard]
+    //canActivate: [FeAuthGuard]
   },
   {
     path: 'orderitems',
