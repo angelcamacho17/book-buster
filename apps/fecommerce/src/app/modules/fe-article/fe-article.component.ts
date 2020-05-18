@@ -17,15 +17,15 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   private _articles$: Observable<Article[]>;
   // private _currentOrder$: Observable<Order>;
   // public currentOrder: Order;
-  private _subs: Subscription;
+  private _subscriptions = new Subscription();
 
   constructor(private _store: Store<{ articles: Article[], currentOrder: Order }>,
     private _router: Router) {
     this._articles$ = this._store.pipe(select('articles'));
 
-    this._subs = this._articles$.subscribe(data => {
+    this._subscriptions.add(this._articles$.subscribe(data => {
       this.articles = data;
-    });
+    }));
     this._store.dispatch(refreshArticlesRequest());
   }
 
@@ -33,8 +33,8 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._subs) {
-      this._subs.unsubscribe();
+    if (this._subscriptions) {
+      this._subscriptions.unsubscribe();
     }
   }
 

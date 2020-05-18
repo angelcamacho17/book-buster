@@ -15,7 +15,7 @@ export class FeCustomerRowComponent implements OnDestroy {
   @Input() item: any;
   public smaller: Observable<boolean>;
   public initials = '';
-  private _subs: Subscription;
+  private _subscriptions = new Subscription();
 
   constructor(
     private router: Router,
@@ -78,8 +78,8 @@ export class FeCustomerRowComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._subs) {
-      this._subs.unsubscribe();
+    if (this._subscriptions) {
+      this._subscriptions.unsubscribe();
     }
   }
 

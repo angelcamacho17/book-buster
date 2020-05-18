@@ -19,24 +19,24 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   public order: Order;
   public orderArticles$: Observable<OrderArticle[]>;
   public orderArticle: OrderArticle[];
-  private _subs: Subscription;
+  private _subscriptions = new Subscription();
 
   constructor(
     private _store: Store<{ currentOrder: Order, orderArticles: OrderArticle[] }>,
     private _snackBar: MatSnackBar,
     private _router: Router,
-    public dialog: MatDialog) {
+    public dialog: MatDialog
+  ) {
     // this.orderArticles$ = this._store.pipe(select('orderArticles'));
     this.order$ = this._store.pipe(select('currentOrder'));
-    this._subs = this.order$.subscribe(data => {
+    this._subscriptions.add(this.order$.subscribe(data => {
       this.order = data;
-      console.log("Order has changed", data)
-    });
+    }));
     this._store.dispatch(getCurrentOrderRequest());
 
-    // this._subs = this.orderArticles$.subscribe(data => {
+    // this._subs.add(this.orderArticles$.subscribe(data => {
     //   this.orderArticle = data;
-    // })
+    // }))
 
   }
 
@@ -44,8 +44,8 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._subs) {
-      this._subs.unsubscribe();
+    if (this._subscriptions) {
+      this._subscriptions.unsubscribe();
     }
   }
 
