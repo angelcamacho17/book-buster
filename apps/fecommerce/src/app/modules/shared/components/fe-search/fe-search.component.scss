@@ -138,6 +138,8 @@
 ::ng-deep .mat-autocomplete-panel {
   border-bottom-left-radius: 8px !important;
   border-bottom-right-radius: 8px !important;
+  max-height: 256px;
+  height: fit-content !important;
 }
 
 ::ng-deep .cdk-overlay-pane {
@@ -151,6 +153,7 @@
   left: 16px !important;
   margin-top: 11px !important;
   right: 16px !important;
+  height: 0px;
 }
 
 ::ng-deep .mat-autocomplete-panel:not([class*=mat-elevation-z]) {

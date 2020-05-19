@@ -8,6 +8,8 @@
   height: calc(100% - 72px) !important;
   width: calc(100% - 32px) !important;
   justify-content: space-between;
+  top: 0px;
+  z-index: 0;
 
   .top-content {
     display: flex;
