@@ -50,12 +50,15 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   }
 
   public orderConfirmed(): void {
-    this._store.dispatch(appendOrderRequest({ order: this.order }));
+    if (isUndefined(this.order?.id) || this.order?.id == null) {
+      this._store.dispatch(appendOrderRequest({ order: this.order }));
+      const msg = 'Order succesfully confirmed';
+      this._snackBar.open(msg, '', {
+        duration: 1000,
+      });
+    }
+
     this._router.navigate(['/home']);
-    const msg = 'Order succesfully confirmed';
-    this._snackBar.open(msg, '', {
-      duration: 1000,
-    });
   }
 
   public changeCustomer(): void {
