@@ -1,12 +1,35 @@
 .gradient-background {
-  height: 178px;
-  width: 100%;
-  background: linear-gradient(270deg, #1F51D2 0%, #1946B9 100%);
+  // height: 178px;
+  // width: 100%;
+  // background: linear-gradient(270deg, #1F51D2 0%, #1946B9 100%);
+  // color: #ffffff;
+  // padding-left: 16px;
+  // display: flex;
+  // position: relative;
+  // overflow: hidden;
   color: #ffffff;
-  padding-left: 16px;
-  display: flex;
-  position: relative;
+  height: 178px !important;
   overflow: hidden;
+  position: fixed;
+  background-repeat: no-repeat;
+  background-size:
+      240px 240px,
+      253px 253px,
+      169px 169px,
+      188px 188px,
+      cover;
+  background-image:
+      url('~/assets/img/blurry-circle-3.svg'),
+      url('~/assets/img/blurry-circle-3.svg'),
+      url('~/assets/img/blurry-circle-3.svg'),
+      url('~/assets/img/blurry-circle-3.svg'),
+      linear-gradient(270deg, #1F51D2 0%, #1946B9 100%);
+  background-position:
+      -80px -124px,
+      100px -170px,
+      318px 56px,
+      268px 104px,
+      0 0;
 
   .close-icon {
     color: rgba(255, 255, 255, 0.6);
@@ -18,7 +41,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 100001;
     //margin-right: 25%;
+  }
+
+  .logout {
+    @extend .close-icon;
+    z-index: 4;
   }
 
   .title-centered {

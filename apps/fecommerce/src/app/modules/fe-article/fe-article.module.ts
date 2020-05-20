@@ -22,12 +22,14 @@ import { FeArticleDetailComponent } from './fe-article-detail/fe-article-detail.
       },
       {
         path: 'detail/:id',
-        component: FeArticleDetailComponent
+        component: FeArticleDetailComponent,
+        data: { animation: 'articledetail' },
+
       }
     ]),
     MaterialModule,
     SharedModule
-    
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

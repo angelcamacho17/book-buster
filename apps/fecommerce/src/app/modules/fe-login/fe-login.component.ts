@@ -82,17 +82,17 @@ export class FeLoginComponent implements OnInit {
     this.hideCustomerKey = false;
     let key = '';
     setTimeout(() => {
-      this.displayTitle = true;
+      this.displayImg = true;
       setTimeout(() => {
-        this.displayContent = true;
+        this.displayTitle = true;
         setTimeout(() => {
-          this.displayImg = true;
+          this.displayContent = true;
         }, 400);
       }, 400);
     }, 200);
 
     this.loginForm = this._formBuilder.group({
-      key: ['', [Validators.required]],
+      //key: ['', [Validators.required]],
       user: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
@@ -116,6 +116,13 @@ export class FeLoginComponent implements OnInit {
 
   public onSubmit(event) {
     this.isSubmitted = true;
+
+    setTimeout(()=> {
+      this._router.navigate(['/home']).then(() => {
+        this.isSubmitted = false;
+      });
+    },2000)
+    return;
     this._hcs.login(this.username, this.password, { customerKey: this.key }).subscribe(
       (loginDetails) => {
         localStorage.setItem('CUSTOMER_KEY', this.key);

@@ -14,17 +14,18 @@ import { NONE_TYPE } from '@angular/compiler';
 export const routesAnimations =
   trigger('routeAnimations', [
     transition('login => home', slideToRight()),
-    transition('login => order', slideToLeft()),
-    transition('login => article', slideToLeft()),
-    transition('login => customer', slideToLeft()),
-    transition('login => orderitems', slideToLeft()),
-    transition('login => neworder', slideToLeft()),
+    transition('login => order', slideToRight()),
+    transition('login => article', slideToRight()),
+    transition('login => customer', slideToRight()),
+    transition('login => orderitems', slideToRight()),
+    transition('login => neworder', slideToRight()),
 
     transition('home => order', slideToRight()),
     transition('home => article', slideToRight()),
     transition('home => customer', slideToRight()),
     transition('home => orderitems', slideToRight()),
     transition('home => neworder', fromBottom()),
+    transition('home => login', slideToLeft()),
 
     transition('order => home', slideToLeft()),
     transition('order => neworder', slideToLeft()),
@@ -32,11 +33,15 @@ export const routesAnimations =
     transition('order => customer', slideToRight()),
     transition('order => orderitems', slideToRight()),
 
+
     transition('article => home', slideToLeft()),
     transition('article => neworder', slideToLeft()),
     transition('article => order', slideToRight()),
     transition('article => customer', slideToRight()),
     transition('article => orderitems', slideToRight()),
+    transition('article => articledetail', slideToRight()),
+
+    transition('articledetail => article', slideToLeft()),
 
     transition('customer => home', slideToLeft()),
     transition('customer => neworder', slideToLeft()),
@@ -77,14 +82,14 @@ function slideToRight() {
     ]),
     group([
       query(':leave', [
-        animate('600ms ease', style({
+        animate('1150ms ease', style({
           right: '0%',
           'z-index': 0,
 
         }))
       ], optional),
       query(':enter', [
-        animate('600ms ease', style({
+        animate('1150ms ease', style({
           right: '0%',
           'z-index': 10000,
 
@@ -121,13 +126,13 @@ function slideToLeft() {
     ]),
     group([
       query(':leave', [
-        animate('600ms ease',
+        animate('1150ms ease',
         style({
           left: '100%'
       }))
       ], optional),
       query(':enter', [
-        animate('600ms ease', style({
+        animate('1150ms ease', style({
           left: '0%'
         }))
       ])
@@ -160,14 +165,14 @@ function fromBottom() {
     ]),
     group([
       query(':leave', [
-        animate('600ms ease',
+        animate('1150ms ease',
         style({
           'z-index': 0,
 
       }))
       ], optional),
       query(':enter', [
-        animate('600ms ease', style({
+        animate('1150ms ease', style({
           top: '0%',
           'z-index': 10000,
 
@@ -204,14 +209,14 @@ function fromTop() {
     ]),
     group([
       query(':leave', [
-        animate('600ms ease',
+        animate('1150ms ease',
         style({
           top: '100%',
           'z-index': 10000
       }))
       ], optional),
       query(':enter', [
-        animate('600ms ease', style({
+        animate('1150ms ease', style({
           top: 0,
           'z-index': 0,
         }))
