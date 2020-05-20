@@ -82,14 +82,14 @@ function slideToRight() {
     ]),
     group([
       query(':leave', [
-        animate('1300ms ease', style({
+        animate('1150ms ease', style({
           right: '0%',
           'z-index': 0,
 
         }))
       ], optional),
       query(':enter', [
-        animate('1300ms ease', style({
+        animate('1150ms ease', style({
           right: '0%',
           'z-index': 10000,
 
@@ -126,13 +126,13 @@ function slideToLeft() {
     ]),
     group([
       query(':leave', [
-        animate('1300ms ease',
+        animate('1150ms ease',
         style({
           left: '100%'
       }))
       ], optional),
       query(':enter', [
-        animate('1300ms ease', style({
+        animate('1150ms ease', style({
           left: '0%'
         }))
       ])
@@ -165,14 +165,14 @@ function fromBottom() {
     ]),
     group([
       query(':leave', [
-        animate('1300ms ease',
+        animate('1150ms ease',
         style({
           'z-index': 0,
 
       }))
       ], optional),
       query(':enter', [
-        animate('1300ms ease', style({
+        animate('1150ms ease', style({
           top: '0%',
           'z-index': 10000,
 
@@ -209,14 +209,14 @@ function fromTop() {
     ]),
     group([
       query(':leave', [
-        animate('1300ms ease',
+        animate('1150ms ease',
         style({
           top: '100%',
           'z-index': 10000
       }))
       ], optional),
       query(':enter', [
-        animate('1300ms ease', style({
+        animate('1150ms ease', style({
           top: 0,
           'z-index': 0,
         }))
