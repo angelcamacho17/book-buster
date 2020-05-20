@@ -33,8 +33,6 @@ export class CustomerEffects{
   replaceCustomer$ = createEffect(():any => this.actions$.pipe(
     ofType(replaceCustomerRequest),
     mergeMap((action) => {
-      console.log('replace effect');
-      console.log(action.customer);
       return this.customerService.replace(action.customer).pipe(
         map(() => refreshCustomersRequest()),
         catchError(() => EMPTY)

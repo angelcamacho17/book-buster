@@ -11,7 +11,6 @@ import { getLocales } from '../sdp/utils/locales/locales';
   providedIn: 'root'
 })
 export class AuthService {
-  public loggedInUser = 'loggedInUser';
   
   constructor(
     private _key: KeyValueStoreService,

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
@@ -9,22 +9,28 @@ import { RouterReducerState } from '@ngrx/router-store';
   templateUrl: './fe-header.component.html',
   styleUrls: ['./fe-header.component.scss']
 })
-export class FeHeaderComponent implements OnInit{
+export class FeHeaderComponent implements OnInit {
 
   $header: Observable<string>;
   @Input() title = '';
   @Input() class = '';
   @Input() style = '';
   @Input() icon = 'close';
+  @Input() needsConfirm = false;
+  @Output() goBack = new EventEmitter<boolean>();
 
-  constructor(private _storeRouter: Store<{router: RouterReducerState}>,
-              private _location: Location) {
-  }
+  constructor(
+    private _storeRouter: Store<{ router: RouterReducerState }>,
+    private _location: Location
+  ) { }
 
   ngOnInit(): void {
   }
 
   goLastVisited(): void {
+    if (this.needsConfirm) {
+      return this.goBack.emit(true);
+    }
     this._location.back();
   }
 
@@ -34,5 +40,4 @@ export class FeHeaderComponent implements OnInit{
   //     console.log(this.style);
   //   }
   // }
-
 }

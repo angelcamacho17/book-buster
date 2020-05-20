@@ -20,7 +20,6 @@ export class FeCustomerRowComponent implements OnDestroy {
   constructor(
     private router: Router,
     private _store: Store<{ currentOrder: Order }>,
-    private authService: AuthService
     ) {
 
     if (this.item) {
@@ -65,7 +64,7 @@ export class FeCustomerRowComponent implements OnDestroy {
     const order: Order = {
       description: 'Latest order',
       amount: 0,
-      createdBy: this.authService.loggedInUser,
+      createdBy: 'loggedInUser',
       articles: [],
       customer: this.item
     }

@@ -34,7 +34,6 @@ export class FeSearchComponent implements OnInit {
             if (this.small) {
               this.expandBorder = !this.showInitial;
             }
-            console.log(this._filteredResult.length === 0);
             return this._filteredResult;
           } else {
            return this.list.slice();

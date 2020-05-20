@@ -185,15 +185,11 @@ export class OrderService {
   }
 
   public setCurrentOrder(order: Order): Observable<any> {
-    if (!this.currentOrder) {
-      this.currentOrder = order;
-    }
+    this.currentOrder = order;
     return of(null);
   }
 
   public replaceCurrentOrder(order: Order): Observable<any> {
-    console.log("ORDER ORDER", order)
-    console.log("CURRENT ORDER", this.currentOrder)
     this.currentOrder = order;
     return of(null);
   }

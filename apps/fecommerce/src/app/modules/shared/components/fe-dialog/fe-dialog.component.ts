@@ -28,7 +28,6 @@ export class FeDialogComponent implements OnInit {
     this.dialogRef.close({result});
   }
 
-
   ngOnInit(): void {
   }
 

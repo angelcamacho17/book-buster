@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class FeBottomNavComponent implements OnInit {
 
   constructor() {
-    console.log('bottom');
   }
 
   ngOnInit(): void {

@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Customer, Order, appendOrderRequest, setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 import { FeCustomerRowComponent } from '../shared/components/fe-row/fe-customer-row/fe-customer-row.component';
-import { Route } from '@angular/compiler/src/core';
-import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { FeConfirmDiscardDialogComponent } from '../shared/components/fe-confirm-discard/fe-confirm-discard-dialog.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'fe-new-order',
@@ -14,22 +15,69 @@ import { Router } from '@angular/router';
 })
 export class FeNewOrderComponent implements OnInit, OnDestroy {
 
-  public $customers: Observable<Customer[]>;
+  public customers$: Observable<Customer[]>;
   public customers: Customer[];
+  public orders: Order[];
+  public currentOrder$: Observable<Order>;
+  public currentOrder: Order;
   public rowType = FeCustomerRowComponent;
   private _subscriptions = new Subscription();
 
   constructor(
-    private _store: Store<{ customers: Customer[] }>) {
-    this.$customers = this._store.pipe(select('customers'));
-    this._subscriptions.add(this.$customers.subscribe(data => {
+    private matDialog: MatDialog,
+    private _location: Location,
+    private _store: Store<{ orders: Order[], currentOrder: Order, customers: Customer[] }>) {
+    this.customers$ = this._store.pipe(select('customers'));
+    this._subscriptions.add(this.customers$.subscribe(data => {
       this.customers = data;
     }));
 
+    this.currentOrder$ = this._store.pipe(select('currentOrder'));
+    this.currentOrder$.subscribe((currentOrder) => {
+      this.currentOrder = currentOrder;
+    })
+
     this._store.dispatch(refreshCustomersRequest());
+    // this._store.dispatch(setCurrentOrderRequest({ order: null }));
   }
 
   ngOnInit(): void {
+  }
+
+  openConfirmDialog() {
+    let message;
+    if (this.currentOrder?.articles?.length) {
+      message = "You have an order on progress, do you want to save it?"
+    } else {
+      message = "Your current order has no articles in it, do you want to save it anyway?";
+    }
+    const dialogRef = this.matDialog.open(FeConfirmDiscardDialogComponent, {
+      data: {
+        title: "Save order?",
+        message
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this._store.dispatch(appendOrderRequest({ order: this.currentOrder }));
+      }
+      this._store.dispatch(setCurrentOrderRequest({ order: null }))
+      return this.goBack();
+    });
+  }
+
+  onHeaderGoBack() {
+    this._store.dispatch(getCurrentOrderRequest())
+    if (this.currentOrder != null) {
+      this.openConfirmDialog();
+    } else {
+      this.goBack();
+    }
+  }
+
+  goBack() {
+    this._location.back();
   }
 
   public getInitials(customer: any): string {
@@ -58,5 +106,4 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
       this._subscriptions.unsubscribe();
     }
   }
-
 }

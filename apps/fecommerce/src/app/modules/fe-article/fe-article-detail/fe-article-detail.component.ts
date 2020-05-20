@@ -82,7 +82,6 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
   }
 
   updatedOrder(): Order {
-    console.log(this.orderArticles);
     const order: Order = {
       id: this.currentOrder.id,
       description: this.currentOrder.description,

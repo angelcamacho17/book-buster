@@ -11,6 +11,7 @@ import { FeCustomerRowComponent } from './components/fe-row/fe-customer-row/fe-c
 import { FeArticleRowComponent } from './components/fe-row/fe-article-row/fe-article-row.component';
 import { FeRowComponent } from './components/fe-row/fe-row.component';
 import { FeDialogComponent } from './components/fe-dialog/fe-dialog.component';
+import { FeConfirmDiscardDialogComponent } from './components/fe-confirm-discard/fe-confirm-discard-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FeDialogComponent } from './components/fe-dialog/fe-dialog.component';
     FeSearchComponent,
     FeArticleRowComponent,
     FeRowComponent,
-    FeDialogComponent
+    FeDialogComponent,
+    FeConfirmDiscardDialogComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { FeDialogComponent } from './components/fe-dialog/fe-dialog.component';
     FeHeaderComponent,
     FeCardComponent,
     FeCustomerRowComponent,
-    FeArticleRowComponent
+    FeArticleRowComponent,
+    FeConfirmDiscardDialogComponent
   ],
   entryComponents: [
     FeCustomerRowComponent,
