@@ -21,7 +21,8 @@
         <mat-autocomplete #auto="matAutocomplete"
                           class="autocomplete"
                           (closed)="closeSearch()"
-                          (opened)="openSearch()">
+                          (opened)="openSearch()"
+                          >
           <mat-option *ngFor="let item of filteredlist | async" style="height: 72px;
                             display: flex;
                             padding: 0;" >
