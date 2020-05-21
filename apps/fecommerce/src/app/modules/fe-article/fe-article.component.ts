@@ -38,6 +38,10 @@ export class FeArticleComponent implements OnInit, OnDestroy {
     }
   }
 
+  public returnUrl(): void {
+    this._router.navigate(['/neworder']);
+  }
+
   public overviewOrder(): void {
 
     setTimeout(() => {

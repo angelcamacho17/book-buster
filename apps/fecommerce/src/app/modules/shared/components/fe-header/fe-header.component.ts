@@ -21,6 +21,7 @@ export class FeHeaderComponent implements OnInit {
   @Input() icon = 'close';
   @Input() needsConfirm = false;
   @Output() goBack = new EventEmitter<boolean>();
+  @Output() returnUrl = new EventEmitter<boolean>();
 
   constructor(private _location: Location,
               private _auth: AuthService,
@@ -30,11 +31,17 @@ export class FeHeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goLastVisited(): void {
+  public goLastVisited(): void {
     if (this.needsConfirm) {
       return this.goBack.emit(true);
+    } else {
+      this.returnLastUrl();
     }
-    this._location.back();
+  }
+
+  private returnLastUrl(): void {
+    console.log('here');
+    this.returnUrl.emit(true);
   }
 
   public logout(): void {

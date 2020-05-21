@@ -1,2 +1,7 @@
-<fe-header [class]="'mat-headline'" [style]="'center'" [title]="'New order'" [needsConfirm]="true" (goBack)="onHeaderGoBack()"></fe-header>
+<fe-header [class]="'mat-headline'"
+           [style]="'center'"
+           [title]="'New order'"
+           [needsConfirm]="true"
+           (goBack)="onHeaderGoBack()"
+           (returnUrl)="returnUrl()"></fe-header>
 <fe-search [list]="customers" [small]="false" [searchTitle]="'Link customer'" [itemType]="rowType"></fe-search>

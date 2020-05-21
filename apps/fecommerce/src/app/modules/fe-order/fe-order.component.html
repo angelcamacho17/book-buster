@@ -1,4 +1,8 @@
-<fe-header [icon]="'keyboard_arrow_left'" [title]="'Order overview'" [class]="'mat-headline'" [style]="'center'"></fe-header>
+<fe-header [icon]="'keyboard_arrow_left'"
+           [title]="'Order overview'"
+           [class]="'mat-headline'"
+           [style]="'center'"
+           (returnUrl)="returnUrl()"></fe-header>
 
 <div class="order-overview">
   <mat-card class="customer-row mat-elevation-z4">

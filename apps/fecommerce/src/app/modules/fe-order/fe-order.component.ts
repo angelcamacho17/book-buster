@@ -72,18 +72,22 @@ export class FeOrderComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(data => {
       if (isUndefined(data)) {
-        // Is undefined when the user closes 
+        // Is undefined when the user closes
         // the dialog without an action
         return;
       }
       if (data?.result === 'SWITCH') {
-        this._router.navigate(['/neworder']);
+        this._router.navigate(['/neworder'], { queryParams: { lastUrl: 'order'}});
       }
     });
   }
 
   public openItems(): void {
     this._router.navigate(['/orderitems']);
+  }
+
+  public returnUrl(): void {
+    this._router.navigate(['/home']);
   }
 
 }

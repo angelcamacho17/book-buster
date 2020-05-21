@@ -7,6 +7,7 @@ import { FeCustomerRowComponent } from '../shared/components/fe-row/fe-customer-
 import { MatDialog } from '@angular/material/dialog';
 import { FeConfirmDiscardDialogComponent } from '../shared/components/fe-confirm-discard/fe-confirm-discard-dialog.component';
 import { Location } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'fe-new-order',
@@ -22,11 +23,14 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public currentOrder: Order;
   public rowType = FeCustomerRowComponent;
   private _subscriptions = new Subscription();
+  private _returnUrl = 'home'
 
   constructor(
     private matDialog: MatDialog,
     private _location: Location,
-    private _store: Store<{ orders: Order[], currentOrder: Order, customers: Customer[] }>) {
+    private _store: Store<{ orders: Order[], currentOrder: Order, customers: Customer[] }>,
+    private _router: Router,
+    private _route: ActivatedRoute) {
     this.customers$ = this._store.pipe(select('customers'));
     this._subscriptions.add(this.customers$.subscribe(data => {
       this.customers = data;
@@ -42,6 +46,12 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._route.queryParams
+      .subscribe(params => {
+        if (params.returnUrl) {
+          this._returnUrl = params.returnUrl;
+        }
+      });
   }
 
   openConfirmDialog() {
@@ -77,7 +87,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
-    this._location.back();
+    this.returnUrl();
   }
 
   public getInitials(customer: any): string {
@@ -99,6 +109,11 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
 
   private getChar(text: string, index: number) {
     return text.charAt(index);
+  }
+
+  public returnUrl(): void {
+    console.log('return url'+ this._returnUrl);
+    this._router.navigate(['/'+this._returnUrl]);
   }
 
   ngOnDestroy(): void {

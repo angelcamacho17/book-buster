@@ -81,7 +81,11 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
     this._router.navigate(['/article']);
   }
 
-  updatedOrder(): Order {
+  public returnUrl(): void {
+    this._router.navigate(['/article']);
+  }
+
+  public updatedOrder(): Order {
     const order: Order = {
       id: this.currentOrder.id,
       description: this.currentOrder.description,

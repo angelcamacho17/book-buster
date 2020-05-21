@@ -1,4 +1,8 @@
-<fe-header [icon]="'keyboard_arrow_left'" [class]="'mat-headline'" [title]="'New order'" [style]="'center'"></fe-header>
+<fe-header [icon]="'keyboard_arrow_left'"
+           [class]="'mat-headline'"
+           [title]="'New order'"
+           [style]="'center'"
+           (returnUrl)="returnUrl()"></fe-header>
 <fe-search [list]="articles" [itemType]="rowType" [small]="true"></fe-search>
 
 <div class="container">
