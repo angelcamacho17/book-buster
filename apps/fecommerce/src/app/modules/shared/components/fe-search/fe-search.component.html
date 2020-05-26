@@ -1,11 +1,11 @@
 <mat-card class="search-container mat-elevation-z2"
           [ngClass]="expandBorder ? 'expand-card' : ''">
-  <div class="mat-headline title" *ngIf="!small">
+  <div class="mat-headline title mat-elevation-z2" *ngIf="!small">
     <span style="padding-left: 16px;">
       {{searchTitle }}
     </span>
   </div>
-  <div class="search-field shadow"
+  <div class="search-field"
        [ngStyle]="!small? {'top': '56px'} : {'top':'0px'}">
     <mat-icon style="color:rgba(0, 0, 0, 0.6)">search</mat-icon>
     <mat-form-field class="search-bar" floatLabel="never">
