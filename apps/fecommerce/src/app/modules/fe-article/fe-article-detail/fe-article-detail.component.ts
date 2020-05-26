@@ -74,10 +74,10 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
       article: this.article,
       quantity: this.amount
     }
-
+    
+    this._store.dispatch(getCurrentOrderRequest());
     this._store.dispatch(appendOrderArticleRequest({ orderArticle }));
     this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
-    this._store.dispatch(getCurrentOrderRequest());
     this._router.navigate(['/article']);
   }
 
@@ -87,7 +87,7 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
 
   public updatedOrder(): Order {
     const order: Order = {
-      id: this.currentOrder.id,
+      id: this.currentOrder?.id,
       description: this.currentOrder.description,
       articles: this.orderArticles,
       amount: this.currentOrder.amount,

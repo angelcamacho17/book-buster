@@ -140,6 +140,7 @@ export class OrderService {
   }
 
   public append(order: Order): Observable<Order[]> {
+    console.log('estoy append')
     const lastOrderId = this._orders[this._orders.length - 1]?.id ?? 0;
     order = { ...order, ...{ id: lastOrderId + 1 } };
     order.amount = this.calculateTotal(order);
@@ -149,6 +150,7 @@ export class OrderService {
   }
 
   public replace(order: Order): Observable<Order[]> {
+    console.log('estoy replace')
     const orders = [];
     const editedOrder = {
       id: this.currentOrder.id,

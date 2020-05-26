@@ -68,12 +68,12 @@ export class FeCustomerRowComponent implements OnDestroy {
       articles: [],
       customer: this.item
     }
-
+    console.log('selectCusomer', order);
     this._store.dispatch(handleOrderRequest({ order }));
+    this._store.dispatch(setCurrentOrderRequest({ order }));
     setTimeout(() => {
       this.router.navigate(['/article']);
     }, 100);
-
   }
 
   ngOnDestroy(): void {
