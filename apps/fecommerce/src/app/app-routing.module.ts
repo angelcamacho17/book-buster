@@ -48,12 +48,12 @@ const routes: Routes = [
     data: { animation: 'orderitems' },
     //canActivate: [FeAuthGuard]
   },
-  {
-    path: ':customerKey',
-    component: AppComponent,
-    pathMatch: 'full',
-    resolve: { customerKey: CustomerKeyResolver },
-  },
+  // {
+  //   path: ':customerKey',
+  //   component: AppComponent,
+  //   pathMatch: 'full',
+  //   resolve: { customerKey: CustomerKeyResolver },
+  // },
   { path: '**', redirectTo: 'login' }
 ];
 

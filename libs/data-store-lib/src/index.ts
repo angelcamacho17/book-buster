@@ -11,13 +11,14 @@ export * from './lib/customer/customer.actions';
 export * from './lib/order/order.actions';
 export * from './lib/article/article.actions'
 export * from './lib/order-articles/order-articles.actions';
-
+export * from './lib/back-navigation/back-navigation.actions';
 
 /*  Model exports  */
 export * from './lib/models/article.model';
 export * from './lib/models/customer.model';
 export * from './lib/models/order.model';
 export * from './lib/models/order-article.model';
+export * from './lib/models/back-navigation.model';
 
 /* Services exports */
 

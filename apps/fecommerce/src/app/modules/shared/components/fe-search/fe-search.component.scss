@@ -119,47 +119,19 @@
 
 }
 
-::ng-deep .mat-option-text {
-  flex-grow: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: flex !important;
-  justify-content: flex-end;
-  align-items: center;
-}
-
 ::ng-deep .mat-autocomplete-panel:not([class*=mat-elevation-z]) {
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
               0px 4px 5px 0px rgba(0, 0, 0, 0.14),
-              0px 0px 0px 0px rgba(0, 0, 0, 0.12)
-              !important;
-}
-
-::ng-deep .mat-autocomplete-panel {
-  border-bottom-left-radius: 8px !important;
-  border-bottom-right-radius: 8px !important;
-  max-height: 256px;
-  height: fit-content !important;
+             0px 0px 0px 0px rgba(0, 0, 0, 0.12)
+             !important;
 }
 
 ::ng-deep .cdk-overlay-pane {
-  position: absolute;
+  width: 100% !important;
   pointer-events: auto;
-  box-sizing: border-box;
-  z-index: 0;
-  display: flex;
-  max-width: 100%;
-  width: auto !important;
-  left: 16px !important;
-  margin-top: 11px !important;
-  right: 16px !important;
-  height: 0;
-}
-
-::ng-deep .mat-autocomplete-panel:not([class*=mat-elevation-z]) {
-  box-shadow: 0px 4px 4px -1px rgba(0, 0, 0, 0.2),
-              0px 4px 5px 0px rgba(0, 0, 0, 0.14),
-              0px 1px 4px 0px rgba(0, 0, 0, 0.12);
+  top: 222.088px;
+  padding: 16px;
+  left: 0px !important;
 }
 
 ::ng-deep .mat-form-field-underline {

@@ -75,3 +75,11 @@ body {
 
     // padding-top: 196px;
 }
+
+.autocomplete {
+  position: relative !important;
+  max-height: 256px !important;
+  width: 100% !important;
+  border-top: transparent;
+  margin-top: -5px !important;
+}

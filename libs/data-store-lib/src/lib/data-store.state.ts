@@ -1,4 +1,4 @@
-import { ActionReducerMap, State } from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { Order } from './models/order.model';
 import { RouterStateUrl } from './router/router.reducer';
@@ -9,6 +9,7 @@ import { Article } from './models/article.model';
 import { articlesReducer, articleReducer } from './article/article.reducer';
 import { orderArticlesReducer } from './order-articles/order-articles.reducer';
 import { OrderArticle } from './models/order-article.model';
+import { backNavigationReducer } from './back-navigation/back-navigation.reducer';
 
 export const FEATURE_NAME = 'examples';
 
@@ -19,7 +20,8 @@ export const reducers: ActionReducerMap<AppState> = {
   currentOrder: currentOrderReducer,
   article: articleReducer,
   articles: articlesReducer,
-  orderArticles: orderArticlesReducer
+  orderArticles: orderArticlesReducer,
+  backNavigation: backNavigationReducer
 };
 
 export interface AppState {
@@ -29,5 +31,6 @@ export interface AppState {
   currentOrder: Order,
   article: Article,
   articles: Article[],
-  orderArticles: OrderArticle[]
+  orderArticles: OrderArticle[],
+  backNavigation: string
 }
