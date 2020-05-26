@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Order, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest, Customer, AuthService } from '@fecommerce-workspace/data-store-lib';
+import { Store, select } from '@ngrx/store';
+import { Order, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest, Customer, AuthService, getCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 
 
 @Component({
@@ -16,11 +16,10 @@ export class FeCustomerRowComponent implements OnDestroy {
   public smaller: Observable<boolean>;
   public initials = '';
   private _subscriptions = new Subscription();
-
   constructor(
     private router: Router,
     private _store: Store<{ currentOrder: Order }>,
-    ) {
+  ) {
 
     if (this.item) {
       this.smaller = this.reduceLetterSize();
@@ -61,6 +60,7 @@ export class FeCustomerRowComponent implements OnDestroy {
   }
 
   public selectedCustomer(): void {
+
     const order: Order = {
       description: 'Latest order',
       amount: 0,
@@ -69,7 +69,7 @@ export class FeCustomerRowComponent implements OnDestroy {
       customer: this.item
     }
 
-    this._store.dispatch(setCurrentOrderRequest({ order }));
+    this._store.dispatch(handleOrderRequest({ order }));
     setTimeout(() => {
       this.router.navigate(['/article']);
     }, 100);

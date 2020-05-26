@@ -185,7 +185,9 @@ export class OrderService {
   }
 
   public setCurrentOrder(order: Order): Observable<any> {
-    this.currentOrder = order;
+    if (this.currentOrder === null) {
+      this.currentOrder = order;
+    }
     return of(null);
   }
 
