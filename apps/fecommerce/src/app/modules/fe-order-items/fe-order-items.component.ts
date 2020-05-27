@@ -1,8 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Order, getCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Order, getCurrentOrderRequest, deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { FeConfirmDiscardDialogComponent } from '../shared/components/fe-confirm-discard/fe-confirm-discard-dialog.component';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'fe-order-items',
@@ -11,21 +14,26 @@ import { Router } from '@angular/router';
 })
 export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
-  public $order: Observable<Order>;
-  public order: Order;
+  public $articles: Observable<OrderArticle[]>;
+  public articles: OrderArticle[] ;
+  public items: any = [];
+  public initialPos = { x: 0, y: 0};
   private _subscriptions = new Subscription();
   public totalAmount = 0;
+  public artRecentlyDeleted = false;
 
   constructor(
-    private _store: Store<{ currentOrder: Order }>,
-    private _router: Router) {
-    this.$order = this._store.pipe(select('currentOrder'));
-    this._subscriptions.add(this.$order.subscribe(data => {
-      this.order = data;
+    private _snackBar: MatSnackBar,
+    private _store: Store<{ orderArticles: OrderArticle[] }>) {
+    this.$articles = this._store.pipe(select('orderArticles'));
+    this._subscriptions.add(this.$articles.subscribe(data => {
+      this.articles = data;
+      console.log(data);
+      this.fillPositions();
       this.totalAmount = this.getTotal();
     }));
 
-    this._store.dispatch(getCurrentOrderRequest());
+    this._store.dispatch(refreshOrderArticlesRequest());
   }
 
 
@@ -39,16 +47,68 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public getTotal(): number {
-    if (this.order == null) {
+    if (this.articles == null) {
       return 0;
     }
-    
+
     let total = 0;
-    for (const orderArticle of this.order.articles) {
+    for (const orderArticle of this.articles) {
       total = total + orderArticle.article.price;
     }
 
     return Math.round(total * 100) / 100;
+  }
+
+  public dragMoved(event, item): void {
+
+    if (event.distance.x < -35) {
+      this.items[item.id] = {
+        x: -64,
+        y: 0
+      };
+    } else {
+      this.items[item.id] = {
+        x: 0,
+        y: 0
+      };
+    }
+  }
+
+  private deleteArticle(article): void {
+
+    this._store.dispatch(deleteOrderArticleRequest({orderArticleId: article.id}));
+    this.artRecentlyDeleted = true;
+  }
+
+  public tempDelete(article): void {
+    this.articles = this.articles.filter(obj => obj !== article);
+
+    let ref = this._snackBar.open('Article deleted', 'UNDO', {
+      duration: 3000,
+    });
+    ref.afterDismissed().subscribe((action)=> {
+      if (!action.dismissedByAction) {
+        console.log('DELETE')
+        this.deleteArticle(article);
+      } else {
+        console.log('Refresh')
+        this._store.dispatch(refreshOrderArticlesRequest());
+      }
+    })
+  }
+
+  private fillPositions(): void {
+    if (this.articles) {
+      for (let article of this.articles) {
+        if (article) {
+
+          this.items[article.id] = {
+            x: 0,
+            y: 0
+          }
+        }
+      }
+    }
   }
 
 }

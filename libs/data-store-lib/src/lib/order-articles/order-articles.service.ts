@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { OrderArticle } from '../models/order-article.model';
+import { Article } from '../models/article.model';
 
 @Injectable({ providedIn: 'root' })
 export class OrderArticlesService {
@@ -11,13 +12,11 @@ export class OrderArticlesService {
     constructor() { }
 
     public all() {
-        return this.orderArticles.asObservable();
+        return of(this._orderArticles);
     }
 
     public append(orderArticle: OrderArticle) {
-        console.log('antes')
         const lastOrderArticleId = this._orderArticles[this._orderArticles.length - 1]?.id ?? 0;
-        console.log('desp')
         orderArticle = { ...orderArticle, ...{ id: lastOrderArticleId + 1 } }
         this._orderArticles = this._orderArticles.concat(orderArticle);
         this.orderArticles.next(this._orderArticles);
@@ -31,13 +30,20 @@ export class OrderArticlesService {
         this._orderArticles[index].price = article.price;
         this.orderArticles.next(this._orderArticles);
         return this.orderArticles.asObservable();
-    }
+    }*/
 
-    public delete(articleId: any): Observable<Article[]> {
-      const index = this._orderArticles.findIndex(c => c.id === articleId);
-      this._orderArticles.splice(index, 1);
-      this.orderArticles.next(this._orderArticles);
-      return this.orderArticles.asObservable();
-    } */
+    public delete(articleId: any): Observable<OrderArticle[]> {
+      const articles = [];
+      for (let i = 0; i < this._orderArticles.length; i++) {
+        if (this._orderArticles[i].id !== articleId) {
+          articles.push(this._orderArticles[i]);
+        }
+      }
+
+      this._orderArticles = [];
+      this._orderArticles = articles;
+
+      return of(this._orderArticles);
+    }
 
 }

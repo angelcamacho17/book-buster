@@ -54,7 +54,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
       this._store.dispatch(appendOrderRequest({ order: this.order }));
       const msg = 'Order succesfully confirmed';
       this._snackBar.open(msg, '', {
-        duration: 1000,
+        duration: 3000,
       });
     }
 

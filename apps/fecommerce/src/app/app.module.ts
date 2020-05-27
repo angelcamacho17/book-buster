@@ -2,6 +2,7 @@ import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, Optional, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataStoreModule, ConfigService, CustomerKeyResolver, SDPInitializer, SDP_INITIALIZER, SDP_PRIORITY_INITIALIZER, KeyValueStoreService, SDP_LOCALES, getLocales, LanguageService, MyHammerConfig, AuthTokenService, HCSClient, HcsModule, KeyvaluestoreModule, LanguageModule, TranslatePipeModule, FeAuthGuard, FeLoginGuard, HCSLoad } from '@fecommerce-workspace/data-store-lib';
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     HcsModule,
     KeyvaluestoreModule,
     LanguageModule,
-    TranslatePipeModule
+    TranslatePipeModule,
+    DragDropModule
   ],
   providers: [
     FeAuthGuard,

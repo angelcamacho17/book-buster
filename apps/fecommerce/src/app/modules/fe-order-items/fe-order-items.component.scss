@@ -2,30 +2,43 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  right: 16px;
+  right: 15px;
   left: 16px;
   top: 94px;
   bottom: 16px;
   justify-content: space-between;
 
   .card {
-    padding: 0 !important;
     overflow: auto;
     border-radius: 8px;
     margin-bottom: 16px;
+    padding: 0;
 
     .list {
-      padding: 0 16px;
+      position: relative;
       max-height: 384px;
+      padding-top: 0 !important;
+      padding-left: 16px;
+      width: 100%;
+      //width: calc(100% - 49px);
 
         .list-item {
+          width: calc(100% - 16px);
+          position: relative;
+          z-index: 14;
+          padding-left: 64px;
+          background: #ffffff;
+          left: -64px;
 
           .content {
+            z-index: 2;
+            background:#ffffff;
             display: flex;
             padding: 10px 0;
-            width: 100% !important;
+            width: calc(100% - 16px);
             justify-content: space-between;
-            height: 100%;
+            height: 44px;
+            padding-right: 16px;
 
               .info {
                   display: flex;
@@ -46,11 +59,27 @@
 
             .divider {
                 position: relative;
+                color: green;
                 width: calc(100% + 16px);
             }
         }
 
+        .delete-button {
+          z-index: -1;
+          top: 1px;
+          position: absolute;
+          height: 64px;
+          width: 64px;
+          color: #ffffff;
+          background: #E02020;
+          right: 0px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
     }
+
   }
 
   .total {
@@ -71,5 +100,6 @@
     }
 
   }
-}
 
+
+}

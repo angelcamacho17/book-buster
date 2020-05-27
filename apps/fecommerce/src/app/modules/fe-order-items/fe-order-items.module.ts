@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FeOrderItemsComponent } from './fe-order-items.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MaterialModule } from '../shared/modules/material/material.module';
 
 
@@ -13,7 +14,8 @@ import { MaterialModule } from '../shared/modules/material/material.module';
     CommonModule,
     SharedModule,
     RouterModule.forChild([{ path: '', component: FeOrderItemsComponent }]),
-    MaterialModule
+    MaterialModule,
+    DragDropModule
   ]
 })
 export class FeOrderItemsModule { }

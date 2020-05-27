@@ -64,7 +64,9 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     const dialogRef = this.matDialog.open(FeConfirmDiscardDialogComponent, {
       data: {
         title: "Save order?",
-        message
+        message,
+        firstBtn: 'Discard',
+        secondBtn: 'Save'
       }
     });
 
