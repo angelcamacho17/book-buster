@@ -78,7 +78,7 @@ export class OrderEffects {
   handleOrder$ = createEffect((): any => this.actions$.pipe(
     ofType(handleOrderRequest),
     mergeMap((action) => {
-      if (this.orderService.currentOrder) {
+      if (this.orderService.currentOrder?.id) {
         return this.orderService.replace(action.order).pipe(
           map(() => refreshOrdersRequest()),
           catchError(() => EMPTY)

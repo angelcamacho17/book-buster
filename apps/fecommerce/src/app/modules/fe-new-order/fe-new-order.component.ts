@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest, replaceCurrentOrderRequest, handleOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest, replaceCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 import { FeCustomerRowComponent } from '../shared/components/fe-row/fe-customer-row/fe-customer-row.component';
@@ -81,6 +81,8 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
         this._store.dispatch(handleOrderRequest({ order: this.currentOrder }));
       }
       this._store.dispatch(setCurrentOrderRequest({ order: null }))
+      const orderArticles = [];
+      this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
       return this.goBack();
     });
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../models/order.model';
 import { Observable, BehaviorSubject, of, EMPTY } from 'rxjs';
@@ -147,9 +147,15 @@ export class OrderService {
   public append(order: Order): Observable<Order[]> {
     console.log('estoy append')
     const lastOrderId = this._orders[this._orders.length - 1]?.id ?? 0;
-    order = { ...order, ...{ id: lastOrderId + 1 } };
-    order.amount = this.calculateTotal(order);
-    this._orders = this._orders.concat(order);
+    const newOrder: Order = {
+      id: lastOrderId + 1,
+      description: order.description,
+      amount: this.calculateTotal(order),
+      createdBy: order.createdBy,
+      articles: order.articles,
+      customer: order.customer
+    }
+    this._orders = this._orders.concat(newOrder);
     this.orders.next(this._orders);
     return of(this._orders);
   }

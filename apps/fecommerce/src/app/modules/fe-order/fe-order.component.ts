@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -53,6 +53,8 @@ export class FeOrderComponent implements OnInit, OnDestroy {
     // if (isUndefined(this.order?.id) || this.order?.id == null) {
     // }
     this._store.dispatch(handleOrderRequest({ order: this.order }));
+    const orderArticles = [];
+    this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
     const msg = 'Order succesfully confirmed';
     this._snackBar.open(msg, '', {
       duration: 1000,
