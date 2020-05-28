@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Article, Order, getArticleRequest, getCurrentOrderRequest, appendOrderArticleRequest, refreshOrderArticlesRequest, OrderArticle, replaceArticlesOnCurrentOrder, setCurrentOrderRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Article, Order, getArticleRequest, getCurrentOrderRequest, appendOrderArticleRequest, OrderArticle, replaceCurrentOrderRequest, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -75,7 +75,10 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
       quantity: this.amount
     }
     
-    this._store.dispatch(getCurrentOrderRequest());
+    const orderArticles = this.currentOrder.articles;
+    if (orderArticles.length > 0) {
+      this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
+    }
     this._store.dispatch(appendOrderArticleRequest({ orderArticle }));
     this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
     this._router.navigate(['/article']);

@@ -19,7 +19,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
-        // "id": 1,
+        "id": 1,
         "article": {
           "id": 3,
           "name": "Soy Protein",
@@ -43,6 +43,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Angel Camacho",
       "articles": [{
+        "id": 1,
         "article": {
           "id": 1,
           "name": "Southern Comfort",
@@ -51,6 +52,7 @@ export class OrderService {
         },
         "quantity": 2
       }, {
+        "id": 2,
         "article": {
           "id": 2,
           "name": "Stock - Veal, White",
@@ -72,6 +74,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
+        "id": 1,
         "article": {
           "id": 69,
           "name": "Cookie Dough - Double",
@@ -80,6 +83,7 @@ export class OrderService {
         },
         "quantity": 6
       }, {
+        "id": 2,
         "article": {
           "id": 70,
           "name": "Ham - Black Forest",
@@ -109,6 +113,7 @@ export class OrderService {
           "price": 61.15
         }, "quantity": 3
       }, {
+        "id": 1,
         "article": {
           "id": 32,
           "name": "Soup - Knorr, Chicken Noodle",
@@ -156,7 +161,7 @@ export class OrderService {
       id: this.currentOrder.id,
       customer: order.customer,
       description: this.currentOrder.description,
-      amount: this.currentOrder.amount,
+      amount: this.calculateTotal(order),
       createdBy: this.currentOrder.createdBy,
       articles: this.currentOrder.articles
     };
@@ -195,7 +200,7 @@ export class OrderService {
 
   public replaceCurrentOrder(order: Order): Observable<any> {
     this.currentOrder = order;
-    return of(null);
+    return of(this.currentOrder);
   }
 
   public getCurrentOrder(): Observable<Order> {

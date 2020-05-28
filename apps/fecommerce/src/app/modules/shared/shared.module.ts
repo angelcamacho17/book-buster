@@ -12,6 +12,7 @@ import { FeArticleRowComponent } from './components/fe-row/fe-article-row/fe-art
 import { FeRowComponent } from './components/fe-row/fe-row.component';
 import { FeDialogComponent } from './components/fe-dialog/fe-dialog.component';
 import { FeConfirmDiscardDialogComponent } from './components/fe-confirm-discard/fe-confirm-discard-dialog.component';
+import { EventService } from './services/event.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,9 @@ import { FeConfirmDiscardDialogComponent } from './components/fe-confirm-discard
     FeCustomerRowComponent,
     FeArticleRowComponent,
     FeConfirmDiscardDialogComponent
+  ],
+  providers: [
+    EventService
   ],
   entryComponents: [
     FeCustomerRowComponent,
