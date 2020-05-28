@@ -7,20 +7,24 @@ import { Article } from '../models/article.model';
 export class OrderArticlesService {
 
     private _orderArticles: OrderArticle[] = [];
-    private orderArticles = new BehaviorSubject(this._orderArticles);
+    // private orderArticles = new BehaviorSubject(this._orderArticles);
 
     constructor() { }
 
     public all() {
+      console.log('all ord arts')
+
         return of(this._orderArticles);
     }
 
     public append(orderArticle: OrderArticle) {
+      console.log('append serv ord arts')
+
         const lastOrderArticleId = this._orderArticles[this._orderArticles.length - 1]?.id ?? 0;
         orderArticle = { ...orderArticle, ...{ id: lastOrderArticleId + 1 } }
         this._orderArticles = this._orderArticles.concat(orderArticle);
-        this.orderArticles.next(this._orderArticles);
-        return this.orderArticles.asObservable();
+        //this.orderArticles.next(this._orderArticles);
+        return of(this._orderArticles);
     }
 
     /* public replace(article: Article): Observable<Article[]> {

@@ -13,6 +13,7 @@
     border-radius: 8px;
     margin-bottom: 16px;
     padding: 0;
+    overflow-x: hidden;
 
     .list {
       position: relative;
@@ -20,6 +21,7 @@
       padding-top: 0 !important;
       padding-left: 16px;
       width: 100%;
+      overflow-x: hidden;
       //width: calc(100% - 49px);
 
         .list-item {
@@ -39,6 +41,7 @@
             justify-content: space-between;
             height: 44px;
             padding-right: 16px;
+            border-top: 1px solid #dadada;
 
               .info {
                   display: flex;
@@ -68,9 +71,10 @@
           z-index: -1;
           top: 1px;
           position: absolute;
-          height: 64px;
+          height: 63px;
           width: 64px;
           color: #ffffff;
+          border-top: 1px solid rgba(255, 255, 255, 0);
           background: #E02020;
           right: 0px;
           display: flex;

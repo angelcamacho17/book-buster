@@ -1,11 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { Order, getCurrentOrderRequest, deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Observable, Subscription, of } from 'rxjs';
+import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { FeConfirmDiscardDialogComponent } from '../shared/components/fe-confirm-discard/fe-confirm-discard-dialog.component';
-import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'fe-order-items',
@@ -15,25 +13,31 @@ import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
   public $articles: Observable<OrderArticle[]>;
-  public articles: OrderArticle[] ;
+  public articles: OrderArticle[] = [];
   public items: any = [];
   public initialPos = { x: 0, y: 0};
   private _subscriptions = new Subscription();
   public totalAmount = 0;
+  public filteredlist: Observable<any[]>;
   public artRecentlyDeleted = false;
 
   constructor(
     private _snackBar: MatSnackBar,
-    private _store: Store<{ orderArticles: OrderArticle[] }>) {
-    this.$articles = this._store.pipe(select('orderArticles'));
-    this._subscriptions.add(this.$articles.subscribe(data => {
-      this.articles = data;
-      console.log(data);
-      this.fillPositions();
-      this.totalAmount = this.getTotal();
-    }));
+    private _storeOrdArt: Store<{ orderArticles: OrderArticle[] }>) {
+    this.$articles = this._storeOrdArt.pipe(select('orderArticles'));
+    // this._subscriptions = this.$articles.subscribe(data => {
 
-    this._store.dispatch(refreshOrderArticlesRequest());
+    //   this.articles = data;
+    //   console.log(this.articles);
+    //   this.fillPositions();
+    //   this.totalAmount = this.getTotal();
+    // })
+
+    this.listenToOrderArts();
+
+    console.log(this.articles);
+
+    this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
   }
 
 
@@ -72,36 +76,60 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
         y: 0
       };
     }
+    this.fillPositions(item);
   }
 
   private deleteArticle(article): void {
 
-    this._store.dispatch(deleteOrderArticleRequest({orderArticleId: article.id}));
+    this._storeOrdArt.dispatch(deleteOrderArticleRequest({orderArticleId: article.id}));
     this.artRecentlyDeleted = true;
   }
 
   public tempDelete(article): void {
     this.articles = this.articles.filter(obj => obj !== article);
-
-    let ref = this._snackBar.open('Article deleted', 'UNDO', {
-      duration: 3000,
-    });
+    // Update with temporally delete
+    this.filteredlist = of(this.articles);
+    const config = new MatSnackBarConfig();
+    config.duration = 5000,
+    config.panelClass = ['delete-art'];
+    config.verticalPosition = 'bottom';
+    config.horizontalPosition = 'center';
+    let ref = this._snackBar.open('Article deleted', 'UNDO', config);
     ref.afterDismissed().subscribe((action)=> {
+      this.fillPositions();
       if (!action.dismissedByAction) {
-        console.log('DELETE')
+        this.listenToOrderArts();
         this.deleteArticle(article);
       } else {
-        console.log('Refresh')
-        this._store.dispatch(refreshOrderArticlesRequest());
+        this.listenToOrderArts();
+        this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
+
+        // console.log('refresh');
+        // this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
       }
-    })
+    });
+
   }
 
-  private fillPositions(): void {
+  private listenToOrderArts(): void {
+    this.filteredlist = this.$articles
+      .pipe(
+        startWith([]),
+        map((state) => {
+          if(state) {
+            this.articles = state;
+            return this.articles;
+          } else {
+            return this.articles;
+          }
+        })
+      );
+  }
+
+  public fillPositions(item?): void {
     if (this.articles) {
       for (let article of this.articles) {
-        if (article) {
-
+        if (article && article !== item) {
           this.items[article.id] = {
             x: 0,
             y: 0

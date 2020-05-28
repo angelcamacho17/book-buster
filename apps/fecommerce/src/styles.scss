@@ -11,7 +11,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $my-theme-primary: mat-palette($mat-blue, A700);
-$my-theme-accent: mat-palette($mat-blue, 200);
+$my-theme-accent: mat-palette($mat-blue, A700);
 $my-theme-warn: mat-palette($mat-deep-orange, A200);
 
 // The warn palette is optional (defaults to red).
@@ -96,3 +96,10 @@ body {
   width: 100%;
 }
 
+.delete-art {
+  position: relative !important;
+  width: 200px !important;
+  display: flex !important;
+  justify-content: center !important;
+
+}

@@ -14,7 +14,10 @@ export class OrderArticleEffects{
     ofType(refreshOrderArticlesRequest),
     mergeMap(() => {
       return this.orderArticlesService.all().pipe(
-        map(orderArticles => refreshOrderArticlesDone({ orderArticles })),
+        map(orderArticles => {
+          console.log(orderArticles);
+          return refreshOrderArticlesDone({ orderArticles })
+         }),
         catchError(() => EMPTY)
       );
     })

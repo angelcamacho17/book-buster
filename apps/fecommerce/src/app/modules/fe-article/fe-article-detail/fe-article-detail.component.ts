@@ -11,14 +11,14 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./fe-article-detail.component.scss']
 })
 export class FeArticleDetailComponent implements OnInit, OnDestroy {
-  title = "Article detail";
-  amount = 0;
+  public title = "Article detail";
+  public amount = 0;
   private _article$: Observable<Article>;
   private _currentOrder$: Observable<Order>;
   private _orderArticles$: Observable<OrderArticle[]>
-  article: Article;
-  orderArticles: OrderArticle[];
-  currentOrder: Order;
+  public article: Article;
+  public orderArticles: OrderArticle[];
+  public currentOrder: Order;
   private _subscriptions = new Subscription();
 
 

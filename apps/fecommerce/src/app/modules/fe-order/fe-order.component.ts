@@ -22,21 +22,17 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   private _subscriptions = new Subscription();
 
   constructor(
-    private _store: Store<{ currentOrder: Order, orderArticles: OrderArticle[] }>,
+    private _store: Store<{ currentOrder: Order }>,
     private _snackBar: MatSnackBar,
     private _router: Router,
     public dialog: MatDialog
   ) {
-    // this.orderArticles$ = this._store.pipe(select('orderArticles'));
+
     this.order$ = this._store.pipe(select('currentOrder'));
     this._subscriptions.add(this.order$.subscribe(data => {
       this.order = data;
     }));
     this._store.dispatch(getCurrentOrderRequest());
-
-    // this._subs.add(this.orderArticles$.subscribe(data => {
-    //   this.orderArticle = data;
-    // }))
 
   }
 
@@ -54,7 +50,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
       this._store.dispatch(appendOrderRequest({ order: this.order }));
       const msg = 'Order succesfully confirmed';
       this._snackBar.open(msg, '', {
-        duration: 3000,
+        duration: 5000,
       });
     }
 
