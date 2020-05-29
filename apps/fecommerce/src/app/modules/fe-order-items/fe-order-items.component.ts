@@ -80,8 +80,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public dragStarted(item): void {
-    console.log(item.id);
-    console.log(this.items);
+
     this.items[item.id] = {
       deleteBtn: true
     }
@@ -102,12 +101,12 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
     // Update with temporally delete
     this.filteredlist = of(this.articles);
-    let config = new MatSnackBarConfig();
+    const config = new MatSnackBarConfig();
     config.horizontalPosition = this.horizontalPosition;
     config.duration = 5000;
     config.panelClass = ['delete-art'];
 
-    let ref = this._snackBar.open('Article deleted', 'UNDO', config);
+    const ref = this._snackBar.open('Article deleted', 'UNDO', config);
     ref.afterDismissed().subscribe((action)=> {
       this.waitToDeleted = false;
       this.articleToDelete = null;
@@ -139,7 +138,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
   public swipePositions(item?): void {
     if (this.articles) {
-      for (let article of this.articles) {
+      for (const article of this.articles) {
         if (article && article !== item) {
           this.items[article.id] = {
             x: 0,
