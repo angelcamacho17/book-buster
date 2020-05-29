@@ -97,9 +97,12 @@ body {
 }
 
 .delete-art {
-  position: relative !important;
-  width: 200px !important;
+  width: fit-content !important;
+
+}
+
+.mat-snack-bar-handset {
+  /* width: 100%; */
   display: flex !important;
   justify-content: center !important;
-
 }

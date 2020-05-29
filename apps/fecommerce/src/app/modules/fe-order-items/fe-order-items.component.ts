@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrateg
 import { Observable, Subscription, of } from 'rxjs';
 import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { startWith, map } from 'rxjs/operators';
 
 @Component({
@@ -20,23 +20,14 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   public totalAmount = 0;
   public filteredlist: Observable<any[]>;
   public artRecentlyDeleted = false;
+  public horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  public showDeleteBtn = false;
 
   constructor(
     private _snackBar: MatSnackBar,
     private _storeOrdArt: Store<{ orderArticles: OrderArticle[] }>) {
     this.$articles = this._storeOrdArt.pipe(select('orderArticles'));
-    // this._subscriptions = this.$articles.subscribe(data => {
-
-    //   this.articles = data;
-    //   console.log(this.articles);
-    //   this.fillPositions();
-    //   this.totalAmount = this.getTotal();
-    // })
-
     this.listenToOrderArts();
-
-    console.log(this.articles);
-
     this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
   }
 
@@ -64,39 +55,46 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public dragMoved(event, item): void {
+    this.items[item.id].deleteBtn = true;
 
     if (event.distance.x < -35) {
       this.items[item.id] = {
         x: -64,
-        y: 0
+        y: 0,
+        deleteBtn: true
       };
     } else {
       this.items[item.id] = {
         x: 0,
-        y: 0
+        y: 0,
+        deleteBtn: false
       };
     }
-    this.fillPositions(item);
+    this.swipePositions(item);
+  }
+
+  public dragStarted(item): void {
+    this.items[item.id].deleteBtn = true;
   }
 
   private deleteArticle(article): void {
-
     this._storeOrdArt.dispatch(deleteOrderArticleRequest({orderArticleId: article.id}));
     this.artRecentlyDeleted = true;
   }
 
   public tempDelete(article): void {
+    // Reset swipe positions of the articles
+    this.swipePositions();
+    // Delete temporally to article
     this.articles = this.articles.filter(obj => obj !== article);
     // Update with temporally delete
     this.filteredlist = of(this.articles);
-    const config = new MatSnackBarConfig();
-    config.duration = 5000,
+    let config = new MatSnackBarConfig();
+    config.horizontalPosition = this.horizontalPosition;
+    config.duration = 5000;
     config.panelClass = ['delete-art'];
-    config.verticalPosition = 'bottom';
-    config.horizontalPosition = 'center';
     let ref = this._snackBar.open('Article deleted', 'UNDO', config);
     ref.afterDismissed().subscribe((action)=> {
-      this.fillPositions();
       if (!action.dismissedByAction) {
         this.listenToOrderArts();
         this.deleteArticle(article);
@@ -126,7 +124,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
       );
   }
 
-  public fillPositions(item?): void {
+  public swipePositions(item?): void {
     if (this.articles) {
       for (let article of this.articles) {
         if (article && article !== item) {

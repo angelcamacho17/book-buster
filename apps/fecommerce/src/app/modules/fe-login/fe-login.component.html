@@ -40,12 +40,15 @@
       </mat-error>
       <button class="login-btn"
               [class.disabled] = "!loginForm.valid || isSubmitted"
+              [disabled] = "!loginForm.valid || isSubmitted"
               mat-raised-button>
               Sign in
               <mat-progress-bar
-                [style.display]="isSubmitted ? 'block' : 'none'"
                 mode="indeterminate"
-                style="position: absolute; left: 0;">
+                [style.display]="isSubmitted ? 'block' : 'none'"
+                style="position: absolute;
+                       left: 0;
+                       bottom: 0;">
               </mat-progress-bar>
         </button>
     </div>
