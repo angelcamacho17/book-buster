@@ -13,7 +13,6 @@ import { FeRowComponent } from './components/fe-row/fe-row.component';
 import { FeDialogComponent } from './components/fe-dialog/fe-dialog.component';
 import { FeConfirmDiscardDialogComponent } from './components/fe-confirm-discard/fe-confirm-discard-dialog.component';
 import { EventService } from './services/event.service';
-import { HammerGesturesDirective } from './directives/hammergestures.directive';
 
 @NgModule({
   declarations: [
@@ -26,8 +25,7 @@ import { HammerGesturesDirective } from './directives/hammergestures.directive';
     FeArticleRowComponent,
     FeRowComponent,
     FeDialogComponent,
-    FeConfirmDiscardDialogComponent,
-    HammerGesturesDirective
+    FeConfirmDiscardDialogComponent
   ],
   imports: [
     CommonModule,
@@ -43,8 +41,7 @@ import { HammerGesturesDirective } from './directives/hammergestures.directive';
     FeCardComponent,
     FeCustomerRowComponent,
     FeArticleRowComponent,
-    FeConfirmDiscardDialogComponent,
-    HammerGesturesDirective
+    FeConfirmDiscardDialogComponent
   ],
   providers: [
     EventService
