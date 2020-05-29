@@ -11,15 +11,16 @@ export class OrderArticlesService {
 
     constructor() { }
 
-    public all() {
-      console.log('all ord arts')
+    public all(): Observable<OrderArticle[]> {
+      return of(this._orderArticles);
+    }
 
+    public set(orderArticles: OrderArticle[]): Observable<OrderArticle[]> {
+        this._orderArticles = orderArticles;
         return of(this._orderArticles);
     }
 
-    public append(orderArticle: OrderArticle) {
-      console.log('append serv ord arts')
-
+    public append(orderArticle: OrderArticle): Observable<OrderArticle[]> {
         const lastOrderArticleId = this._orderArticles[this._orderArticles.length - 1]?.id ?? 0;
         orderArticle = { ...orderArticle, ...{ id: lastOrderArticleId + 1 } }
         this._orderArticles = this._orderArticles.concat(orderArticle);

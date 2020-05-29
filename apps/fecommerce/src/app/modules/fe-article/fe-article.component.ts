@@ -39,7 +39,9 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   }
 
   public returnUrl(): void {
-    this._router.navigate(['/neworder']);
+    console.log('Recibi: ', history?.state?.order)
+    // debugger
+    this._router.navigate(['/neworder', { state: { order: history?.state?.order } }]);
   }
 
   public overviewOrder(): void {

@@ -5,4 +5,4 @@
            [needsConfirm]="true"
            (goBack)="onHeaderGoBack()"
            (returnUrl)="returnUrl()"></fe-header>
-<fe-search [list]="customers" [small]="false" [searchTitle]="'Link customer'" [itemType]="rowType"></fe-search>
+<fe-search (customerChange)="onCustomerChange($event)" [list]="customers" [small]="false" [searchTitle]="'Link customer'" [itemType]="rowType"></fe-search>

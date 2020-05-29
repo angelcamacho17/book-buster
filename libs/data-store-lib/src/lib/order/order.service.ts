@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../models/order.model';
 import { Observable, BehaviorSubject, of, EMPTY } from 'rxjs';
@@ -19,7 +19,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
-        // "id": 1,
+        "id": 1,
         "article": {
           "id": 3,
           "name": "Soy Protein",
@@ -43,6 +43,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Angel Camacho",
       "articles": [{
+        "id": 1,
         "article": {
           "id": 1,
           "name": "Southern Comfort",
@@ -51,6 +52,7 @@ export class OrderService {
         },
         "quantity": 2
       }, {
+        "id": 2,
         "article": {
           "id": 2,
           "name": "Stock - Veal, White",
@@ -72,6 +74,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
+        "id": 1,
         "article": {
           "id": 69,
           "name": "Cookie Dough - Double",
@@ -80,6 +83,7 @@ export class OrderService {
         },
         "quantity": 6
       }, {
+        "id": 2,
         "article": {
           "id": 70,
           "name": "Ham - Black Forest",
@@ -102,6 +106,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
+        "id":1,
         "article": {
           "id": 31,
           "name": "Tea - Honey Green Tea",
@@ -109,6 +114,7 @@ export class OrderService {
           "price": 61.15
         }, "quantity": 3
       }, {
+        "id": 2,
         "article": {
           "id": 32,
           "name": "Soup - Knorr, Chicken Noodle",
@@ -140,21 +146,29 @@ export class OrderService {
   }
 
   public append(order: Order): Observable<Order[]> {
+    console.log('estoy append')
     const lastOrderId = this._orders[this._orders.length - 1]?.id ?? 0;
-    order = { ...order, ...{ id: lastOrderId + 1 } };
-    order.amount = this.calculateTotal(order);
-    this._orders = this._orders.concat(order);
+    const newOrder: Order = {
+      id: lastOrderId + 1,
+      description: order.description,
+      amount: this.calculateTotal(order),
+      createdBy: order.createdBy,
+      articles: order.articles,
+      customer: order.customer
+    }
+    this._orders = this._orders.concat(newOrder);
     this.orders.next(this._orders);
     return of(this._orders);
   }
 
   public replace(order: Order): Observable<Order[]> {
+    console.log('estoy replace')
     const orders = [];
     const editedOrder = {
       id: this.currentOrder.id,
       customer: order.customer,
       description: this.currentOrder.description,
-      amount: this.currentOrder.amount,
+      amount: this.calculateTotal(order),
       createdBy: this.currentOrder.createdBy,
       articles: this.currentOrder.articles
     };
@@ -185,13 +199,15 @@ export class OrderService {
   }
 
   public setCurrentOrder(order: Order): Observable<any> {
-    this.currentOrder = order;
+    if (this.currentOrder === null) {
+      this.currentOrder = order;
+    }
     return of(null);
   }
 
   public replaceCurrentOrder(order: Order): Observable<any> {
     this.currentOrder = order;
-    return of(null);
+    return of(this.currentOrder);
   }
 
   public getCurrentOrder(): Observable<Order> {

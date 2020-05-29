@@ -1,4 +1,4 @@
-<div (click)="selectedCustomer()" class="customer-row">
+<div (click)="onSelectCustomer(item)" class="customer-row">
   <div class="avatar">
     <div class="mat-body-2 initials-sidenav" [ngClass]="(smaller | async) ? 'mat-body-1' : ''">{{ getInitials() }}</div>
   </div>

@@ -1,9 +1,9 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { map, mergeMap, catchError } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
+import { EMPTY, merge } from 'rxjs';
 import { OrderArticlesService } from './order-articles.service';
-import { refreshOrderArticlesRequest, refreshOrderArticlesDone, appendOrderArticleRequest, deleteOrderArticleRequest } from './order-articles.actions';
+import { refreshOrderArticlesRequest, refreshOrderArticlesDone, appendOrderArticleRequest, setOrderArticlesRequest, deleteOrderArticleRequest } from './order-articles.actions';
 
 @Injectable()
 export class OrderArticleEffects{
@@ -20,6 +20,16 @@ export class OrderArticleEffects{
          }),
         catchError(() => EMPTY)
       );
+    })
+  ))
+
+  setOrderArticles$ = createEffect((): any => this.actions$.pipe(
+    ofType(setOrderArticlesRequest),
+    mergeMap((action) => {
+      return this.orderArticlesService.set(action.orderArticles).pipe(
+        map(orderArticles => refreshOrderArticlesDone({ orderArticles })),
+        catchError(() => EMPTY)
+      )
     })
   ))
 
