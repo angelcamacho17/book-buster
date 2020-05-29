@@ -10,8 +10,8 @@
                  cdkDragLockAxis="x"
                  cdkDragBoundary=".list-item"
                  cdkDrag
+                 (click)="dragStarted(item)"
                  (cdkDragEnded) = "dragMoved($event, item)"
-                 (cdkDragStarted) = "dragStarted(item)"
                  [cdkDragFreeDragPosition]="items[item?.id] ? items[item?.id] : initialPos"
                  >
               <div class="info">

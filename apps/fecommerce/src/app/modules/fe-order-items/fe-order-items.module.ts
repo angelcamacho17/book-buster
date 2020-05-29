@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { MaterialModule } from '../shared/modules/material/material.module';
+import { HammerGesturesDirective } from '../shared/directives/hammergestures.directive';
 
 
 

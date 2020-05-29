@@ -79,9 +79,9 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
     this.swipePositions(item);
   }
 
-  public dragStarted(item): void {
+  public dragStarted(event, item): void {
 
-    this.items[item.id] = {
+    this.items[item?.id] = {
       deleteBtn: true
     }
   }

@@ -13,7 +13,7 @@
     border-radius: 8px;
     margin-bottom: 16px;
     padding: 0;
-    overflow-x: hidden;
+    overflow: hidden;
 
     .list {
       position: relative;
@@ -21,7 +21,7 @@
       padding-top: 0 !important;
       padding-left: 16px;
       width: 100%;
-      overflow-x: hidden;
+      overflow: hidden;
       //width: calc(100% - 49px);
 
         .list-item {
@@ -29,8 +29,7 @@
           position: relative;
           z-index: 14;
           padding-left: 64px;
-          background: #ffffff;
-          border-radius: 8px;
+          overflow: hidden;
           left: -64px;
 
           .content {
@@ -43,7 +42,6 @@
             height: 44px;
             padding-right: 16px;
             border-top: 1px solid #dadada;
-            border-radius: 8px;
 
               .info {
                   display: flex;
@@ -82,7 +80,6 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          border-bottom-right-radius: 8px;
         }
 
     }
