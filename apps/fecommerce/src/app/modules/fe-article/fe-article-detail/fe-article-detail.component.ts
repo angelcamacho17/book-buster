@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Article, Order, getArticleRequest, getCurrentOrderRequest, appendOrderArticleRequest, OrderArticle, replaceCurrentOrderRequest, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subscription, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'fe-article-detail',
@@ -16,10 +16,10 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
   private _article$: Observable<Article>;
   private _currentOrder$: Observable<Order>;
   private _orderArticles$: Observable<OrderArticle[]>
-  public article: Article;
-  public orderArticles: OrderArticle[];
-  public currentOrder: Order;
-  private _subscriptions = new Subscription();
+  article: Article;
+  orderArticles: OrderArticle[];
+  currentOrder: Order;
+  private _subscriptions = new Subject<any>();
 
 
   constructor(
@@ -28,20 +28,23 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
     private _router: Router
   ) {
     this._article$ = this._store.pipe(select('article'));
-    this._subscriptions.add(this._article$.subscribe(data => {
-      this.article = data;
-    }));
+    this._article$.pipe(takeUntil(this._subscriptions))
+      .subscribe(data => {
+        this.article = data;
+      });
 
     this._currentOrder$ = this._store.pipe(select('currentOrder'));
-    this._subscriptions.add(this._currentOrder$.subscribe(data => {
-      this.currentOrder = data;
-    }));
+    this._currentOrder$.pipe(takeUntil(this._subscriptions))
+      .subscribe(data => {
+        this.currentOrder = data;
+      });
     this._store.dispatch(getCurrentOrderRequest())
 
     this._orderArticles$ = this._store.pipe(select('orderArticles'));
-    this._subscriptions.add(this._orderArticles$.subscribe(data => {
-      this.orderArticles = data;
-    }));
+    this._orderArticles$.pipe(takeUntil(this._subscriptions))
+      .subscribe(data => {
+        this.orderArticles = data;
+      });
   }
 
   ngOnInit(): void {
@@ -50,13 +53,13 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
 
   public getArticle() {
     let articleId: number;
-    this._subscriptions.add(
-      this._route.paramMap.pipe(
-        map((params: ParamMap) => articleId = +params.get('id'))
-      ).subscribe(() => {
-        this._store.dispatch(getArticleRequest({ articleId }));
-      })
-    );
+
+    this._route.paramMap.pipe(
+      takeUntil(this._subscriptions),
+      map((params: ParamMap) => articleId = +params.get('id'))
+    ).subscribe(() => {
+      this._store.dispatch(getArticleRequest({ articleId }));
+    })
   }
 
   public addQuantity() {
@@ -101,8 +104,7 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
-    }
+    this._subscriptions.next();
+    this._subscriptions.complete();
   }
 }

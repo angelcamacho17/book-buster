@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
 import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
-import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { FeDialogComponent } from '../shared/components/fe-dialog/fe-dialog.component';
 import { isUndefined } from 'util';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'fe-order',
@@ -21,7 +22,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   public articles: OrderArticle[] = [];
   public orderArticles$: Observable<OrderArticle[]>;
   public orderArticle: OrderArticle[];
-  private _subscriptions = new Subscription();
+  private _subscriptions = new Subject<any>();
 
   constructor(
     private _store: Store<{ currentOrder: Order, orderArticles: OrderArticle[] }>,
@@ -31,14 +32,11 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   ) {
 
     this.order$ = this._store.pipe(select('currentOrder'));
-    this._subscriptions = this.order$.subscribe(data => {
+    this.order$.pipe(takeUntil(this._subscriptions))
+    .subscribe(data => {
       this.order = data;
     });
-
-    this.$articles = this._store.pipe(select('orderArticles'));
-    this._subscriptions = this.$articles.subscribe(data => {
-      this.articles = data;
-    });
+    this._store.dispatch(getCurrentOrderRequest());
 
     this._store.dispatch(refreshOrderArticlesRequest());
     this._store.dispatch(getCurrentOrderRequest());
@@ -46,12 +44,6 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-    if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
-    }
   }
 
   public orderConfirmed(): void {
@@ -117,6 +109,11 @@ export class FeOrderComponent implements OnInit, OnDestroy {
 
   public returnUrl(): void {
     this._router.navigate(['/home']);
+  }
+
+  ngOnDestroy(): void {
+    this._subscriptions.next();
+    this._subscriptions.complete();
   }
 
 }

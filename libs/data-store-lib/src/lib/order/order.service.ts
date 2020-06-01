@@ -147,6 +147,7 @@ export class OrderService {
 
   public append(order: Order): Observable<Order[]> {
     console.log('estoy append')
+    console.log(this._orders)
     const lastOrderId = this._orders[this._orders.length - 1]?.id ?? 0;
     const newOrder: Order = {
       id: lastOrderId + 1,
