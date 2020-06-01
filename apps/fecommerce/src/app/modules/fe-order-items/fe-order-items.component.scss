@@ -13,6 +13,7 @@
     border-radius: 8px;
     margin-bottom: 16px;
     padding: 0;
+    display: inline-block;
     overflow: hidden;
     background: linear-gradient(90deg, #ffffff 50%, #E02020 50%);
 
@@ -36,7 +37,7 @@
           .content {
             z-index: 2;
             background:#ffffff;
-            display: flex;
+            display: inline-flex;
             padding: 10px 0;
             width: calc(100% - 16px);
             justify-content: space-between;
