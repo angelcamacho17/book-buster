@@ -16,7 +16,8 @@
     display: inline-block;
     overflow: hidden;
     background: linear-gradient(90deg, #ffffff 80%, #E02020 50%);
-    width: 100%;
+    position: fixed;
+    width: calc(100% - 32px);
 
     .list {
       position: relative;
