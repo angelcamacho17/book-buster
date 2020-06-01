@@ -32,7 +32,7 @@ export class FeHomeComponent implements OnInit, OnDestroy {
         data = data.slice().sort((a, b) => b.id - a.id)
       }
       this.orders = data;
-    }));
+    });
     this._store.dispatch(clearCurrentOrderRequest());
     this._storeOrders.dispatch(refreshOrdersRequest())
   }
