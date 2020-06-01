@@ -105,7 +105,7 @@ export class FeSearchComponent implements OnInit, OnDestroy {
 
   private _filterStates(value: string): any[] {
     const filterValue = value.toLowerCase();
-
+    // tslint:disable-next-line:no-shadowed-variable
     return this.list.filter((state: any) => state.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
