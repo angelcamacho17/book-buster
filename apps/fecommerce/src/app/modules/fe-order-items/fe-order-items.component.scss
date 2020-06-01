@@ -13,8 +13,10 @@
     border-radius: 8px;
     margin-bottom: 16px;
     padding: 0;
+    display: inline-block;
     overflow: hidden;
-    background: linear-gradient(90deg, #ffffff 50%, #E02020 50%);
+    background: linear-gradient(90deg, #ffffff 80%, #E02020 50%);
+    width: 100%;
 
     .list {
       position: relative;
@@ -36,13 +38,14 @@
           .content {
             z-index: 2;
             background:#ffffff;
-            display: flex;
+            display: inline-flex;
             padding: 10px 0;
             width: calc(100% - 16px);
             justify-content: space-between;
             height: 44px;
             padding-right: 16px;
             border-top: 1px solid #dadada;
+            overflow: hidden;
 
               .info {
                   display: flex;
@@ -89,6 +92,9 @@
 
   .total {
     border-radius: 8px;
+    position: fixed;
+    bottom: 32px;
+    width: calc(100% - 64px);
 
     .info-total {
       display: flex;
