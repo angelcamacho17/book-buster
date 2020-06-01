@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -22,7 +22,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   public articles: OrderArticle[] = [];
   public orderArticles$: Observable<OrderArticle[]>;
   public orderArticle: OrderArticle[];
-  private _subscriptions = new Subject<any>();
+  private _subscriptions: Subscription;
 
   constructor(
     private _store: Store<{ currentOrder: Order, orderArticles: OrderArticle[] }>,
@@ -31,9 +31,13 @@ export class FeOrderComponent implements OnInit, OnDestroy {
     public dialog: MatDialog
   ) {
 
+    this.$articles = this._store.pipe(select('orderArticles'));
+    this._subscriptions = this.$articles.subscribe((arts) => {
+      this.articles = arts;
+    })
+
     this.order$ = this._store.pipe(select('currentOrder'));
-    this.order$.pipe(takeUntil(this._subscriptions))
-    .subscribe(data => {
+    this._subscriptions = this.order$.subscribe(data => {
       this.order = data;
     });
     this._store.dispatch(getCurrentOrderRequest());
@@ -112,8 +116,9 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._subscriptions.next();
-    this._subscriptions.complete();
+    if (this._subscriptions) {
+      this._subscriptions.unsubscribe();
+    }
   }
 
 }

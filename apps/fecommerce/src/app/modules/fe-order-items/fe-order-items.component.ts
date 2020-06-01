@@ -16,7 +16,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   public articles: OrderArticle[] = [];
   public items: any = [];
   public initialPos = { x: 0, y: 0};
-  private _subscriptions = new Subscription();
+  private _subscriptions: Subscription;
   public totalAmount = 0;
   public filteredlist: Observable<any[]>;
   public horizontalPosition: MatSnackBarHorizontalPosition = 'center';

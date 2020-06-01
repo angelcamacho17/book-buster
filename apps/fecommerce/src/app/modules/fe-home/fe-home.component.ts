@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { setCurrentOrderRequest, clearCurrentOrderRequest, OrderService, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
 import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
 import { takeUntil } from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class FeHomeComponent implements OnInit, OnDestroy {
   public orders$: Observable<Order[]>;
   public orders: Order[];
   public display = false;
-  private _subscriptions = new Subject<any>();
+  private _subscriptions: Subscription;
 
   constructor(
     private _store: Store,
@@ -26,8 +26,7 @@ export class FeHomeComponent implements OnInit, OnDestroy {
     private _orderService: OrderService
   ) {
     this.orders$ = this._storeOrders.pipe(select('orders'));
-    this.orders$.pipe(takeUntil(this._subscriptions))
-    .subscribe(data => {
+    this._subscriptions = this.orders$.subscribe(data => {
       if (data.length) {
         data = data.slice().sort((a, b) => b.id - a.id)
       }
@@ -51,7 +50,8 @@ export class FeHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._subscriptions.next();
-    this._subscriptions.complete();
+    if (this._subscriptions) {
+      this._subscriptions.unsubscribe();
+    }
   }
 }

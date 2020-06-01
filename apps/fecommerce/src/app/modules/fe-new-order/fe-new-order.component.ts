@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest, replaceCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
@@ -25,7 +25,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public currentOrder$: Observable<Order>;
   public currentOrder: Order;
   public rowType = FeCustomerRowComponent;
-  private _subscriptions = new Subject<any>();
+  private _subscriptions: Subscription;
   private _returnUrl = 'home'
 
   constructor(
@@ -35,19 +35,15 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     private _store: Store<{ orders: Order[], currentOrder: Order, customers: Customer[] }>,
     private _router: Router,
     private _route: ActivatedRoute) {
-    this.eventService.customerChange
-      .pipe(takeUntil(this._subscriptions))
-      .subscribe(customer => this.onCustomerChange(customer));
+    this._subscriptions = this.eventService.customerChange.subscribe(customer => this.onCustomerChange(customer));
 
     this.customers$ = this._store.pipe(select('customers'));
-    this.customers$.pipe(takeUntil(this._subscriptions))
-    .subscribe(data => {
+    this._subscriptions = this.customers$.subscribe(data => {
       this.customers = data;
     });
 
     this.currentOrder$ = this._store.pipe(select('currentOrder'));
-    this.currentOrder$.pipe(takeUntil(this._subscriptions))
-    .subscribe((currentOrder) => {
+    this._subscriptions = this.currentOrder$.subscribe((currentOrder) => {
       this.currentOrder = currentOrder;
       console.log('The order, has changed.', currentOrder);
     })
@@ -57,8 +53,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._route.queryParams.pipe(takeUntil(this._subscriptions))
-      .subscribe(params => {
+    this._subscriptions = this._route.queryParams.subscribe(params => {
         if (params.returnUrl) {
           this._returnUrl = params.returnUrl;
         }
@@ -158,7 +153,8 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._subscriptions.next();
-    this._subscriptions.complete();
+    if (this._subscriptions) {
+      this._subscriptions.unsubscribe();
+    }
   }
 }
