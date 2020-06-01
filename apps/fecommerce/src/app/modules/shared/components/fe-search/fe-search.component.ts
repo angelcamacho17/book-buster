@@ -1,15 +1,60 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { Customer } from '@fecommerce-workspace/data-store-lib';
+import { trigger, style, state, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'fe-search',
   templateUrl: './fe-search.component.html',
-  styleUrls: ['./fe-search.component.scss']
+  styleUrls: ['./fe-search.component.scss'],
+  animations: [
+    trigger('card', [
+      // ...
+      state('not-hide', style({
+        position: 'fixed'
+      })),
+      state('hide', style({
+        position: 'relative',
+        width: 'calc(100% - 32px)'
+      })),
+      transition('hide => not-hide', [
+        animate('0s')
+      ]),
+    ]),
+    trigger('title', [
+      // ...
+      state('not-hide', style({
+        position: 'fixed',
+        width: 'calc(100% - 32px)'
+      })),
+      state('hide', style({
+        position: 'relative',
+        width: '100%'
+      })),
+      transition('hide => not-hide', [
+        animate('0s')
+      ]),
+    ]),
+    trigger('nodata', [
+      // ...
+      state('not-hide', style({
+        position: 'fixed',
+        width: 'calc(100% - 32px)',
+        top: '199px'
+      })),
+      state('hide', style({
+        position: 'relative',
+        width: 'calc(100% - 32px)',
+        top: '156px'
+      })),
+      transition('hide => not-hide', [
+        animate('0s')
+      ]),
+    ])
+  ],
 })
-export class FeSearchComponent implements OnInit {
+export class FeSearchComponent implements OnInit, OnDestroy {
 
   @Input() list: any[];
   @Input() searchTitle = '';
@@ -22,8 +67,12 @@ export class FeSearchComponent implements OnInit {
   public stateCtrl = new FormControl();
   public showInitial = true;
   public expandBorder = false;
+  public display = false;
 
   constructor() {
+    setTimeout(()=>{
+      this.display = true;
+    },100000000)
     this.filteredlist = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -46,6 +95,10 @@ export class FeSearchComponent implements OnInit {
     this._filteredResult = [];
     this.showInitial = true;
     this.expandBorder = false;
+  }
+
+  ngOnDestroy(): void {
+    this.display = false;
   }
 
   private _filterStates(value: string): any[] {

@@ -1,7 +1,7 @@
 .fe-button {
   position: fixed;
   height: 48px;
-  width: -webkit-fill-available;
+  width: calc(100% - 32px);
   margin: 0 16px;
   background-color: #1666D8;
   color: #fff;
