@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Article, Order, getCurrentOrderRequest, refreshArticlesRequest } from '@fecommerce-workspace/data-store-lib';
+import { Article, Order, refreshArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { FeArticleRowComponent } from '../shared/components/fe-row/fe-article-row/fe-article-row.component';
-import { Observable, Subscription, Subscriber } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'fe-article',
@@ -17,15 +18,17 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   private _articles$: Observable<Article[]>;
   // private _currentOrder$: Observable<Order>;
   // public currentOrder: Order;
-  private _subscriptions = new Subscription();
+  private _subscriptions = new Subject<any>();
 
   constructor(private _store: Store<{ articles: Article[], currentOrder: Order }>,
     private _router: Router) {
     this._articles$ = this._store.pipe(select('articles'));
 
-    this._subscriptions.add(this._articles$.subscribe(data => {
-      this.articles = data;
-    }));
+    this._articles$
+      .pipe(takeUntil(this._subscriptions))
+      .subscribe(data => {
+        this.articles = data;
+      });
     this._store.dispatch(refreshArticlesRequest());
   }
 
@@ -33,15 +36,12 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
-    }
+    this._subscriptions.next();
+    this._subscriptions.complete();
   }
 
   public returnUrl(): void {
-    console.log('Recibi: ', history?.state?.order)
-    // debugger
-    this._router.navigate(['/neworder', { state: { order: history?.state?.order } }]);
+    this._router.navigate(['/neworder']);
   }
 
   public overviewOrder(): void {

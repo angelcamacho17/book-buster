@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest, replaceCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../shared/services/event.service';
 import { isUndefined } from 'util';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'fe-new-order',
@@ -24,7 +25,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public currentOrder$: Observable<Order>;
   public currentOrder: Order;
   public rowType = FeCustomerRowComponent;
-  private _subscriptions = new Subscription();
+  private _subscriptions = new Subject<any>();
   private _returnUrl = 'home'
 
   constructor(
@@ -34,17 +35,19 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     private _store: Store<{ orders: Order[], currentOrder: Order, customers: Customer[] }>,
     private _router: Router,
     private _route: ActivatedRoute) {
-    this._subscriptions.add(this.eventService.customerChange
-      .subscribe(customer => this.onCustomerChange(customer))
-    );
+    this.eventService.customerChange
+      .pipe(takeUntil(this._subscriptions))
+      .subscribe(customer => this.onCustomerChange(customer));
 
     this.customers$ = this._store.pipe(select('customers'));
-    this._subscriptions.add(this.customers$.subscribe(data => {
+    this.customers$.pipe(takeUntil(this._subscriptions))
+    .subscribe(data => {
       this.customers = data;
-    }));
+    });
 
     this.currentOrder$ = this._store.pipe(select('currentOrder'));
-    this.currentOrder$.subscribe((currentOrder) => {
+    this.currentOrder$.pipe(takeUntil(this._subscriptions))
+    .subscribe((currentOrder) => {
       this.currentOrder = currentOrder;
       console.log('The order, has changed.', currentOrder);
     })
@@ -54,7 +57,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._route.queryParams
+    this._route.queryParams.pipe(takeUntil(this._subscriptions))
       .subscribe(params => {
         if (params.returnUrl) {
           this._returnUrl = params.returnUrl;
@@ -153,8 +156,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
-    }
+    this._subscriptions.next();
+    this._subscriptions.complete();
   }
 }
