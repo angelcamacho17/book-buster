@@ -72,11 +72,13 @@ export class FeSearchComponent implements OnInit, OnDestroy {
   constructor() {
     setTimeout(()=>{
       this.display = true;
-    },100000000)
+    }, 1000)
     this.filteredlist = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
+        // tslint:disable-next-line:no-shadowed-variable
         map(state => {
+          // tslint:disable-next-line:no-shadowed-variable
           if(state) {
             this._filteredResult = this._filterStates(state);
             this.showInitial = this._filteredResult.length === 0;
