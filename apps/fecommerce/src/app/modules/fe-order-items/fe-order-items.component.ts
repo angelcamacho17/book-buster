@@ -61,7 +61,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public dragMoved(event, item): void {
-    this.items[item.id].deleteBtn = true;
+    // this.items[item.id].deleteBtn = true;
 
     if (event.distance.x < -35) {
       this.items[item.id] = {
