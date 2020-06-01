@@ -26,8 +26,7 @@
                 € {{item?.article?.price}}
               </div>
           </div>
-
-          <div class="delete-button" *ngIf="items[item.id]?.deleteBtn" (click)="tempDelete(item)">
+          <div class="delete-button" (click)="tempDelete(item)">
             <mat-icon>
               delete_outline
             </mat-icon>

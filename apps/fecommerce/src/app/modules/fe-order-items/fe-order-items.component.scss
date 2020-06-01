@@ -14,6 +14,7 @@
     margin-bottom: 16px;
     padding: 0;
     overflow: hidden;
+    background: linear-gradient(90deg, #ffffff 50%, #E02020 50%);
 
     .list {
       position: relative;
@@ -75,7 +76,7 @@
           width: 64px;
           color: #ffffff;
           border-top: 1px solid rgba(255, 255, 255, 0);
-          background: #E02020;
+          background: transparent;
           right: 0px;
           display: flex;
           justify-content: center;
