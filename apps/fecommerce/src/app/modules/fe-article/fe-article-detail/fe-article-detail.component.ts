@@ -11,8 +11,8 @@ import { map, takeUntil } from 'rxjs/operators';
   styleUrls: ['./fe-article-detail.component.scss']
 })
 export class FeArticleDetailComponent implements OnInit, OnDestroy {
-  title = "Article detail";
-  amount = 0;
+  public title = "Article detail";
+  public amount = 0;
   private _article$: Observable<Article>;
   private _currentOrder$: Observable<Order>;
   private _orderArticles$: Observable<OrderArticle[]>

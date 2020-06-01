@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { EMPTY, merge } from 'rxjs';
 import { OrderArticlesService } from './order-articles.service';
-import { refreshOrderArticlesRequest, refreshOrderArticlesDone, appendOrderArticleRequest, setOrderArticlesRequest } from './order-articles.actions';
+import { refreshOrderArticlesRequest, refreshOrderArticlesDone, appendOrderArticleRequest, setOrderArticlesRequest, deleteOrderArticleRequest } from './order-articles.actions';
 
 @Injectable()
 export class OrderArticleEffects{
@@ -14,7 +14,10 @@ export class OrderArticleEffects{
     ofType(refreshOrderArticlesRequest),
     mergeMap(() => {
       return this.orderArticlesService.all().pipe(
-        map(orderArticles => refreshOrderArticlesDone({ orderArticles })),
+        map(orderArticles => {
+          console.log(orderArticles);
+          return refreshOrderArticlesDone({ orderArticles })
+         }),
         catchError(() => EMPTY)
       );
     })
@@ -48,16 +51,17 @@ export class OrderArticleEffects{
         catchError(() => EMPTY)
       );
     })
-  ))
+  ))*/
 
   deleteArticle$ = createEffect(():any =>
     this.actions$.pipe(
-    ofType(deleteCurrentArticleRequest),
+    ofType(deleteOrderArticleRequest),
     mergeMap((action) => {
-      return this.orderArticlesService.delete(action.articleId).pipe(
+      return this.orderArticlesService.delete(action.orderArticleId).pipe(
         map(() => refreshOrderArticlesRequest()),
         catchError(() => EMPTY)
       );
     })
-  ))*/
+  ));
+
 }

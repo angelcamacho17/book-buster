@@ -106,6 +106,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
+        "id":1,
         "article": {
           "id": 31,
           "name": "Tea - Honey Green Tea",
@@ -113,7 +114,7 @@ export class OrderService {
           "price": 61.15
         }, "quantity": 3
       }, {
-        "id": 1,
+        "id": 2,
         "article": {
           "id": 32,
           "name": "Soup - Knorr, Chicken Noodle",

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { setCurrentOrderRequest, clearCurrentOrderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
+import { setCurrentOrderRequest, clearCurrentOrderRequest, OrderService, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
@@ -34,6 +34,7 @@ export class FeHomeComponent implements OnInit, OnDestroy {
       this.orders = data;
     });
     this._store.dispatch(clearCurrentOrderRequest());
+    this._store.dispatch(setOrderArticlesRequest({orderArticles: []}));
     this._storeOrders.dispatch(refreshOrdersRequest())
   }
 
@@ -45,6 +46,7 @@ export class FeHomeComponent implements OnInit, OnDestroy {
 
   public openOrder(order: Order): void {
     this._storeOrders.dispatch(setCurrentOrderRequest({order}))
+    this._store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }));
     this._router.navigate(['/order']);
   }
 

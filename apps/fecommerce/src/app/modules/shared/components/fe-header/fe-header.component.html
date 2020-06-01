@@ -2,13 +2,18 @@
   <mat-icon *ngIf="style === 'center'" class="close-icon" (click)="goLastVisited()">
     {{icon}}
   </mat-icon>
-  <div [ngClass]="class"
-       [class.title-centered]="style === 'center'"
+  <div *ngIf="style !== 'center'"
+       [ngClass]="class"
        [ngStyle]="logoutIcon ? {'width': '100%'} : {}"
        style="margin: 0 !important;">
     {{title}}
   </div>
-  <mat-icon *ngIf="logoutIcon" class="logout" (click)="logout()">
+  <h6  *ngIf="style === 'center'"
+       class="title-centered"
+       style="margin: 0 !important; font-weight: 600;">
+    {{title}}
+  </h6>
+  <mat-icon *ngIf="logoutIcon"  class="logout" (click)="logout()">
     exit_to_app
   </mat-icon>
 

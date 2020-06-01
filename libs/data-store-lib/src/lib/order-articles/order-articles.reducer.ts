@@ -7,6 +7,7 @@ export const initialState: OrderArticlesState = {
 };
 
 export const orderArticlesReducer = createReducer<OrderArticle[]>(initialState.orderArticles,
-  on(refreshOrderArticlesDone, (_, action) => action.orderArticles),
+  on(refreshOrderArticlesDone, (_, action) => {
+    return action.orderArticles }),
 );
 

@@ -1,24 +1,37 @@
 <fe-header [icon]="'keyboard_arrow_left'" [title]="'Order items'" [class]="'mat-headline'" [style]="'center'"></fe-header>
 
 <div class="order-items">
-  <mat-card class="card mat-elevation-z4">
-    <mat-card-content>
+  <mat-card class="card mat-elevation-z4" (clickOutside)="swipePositions()">
+    <mat-card-content >
       <mat-list class="list">
-        <div class="list-item" *ngFor="let item of order?.articles">
-          <div class="content">
-            <div class="info">
-              <div class="mat-subheading-2" style="margin: 0; color: rgba(0, 0, 0, 0.87);">
-                {{item?.quantity}} - {{item?.article?.name}}
+        <div class="list-item" *ngFor="let item of filteredlist | async;">
+
+            <div class="content"
+                 cdkDragLockAxis="x"
+                 cdkDragBoundary=".list-item"
+                 cdkDrag
+                 (click)="dragStarted(item)"
+                 (cdkDragEnded) = "dragMoved($event, item)"
+                 [cdkDragFreeDragPosition]="items[item?.id] ? items[item?.id] : initialPos"
+                 >
+              <div class="info">
+                <div class="mat-subheading-2 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.87);">
+                  {{ item?.quantity > 1 ? item?.quantity + 'x ' : ''}} {{item?.article?.name}}
+                </div>
+                <div class="mat-body-1 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.6);">
+                  {{item?.article?.description}}
+                </div>
               </div>
-              <div class="mat-body-1" style="margin: 0; color: rgba(0, 0, 0, 0.6);">
-                {{item?.article?.description}}
+              <div class="price mat-subheading-2" style="margin: 0;">
+                € {{item?.article?.price}}
               </div>
-            </div>
-            <div class="price mat-subheading-2" style="margin: 0;">
-              € {{item?.article?.price}}
-            </div>
           </div>
-          <mat-divider class="divider"></mat-divider>
+
+          <div class="delete-button" *ngIf="items[item.id]?.deleteBtn" (click)="tempDelete(item)">
+            <mat-icon>
+              delete_outline
+            </mat-icon>
+          </div>
         </div>
       </mat-list>
     </mat-card-content>

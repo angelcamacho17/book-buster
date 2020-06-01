@@ -34,7 +34,6 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
     this.url$.pipe(takeUntil(this._subscriptions))
     .subscribe(data => {
       this._backUrl = data;
-      console.log(data);
       if (this._backUrl && this._backUrl!=='') {
         this._router.navigate(['/'+ this._backUrl]);
       }

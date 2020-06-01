@@ -69,6 +69,7 @@ function slideToRight() {
       style({
         position: 'fixed',
         width: '100%',
+        right: 0,
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
         background: '#ffffff'
@@ -76,22 +77,19 @@ function slideToRight() {
     ], optional),
     query(':enter', [
       style({
-        right: '-100%',
+        right: '-100%'
 
       })
     ]),
     group([
       query(':leave', [
         animate('300ms ease', style({
-          right: '0%',
-          'z-index': 0,
-
+          right: '100%'
         }))
       ], optional),
       query(':enter', [
         animate('300ms ease', style({
-          right: '0%',
-          'z-index': 10000,
+          right: '0%'
 
         }))
       ])
@@ -114,14 +112,12 @@ function slideToLeft() {
         width: '100%',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
-        background: '#ffffff',
-        'z-index': 10001
+        background: '#ffffff'
       })
     ], optional),
     query(':enter', [
       style({
-        left: '0%',
-        'z-index':0
+        left: '-100%'
       })
     ]),
     group([

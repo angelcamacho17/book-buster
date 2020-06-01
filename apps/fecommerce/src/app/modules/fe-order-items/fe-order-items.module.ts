@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FeOrderItemsComponent } from './fe-order-items.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ClickOutsideModule } from 'ng-click-outside';
 import { MaterialModule } from '../shared/modules/material/material.module';
-
-
 
 @NgModule({
   declarations: [FeOrderItemsComponent],
@@ -13,7 +13,9 @@ import { MaterialModule } from '../shared/modules/material/material.module';
     CommonModule,
     SharedModule,
     RouterModule.forChild([{ path: '', component: FeOrderItemsComponent }]),
-    MaterialModule
+    MaterialModule,
+    DragDropModule,
+    ClickOutsideModule
   ]
 })
 export class FeOrderItemsModule { }

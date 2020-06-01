@@ -4,6 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 interface DialogData {
   title: "";
   message: "";
+  firstBtn: "";
+  secondBtn: "";
+
 }
 
 @Component({
@@ -24,7 +27,7 @@ export class FeConfirmDiscardDialogComponent implements OnInit {
   onConfirm() {
     this.matDialogRef.close(true);
   }
-  
+
   onDiscard() {
     this.matDialogRef.close(false);
   }

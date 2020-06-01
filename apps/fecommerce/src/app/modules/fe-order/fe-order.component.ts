@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
-import { Observable, Subscription, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,6 +18,8 @@ export class FeOrderComponent implements OnInit, OnDestroy {
 
   public order$: Observable<Order>;
   public order: Order;
+  public $articles: Observable<OrderArticle[]>;
+  public articles: OrderArticle[] = [];
   public orderArticles$: Observable<OrderArticle[]>;
   public orderArticle: OrderArticle[];
   private _subscriptions = new Subject<any>();
@@ -28,7 +30,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
     private _router: Router,
     public dialog: MatDialog
   ) {
-    // this.orderArticles$ = this._store.pipe(select('orderArticles'));
+
     this.order$ = this._store.pipe(select('currentOrder'));
     this.order$.pipe(takeUntil(this._subscriptions))
     .subscribe(data => {
@@ -36,9 +38,8 @@ export class FeOrderComponent implements OnInit, OnDestroy {
     });
     this._store.dispatch(getCurrentOrderRequest());
 
-    // this._subs.add(this.orderArticles$.subscribe(data => {
-    //   this.orderArticle = data;
-    // }))
+    this._store.dispatch(refreshOrderArticlesRequest());
+    this._store.dispatch(getCurrentOrderRequest());
 
   }
 
@@ -48,15 +49,27 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   public orderConfirmed(): void {
     // if (isUndefined(this.order?.id) || this.order?.id == null) {
     // }
+    this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
     this._store.dispatch(handleOrderRequest({ order: this.order }));
-    const orderArticles = [];
-    this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
+    this._store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
     const msg = 'Order succesfully confirmed';
     this._snackBar.open(msg, '', {
-      duration: 1000,
+      duration: 5000,
     });
 
     this._router.navigate(['/home']);
+  }
+
+  private updatedOrder(): Order {
+    const order: Order = {
+      id: this.order?.id,
+      description: this.order.description,
+      articles: this.articles,
+      amount: this.order.amount,
+      customer: this.order.customer,
+      createdBy: this.order.createdBy
+    };
+    return order;
   }
 
   public changeCustomer(): void {
