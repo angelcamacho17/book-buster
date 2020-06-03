@@ -26,9 +26,7 @@
               "apps/fecommerce/src/assets",
               "apps/fecommerce/src/.htaccess"
             ],
-            "styles": [
-              "apps/fecommerce/src/styles.scss"
-            ],
+            "styles": ["apps/fecommerce/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -86,10 +84,7 @@
               "apps/fecommerce/tsconfig.app.json",
               "apps/fecommerce/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/fecommerce/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/fecommerce/**"]
           }
         },
         "test": {
@@ -124,13 +119,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/fecommerce-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/fecommerce-e2e/**"
-            ]
+            "tsConfig": ["apps/fecommerce-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/fecommerce-e2e/**"]
           }
         }
       }
@@ -148,10 +138,7 @@
               "libs/data-store-lib/tsconfig.lib.json",
               "libs/data-store-lib/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/data-store-lib/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/data-store-lib/**"]
           }
         },
         "test": {
@@ -167,6 +154,129 @@
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
+        }
+      }
+    },
+    "experimental": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/experimental",
+      "sourceRoot": "apps/experimental/src",
+      "prefix": "fecommerce-workspace",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/experimental",
+            "index": "apps/experimental/src/index.html",
+            "main": "apps/experimental/src/main.ts",
+            "polyfills": "apps/experimental/src/polyfills.ts",
+            "tsConfig": "apps/experimental/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/experimental/src/favicon.ico",
+              "apps/experimental/src/assets"
+            ],
+            "styles": ["apps/experimental/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/experimental/src/environments/environment.ts",
+                  "with": "apps/experimental/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "experimental:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "experimental:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "experimental:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/experimental/tsconfig.app.json",
+              "apps/experimental/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/experimental/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/experimental/jest.config.js",
+            "tsConfig": "apps/experimental/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/experimental/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "experimental-e2e": {
+      "root": "apps/experimental-e2e",
+      "sourceRoot": "apps/experimental-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/experimental-e2e/cypress.json",
+            "tsConfig": "apps/experimental-e2e/tsconfig.e2e.json",
+            "devServerTarget": "experimental:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "experimental:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/experimental-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/experimental-e2e/**"]
+          }
         }
       }
     }
