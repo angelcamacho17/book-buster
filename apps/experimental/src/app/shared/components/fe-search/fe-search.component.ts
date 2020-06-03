@@ -5,7 +5,7 @@ import { startWith, map } from 'rxjs/operators';
 import { Customer } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
-  selector: 'fe-search',
+  selector: 'fecommerce-workspace-search',
   templateUrl: './fe-search.component.html',
   styleUrls: ['./fe-search.component.scss']
 })

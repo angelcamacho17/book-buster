@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 // import * as ordersData from '../../../assets/data/orders.json';
 
 @Component({
-  selector: 'fe-home',
+  selector: 'fecommerce-workspace-home',
   templateUrl: './fe-home.component.html',
   styleUrls: ['./fe-home.component.scss'],
 })

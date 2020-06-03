@@ -8,7 +8,7 @@ import { EventService } from '../../../services/event.service';
 
 
 @Component({
-  selector: 'fe-customer-row',
+  selector: 'fecommerce-workspace-customer-row',
   templateUrl: './fe-customer-row.component.html',
   styleUrls: ['./fe-customer-row.component.scss']
 })

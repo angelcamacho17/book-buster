@@ -5,7 +5,7 @@ import { FeRowComponent } from '../fe-row.component';
 import { Store } from '@ngrx/store';
 
 @Component({
-  selector: 'fe-article-row',
+  selector: 'fecommerce-workspace-article-row',
   templateUrl: './fe-article-row.component.html',
   styleUrls: ['./fe-article-row.component.scss']
 })

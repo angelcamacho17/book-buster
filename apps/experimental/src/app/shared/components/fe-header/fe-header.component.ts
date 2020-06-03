@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'fe-header',
+  selector: 'fecommerce-workspace-header',
   templateUrl: './fe-header.component.html',
   styleUrls: ['./fe-header.component.scss']
 })

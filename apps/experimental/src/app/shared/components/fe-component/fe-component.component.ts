@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'fe-component',
+  selector: 'fecommerce-workspace-component',
   templateUrl: './fe-component.component.html',
   styleUrls: ['./fe-component.component.css']
 })
