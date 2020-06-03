@@ -2,11 +2,11 @@
            [class]="'mat-headline'"
            [title]="'New order'"
            [currentUrl]="'article'"
-           [style]="'center'"
-           (returnUrl)="returnUrl()"></fe-header>
+           [headerSearch]="true"
+           [style]="'center'"></fe-header>
 <fe-search [list]="articles" [itemType]="rowType" [small]="true"></fe-search>
 
-<div class="container">
+<div class="container" >
   <div class="no-results">
     <mat-icon class="icon">search</mat-icon>
     <div class="mat-title search-text">Search articles</div>

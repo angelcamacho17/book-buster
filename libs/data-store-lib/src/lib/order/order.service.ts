@@ -132,7 +132,7 @@ export class OrderService {
     }
   ];
 
-  public currentOrder: Order;
+  public currentOrder: Order = null;
 
   public orders = new BehaviorSubject<Order[]>(this._orders);
 
@@ -146,8 +146,6 @@ export class OrderService {
   }
 
   public append(order: Order): Observable<Order[]> {
-    console.log('estoy append')
-    console.log(this._orders)
     const lastOrderId = this._orders[this._orders.length - 1]?.id ?? 0;
     const newOrder: Order = {
       id: lastOrderId + 1,
@@ -163,7 +161,6 @@ export class OrderService {
   }
 
   public replace(order: Order): Observable<Order[]> {
-    console.log('estoy replace')
     const orders = [];
     const editedOrder = {
       id: this.currentOrder.id,
@@ -203,7 +200,7 @@ export class OrderService {
     if (this.currentOrder === null) {
       this.currentOrder = order;
     }
-    return of(null);
+    return of(this.currentOrder);
   }
 
   public replaceCurrentOrder(order: Order): Observable<any> {

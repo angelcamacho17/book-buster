@@ -53,6 +53,8 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   public orderConfirmed(): void {
     // if (isUndefined(this.order?.id) || this.order?.id == null) {
     // }
+    if (this.updatedOrder() === null) {
+    }
     this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
     this._store.dispatch(handleOrderRequest({ order: this.order }));
     this._store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
@@ -95,14 +97,15 @@ export class FeOrderComponent implements OnInit, OnDestroy {
         return;
       }
       if (data?.result === 'SWITCH') {
-        this._router.navigate(['/neworder'], {
-          state: {
-            order: this.order
-          },
-          queryParams: {
-            lastUrl: 'order'
-          }
-        });
+        this._router.navigate(['/neworder'])
+        // , {
+        //   state: {
+        //     order: this.order
+        //   },
+        //   queryParams: {
+        //     lastUrl: 'order'
+        //   }
+        // });
       }
     });
   }

@@ -3,7 +3,7 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { BackNavigationService } from './back.navigation.service';
-import { goBackNavigationRequest, refreshBackNavigationDone, appendBackNavigationRequest, refreshBackNavigationRequest } from './back-navigation.actions';
+import { goBackNavigationRequest, refreshBackNavigationDone, appendBackNavigationRequest, refreshBackNavigationRequest, changedNavigationRequest } from './back-navigation.actions';
 
 @Injectable()
 export class BackNavigationEffects {
@@ -41,5 +41,15 @@ export class BackNavigationEffects {
             )
         })
     ));
+
+    watchChangedNavigation$ = createEffect((): any => this.actions$.pipe(
+      ofType(changedNavigationRequest),
+      mergeMap((action) => {
+          return this._bnService.watchChanged().pipe(
+              map(url => refreshBackNavigationDone({ url })),
+              catchError(() => EMPTY)
+          )
+      })
+  ));
 
 }

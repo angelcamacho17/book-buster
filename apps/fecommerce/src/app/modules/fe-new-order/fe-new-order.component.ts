@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest, replaceCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
+import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest, replaceCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest, clearCurrentOrderRequest, changedNavigationRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 import { FeCustomerRowComponent } from '../shared/components/fe-row/fe-customer-row/fe-customer-row.component';
@@ -26,12 +26,13 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public currentOrder: Order;
   public rowType = FeCustomerRowComponent;
   private _subscriptions: Subscription;
+  private _curOrderSubs: Subscription;
   private _returnUrl = 'home'
+  private _curId: number = null;
 
   constructor(
     private eventService: EventService,
     private matDialog: MatDialog,
-    private _location: Location,
     private _store: Store<{ orders: Order[], currentOrder: Order, customers: Customer[] }>,
     private _router: Router,
     private _route: ActivatedRoute) {
@@ -43,13 +44,15 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     });
 
     this.currentOrder$ = this._store.pipe(select('currentOrder'));
-    this._subscriptions = this.currentOrder$.subscribe((currentOrder) => {
+    this._curOrderSubs = this.currentOrder$.subscribe((currentOrder) => {
       this.currentOrder = currentOrder;
-      console.log('The order, has changed.', currentOrder);
+      if (this._curId === null) {
+        this._curId = currentOrder?.id;
+      }
     })
 
     this._store.dispatch(refreshCustomersRequest());
-    // this._store.dispatch(setCurrentOrderRequest({ order: null }));
+
   }
 
   ngOnInit(): void {
@@ -60,7 +63,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
       });
   }
 
-  openConfirmDialog() {
+  private openConfirmDialog() {
     let message;
     if (this.currentOrder?.articles?.length) {
       message = "You have an order on progress, do you want to save it?"
@@ -87,10 +90,8 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     });
   }
 
-  onCustomerChange(customer: Customer) {
-    console.log('The customer has been changed.', customer)
-    if (!this.currentOrder || isUndefined(this.currentOrder)) {
-      console.log('SET cO')
+  public onCustomerChange(customer: Customer) {
+    if (this.currentOrder === null || isUndefined(this.currentOrder)) {
       const order: Order = {
         description: 'Latest order',
         articles: [],
@@ -100,9 +101,8 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
       }
       this._store.dispatch(setCurrentOrderRequest({ order }));
     } else {
-      console.log('replace cO')
       const order: Order = {
-        id: this.currentOrder.id,
+        id: this._curId,
         description: this.currentOrder.description,
         articles: this.currentOrder.articles,
         amount: this.currentOrder.amount,
@@ -113,8 +113,11 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     }
   }
 
-  onHeaderGoBack() {
-    this._store.dispatch(getCurrentOrderRequest())
+  public onHeaderGoBack() {
+    this._store.dispatch(getCurrentOrderRequest());
+    // To let know the search the navigation is going back and
+    // it needs to be relative to not damage the animations.
+    this._store.dispatch(changedNavigationRequest());
     if (this.currentOrder != null) {
       this.openConfirmDialog();
     } else {
@@ -122,7 +125,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     }
   }
 
-  goBack() {
+  public goBack() {
     this.returnUrl();
   }
 
@@ -148,13 +151,17 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   }
 
   public returnUrl(): void {
-    console.log('return url' + this._returnUrl);
-    this._router.navigate(['/' + this._returnUrl]);
+    setTimeout(()=> {
+      this._router.navigate(['/' + this._returnUrl]);
+    }, 200);
   }
 
   ngOnDestroy(): void {
     if (this._subscriptions) {
       this._subscriptions.unsubscribe();
+    }
+    if (this._curOrderSubs) {
+      this._curOrderSubs.unsubscribe();
     }
   }
 }

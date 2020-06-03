@@ -15,7 +15,6 @@ export class OrderArticleEffects{
     mergeMap(() => {
       return this.orderArticlesService.all().pipe(
         map(orderArticles => {
-          console.log(orderArticles);
           return refreshOrderArticlesDone({ orderArticles })
          }),
         catchError(() => EMPTY)

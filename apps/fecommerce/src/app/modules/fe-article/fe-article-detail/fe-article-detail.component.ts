@@ -83,6 +83,8 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
       this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
     }
     this._store.dispatch(appendOrderArticleRequest({ orderArticle }));
+    if (this.updatedOrder() === null) {
+    }
     this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
     this._router.navigate(['/article']);
   }
