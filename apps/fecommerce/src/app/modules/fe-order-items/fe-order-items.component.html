@@ -1,6 +1,6 @@
 <fe-header [icon]="'keyboard_arrow_left'" [title]="'Order items'" [class]="'mat-headline'" [style]="'center'"></fe-header>
 
-<div class="order-items">
+<div class="order-items" #content id="content">
   <mat-card class="card mat-elevation-z4" (clickOutside)="swipePositions()">
     <mat-card-content >
       <mat-list class="list">
@@ -26,7 +26,8 @@
                 € {{item?.article?.price}}
               </div>
           </div>
-          <div class="delete-button" (click)="tempDelete(item)">
+          <div class="delete-button" [ngStyle]="items[item.id] && items[item.id]?.deleteBtn ? {'z-index' : '0'} : {'z-index' : '-1'} "
+               (click)="tempDelete(item)">
             <mat-icon>
               delete_outline
             </mat-icon>
