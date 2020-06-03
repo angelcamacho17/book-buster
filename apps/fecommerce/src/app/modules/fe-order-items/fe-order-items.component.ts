@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
@@ -116,6 +116,9 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
       } else {
         this.listenToOrderArts();
         this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
+        const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
+        inputElement.click();
+        console.log('here');
       }
     });
 
