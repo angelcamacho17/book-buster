@@ -125,38 +125,6 @@
         }
       }
     },
-    "data-store-lib": {
-      "projectType": "library",
-      "root": "libs/data-store-lib",
-      "sourceRoot": "libs/data-store-lib/src",
-      "prefix": "fecommerce-workspace",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/data-store-lib/tsconfig.lib.json",
-              "libs/data-store-lib/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/data-store-lib/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/data-store-lib/jest.config.js",
-            "tsConfig": "libs/data-store-lib/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/data-store-lib/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "experimental": {
       "projectType": "application",
       "schematics": {
@@ -277,6 +245,38 @@
             "tsConfig": ["apps/experimental-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/experimental-e2e/**"]
           }
+        }
+      }
+    },
+    "data-store-lib": {
+      "projectType": "library",
+      "root": "libs/data-store-lib",
+      "sourceRoot": "libs/data-store-lib/src",
+      "prefix": "fecommerce-workspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/data-store-lib/tsconfig.lib.json",
+              "libs/data-store-lib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/data-store-lib/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/data-store-lib/jest.config.js",
+            "tsConfig": "libs/data-store-lib/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/data-store-lib/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
         }
       }
     }
