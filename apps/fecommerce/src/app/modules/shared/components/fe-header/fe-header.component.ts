@@ -33,15 +33,10 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
     this.url$ = this._storeUrl.pipe(select('backNavigation'));
     this.url$.pipe(takeUntil(this._subscriptions))
     .subscribe(data => {
-      if (data !== 'foward' && data !== 'back') {
         this._backUrl = data;
         if (this._backUrl && this._backUrl!=='') {
-          this._storeUrl.dispatch(changedNavigationRequest());
-          setTimeout(()=> {
-            this._router.navigate(['/'+ this._backUrl]);
-          }, 500);
+          this._router.navigate(['/'+ this._backUrl]);
         }
-      }
     });
   }
 

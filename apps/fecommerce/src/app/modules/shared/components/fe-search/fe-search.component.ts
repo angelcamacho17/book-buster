@@ -1,63 +1,15 @@
-import { Component, Input, OnInit, TemplateRef, OnDestroy, ɵConsole } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, Subscription, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { trigger, style, state, transition, animate } from '@angular/animations';
-import { Store, select } from '@ngrx/store';
-import { Order } from '@fecommerce-workspace/data-store-lib';
+import { Customer } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
   selector: 'fe-search',
   templateUrl: './fe-search.component.html',
-  styleUrls: ['./fe-search.component.scss'],
-  animations: [
-    trigger('card', [
-      // ...
-      state('not-hide', style({
-        position: 'fixed',
-        width: 'auto'
-      })),
-      state('hide', style({
-        position: 'relative',
-        width: 'calc(100% - 32px)'
-      })),
-      transition('hide <=> not-hide', [
-        animate('0s')
-      ]),
-    ]),
-    trigger('title', [
-      // ...
-      state('not-hide', style({
-        position: 'fixed',
-        width: 'calc(100% - 32px)'
-      })),
-      state('hide', style({
-        position: 'relative',
-        width: '100%'
-      })),
-      transition('hide <=> not-hide', [
-        animate('0s')
-      ]),
-    ]),
-    trigger('nodata', [
-      // ...
-      state('not-hide', style({
-        position: 'fixed',
-        width: 'calc(100% - 32px)',
-        top: '199px'
-      })),
-      state('hide', style({
-        position: 'relative',
-        width: 'calc(100% - 32px)',
-        top: '156px'
-      })),
-      transition('hide <=> not-hide', [
-        animate('0s')
-      ]),
-    ])
-  ],
+  styleUrls: ['./fe-search.component.scss']
 })
-export class FeSearchComponent implements OnInit, OnDestroy {
+export class FeSearchComponent implements OnInit {
 
   @Input() list: any[];
   @Input() searchTitle = '';
@@ -70,27 +22,12 @@ export class FeSearchComponent implements OnInit, OnDestroy {
   public stateCtrl = new FormControl();
   public showInitial = true;
   public expandBorder = false;
-  private _subscriptions: Subscription;
-  public navigation$: Observable<string>;
-  public currentOrder: Order;
-  public display = false;
 
-  constructor(private _storeUrl: Store<{ backNavigation: string }>) {
-     this.navigation$ = this._storeUrl.pipe(select('backNavigation'));
-     this._subscriptions = this.navigation$.subscribe((data) => {
-        this.display = false;
-    });
-
-    setTimeout(()=>{
-      this.display = true;
-    }, 300)
-
+  constructor() {
     this.filteredlist = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
-        // tslint:disable-next-line:no-shadowed-variable
         map(state => {
-          // tslint:disable-next-line:no-shadowed-variable
           if(state) {
             this._filteredResult = this._filterStates(state);
             this.showInitial = this._filteredResult.length === 0;
@@ -111,15 +48,9 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     this.expandBorder = false;
   }
 
-  ngOnDestroy(): void {
-    if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
-    }
-  }
-
   private _filterStates(value: string): any[] {
     const filterValue = value.toLowerCase();
-    // tslint:disable-next-line:no-shadowed-variable
+
     return this.list.filter((state: any) => state.name.toLowerCase().indexOf(filterValue) === 0);
   }
 

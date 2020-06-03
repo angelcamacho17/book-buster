@@ -65,12 +65,7 @@ export class FeCustomerRowComponent implements OnDestroy {
   public onSelectCustomer(customer: Customer): void {
     this.eventService.customerChanged(customer);
     this._store.dispatch(getCurrentOrderRequest());
-    // To let know the search the navigation is going back and
-    // it needs to be relative to not damage the animations.
-    this._store.dispatch(changedNavigationRequest());
-    setTimeout(() => {
-      this.router.navigate(['/article']);
-    }, 700);
+    this.router.navigate(['/article']);
   }
 
   ngOnDestroy(): void {

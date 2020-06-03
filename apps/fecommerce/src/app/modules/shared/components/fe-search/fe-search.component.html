@@ -1,6 +1,6 @@
-<mat-card [@card]="display ? 'not-hide' : 'hide'" class="search-container mat-elevation-z2"
+<mat-card class="search-container mat-elevation-z2"
           [ngClass]="expandBorder ? 'expand-card' : ''">
-  <div [@title]="display ? 'not-hide' : 'hide'" class="mat-headline title mat-elevation-z2" *ngIf="!small">
+  <div class="mat-headline title mat-elevation-z2" *ngIf="!small">
     <span style="padding-left: 16px;">
       {{searchTitle }}
     </span>
@@ -35,7 +35,7 @@
       </button>
   </div>
 </mat-card>
-<mat-card [@nodata]="display ? 'not-hide' : 'hide'" *ngIf="showInitial && !small" class="mat-subheading-2 no-data">
+<mat-card *ngIf="showInitial && !small" class="mat-subheading-2 no-data">
   <div>
     Please use the search bar on top to find the
   </div>
@@ -43,3 +43,4 @@
     customer you want to assign.
   </div>
 </mat-card>
+

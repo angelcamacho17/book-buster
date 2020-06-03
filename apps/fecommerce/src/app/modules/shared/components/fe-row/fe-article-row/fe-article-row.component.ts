@@ -20,11 +20,6 @@ export class FeArticleRowComponent implements OnInit {
   }
 
   openArticleDetail(item) {
-    // To let know the search the navigation is going back and
-    // it needs to be relative to not damage the animations.
-    this._store.dispatch(changedNavigationRequest());
-    setTimeout(()=> {
-      this._router.navigate(['/article/detail', item.id]);
-    }, 500)
+    this._router.navigate(['/article/detail', item.id]);
   }
 }

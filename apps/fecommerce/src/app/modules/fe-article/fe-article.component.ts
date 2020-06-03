@@ -44,12 +44,6 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   }
 
   public overviewOrder(): void {
-    // To let know the search the navigation is going back and
-    // it needs to be relative to not damage the animations.
-    this._store.dispatch(changedNavigationRequest());
-    setTimeout(() => {
-      this._router.navigate(['/order']);
-    }, 100);
-
+    this._router.navigate(['/order']);
   }
 }

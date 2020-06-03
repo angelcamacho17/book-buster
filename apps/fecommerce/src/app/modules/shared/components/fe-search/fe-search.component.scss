@@ -1,3 +1,6 @@
+
+
+
 @media screen and (max-height: 403px){
   .search-container {
     display: none;
@@ -8,8 +11,9 @@
 }
 
 .search-container {
-  position: fixed;
+  position: relative;
   padding: 0 !important;
+  width: calc(100% - 32px);
   top: 94px;
   right: 16px;
   left: 16px;
@@ -22,10 +26,10 @@
 
   .title {
     margin: 0 !important;
-    position: fixed;
+    position: relative;
     padding-top: 26px;
     background: #ffffff;
-    width: calc(100% - 32px);
+    width: 100%;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
     padding-bottom: 50px;
@@ -88,6 +92,7 @@
   height: 18px;
   padding: 16px 12px !important;
   border-bottom: 2px solid #dedede;
+  width: calc(100% - 56px);
 
 }
 
@@ -98,11 +103,11 @@
 }
 
 .no-data {
-  position: fixed;
-  width: auto;
+  position: relative;
+  width: calc(100% - 32px);
   right: 16px;
   left: 16px;
-  top: 199px;
+  top: 156px;
   padding: 0 !important;
   // border-top: solid 1px rgba(0, 0, 0, 0.1);
   border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
@@ -137,3 +142,4 @@
 ::ng-deep .mat-form-field-underline {
   display: none;
 }
+

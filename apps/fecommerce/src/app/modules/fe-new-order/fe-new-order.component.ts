@@ -151,9 +151,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   }
 
   public returnUrl(): void {
-    setTimeout(()=> {
-      this._router.navigate(['/' + this._returnUrl]);
-    }, 200);
+    this._router.navigate(['/' + this._returnUrl]);
   }
 
   ngOnDestroy(): void {
