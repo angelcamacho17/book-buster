@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 @Component({
-  selector: 'fecommerce-workspace-row',
+  selector: 'fe-row',
   templateUrl: './fe-row.component.html',
   styleUrls: ['./fe-row.component.css']
 })

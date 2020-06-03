@@ -10,7 +10,7 @@ export interface DialogData {
 
 
 @Component({
-  selector: 'fecommerce-workspace-dialog',
+  selector: 'fe-dialog',
   templateUrl: './fe-dialog.component.html',
   styleUrls: ['./fe-dialog.component.scss']
 })

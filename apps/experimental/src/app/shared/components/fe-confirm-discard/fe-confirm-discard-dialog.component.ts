@@ -10,7 +10,7 @@ interface DialogData {
 }
 
 @Component({
-  selector: 'fecommerce-workspace-confirm-discard-dialog',
+  selector: 'fe-confirm-discard-dialog',
   templateUrl: './fe-confirm-discard-dialog.component.html',
   styleUrls: ['./fe-confirm-discard-dialog.component.scss']
 })
