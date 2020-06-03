@@ -1,0 +1,51 @@
+.customer-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .avatar {
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 40px;
+    width: 49.28px;
+    border-radius: 50%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+    color: rgba(0, 0, 0, .87);
+    text-align: center;
+    margin: 0 16px;
+  }
+
+  .item {
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 71px;
+    justify-content: space-between;
+    align-items: center;
+
+    .item-info {
+
+      .title {
+        margin: 0 !important;
+        height: 28px;
+        color: rgba(0, 0, 0, 0.87);
+      }
+
+      .subtitle {
+        margin: 0 !important;
+        color: rgba(0, 0, 0, 0.6);
+      }
+    }
+  }
+}
+
+::ng-deep .mat-option-text {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex !important;
+  justify-content: flex-end;
+  align-items: center;
+}

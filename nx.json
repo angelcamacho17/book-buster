@@ -28,6 +28,13 @@
     },
     "data-store-lib": {
       "tags": []
+    },
+    "experimental": {
+      "tags": []
+    },
+    "experimental-e2e": {
+      "tags": [],
+      "implicitDependencies": ["experimental"]
     }
   }
 }
