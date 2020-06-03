@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Article, Order, refreshArticlesRequest } from '@fecommerce-workspace/data-store-lib';
+import { Article, Order, refreshArticlesRequest, changedNavigationRequest, setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { FeArticleRowComponent } from '../shared/components/fe-row/fe-article-row/fe-article-row.component';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -19,9 +19,13 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   // private _currentOrder$: Observable<Order>;
   // public currentOrder: Order;
   private _subscriptions: Subscription;
+  public display = false;
+  public navigation$: Observable<string>;
 
-  constructor(private _store: Store<{ articles: Article[], currentOrder: Order }>,
+
+  constructor(private _store: Store<{ articles: Article[], currentOrder: Order, backNavigation: string }>,
     private _router: Router) {
+
     this._articles$ = this._store.pipe(select('articles'));
 
     this._subscriptions = this._articles$.subscribe(data => {
@@ -39,12 +43,10 @@ export class FeArticleComponent implements OnInit, OnDestroy {
     }
   }
 
-  public returnUrl(): void {
-    this._router.navigate(['/neworder']);
-  }
-
   public overviewOrder(): void {
-
+    // To let know the search the navigation is going back and
+    // it needs to be relative to not damage the animations.
+    this._store.dispatch(changedNavigationRequest());
     setTimeout(() => {
       this._router.navigate(['/order']);
     }, 100);

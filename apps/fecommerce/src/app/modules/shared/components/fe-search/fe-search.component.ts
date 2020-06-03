@@ -1,8 +1,10 @@
-import { Component, Input, OnInit, TemplateRef, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, OnDestroy, ɵConsole } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { trigger, style, state, transition, animate } from '@angular/animations';
+import { Store, select } from '@ngrx/store';
+import { Order } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
   selector: 'fe-search',
@@ -12,13 +14,14 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
     trigger('card', [
       // ...
       state('not-hide', style({
-        position: 'fixed'
+        position: 'fixed',
+        width: 'auto'
       })),
       state('hide', style({
         position: 'relative',
         width: 'calc(100% - 32px)'
       })),
-      transition('hide => not-hide', [
+      transition('hide <=> not-hide', [
         animate('0s')
       ]),
     ]),
@@ -32,7 +35,7 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
         position: 'relative',
         width: '100%'
       })),
-      transition('hide => not-hide', [
+      transition('hide <=> not-hide', [
         animate('0s')
       ]),
     ]),
@@ -48,7 +51,7 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
         width: 'calc(100% - 32px)',
         top: '156px'
       })),
-      transition('hide => not-hide', [
+      transition('hide <=> not-hide', [
         animate('0s')
       ]),
     ])
@@ -67,12 +70,21 @@ export class FeSearchComponent implements OnInit, OnDestroy {
   public stateCtrl = new FormControl();
   public showInitial = true;
   public expandBorder = false;
+  private _subscriptions: Subscription;
+  public navigation$: Observable<string>;
+  public currentOrder: Order;
   public display = false;
 
-  constructor() {
+  constructor(private _storeUrl: Store<{ backNavigation: string }>) {
+     this.navigation$ = this._storeUrl.pipe(select('backNavigation'));
+     this._subscriptions = this.navigation$.subscribe((data) => {
+        this.display = false;
+    });
+
     setTimeout(()=>{
       this.display = true;
-    }, 1000)
+    }, 300)
+
     this.filteredlist = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -100,7 +112,9 @@ export class FeSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.display = false;
+    if (this._subscriptions) {
+      this._subscriptions.unsubscribe();
+    }
   }
 
   private _filterStates(value: string): any[] {

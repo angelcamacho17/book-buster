@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../shared/modules/material/material.module';
+import { DataStoreModule } from '@fecommerce-workspace/data-store-lib';
 
 @NgModule({
   declarations: [FeNewOrderComponent],

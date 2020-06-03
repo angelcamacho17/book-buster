@@ -15,7 +15,9 @@ export const ordersReducer = createReducer<Order[]>(initialOrders.orders,
 );
 
 export const currentOrderReducer = createReducer<Order>(initialOrder.order,
-  on(refreshOrderDone, (_, action) => action.order),
+  on(refreshOrderDone, (_, action) => {
+    return action.order
+  }),
   on(refreshOrderSetted, (_, action) => null),
 );
 

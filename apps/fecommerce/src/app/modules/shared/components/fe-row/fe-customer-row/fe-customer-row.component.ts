@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, Output, EventEmitter } from '@angular/core
 import { Observable, of, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Order, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest, Customer, AuthService, getCurrentOrderRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Order, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest, Customer, AuthService, getCurrentOrderRequest, replaceCurrentOrderRequest, changedNavigationRequest } from '@fecommerce-workspace/data-store-lib';
 import { isUndefined } from 'util';
 import { EventService } from '../../../services/event.service';
 
@@ -64,9 +64,13 @@ export class FeCustomerRowComponent implements OnDestroy {
 
   public onSelectCustomer(customer: Customer): void {
     this.eventService.customerChanged(customer);
+    this._store.dispatch(getCurrentOrderRequest());
+    // To let know the search the navigation is going back and
+    // it needs to be relative to not damage the animations.
+    this._store.dispatch(changedNavigationRequest());
     setTimeout(() => {
       this.router.navigate(['/article']);
-    }, 100);
+    }, 700);
   }
 
   ngOnDestroy(): void {

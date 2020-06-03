@@ -118,7 +118,6 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
         this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
         const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
         inputElement.click();
-        console.log('here');
       }
     });
 
