@@ -23,6 +23,7 @@ export * from './lib/models/back-navigation.model';
 /* Services exports */
 
 export * from './lib/order/order.service';
+export * from './lib/order-articles/order-articles.service';
 
 export * from './lib/sdp/config/config.service';
 export * from './lib/sdp/config/initializer.service';

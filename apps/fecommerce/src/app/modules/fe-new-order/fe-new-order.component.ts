@@ -115,9 +115,6 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
 
   public onHeaderGoBack() {
     this._store.dispatch(getCurrentOrderRequest());
-    // To let know the search the navigation is going back and
-    // it needs to be relative to not damage the animations.
-    this._store.dispatch(changedNavigationRequest());
     if (this.currentOrder != null) {
       this.openConfirmDialog();
     } else {

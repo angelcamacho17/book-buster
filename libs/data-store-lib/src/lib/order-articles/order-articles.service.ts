@@ -51,4 +51,21 @@ export class OrderArticlesService {
       return of(this._orderArticles);
     }
 
+    public getTotal(): number {
+      if (this._orderArticles == null) {
+        return 0;
+      }
+
+      let total = 0;
+      for (const orderArticle of this._orderArticles) {
+        total = total + (orderArticle.article.price * orderArticle.quantity);
+      }
+      // Adding VAT
+      total = total + 10.55;
+      // Substracting discounts
+      total = total - 45.13
+
+      return Math.round(total * 100) / 100;
+    }
+
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
-import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
+import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest, OrderArticlesService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { startWith, map } from 'rxjs/operators';
@@ -26,7 +26,8 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _snackBar: MatSnackBar,
-    private _storeOrdArt: Store<{ orderArticles: OrderArticle[] }>) {
+    private _storeOrdArt: Store<{ orderArticles: OrderArticle[] }>,
+    private _ordArtsService: OrderArticlesService) {
     this.$articles = this._storeOrdArt.pipe(select('orderArticles'));
     this.listenToOrderArts();
     this.swipePositions();
@@ -45,19 +46,6 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
     if (this._subscriptions) {
       this._subscriptions.unsubscribe();
     }
-  }
-
-  public getTotal(): number {
-    if (this.articles == null) {
-      return 0;
-    }
-
-    let total = 0;
-    for (const orderArticle of this.articles) {
-      total = total + orderArticle.article.price;
-    }
-
-    return Math.round(total * 100) / 100;
   }
 
   public dragMoved(event, item): void {
@@ -150,6 +138,10 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
         }
       }
     }
+  }
+
+  public getTotal(): number {
+    return this._ordArtsService.getTotal();
   }
 
 }
