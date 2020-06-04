@@ -17,7 +17,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   public items: any = [];
   public initialPos = { x: 0, y: 0};
   private _subscriptions: Subscription;
-  public totalAmount = 0;
+  private _substractArt = 0;
   public filteredlist: Observable<any[]>;
   public horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   public showDeleteBtn = false;
@@ -39,6 +39,9 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // If the time of the snackbar
+    // hasnt past yet, and the user wnats tyo go back
+    // delete the article and dismiss snackbar
     if(this.waitToDeleted) {
       this.deleteArticle(this.articleToDelete);
       this._snackBar.dismiss();
@@ -65,6 +68,8 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
       };
     }
     this.swipePositions(item);
+    this._snackBar.dismiss();
+
   }
 
   public dragStarted(event, item): void {
@@ -74,11 +79,11 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
     }
   }
 
-  private deleteArticle(article): void {
+  private deleteArticle(article: OrderArticle): void {
     this._storeOrdArt.dispatch(deleteOrderArticleRequest({orderArticleId: article.id}));
   }
 
-  public tempDelete(article): void {
+  public tempDelete(article: OrderArticle): void {
     this.waitToDeleted = true;
     this.articleToDelete = article;
     // Reset swipe positions of the articles
@@ -86,6 +91,8 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
     // Delete temporally to article
     this.articles = this.articles.filter(obj => obj !== article);
+    // Substract from total temporally
+    this.substractTemp(article);
 
     // Update with temporally delete
     this.filteredlist = of(this.articles);
@@ -104,9 +111,10 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
       } else {
         this.listenToOrderArts();
         this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
-        const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
-        inputElement.click();
       }
+      this._substractArt = 0;
+      const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
+      inputElement.click();
     });
 
   }
@@ -141,7 +149,13 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public getTotal(): number {
-    return this._ordArtsService.getTotal();
+    let total = this._ordArtsService.getTotal() - this._substractArt;
+    total = Math.round(total * 100) / 100;
+    return total > 0 ? total : 0;
+  }
+
+  private substractTemp(article: OrderArticle): void {
+    this._substractArt = article.quantity * article.article.price;
   }
 
 }

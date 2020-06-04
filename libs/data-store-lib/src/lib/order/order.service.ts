@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Order } from '../models/order.model';
 import { Observable, BehaviorSubject, of, EMPTY } from 'rxjs';
 import { OrderArticle } from '../models/order-article.model';
+import { OrderArticlesService } from '../order-articles/order-articles.service';
 
 @Injectable({
   providedIn: 'root'
@@ -137,7 +138,8 @@ export class OrderService {
   public orders = new BehaviorSubject<Order[]>(this._orders);
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private _ordArtsService: OrderArticlesService
   ) { }
 
   public all(): Observable<Order[]> {
@@ -166,7 +168,7 @@ export class OrderService {
       id: this.currentOrder.id,
       customer: order.customer,
       description: this.currentOrder.description,
-      amount: this.calculateTotal(order),
+      amount: this._ordArtsService.getTotal(),
       createdBy: this.currentOrder.createdBy,
       articles: this.currentOrder.articles
     };
@@ -230,8 +232,12 @@ export class OrderService {
   private calculateTotal(order: Order): number {
     let total = 0;
     for (const orderArticle of order.articles) {
-      total = total + orderArticle.article.price;
+      total = total + (orderArticle.article.price * orderArticle.quantity);
     }
+    // Adding VAT
+    total = total + 10.55;
+    // Substracting discounts
+    total = total - 45.13
     return Math.round(total * 100) / 100;
   }
 }

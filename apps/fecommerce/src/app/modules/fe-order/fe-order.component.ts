@@ -120,7 +120,9 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   }
 
   public getTotal(): number {
-    return this._ordArtsService.getTotal();
+    let total = this._ordArtsService.getTotal() ;
+    total = Math.round(total * 100) / 100;
+    return total > 0 ? total : 0;
   }
 
   ngOnDestroy(): void {
