@@ -1,5 +1,4 @@
-<mat-card class="search-container mat-elevation-z2"
-          [ngClass]="expandBorder ? 'expand-card' : ''">
+<mat-card class="search-container mat-elevation-z2">
   <div class="mat-headline title mat-elevation-z2" *ngIf="!small">
     <span style="padding-left: 16px;">
       {{searchTitle }}
@@ -19,10 +18,9 @@
               color="accent">
         <mat-placeholder class="mat-subheading-2 placeholder">Search...</mat-placeholder>
         <mat-autocomplete #auto="matAutocomplete"
-                          class="autocomplete"
                           (closed)="closeSearch()"
                           (opened)="openSearch()"
-                          >
+                          class="autocomplete">
           <mat-option *ngFor="let item of filteredlist | async" style="height: 72px;
                             display: flex;
                             padding: 0;" >

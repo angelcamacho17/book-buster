@@ -8,6 +8,7 @@
   padding: 0 16px;
 
   .item-info {
+    width: calc(100% - 32px);
 
     .title {
       margin: 0 !important;
@@ -18,6 +19,10 @@
     .subtitle {
       margin: 0 !important;
       color: rgba(0, 0, 0, 0.6);
+      overflow-x: hidden;
+      width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }
