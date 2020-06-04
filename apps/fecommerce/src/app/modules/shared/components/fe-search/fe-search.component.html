@@ -1,11 +1,10 @@
 <mat-card class="search-container mat-elevation-z2">
-  <div class="mat-headline title mat-elevation-z2" *ngIf="!small">
+  <!-- <div class="mat-headline title mat-elevation-z2" *ngIf="!small">
     <span style="padding-left: 16px;">
       {{searchTitle }}
     </span>
-  </div>
-  <div class="search-field"
-       [ngStyle]="!small? {'top': '56px'} : {'top':'0px'}">
+  </div> -->
+  <div class="search-field">
     <mat-icon style="color:rgba(0, 0, 0, 0.6)">search</mat-icon>
     <mat-form-field class="search-bar" floatLabel="never">
       <input matInput
@@ -33,12 +32,12 @@
       </button>
   </div>
 </mat-card>
-<mat-card *ngIf="showInitial && !small" class="mat-subheading-2 no-data">
+<!-- <mat-card *ngIf="showInitial && !small" class="mat-subheading-2 no-data">
   <div>
     Please use the search bar on top to find the
   </div>
   <div>
     customer you want to assign.
   </div>
-</mat-card>
+</mat-card> -->
 

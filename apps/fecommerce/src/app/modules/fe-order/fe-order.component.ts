@@ -72,7 +72,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
       id: this.order?.id,
       description: this.order.description,
       articles: this.articles,
-      amount: this.order.amount,
+      amount: this.getTotal(),
       customer: this.order.customer,
       createdBy: this.order.createdBy
     };

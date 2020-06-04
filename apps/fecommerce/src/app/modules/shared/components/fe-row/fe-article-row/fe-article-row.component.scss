@@ -8,22 +8,38 @@
   padding: 0 16px;
 
   .item-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: calc(100% - 32px);
 
-    .title {
+    .info {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+
+      .title {
+        margin: 0 !important;
+        height: 28px;
+        color: rgba(0, 0, 0, 0.87);
+      }
+
+      .subtitle {
+        margin: 0 !important;
+        color: rgba(0, 0, 0, 0.6);
+        overflow-x: hidden;
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+    }
+
+    .price {
       margin: 0 !important;
-      height: 28px;
       color: rgba(0, 0, 0, 0.87);
     }
 
-    .subtitle {
-      margin: 0 !important;
-      color: rgba(0, 0, 0, 0.6);
-      overflow-x: hidden;
-      width: 100%;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
   }
 }
 
