@@ -4,10 +4,14 @@
            [currentUrl]="'article'"
            [headerSearch]="true"
            [style]="'center'"></fe-header>
-<fe-search [list]="articles" [itemType]="rowType" [small]="true"></fe-search>
+<fe-search [list]="articles"
+           (searching)="hidePanel($event)"
+           (darker)="showShadow($event)"
+           [itemType]="rowType"
+           [small]="true"></fe-search>
 
-<div class="container" >
-  <div class="no-results">
+<div class="container" [ngClass]="shadow ? 'shadow' : ''">
+  <div class="no-results" *ngIf="!hide" (click)="removeDark()">
     <mat-icon class="icon">search</mat-icon>
     <div class="mat-title search-text">Search articles</div>
     <div class="mat-subheading-2 search-description">Find stock, sales & … info</div>

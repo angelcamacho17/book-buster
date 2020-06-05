@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Customer } from '@fecommerce-workspace/data-store-lib';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'fe-search',
@@ -16,6 +17,9 @@ export class FeSearchComponent implements OnInit {
   @Input() itemType: any;
   @Input() small = false;
   @Input() templateRef: TemplateRef<any>;
+  @Output() searching = new EventEmitter<boolean>();
+  @Output() darker = new EventEmitter<boolean>();
+  @ViewChild('input') input: ElementRef;
   public noTitle = false;
   private _filteredResult = [];
   public filteredlist: Observable<any[]>;
@@ -24,22 +28,36 @@ export class FeSearchComponent implements OnInit {
   public expandBorder = false;
 
   constructor() {
+
     this.filteredlist = this.stateCtrl.valueChanges
       .pipe(
-        startWith(''),
         map(state => {
           if(state) {
-            this._filteredResult = this._filterStates(state);
-            this.showInitial = this._filteredResult.length === 0;
-            if (this.small) {
-              this.expandBorder = !this.showInitial;
+            if (state.length < 3) {
+              this.searching.emit(false);
+              this.darker.emit(true);
+              return [];
+            } else {
+              this._filteredResult = this._filterStates(state);
+              if (this._filteredResult.length > 0) {
+                this.searching.emit(true);
+                this.darker.emit(false);
+              } else {
+                this.searching.emit(false);
+                this.darker.emit(true);
+              }
+              return this._filteredResult;
             }
-            return this._filteredResult;
+
           } else {
-           return this.list.slice();
+           return [];
           }
         })
       );
+  }
+
+  public onFocus(): void {
+    this.darker.emit(true);
   }
 
   ngOnInit(): void {
