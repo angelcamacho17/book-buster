@@ -29,6 +29,8 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   private _curOrderSubs: Subscription;
   private _returnUrl = 'home'
   private _curId: number = null;
+  public hide = false;
+  public shadow = false;
 
   constructor(
     private eventService: EventService,
@@ -149,6 +151,14 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
 
   public returnUrl(): void {
     this._router.navigate(['/' + this._returnUrl]);
+  }
+
+  public hidePanel(hide: boolean): void {
+    this.hide = hide;
+  }
+
+  public showShadow(shadow: boolean): void {
+    this.shadow = shadow;
   }
 
   ngOnDestroy(): void {

@@ -21,7 +21,8 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   private _subscriptions: Subscription;
   public display = false;
   public navigation$: Observable<string>;
-
+  public hide = false;
+  public shadow = false;
 
   constructor(private _store: Store<{ articles: Article[], currentOrder: Order, backNavigation: string }>,
     private _router: Router) {
@@ -45,5 +46,18 @@ export class FeArticleComponent implements OnInit, OnDestroy {
 
   public overviewOrder(): void {
     this._router.navigate(['/order']);
+  }
+
+  public hidePanel(hide: boolean): void {
+    this.hide = hide;
+  }
+
+  public showShadow(shadow: boolean): void {
+    this.shadow = shadow;
+  }
+
+  public removeDark(): void {
+    this.shadow = false;
+    this.hide = false;
   }
 }

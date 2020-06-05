@@ -72,7 +72,6 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public dragStarted(event, item): void {
-    console.log('staarted');
     // If a snackbar was already open, close it.
     if ( this._snackBar._openedSnackBarRef) {
       this._snackBar.dismiss();

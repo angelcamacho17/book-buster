@@ -6,9 +6,14 @@
            [headerSearch]="true"
            (goBack)="onHeaderGoBack()"
            (returnUrl)="returnUrl()"></fe-header>
-<fe-search (customerChange)="onCustomerChange($event)" [list]="customers" [itemType]="rowType" [small]="true"></fe-search>
-<div class="container" >
-  <div class="no-results">
+<fe-search (customerChange)="onCustomerChange($event)"
+           (searching)="hidePanel($event)"
+           (darker)="showShadow($event)"
+           [list]="customers"
+           [itemType]="rowType"
+           [small]="true"></fe-search>
+<div class="container" [ngClass]="shadow ? 'shadow' : ''">
+  <div class="no-results" *ngIf="!hide">
     <mat-icon class="icon">search</mat-icon>
     <div class="mat-title search-text">Search customers</div>
     <div class="mat-subheading-2 search-description">Find name, contact & compamny info</div>
