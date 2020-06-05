@@ -106,8 +106,8 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
       this.waitToDeleted = false;
       this.articleToDelete = null;
       if (!action.dismissedByAction) {
-        this.listenToOrderArts();
         this.deleteArticle(article);
+        this.listenToOrderArts();
       } else {
         this.listenToOrderArts();
         this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
