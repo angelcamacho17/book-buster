@@ -1,25 +1,22 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FeHomeComponent } from './fe-home.component';
+import { FeOrderComponent } from './fe-order.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../shared/modules/material/material.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
 @NgModule({
-  declarations: [FeHomeComponent],
+  declarations: [FeOrderComponent],
   imports: [
     CommonModule,
     HttpClientModule,
-    RouterModule.forChild([{ path: '', component: FeHomeComponent }]),
+    RouterModule.forChild([{ path: '', component: FeOrderComponent }]),
     MaterialModule,
     SharedModule
   ],
-  exports: [
-    FeHomeComponent
-  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class FeHomeModule { }
+export class FeOrderModule { }

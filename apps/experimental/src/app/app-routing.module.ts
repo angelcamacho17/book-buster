@@ -5,31 +5,13 @@ import { CustomerKeyResolver, FeLoginGuard, FeAuthGuard } from '@fecommerce-work
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: 'home',
-    loadChildren: () => import('./modules/fe-home/fe-home.module').then(m => m.FeHomeModule),
-    data: { animation: 'home' },
-    //canActivate: [FeAuthGuard]
+    path: 'login',
+    loadChildren: () => import('./modules/fe-login/fe-login.module').then(m => m.FeLoginModule),
+    data: { animation: 'login' },
+    //canActivate: [FeLoginGuard]
   },
-  { path: '**', redirectTo: 'home' }
-];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
-
-/* 
-const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  // {
-  //   path: 'login',
-  //   loadChildren: () => import('./modules/fe-login/fe-login.module').then(m => m.FeLoginModule),
-  //   data: { animation: 'login' },
-  //   //canActivate: [FeLoginGuard]
-  // },
   {
     path: 'home',
     loadChildren: () => import('./modules/fe-home/fe-home.module').then(m => m.FeHomeModule),
@@ -72,6 +54,12 @@ const routes: Routes = [
   //   pathMatch: 'full',
   //   resolve: { customerKey: CustomerKeyResolver },
   // },
-  { path: '**', redirectTo: 'home' }
+  { path: '**', redirectTo: 'login' }
 ];
- */
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+

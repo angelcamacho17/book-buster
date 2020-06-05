@@ -134,7 +134,7 @@
       },
       "root": "apps/experimental",
       "sourceRoot": "apps/experimental/src",
-      "prefix": "fecommerce-workspace",
+      "prefix": "fe",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",

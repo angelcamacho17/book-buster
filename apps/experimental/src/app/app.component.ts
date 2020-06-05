@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { routesAnimations } from './animations/routes.animation';
+
 @Component({
-  selector: 'fe-root',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
@@ -10,8 +11,7 @@ import { routesAnimations } from './animations/routes.animation';
   ]
 })
 export class AppComponent {
-  title = 'experimental';
-
+  title = 'fecommerce';
 
   prepareRoute(outlet: RouterOutlet) {
     /* tslint:disable:no-string-literal */

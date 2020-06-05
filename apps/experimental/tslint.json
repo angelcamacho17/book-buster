@@ -4,7 +4,7 @@
     "directive-selector": [
       true,
       "attribute",
-      "fecommerceWorkspace",
+      "fe",
       "camelCase"
     ],
     "component-selector": [

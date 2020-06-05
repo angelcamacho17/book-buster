@@ -1,0 +1,117 @@
+.order-items {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  right: 15px;
+  left: 16px;
+  top: 94px;
+  bottom: 16px;
+  justify-content: space-between;
+
+  .card {
+    overflow: auto;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 0;
+    display: inline-block;
+    overflow: hidden;
+    background: linear-gradient(90deg, #ffffff 80%, #E02020 50%);
+    position: fixed;
+    width: calc(100% - 32px);
+
+    .list {
+      position: relative;
+      max-height: 384px;
+      padding-top: 0 !important;
+      padding-left: 16px;
+      width: 100%;
+      overflow: hidden;
+      //width: calc(100% - 49px);
+
+        .list-item {
+          width: calc(100% - 15px);
+          position: relative;
+          z-index: 14;
+          padding-left: 64px;
+          overflow: hidden;
+          left: -64px;
+
+          .content {
+            z-index: 2;
+            background:#ffffff;
+            display: inline-flex;
+            padding: 10px 0;
+            width: calc(100% - 16px);
+            justify-content: space-between;
+            height: 44px;
+            padding-right: 16px;
+            border-top: 1px solid #dadada;
+            overflow: hidden;
+
+              .info {
+                  display: flex;
+                  flex-flow: column;
+                  justify-content: space-evenly;
+                  color: rgba(0, 0, 0, 0.87);
+                  height: 100%;
+                  max-width: 240px;
+              }
+
+              .price {
+                  display: flex;
+                  height: 100%;
+                  color: #1666D8;
+                  align-self: center;
+              }
+            }
+
+            .divider {
+                position: relative;
+                color: green;
+                width: calc(100% + 16px);
+            }
+        }
+
+        .delete-button {
+          z-index: -1;
+          position: absolute;
+          top: 0;
+          height: 64px;
+          width: 64px;
+          color: #ffffff;
+          border-top: 1px solid rgba(255, 255, 255, 0);
+          background: transparent;
+          right: 0px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+    }
+
+  }
+
+  .total {
+    border-radius: 8px;
+    position: fixed;
+    bottom: 32px;
+    width: calc(100% - 64px);
+
+    .info-total {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+
+    }
+
+    .order-total {
+      @extend .info-total;
+      padding-top: 16px;
+
+    }
+
+  }
+
+
+}
