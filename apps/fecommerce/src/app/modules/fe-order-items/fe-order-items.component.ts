@@ -68,14 +68,14 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
       };
     }
     this.swipePositions(item);
-    this._snackBar.dismiss();
 
   }
 
   public dragStarted(event, item): void {
-
-    this.items[item?.id] = {
-      deleteBtn: true
+    console.log('staarted');
+    // If a snackbar was already open, close it.
+    if ( this._snackBar._openedSnackBarRef) {
+      this._snackBar.dismiss();
     }
   }
 
@@ -84,6 +84,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public tempDelete(article: OrderArticle): void {
+
     this.waitToDeleted = true;
     this.articleToDelete = article;
     // Reset swipe positions of the articles

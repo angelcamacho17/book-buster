@@ -11,6 +11,7 @@
                  cdkDragBoundary=".list-item"
                  cdkDrag
                  (click)="dragStarted(item)"
+                 (cdkDragStarted) = "dragStarted($event, item)"
                  (cdkDragEnded) = "dragMoved($event, item)"
                  [cdkDragFreeDragPosition]="items[item?.id] ? items[item?.id] : initialPos"
                  >

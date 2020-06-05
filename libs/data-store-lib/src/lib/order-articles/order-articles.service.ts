@@ -63,7 +63,11 @@ export class OrderArticlesService {
       // Adding VAT
       total = total + 10.55;
       // Substracting discounts
-      total = total - 45.13
+      total = total - 45.13;
+
+      if (total < 0) {
+        total = 0;
+      }
 
       return Math.round(total * 100) / 100;
     }
