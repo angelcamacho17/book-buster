@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -28,7 +28,8 @@ export class FeOrderComponent implements OnInit, OnDestroy {
     private _store: Store<{ currentOrder: Order, orderArticles: OrderArticle[] }>,
     private _snackBar: MatSnackBar,
     private _router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _ordArtsService: OrderArticlesService
   ) {
 
     this.$articles = this._store.pipe(select('orderArticles'));
@@ -71,7 +72,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
       id: this.order?.id,
       description: this.order.description,
       articles: this.articles,
-      amount: this.order.amount,
+      amount: this.getTotal(),
       customer: this.order.customer,
       createdBy: this.order.createdBy
     };
@@ -116,6 +117,12 @@ export class FeOrderComponent implements OnInit, OnDestroy {
 
   public returnUrl(): void {
     this._router.navigate(['/home']);
+  }
+
+  public getTotal(): number {
+    let total = this._ordArtsService.getTotal() ;
+    total = Math.round(total * 100) / 100;
+    return total > 0 ? total : 0;
   }
 
   ngOnDestroy(): void {

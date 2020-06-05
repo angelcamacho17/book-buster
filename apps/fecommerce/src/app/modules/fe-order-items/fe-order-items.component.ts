@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
-import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
+import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest, OrderArticlesService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { startWith, map } from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   public items: any = [];
   public initialPos = { x: 0, y: 0};
   private _subscriptions: Subscription;
-  public totalAmount = 0;
+  private _substractArt = 0;
   public filteredlist: Observable<any[]>;
   public horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   public showDeleteBtn = false;
@@ -26,7 +26,8 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _snackBar: MatSnackBar,
-    private _storeOrdArt: Store<{ orderArticles: OrderArticle[] }>) {
+    private _storeOrdArt: Store<{ orderArticles: OrderArticle[] }>,
+    private _ordArtsService: OrderArticlesService) {
     this.$articles = this._storeOrdArt.pipe(select('orderArticles'));
     this.listenToOrderArts();
     this.swipePositions();
@@ -38,6 +39,9 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // If the time of the snackbar
+    // hasnt past yet, and the user wnats tyo go back
+    // delete the article and dismiss snackbar
     if(this.waitToDeleted) {
       this.deleteArticle(this.articleToDelete);
       this._snackBar.dismiss();
@@ -45,19 +49,6 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
     if (this._subscriptions) {
       this._subscriptions.unsubscribe();
     }
-  }
-
-  public getTotal(): number {
-    if (this.articles == null) {
-      return 0;
-    }
-
-    let total = 0;
-    for (const orderArticle of this.articles) {
-      total = total + orderArticle.article.price;
-    }
-
-    return Math.round(total * 100) / 100;
   }
 
   public dragMoved(event, item): void {
@@ -77,20 +68,23 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
       };
     }
     this.swipePositions(item);
+
   }
 
   public dragStarted(event, item): void {
-
-    this.items[item?.id] = {
-      deleteBtn: true
+    console.log('staarted');
+    // If a snackbar was already open, close it.
+    if ( this._snackBar._openedSnackBarRef) {
+      this._snackBar.dismiss();
     }
   }
 
-  private deleteArticle(article): void {
+  private deleteArticle(article: OrderArticle): void {
     this._storeOrdArt.dispatch(deleteOrderArticleRequest({orderArticleId: article.id}));
   }
 
-  public tempDelete(article): void {
+  public tempDelete(article: OrderArticle): void {
+
     this.waitToDeleted = true;
     this.articleToDelete = article;
     // Reset swipe positions of the articles
@@ -98,6 +92,8 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
     // Delete temporally to article
     this.articles = this.articles.filter(obj => obj !== article);
+    // Substract from total temporally
+    this.substractTemp(article);
 
     // Update with temporally delete
     this.filteredlist = of(this.articles);
@@ -116,9 +112,10 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
       } else {
         this.listenToOrderArts();
         this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
-        const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
-        inputElement.click();
       }
+      this._substractArt = 0;
+      const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
+      inputElement.click();
     });
 
   }
@@ -150,6 +147,16 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
         }
       }
     }
+  }
+
+  public getTotal(): number {
+    let total = this._ordArtsService.getTotal() - this._substractArt;
+    total = Math.round(total * 100) / 100;
+    return total > 0 ? total : 0;
+  }
+
+  private substractTemp(article: OrderArticle): void {
+    this._substractArt = article.quantity * article.article.price;
   }
 
 }

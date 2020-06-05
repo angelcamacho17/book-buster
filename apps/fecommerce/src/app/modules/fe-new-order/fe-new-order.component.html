@@ -1,8 +1,16 @@
 <fe-header [class]="'mat-headline'"
            [style]="'center'"
-           [title]="'New order'"
+           [title]="'Customers'"
            [currentUrl]="'neworder'"
            [needsConfirm]="true"
+           [headerSearch]="true"
            (goBack)="onHeaderGoBack()"
            (returnUrl)="returnUrl()"></fe-header>
-<fe-search (customerChange)="onCustomerChange($event)" [list]="customers" [small]="false" [searchTitle]="'Link customer'" [itemType]="rowType"></fe-search>
+<fe-search (customerChange)="onCustomerChange($event)" [list]="customers" [itemType]="rowType" [small]="true"></fe-search>
+<div class="container" >
+  <div class="no-results">
+    <mat-icon class="icon">search</mat-icon>
+    <div class="mat-title search-text">Search customers</div>
+    <div class="mat-subheading-2 search-description">Find name, contact & compamny info</div>
+  </div>
+</div>

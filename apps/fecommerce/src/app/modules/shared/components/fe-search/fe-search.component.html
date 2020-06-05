@@ -1,12 +1,10 @@
-<mat-card class="search-container mat-elevation-z2"
-          [ngClass]="expandBorder ? 'expand-card' : ''">
-  <div class="mat-headline title mat-elevation-z2" *ngIf="!small">
+<mat-card class="search-container mat-elevation-z2">
+  <!-- <div class="mat-headline title mat-elevation-z2" *ngIf="!small">
     <span style="padding-left: 16px;">
       {{searchTitle }}
     </span>
-  </div>
-  <div class="search-field"
-       [ngStyle]="!small? {'top': '56px'} : {'top':'0px'}">
+  </div> -->
+  <div class="search-field">
     <mat-icon style="color:rgba(0, 0, 0, 0.6)">search</mat-icon>
     <mat-form-field class="search-bar" floatLabel="never">
       <input matInput
@@ -19,10 +17,9 @@
               color="accent">
         <mat-placeholder class="mat-subheading-2 placeholder">Search...</mat-placeholder>
         <mat-autocomplete #auto="matAutocomplete"
-                          class="autocomplete"
                           (closed)="closeSearch()"
                           (opened)="openSearch()"
-                          >
+                          class="autocomplete">
           <mat-option *ngFor="let item of filteredlist | async" style="height: 72px;
                             display: flex;
                             padding: 0;" >
@@ -35,12 +32,12 @@
       </button>
   </div>
 </mat-card>
-<mat-card *ngIf="showInitial && !small" class="mat-subheading-2 no-data">
+<!-- <mat-card *ngIf="showInitial && !small" class="mat-subheading-2 no-data">
   <div>
     Please use the search bar on top to find the
   </div>
   <div>
     customer you want to assign.
   </div>
-</mat-card>
+</mat-card> -->
 
