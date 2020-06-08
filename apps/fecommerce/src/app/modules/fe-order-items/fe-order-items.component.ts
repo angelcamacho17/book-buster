@@ -114,15 +114,15 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
       }
       this._substractArt = 0;
       const inputElement: HTMLElement = document.getElementById('total') as HTMLElement;
-      inputElement.click();
-      inputElement.click();
-      inputElement.click();
+      setTimeout(() => {
+        inputElement.click();
+      }, 700);
     });
 
   }
 
   public totalClicked(): void {
-    console.log('CLICKED');
+    console.log('clicked');
   }
 
   private listenToOrderArts(): void {
