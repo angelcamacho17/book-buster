@@ -116,7 +116,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
       const inputElement: HTMLElement = document.getElementById('total') as HTMLElement;
       setTimeout(() => {
         inputElement.click();
-      }, 200);
+      }, 100);
     });
 
   }
