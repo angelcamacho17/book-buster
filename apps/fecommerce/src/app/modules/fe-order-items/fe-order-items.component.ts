@@ -49,6 +49,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
     if (this._subscriptions) {
       this._subscriptions.unsubscribe();
     }
+    this.filteredlist = of([]);
   }
 
   public dragMoved(event, item): void {
@@ -137,7 +138,6 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public swipePositions(item?): void {
-    console.log(item);
     if (this.articles) {
       for (const article of this.articles) {
         if (article && article !== item) {
