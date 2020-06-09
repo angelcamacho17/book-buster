@@ -18,7 +18,67 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   public initialPos = { x: 0, y: 0};
   private _subscriptions: Subscription;
   private _substractArt = 0;
-  public filteredlist: Observable<any[]>;
+  public filteredlist: Observable<any[]> = of([{
+    "id": 1,
+    "article": {
+      "id": 1,
+      "name": "Southern Comfort",
+      "description": "Eosinophilic gastroenteritis",
+      "price": 56.87
+    },
+    "quantity": 2
+  }, {
+    "id": 2,
+    "article": {
+      "id": 2,
+      "name": "Stock - Veal, White",
+      "description": "Malignant neoplasm of other specified sites of nasopharynx",
+      "price": 76.19
+    }, "quantity": 3
+  },
+  {
+    "id": 3,
+    "article": {
+    "id": 81,
+    "name": "Thyme - Fresh",
+    "description": "Inflamed seborrheic keratosis",
+    "price": +"7.14"
+  }, "quantity": 3
+},
+{
+  "id": 4,
+  "article": {
+    "id": 82,
+    "name": "Port - 74 Brights",
+    "description": "Frostbite of face",
+    "price": +"52.75"
+  }, "quantity": 3
+}, {
+  "id": 5,
+  "article": {
+    "id": 83,
+    "name": "Bread - Roll, Calabrese",
+    "description": "Better eye: moderate vision impairment; lesser eye: profound vision impairment",
+    "price": +"57.68"
+  }, "quantity": 3
+}, {
+    "id": 6,
+    "article": {
+    "id": 84,
+    "name": "Squash - Pepper",
+    "description": "Psychosexual dysfunction with other specified psychosexual dysfunctions",
+    "price": +"26.33"
+  }, "quantity": 3
+}, {
+  "id": 7,
+  "article": {
+    "id": 85,
+    "name": "Wheat - Soft Kernal Of Wheat",
+    "description": "Other fetal and newborn aspiration without respiratory symptoms",
+    "price": +"44.40"
+  }, "quantity": 3
+},
+]);
   public horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   public showDeleteBtn = false;
   public waitToDeleted = false;
@@ -29,7 +89,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
     private _storeOrdArt: Store<{ orderArticles: OrderArticle[] }>,
     private _ordArtsService: OrderArticlesService) {
     this.$articles = this._storeOrdArt.pipe(select('orderArticles'));
-    this.listenToOrderArts();
+    //this.listenToOrderArts();
     this.swipePositions();
     this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
   }
