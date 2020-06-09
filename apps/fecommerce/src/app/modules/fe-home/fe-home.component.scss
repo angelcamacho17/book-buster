@@ -1,14 +1,24 @@
 .container {
-  z-index: 0;
+    z-index: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    box-sizing: border-box;
+    padding-top: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 36px;
 
     .headline {
         font-weight: 600;
         color: rgba(0, 0, 0, 0.87);
+        flex: 0 0 auto;
     }
     .card {
+        position: relative;
+        max-height: 100%;
         padding: 0 !important;
-        height: 294px;
         overflow: auto;
+
         .list {
             .list-item {
                 .order-title {

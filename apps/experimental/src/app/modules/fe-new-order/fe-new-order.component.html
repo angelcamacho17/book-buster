@@ -1,8 +1,0 @@
-<fe-header [class]="'mat-headline'"
-           [style]="'center'"
-           [title]="'New order'"
-           [currentUrl]="'neworder'"
-           [needsConfirm]="true"
-           (goBack)="onHeaderGoBack()"
-           (returnUrl)="returnUrl()"></fe-header>
-<fe-search (customerChange)="onCustomerChange($event)" [list]="customers" [small]="false" [searchTitle]="'Link customer'" [itemType]="rowType"></fe-search>
