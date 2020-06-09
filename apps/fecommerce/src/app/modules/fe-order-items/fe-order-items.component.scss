@@ -15,9 +15,9 @@
     padding: 0;
     display: inline-block;
     background: linear-gradient(90deg, #ffffff 80%, #E02020 50%);
-    position: fixed;
-    width: calc(100% - 32px);
-    max-height: calc(100% - 312px);
+    position: absolute;
+    width: 100%;
+    max-height: calc(100% - 200px);
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
 
