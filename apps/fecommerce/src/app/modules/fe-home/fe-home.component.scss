@@ -18,6 +18,9 @@
         max-height: 100%;
         padding: 0 !important;
         overflow: auto;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        box-shadow: none;
 
         .list {
             .list-item {
@@ -34,6 +37,10 @@
                     height: 40px;
                     color: rgba(0, 0, 0, 0.6);
                 }
+            }
+
+            .list-item:last-child {
+                padding-bottom: 11px;
             }
 
             .divider {
