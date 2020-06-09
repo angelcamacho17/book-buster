@@ -41,7 +41,6 @@ export class FeSearchComponent implements OnInit {
               this._filteredResult = this._filterStates(state);
               if (this._filteredResult.length > 0) {
                 this.searching.emit(true);
-                this.darker.emit(false);
               } else {
                 this.searching.emit(false);
                 this.darker.emit(true);

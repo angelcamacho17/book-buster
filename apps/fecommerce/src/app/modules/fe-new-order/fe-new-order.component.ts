@@ -161,6 +161,11 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     this.shadow = shadow;
   }
 
+  public removeDark(): void {
+    this.shadow = false;
+    this.hide = false;
+  }
+
   ngOnDestroy(): void {
     if (this._subscriptions) {
       this._subscriptions.unsubscribe();
