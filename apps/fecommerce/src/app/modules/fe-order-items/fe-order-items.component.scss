@@ -10,6 +10,7 @@
 
   .card {
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
     border-radius: 8px;
     margin-bottom: 16px;
     padding: 0;
@@ -20,9 +21,9 @@
     max-height: calc(100% - 312px);
     overflow-x: hidden;
     bottom: initial;
-    -webkit-overflow-scrolling: touch;
 
     .list {
+      -webkit-overflow-scrolling: touch;
       position: relative;
       padding-top: 0 !important;
       padding-left: 16px;
@@ -30,7 +31,6 @@
       overflow: auto;
       overflow-x: hidden;
       bottom: initial;
-      -webkit-overflow-scrolling: touch;
       //width: calc(100% - 49px);
 
         .list-item {
