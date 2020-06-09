@@ -64,9 +64,7 @@ export class FeCustomerRowComponent implements OnDestroy {
 
   public onSelectCustomer(customer: Customer): void {
     this.eventService.customerChanged(customer);
-    setTimeout(() => {
-      this.router.navigate(['/article']);
-    }, 100);
+    this.router.navigate(['/article']);
   }
 
   ngOnDestroy(): void {
