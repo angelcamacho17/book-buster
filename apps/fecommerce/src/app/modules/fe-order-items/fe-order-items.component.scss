@@ -19,14 +19,14 @@
     position: fixed;
     width: calc(100% - 32px);
     max-height: calc(100% - 312px);
-    overflow-y: auto;
+    overflow-y: scroll;
 
     .list {
       position: relative;
       padding-top: 0 !important;
       padding-left: 16px;
       width: 100%;
-      overflow: hidden;
+      overflow-y: scroll;
       //width: calc(100% - 49px);
 
         .list-item {
