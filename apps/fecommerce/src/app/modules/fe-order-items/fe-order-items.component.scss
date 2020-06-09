@@ -10,22 +10,27 @@
 
   .card {
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
     border-radius: 8px;
     margin-bottom: 16px;
     padding: 0;
     display: inline-block;
-    overflow: hidden;
     background: linear-gradient(90deg, #ffffff 80%, #E02020 50%);
     position: fixed;
     width: calc(100% - 32px);
+    max-height: calc(100% - 312px);
+    overflow-x: hidden;
+    bottom: initial;
 
     .list {
+      -webkit-overflow-scrolling: touch;
       position: relative;
-      max-height: 384px;
       padding-top: 0 !important;
       padding-left: 16px;
       width: 100%;
-      overflow: hidden;
+      overflow: auto;
+      overflow-x: hidden;
+      bottom: initial;
       //width: calc(100% - 49px);
 
         .list-item {
@@ -33,7 +38,6 @@
           position: relative;
           z-index: 14;
           padding-left: 64px;
-          overflow: hidden;
           left: -64px;
 
           .content {
