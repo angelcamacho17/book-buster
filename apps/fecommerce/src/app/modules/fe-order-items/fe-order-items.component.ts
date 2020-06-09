@@ -111,12 +111,14 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
       } else {
         this.listenToOrderArts();
         this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
+
       }
       this._substractArt = 0;
-      const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
-      inputElement.click();
+      const inputElement: HTMLElement = document.getElementById('card') as HTMLElement;
+      setTimeout(() => {
+        inputElement.click();
+      }, 100);
     });
-
   }
 
   private listenToOrderArts(): void {
@@ -135,6 +137,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public swipePositions(item?): void {
+    console.log(item);
     if (this.articles) {
       for (const article of this.articles) {
         if (article && article !== item) {

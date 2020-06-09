@@ -64,7 +64,6 @@ export class FeCustomerRowComponent implements OnDestroy {
 
   public onSelectCustomer(customer: Customer): void {
     this.eventService.customerChanged(customer);
-    this._store.dispatch(getCurrentOrderRequest());
     this.router.navigate(['/article']);
   }
 
