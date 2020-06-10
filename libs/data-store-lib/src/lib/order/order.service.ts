@@ -173,6 +173,176 @@ export class OrderService {
         "initials": "CR",
         "smallIcon": false
       }
+    },
+    {
+      "id": 8,
+      "description": "Other Order",
+      "amount": null,
+      "createdBy": "Federico Ribero",
+      "articles": [{
+        "id": 1,
+        "article": {
+          "id": 3,
+          "name": "Soy Protein",
+          "description": "Placental polyp, unspecified as to episode of care or not applicable",
+          "price": 98.57
+        },
+        "quantity": 5
+      },
+      ],
+      "customer": {
+        "id": 5,
+        "name": "Juan Pérez",
+        "address": "General Paz 665",
+        "initials": "JP",
+        "smallIcon": false
+      }
+    },
+    {
+      "id": 9,
+      "description": "New order",
+      "amount": null,
+      "createdBy": "Angel Camacho",
+      "articles": [{
+        "id": 1,
+        "article": {
+          "id": 1,
+          "name": "Southern Comfort",
+          "description": "Eosinophilic gastroenteritis",
+          "price": 56.87
+        },
+        "quantity": 2
+      }, {
+        "id": 2,
+        "article": {
+          "id": 2,
+          "name": "Stock - Veal, White",
+          "description": "Malignant neoplasm of other specified sites of nasopharynx",
+          "price": 76.19
+        }, "quantity": 3
+      }],
+      "customer": {
+        "id": 12,
+        "name": "Virginia Suarez",
+        "address": "Av. Los patitos 5500",
+        "initials": "VS",
+        "smallIcon": false
+      }
+    },
+    {
+      "id": 12,
+      "description": "Order",
+      "amount": null,
+      "createdBy": "Federico Ribero",
+      "articles": [{
+        "id":1,
+        "article": {
+          "id": 31,
+          "name": "Tea - Honey Green Tea",
+          "description": "Twin birth, mate liveborn, born in hospital, delivered without mention of cesarean section",
+          "price": 61.15
+        }, "quantity": 3
+      }, {
+        "id": 2,
+        "article": {
+          "id": 32,
+          "name": "Soup - Knorr, Chicken Noodle",
+          "description": "Poisoning by erythromycin and other macrolides",
+          "price": 51.80
+        }, "quantity": 8
+      }],
+      "customer": {
+        "id": 11,
+        "name": "Cecilia Rodriguez",
+        "address": "Libertad 740",
+        "initials": "CR",
+        "smallIcon": false
+      }
+    },
+    {
+      "id": 8,
+      "description": "Other Order",
+      "amount": null,
+      "createdBy": "Federico Ribero",
+      "articles": [{
+        "id": 1,
+        "article": {
+          "id": 3,
+          "name": "Soy Protein",
+          "description": "Placental polyp, unspecified as to episode of care or not applicable",
+          "price": 98.57
+        },
+        "quantity": 5
+      },
+      ],
+      "customer": {
+        "id": 5,
+        "name": "Juan Pérez",
+        "address": "General Paz 665",
+        "initials": "JP",
+        "smallIcon": false
+      }
+    },
+    {
+      "id": 9,
+      "description": "New order",
+      "amount": null,
+      "createdBy": "Angel Camacho",
+      "articles": [{
+        "id": 1,
+        "article": {
+          "id": 1,
+          "name": "Southern Comfort",
+          "description": "Eosinophilic gastroenteritis",
+          "price": 56.87
+        },
+        "quantity": 2
+      }, {
+        "id": 2,
+        "article": {
+          "id": 2,
+          "name": "Stock - Veal, White",
+          "description": "Malignant neoplasm of other specified sites of nasopharynx",
+          "price": 76.19
+        }, "quantity": 3
+      }],
+      "customer": {
+        "id": 12,
+        "name": "Virginia Suarez",
+        "address": "Av. Los patitos 5500",
+        "initials": "VS",
+        "smallIcon": false
+      }
+    },
+    {
+      "id": 12,
+      "description": "Order",
+      "amount": null,
+      "createdBy": "Federico Ribero",
+      "articles": [{
+        "id":1,
+        "article": {
+          "id": 31,
+          "name": "Tea - Honey Green Tea",
+          "description": "Twin birth, mate liveborn, born in hospital, delivered without mention of cesarean section",
+          "price": 61.15
+        }, "quantity": 3
+      }, {
+        "id": 2,
+        "article": {
+          "id": 32,
+          "name": "Soup - Knorr, Chicken Noodle",
+          "description": "Poisoning by erythromycin and other macrolides",
+          "price": 51.80
+        }, "quantity": 8
+      }],
+      "customer": {
+        "id": 11,
+        "name": "Cecilia Rodriguez",
+        "address": "Libertad 740",
+        "initials": "CR",
+        "smallIcon": false
+      }
     }
   ];
 
