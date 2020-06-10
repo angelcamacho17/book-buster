@@ -9,28 +9,27 @@
   justify-content: space-between;
 
   .card {
-    overflow: auto;
     border-radius: 8px;
     margin-bottom: 16px;
     padding: 0;
     display: inline-block;
-    overflow: hidden;
     background: linear-gradient(90deg, #ffffff 80%, #E02020 50%);
     position: relative;
     width: 100%;
     height: calc(100% - 184px);
+    overflow: auto;
     max-height: fit-content;
 
     .list {
       position: relative;
       padding-top: 0 !important;
       padding-left: 16px;
-      width: 100%;
+      width: calc(100% - 16px);
       overflow: hidden;
       //width: calc(100% - 49px);
 
         .list-item {
-          width: calc(100% - 15px);
+          width: 100%;
           position: relative;
           z-index: 14;
           padding-left: 64px;
