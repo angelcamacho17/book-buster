@@ -1,33 +1,35 @@
-.container {
-  position: absolute;
-  height: calc(100% - 226px) !important;
-  padding: 36px 16px;
-  width: calc(100% - 32px);
-  top: 162px;
+@use '../../../assets/styles/sctructural' as structure;
+$header-height: 162px;
 
-  .no-results {
-    text-align: center;
-    display: -webkit-flex;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-items: center;
-    height: calc(100% - 152px);
+.main-wrapper {
+    @include structure.header-height($header-height);
 
-    .icon {
-        width: 99px;
-        height: 99px;
-        font-size: 99px;
-        color: rgba(0,0,0,0.54);
+    .container {
+        padding: 36px 16px;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        .no-results {
+            width: auto;
+            height: auto;
+            text-align: center;
+            margin-bottom: calc(#{$header-height} / 2);
+            .icon {
+                width: 99px;
+                height: 99px;
+                font-size: 99px;
+                color: rgba(0, 0, 0, 0.54);
+            }
+
+            .search-text {
+                color: rgba(0, 0, 0, 0.87);
+                margin-bottom: 3px;
+            }
+
+            .search-description { 
+                color: rgba(0, 0, 0, 0.6);
+            }
+        }
     }
-
-    .search-text {
-        color: rgba(0,0,0,0.87);
-        margin-bottom: 3px
-    }
-
-    .search-description {
-        color: rgba(0,0,0,0.6)
-    }
-}
 }

@@ -1,0 +1,11 @@
+@mixin header-height($header-height) {
+    header {
+        flex: 0 0 $header-height;
+        min-height: $header-height;
+        max-height: $header-height;
+    }
+    main {
+        height: calc(100vh - #{$header-height});
+        max-height: calc(100vh - #{$header-height});
+    }
+}
