@@ -5,7 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../shared/modules/material/material.module';
-import { DataStoreModule } from '@fecommerce-workspace/data-store-lib';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 @NgModule({
   declarations: [FeNewOrderComponent],
@@ -14,7 +14,8 @@ import { DataStoreModule } from '@fecommerce-workspace/data-store-lib';
     HttpClientModule,
     RouterModule.forChild([{ path: '', component: FeNewOrderComponent }]),
     MaterialModule,
-    SharedModule
+    SharedModule,
+    ClickOutsideModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

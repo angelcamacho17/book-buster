@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Customer } from '@fecommerce-workspace/data-store-lib';
-import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'fe-search',
@@ -17,15 +17,15 @@ export class FeSearchComponent implements OnInit {
   @Input() itemType: any;
   @Input() small = false;
   @Input() templateRef: TemplateRef<any>;
-  @Output() searching = new EventEmitter<boolean>();
+  @Output() hidePlaceholder = new EventEmitter<boolean>();
   @Output() darker = new EventEmitter<boolean>();
+  @Output() nodata = new EventEmitter<boolean>();
   @ViewChild('input') input: ElementRef;
+  @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
   public noTitle = false;
   private _filteredResult = [];
   public filteredlist: Observable<any[]>;
   public stateCtrl = new FormControl();
-  public showInitial = true;
-  public expandBorder = false;
 
   constructor() {
 
@@ -34,15 +34,19 @@ export class FeSearchComponent implements OnInit {
         map(state => {
           if(state) {
             if (state.length < 3) {
-              this.searching.emit(false);
+              this.hidePlaceholder.emit(false);
               this.darker.emit(true);
+              this.nodata.emit(false);
               return [];
             } else {
               this._filteredResult = this._filterStates(state);
               if (this._filteredResult.length > 0) {
-                this.searching.emit(true);
+                this.hidePlaceholder.emit(true);
+                this.nodata.emit(false);
+
               } else {
-                this.searching.emit(false);
+                this.hidePlaceholder.emit(true);
+                this.nodata.emit(true);
                 this.darker.emit(true);
               }
               return this._filteredResult;
@@ -61,8 +65,6 @@ export class FeSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this._filteredResult = [];
-    this.showInitial = true;
-    this.expandBorder = false;
   }
 
   private _filterStates(value: string): any[] {
@@ -76,30 +78,48 @@ export class FeSearchComponent implements OnInit {
    */
   public clearSearch(): void {
     this.stateCtrl.setValue('');
-    this.showInitial = true;
+    this.hidePlaceholder.emit(false);
+    const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
+    inputElement.focus();
   }
 
   /**
    * Hide initial state.
    */
   public openSearch(): void {
-    if (this.small) {
-      this.expandBorder = true
-    } else {
-      this.showInitial = false;
-    }
+    console.log('open')
+    this.hidePlaceholder.emit(true);
+    this.darker.emit(true);
+    this.nodata.emit(false);
   }
+
+  public setBright(): void {
+    console.log('out');
+    if (this.stateCtrl.value !== '') {
+      this.hidePlaceholder.emit(true);
+    }
+    this.darker.emit(false);
+  }
+
 
   /**
    * Show initial state.
    */
   public closeSearch(): void {
-    this.stateCtrl.setValue('');
-    if (this.small) {
-      this.expandBorder = false;
-    } else {
-      this.showInitial = true;
-    }
+    this.hidePlaceholder.emit(false);
+    this.darker.emit(false);
+    this.nodata.emit(false);
+    setTimeout(()=> {
+      if (this.stateCtrl.value !== '') {
+        this.autocomplete.openPanel();
+      }
+    }, 1);
+  }
+
+  public holdSearch(): void {
+    setTimeout(()=> {
+        this.autocomplete.openPanel();
+    }, 1);
   }
 
 }

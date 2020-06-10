@@ -86,7 +86,7 @@ body {
   top: 162px !important;
   right: 0px !important;
   left: 0px !important;
-  max-height: 100% !important;
+  max-height: calc(100% - 236px) !important;
 }
 
 .text-truncate {

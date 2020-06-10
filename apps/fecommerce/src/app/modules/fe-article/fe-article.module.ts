@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../shared/modules/material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { FeArticleDetailComponent } from './fe-article-detail/fe-article-detail.component';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FeArticleDetailComponent } from './fe-article-detail/fe-article-detail.
       }
     ]),
     MaterialModule,
-    SharedModule
+    SharedModule,
+    ClickOutsideModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
