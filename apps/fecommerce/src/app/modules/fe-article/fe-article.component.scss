@@ -6,45 +6,48 @@ $header-height: 162px;
 
     .container {
         padding: 36px 16px;
-    
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
         .no-results {
             text-align: center;
-            display: -webkit-flex;
-            display: flex;
-            flex-flow: column wrap;
-            justify-content: center;
-            align-items: center;
-            height: calc(100% - 152px);
-    
+            margin-bottom: calc(#{$header-height} / 2);
+
             .icon {
                 width: 99px;
                 height: 99px;
                 font-size: 99px;
-                color: rgba(0,0,0,0.54);
+                color: rgba(0, 0, 0, 0.54);
             }
-    
+
             .search-text {
-                color: rgba(0,0,0,0.87);
-                margin-bottom: 3px
+                color: rgba(0, 0, 0, 0.87);
+                margin-bottom: 3px;
             }
-    
+
             .search-description {
-                color: rgba(0,0,0,0.6)
+                color: rgba(0, 0, 0, 0.6);
             }
+        }
+        .fe-button {
+            background-color: #1666d8;
+            color: #fff;
+            
         }
     }
 }
-.fe-button {
-  position: fixed;
-  height: 48px;
-  width: 100%;
-  margin: 0 16px;
-  background-color: #1666D8;
-  color: #fff;
-  bottom: 16px;
-  padding: 0 !important;
-  z-index: 10000;
-}
+// .fe-button {
+//   position: fixed;
+//   height: 48px;
+//   width: 100%;
+//   margin: 0 16px;
+//   background-color: #1666D8;
+//   color: #fff;
+//   bottom: 16px;
+//   padding: 0 !important;
+//   z-index: 10000;
+// }
 
 // ITEM LIST
 

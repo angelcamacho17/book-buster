@@ -11,8 +11,6 @@ $header-height: 162px;
         justify-content: center;
         align-items: center;
         .no-results {
-            width: auto;
-            height: auto;
             text-align: center;
             margin-bottom: calc(#{$header-height} / 2);
             .icon {
