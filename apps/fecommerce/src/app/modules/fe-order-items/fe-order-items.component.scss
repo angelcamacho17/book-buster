@@ -17,8 +17,7 @@
     position: relative;
     width: 100%;
     height: calc(100% - 184px);
-    overflow: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     max-height: fit-content;
 
     .list {
