@@ -35,6 +35,9 @@
     "experimental-e2e": {
       "tags": [],
       "implicitDependencies": ["experimental"]
+    },
+    "scanner": {
+      "tags": []
     }
   }
 }

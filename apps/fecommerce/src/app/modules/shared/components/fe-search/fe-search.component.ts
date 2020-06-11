@@ -109,11 +109,6 @@ export class FeSearchComponent implements OnInit {
     this.hidePlaceholder.emit(false);
     this.darker.emit(false);
     this.nodata.emit(false);
-    setTimeout(()=> {
-      if (this.stateCtrl.value !== '') {
-        this.autocomplete.openPanel();
-      }
-    }, 1);
   }
 
   public holdSearch(): void {

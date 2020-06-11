@@ -7,6 +7,7 @@ import { MaterialModule } from '../shared/modules/material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { FeArticleDetailComponent } from './fe-article-detail/fe-article-detail.component';
 import { ClickOutsideModule } from 'ng-click-outside';
+import { ScannerModule } from '@fecommerce-workspace/scanner';
 
 @NgModule({
   declarations: [
@@ -30,8 +31,8 @@ import { ClickOutsideModule } from 'ng-click-outside';
     ]),
     MaterialModule,
     SharedModule,
-    ClickOutsideModule
-
+    ClickOutsideModule,
+    ScannerModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
