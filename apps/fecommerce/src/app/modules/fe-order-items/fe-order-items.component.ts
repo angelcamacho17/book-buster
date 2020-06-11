@@ -1,9 +1,12 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest, OrderArticlesService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { startWith, map } from 'rxjs/operators';
+import { CdkDrag, CdkDragMove } from '@angular/cdk/drag-drop';
+
+const speed = 10;
 
 @Component({
   selector: 'fe-order-items',
@@ -114,6 +117,13 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   public showDeleteBtn = false;
   public waitToDeleted = false;
   public articleToDelete = null;
+  @ViewChild('scrollEl')
+  scrollEl:ElementRef<HTMLElement>;
+
+  @ViewChildren(CdkDrag)
+  dragEls:QueryList<CdkDrag>;
+
+  private animationFrame: number | undefined;
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -143,7 +153,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public dragMoved(event, item): void {
-    this.items[item.id].deleteBtn = true;
+    //this.items[item.id].deleteBtn = true;
 
     if (event.distance.x < -35) {
       this.items[item.id] = {
@@ -251,5 +261,26 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   private substractTemp(article: OrderArticle): void {
     this._substractArt = article.quantity * article.article.price;
   }
+
+  private scroll($event: CdkDragMove) {
+    const { y } = $event.pointerPosition;
+    const baseEl = this.scrollEl.nativeElement;
+    const box = baseEl.getBoundingClientRect();
+    const scrollTop = baseEl.scrollTop;
+    const top = box.top + - y ;
+    if (top > 0 && scrollTop !== 0) {
+        const newScroll = scrollTop - speed * Math.exp(top / 50);
+        baseEl.scrollTop = newScroll;
+        this.animationFrame = requestAnimationFrame(() => this.scroll($event));
+        return;
+    }
+
+    const bottom = y - box.bottom ;
+    if (bottom > 0 && scrollTop < box.bottom) {
+        const newScroll = scrollTop + speed * Math.exp(bottom / 50);
+        baseEl.scrollTop = newScroll;
+        this.animationFrame = requestAnimationFrame(() => this.scroll($event));
+    }
+}
 
 }
