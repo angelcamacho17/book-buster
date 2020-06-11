@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { Observable, Subscription, of, merge } from 'rxjs';
 import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest, OrderArticlesService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
@@ -13,7 +13,7 @@ const speed = 10;
   templateUrl: './fe-order-items.component.html',
   styleUrls: ['./fe-order-items.component.scss']
 })
-export class FeOrderItemsComponent implements OnInit, OnDestroy {
+export class FeOrderItemsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public $articles: Observable<OrderArticle[]>;
   public articles: OrderArticle[] = [];
@@ -325,7 +325,7 @@ this._subscriptions.add(onDown$.subscribe());
 }
 
 export function bound(target: Object, propKey: string | symbol) {
-  var originalMethod = (target as any)[propKey] as Function;
+  const originalMethod = (target as any)[propKey] as Function;
 
   // Ensure the above type-assertion is valid at runtime.
   if (typeof originalMethod !== "function") throw new TypeError("@bound can only be used on methods.");
@@ -343,7 +343,7 @@ export function bound(target: Object, propKey: string | symbol) {
           get: function () {
               // Create bound override on object instance. This will hide the original method on the prototype, and instead yield a bound version from the
               // instance itself. The original method will no longer be accessible. Inside a getter, 'this' will refer to the instance.
-              var instance = this;
+              const instance = this;
 
               Object.defineProperty(instance, propKey.toString(), {
                   value: function () {
