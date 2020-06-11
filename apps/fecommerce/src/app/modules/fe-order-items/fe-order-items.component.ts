@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
-import { Observable, Subscription, of } from 'rxjs';
+import { Observable, Subscription, of, merge } from 'rxjs';
 import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest, OrderArticlesService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
-import { startWith, map } from 'rxjs/operators';
+import { startWith, map, switchMap, tap } from 'rxjs/operators';
 import { CdkDrag, CdkDragMove } from '@angular/cdk/drag-drop';
 
 const speed = 10;
@@ -125,6 +125,23 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
   private animationFrame: number | undefined;
 
+  @bound
+    public triggerScroll($event: CdkDragMove) {
+        if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame);
+            this.animationFrame = undefined;
+        }
+        this.animationFrame = requestAnimationFrame(() => this.scroll($event));
+    }
+
+    @bound
+    private cancelScroll() {
+        if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame);
+            this.animationFrame = undefined;
+        }
+    }
+
   constructor(
     private _snackBar: MatSnackBar,
     private _storeOrdArt: Store<{ orderArticles: OrderArticle[] }>,
@@ -138,6 +155,28 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
   }
+
+  ngAfterViewInit(){
+    const onMove$ = this.dragEls.changes.pipe(
+    startWith(this.dragEls)
+    , map((d: QueryList<CdkDrag>) => d.toArray())
+    , map(dragels => dragels.map(drag => drag.moved))
+    , switchMap(obs => merge(...obs))
+    , tap(this.triggerScroll)
+);
+
+this._subscriptions.add(onMove$.subscribe());
+
+const onDown$ = this.dragEls.changes.pipe(
+    startWith(this.dragEls)
+    , map((d: QueryList<CdkDrag>) => d.toArray())
+    , map(dragels => dragels.map(drag => drag.ended))
+    , switchMap(obs => merge(...obs))
+    , tap(this.cancelScroll)
+);
+
+this._subscriptions.add(onDown$.subscribe());
+}
 
   ngOnDestroy(): void {
     //If the time of the snackbar
@@ -283,4 +322,40 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
     }
 }
 
+}
+
+export function bound(target: Object, propKey: string | symbol) {
+  var originalMethod = (target as any)[propKey] as Function;
+
+  // Ensure the above type-assertion is valid at runtime.
+  if (typeof originalMethod !== "function") throw new TypeError("@bound can only be used on methods.");
+
+  if (typeof target === "function") {
+      // Static method, bind to class (if target is of type "function", the method decorator was used on a static method).
+      return {
+          value: function () {
+              return originalMethod.apply(target, arguments);
+          }
+      };
+  } else if (typeof target === "object") {
+      // Instance method, bind to instance on first invocation (as that is the only way to access an instance from a decorator).
+      return {
+          get: function () {
+              // Create bound override on object instance. This will hide the original method on the prototype, and instead yield a bound version from the
+              // instance itself. The original method will no longer be accessible. Inside a getter, 'this' will refer to the instance.
+              var instance = this;
+
+              Object.defineProperty(instance, propKey.toString(), {
+                  value: function () {
+                      // This is effectively a lightweight bind() that skips many (here unnecessary) checks found in native implementations.
+                      return originalMethod.apply(instance, arguments);
+                  }
+              });
+
+              // The first invocation (per instance) will return the bound method from here. Subsequent calls will never reach this point, due to the way
+              // JavaScript runtimes look up properties on objects; the bound method, defined on the instance, will effectively hide it.
+              return instance[propKey];
+          }
+      } as PropertyDescriptor;
+  }
 }
