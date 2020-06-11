@@ -19,96 +19,96 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   private _subscriptions: Subscription;
   private _substractArt = 0;
   public filteredlist: Observable<any[]>;
-//   public filteredlist: Observable<any[]> = of([{
+// public filteredlist: Observable<any[]> = of([{
+// "id": 1,
+// "article": {
 //   "id": 1,
-//   "article": {
-//     "id": 1,
-//     "name": "Southern Comfort",
-//     "description": "Eosinophilic gastroenteritis",
-//     "price": 56.87
-//   },
-//   "quantity": 2
+//   "name": "Southern Comfort",
+//   "description": "Eosinophilic gastroenteritis",
+//   "price": 56.87
+// },
+// "quantity": 2
 // }, {
+// "id": 2,
+// "article": {
 //   "id": 2,
-//   "article": {
-//     "id": 2,
-//     "name": "Stock - Veal, White",
-//     "description": "Malignant neoplasm of other specified sites of nasopharynx",
-//     "price": 76.19
-//   }, "quantity": 3
+//   "name": "Stock - Veal, White",
+//   "description": "Malignant neoplasm of other specified sites of nasopharynx",
+//   "price": 76.19
+// }, "quantity": 3
 // },{
-//   "id": 3,
-//   "article": {
-//     "id": 10,
-//     "name": "Pork - Butt, Boneless",
-//     "description": "Deep necrosis of underlying tissues [deep third degree) with loss of a body part, of forearm",
-//     "price": +"37.21"
-//   },
-//   "quantity": 2
-// }, {
-//   "id": 4,
-//   "article": {
-//     "id": 8,
-//     "name": "Muffin Mix - Carrot",
-//     "description": "Secondary neuroendocrine tumor, unspecified site",
-//     "price": +"93.17"
-//   }, "quantity": 3
-// },
-// {
-//   "id": 5,
-//   "article": {
-//     "id": 36,
-//     "name": "Orange - Blood",
-//     "description": "Femoral hernia without mention of obstruction or gangrene, bilateral (not specified as recurrent)",
-//     "price": +"1.47"
-//   },
-//   "quantity": 2
-// }, {
-//   "id": 6,
-//   "article": {
-//     "id": 9,
-//     "name": "Tea - Earl Grey",
-//     "description": "Stenosis of lacrimal punctum",
-//     "price": +"95.78"
-//   }, "quantity": 3
-// },
-// {
-//   "id": 7,
-//   "article": {
-//     "id": 29,
-//     "name": "Guinea Fowl",
-//     "description": "Unspecified monoarthritis, site unspecified",
-//     "price": +"74.00"
-//   },
-//   "quantity": 2
-// }, {
-//   "id": 8,
-//   "article": {
-//     "id": 32,
-//     "name": "Soup - Knorr, Chicken Noodle",
-//     "description": "Poisoning by erythromycin and other macrolides",
-//     "price": +"51.80"
-//   }, "quantity": 3
-// },
-// {
-//   "id": 9,
-//   "article": {
-//     "id": 31,
-//     "name": "Tea - Honey Green Tea",
-//     "description": "Twin birth, mate liveborn, born in hospital, delivered without mention of cesarean section",
-//     "price": +"61.15"
-//   },
-//   "quantity": 2
-// }, {
+// "id": 3,
+// "article": {
 //   "id": 10,
-//   "article": {
-//     "id": 30,
-//     "name": "Salmon - Atlantic, No Skin",
-//     "description": "Post term pregnancy, unspecified as to episode of care or not applicable",
-//     "price": +"78.52"
-//   }, "quantity": 3
-// }
-//   ])
+//   "name": "Pork - Butt, Boneless",
+//   "description": "Deep necrosis of underlying tissues [deep third degree) with loss of a body part, of forearm",
+//   "price": +"37.21"
+// },
+// "quantity": 2
+// }, {
+// "id": 4,
+// "article": {
+//   "id": 8,
+//   "name": "Muffin Mix - Carrot",
+//   "description": "Secondary neuroendocrine tumor, unspecified site",
+//   "price": +"93.17"
+// }, "quantity": 3
+// },
+// {
+// "id": 5,
+// "article": {
+//   "id": 36,
+//   "name": "Orange - Blood",
+//   "description": "Femoral hernia without mention of obstruction or gangrene, bilateral (not specified as recurrent)",
+//   "price": +"1.47"
+// },
+// "quantity": 2
+// }, {
+// "id": 6,
+// "article": {
+//   "id": 9,
+//   "name": "Tea - Earl Grey",
+//   "description": "Stenosis of lacrimal punctum",
+//   "price": +"95.78"
+// }, "quantity": 3
+// },
+// {
+// "id": 7,
+// "article": {
+//   "id": 29,
+//   "name": "Guinea Fowl",
+//   "description": "Unspecified monoarthritis, site unspecified",
+//   "price": +"74.00"
+// },
+// "quantity": 2
+// }, {
+// "id": 8,
+// "article": {
+//   "id": 32,
+//   "name": "Soup - Knorr, Chicken Noodle",
+//   "description": "Poisoning by erythromycin and other macrolides",
+//   "price": +"51.80"
+// }, "quantity": 3
+// },
+// {
+// "id": 9,
+// "article": {
+//   "id": 31,
+//   "name": "Tea - Honey Green Tea",
+//   "description": "Twin birth, mate liveborn, born in hospital, delivered without mention of cesarean section",
+//   "price": +"61.15"
+// },
+// "quantity": 2
+// }, {
+// "id": 10,
+// "article": {
+//   "id": 30,
+//   "name": "Salmon - Atlantic, No Skin",
+//   "description": "Post term pregnancy, unspecified as to episode of care or not applicable",
+//   "price": +"78.52"
+// }, "quantity": 3
+//  }
+// ])
   public horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   public showDeleteBtn = false;
   public waitToDeleted = false;
@@ -142,7 +142,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public dragMoved(event, item): void {
-    // this.items[item.id].deleteBtn = true;
+    this.items[item.id].deleteBtn = true;
 
     if (event.distance.x < -35) {
       this.items[item.id] = {
@@ -176,15 +176,15 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
     this.waitToDeleted = true;
     this.articleToDelete = article;
-    // Reset swipe positions of the articles
+    //Reset swipe positions of the articles
     this.swipePositions();
 
-    // Delete temporally to article
+    //Delete temporally to article
     this.articles = this.articles.filter(obj => obj !== article);
-    // Substract from total temporally
+    //Substract from total temporally
     this.substractTemp(article);
 
-    // Update with temporally delete
+    //Update with temporally delete
     this.filteredlist = of(this.articles);
     const config = new MatSnackBarConfig();
     config.horizontalPosition = this.horizontalPosition;

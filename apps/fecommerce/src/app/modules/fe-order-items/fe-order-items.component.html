@@ -1,43 +1,48 @@
 <fe-header [icon]="'keyboard_arrow_left'" [title]="'Order items'" [class]="'mat-headline'" [style]="'center'"></fe-header>
 
 <div class="order-items" #content id="content" >
-  <mat-card class="card mat-elevation-z4" #card id="card" (clickOutside)="swipePositions()">
+  <!-- <mat-card class="card mat-elevation-z4" #card id="card" (clickOutside)="swipePositions()">
     <mat-card-content>
-      <mat-list class="list">
-          <div class="list-item" *ngFor="let item of filteredlist | async;">
+      <mat-list class="list"> -->
+        <div class="card mat-elevation-z4" (clickOutside)="swipePositions()">
+          <div class="list">
 
-              <div class="content"
-                   cdkDragLockAxis="x"
-                   cdkDragBoundary=".list-item"
-                   cdkDrag
-                   (click)="dragStarted(item)"
-                   (cdkDragStarted) = "dragStarted($event, item)"
-                   (cdkDragEnded) = "dragMoved($event, item)"
-                   [cdkDragFreeDragPosition]="items[item?.id] ? items[item?.id] : initialPos"
-                   >
-                <div class="info">
-                  <div class="mat-subheading-2 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.87);">
-                    {{ item?.quantity > 1 ? item?.quantity + 'x ' : ''}} {{item?.article?.name}}
+            <div class="list-item" *ngFor="let item of filteredlist | async;">
+
+                <div class="content"
+                     cdkDragLockAxis="x"
+                     cdkDragBoundary=".list-item"
+                     cdkDrag
+                     (click)="dragStarted(item)"
+                     (cdkDragStarted) = "dragStarted($event, item)"
+                     (cdkDragEnded) = "dragMoved($event, item)"
+                     [cdkDragFreeDragPosition]="items[item?.id] ? items[item?.id] : initialPos"
+                     >
+                  <div class="info">
+                    <div class="mat-subheading-2 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.87);">
+                      {{ item?.quantity > 1 ? item?.quantity + 'x ' : ''}} {{item?.article?.name}}
+                    </div>
+                    <div class="mat-body-1 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.6);">
+                      {{item?.article?.description}}
+                    </div>
                   </div>
-                  <div class="mat-body-1 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.6);">
-                    {{item?.article?.description}}
+                  <div class="price mat-subheading-2" style="margin: 0;">
+                    € {{item?.article?.price}}
                   </div>
-                </div>
-                <div class="price mat-subheading-2" style="margin: 0;">
-                  € {{item?.article?.price}}
-                </div>
-            </div>
-            <div class="delete-button" [ngStyle]="items[item.id] && items[item.id]?.deleteBtn ? {'z-index' : '0'} : {'z-index' : '-1'} "
-                 (click)="tempDelete(item)">
-              <mat-icon>
-                delete_outline
-              </mat-icon>
+              </div>
+              <div class="delete-button" [ngStyle]="items[item.id] && items[item.id]?.deleteBtn ? {'z-index' : '0'} : {'z-index' : '-1'} "
+                   (click)="tempDelete(item)">
+                <mat-icon>
+                  delete_outline
+                </mat-icon>
+              </div>
             </div>
           </div>
+        </div>
 
-      </mat-list>
+      <!-- </mat-list>
     </mat-card-content>
-  </mat-card>
+  </mat-card> -->
   <mat-card class="total mat-elevation-z4">
     <div class="info-total mat-subheading-2">
       <div>
