@@ -13,141 +13,116 @@ const speed = 10;
   templateUrl: './fe-order-items.component.html',
   styleUrls: ['./fe-order-items.component.scss']
 })
-export class FeOrderItemsComponent implements OnInit, OnDestroy, AfterViewInit {
+export class FeOrderItemsComponent implements OnInit, OnDestroy {
 
   public $articles: Observable<OrderArticle[]>;
   public articles: OrderArticle[] = [];
   public items: any = [];
   public initialPos = { x: 0, y: 0};
-  private _subscriptions: Subscription;
+  private _subscriptions = new Subscription();
   private _substractArt = 0;
-  public filteredlist: Observable<any[]>;
   //public filteredlist: Observable<any[]>;
-// public filteredlist: Observable<any[]> = of([{
-// "id": 1,
-// "article": {
-//   "id": 1,
-//   "name": "Southern Comfort",
-//   "description": "Eosinophilic gastroenteritis",
-//   "price": 56.87
-// },
-// "quantity": 2
-// }, {
-// "id": 2,
-// "article": {
-//   "id": 2,
-//   "name": "Stock - Veal, White",
-//   "description": "Malignant neoplasm of other specified sites of nasopharynx",
-//   "price": 76.19
-// }, "quantity": 3
-// },{
-// "id": 3,
-// "article": {
-//   "id": 10,
-//   "name": "Pork - Butt, Boneless",
-//   "description": "Deep necrosis of underlying tissues [deep third degree) with loss of a body part, of forearm",
-//   "price": +"37.21"
-// },
-// "quantity": 2
-// }, {
-// "id": 4,
-// "article": {
-//   "id": 8,
-//   "name": "Muffin Mix - Carrot",
-//   "description": "Secondary neuroendocrine tumor, unspecified site",
-//   "price": +"93.17"
-// }, "quantity": 3
-// },
-// {
-// "id": 5,
-// "article": {
-//   "id": 36,
-//   "name": "Orange - Blood",
-//   "description": "Femoral hernia without mention of obstruction or gangrene, bilateral (not specified as recurrent)",
-//   "price": +"1.47"
-// },
-// "quantity": 2
-// }, {
-// "id": 6,
-// "article": {
-//   "id": 9,
-//   "name": "Tea - Earl Grey",
-//   "description": "Stenosis of lacrimal punctum",
-//   "price": +"95.78"
-// }, "quantity": 3
-// },
-// {
-// "id": 7,
-// "article": {
-//   "id": 29,
-//   "name": "Guinea Fowl",
-//   "description": "Unspecified monoarthritis, site unspecified",
-//   "price": +"74.00"
-// },
-// "quantity": 2
-// }, {
-// "id": 8,
-// "article": {
-//   "id": 32,
-//   "name": "Soup - Knorr, Chicken Noodle",
-//   "description": "Poisoning by erythromycin and other macrolides",
-//   "price": +"51.80"
-// }, "quantity": 3
-// },
-// {
-// "id": 9,
-// "article": {
-//   "id": 31,
-//   "name": "Tea - Honey Green Tea",
-//   "description": "Twin birth, mate liveborn, born in hospital, delivered without mention of cesarean section",
-//   "price": +"61.15"
-// },
-// "quantity": 2
-// }, {
-// "id": 10,
-// "article": {
-//   "id": 30,
-//   "name": "Salmon - Atlantic, No Skin",
-//   "description": "Post term pregnancy, unspecified as to episode of care or not applicable",
-//   "price": +"78.52"
-// }, "quantity": 3
-//  }
-// ])
+public filteredlist: Observable<any[]> = of([{
+"id": 1,
+"article": {
+  "id": 1,
+  "name": "Southern Comfort",
+  "description": "Eosinophilic gastroenteritis",
+  "price": 56.87
+},
+"quantity": 2
+}, {
+"id": 2,
+"article": {
+  "id": 2,
+  "name": "Stock - Veal, White",
+  "description": "Malignant neoplasm of other specified sites of nasopharynx",
+  "price": 76.19
+}, "quantity": 3
+},{
+"id": 3,
+"article": {
+  "id": 10,
+  "name": "Pork - Butt, Boneless",
+  "description": "Deep necrosis of underlying tissues [deep third degree) with loss of a body part, of forearm",
+  "price": +"37.21"
+},
+"quantity": 2
+}, {
+"id": 4,
+"article": {
+  "id": 8,
+  "name": "Muffin Mix - Carrot",
+  "description": "Secondary neuroendocrine tumor, unspecified site",
+  "price": +"93.17"
+}, "quantity": 3
+},
+{
+"id": 5,
+"article": {
+  "id": 36,
+  "name": "Orange - Blood",
+  "description": "Femoral hernia without mention of obstruction or gangrene, bilateral (not specified as recurrent)",
+  "price": +"1.47"
+},
+"quantity": 2
+}, {
+"id": 6,
+"article": {
+  "id": 9,
+  "name": "Tea - Earl Grey",
+  "description": "Stenosis of lacrimal punctum",
+  "price": +"95.78"
+}, "quantity": 3
+},
+{
+"id": 7,
+"article": {
+  "id": 29,
+  "name": "Guinea Fowl",
+  "description": "Unspecified monoarthritis, site unspecified",
+  "price": +"74.00"
+},
+"quantity": 2
+}, {
+"id": 8,
+"article": {
+  "id": 32,
+  "name": "Soup - Knorr, Chicken Noodle",
+  "description": "Poisoning by erythromycin and other macrolides",
+  "price": +"51.80"
+}, "quantity": 3
+},
+{
+"id": 9,
+"article": {
+  "id": 31,
+  "name": "Tea - Honey Green Tea",
+  "description": "Twin birth, mate liveborn, born in hospital, delivered without mention of cesarean section",
+  "price": +"61.15"
+},
+"quantity": 2
+}, {
+"id": 10,
+"article": {
+  "id": 30,
+  "name": "Salmon - Atlantic, No Skin",
+  "description": "Post term pregnancy, unspecified as to episode of care or not applicable",
+  "price": +"78.52"
+}, "quantity": 3
+ }
+])
   public horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   public showDeleteBtn = false;
   public waitToDeleted = false;
   public articleToDelete = null;
-  @ViewChild('scrollEl')
-  scrollEl:ElementRef<HTMLElement>;
-
-  @ViewChildren(CdkDrag)
-  dragEls:QueryList<CdkDrag>;
-
-  private animationFrame: number | undefined;
-
-  @bound
-    public triggerScroll($event: CdkDragMove) {
-        if (this.animationFrame) {
-            cancelAnimationFrame(this.animationFrame);
-            this.animationFrame = undefined;
-        }
-        this.animationFrame = requestAnimationFrame(() => this.scroll($event));
-    }
-
-    @bound
-    private cancelScroll() {
-        if (this.animationFrame) {
-            cancelAnimationFrame(this.animationFrame);
-            this.animationFrame = undefined;
-        }
-    }
 
   constructor(
     private _snackBar: MatSnackBar,
     private _storeOrdArt: Store<{ orderArticles: OrderArticle[] }>,
     private _ordArtsService: OrderArticlesService) {
     this.$articles = this._storeOrdArt.pipe(select('orderArticles'));
-    this.listenToOrderArts();
+    //this.listenToOrderArts();
     this.swipePositions();
     this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
   }
@@ -155,28 +130,6 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
   }
-
-  ngAfterViewInit(){
-    const onMove$ = this.dragEls.changes.pipe(
-    startWith(this.dragEls)
-    , map((d: QueryList<CdkDrag>) => d.toArray())
-    , map(dragels => dragels.map(drag => drag.moved))
-    , switchMap(obs => merge(...obs))
-    , tap(this.triggerScroll)
-);
-
-this._subscriptions.add(onMove$.subscribe());
-
-const onDown$ = this.dragEls.changes.pipe(
-    startWith(this.dragEls)
-    , map((d: QueryList<CdkDrag>) => d.toArray())
-    , map(dragels => dragels.map(drag => drag.ended))
-    , switchMap(obs => merge(...obs))
-    , tap(this.cancelScroll)
-);
-
-this._subscriptions.add(onDown$.subscribe());
-}
 
   ngOnDestroy(): void {
     //If the time of the snackbar
@@ -299,63 +252,5 @@ this._subscriptions.add(onDown$.subscribe());
 
   private substractTemp(article: OrderArticle): void {
     this._substractArt = article.quantity * article.article.price;
-  }
-
-  private scroll($event: CdkDragMove) {
-    const { y } = $event.pointerPosition;
-    const baseEl = this.scrollEl.nativeElement;
-    const box = baseEl.getBoundingClientRect();
-    const scrollTop = baseEl.scrollTop;
-    const top = box.top + - y ;
-    if (top > 0 && scrollTop !== 0) {
-        const newScroll = scrollTop - speed * Math.exp(top / 50);
-        baseEl.scrollTop = newScroll;
-        this.animationFrame = requestAnimationFrame(() => this.scroll($event));
-        return;
-    }
-
-    const bottom = y - box.bottom ;
-    if (bottom > 0 && scrollTop < box.bottom) {
-        const newScroll = scrollTop + speed * Math.exp(bottom / 50);
-        baseEl.scrollTop = newScroll;
-        this.animationFrame = requestAnimationFrame(() => this.scroll($event));
-    }
-}
-
-}
-
-export function bound(target: Object, propKey: string | symbol) {
-  const originalMethod = (target as any)[propKey] as Function;
-
-  // Ensure the above type-assertion is valid at runtime.
-  if (typeof originalMethod !== "function") throw new TypeError("@bound can only be used on methods.");
-
-  if (typeof target === "function") {
-      // Static method, bind to class (if target is of type "function", the method decorator was used on a static method).
-      return {
-          value: function () {
-              return originalMethod.apply(target, arguments);
-          }
-      };
-  } else if (typeof target === "object") {
-      // Instance method, bind to instance on first invocation (as that is the only way to access an instance from a decorator).
-      return {
-          get: function () {
-              // Create bound override on object instance. This will hide the original method on the prototype, and instead yield a bound version from the
-              // instance itself. The original method will no longer be accessible. Inside a getter, 'this' will refer to the instance.
-              const instance = this;
-
-              Object.defineProperty(instance, propKey.toString(), {
-                  value: function () {
-                      // This is effectively a lightweight bind() that skips many (here unnecessary) checks found in native implementations.
-                      return originalMethod.apply(instance, arguments);
-                  }
-              });
-
-              // The first invocation (per instance) will return the bound method from here. Subsequent calls will never reach this point, due to the way
-              // JavaScript runtimes look up properties on objects; the bound method, defined on the instance, will effectively hide it.
-              return instance[propKey];
-          }
-      } as PropertyDescriptor;
   }
 }
