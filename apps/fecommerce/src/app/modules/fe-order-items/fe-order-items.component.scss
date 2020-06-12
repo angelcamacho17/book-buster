@@ -43,10 +43,9 @@
             background:#ffffff;
             display: inline-flex;
             padding: 10px 0;
-            width: calc(100% - 16px);
+            width: 100%;
             justify-content: space-between;
             height: 44px;
-            padding-right: 16px;
             border-top: 1px solid #dadada;
             overflow: hidden;
 
@@ -64,6 +63,7 @@
                   height: 100%;
                   color: #1666D8;
                   align-self: center;
+                  padding-right: 16px
               }
             }
 

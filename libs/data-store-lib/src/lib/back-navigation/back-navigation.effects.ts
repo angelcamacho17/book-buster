@@ -3,7 +3,7 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { BackNavigationService } from './back.navigation.service';
-import { goBackNavigationRequest, refreshBackNavigationDone, appendBackNavigationRequest, refreshBackNavigationRequest, changedNavigationRequest } from './back-navigation.actions';
+import { goBackNavigationRequest, refreshBackNavigationDone, appendBackNavigationRequest, refreshBackNavigationRequest, changedNavigationRequest, switchCustomerRequest } from './back-navigation.actions';
 
 @Injectable()
 export class BackNavigationEffects {

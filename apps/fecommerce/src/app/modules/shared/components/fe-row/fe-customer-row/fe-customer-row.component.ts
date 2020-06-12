@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, Output, EventEmitter } from '@angular/core
 import { Observable, of, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Order, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest, Customer, AuthService, getCurrentOrderRequest, replaceCurrentOrderRequest, changedNavigationRequest } from '@fecommerce-workspace/data-store-lib';
+import { Order, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest, Customer, AuthService, getCurrentOrderRequest, replaceCurrentOrderRequest, changedNavigationRequest, BackNavigationService } from '@fecommerce-workspace/data-store-lib';
 import { isUndefined } from 'util';
 import { EventService } from '../../../services/event.service';
 
@@ -22,6 +22,7 @@ export class FeCustomerRowComponent implements OnDestroy {
     private eventService: EventService,
     private router: Router,
     private _store: Store<{ currentOrder: Order }>,
+    private _bnService: BackNavigationService
   ) {
 
     if (this.item) {
@@ -65,7 +66,11 @@ export class FeCustomerRowComponent implements OnDestroy {
   public onSelectCustomer(customer: Customer): void {
     this.eventService.customerChanged(customer);
     this._store.dispatch(getCurrentOrderRequest());
-    this.router.navigate(['/article']);
+    if (this._bnService.switchCus) {
+      this.router.navigate(['/order']);
+    } else {
+      this.router.navigate(['/article']);
+    }
   }
 
   ngOnDestroy(): void {
