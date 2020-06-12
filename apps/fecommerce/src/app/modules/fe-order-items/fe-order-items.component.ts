@@ -5,6 +5,8 @@ import { Store, select } from '@ngrx/store';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { startWith, map, switchMap, tap } from 'rxjs/operators';
 import { CdkDrag, CdkDragMove } from '@angular/cdk/drag-drop';
+import { MatBottomSheetRef, MatBottomSheet } from '@angular/material/bottom-sheet';
+import { FeArtSheetComponent } from '../shared/components/fe-art-sheet/fe-art-sheet.component';
 
 const speed = 10;
 
@@ -21,6 +23,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   public initialPos = { x: 0, y: 0};
   private _subscriptions = new Subscription();
   private _substractArt = 0;
+  private _currentArt: OrderArticle;
   public filteredlist: Observable<any[]>;
 // public filteredlist: Observable<any[]> = of([{
 // "id": 1,
@@ -120,10 +123,11 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   constructor(
     private _snackBar: MatSnackBar,
     private _storeOrdArt: Store<{ orderArticles: OrderArticle[] }>,
-    private _ordArtsService: OrderArticlesService) {
+    private _ordArtsService: OrderArticlesService,
+    private _bottomSheet: MatBottomSheet) {
     this.$articles = this._storeOrdArt.pipe(select('orderArticles'));
     this.listenToOrderArts();
-    this.swipePositions();
+    //this.swipePositions();
     this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
   }
 
@@ -144,23 +148,37 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
     }
   }
 
+  public openBottomSheet(item: OrderArticle): void {
+    this._currentArt = item;
+    const article = item.article;
+    const ref = this._bottomSheet.open(FeArtSheetComponent, {
+      data: { article },
+    });
+
+    ref.afterDismissed().subscribe((action) => {
+      if (action === 'delete') {
+        this.tempDelete(this._currentArt);
+      }
+    })
+  }
+
   public dragMoved(event, item): void {
     //this.items[item.id].deleteBtn = true;
 
-    if (event.distance.x < -35) {
-      this.items[item.id] = {
-        x: -64,
-        y: 0,
-        deleteBtn: true
-      };
-    } else {
-      this.items[item.id] = {
-        x: 0,
-        y: 0,
-        deleteBtn: false
-      };
-    }
-    this.swipePositions(item);
+    // if (event.distance.x < -35) {
+    //   this.items[item.id] = {
+    //     x: -64,
+    //     y: 0,
+    //     deleteBtn: true
+    //   };
+    // } else {
+    //   this.items[item.id] = {
+    //     x: 0,
+    //     y: 0,
+    //     deleteBtn: false
+    //   };
+    // }
+    // this.swipePositions(item);
 
   }
 
@@ -180,7 +198,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
     this.waitToDeleted = true;
     this.articleToDelete = article;
     //Reset swipe positions of the articles
-    this.swipePositions();
+    //this.swipePositions();
 
     //Delete temporally to article
     this.articles = this.articles.filter(obj => obj !== article);
@@ -229,20 +247,20 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
       );
   }
 
-  public swipePositions(item?): void {
-    console.log(item);
-    if (this.articles) {
-      for (const article of this.articles) {
-        if (article && article !== item) {
-          this.items[article.id] = {
-            x: 0,
-            y: 0,
-            deleteBtn: false
-          }
-        }
-      }
-    }
-  }
+  // public swipePositions(item?): void {
+  //   console.log(item);
+  //   if (this.articles) {
+  //     for (const article of this.articles) {
+  //       if (article && article !== item) {
+  //         this.items[article.id] = {
+  //           x: 0,
+  //           y: 0,
+  //           deleteBtn: false
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   public getTotal(): number {
     let total = this._ordArtsService.getTotal() - this._substractArt;
