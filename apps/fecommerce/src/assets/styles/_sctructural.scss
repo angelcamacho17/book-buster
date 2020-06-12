@@ -15,7 +15,7 @@
     }
     @if ($footer-height) {
         footer {
-            flex: 0 0 $footer-height;
+            flex: 1 0 $footer-height;
             height: $footer-height;
             max-height: $footer-height;
             box-sizing: border-box;

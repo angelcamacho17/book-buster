@@ -1,64 +1,69 @@
-<fe-header [icon]="'keyboard_arrow_left'"
-           [title]="'Article detail'"
-           [class]="'mat-headline'"
-           [style]="'center'"
-           [currentUrl]="'neworder'"
-           (returnUrl)="returnUrl()"></fe-header>
-
-<div class="container">
-    <fe-card class="card">
-        <div class="content">
-            <mat-list class="list">
-                <mat-list-item class="list-item">
-                    <div mat-line class="order-title">
-                        <div class="mat-subheading-2 title">
-                            <!-- {{article.name}} -->
-                            Article code
-                        </div>
-                    </div>
-                    <div mat-line class="order-subtitle">
-                        <div class="mat-body-1 line">
-                            {{article?.id}} - {{article?.name}}
-                            <!-- {{article.description}} -->
-                        </div>
-                    </div>
-                    <mat-divider class="divider"></mat-divider>
-                </mat-list-item>
-                <mat-list-item class="list-item">
-                    <div mat-line class="order-title">
-                        <div class="mat-subheading-2 title">
-                            <!-- {{article.name}} -->
-                            Article name
-                        </div>
-                    </div>
-                    <div mat-line class="order-subtitle">
-                        <div class="mat-body-1 line">
-                            {{article?.description}}
-                            <!-- {{article.description}} -->
-                        </div>
-                    </div>
-                    <mat-divider class="divider"></mat-divider>
-                </mat-list-item>
-            </mat-list>
+<div class="main-wrapper">
+    <header>
+        <fe-header [icon]="'keyboard_arrow_left'" [title]="'Article detail'" [class]="'mat-headline'" [style]="'center'"
+            [currentUrl]="'neworder'" (returnUrl)="returnUrl()"></fe-header>
+    </header>
+    <main>
+        <div class="container">
+            <fe-card class="card">
+                <div class="content">
+                    <mat-list class="list">
+                        <mat-list-item class="list-item">
+                            <div mat-line class="order-title">
+                                <div class="mat-subheading-2 title">
+                                    <!-- {{article.name}} -->
+                                    Article code
+                                </div>
+                            </div>
+                            <div mat-line class="order-subtitle">
+                                <div class="mat-body-1 line">
+                                    {{article?.id}} - {{article?.name}}
+                                    <!-- {{article.description}} -->
+                                </div>
+                            </div>
+                            <mat-divider class="divider"></mat-divider>
+                        </mat-list-item>
+                        <mat-list-item class="list-item">
+                            <div mat-line class="order-title">
+                                <div class="mat-subheading-2 title">
+                                    <!-- {{article.name}} -->
+                                    Article name
+                                </div>
+                            </div>
+                            <div mat-line class="order-subtitle">
+                                <div class="mat-body-1 line">
+                                    {{article?.description}}
+                                    <!-- {{article.description}} -->
+                                </div>
+                            </div>
+                            <mat-divider class="divider"></mat-divider>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+            </fe-card>
         </div>
-    </fe-card>
-    <fe-card class="quantity-card">
-        <div class="content">
+    </main>
+    <footer>
+        <fe-card class="quantity-card">
+            <div class="content">
 
-            <div class="mat-subheading-2 left">
-                Quantity
+                <div class="mat-subheading-2 left">
+                    Quantity
+                </div>
+                <div class="mat-title right">
+                    <button mat-icon-button (click)="removeQuantity()">
+                        <mat-icon class="icon">remove_circle_outline</mat-icon>
+                    </button>
+                    <div class="amount">{{amount}}</div>
+                    <button mat-icon-button (click)="addQuantity()">
+                        <mat-icon class="icon">add_circle_outline</mat-icon>
+                    </button>
+                </div>
             </div>
-            <div class="mat-title right">
-                <button mat-icon-button (click)="removeQuantity()">
-                    <mat-icon class="icon">remove_circle_outline</mat-icon>
-                </button>
-                <div class="amount">{{amount}}</div>
-                <button mat-icon-button (click)="addQuantity()">
-                    <mat-icon class="icon">add_circle_outline</mat-icon>
-                </button>
-            </div>
-        </div>
-    </fe-card>
+        </fe-card>
 
-    <button mat-stroked-button class="add-button" [disabled]="amount === 0" (click)="addToOrder()">add to order</button>
+        <button mat-button color="primary" class="add-button" [disabled]="amount === 0" (click)="addToOrder()">add to
+            order</button>
+    </footer>
+
 </div>
