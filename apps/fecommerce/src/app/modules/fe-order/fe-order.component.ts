@@ -35,7 +35,6 @@ export class FeOrderComponent implements OnInit, OnDestroy {
 
     this.$articles = this._store.pipe(select('orderArticles'));
     this._subscriptions = this.$articles.subscribe((arts) => {
-      console.log(arts);
       this.articles = arts;
     })
 
