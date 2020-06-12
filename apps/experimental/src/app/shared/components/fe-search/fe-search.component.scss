@@ -127,14 +127,6 @@
              !important;
 }
 
-::ng-deep .cdk-overlay-pane {
-  width: 100% !important;
-  pointer-events: auto;
-  top: 222.088px;
-  padding: 16px;
-  left: 0px !important;
-}
-
 ::ng-deep .mat-form-field-underline {
   display: none;
 }
@@ -267,14 +259,6 @@
               0px 4px 5px 0px rgba(0, 0, 0, 0.14),
              0px 0px 0px 0px rgba(0, 0, 0, 0.12)
              !important;
-}
-
-::ng-deep .cdk-overlay-pane {
-  width: 100% !important;
-  pointer-events: auto;
-  top: 222.088px;
-  padding: 16px;
-  left: 0px !important;
 }
 
 ::ng-deep .mat-form-field-underline {
