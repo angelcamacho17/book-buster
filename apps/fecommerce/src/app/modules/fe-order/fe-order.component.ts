@@ -22,7 +22,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   public articles: OrderArticle[] = [];
   public orderArticles$: Observable<OrderArticle[]>;
   public orderArticle: OrderArticle[];
-  private _subscriptions: Subscription;
+  private _subscriptions = new Subscription();
 
   constructor(
     private _store: Store<{ currentOrder: Order, orderArticles: OrderArticle[] }>,
@@ -35,6 +35,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
 
     this.$articles = this._store.pipe(select('orderArticles'));
     this._subscriptions = this.$articles.subscribe((arts) => {
+      console.log(arts);
       this.articles = arts;
     })
 

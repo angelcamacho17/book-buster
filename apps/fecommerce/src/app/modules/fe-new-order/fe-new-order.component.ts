@@ -104,6 +104,8 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
       }
       this._store.dispatch(setCurrentOrderRequest({ order }));
     } else {
+      console.log('ENTRO AQUI');
+      console.log(this.currentOrder.articles);
       const order: Order = {
         id: this._curId,
         description: this.currentOrder.description,
@@ -178,5 +180,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     if (this._curOrderSubs) {
       this._curOrderSubs.unsubscribe();
     }
+
+    this.currentOrder = null;
   }
 }
