@@ -31,6 +31,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   private _curId: number = null;
   public hide = false;
   public shadow = false;
+  public nodata = false;
 
   constructor(
     private eventService: EventService,
@@ -159,6 +160,15 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
 
   public showShadow(shadow: boolean): void {
     this.shadow = shadow;
+  }
+
+  public removeDark(): void {
+    this.shadow = false;
+    this.hide = false;
+  }
+
+  public noDataPlaceholder(show: boolean): void {
+    this.nodata = show;
   }
 
   ngOnDestroy(): void {

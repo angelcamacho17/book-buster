@@ -18,7 +18,8 @@
     "paths": {
       "@fecommerce-workspace/data-store-lib": [
         "libs/data-store-lib/src/index.ts"
-      ]
+      ],
+      "@fecommerce-workspace/scanner": ["libs/scanner/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

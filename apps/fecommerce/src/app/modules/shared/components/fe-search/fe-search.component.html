@@ -10,6 +10,7 @@
       <input matInput
               name="input"
               #input
+              id="input"
               aria-label="State"
               [matAutocomplete]="auto"
               [formControl]="stateCtrl"
@@ -18,6 +19,8 @@
               color="accent">
         <mat-placeholder class="mat-subheading-2 placeholder">Search...</mat-placeholder>
         <mat-autocomplete #auto="matAutocomplete"
+                          id="autocomplete"
+                          #autocomplete
                           (closed)="closeSearch()"
                           (opened)="openSearch()"
                           class="autocomplete">

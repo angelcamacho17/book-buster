@@ -5,18 +5,23 @@
            [headerSearch]="true"
            [style]="'center'"></fe-header>
 <fe-search [list]="articles"
-           (searching)="hidePanel($event)"
+           (hidePlaceholder)="hidePanel($event)"
            (darker)="showShadow($event)"
+           (nodata)="noDataPlaceholder($event)"
            [itemType]="rowType"
+           (clickOutside)="removeDark()"
            [small]="true"></fe-search>
 
 <div class="container" [ngClass]="shadow ? 'shadow' : ''">
-  <div class="no-results" *ngIf="!hide" (click)="removeDark()">
+  <div class="no-results" *ngIf="!hide">
     <mat-icon class="icon">search</mat-icon>
     <div class="mat-title search-text">Search articles</div>
     <div class="mat-subheading-2 search-description">Find stock, sales & … info</div>
   </div>
+  <div class="no-results" *ngIf="nodata" (click)="removeDark()">
+    <div class="mat-title search-text">no matching articles</div>
+  </div>
 </div>
 <button mat-button class="fe-button" (click)="overviewOrder()">OVERVIEW</button>
-
+<fecommerce-workspace-z-scan></fecommerce-workspace-z-scan>
 <router-outlet></router-outlet>
