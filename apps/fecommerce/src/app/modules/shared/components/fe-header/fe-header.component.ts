@@ -19,8 +19,9 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
   @Input() style = '';
   @Input() logoutIcon = false;
   @Input() icon = 'close';
+  @Input() createFlowRoute = null;
   @Input() needsConfirm = false;
-  @Input() currentUrl = '';
+  @Input() lastUrl = '';
   @Input() headerSearch = false;
   @Output() goBack = new EventEmitter<boolean>();
   @Output() returnUrl = new EventEmitter<boolean>();
@@ -30,18 +31,19 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
   constructor(private _router: Router,
               private _storeUrl: Store<{ backNavigation: string }>) {
 
-    this.url$ = this._storeUrl.pipe(select('backNavigation'));
-    this.url$.pipe(takeUntil(this._subscriptions))
-    .subscribe(data => {
-        this._backUrl = data;
-        if (this._backUrl && this._backUrl!=='') {
-          this._router.navigate(['/'+ this._backUrl]);
-        }
-    });
+    // this.url$ = this._storeUrl.pipe(select('backNavigation'));
+    // this.url$.pipe(takeUntil(this._subscriptions))
+    // .subscribe(data => {
+    //     // If the route should not be chronologically
+    //     this._backUrl = data;
+    //     if (this._backUrl && this._backUrl!=='') {
+    //       this._router.navigate(['/'+ this._backUrl]);
+    //     }
+    // });
   }
 
   ngOnInit(): void {
-    this._storeUrl.dispatch(appendBackNavigationRequest({url: this.currentUrl}));
+    //this._storeUrl.dispatch(appendBackNavigationRequest({url: this.currentUrl}));
   }
 
   public goLastVisited(): void {
@@ -53,7 +55,8 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
   }
 
   private returnLastUrl(): void {
-    this._storeUrl.dispatch(goBackNavigationRequest());
+    this._router.navigate(['/'+ this.lastUrl]);
+    //this._storeUrl.dispatch(goBackNavigationRequest());
   }
 
   public logout(): void {

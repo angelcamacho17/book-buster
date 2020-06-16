@@ -25,7 +25,7 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   public nodata = false;
   public shadow = false;
 
-  constructor(private _store: Store<{ articles: Article[], currentOrder: Order, backNavigation: string }>,
+  constructor(private _store: Store<{ articles: Article[], currentOrder: Order }>,
     private _router: Router) {
 
     this._articles$ = this._store.pipe(select('articles'));

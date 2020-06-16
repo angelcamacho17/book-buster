@@ -87,6 +87,7 @@ body {
   right: 0px !important;
   left: 0px !important;
   max-height: calc(100% - 236px) !important;
+  z-index: 1000;
 }
 
 .text-truncate {

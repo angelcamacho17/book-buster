@@ -6,11 +6,9 @@ import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 import { FeCustomerRowComponent } from '../shared/components/fe-row/fe-customer-row/fe-customer-row.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FeConfirmDiscardDialogComponent } from '../shared/components/fe-confirm-discard/fe-confirm-discard-dialog.component';
-import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../shared/services/event.service';
 import { isUndefined } from 'util';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'fe-new-order',
@@ -32,6 +30,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public hide = false;
   public shadow = false;
   public nodata = false;
+  public lastUrl = 'neworder';
 
   constructor(
     private eventService: EventService,
@@ -51,6 +50,10 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
       this.currentOrder = currentOrder;
       if (this._curId === null) {
         this._curId = currentOrder?.id;
+
+      }
+      if (!this.currentOrder?.id) {
+        this.lastUrl = 'article';
       }
     })
 

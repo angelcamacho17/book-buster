@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { FeDialogComponent } from '../shared/components/fe-dialog/fe-dialog.component';
 import { isUndefined } from 'util';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, last } from 'rxjs/operators';
 
 @Component({
   selector: 'fe-order',
@@ -23,6 +23,8 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   public orderArticles$: Observable<OrderArticle[]>;
   public orderArticle: OrderArticle[];
   private _subscriptions = new Subscription();
+  public icon = 'keyboard_arrow_left';
+  public lastUrl = 'article';
 
   constructor(
     private _store: Store<{ currentOrder: Order, orderArticles: OrderArticle[] }>,
@@ -41,6 +43,10 @@ export class FeOrderComponent implements OnInit, OnDestroy {
     this.order$ = this._store.pipe(select('currentOrder'));
     this._subscriptions = this.order$.subscribe(data => {
       this.order = data;
+      if (this.order?.id) {
+        this.icon = 'close';
+        this.lastUrl = 'home';
+      }
     });
     this._store.dispatch(getCurrentOrderRequest());
 
