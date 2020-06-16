@@ -1,10 +1,23 @@
 <div class="main-wrapper">
   <header>
-    <fe-header [class]="'mat-headline'" [style]="'center'" [title]="'Customers'" [currentUrl]="'neworder'"
-      [needsConfirm]="true" [headerSearch]="true" (goBack)="onHeaderGoBack()" (returnUrl)="returnUrl()"></fe-header>
-    <fe-search (customerChange)="onCustomerChange($event)" (searching)="hidePanel($event)" (darker)="showShadow($event)"
-      [list]="customers" [itemType]="rowType" [small]="true" (nodata)="noDataPlaceholder($event)"
-      (clickOutside)="removeDark()"></fe-search>
+    <fe-header 
+              [class]="'mat-headline'"
+              [style]="'center'"
+              [title]="'Customers'"
+              [currentUrl]="'neworder'"
+              [needsConfirm]="true"
+              [headerSearch]="true"
+              (goBack)="onHeaderGoBack()"
+              (returnUrl)="returnUrl()"></fe-header>
+    <fe-search 
+              (customerChange)="onCustomerChange($event)"
+              (hidePlaceholder)="hidePanel($event)"
+              (darker)="showShadow($event)"
+              [list]="customers" 
+              [itemType]="rowType"
+              [small]="true" 
+              (nodata)="noDataPlaceholder($event)"
+              (clickOutside)="removeDark()"></fe-search>
   </header>
 
   <main>

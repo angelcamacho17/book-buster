@@ -2,8 +2,14 @@
   <header>
     <fe-header [icon]="'keyboard_arrow_left'" [class]="'mat-headline'" [title]="'New order'" [currentUrl]="'article'"
       [headerSearch]="true" [style]="'center'"></fe-header>
-    <fe-search [list]="articles" [itemType]="rowType" [small]="true" (searching)="hidePanel($event)"
-      (darker)="showShadow($event)" (nodata)="noDataPlaceholder($event)" (clickOutside)="removeDark()"></fe-search>
+    <fe-search 
+              [list]="articles" 
+              [itemType]="rowType"
+              [small]="true"
+              (hidePlaceholder)="hidePanel($event)"
+              (darker)="showShadow($event)"
+              (nodata)="noDataPlaceholder($event)"
+              (clickOutside)="removeDark()"></fe-search>
   </header>
 
   <main>
