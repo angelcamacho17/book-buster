@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { setCurrentOrderRequest, clearCurrentOrderRequest, OrderService, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
+import { setCurrentOrderRequest, clearCurrentOrderRequest, OrderService, setOrderArticlesRequest, BackNavigationService } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
@@ -23,7 +23,7 @@ export class FeHomeComponent implements OnInit, OnDestroy {
     private _store: Store,
     private _router: Router,
     private _storeOrders: Store<{ orders: Order[] }>,
-    private _orderService: OrderService
+    private _bnService: BackNavigationService
   ) {
     this.orders$ = this._storeOrders.pipe(select('orders'));
     this._subscriptions = this.orders$.subscribe(data => {
@@ -40,6 +40,7 @@ export class FeHomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void { }
 
   public createOrder(): void {
+    this._bnService.switchCustomer(false);
     this._router.navigate(['/neworder']);
   }
 

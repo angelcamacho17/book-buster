@@ -106,3 +106,12 @@ body {
   display: flex !important;
   justify-content: center !important;
 }
+
+.mat-bottom-sheet-container {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.no-margin-btm {
+  margin-bottom: 0px !important;
+}

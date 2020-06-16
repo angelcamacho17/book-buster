@@ -15,12 +15,12 @@ export class ZScanComponent extends ScannerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._snackBar.open('Opening ' + this.name ,'Great!',
-      {
-        duration: 5000,
-        verticalPosition: 'top'
-      }
-    )
+    // this._snackBar.open('Opening ' + this.name ,'Great!',
+    //   {
+    //     duration: 5000,
+    //     verticalPosition: 'top'
+    //   }
+    // )
   }
 
 }

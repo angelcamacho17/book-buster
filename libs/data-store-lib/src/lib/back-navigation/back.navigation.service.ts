@@ -7,6 +7,7 @@ export class BackNavigationService {
   private _currentUrl: string;
   private _changedNav = ['foward', 'back'];
   private _index = 0;
+  public switchCus = false;
 
   constructor() { }
 
@@ -31,5 +32,9 @@ export class BackNavigationService {
     this._urls.push(url);
     this._currentUrl = url;
     return of('');
+  }
+
+  public switchCustomer(data: boolean): void {
+    this.switchCus = data;
   }
 }

@@ -19,7 +19,7 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
   article: Article;
   orderArticles: OrderArticle[];
   currentOrder: Order;
-  private _subscriptions = new Subject<any>();
+  private _subscriptions = new Subscription();
 
 
   constructor(
@@ -28,21 +28,18 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
     private _router: Router
   ) {
     this._article$ = this._store.pipe(select('article'));
-    this._article$.pipe(takeUntil(this._subscriptions))
-      .subscribe(data => {
+    this._subscriptions = this._article$.subscribe(data => {
         this.article = data;
       });
 
     this._currentOrder$ = this._store.pipe(select('currentOrder'));
-    this._currentOrder$.pipe(takeUntil(this._subscriptions))
-      .subscribe(data => {
+    this._subscriptions =  this._currentOrder$.subscribe(data => {
         this.currentOrder = data;
       });
     this._store.dispatch(getCurrentOrderRequest())
 
     this._orderArticles$ = this._store.pipe(select('orderArticles'));
-    this._orderArticles$.pipe(takeUntil(this._subscriptions))
-      .subscribe(data => {
+    this._subscriptions = this._orderArticles$.subscribe(data => {
         this.orderArticles = data;
       });
   }
@@ -55,7 +52,6 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
     let articleId: number;
 
     this._route.paramMap.pipe(
-      takeUntil(this._subscriptions),
       map((params: ParamMap) => articleId = +params.get('id'))
     ).subscribe(() => {
       this._store.dispatch(getArticleRequest({ articleId }));
@@ -106,7 +102,6 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._subscriptions.next();
-    this._subscriptions.complete();
+    this._subscriptions.unsubscribe();
   }
 }

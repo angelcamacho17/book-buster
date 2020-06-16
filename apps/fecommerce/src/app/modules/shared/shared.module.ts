@@ -14,6 +14,7 @@ import { FeDialogComponent } from './components/fe-dialog/fe-dialog.component';
 import { FeConfirmDiscardDialogComponent } from './components/fe-confirm-discard/fe-confirm-discard-dialog.component';
 import { EventService } from './services/event.service';
 import { DataStoreModule } from '@fecommerce-workspace/data-store-lib';
+import { FeArtSheetComponent } from './components/fe-art-sheet/fe-art-sheet.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DataStoreModule } from '@fecommerce-workspace/data-store-lib';
     FeArticleRowComponent,
     FeRowComponent,
     FeDialogComponent,
-    FeConfirmDiscardDialogComponent
+    FeConfirmDiscardDialogComponent,
+    FeArtSheetComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,9 @@ import { DataStoreModule } from '@fecommerce-workspace/data-store-lib';
     FeCardComponent,
     FeCustomerRowComponent,
     FeArticleRowComponent,
-    FeConfirmDiscardDialogComponent
+    FeConfirmDiscardDialogComponent,
+    FeArtSheetComponent
+
   ],
   providers: [
     EventService

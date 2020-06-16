@@ -1,0 +1,28 @@
+<div class="sheet">
+  <h4 class="mat-display-1 no-margin-btm">
+    Article detail
+  </h4>
+  <div class="subtitle mat-body-2">
+    {{article?.name}}
+  </div>
+  <div class="divider" color="primary"></div>
+  <div class="description mat-body-2">
+    <mat-icon class="icon">
+      description
+    </mat-icon>
+    <div class="text text-truncate">
+      {{article?.description}}
+    </div>
+  </div>
+  <div class="description mat-body-2">
+    <mat-icon class="icon">
+      payment
+    </mat-icon>
+    <div class="text">
+      € {{article?.price}}
+    </div>
+  </div>
+  <button mat-stroked-button
+          (click)="deleteArticle()"
+          class="delete">DELETE FROM ORDER</button>
+</div>

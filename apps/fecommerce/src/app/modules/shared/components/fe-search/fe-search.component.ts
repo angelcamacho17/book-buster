@@ -87,7 +87,6 @@ export class FeSearchComponent implements OnInit {
    * Hide initial state.
    */
   public openSearch(): void {
-    console.log('open')
     this.hidePlaceholder.emit(true);
     this.darker.emit(true);
     this.nodata.emit(false);
