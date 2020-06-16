@@ -22,6 +22,7 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   public display = false;
   public navigation$: Observable<string>;
   public hide = false;
+  public nodata = false;
   public shadow = false;
 
   constructor(private _store: Store<{ articles: Article[], currentOrder: Order, backNavigation: string }>,
@@ -60,4 +61,10 @@ export class FeArticleComponent implements OnInit, OnDestroy {
     this.shadow = false;
     this.hide = false;
   }
+
+  public noDataPlaceholder(show: boolean): void {
+    this.nodata = show;
+  }
+
+
 }

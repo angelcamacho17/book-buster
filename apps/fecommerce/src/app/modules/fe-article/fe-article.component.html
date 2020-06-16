@@ -2,8 +2,8 @@
   <header>
     <fe-header [icon]="'keyboard_arrow_left'" [class]="'mat-headline'" [title]="'New order'" [currentUrl]="'article'"
       [headerSearch]="true" [style]="'center'"></fe-header>
-    <fe-search [list]="articles" (searching)="hidePanel($event)" (darker)="showShadow($event)" [itemType]="rowType"
-      [small]="true"></fe-search>
+    <fe-search [list]="articles" [itemType]="rowType" [small]="true" (searching)="hidePanel($event)"
+      (darker)="showShadow($event)" (nodata)="noDataPlaceholder($event)" (clickOutside)="removeDark()"></fe-search>
   </header>
 
   <main>
@@ -19,4 +19,5 @@
     <button mat-button class="fe-button" (click)="overviewOrder()">OVERVIEW</button>
   </footer>
 </div>
+<fecommerce-workspace-z-scan></fecommerce-workspace-z-scan>
 <router-outlet></router-outlet>
