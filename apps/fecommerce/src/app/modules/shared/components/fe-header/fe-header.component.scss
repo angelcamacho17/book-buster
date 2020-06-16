@@ -1,15 +1,8 @@
 .gradient-background {
-  height: 128px;
-  // width: 100%;
-  // background: linear-gradient(270deg, #1F51D2 0%, #1946B9 100%);
-  // color: #ffffff;
-  // padding-left: 16px;
-  // display: flex;
-  // position: relative;
-  // overflow: hidden;
+  position: sticky;
+  height: 100% !important;
   color: #ffffff;
   overflow: hidden;
-  position: fixed;
   background-repeat: no-repeat;
   background-size:
       240px 240px,

@@ -1,39 +1,160 @@
-.order-items {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  right: 15px;
-  left: 16px;
-  top: 94px;
-  bottom: 16px;
-  justify-content: space-between;
+@use '../../../assets/styles/sctructural' as structure;
+$header-height: 162px;
+$footer-height: 195px;
 
-  .card {
-    border-radius: 8px;
-    padding: 0;
-    display: inline-block;
-    //background: linear-gradient(90deg, #ffffff 80%, #E02020 50%);
-    background: #ffffff;
-    position: fixed;
-    width: calc(100% - 32px);
-    max-height: calc(100% - 304px);
-    margin-bottom: 196px;
-    bottom: initial;
-    -webkit-overflow-scrolling: touch;
-    overflow: auto;
-    overflow-x: hidden;
+.main-wrapper {
+  @include structure.set-structure($header-height, $footer-height);
 
-    .list {
+  main {
+    .order-items {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      right: 15px;
+      left: 16px;
+      top: 112px;
+      bottom: 16px;
+      justify-content: space-between;
+
+      .card {
+        border-radius: 8px;
+        padding: 0;
+        display: inline-block;
+        //background: linear-gradient(90deg, #ffffff 80%, #E02020 50%);
+        background: #ffffff;
+        position: fixed;
+        width: calc(100% - 32px);
+        max-height: calc(100% - 342px);
+        margin-bottom: 196px;
+        bottom: initial;
+        -webkit-overflow-scrolling: touch;
+        overflow: auto;
+        overflow-x: hidden;
+
+        .list {
+          position: relative;
+          padding-top: 0 !important;
+          padding-left: 16px;
+          width: 100%;
+          bottom: initial;
+          -webkit-overflow-scrolling: touch;
+          //width: calc(100% - 49px);
+
+          .list-item {
+            width: calc(100% - 15px);
+            position: relative;
+            z-index: 14;
+            padding-left: 64px;
+            left: -64px;
+
+            .content {
+              z-index: 2;
+              background: #ffffff;
+              display: inline-flex;
+              padding: 10px 0;
+              width: 100%;
+              justify-content: space-between;
+              height: 44px;
+              border-top: 1px solid #dadada;
+              overflow: hidden;
+
+              .info {
+                display: flex;
+                flex-flow: column;
+                justify-content: space-evenly;
+                color: rgba(0, 0, 0, 0.87);
+                height: 100%;
+                max-width: 224px;
+              }
+
+              .price {
+                display: flex;
+                height: 100%;
+                color: #1666d8;
+                align-self: center;
+                padding-right: 16px;
+              }
+            }
+
+            .divider {
+              position: relative;
+              color: green;
+              width: calc(100% + 16px);
+            }
+          }
+
+          .delete-button {
+            z-index: -1;
+            position: absolute;
+            top: 0;
+            height: 64px;
+            width: 64px;
+            color: #ffffff;
+            border-top: 1px solid rgba(255, 255, 255, 0);
+            background: transparent;
+            right: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+  footer {
+    padding: 0 16px;
+    .total {
       position: relative;
-      padding-top: 0 !important;
-      padding-left: 16px;
-      width: 100%;
-      bottom: initial;
-      -webkit-overflow-scrolling: touch;
-      //width: calc(100% - 49px);
+      border-radius: 8px;
+      padding-top: 0;
+      .info-total {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        padding-top: 16px;
+      }
 
-        .list-item {
-          width: calc(100% - 15px);
+      .order-total {
+        @extend .info-total;
+      }
+    }
+  }
+}
+
+/* @use '../../../assets/styles/sctructural' as structure;
+$header-height: 162px;
+$footer-heigth: 195px;
+
+.main-wrapper {
+  @include structure.set-structure($header-height, $footer-heigth);
+
+  main {
+    .order-items {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      right: 15px;
+      left: 16px;
+      top: 94px;
+      bottom: 16px;
+      justify-content: space-between;
+
+      .card {
+        border-radius: 8px;
+        padding: 0;
+        display: inline-block;
+        background: linear-gradient(90deg, #ffffff 80%, #e02020 50%);
+        position: fixed;
+        width: calc(100% - 32px);
+        max-height: calc(100% - 304px);
+        margin-bottom: 196px;
+        bottom: initial;
+        -webkit-overflow-scrolling: touch;
+        overflow: auto;
+        overflow-x: hidden;
+
+        .list {
           position: relative;
           z-index: 14;
           padding-left: 64px;
@@ -41,7 +162,7 @@
 
           .content {
             z-index: 2;
-            background:#ffffff;
+            background: #ffffff;
             display: inline-flex;
             padding: 10px 0;
             width: 100%;
@@ -50,72 +171,45 @@
             border-top: 1px solid #dadada;
             overflow: hidden;
 
-              .info {
-                  display: flex;
-                  flex-flow: column;
-                  justify-content: space-evenly;
-                  color: rgba(0, 0, 0, 0.87);
-                  height: 100%;
-                  max-width: 224px;
-
-              }
-
-              .price {
-                  display: flex;
-                  height: 100%;
-                  color: #1666D8;
-                  align-self: center;
-                  padding-right: 16px
-              }
+            .info {
+              display: flex;
+              flex-flow: column;
+              justify-content: space-evenly;
+              color: rgba(0, 0, 0, 0.87);
+              height: 100%;
+              max-width: 224px;
             }
 
-            .divider {
-                position: relative;
-                color: green;
-                width: calc(100% + 16px);
+            .price {
+              display: flex;
+              height: 100%;
+              color: #1666d8;
+              align-self: center;
+              padding-right: 16px;
             }
+          }
         }
-
-        .delete-button {
-          z-index: -1;
-          position: absolute;
-          top: 0;
-          height: 64px;
-          width: 64px;
-          color: #ffffff;
-          border-top: 1px solid rgba(255, 255, 255, 0);
-          background: transparent;
-          right: 0px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
+      }
     }
-
   }
+  footer {
+    padding: 0 16px;
+    .total {
+      border-radius: 8px;
+      width: calc(100% - 32px);
 
-  .total {
-    border-radius: 8px;
-    position: fixed;
-    bottom: 32px;
-    width: calc(100% - 64px);
+      .info-total {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+      }
 
-    .info-total {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      width: 100%;
-
+      .order-total {
+        @extend .info-total;
+        padding-top: 16px;
+      }
     }
-
-    .order-total {
-      @extend .info-total;
-      padding-top: 16px;
-
-    }
-
   }
-
-
 }
+ */
