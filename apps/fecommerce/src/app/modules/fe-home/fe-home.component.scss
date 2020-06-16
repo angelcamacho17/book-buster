@@ -38,14 +38,17 @@
                     color: rgba(0, 0, 0, 0.6);
                 }
             }
-
-            .list-item:last-child {
-                padding-bottom: 11px;
-            }
-
             .divider {
                 left: 16px;
                 width: calc(100% - 16px);
+            }
+        }
+
+        &.overflows {
+            .list {
+                .list-item:last-child {
+                    padding-bottom: 11px;
+                }
             }
         }
     }
