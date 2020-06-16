@@ -28,6 +28,9 @@
     },
     "data-store-lib": {
       "tags": []
+    },
+    "scanner": {
+      "tags": []
     }
   }
 }
