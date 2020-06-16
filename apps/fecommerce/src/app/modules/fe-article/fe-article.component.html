@@ -21,7 +21,7 @@
       </div>
     </div>
   </main>
-  <footer>
+  <footer [ngClass]="shadow ? 'shadow' : ''">
     <button mat-button class="fe-button" (click)="overviewOrder()">OVERVIEW</button>
   </footer>
 </div>
