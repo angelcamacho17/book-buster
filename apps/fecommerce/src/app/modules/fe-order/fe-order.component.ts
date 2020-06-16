@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService } from '@fecommerce-workspace/data-store-lib';
+import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,14 +22,15 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   public articles: OrderArticle[] = [];
   public orderArticles$: Observable<OrderArticle[]>;
   public orderArticle: OrderArticle[];
-  private _subscriptions: Subscription;
+  private _subscriptions = new Subscription();
 
   constructor(
     private _store: Store<{ currentOrder: Order, orderArticles: OrderArticle[] }>,
     private _snackBar: MatSnackBar,
     private _router: Router,
     public dialog: MatDialog,
-    private _ordArtsService: OrderArticlesService
+    private _ordArtsService: OrderArticlesService,
+    private _bnService: BackNavigationService
   ) {
 
     this.$articles = this._store.pipe(select('orderArticles'));
@@ -98,6 +99,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
         return;
       }
       if (data?.result === 'SWITCH') {
+        this._bnService.switchCustomer(true);
         this._router.navigate(['/neworder'])
         // , {
         //   state: {
