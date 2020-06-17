@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 import { AuthService, goBackNavigationRequest, appendBackNavigationRequest, getCurrentOrderRequest, changedNavigationRequest, deleteOrderRequest, Order, OrderService } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { FeDialogComponent } from '../fe-dialog/fe-dialog.component';
 
 @Component({
   selector: 'fe-header',
@@ -32,6 +34,7 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
 
   constructor(private _router: Router,
               private _ordService: OrderService,
+              public dialog: MatDialog,
               private _store: Store<{ currentOrder: Order }>) {
   // this.url$ = this._storeUrl.pipe(select('backNavigation'));
     // this.url$.pipe(takeUntil(this._subscriptions))
@@ -66,8 +69,27 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
   }
 
   public deleteOrder(): void {
-    this._store.dispatch(deleteOrderRequest());
-    this._router.navigate(['/home']);
+    const dialogRef = this.dialog.open(FeDialogComponent, {
+      width: '280px',
+      height: '120px',
+      data: {
+        msg: 'Delete this order?',
+        firstButton: 'CANCEL',
+        secondButton: 'DELETE',
+        buttonColor: 'red'
+      }
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data === undefined) {
+        // Is undefined when the user closes
+        // the dialog without an action
+        return;
+      }
+      if (data?.result === 'DELETE') {
+        this._store.dispatch(deleteOrderRequest());
+        this._router.navigate(['/home']);
+      }
+    });
   }
 
   public addArticle(): void {

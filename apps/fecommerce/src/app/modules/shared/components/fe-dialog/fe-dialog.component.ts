@@ -6,8 +6,8 @@ export interface DialogData {
   msg: string;
   firstButton: string;
   secondButton: string;
+  buttonColor: string;
 }
-
 
 @Component({
   selector: 'fe-dialog',

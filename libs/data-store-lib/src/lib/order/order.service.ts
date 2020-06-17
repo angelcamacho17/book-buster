@@ -261,7 +261,6 @@ export class OrderService {
   }
 
   public append(order: Order): Observable<Order[]> {
-    console.log(this._orders);
     const lastOrderId = this._orders[this._orders.length - 1]?.id;
     const newOrder: Order = {
       id: lastOrderId + 1,
@@ -271,7 +270,6 @@ export class OrderService {
       articles: order.articles,
       customer: order.customer
     }
-    console.log(lastOrderId);
     this._orders = this._orders.concat(newOrder);
     return of(this._orders);
   }

@@ -96,7 +96,8 @@ export class FeOrderComponent implements OnInit, OnDestroy {
         title: 'Switch customer',
         msg: 'Customer specific prices will be recalculated after asssigning a new customer.',
         firstButton: 'CANCEL',
-        secondButton: 'SWITCH'
+        secondButton: 'SWITCH',
+        buttonColor: 'blue'
       }
     });
 
