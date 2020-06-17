@@ -25,12 +25,13 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public rowType = FeCustomerRowComponent;
   private _subscriptions: Subscription;
   private _curOrderSubs: Subscription;
-  private _returnUrl = 'home'
+  private _returnUrl = 'home';
   private _curId: number = null;
   public hide = false;
   public shadow = false;
   public nodata = false;
   public lastUrl = 'neworder';
+  public icon = 'close';
 
   constructor(
     private eventService: EventService,
@@ -50,7 +51,12 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
       this.currentOrder = currentOrder;
       if (this._curId === null) {
         this._curId = currentOrder?.id;
-
+        if (this._curId) {
+          this.icon = 'keyboard_arrow_left';
+          this._returnUrl = 'order';
+        } else {
+          this.icon = 'close';
+        }
       }
       if (!this.currentOrder?.id) {
         this.lastUrl = 'article';
@@ -63,7 +69,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._subscriptions = this._route.queryParams.subscribe(params => {
-        if (params.returnUrl) {
+        if (params.returnUrl && this.icon ==='close') {
           this._returnUrl = params.returnUrl;
         }
       });
@@ -107,8 +113,6 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
       }
       this._store.dispatch(setCurrentOrderRequest({ order }));
     } else {
-      console.log('ENTRO AQUI');
-      console.log(this.currentOrder.articles);
       const order: Order = {
         id: this._curId,
         description: this.currentOrder.description,
@@ -122,12 +126,18 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   }
 
   public onHeaderGoBack() {
-    this._store.dispatch(getCurrentOrderRequest());
-    if (this.currentOrder != null) {
-      this.openConfirmDialog();
+
+    if (this.icon === 'close') {
+      this._store.dispatch(getCurrentOrderRequest());
+      if (this.currentOrder != null) {
+        this.openConfirmDialog();
+      } else {
+        this.goBack();
+      }
     } else {
-      this.goBack();
+      this.returnUrl();
     }
+
   }
 
   public goBack() {

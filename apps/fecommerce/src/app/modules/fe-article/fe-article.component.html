@@ -4,7 +4,7 @@
     <fe-header [icon]="'keyboard_arrow_left'"
            [class]="'mat-headline'"
            [title]="'New order'"
-           [lastUrl]="'neworder'"
+           [lastUrl]="lastUrl"
            [headerSearch]="true"
            [style]="'center'"></fe-header>
     <fe-search [list]="articles"
@@ -22,6 +22,9 @@
         <mat-icon class="icon">search</mat-icon>
         <div class="mat-title search-text">Search articles</div>
         <div class="mat-subheading-2 search-description">Find stock, sales & … info</div>
+      </div>
+      <div class="no-results" *ngIf="nodata">
+        <div class="mat-title search-text">no matching articles</div>
       </div>
     </div>
   </main>

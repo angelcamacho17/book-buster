@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { Observable, Subscription, of, merge } from 'rxjs';
-import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest, OrderArticlesService } from '@fecommerce-workspace/data-store-lib';
+import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest, OrderArticlesService, OrderService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { startWith, map, switchMap, tap } from 'rxjs/operators';
@@ -48,15 +48,20 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   public showDeleteBtn = false;
   public waitToDeleted = false;
   public articleToDelete = null;
+  public addArt = false;
 
   constructor(
     private _snackBar: MatSnackBar,
+    private _ordSer: OrderService,
     private _storeOrdArt: Store<{ orderArticles: OrderArticle[] }>,
     private _ordArtsService: OrderArticlesService,
     private _bottomSheet: MatBottomSheet) {
     this.$articles = this._storeOrdArt.pipe(select('orderArticles'));
     this.listenToOrderArts();
     this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
+    if (this._ordSer.currentOrder?.id) {
+      this.addArt = true;
+    }
   }
 
 

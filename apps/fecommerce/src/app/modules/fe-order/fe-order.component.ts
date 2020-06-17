@@ -25,6 +25,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   private _subscriptions = new Subscription();
   public icon = 'keyboard_arrow_left';
   public lastUrl = 'article';
+  public delete = false;
 
   constructor(
     private _store: Store<{ currentOrder: Order, orderArticles: OrderArticle[] }>,
@@ -46,6 +47,7 @@ export class FeOrderComponent implements OnInit, OnDestroy {
       if (this.order?.id) {
         this.icon = 'close';
         this.lastUrl = 'home';
+        this.delete = true;
       }
     });
     this._store.dispatch(getCurrentOrderRequest());

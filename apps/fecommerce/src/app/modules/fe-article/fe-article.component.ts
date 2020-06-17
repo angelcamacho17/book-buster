@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Article, Order, refreshArticlesRequest, changedNavigationRequest, setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Article, Order, refreshArticlesRequest, changedNavigationRequest, setCurrentOrderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
 import { FeArticleRowComponent } from '../shared/components/fe-row/fe-article-row/fe-article-row.component';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -24,9 +24,11 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   public hide = false;
   public nodata = false;
   public shadow = false;
+  public lastUrl = 'neworder';
 
   constructor(private _store: Store<{ articles: Article[], currentOrder: Order }>,
-    private _router: Router) {
+              private _ordSer: OrderService,
+              private _router: Router) {
 
     this._articles$ = this._store.pipe(select('articles'));
 
@@ -34,6 +36,9 @@ export class FeArticleComponent implements OnInit, OnDestroy {
       this.articles = data;
 
       });
+    if (this._ordSer.currentOrder?.id) {
+      this.lastUrl = 'orderitems';
+    }
     this._store.dispatch(refreshArticlesRequest());
   }
 

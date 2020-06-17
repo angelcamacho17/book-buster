@@ -15,7 +15,7 @@ export class OrderService {
 
   private _orders: Array<Order> = [
     {
-      "id": 8,
+      "id": 9,
       "description": "Other Order",
       "amount": null,
       "createdBy": "Federico Ribero",
@@ -39,7 +39,7 @@ export class OrderService {
       }
     },
     {
-      "id": 9,
+      "id": 10,
       "description": "New order",
       "amount": null,
       "createdBy": "Angel Camacho",
@@ -250,8 +250,6 @@ export class OrderService {
 
   public currentOrder: Order = null;
 
-  public orders = new BehaviorSubject<Order[]>(this._orders);
-
   constructor(
     private httpClient: HttpClient,
     private _ordArtsService: OrderArticlesService
@@ -259,11 +257,12 @@ export class OrderService {
 
   public all(): Observable<Order[]> {
     this.setOrdersTotal();
-    return this.orders.asObservable();
+    return of(this._orders);
   }
 
   public append(order: Order): Observable<Order[]> {
-    const lastOrderId = this._orders[this._orders.length - 1]?.id ?? 0;
+    console.log(this._orders);
+    const lastOrderId = this._orders[this._orders.length - 1]?.id;
     const newOrder: Order = {
       id: lastOrderId + 1,
       description: order.description,
@@ -272,8 +271,8 @@ export class OrderService {
       articles: order.articles,
       customer: order.customer
     }
+    console.log(lastOrderId);
     this._orders = this._orders.concat(newOrder);
-    this.orders.next(this._orders);
     return of(this._orders);
   }
 
@@ -297,20 +296,22 @@ export class OrderService {
     this.currentOrder = editedOrder;
     orders.push(editedOrder);
     this._orders = orders;
-    this.orders.next(this._orders);
-
+    this._orders.sort(function(a, b){return a.id - b.id});
     return of(this._orders);
 
   }
 
-  public delete(orderId: number): Observable<Order[]> {
+  public delete(): Observable<Order[]> {
     const orders = [];
     for (let i = 0; i < this._orders.length; i++) {
-      if (this._orders[i].id !== orderId) {
+      if (this._orders[i].id !== this.currentOrder?.id) {
         orders.push(this._orders[i]);
       }
     }
-    return of(orders);
+    this._orders = [];
+    this._orders = orders;
+    console.log(this._orders);
+    return of(this._orders);
   }
 
   public setCurrentOrder(order: Order): Observable<any> {

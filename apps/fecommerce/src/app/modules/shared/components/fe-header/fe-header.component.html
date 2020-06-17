@@ -17,5 +17,12 @@
   <mat-icon *ngIf="logoutIcon"  class="logout" (click)="logout()">
     exit_to_app
   </mat-icon>
+  <mat-icon *ngIf="delete"  class="lined-icon" (click)="deleteOrder()">
+    delete_outline
+  </mat-icon>
+
+  <mat-icon *ngIf="addArt"  class="lined-icon" (click)="addArticle()">
+    add
+  </mat-icon>
 
 </mat-toolbar>
