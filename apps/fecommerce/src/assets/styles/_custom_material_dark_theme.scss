@@ -2,7 +2,7 @@
 .dark-theme {
     background: rgba(11, 11, 11, 0.959);
     $dark-primary: mat-palette($mat-blue, A700);
-    $dark-accent: mat-palette($mat-blue, 400);
+    $dark-accent: mat-palette($mat-blue, 50);
     $dark-warn: mat-palette($mat-red);
     $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
