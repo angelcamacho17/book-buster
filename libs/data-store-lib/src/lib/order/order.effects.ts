@@ -131,8 +131,8 @@ export class OrderEffects {
   deleteOrder$ = createEffect((): any =>
     this.actions$.pipe(
       ofType(deleteOrderRequest),
-      mergeMap((action) => {
-        return this.orderService.delete(action.orderId).pipe(
+      mergeMap(() => {
+        return this.orderService.delete().pipe(
           map(() => refreshOrdersRequest()),
           catchError(() => EMPTY)
         );

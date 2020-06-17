@@ -1,16 +1,16 @@
 <div class="dialog">
   <div>
-    <div class="mat-title" >
+    <div class="mat-title" *ngIf="data?.title" >
         {{data.title}}
     </div>
     <p class="mat-subheading-2" style="color: rgba(0, 0, 0, 0.6)">{{data.msg}}</p>
   </div>
   <div class="buttons">
     <button mat-flat-button (click)="onClick(data.firstButton)">
-      CANCEL
+      {{data.firstButton}}
     </button>
-    <button mat-flat-button style="color:#1666D8"(click)="onClick(data.secondButton)">
-      SWITCH
+    <button mat-flat-button [ngClass]="data?.buttonColor" (click)="onClick(data.secondButton)">
+      {{data.secondButton}}
     </button>
   </div>
 </div>

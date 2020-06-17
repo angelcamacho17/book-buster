@@ -42,6 +42,12 @@
     z-index: 4;
   }
 
+  .lined-icon {
+    @extend .logout;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.87);
+  }
+
   .title-centered {
     width: calc(100% - 64px);
     text-align: center;

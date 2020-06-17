@@ -68,12 +68,9 @@ export class FeHomeComponent implements OnInit, AfterViewInit, AfterContentCheck
     const cardHeight = this.ordersCard?.nativeElement.offsetHeight;
     const listHeight = this.ordersCardList?.nativeElement.offsetHeight;
     const cardScroll = this.ordersCard?.nativeElement.scrollHeight;
-    console.log(cardHeight, cardScroll, cardHeight <= cardScroll)
     if (cardHeight <= listHeight) {
-      console.log('sep', cardHeight, listHeight)
       return true;
     } else {
-      console.log('nopp', cardHeight, listHeight)
       return false;
     }
   }
