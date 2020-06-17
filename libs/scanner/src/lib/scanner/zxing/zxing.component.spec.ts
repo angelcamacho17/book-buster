@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ZScanComponent } from './z-scan.component';
+import { ZxingComponent } from './zxing.component';
 
-describe('ZScanComponent', () => {
-  let component: ZScanComponent;
-  let fixture: ComponentFixture<ZScanComponent>;
+describe('ZxingComponent', () => {
+  let component: ZxingComponent;
+  let fixture: ComponentFixture<ZxingComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ZScanComponent ]
+      declarations: [ ZxingComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ZScanComponent);
+    fixture = TestBed.createComponent(ZxingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

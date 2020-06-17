@@ -12,8 +12,6 @@ export class ScannerComponent implements OnInit {
 
   constructor(public _snackBar: MatSnackBar) { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
 }
