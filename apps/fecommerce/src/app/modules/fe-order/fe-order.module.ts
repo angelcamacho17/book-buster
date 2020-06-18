@@ -13,7 +13,17 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     HttpClientModule,
-    RouterModule.forChild([{ path: '', component: FeOrderComponent }]),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: FeOrderComponent
+      },
+      {
+        path: 'edit',
+        component: FeOrderComponent,
+        data: { animation: 'orderedit' },
+      }
+    ]),
     MaterialModule,
     SharedModule
   ],

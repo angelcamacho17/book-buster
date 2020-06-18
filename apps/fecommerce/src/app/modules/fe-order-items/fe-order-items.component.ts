@@ -49,6 +49,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
   public waitToDeleted = false;
   public articleToDelete = null;
   public addArt = false;
+  public returnUrl = 'order';
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -61,6 +62,7 @@ export class FeOrderItemsComponent implements OnInit, OnDestroy {
     this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
     if (this._ordSer.currentOrder?.id) {
       this.addArt = true;
+      this.returnUrl = 'order/edit';
     }
   }
 
