@@ -60,6 +60,7 @@ export const routesAnimations =
 
     transition('neworder => home', fromTop()),
     transition('neworder => order', slideToRight()),
+    transition('neworder => orderedit', slideToRight()),
     transition('neworder => article', slideToRight()),
     transition('neworder => customer', slideToRight()),
     transition('neworder => orderitems', slideToRight()),
@@ -180,7 +181,7 @@ function fromBottom() {
       query(':enter', [
         animate('300ms ease', style({
           top: '0%',
-          'z-index': 10000,
+          'z-index': 10,
 
         }))
       ])
@@ -204,7 +205,7 @@ function fromTop() {
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
         background: '#ffffff',
-        'z-index': 1000
+        'z-index': 10
       })
     ], optional),
     query(':enter', [
@@ -218,7 +219,7 @@ function fromTop() {
         animate('300ms ease',
         style({
           top: '100%',
-          'z-index': 10000
+          'z-index': 10
       }))
       ], optional),
       query(':enter', [
