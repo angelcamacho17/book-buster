@@ -10,10 +10,10 @@
            [icon]="icon"
            (goBack)="onHeaderGoBack()"
            (returnUrl)="returnUrl()"></fe-header>
-    <fe-search (onFocus)="showShadow($event)"
-              (onBlur)="removeShadow()"
-              (onSearching)="hidePanel($event)"
-              (onSearchResults)="handleSearchResults($event)"
+    <fe-search (searchFocus)="showShadow($event)"
+              (searchBlur)="removeShadow()"
+              (userSearching)="hidePanel($event)"
+              (hasSearchResults)="handleSearchResults($event)"
               [list]="customers"
               ></fe-search>
   </header>

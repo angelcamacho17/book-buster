@@ -9,10 +9,10 @@ import { Subscription } from 'rxjs';
 })
 export class FeSearchComponent implements OnInit, OnDestroy {
 
-    @Output() onFocus = new EventEmitter<boolean>();
-    @Output() onSearching = new EventEmitter<boolean>();
-    @Output() onBlur = new EventEmitter<boolean>();
-    @Output() onSearchResults = new EventEmitter<any[]>();
+    @Output() searchFocus = new EventEmitter<boolean>();
+    @Output() userSearching = new EventEmitter<boolean>();
+    @Output() searchBlur = new EventEmitter<boolean>();
+    @Output() hasSearchResults = new EventEmitter<any[]>();
     @Input() list: any = []
 
     inputControl = new FormControl();
@@ -29,23 +29,23 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     }
 
     onSearchFocus() {
-        this.onFocus.emit(true);
+        this.searchFocus.emit(true);
     }
 
     onSearchBlur() {
-        this.onBlur.emit(true);
+        this.searchBlur.emit(true);
     }
 
     onSearchInput() {
         if (this.input.length >= 3) {
             this._userSearching = true;
             this._filteredList = this.getFilteredResults();
-            this.onSearchResults.emit(this._filteredList);
+            this.hasSearchResults.emit(this._filteredList);
         } else {
             this._userSearching = false;
-            this.onSearchResults.emit([]);
+            this.hasSearchResults.emit([]);
         }
-        this.onSearching.emit(this._userSearching);
+        this.userSearching.emit(this._userSearching);
     }
 
     cleanSearch() {

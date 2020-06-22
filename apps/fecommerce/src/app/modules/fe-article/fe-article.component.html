@@ -7,10 +7,10 @@
            [lastUrl]="lastUrl"
            [headerSearch]="true"
            [style]="'center'"></fe-header>
-    <fe-search (onFocus)="showShadow($event)"
-               (onBlur)="removeShadow()"
-               (onSearching)="hidePanel($event)"
-               (onSearchResults)="handleSearchResults($event)"
+    <fe-search (searchFocus)="showShadow($event)"
+               (searchBlur)="removeShadow()"
+               (userSearching)="hidePanel($event)"
+               (hasSearchResults)="handleSearchResults($event)"
                [list]="articles"
                ></fe-search>
   </header>
