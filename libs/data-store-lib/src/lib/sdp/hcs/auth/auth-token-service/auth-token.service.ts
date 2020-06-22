@@ -25,6 +25,7 @@ export class AuthTokenService {
   public initTokens(): Observable<any> {
     this.tokenname = this.configService.get('APPKEY') + '_' + 'hcs_token';
     this.refreshtokenname = this.configService.get('APPKEY') + '_' + 'hcs_refreshtoken';
+    // tslint:disable-next-line: deprecation
     return forkJoin(this.keyvaluestore.get(this.tokenname), this.keyvaluestore.get(this.refreshtokenname)).pipe(map((val: Array<any>) => {
       this.token = val[0];
       this.refreshtoken = val[1];

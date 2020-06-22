@@ -21,11 +21,14 @@ describe('Form control validation tests!', () => {
         LanguageService,
       ]
     }).compileComponents();
+    // tslint:disable-next-line: deprecation
     httpTestingController = TestBed.get(HttpTestingController);
+    // tslint:disable-next-line: deprecation
     langService = TestBed.get(LanguageService);
     const lang = new Language(2057);
     langService.AVAIBLELANGUAGES = [lang];
     langService.setLanguage(new Language(2057));
+    // tslint:disable-next-line: deprecation
     transService = TestBed.get(TranslationService);
 
     // used to clear locale storage

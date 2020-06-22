@@ -19,7 +19,9 @@ describe('ConfigService', () => {
             ]
         });
 
+        // tslint:disable-next-line: deprecation
         configService = TestBed.get(ConfigService);
+        // tslint:disable-next-line: deprecation
         httpTestingController = TestBed.get(HttpTestingController);
     });
 

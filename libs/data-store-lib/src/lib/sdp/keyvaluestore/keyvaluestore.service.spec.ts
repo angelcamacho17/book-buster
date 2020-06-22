@@ -18,7 +18,9 @@ describe('KeyvaluestoreService', () => {
             ]
         });
 
+        // tslint:disable-next-line: deprecation
         keyvaluestoreService = TestBed.get(KeyValueStoreService);
+        // tslint:disable-next-line: deprecation
         const config = TestBed.get(ConfigService);
         keyvaluestoreService.initDatabase(config);
     });

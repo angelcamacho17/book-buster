@@ -35,6 +35,7 @@ export class SDPInitializer {
   private chainObservables(val: Array<() => Observable<any>>): Observable<any> {
     let buffer = val[0]();
     for (let i = 1; i < val.length; i++) {
+      // tslint:disable-next-line: deprecation
       buffer = buffer.pipe(zip(val[i]()));
     }
     return buffer;
