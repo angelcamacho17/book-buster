@@ -15,12 +15,14 @@ export const routesAnimations =
   trigger('routeAnimations', [
     transition('login => home', slideToRight()),
     transition('login => order', slideToRight()),
+    transition('login => orderedit', slideToRight()),
     transition('login => article', slideToRight()),
     transition('login => customer', slideToRight()),
     transition('login => orderitems', slideToRight()),
     transition('login => neworder', slideToRight()),
 
     transition('home => order', slideToRight()),
+    transition('home => orderedit', slideToRight()),
     transition('home => article', slideToRight()),
     transition('home => customer', slideToRight()),
     transition('home => orderitems', slideToRight()),
@@ -33,12 +35,18 @@ export const routesAnimations =
     transition('order => customer', slideToRight()),
     transition('order => orderitems', slideToRight()),
 
+    transition('orderedit => home', slideToLeft()),
+    transition('orderedit => neworder', slideToLeft()),
+    transition('orderedit => article', slideToRight()),
+    transition('orderedit => customer', slideToRight()),
+    transition('orderedit => orderitems', slideToRight()),
 
     transition('article => home', slideToLeft()),
     transition('article => neworder', slideToLeft()),
     transition('article => order', slideToRight()),
     transition('article => customer', slideToRight()),
     transition('article => orderitems', slideToLeft()),
+    transition('article => orderedit', slideToLeft()),
     transition('article => articledetail', slideToRight()),
 
     transition('articledetail => article', slideToLeft()),
@@ -46,17 +54,20 @@ export const routesAnimations =
     transition('customer => home', slideToLeft()),
     transition('customer => neworder', slideToLeft()),
     transition('customer => order', slideToLeft()),
+    transition('customer => orderedit', slideToLeft()),
     transition('customer => article', slideToLeft()),
     transition('customer => orderitems', slideToRight()),
 
     transition('neworder => home', fromTop()),
     transition('neworder => order', slideToRight()),
+    transition('neworder => orderedit', slideToRight()),
     transition('neworder => article', slideToRight()),
     transition('neworder => customer', slideToRight()),
     transition('neworder => orderitems', slideToRight()),
 
     transition('orderitems => home', slideToLeft()),
     transition('orderitems => order', slideToLeft()),
+    transition('orderitems => orderedit', slideToLeft()),
     transition('orderitems => article', slideToRight()),
     transition('orderitems => customer', slideToLeft()),
     transition('orderitems => neworder', slideToLeft()),
@@ -170,7 +181,7 @@ function fromBottom() {
       query(':enter', [
         animate('300ms ease', style({
           top: '0%',
-          'z-index': 10000,
+          'z-index': 10,
 
         }))
       ])
@@ -194,7 +205,7 @@ function fromTop() {
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
         background: '#ffffff',
-        'z-index': 1000
+        'z-index': 10
       })
     ], optional),
     query(':enter', [
@@ -208,7 +219,7 @@ function fromTop() {
         animate('300ms ease',
         style({
           top: '100%',
-          'z-index': 10000
+          'z-index': 10
       }))
       ], optional),
       query(':enter', [

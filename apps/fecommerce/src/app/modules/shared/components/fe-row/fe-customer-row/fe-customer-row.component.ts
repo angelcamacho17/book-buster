@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, Output, EventEmitter } from '@angular/core
 import { Observable, of, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Order, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest, Customer, AuthService, getCurrentOrderRequest, replaceCurrentOrderRequest, changedNavigationRequest, BackNavigationService } from '@fecommerce-workspace/data-store-lib';
+import { Order, setCurrentOrderRequest, handleOrderRequest, refreshOrdersRequest, Customer, AuthService, getCurrentOrderRequest, replaceCurrentOrderRequest, changedNavigationRequest, BackNavigationService, OrderService } from '@fecommerce-workspace/data-store-lib';
 import { isUndefined } from 'util';
 import { EventService } from '../../../services/event.service';
 
@@ -20,6 +20,7 @@ export class FeCustomerRowComponent implements OnDestroy {
   private _subscriptions = new Subscription();
   constructor(
     private eventService: EventService,
+    private _ordSer: OrderService,
     private router: Router,
     private _store: Store<{ currentOrder: Order }>,
     private _bnService: BackNavigationService
@@ -67,7 +68,11 @@ export class FeCustomerRowComponent implements OnDestroy {
     this.eventService.customerChanged(customer);
     this._store.dispatch(getCurrentOrderRequest());
     if (this._bnService.switchCus) {
-      this.router.navigate(['/order']);
+      if (this._ordSer.currentOrder?.id){
+        this.router.navigate(['/order/edit']);
+      } else {
+        this.router.navigate(['/order']);
+      }
     } else {
       this.router.navigate(['/article']);
     }

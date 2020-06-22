@@ -12,7 +12,12 @@ import { MaterialModule } from '../shared/modules/material/material.module';
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild([{ path: '', component: FeOrderItemsComponent }]),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: FeOrderItemsComponent
+      }
+    ]),
     MaterialModule,
     DragDropModule,
     ClickOutsideModule

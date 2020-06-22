@@ -26,6 +26,7 @@ export class FeHomeComponent implements OnInit, AfterViewInit, AfterContentCheck
   constructor(
     private _store: Store,
     private _router: Router,
+    private _ordSer: OrderService,
     private _storeOrders: Store<{ orders: Order[] }>,
     private _bnService: BackNavigationService,
     private _changeDetector: ChangeDetectorRef
@@ -61,7 +62,11 @@ export class FeHomeComponent implements OnInit, AfterViewInit, AfterContentCheck
   public openOrder(order: Order): void {
     this._storeOrders.dispatch(setCurrentOrderRequest({ order }))
     this._store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }));
-    this._router.navigate(['/order']);
+    if (this._ordSer.currentOrder?.id){
+      this._router.navigate(['/order/edit']);
+    } else {
+      this._router.navigate(['/order']);
+    }
   }
 
   checkOrdersCardOverflow() {

@@ -52,7 +52,11 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   }
 
   public overviewOrder(): void {
-    this._router.navigate(['/order']);
+    if (this._ordSer.currentOrder?.id) {
+      this._router.navigate(['/order/edit']);
+    } else {
+      this._router.navigate(['/order']);
+    }
   }
 
   public hidePanel(hide: boolean): void {

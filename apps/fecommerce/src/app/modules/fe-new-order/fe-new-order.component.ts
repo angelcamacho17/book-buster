@@ -55,7 +55,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
         this._curId = currentOrder?.id;
         if (this._curId) {
           this.icon = 'keyboard_arrow_left';
-          this._returnUrl = 'order';
+          this._returnUrl = 'order/edit';
         } else {
           this.icon = 'close';
         }
