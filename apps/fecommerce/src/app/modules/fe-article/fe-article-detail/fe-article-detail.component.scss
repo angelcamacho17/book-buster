@@ -17,7 +17,9 @@ $footer-height: 176px;
                 padding: 0 !important;
                 // width: calc(100% - 32px) !important;
                 .content {
+                    padding: 0 16px;
                     .list {
+                        padding: 0;
                         .list-item {
                             height: 64px;
 

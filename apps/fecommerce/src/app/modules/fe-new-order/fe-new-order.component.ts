@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, of } from 'rxjs';
 import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest, replaceCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest, clearCurrentOrderRequest, changedNavigationRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
@@ -29,9 +29,11 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   private _curId: number = null;
   public hide = false;
   public shadow = false;
-  public nodata = false;
+  public emptyResults = true;
   public lastUrl = 'neworder';
   public icon = 'close';
+  public filteredResults: Customer[] = [];
+  // public filteredCustomers$: Observable<Customer[]> = of([]);
 
   constructor(
     private eventService: EventService,
@@ -177,13 +179,14 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     this.shadow = shadow;
   }
 
-  public removeDark(): void {
+  public removeShadow(): void {
     this.shadow = false;
     this.hide = false;
   }
 
-  public noDataPlaceholder(show: boolean): void {
-    this.nodata = show;
+  public handleSearchResults(results: any[]): void {
+    this.emptyResults = results.length === 0;
+    this.filteredResults = results;
   }
 
   ngOnDestroy(): void {

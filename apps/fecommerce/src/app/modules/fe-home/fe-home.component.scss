@@ -15,12 +15,12 @@
     }
     .card {
         position: relative;
+        box-shadow: none;
         max-height: 100%;
-        padding: 0 !important;
         overflow: auto;
         border-radius: 8px;
         border: 1px solid rgba(0, 0, 0, 0.12);
-        box-shadow: none;
+        padding: 0 16px !important;
 
         .list {
             .list-item {

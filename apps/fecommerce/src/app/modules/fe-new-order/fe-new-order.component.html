@@ -10,25 +10,32 @@
            [icon]="icon"
            (goBack)="onHeaderGoBack()"
            (returnUrl)="returnUrl()"></fe-header>
-    <fe-search (customerChange)="onCustomerChange($event)"
-              (hidePlaceholder)="hidePanel($event)"
-              (darker)="showShadow($event)"
+    <fe-search (onFocus)="showShadow($event)"
+              (onBlur)="removeShadow()"
+              (onSearching)="hidePanel($event)"
+              (onSearchResults)="handleSearchResults($event)"
               [list]="customers"
-              [itemType]="rowType"
-              (nodata)="noDataPlaceholder($event)"
-              (clickOutside)="removeDark()"
-              [small]="true"
               ></fe-search>
   </header>
 
   <main>
-    <div class="container" [ngClass]="shadow ? 'shadow' : ''">
-      <div class="no-results" *ngIf="!hide">
+    <div class="container" [ngClass]="shadow || !emptyResults ? 'shadow' : ''">
+      <fe-search-results *ngIf="!emptyResults"
+                         [items]="filteredResults"
+                         [rowType]="rowType"
+                         class="search-results"></fe-search-results>
+      <!-- <mat-list role="list" *ngIf="!emptyResults" class="customer-list  mat-elevation-z3">
+        <mat-list-item *ngFor="let item of filteredCustomers$ | async" class="list-item">
+          <fe-customer-row [item]="item" class="customer-row"></fe-customer-row>
+        </mat-list-item>
+      </mat-list> -->
+
+      <div class="no-results" *ngIf="!hide && emptyResults">
         <mat-icon class="icon">search</mat-icon>
         <div class="mat-title search-text">Search customers</div>
         <div class="mat-subheading-2 search-description">Find name, contact & compamny info</div>
       </div>
-      <div class="no-results" *ngIf="nodata">
+      <div class="no-results" *ngIf="hide && emptyResults">
         <div class="mat-title search-text">no matching customers</div>
       </div>
     </div>

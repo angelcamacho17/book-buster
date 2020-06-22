@@ -1,54 +1,52 @@
-.item {
-  display: flex;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+.article-row {
+  box-sizing: border-box;
   width: 100%;
-  height: 71px;
-  justify-content: space-between;
-  align-items: center;
+  max-height: 64px;
   padding: 0 16px;
 
-  .item-info {
+  .item {
+    box-sizing: border-box;
     display: flex;
-    flex-direction: row;
+    flex-flow: row nowrap;
     justify-content: space-between;
-    width: calc(100% - 32px);
+    align-items: center;
+    width: 100%;
+    height: 64px;
 
-    .info {
+    .item-info {
       display: flex;
-      flex-direction: column;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: flex-start;
       width: 80%;
-
+      height: inherit;
       .title {
+        padding-top: 11px;
         margin: 0 !important;
-        height: 28px;
+        height: 21px;
         color: rgba(0, 0, 0, 0.87);
       }
 
       .subtitle {
+        padding-bottom: 11px;
+        height: 20px;
         margin: 0 !important;
         color: rgba(0, 0, 0, 0.6);
-        overflow-x: hidden;
-        width: 100%;
-        text-overflow: ellipsis;
-        white-space: nowrap;
       }
 
     }
 
     .price {
+      padding-top: 16px;
       margin: 0 !important;
       color: rgba(0, 0, 0, 0.87);
+      align-self: flex-start;
     }
 
+    .divider {
+      width: calc(100% - 16px);
+      left: 16px;
+    }
   }
-}
-
-::ng-deep .mat-option-text {
-  flex-grow: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: flex !important;
-  justify-content: flex-end;
-  align-items: center;
 }
 

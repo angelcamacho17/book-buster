@@ -4,7 +4,11 @@
 @import 'assets/styles/custom_material_typography';
 @import 'assets/styles/global';
 
-html,
+html {
+  position: fixed;
+  height: 100%;
+  overflow: hidden;
+}
 body {
     width: 100vw;
     height: 100vh;

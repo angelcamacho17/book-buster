@@ -15,6 +15,7 @@ import { FeConfirmDiscardDialogComponent } from './components/fe-confirm-discard
 import { EventService } from './services/event.service';
 import { DataStoreModule } from '@fecommerce-workspace/data-store-lib';
 import { FeArtSheetComponent } from './components/fe-art-sheet/fe-art-sheet.component';
+import { FeSearchResultsComponent } from './components/fe-search/fe-search-results/fe-search-results.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FeArtSheetComponent } from './components/fe-art-sheet/fe-art-sheet.comp
     FeCustomerRowComponent,
     FeHeaderComponent,
     FeSearchComponent,
+    FeSearchResultsComponent,
     FeArticleRowComponent,
     FeRowComponent,
     FeDialogComponent,
@@ -40,6 +42,7 @@ import { FeArtSheetComponent } from './components/fe-art-sheet/fe-art-sheet.comp
     FeCardComponent,
     FeCreateButtonComponent,
     FeSearchComponent,
+    FeSearchResultsComponent,
     FeHeaderComponent,
     FeCardComponent,
     FeCustomerRowComponent,

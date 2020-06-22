@@ -7,30 +7,31 @@
            [lastUrl]="lastUrl"
            [headerSearch]="true"
            [style]="'center'"></fe-header>
-    <fe-search [list]="articles"
-              (hidePlaceholder)="hidePanel($event)"
-              (darker)="showShadow($event)"
-              (nodata)="noDataPlaceholder($event)"
-              [itemType]="rowType"
-              (clickOutside)="removeDark()"
-              [small]="true"></fe-search>
+    <fe-search (onFocus)="showShadow($event)"
+               (onBlur)="removeShadow()"
+               (onSearching)="hidePanel($event)"
+               (onSearchResults)="handleSearchResults($event)"
+               [list]="articles"
+               ></fe-search>
   </header>
 
   <main>
-    <div class="container" [ngClass]="shadow ? 'shadow' : ''">
-      <div class="no-results" *ngIf="!hide" (click)="removeDark()">
+    <div class="container" [ngClass]="shadow || !emptyResults ? 'shadow' : ''">
+      <fe-search-results *ngIf="!emptyResults"
+                         [items]="filteredResults"
+                         [rowType]="rowType"
+                         class="search-results"></fe-search-results>
+      <div class="no-results" *ngIf="!hide && emptyResults">
         <mat-icon class="icon">search</mat-icon>
         <div class="mat-title search-text">Search articles</div>
         <div class="mat-subheading-2 search-description">Find stock, sales & … info</div>
       </div>
-      <div class="no-results" *ngIf="nodata">
+      <div class="no-results" *ngIf="hide && emptyResults">
         <div class="mat-title search-text">no matching articles</div>
       </div>
     </div>
+    <button mat-button *ngIf="emptyResults" class="fe-button" (click)="overviewOrder()">OVERVIEW</button>
   </main>
-  <footer [ngClass]="shadow ? 'shadow' : ''">
-    <button mat-button class="fe-button" (click)="overviewOrder()">OVERVIEW</button>
-  </footer>
 </div>
 <fecommerce-workspace-z-scan></fecommerce-workspace-z-scan>
 <router-outlet></router-outlet>

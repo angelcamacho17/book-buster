@@ -1,51 +1,61 @@
 .customer-row {
+  padding: 0 16px;
   display: flex;
   align-items: center;
+  max-height: 64px;
   width: 100%;
+  box-sizing: border-box;
 
   .avatar {
-    background-color: rgba(0, 0, 0, 0.1);
     height: 40px;
-    width: 49.28px;
+    width: 40px;
     border-radius: 50%;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-content: center;
+    background-color: rgba(0, 0, 0, 0.1);
     color: rgba(0, 0, 0, .87);
-    text-align: center;
-    margin: 0 16px;
+    margin-right: 16px;
+    .initials-sidenav {
+      position: relative;
+      display: -webkit-flex;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+    }
   }
 
   .item {
     display: flex;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     width: 100%;
-    height: 71px;
+    height: 64px;
     justify-content: space-between;
     align-items: center;
 
     .item-info {
-
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: flex-start;
+      max-height: 40px;
       .title {
+        padding-top: 15px;
         margin: 0 !important;
         height: 28px;
         color: rgba(0, 0, 0, 0.87);
       }
 
       .subtitle {
+        padding-bottom: 12px;
         margin: 0 !important;
         color: rgba(0, 0, 0, 0.6);
       }
     }
   }
-}
-
-::ng-deep .mat-option-text {
-  flex-grow: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: flex !important;
-  justify-content: flex-end;
-  align-items: center;
+  .divider {
+    width: calc(100% - 72px);
+    left: 72px;
+  }
 }

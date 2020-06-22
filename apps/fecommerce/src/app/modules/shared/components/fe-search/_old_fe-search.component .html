@@ -1,0 +1,47 @@
+<mat-card class="search-container">
+  <!-- <div class="mat-headline title mat-elevation-z2" *ngIf="!small">
+    <span style="padding-left: 16px;">
+      {{searchTitle }}
+    </span>
+  </div> -->
+  <div class="search-field">
+    <mat-icon style="color:rgba(0, 0, 0, 0.6)">search</mat-icon>
+    <mat-form-field class="search-bar" floatLabel="never">
+      <input matInput
+              name="input"
+              #input
+              id="input"
+              aria-label="State"
+              [matAutocomplete]="auto"
+              [formControl]="stateCtrl"
+              (click)="onFocus(º)"
+              class="mat-subheading-2 input"
+              color="accent">
+        <mat-placeholder class="mat-subheading-2 placeholder">Search...</mat-placeholder>
+        <mat-autocomplete #auto="matAutocomplete"
+                          id="autocomplete"
+                          #autocomplete
+                          (closed)="closeSearch()"
+                          (opened)="openSearch()"
+                          class="autocomplete">
+          <mat-option *ngFor="let item of filteredlist | async" style="height: 72px;
+                            display: flex;
+                            padding: 0;" >
+            <fe-row [itemType]="itemType" [item]="item" class="item"></fe-row>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button class="close-button" mat-icon-button disableRipple="true" (click)="clearSearch()">
+        <mat-icon style="color:rgba(0, 0, 0, 0.6)">close</mat-icon>
+      </button>
+  </div>
+</mat-card>
+<!-- <mat-card *ngIf="showInitial && !small" class="mat-subheading-2 no-data">
+  <div>
+    Please use the search bar on top to find the
+  </div>
+  <div>
+    customer you want to assign.
+  </div>
+</mat-card> -->
+

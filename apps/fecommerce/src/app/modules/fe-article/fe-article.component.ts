@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Article, Order, refreshArticlesRequest, changedNavigationRequest, setCurrentOrderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
+import { Article, Order, refreshArticlesRequest, changedNavigationRequest, setCurrentOrderRequest, OrderService, TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { FeArticleRowComponent } from '../shared/components/fe-row/fe-article-row/fe-article-row.component';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'fe-article',
@@ -25,7 +24,8 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   public nodata = false;
   public shadow = false;
   public lastUrl = 'neworder';
-
+  public emptyResults = true;
+  public filteredResults: Article[] = [];
   constructor(private _store: Store<{ articles: Article[], currentOrder: Order }>,
               private _ordSer: OrderService,
               private _router: Router) {
@@ -63,7 +63,7 @@ export class FeArticleComponent implements OnInit, OnDestroy {
     this.shadow = shadow;
   }
 
-  public removeDark(): void {
+  public removeShadow(): void {
     this.shadow = false;
     this.hide = false;
   }
@@ -72,5 +72,8 @@ export class FeArticleComponent implements OnInit, OnDestroy {
     this.nodata = show;
   }
 
-
+  handleSearchResults(results: any[]): void {
+    this.emptyResults = results.length === 0;
+    this.filteredResults = results;
+  }
 }
