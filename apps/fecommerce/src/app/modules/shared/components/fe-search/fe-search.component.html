@@ -10,8 +10,10 @@
         <mat-icon class="search-icon">search</mat-icon>
         <mat-form-field floatLabel="never" class="form-field">
             <input matInput #input
-                   [formControl]="inputControl" 
-                   (focus)="onSearchFocus()" 
+                   id ="input"
+                   name="input"
+                   [formControl]="inputControl"
+                   (focus)="onSearchFocus()"
                    (blur)="onSearchBlur()"
                    class="mat-subheading-2 input"
                    autocomplete="off">
