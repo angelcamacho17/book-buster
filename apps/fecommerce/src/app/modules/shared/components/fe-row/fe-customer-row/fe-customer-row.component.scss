@@ -1,5 +1,4 @@
 .customer-row {
-  padding: 0 16px;
   display: flex;
   align-items: center;
   max-height: 64px;
@@ -55,7 +54,7 @@
     }
   }
   .divider {
-    width: calc(100% - 72px);
+    width: calc(100% + 16px);
     left: 72px;
   }
 }

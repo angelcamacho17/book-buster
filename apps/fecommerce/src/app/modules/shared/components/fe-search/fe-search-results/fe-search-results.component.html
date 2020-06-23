@@ -1,5 +1,6 @@
 <mat-list role="list" class="search-results-list">
     <mat-list-item *ngFor="let item of items" class="list-item">
         <fe-row [item]="item" [itemType]="rowType" class="list-row"></fe-row>
+        <mat-divider class="divider"></mat-divider>
     </mat-list-item>
 </mat-list>
