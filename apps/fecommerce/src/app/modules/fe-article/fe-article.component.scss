@@ -38,10 +38,11 @@ $header-height: 162px;
         .fe-button {
             position: -webkit-sticky;
             position: sticky;
-            width: calc(100% - 32px);
             height: 48px;
-            bottom: 32px;
+            width: calc(100% - 32px);
             left: 16px;
+            top: calc(100% - 80px);
+            // bottom: 32px;
             background-color: #1666d8;
             color: #fff;
         }
