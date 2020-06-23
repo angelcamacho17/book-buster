@@ -16,9 +16,10 @@
                    (focus)="onSearchFocus()"
                    (blur)="onSearchBlur()"
                    class="mat-subheading-2 input"
+                   autocorrect="off"
+                   autocapitalize="none"
                    autocomplete="off"
-                   autocapitalize="off"
-                   autocorrect="off">
+                   spellcheck="false">
         </mat-form-field>
         <mat-icon class="search-icon" (click)="cleanSearch()">close</mat-icon>
     </div>

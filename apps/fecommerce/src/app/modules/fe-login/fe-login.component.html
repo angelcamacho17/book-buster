@@ -22,7 +22,7 @@
 
       <mat-form-field color="accent">
         <mat-label class="mat-caption label">User</mat-label>
-        <input matInput class="input mat-subheading-2"  formControlName="user" (keyup)="cleanError($event)">
+        <input matInput class="input mat-subheading-2" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="user" (keyup)="cleanError($event)">
       </mat-form-field>
       <mat-error class="error mat-body-1" *ngIf="!loginForm.controls['user'].valid && loginForm.controls['user'].touched">
         Field is required
