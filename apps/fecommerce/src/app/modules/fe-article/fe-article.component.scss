@@ -4,6 +4,7 @@ $header-height: 162px;
     @include structure.set-structure($header-height);
 
     .container {
+        position: relative;
         height: 100%;
         .search-results {
             position: relative;
@@ -34,16 +35,15 @@ $header-height: 162px;
                 color: rgba(0, 0, 0, 0.6);
             }
         }
-    }
-
-    .fe-button {
-        position: -webkit-sticky;
-        position: sticky;
-        width: calc(100% - 32px);
-        height: 48px;
-        bottom: 32px;
-        left: 16px;
-        background-color: #1666d8;
-        color: #fff;
+        .fe-button {
+            position: -webkit-sticky;
+            position: sticky;
+            width: calc(100% - 32px);
+            height: 48px;
+            bottom: 32px;
+            left: 16px;
+            background-color: #1666d8;
+            color: #fff;
+        }
     }
 }
