@@ -26,6 +26,8 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+      const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
+      inputElement.focus();
     }
 
     onSearchFocus() {
@@ -63,4 +65,4 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     }
 
     get input() { return this.inputControl.value }
-}  
+}
