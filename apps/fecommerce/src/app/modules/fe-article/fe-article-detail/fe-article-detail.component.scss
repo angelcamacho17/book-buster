@@ -16,7 +16,6 @@ $footer-height: 176px;
                 top: 112px;
                 padding: 0 !important;
                 .content {
-                    padding: 0 16px;
                     .list {
                         padding: 0;
                         .list-item {
@@ -31,7 +30,8 @@ $footer-height: 176px;
                             }
 
                             .divider {
-                                width: calc(100% + 16px);
+                                width: calc(100% - 16px);
+                                left: 16px;
                             }
                         }
                     }
