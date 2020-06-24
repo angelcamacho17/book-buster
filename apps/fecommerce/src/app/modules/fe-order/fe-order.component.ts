@@ -58,6 +58,8 @@ export class FeOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._bnService.switchCustomer(false);
+
   }
 
   public orderConfirmed(): void {
