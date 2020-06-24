@@ -20,12 +20,10 @@ $footer-height: 195px;
         border-radius: 8px;
         padding: 0;
         display: inline-block;
-        //background: linear-gradient(90deg, #ffffff 80%, #E02020 50%);
         background: #ffffff;
         position: fixed;
         width: calc(100% - 32px);
         max-height: calc(100% - 342px);
-        margin-bottom: 196px;
         bottom: initial;
         -webkit-overflow-scrolling: touch;
         overflow: auto;
@@ -38,7 +36,6 @@ $footer-height: 195px;
           width: 100%;
           bottom: initial;
           -webkit-overflow-scrolling: touch;
-          //width: calc(100% - 49px);
 
           .list-item {
             width: calc(100% - 15px);
