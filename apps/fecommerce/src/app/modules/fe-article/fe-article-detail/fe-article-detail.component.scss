@@ -17,6 +17,7 @@ $footer-height: 176px;
                 padding: 0 !important;
                 -webkit-transform: translateZ(1px);
                 transform: translateZ(1px);
+                z-index: 10;
                 .content {
                     .list {
                         padding: 0;
