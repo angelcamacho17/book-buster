@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CustomerKeyResolver, FeLoginGuard, FeAuthGuard } from '@fecommerce-workspace/data-store-lib';
 
@@ -58,7 +58,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(
+    routes,
+    {
+      useHash: true,
+      preloadingStrategy: PreloadAllModules
+    })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -83,7 +83,9 @@ function slideToRight() {
         right: 0,
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
-        background: '#ffffff'
+        background: '#ffffff',
+        'z-index': 10,
+
       })
     ], optional),
     query(':enter', [
@@ -123,7 +125,8 @@ function slideToLeft() {
         width: '100%',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
-        background: '#ffffff'
+        background: '#ffffff',
+        'z-index': 10
       })
     ], optional),
     query(':enter', [
