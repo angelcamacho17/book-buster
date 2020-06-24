@@ -28,12 +28,12 @@ $content-height: calc(100vh - #{$header-height});
     flex: 1 1 auto;
     height: $content-height;
     max-height: $content-height;
+    background-color: #f7f8f9;
 
     .container {
       position: relative;
       height: 100%;
       max-height: 100%;
-      background-color: #f7f8f9;
       box-sizing: border-box;
       overflow: auto;
       -webkit-overflow-scrolling: touch;
@@ -44,6 +44,8 @@ $content-height: calc(100vh - #{$header-height});
     flex: 0 0 $bottom-nav-height;
     height: $bottom-nav-height;
     max-height: $bottom-nav-height;
+    background-color: #f7f8f9;
+
   }
 }
 
