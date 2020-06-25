@@ -12,7 +12,7 @@ import { map, takeUntil } from 'rxjs/operators';
 })
 export class FeArticleDetailComponent implements OnInit, OnDestroy {
   public title = "Article detail";
-  public amount = 0;
+  public amount = 1;
   private _article$: Observable<Article>;
   private _currentOrder$: Observable<Order>;
   private _orderArticles$: Observable<OrderArticle[]>
