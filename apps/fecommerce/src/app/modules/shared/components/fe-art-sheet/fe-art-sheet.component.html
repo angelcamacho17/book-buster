@@ -1,7 +1,12 @@
 <div class="sheet">
-  <h4 class="mat-display-1 no-margin-btm">
-    {{'artdet' | translate}}
-  </h4>
+  <div class="title">
+    <h4 class="mat-display-1 no-margin-btm">
+      {{'artdet' | translate}}
+    </h4>
+    <mat-icon class="icon" (click)="close($event)">
+      close
+    </mat-icon>
+  </div>
   <div class="subtitle mat-body-2">
     {{article?.name}}
   </div>

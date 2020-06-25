@@ -1,4 +1,16 @@
 .sheet {
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .icon {
+      background: transparent;
+      color: rgba(0, 0, 0, 0.87);
+    }
+  }
+
   .subtitle {
     padding: 16px 0;
     color: rgba(0, 0, 0, 0.6);

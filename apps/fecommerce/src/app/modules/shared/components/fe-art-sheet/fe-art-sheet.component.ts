@@ -13,12 +13,12 @@ export class FeArtSheetComponent implements OnInit {
   constructor(private _bottomSheetRef: MatBottomSheetRef<FeArtSheetComponent>,
               @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {}
 
-  openLink(event: MouseEvent): void {
+  public close(event: MouseEvent): void {
     this._bottomSheetRef.dismiss();
     event.preventDefault();
   }
 
-  deleteArticle(): void {
+  public deleteArticle(): void {
     this._bottomSheetRef.dismiss('delete');
   }
 
