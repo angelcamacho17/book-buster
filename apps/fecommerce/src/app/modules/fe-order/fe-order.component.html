@@ -2,7 +2,7 @@
 <div class="main-wrapper">
   <header>
     <fe-header [icon]="icon"
-           [title]="'Order overview'"
+           [title]="'orderover'"
            [class]="'mat-headline'"
            [style]="'center'"
            [lastUrl]="lastUrl"
@@ -34,7 +34,7 @@
         <mat-divider></mat-divider>
         <div class="total">
           <h3 class="mat-headline" style="margin: 0px;">
-            Total amount
+            {{'totalamt' | translate}}
           </h3>
           <div class="amount mat-body-2">
             € {{getTotal()}}
@@ -44,10 +44,10 @@
       <mat-card class="order-items mat-elevation-z4" (click)="openItems()">
         <div>
           <div class="title mat-subheading-2">
-            Orders
+            {{'orders' | translate}}
           </div>
           <div class="items mat-body-1">
-            {{articles?.length}} items
+            {{articles?.length}} {{'items' | translate}}
           </div>
         </div>
         <mat-icon style="align-self: center; color: rgba(0, 0, 0, 0.6)">
@@ -59,7 +59,7 @@
 
   <footer>
     <button mat-button class="fe-button" (click)="orderConfirmed()">
-      CONFIRM
+      {{'confirm' | translate}}
     </button>
   </footer>
 </div>

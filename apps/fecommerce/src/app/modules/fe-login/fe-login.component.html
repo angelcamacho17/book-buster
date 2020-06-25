@@ -2,10 +2,10 @@
   <div class="top-content">
     <img [@image]="displayImg ? 'not-hide' : 'hide'" src="assets/img/commerce-logo.png" alt="" class="logo">
     <div [@title]="displayTitle ? 'not-hide' : 'hide'" class="title mat-display-1">
-      Welcome
+      {{'welcome' | translate}}
     </div>
     <div [@title]="displayTitle ? 'not-hide' : 'hide'" class="subtitle mat-headline">
-      Sign in to Commerce
+      {{'signin' | translate}}
     </div>
   </div>
   <form [@content]="displayContent ? 'not-hide' : 'hide'" [formGroup]="loginForm" (ngSubmit)="onSubmit($event)" disabled="isSubmitted"
@@ -21,28 +21,29 @@
       </mat-error> -->
 
       <mat-form-field color="accent">
-        <mat-label class="mat-caption label">User</mat-label>
+        <mat-label class="mat-caption label">{{'user' | translate}}</mat-label>
         <input matInput class="input mat-subheading-2" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="user" (keyup)="cleanError($event)">
       </mat-form-field>
       <mat-error class="error mat-body-1" *ngIf="!loginForm.controls['user'].valid && loginForm.controls['user'].touched">
-        Field is required
+        {{'required' | translate }}
       </mat-error>
       <mat-form-field color="accent">
         <input matInput class="input mat-subheading-2"  [type]="hidePassword ? 'password' : 'text'" formControlName="password" (keyup)="cleanError($event)">
         <mat-icon class="visibility-icon" matSuffix (click)="showPassword()">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-        <mat-label class="mat-caption label">Password</mat-label>
+        <mat-label class="mat-caption label">{{'password' | translate}}</mat-label>
       </mat-form-field>
       <mat-error class="error mat-body-1" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
-        Field is required
+        {{'required' | translate }}
+
       </mat-error>
       <mat-error class="error mat-body-1" *ngIf="loginForm.valid && errorMessage!==''">
-        Incorrect user name or password
+        {{'incorrectpas' | translate}}
       </mat-error>
       <button class="login-btn"
               [class.disabled] = "!loginForm.valid || isSubmitted"
               [disabled] = "!loginForm.valid || isSubmitted"
               mat-raised-button>
-              Sign in
+              {{'sign' | translate}}
               <mat-progress-bar
                 mode="indeterminate"
                 color="accent"

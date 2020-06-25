@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService } from '@fecommerce-workspace/data-store-lib';
+import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -33,7 +33,8 @@ export class FeOrderComponent implements OnInit, OnDestroy {
     private _router: Router,
     public dialog: MatDialog,
     private _ordArtsService: OrderArticlesService,
-    private _bnService: BackNavigationService
+    private _bnService: BackNavigationService,
+    private _transServ: TranslationService
   ) {
 
     this.$articles = this._store.pipe(select('orderArticles'));
@@ -95,10 +96,10 @@ export class FeOrderComponent implements OnInit, OnDestroy {
       width: '280px',
       height: '248px',
       data: {
-        title: 'Switch customer',
-        msg: 'Customer specific prices will be recalculated after asssigning a new customer.',
-        firstButton: 'CANCEL',
-        secondButton: 'SWITCH',
+        title: this._transServ.get('switchcus'),
+        msg: this._transServ.get('switchcusmes'),
+        firstButton: this._transServ.get('cancel'),
+        secondButton: this._transServ.get('switch'),
         buttonColor: 'blue'
       }
     });

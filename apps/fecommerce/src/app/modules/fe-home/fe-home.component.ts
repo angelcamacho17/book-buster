@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
 import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, map } from 'rxjs/operators';
 // import * as ordersData from '../../../assets/data/orders.json';
 
 @Component({

@@ -23,13 +23,13 @@
                          class="search-results"></fe-search-results>
       <div class="no-results" *ngIf="!hide && emptyResults">
         <mat-icon class="icon">search</mat-icon>
-        <div class="mat-title search-text">Search articles</div>
-        <div class="mat-subheading-2 search-description">Find stock, sales & … info</div>
+        <div class="mat-title search-text">{{'searchArts' | translate}}</div>
+        <div class="mat-subheading-2 search-description">{{'artsplaceholder' | translate}}</div>
       </div>
       <div class="no-results" *ngIf="hide && emptyResults">
-        <div class="mat-title search-text">no matching articles</div>
+        <div class="mat-title search-text">{{'nomatcharts' | translate}}</div>
       </div>
-    <button mat-button *ngIf="emptyResults" class="fe-button" (click)="overviewOrder()">OVERVIEW</button>
+    <button mat-button *ngIf="emptyResults" class="fe-button" (click)="overviewOrder()">{{'overview' | translate}}</button>
     </div>
   </main>
 </div>

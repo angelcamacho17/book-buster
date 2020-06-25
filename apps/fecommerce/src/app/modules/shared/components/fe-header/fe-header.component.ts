@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges, Output, EventEmitter, OnDestroy } 
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription, Subject } from 'rxjs';
 import { Location } from '@angular/common';
-import { AuthService, goBackNavigationRequest, appendBackNavigationRequest, getCurrentOrderRequest, changedNavigationRequest, deleteOrderRequest, Order, OrderService } from '@fecommerce-workspace/data-store-lib';
+import { AuthService, goBackNavigationRequest, appendBackNavigationRequest, getCurrentOrderRequest, changedNavigationRequest, deleteOrderRequest, Order, OrderService, TranslationService } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
@@ -35,6 +35,7 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
   constructor(private _router: Router,
               private _ordService: OrderService,
               public dialog: MatDialog,
+              private _transServ: TranslationService,
               private _store: Store<{ currentOrder: Order }>) {
   // this.url$ = this._storeUrl.pipe(select('backNavigation'));
     // this.url$.pipe(takeUntil(this._subscriptions))
@@ -73,9 +74,9 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
       width: '280px',
       height: '120px',
       data: {
-        msg: 'Delete this order?',
-        firstButton: 'CANCEL',
-        secondButton: 'DELETE',
+        msg: this._transServ.get('deleteord'),
+        firstButton: this._transServ.get('cancel'),
+        secondButton: this._transServ.get('delete'),
         buttonColor: 'red'
       }
     });

@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FeArticleDetailComponent } from './fe-article-detail/fe-article-detail.component';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { ScannerModule } from '@fecommerce-workspace/scanner';
+import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ScannerModule } from '@fecommerce-workspace/scanner';
   imports: [
     CommonModule,
     HttpClientModule,
+    TranslatePipeModule,
     RouterModule.forChild([
       {
         path: '',

@@ -4,6 +4,7 @@ import { FeLoginComponent } from './fe-login.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/modules/material/material.module';
+import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 
 
 
@@ -14,7 +15,8 @@ import { MaterialModule } from '../shared/modules/material/material.module';
     RouterModule.forChild([{ path: '', component: FeLoginComponent }]),
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    TranslatePipeModule
   ]
 })
 export class FeLoginModule { }

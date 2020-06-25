@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../shared/modules/material/material.module';
+import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 
 
 
@@ -15,7 +16,8 @@ import { MaterialModule } from '../shared/modules/material/material.module';
     HttpClientModule,
     RouterModule.forChild([{ path: '', component: FeHomeComponent }]),
     MaterialModule,
-    SharedModule
+    SharedModule,
+    TranslatePipeModule
   ],
   exports: [
     FeHomeComponent

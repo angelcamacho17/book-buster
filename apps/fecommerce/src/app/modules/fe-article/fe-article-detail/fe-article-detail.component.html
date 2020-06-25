@@ -2,7 +2,7 @@
 <div class="main-wrapper">
     <header>
       <fe-header [icon]="'keyboard_arrow_left'"
-                 [title]="'Article detail'"
+                 [title]="'artdet'"
                  [class]="'mat-headline'"
                  [style]="'center'"
                  [lastUrl]="'article'"
@@ -18,7 +18,7 @@
                             <div mat-line class="order-title">
                                 <div class="mat-subheading-2 title">
                                     <!-- {{article.name}} -->
-                                    Article code
+                                    {{'artcode' | translate}}
                                 </div>
                             </div>
                             <div mat-line class="order-subtitle">
@@ -33,7 +33,7 @@
                             <div mat-line class="order-title">
                                 <div class="mat-subheading-2 title">
                                     <!-- {{article.name}} -->
-                                    Article name
+                                    {{'artname' | translate}}
                                 </div>
                             </div>
                             <div mat-line class="order-subtitle">
@@ -54,7 +54,7 @@
             <div class="content">
 
                 <div class="mat-subheading-2 left">
-                    Quantity
+                    {{'quantity' | translate}}
                 </div>
                 <div class="mat-title right">
                     <button mat-icon-button (click)="removeQuantity()">
@@ -68,8 +68,7 @@
             </div>
         </fe-card>
 
-        <button mat-button color="primary" class="add-button" [disabled]="amount === 0" (click)="addToOrder()">add to
-            order</button>
+        <button mat-button color="primary" class="add-button" [disabled]="amount === 0" (click)="addToOrder()">{{'addTo' | translate}}</button>
     </footer>
 
 </div>
