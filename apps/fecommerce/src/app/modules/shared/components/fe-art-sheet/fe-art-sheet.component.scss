@@ -6,8 +6,13 @@
     align-items: center;
 
     .icon {
-      background: transparent;
-      color: rgba(0, 0, 0, 0.87);
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.54);
+      border-radius: 50%;
+      font-size: 21px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 
