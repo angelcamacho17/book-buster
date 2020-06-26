@@ -43,6 +43,7 @@
   "addTo": "add to order",
   "discounts": "Discounts",
   "vat": "VAT",
-  "customerkey": "Customer Key"
+  "customerkey": "Customer Key",
+  "ordersitems": "Orders items"
 
 }
