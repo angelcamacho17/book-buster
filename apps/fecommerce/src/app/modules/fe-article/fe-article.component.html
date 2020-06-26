@@ -29,7 +29,7 @@
       <div class="no-results" *ngIf="hide && emptyResults">
         <div class="mat-title search-text">{{'nomatcharts' | translate}}</div>
       </div>
-    <button mat-button *ngIf="emptyResults" class="fe-button" (click)="overviewOrder()">{{'overview' | translate}}</button>
+    <button mat-button *ngIf="emptyResults" class="fe-button" (click)="overviewOrder()">{{('overview' | translate) | uppercase}}</button>
     </div>
   </main>
 </div>

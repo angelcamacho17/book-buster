@@ -3,6 +3,6 @@
     {{ data.message }}
 </div>
 <div mat-dialog-actions class="actions">
-    <button mat-button (click)="onDiscard()">{{data.firstBtn}}</button>
-    <button mat-button (click)="onConfirm()" cdkFocusInitial>{{data.secondBtn}}</button>
+    <button mat-button (click)="onDiscard()">{{data.firstBtn | uppercase}}</button>
+    <button mat-button (click)="onConfirm()" cdkFocusInitial>{{data.secondBtn | uppercase}}</button>
 </div>
