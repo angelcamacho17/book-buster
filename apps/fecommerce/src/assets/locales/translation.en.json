@@ -42,5 +42,7 @@
   "deletefromord": "DELETE FROM ORDER",
   "addTo": "add to order",
   "discounts": "Discounts",
-  "vat": "VAT"
+  "vat": "VAT",
+  "customerkey": "Customer Key"
+
 }

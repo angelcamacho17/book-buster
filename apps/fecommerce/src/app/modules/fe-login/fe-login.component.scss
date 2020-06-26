@@ -48,8 +48,9 @@
       border-radius: 8px;
       background: rgba(0,0,0,0.1);
       height: 50px;
-      padding: 8px;
-      margin-top: 32px;
+      padding: 7px 8px;
+      margin-top: 8px;
+      margin-bottom: 8px;
 
       .label {
         color: rgba(0, 0, 0, 0.6);
@@ -67,7 +68,7 @@
     }
 
     .login-btn {
-      margin-top: 40px;
+      margin-top: 32px;
       background-color:#1666D8 !important;
       color:#ffffff;
       height: 50px;
@@ -75,7 +76,7 @@
     }
 
     .disabled {
-      margin-top: 40px;
+      margin-top: 32px;
       background-color: rgba(0, 0, 0, 0.2) !important;
       color:rgba(0, 0, 0, 0.87);
     }
@@ -86,10 +87,6 @@
     }
 
   }
-}
-
-::ng-deep .mat-form-field-underline {
-  display: none;
 }
 
 
