@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { MaterialModule } from '../shared/modules/material/material.module';
+import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 
 @NgModule({
   declarations: [FeOrderItemsComponent],
@@ -20,7 +21,8 @@ import { MaterialModule } from '../shared/modules/material/material.module';
     ]),
     MaterialModule,
     DragDropModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    TranslatePipeModule
   ]
 })
 export class FeOrderItemsModule { }

@@ -7,12 +7,12 @@
        [ngClass]="class"
        [ngStyle]="logoutIcon ? {'width': '100%'} : {}"
        style="margin: 0 !important;">
-    {{title}}
+    {{title | translate}}
   </div>
   <h6  *ngIf="style === 'center'"
        class="title-centered"
        style="margin: 0 !important; font-weight: 600;">
-    {{title}}
+    {{title | translate}}
   </h6>
   <mat-icon *ngIf="logoutIcon"  class="logout" (click)="logout()">
     exit_to_app
@@ -22,7 +22,7 @@
   </mat-icon>
 
   <mat-icon *ngIf="addArt"  class="lined-icon" (click)="addArticle()">
-    add
+    {{ 'add' | translate}}
   </mat-icon>
 
 </mat-toolbar>

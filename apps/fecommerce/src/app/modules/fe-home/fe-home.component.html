@@ -1,10 +1,10 @@
 <div class="main-wrapper">
   <header>
-    <fe-header [class]="'mat-display-1'" [currentUrl]="'home'" [logoutIcon]="true" [title]="'Home'"></fe-header>
+    <fe-header [class]="'mat-display-1'" [currentUrl]="'home'" [logoutIcon]="true" [title]="'home'"></fe-header>
   </header>
   <main>
     <div class="container">
-      <div class="mat-headline headline">Recent orders</div>
+      <div class="mat-headline headline">{{'recOrds' | translate}}</div>
       <mat-card class="card" #ordersCard [ngClass]="cardOverflows ? 'overflows' : ''">
         <mat-card-content>
           <mat-list class="list" #ordersCardList>
@@ -20,7 +20,7 @@
               <div mat-line class="mat-body-1 order-subtitle">
                 <div class="line">{{order.description}}</div>
                 <!-- <div class="line">Created by {{order.createdBy}}</div> -->
-                <div class="line">Customer: {{order.customer.name}}</div>
+                <div class="line">{{'customer' | translate}}: {{order.customer.name}}</div>
               </div>
               <mat-divider class="divider"></mat-divider>
             </mat-list-item>

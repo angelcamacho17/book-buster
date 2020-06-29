@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Observable, Subject, Subscription, of } from 'rxjs';
-import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest, replaceCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest, clearCurrentOrderRequest, changedNavigationRequest } from '@fecommerce-workspace/data-store-lib';
+import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest, replaceCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest, clearCurrentOrderRequest, changedNavigationRequest, TranslationService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 import { FeCustomerRowComponent } from '../shared/components/fe-row/fe-customer-row/fe-customer-row.component';
@@ -40,6 +40,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog,
     private _store: Store<{ orders: Order[], currentOrder: Order, customers: Customer[] }>,
     private _router: Router,
+    private _transServ: TranslationService,
     private _route: ActivatedRoute) {
     this._subscriptions = this.eventService.customerChange.subscribe(customer => this.onCustomerChange(customer));
 
@@ -80,16 +81,16 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   private openConfirmDialog() {
     let message;
     if (this.currentOrder?.articles?.length) {
-      message = "You have an order on progress, do you want to save it?"
+      message =  this._transServ.get('progressord');
     } else {
-      message = "Your current order has no articles in it, do you want to save it anyway?";
+      message = this._transServ.get('noarts');
     }
     const dialogRef = this.matDialog.open(FeConfirmDiscardDialogComponent, {
       data: {
-        title: "Save order?",
+        title: this._transServ.get('saveord'),
         message,
-        firstBtn: 'Discard',
-        secondBtn: 'Save'
+        firstBtn: this._transServ.get('discard'),
+        secondBtn: this._transServ.get('save')
       }
     });
 

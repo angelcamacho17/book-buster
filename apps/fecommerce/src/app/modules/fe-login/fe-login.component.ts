@@ -92,7 +92,7 @@ export class FeLoginComponent implements OnInit {
     }, 200);
 
     this.loginForm = this._formBuilder.group({
-      //key: ['', [Validators.required]],
+      key: ['', [Validators.required]],
       user: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });

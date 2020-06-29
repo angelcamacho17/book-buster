@@ -46,9 +46,11 @@ $footer-heigth: 80px;
 
             .item-info {
               .title {
+                display: flex;
                 margin: 0 !important;
                 height: 28px;
                 color: rgba(0, 0, 0, 0.87);
+                align-items: center;
               }
 
               .subtitle {

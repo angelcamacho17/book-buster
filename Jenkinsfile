@@ -28,7 +28,7 @@
             }
         }
         stage('Build') {
-            when { 
+            when {
                 anyOf {
                     branch 'Feature*'
                     branch 'develop'
@@ -41,12 +41,12 @@
                     sh 'rm -f build/logs/dist_${BRANCH_NAME}.tar'
                     sh 'chmod -R 755 dist/'
                     sh 'tar -cf build/logs/dist_${BRANCH_NAME}.tar dist/* dist/.htaccess'
-                    // archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
+                    archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
                 }
             }
         }
         stage('Production build') {
-            when { 
+            when {
                 branch 'staging'
             }
             steps {

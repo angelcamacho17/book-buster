@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../shared/modules/material/material.module';
 import { SharedModule } from '../shared/shared.module';
+import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 
 
 
@@ -13,6 +14,7 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     HttpClientModule,
+    TranslatePipeModule,
     RouterModule.forChild([
       {
         path: '',

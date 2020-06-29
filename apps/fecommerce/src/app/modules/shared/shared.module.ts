@@ -13,7 +13,7 @@ import { FeRowComponent } from './components/fe-row/fe-row.component';
 import { FeDialogComponent } from './components/fe-dialog/fe-dialog.component';
 import { FeConfirmDiscardDialogComponent } from './components/fe-confirm-discard/fe-confirm-discard-dialog.component';
 import { EventService } from './services/event.service';
-import { DataStoreModule } from '@fecommerce-workspace/data-store-lib';
+import { DataStoreModule, TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { FeArtSheetComponent } from './components/fe-art-sheet/fe-art-sheet.component';
 import { FeSearchResultsComponent } from './components/fe-search/fe-search-results/fe-search-results.component';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
@@ -38,7 +38,8 @@ import { AutoFocusDirective } from './directives/auto-focus.directive';
     CommonModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslatePipeModule
   ],
   exports: [
     FeCardComponent,
