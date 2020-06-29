@@ -26,8 +26,8 @@ export class FeSearchComponent implements AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit(): void {
-      const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
-      inputElement.focus();
+    //   const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
+    //   inputElement.focus();
     }
 
     onSearchFocus() {
