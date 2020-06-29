@@ -7,10 +7,7 @@
            [lastUrl]="lastUrl"
            [headerSearch]="true"
            [style]="'center'"></fe-header>
-    <fe-search [class]="'mat-headline'"
-               [style]="'center'"
-               [title]="'New Order'"
-               (searchFocus)="showShadow($event)"
+    <fe-search (searchFocus)="showShadow($event)"
                (searchBlur)="removeShadow()"
                (userSearching)="hidePanel($event)"
                (hasSearchResults)="handleSearchResults($event)"
