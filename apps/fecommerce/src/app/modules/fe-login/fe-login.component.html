@@ -32,7 +32,7 @@
         <input matInput class="input mat-subheading-2"  [type]="hidePassword ? 'password' : 'text'" formControlName="password" (keyup)="cleanError($event)">
         <mat-icon class="visibility-icon" matSuffix (click)="showPassword()">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
-      <mat-error class="error mat-body-1" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
+      <mat-error class="error mat-body-1" style="margin-top: 8px;" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
         {{'required' | translate }}
 
       </mat-error>
