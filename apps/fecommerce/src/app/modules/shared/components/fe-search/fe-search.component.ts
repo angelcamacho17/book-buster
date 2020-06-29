@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './fe-search.component.html',
     styleUrls: ['./fe-search.component.scss']
 })
-export class FeSearchComponent implements OnInit, OnDestroy {
+export class FeSearchComponent implements AfterViewInit, OnDestroy {
 
     @Output() searchFocus = new EventEmitter<boolean>();
     @Output() userSearching = new EventEmitter<boolean>();
@@ -25,7 +25,7 @@ export class FeSearchComponent implements OnInit, OnDestroy {
         )
     }
 
-    ngOnInit() {
+    ngAfterViewInit(): void {
       const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
       inputElement.focus();
     }
