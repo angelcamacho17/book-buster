@@ -26,8 +26,8 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-    //   const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
-    //   inputElement.focus();
+      const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
+      inputElement.focus();
     }
 
     onSearchFocus() {
