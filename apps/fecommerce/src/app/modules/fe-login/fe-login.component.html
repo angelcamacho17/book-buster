@@ -28,7 +28,7 @@
         {{'required' | translate }}
       </mat-error>
       <mat-form-field color="accent" style="margin-bottom: 0;">
-        <mat-label class="mat-caption input">{{'password' | translate}}</mat-label>
+        <mat-label class="mat-caption label">{{'password' | translate}}</mat-label>
         <input matInput class="input"  [type]="hidePassword ? 'password' : 'text'" formControlName="password" (keyup)="cleanError($event)">
         <mat-icon class="visibility-icon" matSuffix (click)="showPassword()">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
@@ -40,6 +40,8 @@
         {{'incorrectpas' | translate}}
       </mat-error>
       <button class="login-btn"
+              [class.disabled] = "isSubmitted"
+              [disabled] = "isSubmitted"
               mat-raised-button>
               {{('sign' | translate) | uppercase}}
               <mat-progress-bar
@@ -51,7 +53,7 @@
                        bottom: 0;">
               </mat-progress-bar>
         </button>
-    </div>
+      </div>
   </form>
 </div>
 
