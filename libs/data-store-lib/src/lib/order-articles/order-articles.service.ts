@@ -28,14 +28,11 @@ export class OrderArticlesService {
         return of(this._orderArticles);
     }
 
-    /* public replace(article: Article): Observable<Article[]> {
-        const index = this._orderArticles.findIndex(c => c.id === article.id);
-        this._orderArticles[index].description = article.description;
-        this._orderArticles[index].name = article.name;
-        this._orderArticles[index].price = article.price;
-        this.orderArticles.next(this._orderArticles);
-        return this.orderArticles.asObservable();
-    }*/
+    public replace(orderArticle: OrderArticle): Observable<OrderArticle[]> {
+      this.delete(orderArticle.id);
+      this.append(orderArticle);
+      return of(this._orderArticles);
+    }
 
     public delete(articleId: any): Observable<OrderArticle[]> {
       const articles = [];

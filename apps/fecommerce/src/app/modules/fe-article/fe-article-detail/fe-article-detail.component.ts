@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Article, Order, getArticleRequest, getCurrentOrderRequest, appendOrderArticleRequest, OrderArticle, replaceCurrentOrderRequest, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
+import { Article, Order, getArticleRequest, getCurrentOrderRequest, appendOrderArticleRequest, OrderArticle, replaceCurrentOrderRequest, setOrderArticlesRequest, replaceOrderArticleRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, Subscription, Subject } from 'rxjs';
@@ -29,19 +29,19 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
   ) {
     this._article$ = this._store.pipe(select('article'));
     this._subscriptions = this._article$.subscribe(data => {
-        this.article = data;
-      });
+      this.article = data;
+    });
 
     this._currentOrder$ = this._store.pipe(select('currentOrder'));
-    this._subscriptions =  this._currentOrder$.subscribe(data => {
-        this.currentOrder = data;
-      });
+    this._subscriptions = this._currentOrder$.subscribe(data => {
+      this.currentOrder = data;
+    });
     this._store.dispatch(getCurrentOrderRequest())
 
     this._orderArticles$ = this._store.pipe(select('orderArticles'));
     this._subscriptions = this._orderArticles$.subscribe(data => {
-        this.orderArticles = data;
-      });
+      this.orderArticles = data;
+    });
   }
 
   ngOnInit(): void {
@@ -69,17 +69,24 @@ export class FeArticleDetailComponent implements OnInit, OnDestroy {
   }
 
   public addToOrder() {
-    const orderArticle: OrderArticle = {
+    let orderArticle: OrderArticle = {
       article: this.article,
       quantity: this.amount
     }
-
     const orderArticles = this.currentOrder.articles;
     if (orderArticles.length > 0) {
       this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
     }
-    this._store.dispatch(appendOrderArticleRequest({ orderArticle }));
-    if (this.updatedOrder() === null) {
+    const existingOrderArticle = this.orderArticles.find((o) => o.article.id === this.article.id);
+    if (existingOrderArticle) {
+      orderArticle = {
+        id: existingOrderArticle.id,
+        article: this.article,
+        quantity: (existingOrderArticle.quantity + this.amount)
+      }
+      this._store.dispatch(replaceOrderArticleRequest({ orderArticle }))
+    } else {
+      this._store.dispatch(appendOrderArticleRequest({ orderArticle }));
     }
     this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
     this._router.navigate(['/article']);
