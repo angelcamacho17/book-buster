@@ -69,11 +69,11 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
 
     this._store.dispatch(refreshCustomersRequest());
 
-    window.addEventListener('keyboardWillShow', (e: any) => {
-      console.log('keyboard will show! ', e);
-      alert('keyboarON')
-      this.keyboardH = e.keyboardHeight +'px';
-    });
+    // window.addEventListener('keyboardWillShow', (e: any) => {
+    //   console.log('keyboard will show! ', e);
+    //   alert('keyboarON')
+    //   this.keyboardH = e.keyboardHeight +'px';
+    // });
 
   }
 
