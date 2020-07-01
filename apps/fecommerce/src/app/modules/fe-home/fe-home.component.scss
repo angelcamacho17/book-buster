@@ -45,12 +45,17 @@
                     width: calc(100% - 16px);
                 }
             }
+            .list-item:last-child{
+              .divider {
+                display: none;
+              }
+            }
         }
 
         &.overflows {
             .list {
                 .list-item:last-child {
-                    padding-bottom: 11px;
+                    //padding-bottom: 11px;
                 }
             }
         }
