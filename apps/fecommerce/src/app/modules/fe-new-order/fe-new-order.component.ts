@@ -33,6 +33,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public lastUrl = 'neworder';
   public icon = 'close';
   public filteredResults: Customer[] = [];
+  public keyboardH = null;
   // public filteredCustomers$: Observable<Customer[]> = of([]);
 
   constructor(
@@ -67,6 +68,12 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     })
 
     this._store.dispatch(refreshCustomersRequest());
+
+    window.addEventListener('keyboardWillShow', (e) => {
+      console.log('keyboard will show! ', e);
+      alert('keyboarON')
+      this.keyboardH = e.keyboardHeight;
+    });
 
   }
 
