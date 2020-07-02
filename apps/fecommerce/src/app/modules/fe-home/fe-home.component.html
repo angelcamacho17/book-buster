@@ -7,7 +7,7 @@
       <div class="mat-headline headline">{{'recOrds' | translate}}</div>
       <mat-card class="card" #ordersCard [ngClass]="cardOverflows ? 'overflows' : ''">
         <mat-card-content>
-          <mat-list class="list" #ordersCardList>
+          <mat-list role="list" class="list" #ordersCardList>
             <mat-list-item class="list-item" *ngFor="let order of orders" (click)="openOrder(order)">
               <div mat-line class="mat-subheading-2 order-title">
                 <div class="title">
