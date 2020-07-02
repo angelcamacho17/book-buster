@@ -19,7 +19,6 @@
 
   <main>
     <div class="container"
-         id="container"
          [ngClass]="shadow || !emptyResults ? 'shadow' : ''">
       <fe-search-results *ngIf="!emptyResults"
                          [items]="filteredResults"
