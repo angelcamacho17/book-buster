@@ -40,6 +40,10 @@ export class FeArticleComponent implements OnInit, OnDestroy {
       this.lastUrl = 'orderitems';
     }
     this._store.dispatch(refreshArticlesRequest());
+
+    window.addEventListener('keyboardWillShow', (e) => {
+      console.log('keyboard will show! ', e);
+  });
   }
 
   ngOnInit(): void {
