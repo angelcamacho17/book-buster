@@ -36,6 +36,7 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     onSearchFocus(e) {
         this.searchFocus.emit(true);
         this.innerHeight.emit(e?.view?.innerHeight);
+        console.log(e);
     }
 
     onSearchBlur() {
