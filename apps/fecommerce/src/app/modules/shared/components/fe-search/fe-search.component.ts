@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -7,13 +7,15 @@ import { Subscription } from 'rxjs';
     templateUrl: './fe-search.component.html',
     styleUrls: ['./fe-search.component.scss']
 })
-export class FeSearchComponent implements AfterViewInit, OnDestroy {
+export class FeSearchComponent implements OnInit, OnDestroy {
 
     @Output() searchFocus = new EventEmitter<boolean>();
     @Output() userSearching = new EventEmitter<boolean>();
     @Output() searchBlur = new EventEmitter<boolean>();
     @Output() hasSearchResults = new EventEmitter<any[]>();
+    @Output() innerHeight = new EventEmitter<number>();
     @Input() list: any = []
+    @Input() customIcon: string;
 
     inputControl = new FormControl();
     private _userSearching = false;
@@ -25,13 +27,15 @@ export class FeSearchComponent implements AfterViewInit, OnDestroy {
         )
     }
 
-    ngAfterViewInit(): void {
+    ngOnInit() {
+      this.searchFocus.emit(false);
     //   const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
     //   inputElement.focus();
     }
 
-    onSearchFocus() {
+    onSearchFocus(e) {
         this.searchFocus.emit(true);
+        this.innerHeight.emit(e?.view?.innerHeight);
     }
 
     onSearchBlur() {

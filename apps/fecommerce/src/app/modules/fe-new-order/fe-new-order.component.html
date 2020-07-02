@@ -11,6 +11,7 @@
            (goBack)="onHeaderGoBack()"
            (returnUrl)="returnUrl()"></fe-header>
     <fe-search (searchFocus)="showShadow($event)"
+              (innerHeight)="setInnerHeight($event)"
               (searchBlur)="removeShadow()"
               (userSearching)="hidePanel($event)"
               (hasSearchResults)="handleSearchResults($event)"
@@ -20,8 +21,8 @@
 
   <main>
     <div class="container"
+         id="container"
          [ngClass]="shadow || !emptyResults ? 'shadow' : ''">
-         <!-- [ngStyle]="shadow || !emptyResults ?  {'height': 'calc(100vh - keyboardH)'} : {'height': '100vh'}"> -->
       <fe-search-results *ngIf="!emptyResults"
                          [items]="filteredResults"
                          [rowType]="rowType"

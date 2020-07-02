@@ -33,7 +33,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public lastUrl = 'neworder';
   public icon = 'close';
   public filteredResults: Customer[] = [];
-  public keyboardH = null;
+  public innerHeight = null;
   // public filteredCustomers$: Observable<Customer[]> = of([]);
 
   constructor(
@@ -184,6 +184,16 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public removeShadow(): void {
     this.shadow = false;
     this.hide = false;
+  }
+
+  public setInnerHeight(height: number): void {
+    this.innerHeight = height;
+    console.log(this.innerHeight);
+    const h = 'calc('+height+'px - 162px)'
+    if (this.shadow){
+      document.getElementById('container').style.height = h;
+    }
+
   }
 
   public handleSearchResults(results: any[]): void {
