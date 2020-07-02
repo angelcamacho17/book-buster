@@ -7,7 +7,7 @@ $fixed-space: $header-height + $bottom-nav-height;
 $content-height: calc(100vh - #{$header-height});
 
 /* Structure
-*   The main content of the app, must be 
+*   The main content of the app, must be
  */
 .main-wrapper {
   width: 100vw;
@@ -30,7 +30,7 @@ $content-height: calc(100vh - #{$header-height});
     max-height: $content-height;
     background-color: #f7f8f9;
     box-sizing: border-box;
-    
+
     .container {
       position: relative;
       height: 100%;

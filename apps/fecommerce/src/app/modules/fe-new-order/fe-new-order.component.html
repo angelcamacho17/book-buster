@@ -19,7 +19,9 @@
   </header>
 
   <main>
-    <div class="container" [ngClass]="shadow || !emptyResults ? 'shadow' : ''">
+    <div class="container"
+         [ngClass]="shadow || !emptyResults ? 'shadow' : ''">
+         <!-- [ngStyle]="shadow || !emptyResults ?  {'height': 'calc(100vh - keyboardH)'} : {'height': '100vh'}"> -->
       <fe-search-results *ngIf="!emptyResults"
                          [items]="filteredResults"
                          [rowType]="rowType"

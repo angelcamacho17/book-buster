@@ -33,6 +33,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public lastUrl = 'neworder';
   public icon = 'close';
   public filteredResults: Customer[] = [];
+  public keyboardH = null;
   // public filteredCustomers$: Observable<Customer[]> = of([]);
 
   constructor(
