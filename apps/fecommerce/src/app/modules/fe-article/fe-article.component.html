@@ -21,7 +21,9 @@
                          [items]="filteredResults"
                          [rowType]="rowType"
                          class="search-results"></fe-search-results>
-      <div class="no-results" *ngIf="!hide && emptyResults">
+      <div class="no-results"
+           *ngIf="!hide && emptyResults"
+           [ngClass]="shadow || !emptyResults ? 'move-up' : ''">
         <mat-icon class="icon">search</mat-icon>
         <div class="mat-title search-text">{{'searchArts' | translate}}</div>
         <div class="mat-subheading-2 search-description">{{'artsplaceholder' | translate}}</div>

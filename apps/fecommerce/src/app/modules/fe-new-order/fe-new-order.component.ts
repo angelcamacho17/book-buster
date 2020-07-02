@@ -186,16 +186,6 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
     this.hide = false;
   }
 
-  public setInnerHeight(height: number): void {
-    this.innerHeight = height;
-    console.log(this.innerHeight);
-    const h = 'calc('+screen?.availHeight+'px - 162px)';
-    if (this.shadow) {
-      document.getElementById('container').style.height = h;
-    }
-
-  }
-
   public handleSearchResults(results: any[]): void {
     this.emptyResults = results.length === 0;
     this.filteredResults = results;

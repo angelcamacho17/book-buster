@@ -35,6 +35,12 @@ $header-height: 162px;
                 color: rgba(0, 0, 0, 0.6);
             }
         }
+
+        .move-up {
+          top: 0;
+          transform: translate(-50%, 50%);
+        }
+
         .fe-button {
             // position: -webkit-sticky;
             // position: sticky;

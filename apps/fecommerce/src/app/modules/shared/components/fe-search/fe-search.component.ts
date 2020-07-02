@@ -13,11 +13,10 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     @Output() userSearching = new EventEmitter<boolean>();
     @Output() searchBlur = new EventEmitter<boolean>();
     @Output() hasSearchResults = new EventEmitter<any[]>();
-    @Output() innerHeight = new EventEmitter<number>();
     @Input() list: any = []
     @Input() customIcon: string;
 
-    inputControl = new FormControl();
+    public inputControl = new FormControl();
     private _userSearching = false;
     private _filteredList: any[] = [];
     private _subscription: Subscription;
@@ -33,10 +32,8 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     //   inputElement.focus();
     }
 
-    onSearchFocus(e) {
+    onSearchFocus() {
         this.searchFocus.emit(true);
-        this.innerHeight.emit(e?.view?.innerHeight);
-        console.log(e);
     }
 
     onSearchBlur() {

@@ -12,7 +12,7 @@
           <mat-placeholder class="placeholder mat-subheading-2">{{'search' | translate}}</mat-placeholder>
             <input matInput #input
                    [formControl]="inputControl"
-                   (focus)="onSearchFocus($event)"
+                   (focus)="onSearchFocus()"
                    (blur)="onSearchBlur()"
                    class="mat-subheading-2"
                    autocorrect="off"
