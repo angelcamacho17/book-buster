@@ -14,7 +14,7 @@
         position: relative;
         max-height: 100%;
         box-shadow: none;
-        overflow: auto;
+        overflow-x: hidden;
         border-radius: 8px;
         border: 1px solid rgba(0, 0, 0, 0.12);
         padding: 0 !important;
@@ -25,10 +25,14 @@
             .list-item {
                 height: 88px;
                 max-height: 88px;
+                display: -webkit-flex;
                 display: flex;
                 flex-flow: column nowrap;
                 justify-content: space-between;
                 align-content: flex-start;
+                box-sizing: border-box;
+                padding-top: 10px;
+                padding-bottom: 15px;
 
                 .order-title {
                     margin: 0 !important;
@@ -63,6 +67,18 @@
                     }
                 }
             }
+
+            .list-item::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 16px;
+                width: calc(100% - 16px);
+                border: 1px solid rgba(0, 0, 0, 0.12);
+            }
+            .list-item:last-child::after {
+                display: none;
+            }
         }
 
         &.overflows {
@@ -75,10 +91,6 @@
     }
 }
 
-:host ::ng-deep .mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content {
-    padding-top: 10px;
-    padding-bottom: 15px;
-}
 /* 
             .list-item {
                 position: relative;
