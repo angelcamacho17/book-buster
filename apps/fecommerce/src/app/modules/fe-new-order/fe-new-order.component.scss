@@ -5,7 +5,7 @@ $header-height: 162px;
     @include structure.set-structure($header-height);
 
     .container {
-        height: 100vh;
+        height: 100%;
         .search-results {
             position: relative;
             width: 100%;
