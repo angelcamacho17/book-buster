@@ -189,8 +189,8 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
   public setInnerHeight(height: number): void {
     this.innerHeight = height;
     console.log(this.innerHeight);
-    const h = 'calc('+height+'px - 162px)'
-    if (this.shadow){
+    const h = 'calc('+screen.availHeight;+'px - 162px)';
+    if (this.shadow) {
       document.getElementById('container').style.height = h;
     }
 
