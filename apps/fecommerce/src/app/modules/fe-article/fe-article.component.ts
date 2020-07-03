@@ -71,6 +71,7 @@ export class FeArticleComponent implements OnInit, OnDestroy, AfterViewInit {
     this.shadow = shadow;
   }
 
+
   public removeShadow(): void {
     this.shadow = false;
     this.hide = false;
