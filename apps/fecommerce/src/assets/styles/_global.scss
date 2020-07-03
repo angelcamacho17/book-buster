@@ -18,9 +18,7 @@ $content-height: calc(100vh - #{$header-height});
   justify-content: stretch;
   align-items: stretch;
   touch-action: none;
-  -webkit-overflow-scrolling: none;
   overflow: hidden;
-  overscroll-behavior: none;
 
   header {
     flex: 0 0 $header-height;

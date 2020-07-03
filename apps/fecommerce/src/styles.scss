@@ -1,28 +1,29 @@
-
-@import 'assets/styles/custom_material_dark_theme';
-@import 'assets/styles/custom_material_light_theme';
-@import 'assets/styles/custom_material_typography';
-@import 'assets/styles/global';
+@import "assets/styles/custom_material_dark_theme";
+@import "assets/styles/custom_material_light_theme";
+@import "assets/styles/custom_material_typography";
+@import "assets/styles/global";
 
 html {
   position: fixed;
   height: 100%;
   overflow: hidden;
+  -webkit-overflow-scrolling: none;
+  overscroll-behavior: none;
 }
 body {
-    width: 100vw;
-    height: 100vh;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden;
-}
+  width: 100vw;
+  height: 100vh;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
 
+  -webkit-overflow-scrolling: none;
+  overscroll-behavior: none;
+}
 
 .shadow {
   background: rgba(0, 0, 0, 0.15) !important;
 }
-
-
 
 /* .container {
     // All main content of each router has to be wrapped by this class in order to apply
@@ -44,7 +45,6 @@ body {
   left: 0px !important;
   max-height: calc(100% - 236px) !important;
 } */
-
 
 // /* You can add global styles to this file, and also import other style files */
 // @import "~@angular/material/theming";
@@ -124,6 +124,4 @@ body {
 //     // padding-top: 196px;
 // }
 
-
 // }
-
