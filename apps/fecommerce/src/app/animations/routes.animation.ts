@@ -160,10 +160,13 @@ function fromBottom() {
   return [
     query(':enter, :leave', [
       style({
-        position: 'fixed',
-        width: '100%',
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        'flex-flow': 'column nowrap',
+        'justify-content': 'stretch',
+        'align-items': 'stretch',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
-        height: '100%',
         background: '#ffffff',
         'z-index': '0'
       })
