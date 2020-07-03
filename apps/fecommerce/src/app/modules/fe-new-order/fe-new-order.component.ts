@@ -182,6 +182,8 @@ export class FeNewOrderComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public showShadow(shadow: boolean): void {
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
     this.shadow = shadow;
   }
 
