@@ -28,8 +28,10 @@ export class FeSearchComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
       this.searchFocus.emit(false);
-      const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
-      inputElement.focus();
+      setTimeout(()=>{
+        const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
+        inputElement.focus();
+      },300);
     }
 
     onSearchFocus() {
