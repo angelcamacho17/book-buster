@@ -11,8 +11,9 @@
         <mat-form-field floatLabel="never" class="form-field">
           <mat-placeholder class="placeholder mat-subheading-2">{{'search' | translate}}</mat-placeholder>
             <input matInput #input
+                   id="input"
                    [formControl]="inputControl"
-                   (focus)="onSearchFocus($event)"
+                   (focus)="onSearchFocus()"
                    (blur)="onSearchBlur()"
                    class="mat-subheading-2"
                    autocorrect="off"

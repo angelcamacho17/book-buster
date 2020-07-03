@@ -16,14 +16,15 @@
   </header>
 
   <main>
-    <div class="container" [ngClass]="shadow || !emptyResults ? 'shadow' : ''">
+    <div class="container" [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
       <fe-search-results *ngIf="!emptyResults"
                          [items]="filteredResults"
                          [rowType]="rowType"
                          class="search-results"></fe-search-results>
-      <div class="no-results" *ngIf="!hide && emptyResults">
+      <div class="no-results"
+           *ngIf="!hide && emptyResults">
         <mat-icon class="icon">search</mat-icon>
-        <div class="mat-title search-text">{{'searchArts' | translate}}</div>
+        <div class="mat-title search-text">{{'searcharts' | translate}}</div>
         <div class="mat-subheading-2 search-description">{{'artsplaceholder' | translate}}</div>
       </div>
       <div class="no-results" *ngIf="hide && emptyResults">

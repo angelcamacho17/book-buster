@@ -13,11 +13,10 @@ export class FeSearchResultsComponent implements OnInit, OnDestroy {
   @Input() dividerClass: string;
   public items$: Observable<any[]> = of(this.items);
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
-    console.log('estoy en search results')
-    console.log(this.items)
+
   }
 
   ngOnDestroy() {

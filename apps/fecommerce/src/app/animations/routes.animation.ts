@@ -163,7 +163,7 @@ function fromBottom() {
         position: 'fixed',
         width: '100%',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
-        height: '100%',
+        height: '100vh',
         background: '#ffffff',
         'z-index': '0'
       })
@@ -206,7 +206,7 @@ function fromTop() {
         width: '100%',
         top: '0',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
-        height: '100%',
+        height: '100vh',
         background: '#ffffff',
         'z-index': 10
       })

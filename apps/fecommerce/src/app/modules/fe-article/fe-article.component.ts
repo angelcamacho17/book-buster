@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Article, Order, refreshArticlesRequest, changedNavigationRequest, setCurrentOrderRequest, OrderService, TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { FeArticleRowComponent } from '../shared/components/fe-row/fe-article-row/fe-article-row.component';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './fe-article.component.html',
   styleUrls: ['./fe-article.component.scss']
 })
-export class FeArticleComponent implements OnInit, OnDestroy {
+export class FeArticleComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public rowType = FeArticleRowComponent;
   public articles: Article[] = [];
@@ -71,6 +71,7 @@ export class FeArticleComponent implements OnInit, OnDestroy {
     this.shadow = shadow;
   }
 
+
   public removeShadow(): void {
     this.shadow = false;
     this.hide = false;
@@ -83,5 +84,9 @@ export class FeArticleComponent implements OnInit, OnDestroy {
   handleSearchResults(results: any[]): void {
     this.emptyResults = results.length === 0;
     this.filteredResults = results;
+  }
+
+  ngAfterViewInit(): void {
+    window.scrollTo(0, 0);
   }
 }
