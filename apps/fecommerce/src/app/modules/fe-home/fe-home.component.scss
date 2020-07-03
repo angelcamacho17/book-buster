@@ -1,130 +1,96 @@
-.container {
-    box-sizing: border-box;
-    padding-top: 24px;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 36px;
-    overflow: hidden;
-    display: -webkit-flex;
-    display: flex;
-    flex-flow: column nowrap;
-    
-    .headline {
-        font-weight: 600;
-        color: rgba(0, 0, 0, 0.87);
-    }
+.main-wrapper {
+    .container {
+        box-sizing: border-box;
+        padding-top: 24px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-bottom: 36px;
+        overflow: hidden;
+        display: -webkit-flex;
+        display: flex;
+        flex-flow: column nowrap;
 
-    .card {
-        position: relative;
-        box-shadow: none;
-        overflow-x: hidden;
-        border-radius: 8px;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        padding: 0 !important;
+        .headline {
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.87);
+        }
 
-        .list {
-            padding: 0;
+        .card {
+            position: relative;
+            box-shadow: none;
+            overflow-x: hidden;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            padding: 0 !important;
 
-            .list-item {
-                height: 88px;
-                max-height: 88px;
-                display: -webkit-flex;
-                display: flex;
-                flex-flow: column nowrap;
-                justify-content: space-between;
-                align-content: flex-start;
-                box-sizing: border-box;
-                padding-top: 10px;
-                padding-bottom: 15px;
+            .list {
+                padding: 0;
 
-                .order-title {
-                    margin: 0 !important;
-                    padding: 0 !important;
-                    color: rgba(0, 0, 0, 0.87);
-                    font-weight: 600;
-                    height: 24px;
-                    display: -webkit-flex;
-                    display: flex;
-                    flex-flow: row wrap;
-                    justify-content: space-between;
-                    align-items: flex-start;
-
-                    .money {
-                        color: rgba(0, 0, 0, 0.6);
-                        font-weight: 600;
-                        align-self: center;
-                    }
-                }
-                .order-subtitle {
-                    height: 40px;
-                    color: rgba(0, 0, 0, 0.6);
-                    font-weight: 500;
+                .list-item {
+                    height: 88px;
+                    max-height: 88px;
                     display: -webkit-flex;
                     display: flex;
                     flex-flow: column nowrap;
                     justify-content: space-between;
-                    align-items: flex-start;
-                    .line {
-                        height: 20px;
+                    align-content: flex-start;
+                    box-sizing: border-box;
+                    padding-top: 10px;
+                    padding-bottom: 15px;
+
+                    .order-title {
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        color: rgba(0, 0, 0, 0.87);
+                        font-weight: 600;
+                        height: 24px;
+                        display: -webkit-flex;
+                        display: flex;
+                        flex-flow: row wrap;
+                        justify-content: space-between;
+                        align-items: flex-start;
+
+                        .money {
+                            color: rgba(0, 0, 0, 0.6);
+                            font-weight: 600;
+                            align-self: center;
+                        }
                     }
+                    .order-subtitle {
+                        height: 40px;
+                        color: rgba(0, 0, 0, 0.6);
+                        font-weight: 500;
+                        display: -webkit-flex;
+                        display: flex;
+                        flex-flow: column nowrap;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                        .line {
+                            height: 20px;
+                        }
+                    }
+                }
+
+                .list-item::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 16px;
+                    width: calc(100% - 16px);
+                    border: 1px solid rgba(0, 0, 0, 0.12);
+                }
+                .list-item:last-child::after {
+                    display: none;
                 }
             }
 
-            .list-item::after {
-                content: "";
-                position: absolute;
-                bottom: 0;
-                left: 16px;
-                width: calc(100% - 16px);
-                border: 1px solid rgba(0, 0, 0, 0.12);
-            }
-            .list-item:last-child::after {
-                display: none;
-            }
-        }
-
-        &.overflows {
-            .list {
-                .list-item:last-child {
-                    padding-bottom: 11px;
+            &.overflows {
+                .list {
+                    .list-item:last-child {
+                        padding-bottom: 11px;
+                    }
                 }
             }
         }
     }
 }
-
-/* 
-            .list-item {
-                position: relative;
-                height: 88px;
-                display: -webkit-flex;
-                display: flex;
-                flex-flow: column;
-                justify-content: space-between;
-                align-items: flex-start;
-                box-sizing: border-box;
-                padding-top: 10px;
-                .order-title {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    color: rgba(0, 0, 0, 0.87);
-                    font-weight: 600;
-                    height: 24px;
-                }
-
-                .order-subtitle {
-                    height: 40px;
-                    color: rgba(0, 0, 0, 0.6);
-                    padding-bottom: 15px;
-                }
-                .divider {
-                    left: 16px;
-                    width: calc(100% - 16px);
-                }
-            }
-            .list-item:last-child {
-                .divider {
-                    display: none;
-                }
-            } */
