@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter, OnDestroy, HostListener } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription, Subject } from 'rxjs';
 import { Location } from '@angular/common';
-import { AuthService, goBackNavigationRequest, appendBackNavigationRequest, getCurrentOrderRequest, changedNavigationRequest, deleteOrderRequest, Order, OrderService, TranslationService } from '@fecommerce-workspace/data-store-lib';
+import { AuthService, goBackNavigationRequest, appendBackNavigationRequest, getCurrentOrderRequest, changedNavigationRequest, deleteOrderRequest, Order, OrderService, TranslationService, HeaderService } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
@@ -29,11 +29,11 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
   @Input() headerSearch = false;
   @Output() goBack = new EventEmitter<boolean>();
   @Output() returnUrl = new EventEmitter<boolean>();
-  private _backUrl: string;
+  public shadow = false;
   private _subscriptions = new Subject<any>();
 
   constructor(private _router: Router,
-              private _ordService: OrderService,
+              public hedSer: HeaderService,
               public dialog: MatDialog,
               private _transServ: TranslationService,
               private _store: Store<{ currentOrder: Order }>) {
@@ -100,5 +100,6 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._subscriptions.next();
     this._subscriptions.complete();
+    this.hedSer.dropShadow = false;
   }
 }
