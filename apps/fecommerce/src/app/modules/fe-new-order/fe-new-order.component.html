@@ -19,7 +19,7 @@
 
   <main>
     <div class="container"
-         [ngClass]="shadow || !emptyResults ? 'shadow' : ''">
+         [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
       <fe-search-results *ngIf="!emptyResults"
                          [items]="filteredResults"
                          [rowType]="rowType"
