@@ -69,6 +69,8 @@ export class FeArticleComponent implements OnInit, OnDestroy {
 
   public showShadow(shadow: boolean): void {
     this.shadow = shadow;
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
   }
 
   public removeShadow(): void {
