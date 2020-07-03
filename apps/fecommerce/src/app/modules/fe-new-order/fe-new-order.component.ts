@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { Observable, Subject, Subscription, of } from 'rxjs';
 import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest, replaceCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest, clearCurrentOrderRequest, changedNavigationRequest, TranslationService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
@@ -15,7 +15,7 @@ import { isUndefined } from 'util';
   templateUrl: './fe-new-order.component.html',
   styleUrls: ['./fe-new-order.component.scss']
 })
-export class FeNewOrderComponent implements OnInit, OnDestroy {
+export class FeNewOrderComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public customers$: Observable<Customer[]>;
   public customers: Customer[];
@@ -69,6 +69,9 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
 
     this._store.dispatch(refreshCustomersRequest());
 
+  }
+  ngAfterViewInit(): void {
+    window.scrollTo(0, 0);
   }
 
   ngOnInit(): void {
@@ -179,8 +182,6 @@ export class FeNewOrderComponent implements OnInit, OnDestroy {
 
   public showShadow(shadow: boolean): void {
     this.shadow = shadow;
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
   }
 
   public removeShadow(): void {
