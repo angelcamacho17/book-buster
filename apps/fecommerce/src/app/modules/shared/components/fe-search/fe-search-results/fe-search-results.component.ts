@@ -10,6 +10,7 @@ export class FeSearchResultsComponent implements OnInit, OnDestroy {
 
   @Input() items: any;
   @Input() rowType: any;
+  @Input() dividerClass: string;
   public items$: Observable<any[]> = of(this.items);
 
   constructor() {}

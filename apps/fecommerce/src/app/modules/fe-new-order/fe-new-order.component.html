@@ -26,12 +26,8 @@
       <fe-search-results *ngIf="!emptyResults"
                          [items]="filteredResults"
                          [rowType]="rowType"
+                         [dividerClass]="'customer-divider'"
                          class="search-results"></fe-search-results>
-      <!-- <mat-list role="list" *ngIf="!emptyResults" class="customer-list  mat-elevation-z3">
-        <mat-list-item *ngFor="let item of filteredCustomers$ | async" class="list-item">
-          <fe-customer-row [item]="item" class="customer-row"></fe-customer-row>
-        </mat-list-item>
-      </mat-list> -->
 
       <div class="no-results" *ngIf="!hide && emptyResults">
         <mat-icon class="icon">search</mat-icon>

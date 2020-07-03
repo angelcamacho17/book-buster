@@ -17,11 +17,15 @@
             width: calc(100% - 16px);
             left: 16px;
         }
+        .customer-divider {
+            width: calc(100% - 72px);
+            left: 72px;
+        }
     }
 
     .list-item:last-child {
         .divider {
-            display: none
+            display: none;
         }
     }
 }
