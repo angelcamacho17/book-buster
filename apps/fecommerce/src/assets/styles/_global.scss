@@ -17,7 +17,6 @@ $content-height: calc(100vh - #{$header-height});
   flex-flow: column nowrap;
   justify-content: stretch;
   align-items: stretch;
-  touch-action: none;
   overflow: hidden;
 
   header {
