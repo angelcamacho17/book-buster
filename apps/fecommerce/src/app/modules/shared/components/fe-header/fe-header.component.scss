@@ -1,4 +1,7 @@
+@import '~@angular/material/theming';
+
 .gradient-background {
+  position: relative;
   height: 100% !important;
   color: #ffffff;
   overflow: hidden;
@@ -95,6 +98,12 @@
     box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
     background-color: rgba(255, 255, 255, 0.25);
   }
+}
+
+.over-header {
+  @include mat-elevation(4);
+  transition: box-shadow 0.7s;
+  z-index: 1;
 }
 
 .header-search {

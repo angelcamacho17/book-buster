@@ -1,5 +1,6 @@
 <mat-toolbar class="gradient-background"
-             [ngClass]="headerSearch ? 'header-search' : ''">
+             [ngClass]="headerSearch ? 'header-search' : ''"
+             [class.over-header]="hedSer.dropShadow">
   <mat-icon *ngIf="style === 'center'" class="close-icon" (click)="goLastVisited()">
     {{icon}}
   </mat-icon>
