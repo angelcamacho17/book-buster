@@ -1,4 +1,8 @@
+@use '../../../assets/styles/sctructural' as structure;
+$header-height: 151px;
+
 .main-wrapper {
+    @include structure.set-structure($header-height);
     main {
         .container {
             box-sizing: border-box;
@@ -19,6 +23,7 @@
             .card {
                 position: relative;
                 box-shadow: none;
+                
                 overflow-x: hidden;
                 border-radius: 8px;
                 border: 1px solid rgba(0, 0, 0, 0.12);
