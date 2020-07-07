@@ -28,18 +28,21 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-      if (this.autoFocus) {
-        const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
-        inputElement.focus();
-      }
-      console.log('windows init')
+        console.log('body offset height: ', document.body.offsetHeight)
+        console.log('window height: ', document.body.offsetHeight)
+        if (this.autoFocus) {
+            const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
+            inputElement.focus();
+        }
+        console.log('windows init')
 
     }
-    
-    @HostListener('window:scroll', ['$event']) onScrollEvent($event){
+
+    @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
         console.log($event);
         console.log("scrolling");
-      }
+        window.scrollTo(0, 0)
+    }
 
     private stopScrolling() {
         const timerID = setInterval(() => {
@@ -56,8 +59,8 @@ export class FeSearchComponent implements OnInit, OnDestroy {
         document.body.onscroll = () => {
             console.log('body is actually scrolling.')
         }
-    } 
-      
+    }
+
     onSearchBlur() {
         this.searchBlur.emit(true);
     }
