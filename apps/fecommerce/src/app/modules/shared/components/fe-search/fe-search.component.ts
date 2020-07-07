@@ -44,7 +44,10 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     }
     onSearchFocus() {
         this.searchFocus.emit(true);
-        this.stopScrolling();
+        // this.stopScrolling();
+        document.body.onscroll = () => {
+            console.log('body is actually scrolling.')
+        }
     }
 
     onSearchBlur() {
