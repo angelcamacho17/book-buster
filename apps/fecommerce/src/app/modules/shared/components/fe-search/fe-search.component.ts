@@ -15,6 +15,7 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     @Output() hasSearchResults = new EventEmitter<any[]>();
     @Input() list: any = []
     @Input() customIcon: string;
+    @Input() autoFocus = false;
 
     public inputControl = new FormControl();
     private _userSearching = false;
@@ -27,9 +28,10 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-    //   this.searchFocus.emit(false);
-    //   const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
-    //   inputElement.focus();
+      if (this.autoFocus) {
+        const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
+        inputElement.focus();
+      }
     }
 
     private stopScrolling() {
