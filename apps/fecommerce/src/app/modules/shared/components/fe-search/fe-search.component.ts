@@ -41,7 +41,8 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
         console.log($event);
         console.log("scrolling");
-        window.scrollTo(0, 0)
+        document.body.scrollTop = 0
+        $event.preventDefault()
     }
 
     private stopScrolling() {
