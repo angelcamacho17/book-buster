@@ -33,7 +33,7 @@ export class FeSearchComponent implements OnInit, OnDestroy {
         inputElement.focus();
       }
       console.log('windows init')
-      
+
     }
     
     @HostListener('window:scroll', ['$event']) onScrollEvent($event){
@@ -52,7 +52,7 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     onSearchFocus() {
         this.searchFocus.emit(true);
         // this.stopScrolling();
-        var el = document.body
+        const el = document.body
         document.body.onscroll = () => {
             console.log('body is actually scrolling.')
         }
