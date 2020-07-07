@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -32,7 +32,14 @@ export class FeSearchComponent implements OnInit, OnDestroy {
         const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
         inputElement.focus();
       }
+      console.log('windows init')
+      
     }
+    
+    @HostListener('window:scroll', ['$event']) onScrollEvent($event){
+        console.log($event);
+        console.log("scrolling");
+      }
 
     private stopScrolling() {
         const timerID = setInterval(() => {
@@ -45,11 +52,12 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     onSearchFocus() {
         this.searchFocus.emit(true);
         // this.stopScrolling();
+        var el = document.body
         document.body.onscroll = () => {
             console.log('body is actually scrolling.')
         }
-    }
-
+    } 
+      
     onSearchBlur() {
         this.searchBlur.emit(true);
     }
