@@ -32,8 +32,17 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     //   inputElement.focus();
     }
 
+    private stopScrolling() {
+        const timerID = setInterval(() => {
+            window.scrollTo(0, 0);
+            if (window.pageYOffset > 0) {
+                clearInterval(timerID);
+            }
+        }, 13);
+    }
     onSearchFocus() {
         this.searchFocus.emit(true);
+        this.stopScrolling();
     }
 
     onSearchBlur() {
