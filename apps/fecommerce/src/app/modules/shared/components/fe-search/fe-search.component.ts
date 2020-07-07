@@ -39,10 +39,7 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     }
 
     @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
-        console.log($event);
-        console.log("scrolling");
-        document.body.scrollTop = 0
-        $event.preventDefault()
+        window.scrollTo(0, 0);
     }
 
     private stopScrolling() {
@@ -60,7 +57,7 @@ export class FeSearchComponent implements OnInit, OnDestroy {
         document.body.onscroll = () => {
             console.log('body is actually scrolling.')
         }
-        
+
         console.log('body offset height: ', document.body.offsetHeight)
         console.log('window height: ', document.body.offsetHeight)
     }
