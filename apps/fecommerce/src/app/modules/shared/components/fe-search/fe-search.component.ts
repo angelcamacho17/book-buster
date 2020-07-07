@@ -38,8 +38,9 @@ export class FeSearchComponent implements OnInit, OnDestroy {
 
     }
 
-    @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
+    @HostListener('window:touchend', ['$event']) onScrollEvent($event) {
         window.scrollTo(0, 0);
+        console.log('llorcs')
     }
 
     private stopScrolling() {
