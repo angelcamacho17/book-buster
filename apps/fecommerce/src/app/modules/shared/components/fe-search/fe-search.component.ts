@@ -36,58 +36,22 @@ export class FeSearchComponent implements OnInit, OnDestroy {
         }
         console.log('windows init')
 
-        document.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-        }, { passive: false });
-        document.addEventListener('touchforcechange', (e) => {
-            e.preventDefault();
-        }, { passive: false });
+        document.addEventListener('touchmove', (e) => this.preventDefault, { passive: false });
+        document.addEventListener('touchforcechange', (e) => this.preventDefault, { passive: false });
         
     }
-    private scrollToTop (duration) {
-        // cancel if already on top
-        if (document.scrollingElement.scrollTop === 0) return;
-    
-        const totalScrollDistance = document.scrollingElement.scrollTop;
-        let scrollY = totalScrollDistance, oldTimestamp = null;
-    
-        function step (newTimestamp) {
-            if (oldTimestamp !== null) {
-                // if duration is 0 scrollY will be -Infinity
-                scrollY -= totalScrollDistance * (newTimestamp - oldTimestamp) / duration;
-                if (scrollY <= 0) return document.scrollingElement.scrollTop = 0;
-                document.scrollingElement.scrollTop = scrollY;
-            }
-            oldTimestamp = newTimestamp;
-            window.requestAnimationFrame(step);
-        }
-        window.requestAnimationFrame(step);
+    private preventDefault (e) {
+        e.preventDefault();
     }
     // @HostListener('window:touchmove', ['$event']) onScrollEvent($event) {
     //     // $event.preventDefault();
 
     //     // event.preventDefault();
-    //     this.scrollToTop(450);
+    //     // this.scrollToTop(450);
     // }
 
-    private stopScrolling() {
-        const timerID = setInterval(() => {
-            window.scrollTo(0, 0);
-            if (window.pageYOffset > 0) {
-                clearInterval(timerID);
-            }
-        }, 13);
-    }
     onSearchFocus() {
         this.searchFocus.emit(true);
-        // this.stopScrolling();
-        const el = document.body
-        document.body.onscroll = () => {
-            console.log('body is actually scrolling.')
-        }
-
-        console.log('body offset height: ', document.body.offsetHeight)
-        console.log('window height: ', document.body.offsetHeight)
     }
 
     onSearchBlur() {
@@ -118,8 +82,8 @@ export class FeSearchComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this._subscription.unsubscribe();
-        document.removeEventListener('touchmove', (e) => e.preventDefault());
-        document.removeEventListener('touchforcechange', (e) => e.preventDefault());
+        document.removeEventListener('touchmove', (e) => this.preventDefault);
+        document.removeEventListener('touchforcechange', (e) => this.preventDefault);
     }
 
     get input() { return this.inputControl.value }
