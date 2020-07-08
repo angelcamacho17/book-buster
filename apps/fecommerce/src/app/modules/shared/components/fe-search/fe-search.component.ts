@@ -36,8 +36,8 @@ export class FeSearchComponent implements OnInit, OnDestroy {
         }
         console.log('windows init')
 
-        document.addEventListener('touchmove', (e) => this.preventDefault, { passive: false });
-        document.addEventListener('touchforcechange', (e) => this.preventDefault, { passive: false });
+        document.addEventListener('touchmove', (e) => this.preventDefault(e), { passive: false });
+        document.addEventListener('touchforcechange', (e) => this.preventDefault(e), { passive: false });
         
     }
     private preventDefault (e) {
@@ -82,8 +82,8 @@ export class FeSearchComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this._subscription.unsubscribe();
-        document.removeEventListener('touchmove', (e) => this.preventDefault);
-        document.removeEventListener('touchforcechange', (e) => this.preventDefault);
+        document.removeEventListener('touchmove', (e) => this.preventDefault(e));
+        document.removeEventListener('touchforcechange', (e) => this.preventDefault(e));
     }
 
     get input() { return this.inputControl.value }
