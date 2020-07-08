@@ -119,7 +119,7 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this._subscription.unsubscribe();
         document.removeEventListener('touchmove', (e) => e.preventDefault());
-        document.addEventListener('touchforcechange', (e) => e.preventDefault());
+        document.removeEventListener('touchforcechange', (e) => e.preventDefault());
     }
 
     get input() { return this.inputControl.value }
