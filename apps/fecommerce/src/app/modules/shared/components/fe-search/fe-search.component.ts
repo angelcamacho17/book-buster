@@ -36,6 +36,13 @@ export class FeSearchComponent implements OnInit, OnDestroy {
         }
         console.log('windows init')
 
+        document.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+        document.addEventListener('touchforcechange', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+        
     }
     private scrollToTop (duration) {
         // cancel if already on top
@@ -56,12 +63,12 @@ export class FeSearchComponent implements OnInit, OnDestroy {
         }
         window.requestAnimationFrame(step);
     }
-    @HostListener('window:touchmove', ['$event']) onScrollEvent($event) {
-        // $event.preventDefault();
+    // @HostListener('window:touchmove', ['$event']) onScrollEvent($event) {
+    //     // $event.preventDefault();
 
-        // event.preventDefault();
-        this.scrollToTop(450);
-    }
+    //     // event.preventDefault();
+    //     this.scrollToTop(450);
+    // }
 
     private stopScrolling() {
         const timerID = setInterval(() => {
