@@ -34,12 +34,7 @@ export class FeSearchComponent implements OnInit, OnDestroy {
         }        
     }
     private preventDefault = (e) => e.preventDefault();
-    // @HostListener('window:touchmove', ['$event']) onScrollEvent($event) {
-    //     // $event.preventDefault();
-
-    //     // event.preventDefault();
-    //     // this.scrollToTop(450);
-    // }
+    
     private _disableScroll() {
         document.addEventListener('touchmove', this.preventDefault, { passive: false });
         document.addEventListener('touchforcechange', this.preventDefault, { passive: false });
