@@ -28,34 +28,38 @@ export class FeSearchComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        console.log('body offset height: ', document.body.offsetHeight)
-        console.log('window height: ', document.body.offsetHeight)
         if (this.autoFocus) {
             const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
             inputElement.focus();
-        }
-        console.log('windows init')
-
-        document.addEventListener('touchmove', (e) => this.preventDefault(e), { passive: false });
-        document.addEventListener('touchforcechange', (e) => this.preventDefault(e), { passive: false });
-        
+        }        
     }
-    private preventDefault (e) {
-        e.preventDefault();
-    }
+    private preventDefault = (e) => e.preventDefault();
     // @HostListener('window:touchmove', ['$event']) onScrollEvent($event) {
     //     // $event.preventDefault();
 
     //     // event.preventDefault();
     //     // this.scrollToTop(450);
     // }
+    private _disableScroll() {
+        document.addEventListener('touchmove', this.preventDefault, { passive: false });
+        document.addEventListener('touchforcechange', this.preventDefault, { passive: false });
+    }
+
+    private _enableScroll() {
+        document.removeEventListener('touchmove', this.preventDefault, false);
+        document.removeEventListener('touchforcechange', this.preventDefault, false);
+    }
 
     onSearchFocus() {
         this.searchFocus.emit(true);
+
+        this._disableScroll();
     }
 
     onSearchBlur() {
         this.searchBlur.emit(true);
+
+        this._enableScroll();
     }
 
     onSearchInput() {
@@ -82,8 +86,8 @@ export class FeSearchComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this._subscription.unsubscribe();
-        document.removeEventListener('touchmove', (e) => this.preventDefault(e));
-        document.removeEventListener('touchforcechange', (e) => this.preventDefault(e));
+        // document.removeEventListener('touchmove', (e) => this.preventDefault(e));
+        // document.removeEventListener('touchforcechange', (e) => this.preventDefault(e));
     }
 
     get input() { return this.inputControl.value }
