@@ -5,15 +5,13 @@
 
 html {
   position: fixed;
-  // height: 100%;
-  min-height: -webkit-fill-available;
+  height: 100%;
   overflow: hidden;
 }
 body {
   position: fixed;
   width: 100vw;
-  // height: 100vh;
-  min-height: -webkit-fill-available;
+  height: 100vh;
   padding: 0 !important;
   margin: 0 !important;
   overflow: hidden;

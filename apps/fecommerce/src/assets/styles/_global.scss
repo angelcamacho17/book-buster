@@ -12,8 +12,7 @@ $content-height: calc(100vh - #{$header-height});
 .main-wrapper {
   position: fixed;
   width: 100vw;
-  // height: 100vh
-  min-height: -webkit-fill-available;;
+  height: 100vh;
   display: -webkit-flex;
   display: flex;
   flex-flow: column nowrap;
@@ -30,7 +29,6 @@ $content-height: calc(100vh - #{$header-height});
   main {
     flex: 1 1 auto;
     height: $content-height;
-    min-height: -webkit-fill-available;
     max-height: $content-height;
     background-color: #f7f8f9;
     box-sizing: border-box;

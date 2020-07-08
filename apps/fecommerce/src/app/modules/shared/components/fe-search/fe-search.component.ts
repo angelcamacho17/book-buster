@@ -56,11 +56,9 @@ export class FeSearchComponent implements OnInit, OnDestroy {
         }
         window.requestAnimationFrame(step);
     }
-    @HostListener('window:touchend', ['$event']) onScrollEvent($event) {
-        // window.scrollTo(0, 0);
-        this.scrollToTop(450);
-        // console.log('llorcs')
-        
+    @HostListener('window:touchmove', ['$event']) onScrollEvent($event) {
+        event.preventDefault();
+        // this.scrollToTop(450);
     }
 
     private stopScrolling() {
