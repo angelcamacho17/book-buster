@@ -14,8 +14,12 @@ import { NONE_TYPE } from '@angular/compiler';
 export const routesAnimations =
   trigger('routeAnimations', [
     transition('login => main', slideToRight()),
+    transition('login => home', slideToRight()),
 
-    transition('main => login', slideToLeft())
+    transition('home => login', slideToLeft()),
+    transition('home => order', slideToRight()),
+
+    transition('order => home', slideToLeft()),
   ]);
 
 function slideToRight() {
