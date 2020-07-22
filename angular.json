@@ -1,6 +1,106 @@
 {
   "version": 1,
   "projects": {
+    "fe-commerce": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/fe-commerce",
+      "sourceRoot": "apps/fe-commerce/src",
+      "prefix": "",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist",
+            "index": "apps/fe-commerce/src/index.html",
+            "main": "apps/fe-commerce/src/main.ts",
+            "polyfills": "apps/fe-commerce/src/polyfills.ts",
+            "tsConfig": "apps/fe-commerce/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/fe-commerce/src/favicon.ico",
+              "apps/fe-commerce/src/assets",
+              "apps/fe-commerce/src/.htaccess",
+              "apps/fe-commerce/src/manifest.webmanifest"
+            ],
+            "styles": ["apps/fe-commerce/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/fe-commerce/src/environments/environment.ts",
+                  "with": "apps/fe-commerce/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "apps/fe-commerce/ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fe-commerce:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fe-commerce:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fe-commerce:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/fe-commerce/tsconfig.app.json",
+              "apps/fe-commerce/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/fe-commerce/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/fe-commerce/jest.config.js",
+            "tsConfig": "apps/fe-commerce/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/fe-commerce/src/test-setup.ts"
+          }
+        }
+      }
+    },
     "fecommerce": {
       "projectType": "application",
       "schematics": {

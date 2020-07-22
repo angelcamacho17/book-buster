@@ -19,6 +19,9 @@
     }
   },
   "projects": {
+    "fe-commerce": {
+      "tags": []
+    },
     "fecommerce": {
       "tags": []
     },
