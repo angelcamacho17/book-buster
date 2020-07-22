@@ -13,10 +13,11 @@ import { FeRowComponent } from './components/fe-row/fe-row.component';
 import { FeDialogComponent } from './components/fe-dialog/fe-dialog.component';
 import { FeConfirmDiscardDialogComponent } from './components/fe-confirm-discard/fe-confirm-discard-dialog.component';
 import { EventService } from './services/event.service';
-import { DataStoreModule, TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
+import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { FeArtSheetComponent } from './components/fe-art-sheet/fe-art-sheet.component';
 import { FeSearchResultsComponent } from './components/fe-search/fe-search-results/fe-search-results.component';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
+import { SetHeightDirective } from './directives/set-height.directive';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AutoFocusDirective } from './directives/auto-focus.directive';
     FeDialogComponent,
     FeConfirmDiscardDialogComponent,
     FeArtSheetComponent,
-    AutoFocusDirective
+    AutoFocusDirective,
+    SetHeightDirective
   ],
   imports: [
     CommonModule,
@@ -51,8 +53,8 @@ import { AutoFocusDirective } from './directives/auto-focus.directive';
     FeCustomerRowComponent,
     FeArticleRowComponent,
     FeConfirmDiscardDialogComponent,
-    FeArtSheetComponent
-
+    FeArtSheetComponent,
+    SetHeightDirective
   ],
   providers: [
     EventService

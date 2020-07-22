@@ -1,55 +1,20 @@
-// Height of the header.
-$header-height: 128px;
-// Height of the bottom nav.
-$bottom-nav-height: 90px;
-// This sum is used to calculate the height of the content.
-$fixed-space: $header-height + $bottom-nav-height;
-$content-height: calc(100vh - #{$header-height});
-
 /* Structure
-*   The main content of the app, must be
+*   
  */
-.main-wrapper {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
+header {
+  position: relative;
+  height: 112px;
+}
+main {
+  position: relative;
   display: -webkit-flex;
   display: flex;
-  flex-flow: column nowrap;
+  flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
-  overflow: hidden;
-
-  header {
-    flex: 0 0 $header-height;
-    min-height: $header-height;
-    max-height: $header-height;
-  }
-
-  main {
-    flex: 1 1 auto;
-    height: $content-height;
-    max-height: $content-height;
-    background-color: #f7f8f9;
-    box-sizing: border-box;
-
-    .container {
-      position: relative;
-      height: 100%;
-      background-color: transparent;
-      max-height: 100%;
-      box-sizing: border-box;
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-  }
-
-  footer {
-    flex: 0 0 $bottom-nav-height;
-    height: $bottom-nav-height;
-    max-height: $bottom-nav-height;
-    background-color: #f7f8f9;
-
+  .scrollable-container {
+    flex: 1;
+    overflow: auto;
   }
 }
 

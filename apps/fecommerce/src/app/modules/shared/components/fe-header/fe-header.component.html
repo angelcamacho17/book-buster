@@ -1,29 +1,23 @@
-<mat-toolbar class="gradient-background"
-             [ngClass]="headerSearch ? 'header-search' : ''"
-             [class.over-header]="hedSer.dropShadow">
-  <mat-icon *ngIf="style === 'center'" class="close-icon" (click)="goLastVisited()">
-    {{icon}}
-  </mat-icon>
-  <div *ngIf="style !== 'center'"
-       [ngClass]="class"
-       [ngStyle]="logoutIcon ? {'width': '100%'} : {}"
-       style="margin: 0 !important;">
-    {{title | translate}}
-  </div>
-  <h6  *ngIf="style === 'center'"
-       class="title-centered"
-       style="margin: 0 !important; font-weight: 600;">
-    {{title | translate}}
-  </h6>
-  <mat-icon *ngIf="logoutIcon"  class="logout" (click)="logout()">
-    exit_to_app
-  </mat-icon>
-  <mat-icon *ngIf="delete"  class="lined-icon" (click)="deleteOrder()">
-    delete_outline
-  </mat-icon>
-
-  <mat-icon *ngIf="addArt"  class="lined-icon" (click)="addArticle()">
-    {{ 'add' | translate}}
-  </mat-icon>
-
-</mat-toolbar>
+<header id="header" #header>
+  <mat-toolbar class="header-toolbar">
+    <!-- <div class="left-icon">
+      <mat-icon class="close-icon" (click)="goLastVisited()">
+        {{icon}}
+      </mat-icon>
+    </div> -->
+    <div class="mat-display-1 title">
+      {{title}}
+    </div>
+    <!-- <mat-icon *ngIf="logoutIcon"  class="logout" (click)="logout()">
+      exit_to_app
+    </mat-icon>
+    <mat-icon *ngIf="delete"  class="lined-icon" (click)="deleteOrder()">
+      delete_outline
+    </mat-icon>
+  
+    <mat-icon *ngIf="addArt" class="lined-icon" (click)="addArticle()">
+      {{ 'add' | translate}}
+    </mat-icon> -->
+  </mat-toolbar>
+  
+</header>

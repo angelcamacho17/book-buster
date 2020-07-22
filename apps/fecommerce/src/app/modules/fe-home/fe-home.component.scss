@@ -1,103 +1,68 @@
-@use '../../../assets/styles/sctructural' as structure;
-$header-height: 151px;
+.scrollable-container {
+    box-sizing: border-box;
+    padding-top: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 36px;
 
-.main-wrapper {
-    @include structure.set-structure($header-height);
-    main {
-        .container {
-            box-sizing: border-box;
-            padding-top: 24px;
-            padding-left: 16px;
-            padding-right: 16px;
-            padding-bottom: 36px;
-            overflow: hidden;
+    .headline {
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.87);
+    }
+
+    .card {
+        position: relative;
+        box-shadow: none;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        height: 81px;
+        padding-left: 16px;
+        padding-top: 11px;
+        padding-bottom: 8px;
+        padding-right: 23.13px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+        .card-content {
             display: -webkit-flex;
             display: flex;
-            flex-flow: column nowrap;
-
-            .headline {
-                font-weight: 600;
-                color: rgba(0, 0, 0, 0.87);
-            }
-
-            .card {
-                position: relative;
-                box-shadow: none;
-                
-                overflow-x: hidden;
-                border-radius: 8px;
-                border: 1px solid rgba(0, 0, 0, 0.12);
-                padding: 0 !important;
-
-                .list {
-                    padding: 0;
-
-                    .list-item {
-                        height: 88px;
-                        max-height: 88px;
-                        display: -webkit-flex;
-                        display: flex;
-                        flex-flow: column nowrap;
-                        justify-content: space-between;
-                        align-content: flex-start;
-                        box-sizing: border-box;
-                        padding-top: 10px;
-                        padding-bottom: 15px;
-
-                        .order-title {
-                            margin: 0 !important;
-                            padding: 0 !important;
-                            color: rgba(0, 0, 0, 0.87);
-                            font-weight: 600;
-                            height: 24px;
-                            display: -webkit-flex;
-                            display: flex;
-                            flex-flow: row wrap;
-                            justify-content: space-between;
-                            align-items: flex-start;
-
-                            .money {
-                                color: rgba(0, 0, 0, 0.6);
-                                font-weight: 600;
-                                align-self: center;
-                            }
-                        }
-                        .order-subtitle {
-                            height: 40px;
-                            color: rgba(0, 0, 0, 0.6);
-                            font-weight: 500;
-                            display: -webkit-flex;
-                            display: flex;
-                            flex-flow: column nowrap;
-                            justify-content: space-between;
-                            align-items: flex-start;
-                            .line {
-                                height: 20px;
-                            }
-                        }
-                    }
-
-                    .list-item::after {
-                        content: "";
-                        position: absolute;
-                        bottom: 0;
-                        left: 16px;
-                        width: calc(100% - 16px);
-                        border: 1px solid rgba(0, 0, 0, 0.12);
-                    }
-                    .list-item:last-child::after {
-                        display: none;
-                    }
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-content: center;
+            .content {
+                .order-title {
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    color: rgba(0, 0, 0, 0.87);
+                    font-weight: 600;
+                    height: 24px;
+                    display: -webkit-flex;
+                    display: flex;
+                    flex-flow: row wrap;
+                    justify-content: space-between;
+                    align-items: flex-start;
                 }
-
-                &.overflows {
-                    .list {
-                        .list-item:last-child {
-                            padding-bottom: 11px;
-                        }
+                .order-subtitle {
+                    height: 40px;
+                    color: rgba(0, 0, 0, 0.6);
+                    font-weight: 500;
+                    display: -webkit-flex;
+                    display: flex;
+                    flex-flow: column nowrap;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    .line {
+                        height: 20px;
                     }
                 }
             }
+        }
+
+        .icon {
+            align-self: center;
+        }
+
+        &.last {
+            margin-bottom: 0;
         }
     }
 }

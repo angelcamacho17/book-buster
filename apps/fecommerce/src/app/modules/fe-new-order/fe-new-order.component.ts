@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, AfterViewInit, HostListener } from '@angular/core';
 import { Observable, Subject, Subscription, of } from 'rxjs';
-import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest, replaceCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest, clearCurrentOrderRequest, changedNavigationRequest, TranslationService, HeaderService } from '@fecommerce-workspace/data-store-lib';
+import { Customer, setCurrentOrderRequest, getCurrentOrderRequest, Order, appendOrderRequest, replaceCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest, clearCurrentOrderRequest, changedNavigationRequest, TranslationService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 import { FeCustomerRowComponent } from '../shared/components/fe-row/fe-customer-row/fe-customer-row.component';
@@ -41,7 +41,6 @@ export class FeNewOrderComponent implements OnInit, OnDestroy, AfterViewInit {
     private matDialog: MatDialog,
     private _store: Store<{ orders: Order[], currentOrder: Order, customers: Customer[] }>,
     private _router: Router,
-    private _hedSer: HeaderService,
     private _transServ: TranslationService,
     private _route: ActivatedRoute) {
     this._subscriptions = this.eventService.customerChange.subscribe(customer => this.onCustomerChange(customer));
@@ -195,13 +194,13 @@ export class FeNewOrderComponent implements OnInit, OnDestroy, AfterViewInit {
     this.filteredResults = results;
   }
 
-  public onScroll(event): void {
-    if(event.srcElement.scrollTop>0){
-      this._hedSer.dropShadow = true;
-    } else {
-      this._hedSer.dropShadow = false;
-    }
-  }
+  // public onScroll(event): void {
+  //   if(event.srcElement.scrollTop>0){
+  //     this._hedSer.dropShadow = true;
+  //   } else {
+  //     this._hedSer.dropShadow = false;
+  //   }
+  // }
 
   ngOnDestroy(): void {
     if (this._subscriptions) {

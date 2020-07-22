@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter, OnDestroy, HostListener, AfterViewInit, Renderer2 } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription, Subject } from 'rxjs';
 import { Location } from '@angular/common';
-import { AuthService, goBackNavigationRequest, appendBackNavigationRequest, getCurrentOrderRequest, changedNavigationRequest, deleteOrderRequest, Order, OrderService, TranslationService, HeaderService } from '@fecommerce-workspace/data-store-lib';
+import { AuthService, goBackNavigationRequest, appendBackNavigationRequest, getCurrentOrderRequest, changedNavigationRequest, deleteOrderRequest, Order, OrderService, TranslationService } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,7 +13,7 @@ import { FeDialogComponent } from '../fe-dialog/fe-dialog.component';
   templateUrl: './fe-header.component.html',
   styleUrls: ['./fe-header.component.scss']
 })
-export class FeHeaderComponent implements OnInit, OnDestroy {
+export class FeHeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
   url$: Observable<string>;
   @Input() title = '';
@@ -26,17 +26,16 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
   @Input() createFlowRoute = null;
   @Input() needsConfirm = false;
   @Input() lastUrl = '';
-  @Input() headerSearch = false;
   @Output() goBack = new EventEmitter<boolean>();
   @Output() returnUrl = new EventEmitter<boolean>();
   public shadow = false;
-  private _subscriptions = new Subject<any>();
+  public height: number;
 
   constructor(private _router: Router,
-              public hedSer: HeaderService,
               public dialog: MatDialog,
+              private _renderer2: Renderer2,
               private _transServ: TranslationService,
-              private _store: Store<{ currentOrder: Order }>) {
+              private _store: Store<{ order: Order }>) {
   // this.url$ = this._storeUrl.pipe(select('backNavigation'));
     // this.url$.pipe(takeUntil(this._subscriptions))
     // .subscribe(data => {
@@ -46,6 +45,11 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
     //       this._router.navigate(['/'+ this._backUrl]);
     //     }
     // });
+
+  }
+
+  ngAfterViewInit(): void {
+    this.height = document.getElementById('header').offsetHeight;
   }
 
   ngOnInit(): void {
@@ -97,9 +101,5 @@ export class FeHeaderComponent implements OnInit, OnDestroy {
     this._router.navigate(['/article']);
   }
 
-  ngOnDestroy(): void {
-    this._subscriptions.next();
-    this._subscriptions.complete();
-    this.hedSer.dropShadow = false;
-  }
+  ngOnDestroy(): void { }
 }

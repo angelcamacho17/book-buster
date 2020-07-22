@@ -13,6 +13,7 @@ import { MaterialModule } from './modules/shared/modules/material/material.modul
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { environment } from '../environments/environment';
     LanguageModule,
     TranslatePipeModule,
     DragDropModule,
+    SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [

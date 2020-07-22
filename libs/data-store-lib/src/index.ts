@@ -25,7 +25,6 @@ export * from './lib/models/back-navigation.model';
 export * from './lib/order/order.service';
 export * from './lib/back-navigation/back.navigation.service';
 export * from './lib/order-articles/order-articles.service';
-export * from './lib/header/header.service';
 
 export * from './lib/sdp/config/config.service';
 export * from './lib/sdp/config/initializer.service';

@@ -16,7 +16,7 @@
   </header>
 
   <main>
-    <div (scroll)="onScroll($event)" class="container" [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
+    <div class="container" [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
       <fe-search-results *ngIf="!emptyResults"
                          [items]="filteredResults"
                          [rowType]="rowType"

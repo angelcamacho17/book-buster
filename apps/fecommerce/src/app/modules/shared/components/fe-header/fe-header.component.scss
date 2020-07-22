@@ -1,44 +1,36 @@
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 
-.gradient-background {
-  position: relative;
-  height: 100% !important;
-  color: #ffffff;
-  overflow: hidden;
-  background-repeat: no-repeat;
-  background-size:
-      240px 240px,
-      253px 253px,
-      169px 169px,
-      188px 188px,
-      cover;
-  background-image:
-      url('~/assets/img/blurry-circle-3.svg'),
-      url('~/assets/img/blurry-circle-3.svg'),
-      url('~/assets/img/blurry-circle-3.svg'),
-      url('~/assets/img/blurry-circle-3.svg'),
-      linear-gradient(270deg, #1F51D2 0%, #1946B9 100%);
-  background-position:
-      -80px -124px,
-      100px -170px,
-      318px 56px,
-      268px 104px,
-      0 0;
-
-  .close-icon {
-    color: rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    height: 32px;
-    width: 32px;
-    text-align: center;
+.header-toolbar {
+  position: fixed;
+  height: 112px;
+  // width: 100%;
+  background-color: #1666d8;
+  box-sizing: border-box;
+  padding: 0 16px;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  .left-icon {
+    height: 28px;
+    width: 28px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    z-index: 100001;
-    //margin-right: 25%;
+    align-items: center;
+    .close-icon {
+      height: 28px;
+      font-size: 28px;
+      color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+    }
   }
 
+  .title {
+    margin: 0;
+    color: #fff;
+  }
   .logout {
     @extend .close-icon;
     z-index: 4;
@@ -55,48 +47,12 @@
     text-align: center;
   }
 
-  .oval-1 {
-    position: absolute;
-    border-radius: 50%;
-    height: 188px;
-    width: 188px;
-    right: -45px;
-    top: 79px;
-    box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.25);
+  .search {
+    display: none;
   }
 
-  .oval-2 {
-    position: absolute;
-    border-radius: 50%;
-    height: 169px;
-    width: 169px;
-    top: 53px;
-    right: -91px;
-    box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.25);
-  }
-
-  .oval-3 {
-    position: absolute;
-    border-radius: 50%;
-    height: 253px;
-    width: 253px;
-    top: -221px;
-    right: 65px;
-    box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.25);
-  }
-
-  .oval-4 {
-    position: absolute;
-    border-radius: 50%;
-    height: 240px;
-    width: 240px;
-    top: -177px;
-    left: -143px;
-    box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.25);
+  .profile {
+    display: none;
   }
 }
 
@@ -111,3 +67,47 @@
   padding-bottom: 24px;
 }
 
+// Large Tablet 840px-959px
+// @media (min-width: 840px) {
+//   .header-toolbar {
+//     justify-content: space-between;
+//     padding: 0 40px;
+
+//     .title-centered {
+//       display: flex;
+//       width: auto;
+//     }
+
+//     .search {
+//       display: flex;
+//       align-items: center;
+//     }
+
+//     .profile {
+//       display: flex;
+//       align-items: center;
+//       justify-content: flex-end;
+//     }
+//   }
+
+//   .mat-icon {
+//     height: 40px;
+//     width: 40px;
+//   }
+
+//   .material-icons {
+//     font-size: 40px;
+//   }
+// }
+
+.overlay {
+  height: 100%;
+  color: #ffffff;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: 240px 240px, 253px 253px, 169px 169px, 188px 188px, cover;
+  background-image: url("~/assets/img/blurry-circle-3.svg"), url("~/assets/img/blurry-circle-3.svg"),
+    url("~/assets/img/blurry-circle-3.svg"), url("~/assets/img/blurry-circle-3.svg"),
+    linear-gradient(270deg, #1f51d2 0%, #1946b9 100%);
+  background-position: -80px -124px, 100px -170px, 318px 56px, 268px 104px, 0 0;
+}

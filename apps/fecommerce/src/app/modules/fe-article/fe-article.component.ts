@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Article, Order, refreshArticlesRequest, changedNavigationRequest, setCurrentOrderRequest, OrderService, TranslatePipeModule, HeaderService } from '@fecommerce-workspace/data-store-lib';
+import { Article, Order, refreshArticlesRequest, changedNavigationRequest, setCurrentOrderRequest, OrderService, TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { FeArticleRowComponent } from '../shared/components/fe-row/fe-article-row/fe-article-row.component';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -28,7 +28,6 @@ export class FeArticleComponent implements OnInit, OnDestroy, AfterViewInit {
   public filteredResults: Article[] = [];
   constructor(private _store: Store<{ articles: Article[], currentOrder: Order }>,
               private _ordSer: OrderService,
-              private _hedSer: HeaderService,
               private _router: Router) {
 
     this._articles$ = this._store.pipe(select('articles'));
@@ -87,13 +86,13 @@ export class FeArticleComponent implements OnInit, OnDestroy, AfterViewInit {
     this.filteredResults = results;
   }
 
-  public onScroll(event): void {
-    if(event.srcElement.scrollTop>0){
-      this._hedSer.dropShadow = true;
-    } else {
-      this._hedSer.dropShadow = false;
-    }
-  }
+  // public onScroll(event): void {
+  //   if(event.srcElement.scrollTop>0){
+  //     this._hedSer.dropShadow = true;
+  //   } else {
+  //     this._hedSer.dropShadow = false;
+  //   }
+  // }
 
   ngAfterViewInit(): void {
     window.scrollTo(0, 0);

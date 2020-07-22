@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="main-wrapper">
   <header>
     <fe-header [class]="'mat-headline'"
@@ -10,33 +10,25 @@
            [icon]="icon"
            (goBack)="onHeaderGoBack()"
            (returnUrl)="returnUrl()"></fe-header>
-    <fe-search (searchFocus)="showShadow($event)"
-              (searchBlur)="removeShadow()"
-              (userSearching)="hidePanel($event)"
-              (hasSearchResults)="handleSearchResults($event)"
-              [list]="customers"
-              [autoFocus]="true"></fe-search>
-  </header>
+  </header> -->
+<div class="header-extension">
+  <fe-search (searchFocus)="showShadow($event)"
+             (searchBlur)="removeShadow()"
+             (userSearching)="hidePanel($event)"
+             (hasSearchResults)="handleSearchResults($event)" 
+             [list]="customers" 
+             [autoFocus]="true"></fe-search>
+</div>
+<div class="scrollable-container" [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
+  <fe-search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
+    [dividerClass]="'customer-divider'" class="search-results"></fe-search-results>
 
-  <main>
-    <div class="container"
-         [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
-      <fe-search-results *ngIf="!emptyResults"
-                         [items]="filteredResults"
-                         [rowType]="rowType"
-                         [dividerClass]="'customer-divider'"
-                         class="search-results"></fe-search-results>
-
-      <div class="no-results"
-           *ngIf="!hide && emptyResults"
-           [ngClass]="shadow || !emptyResults ? 'move-up' : ''">
-        <mat-icon class="icon">search</mat-icon>
-        <div class="mat-title search-text">{{'searchcus' | translate}}</div>
-        <div class="mat-subheading-2 search-description">{{'cusplaceholder' | translate}}</div>
-      </div>
-      <div class="no-results" *ngIf="hide && emptyResults">
-        <div class="mat-title search-text">{{'nomatchcus' | translate}}</div>
-      </div>
-    </div>
-  </main>
+  <div class="no-results" *ngIf="!hide && emptyResults" [ngClass]="shadow || !emptyResults ? 'move-up' : ''">
+    <mat-icon class="icon">search</mat-icon>
+    <div class="mat-title search-text">{{'searchcus' | translate}}</div>
+    <div class="mat-subheading-2 search-description">{{'cusplaceholder' | translate}}</div>
+  </div>
+  <div class="no-results" *ngIf="hide && emptyResults">
+    <div class="mat-title search-text">{{'nomatchcus' | translate}}</div>
+  </div>
 </div>
