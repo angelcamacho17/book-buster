@@ -1,6 +1,6 @@
 
-<div class="main-wrapper">
-  <header>
+<!-- <div class="main-wrapper"> -->
+  <!-- <header>
     <fe-header [icon]="icon"
            [title]="'orderover'"
            [class]="'mat-headline'"
@@ -8,58 +8,58 @@
            [lastUrl]="lastUrl"
            [delete]="delete"
            (returnUrl)="returnUrl()"></fe-header>
-  </header>
-  <main>
-    <div class="order-overview">
-      <mat-card class="customer-row mat-elevation-z4">
-        <div class="customer-info">
-          <div class="avatar">
-            <div class="mat-body-2 initials-sidenav" [ngClass]="order?.customer?.smallIcon ? 'mat-body-1' : ''">
-              {{ order?.customer?.initials }}</div>
-          </div>
-          <div class="item">
-            <div class="item-info">
-              <h3 class="mat-headline" class="title">
-                {{order?.customer?.name}}
-              </h3>
-              <div class="mat-body-1" class="subtitle">
-                {{order?.customer?.email}}
-              </div>
-            </div>
-          </div>
-          <mat-icon (click)="changeCustomer()">
-            link_off
-          </mat-icon>
-        </div>
-        <mat-divider></mat-divider>
-        <div class="total">
-          <h3 class="mat-headline" style="margin: 0px;">
-            {{'totalamt' | translate}}
+  </header> -->
+  <!-- <main> -->
+<div class="order-overview">
+  <mat-card class="customer-row mat-elevation-z4">
+    <div class="customer-info">
+      <div class="avatar">
+        <div class="mat-body-2 initials-sidenav" [ngClass]="order?.customer?.smallIcon ? 'mat-body-1' : ''">
+          {{ order?.customer?.initials }}</div>
+      </div>
+      <div class="item">
+        <div class="item-info">
+          <h3 class="mat-headline" class="title">
+            {{order?.customer?.name}}
           </h3>
-          <div class="amount mat-body-2">
-            € {{getTotal()}}
+          <div class="mat-body-1" class="subtitle">
+            {{order?.customer?.email}}
           </div>
         </div>
-      </mat-card>
-      <mat-card class="order-items mat-elevation-z4" (click)="openItems()">
-        <div>
-          <div class="title mat-subheading-2">
-            {{'orderitems' | translate}}
-          </div>
-          <div class="items mat-body-1">
-            {{articles?.length}} {{'items' | translate}}
-          </div>
-        </div>
-        <mat-icon style="align-self: center; color: rgba(0, 0, 0, 0.6)">
-          keyboard_arrow_right
-        </mat-icon>
-      </mat-card>
+      </div>
+      <mat-icon (click)="changeCustomer()">
+        link_off
+      </mat-icon>
     </div>
-  </main>
-
-  <footer>
-    <button mat-button class="fe-button" (click)="orderConfirmed()">
-      {{('confirm' | translate) | uppercase}}
-    </button>
-  </footer>
+    <mat-divider></mat-divider>
+    <div class="total">
+      <h3 class="mat-headline" style="margin: 0px;">
+        {{'totalamt' | translate}}
+      </h3>
+      <div class="amount mat-body-2">
+        € {{getTotal()}}
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="order-items mat-elevation-z4" (click)="openItems()">
+    <div>
+      <div class="title mat-subheading-2">
+        {{'orderitems' | translate}}
+      </div>
+      <div class="items mat-body-1">
+        {{articles?.length}} {{'items' | translate}}
+      </div>
+    </div>
+    <mat-icon style="align-self: center; color: rgba(0, 0, 0, 0.6)">
+      keyboard_arrow_right
+    </mat-icon>
+  </mat-card>
 </div>
+  <!-- </main> -->
+
+<footer>
+  <button mat-button class="fe-button" (click)="orderConfirmed()">
+    {{('confirm' | translate) | uppercase}}
+  </button>
+</footer>
+<!-- </div> -->

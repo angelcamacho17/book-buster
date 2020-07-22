@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 import { routesAnimations } from './animations/routes.animation';
 
 @Component({
@@ -10,8 +10,10 @@ import { routesAnimations } from './animations/routes.animation';
     routesAnimations
   ]
 })
-export class AppComponent {
+export class AppComponent{
   title = 'fecommerce';
+
+  constructor(public router: Router) { }
 
   prepareRoute(outlet: RouterOutlet) {
     /* tslint:disable:no-string-literal */
