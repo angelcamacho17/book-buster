@@ -1,5 +1,7 @@
 <div [@routeAnimations]="prepareRoute(outlet)">
-  <fe-header #header [title]="'home'"></fe-header>
+  <fe-header #header [title]="'home'"
+             [style.display]="router.url === '/login' || router.url === '/' ? 'none' : 'block'">
+  </fe-header>
   <main [feSetHeight]="header">
     <div class="scrollable-container">
       <router-outlet #outlet="outlet"></router-outlet>
