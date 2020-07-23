@@ -4,12 +4,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { CreateButtonComponent } from './components/create-button/create-button.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { MaterialModule } from '../../material/material.module';
+import { SetHeightDirective } from './directives/set-height.directive';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     CreateButtonComponent,
-    DialogComponent
+    DialogComponent,
+    SetHeightDirective
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { MaterialModule } from '../../material/material.module';
   exports: [
     HeaderComponent,
     CreateButtonComponent,
-    DialogComponent
+    DialogComponent,
+    SetHeightDirective
   ]
 })
 export class SharedModule { }
