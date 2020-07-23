@@ -16,7 +16,8 @@ export const routesAnimations =
     transition('login => main', slideToRight()),
     transition('login => home', slideToRight()),
 
-    transition('home => login', slideToLeft()),
+    transition('main => login', slideToLeft()),
+
     transition('home => order', slideToRight()),
 
     transition('order => home', slideToLeft()),
