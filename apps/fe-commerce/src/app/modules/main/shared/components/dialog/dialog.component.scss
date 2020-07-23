@@ -1,0 +1,19 @@
+.dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .blue {
+    color:#1666D8;
+  }
+
+  .red {
+    color:#B00020;
+  }
+}
+

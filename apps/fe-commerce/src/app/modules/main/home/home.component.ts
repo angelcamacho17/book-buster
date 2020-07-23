@@ -63,9 +63,9 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
     this._storeOrders.dispatch(setCurrentOrderRequest({ order }))
     this._store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }));
     if (this._ordSer.currentOrder?.id){
-      this._router.navigate(['/order/edit']);
+      this._router.navigate(['/main/order/edit']);
     } else {
-      this._router.navigate(['/order']);
+      this._router.navigate(['/main/order']);
     }
   }
 

@@ -19,8 +19,10 @@ export const routesAnimations =
     transition('main => login', slideToLeft()),
 
     transition('home => order', slideToRight()),
+    transition('home => edit-order', slideToRight()),
 
     transition('order => home', slideToLeft()),
+    transition('edit-order => home', slideToLeft()),
   ]);
 
 function slideToRight() {
@@ -33,7 +35,7 @@ function slideToRight() {
         right: 0,
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
-        background: '#ffffff',
+        background: '#F7F8F9',
         'z-index': 10,
 
       })
@@ -75,7 +77,7 @@ function slideToLeft() {
         width: '100%',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100%',
-        background: '#ffffff',
+        background: '#F7F8F9',
         'z-index': 10
       })
     ], optional),
@@ -114,7 +116,7 @@ function fromBottom() {
         width: '100%',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100vh',
-        background: '#ffffff',
+        background: '#F7F8F9',
         'z-index': '0'
       })
     ], optional),
@@ -157,7 +159,7 @@ function fromTop() {
         top: '0',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100vh',
-        background: '#ffffff',
+        background: '#F7F8F9',
         'z-index': 10
       })
     ], optional),
