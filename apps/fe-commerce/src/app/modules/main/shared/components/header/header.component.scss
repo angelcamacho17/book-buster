@@ -1,6 +1,7 @@
-header {
+.header {
   position: relative;
-  height: 80px;
+  box-sizing: border-box;
+  height: 100%;
   width: 100%;
   padding: 16px;
   font-size: 24px;

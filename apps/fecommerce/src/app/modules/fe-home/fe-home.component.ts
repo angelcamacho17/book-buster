@@ -80,6 +80,11 @@ export class FeHomeComponent implements OnInit, AfterViewInit, AfterContentCheck
     }
   }
 
+  private _setHeaderHeight() {
+    const header = document.getElementById('header');
+    
+  }
+
   ngOnDestroy(): void {
     if (this._subscriptions) {
       this._subscriptions.unsubscribe();

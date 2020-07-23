@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, AfterContentChecked, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, AfterContentChecked, ChangeDetectionStrategy, Renderer2 } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { setCurrentOrderRequest, clearCurrentOrderRequest, OrderService, setOrderArticlesRequest, BackNavigationService } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
   private _subscriptions: Subscription;
 
   constructor(
+    private _renderer2: Renderer2,
     private _store: Store,
     private _router: Router,
     private _ordSer: OrderService,
@@ -47,6 +48,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
 
   ngAfterViewInit(): void {
     this.cardOverflows = this.checkOrdersCardOverflow();
+    this.setHeaderHeight();
   }
 
   ngAfterContentChecked(): void {
@@ -78,6 +80,11 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
     } else {
       return false;
     }
+  }
+
+  private setHeaderHeight() {
+    const header = document.getElementById('header');
+    this._renderer2.setStyle(header, 'height', '60px');
   }
 
   ngOnDestroy(): void {
