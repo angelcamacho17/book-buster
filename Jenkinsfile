@@ -1,7 +1,7 @@
  pipeline {
     agent any
     environment {
-        APPNAME="fecommerce"
+        APPNAME="fe-commerce"
         WEBAPPDIR="/data/webapp/${APPNAME}/${BRANCH_NAME}"
         BASEHREF="/${APPNAME}/${BRANCH_NAME}/"
         GITDIR="."
