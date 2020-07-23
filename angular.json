@@ -87,16 +87,14 @@
               "apps/fe-commerce/tsconfig.app.json",
               "apps/fe-commerce/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/fe-commerce/**"]
+            "exclude": ["**/node_modules/**", "!apps/fe-commerce/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/fe-commerce/jest.config.js",
-            "tsConfig": "apps/fe-commerce/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "apps/fe-commerce/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       }
@@ -187,16 +185,14 @@
               "apps/fecommerce/tsconfig.app.json",
               "apps/fecommerce/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/fecommerce/**"]
+            "exclude": ["**/node_modules/**", "!apps/fecommerce/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/fecommerce/jest.config.js",
-            "tsConfig": "apps/fecommerce/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "apps/fecommerce/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       }
@@ -223,7 +219,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["apps/fecommerce-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/fecommerce-e2e/**"]
+            "exclude": ["**/node_modules/**", "!apps/fecommerce-e2e/**/*"]
           }
         }
       }
@@ -241,16 +237,14 @@
               "libs/data-store-lib/tsconfig.lib.json",
               "libs/data-store-lib/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/data-store-lib/**"]
+            "exclude": ["**/node_modules/**", "!libs/data-store-lib/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/data-store-lib/jest.config.js",
-            "tsConfig": "libs/data-store-lib/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/data-store-lib/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
@@ -273,16 +267,14 @@
               "libs/scanner/tsconfig.lib.json",
               "libs/scanner/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/scanner/**"]
+            "exclude": ["**/node_modules/**", "!libs/scanner/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/scanner/jest.config.js",
-            "tsConfig": "libs/scanner/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/scanner/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
