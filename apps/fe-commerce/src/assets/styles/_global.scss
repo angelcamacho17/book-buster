@@ -12,10 +12,12 @@ main {
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
-  .scrollable-container {
-    flex: 1;
-    overflow: auto;
-  }
+}
+
+.scrollable-container {
+  flex: 1;
+  height: 100vh;
+  overflow: auto;
 }
 
 .shadow {
