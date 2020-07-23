@@ -1,0 +1,14 @@
+.create-button {
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  right: 16px;
+  bottom: 36px;
+  border-radius: 50%;
+  background-color: #1666D8;
+  z-index: 0;
+
+  .fav-icon {
+    color: #fff;
+  }
+}

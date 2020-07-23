@@ -1,4 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+@import "assets/styles/custom_material_dark_theme";
+@import "assets/styles/custom_material_light_theme";
+@import "assets/styles/custom_material_typography";
+@import "assets/styles/global";
 
 html {
   position: fixed;
@@ -12,12 +15,5 @@ body {
   padding: 0 !important;
   margin: 0 !important;
   overflow: hidden;
-  background: #ffffff;
+  background: #F7F8F9;
 }
-
-.content {
-  position: relative;
-  padding: 16px;
-  height: 100%;
-}
-

@@ -4,13 +4,12 @@
     "directive-selector": [
       true,
       "attribute",
-      "fecommerceWorkspace",
+      "fe",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "",
       "kebab-case"
     ]
   },
