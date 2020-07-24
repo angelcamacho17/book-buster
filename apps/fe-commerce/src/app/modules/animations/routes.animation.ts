@@ -23,6 +23,9 @@ export const routesAnimations =
 
     transition('order => home', slideToLeft()),
     transition('edit-order => home', slideToLeft()),
+    transition('edit-order => order-items', slideToRight()),
+
+    transition('order-items => edit-order', slideToLeft()),
   ]);
 
 function slideToRight() {

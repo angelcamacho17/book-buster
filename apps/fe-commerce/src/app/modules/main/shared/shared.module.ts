@@ -5,7 +5,9 @@ import { CreateButtonComponent } from './components/create-button/create-button.
 import { DialogComponent } from './components/dialog/dialog.component';
 import { MaterialModule } from '../../material/material.module';
 import { SetHeightDirective } from './directives/set-height.directive';
-import { ArtSheetComponent } from './components/art-sheet/art-sheet.component'
+import { ScrollableDivDirective } from './directives/scrollable-div.directive';
+import { ArtSheetComponent } from './components/art-sheet/art-sheet.component';
+import { BaseComponent } from './components/base/base.component'
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { ArtSheetComponent } from './components/art-sheet/art-sheet.component'
     CreateButtonComponent,
     DialogComponent,
     SetHeightDirective,
-    ArtSheetComponent
+    ArtSheetComponent,
+    ScrollableDivDirective,
+    BaseComponent
   ],
   imports: [
     CommonModule,
@@ -24,8 +28,9 @@ import { ArtSheetComponent } from './components/art-sheet/art-sheet.component'
     CreateButtonComponent,
     DialogComponent,
     SetHeightDirective,
-    ArtSheetComponent
-
+    ArtSheetComponent,
+    ScrollableDivDirective,
+    BaseComponent
   ]
 })
 export class SharedModule { }
