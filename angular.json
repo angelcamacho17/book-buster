@@ -298,5 +298,5 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "fecommerce"
+  "defaultProject": "fe-commerce"
 }
