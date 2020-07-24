@@ -1,4 +1,4 @@
-import { Directive, HostListener, Renderer2, ElementRef, Input, AfterViewInit } from '@angular/core';
+import { Directive, ElementRef, Input, HostListener, AfterViewInit, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[feSetHeight]'
@@ -8,20 +8,20 @@ export class SetHeightDirective implements AfterViewInit {
   @Input() feSetHeight: any;
 
   constructor(private renderer: Renderer2,
-    private _el: ElementRef) { }
+              private _el: ElementRef) { }
 
   ngAfterViewInit(): void {
-    this.setElHeight();
+    this.setHeight();
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.setElHeight();
+    this.setHeight();
   }
 
-  private setElHeight(): void {
-    let height = null;
-    height = 'calc(100vh - ' + document.getElementById('header').offsetHeight + 'px)';
+  private setHeight(): void {
+    const height = window.innerHeight - this.feSetHeight.height + 'px';
+    console.log(height);
     this.renderer.setStyle(
       this._el.nativeElement,
       'height',

@@ -2,10 +2,11 @@
 $header-height: 162px;
 $footer-heigth: 80px;
 
-.scrollable-container {
+.overview-container {
   display: flex;
   flex-flow: column;
   justify-content: space-between;
+  height: 100%;
   .order-overview {
       padding: 16px;
 

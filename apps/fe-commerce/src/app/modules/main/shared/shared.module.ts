@@ -8,6 +8,8 @@ import { SetHeightDirective } from './directives/set-height.directive';
 import { ScrollableDivDirective } from './directives/scrollable-div.directive';
 import { ArtSheetComponent } from './components/art-sheet/art-sheet.component';
 import { BaseComponent } from './components/base/base.component'
+import { SetMainHeightDirective } from './directives/set-main-height.directive';
+import { FillScrollableDirective } from './directives/fill-scrollable.directive';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { BaseComponent } from './components/base/base.component'
     SetHeightDirective,
     ArtSheetComponent,
     ScrollableDivDirective,
-    BaseComponent
+    BaseComponent,
+    SetMainHeightDirective,
+    FillScrollableDirective
   ],
   imports: [
     CommonModule,
@@ -30,7 +34,10 @@ import { BaseComponent } from './components/base/base.component'
     SetHeightDirective,
     ArtSheetComponent,
     ScrollableDivDirective,
-    BaseComponent
+    BaseComponent,
+    SetMainHeightDirective,
+    FillScrollableDirective
   ]
 })
+
 export class SharedModule { }
