@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        APPNAME="fecommerce"
+        APPNAME="fe-commerce"
         WEBAPPDIR="/data/webapp/${APPNAME}/${BRANCH_NAME}"
         BASEHREF="/${APPNAME}/${BRANCH_NAME}/"
         GITDIR="."
@@ -37,7 +37,7 @@ pipeline {
                     archiveArtifacts artifacts: "build/logs/*", onlyIfSuccessful: true
                 }
             }
-        }        
+        }
         stage('Deploy feature') {
             when {
                 branch 'Feature*'
@@ -51,7 +51,7 @@ pipeline {
                     sh 'tar -xf  build/logs/dist_${BRANCH_NAME}.tar --strip-components=3 -C ${WEBAPPDIR}/dist/'
                 }
             }
-        }         
+        }
         stage('Deploy development') {
             when {
                 branch 'develop'
@@ -85,5 +85,5 @@ pipeline {
         failure {
             emailext subject: "JOB FAILED: '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", body: "Job FAILED: ${env.JOB_NAME} [${env.BUILD_NUMBER}] ${env.RUN_DISPLAY_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider']]
         }
-    }    
+    }
 }
