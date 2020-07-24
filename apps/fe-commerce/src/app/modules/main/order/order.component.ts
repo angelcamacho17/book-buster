@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, AfterViewInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { Order, getCurrentOrderRequest, OrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService } from '@fecommerce-workspace/data-store-lib';
@@ -13,7 +13,7 @@ import { DialogComponent } from '../shared/components/dialog/dialog.component';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss']
 })
-export class OrderComponent implements OnInit, OnDestroy {
+export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public order$: Observable<Order>;
   public order: Order;
@@ -33,7 +33,8 @@ export class OrderComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private _ordArtsService: OrderArticlesService,
     private _bnService: BackNavigationService,
-    private _transServ: TranslationService
+    private _transServ: TranslationService,
+    private _renderer2: Renderer2
   ) {
     this.$articles = this._store.pipe(select('orderArticles'));
     this._subscriptions = this.$articles.subscribe((arts) => {
@@ -55,10 +56,12 @@ export class OrderComponent implements OnInit, OnDestroy {
     this._store.dispatch(getCurrentOrderRequest());
 
   }
+  ngAfterViewInit(): void {
+    this.setHeaderHeight();
+  }
 
   ngOnInit(): void {
     this._bnService.switchCustomer(false);
-
   }
 
   public orderConfirmed(): void {
@@ -135,6 +138,11 @@ export class OrderComponent implements OnInit, OnDestroy {
     let total = this._ordArtsService.getTotal() ;
     total = Math.round(total * 100) / 100;
     return total > 0 ? total : 0;
+  }
+
+  private setHeaderHeight() {
+    const header = document.getElementById('header');
+    this._renderer2.setStyle(header, 'height', '112px');
   }
 
   ngOnDestroy(): void {
