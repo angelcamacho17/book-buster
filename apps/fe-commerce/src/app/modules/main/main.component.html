@@ -2,5 +2,7 @@
   <fe-header></fe-header>
 </header>
 <div [@routeAnimations]="prepareRoute(outlet)">
-  <router-outlet #outlet="outlet"></router-outlet>
+  <main id="fede" feSetMainHeight>
+    <router-outlet #outlet="outlet"></router-outlet>
+  </main>
 </div>

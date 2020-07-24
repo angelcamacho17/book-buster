@@ -1,19 +1,20 @@
-/* 
-main {
-  position: relative;
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  align-items: stretch;
-}
 
-.scrollable-container {
-  flex: 1;
-  overflow: auto;
-} */
+// main {
+//   position: relative;
+//   display: -webkit-flex;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: stretch;
+//   align-items: stretch;
+  
+//   .scrollable-container {
+//     flex: 1;
+//     overflow: auto;
+//   }
+// }
 
-.wrapper {
+
+/* .wrapper {
   main {
     // background:black;
     display: flex;
@@ -26,7 +27,7 @@ main {
       overflow: auto;
     }
   }
-}
+} */
 .shadow {
   background: rgba(0, 0, 0, 0.15) !important;
 }

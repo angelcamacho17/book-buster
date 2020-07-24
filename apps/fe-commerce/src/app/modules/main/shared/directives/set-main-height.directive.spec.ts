@@ -1,8 +1,8 @@
-import { SetHeightDirective } from './set-height.directive';
+import { SetMainHeightDirective } from './set-main-height.directive';
 
 describe('SetHeightDirective', () => {
   it('should create an instance', () => {
-    const directive = new SetHeightDirective();
+    const directive = new SetMainHeightDirective();
     expect(directive).toBeTruthy();
   });
 });

@@ -1,9 +1,9 @@
 import { Directive, HostListener, Renderer2, ElementRef, Input, AfterViewInit } from '@angular/core';
 
 @Directive({
-  selector: '[feSetHeight]'
+  selector: '[feSetMainHeight]'
 })
-export class SetHeightDirective implements AfterViewInit {
+export class SetMainHeightDirective implements AfterViewInit {
 
   @Input() feSetHeight: any;
 
