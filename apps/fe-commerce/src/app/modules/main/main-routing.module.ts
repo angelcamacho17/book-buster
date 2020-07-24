@@ -19,6 +19,12 @@ const routes: Routes = [
         data: { animation: 'order' },
         //canActivate: [FeLoginGuard]
       },
+      {
+        path: 'order-items',
+        loadChildren: () => import('./order-items/order-items.module').then(m => m.OrderItemsModule),
+        data: { animation: 'order-items' },
+        //canActivate: [FeLoginGuard]
+      },
       { path: '**', redirectTo: 'home' }
     ]
   }

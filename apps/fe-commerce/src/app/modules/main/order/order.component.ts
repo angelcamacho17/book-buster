@@ -57,7 +57,6 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    this.setHeaderHeight();
   }
 
   ngOnInit(): void {
@@ -127,7 +126,7 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public openItems(): void {
-    this._router.navigate(['/orderitems']);
+    this._router.navigate(['/main/order-items']);
   }
 
   public returnUrl(): void {
@@ -138,11 +137,6 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
     let total = this._ordArtsService.getTotal() ;
     total = Math.round(total * 100) / 100;
     return total > 0 ? total : 0;
-  }
-
-  private setHeaderHeight() {
-    const header = document.getElementById('header');
-    this._renderer2.setStyle(header, 'height', '112px');
   }
 
   ngOnDestroy(): void {

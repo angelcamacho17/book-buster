@@ -1,0 +1,48 @@
+.scrollable-container {
+  .page-content {
+    position: relative;
+    height: 100%;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: stretch;
+    align-items: stretch;
+    padding: 0 16px;
+
+
+    .header-content {
+      margin-bottom: 12px;
+      display: block !important;
+
+      .header-extension {
+        position: absolute;
+        height: 40px;
+        width: 100%;
+        background: #3954F0;
+        border-bottom: 2px black dashed;
+        left: 0;
+      }
+
+      .first-card {
+        margin-top: 8px;
+        height: 120px;
+      }
+
+      .scrollable {
+        height: 100%;
+      }
+
+    }
+
+    .content {
+
+      .second-card {
+        overflow: auto;
+      }
+    }
+    .centered {
+      text-align: center;
+    }
+  }
+}
+
