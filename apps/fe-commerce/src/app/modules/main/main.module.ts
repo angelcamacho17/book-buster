@@ -2,13 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './main.component';
 import { RouterModule } from '@angular/router';
-import { MainRoutingModule } from './main-routing.module';
-import { HeaderComponent } from './shared/components/header/header.component';
 import { SharedModule } from './shared/shared.module';
-import { HomeComponent } from './home/home.component';
-import { OrderComponent } from './order/order.component';
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,6 +11,7 @@ import { OrderComponent } from './order/order.component';
   ],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     RouterModule.forChild([
       {
         path: '',
