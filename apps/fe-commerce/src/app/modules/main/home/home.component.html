@@ -1,5 +1,5 @@
 <div class="scrollable-container" [feSetHeight]="'60px'">
-  <div class="mat-headline headline">{{'recOrds' | translate}}</div>
+  <div class="mat-headline headline">new {{'recOrds' | translate}}</div>
   <mat-card class="card" [class.last]="lastOrder" *ngFor="let order of orders; let lastOrder = last;" (click)="openOrder(order)">
     <mat-card-content class="card-content">
       <div class="content">
