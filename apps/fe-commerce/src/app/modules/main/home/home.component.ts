@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
 
   ngAfterViewInit(): void {
     this.cardOverflows = this.checkOrdersCardOverflow();
-    this.setHeaderHeight();
+    // this.setHeaderHeight();
   }
 
   ngAfterContentChecked(): void {

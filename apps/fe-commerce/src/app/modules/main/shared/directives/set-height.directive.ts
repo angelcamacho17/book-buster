@@ -3,12 +3,12 @@ import { Directive, HostListener, Renderer2, ElementRef, Input, AfterViewInit } 
 @Directive({
   selector: '[feSetHeight]'
 })
-export class SetHeightDirective implements AfterViewInit{
+export class SetHeightDirective implements AfterViewInit {
 
   @Input() feSetHeight: any;
 
   constructor(private renderer: Renderer2,
-              private _el: ElementRef) { }
+    private _el: ElementRef) { }
 
   ngAfterViewInit(): void {
     this.setElHeight();
@@ -21,12 +21,7 @@ export class SetHeightDirective implements AfterViewInit{
 
   private setElHeight(): void {
     let height = null;
-    if (this.feSetHeight){
-      height = 'calc(100vh - ' + this.feSetHeight + ')';
-    } else {
-      height = 'calc(100vh - '+document.getElementById('header').offsetHeight + 'px)';
-    }
-    console.log(height);
+    height = 'calc(100vh - ' + document.getElementById('header').offsetHeight + 'px)';
     this.renderer.setStyle(
       this._el.nativeElement,
       'height',

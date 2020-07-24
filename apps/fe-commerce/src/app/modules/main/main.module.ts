@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MainComponent } from './main.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
+import { MainRoutingModule } from './main-routing.module';
 
 @NgModule({
   declarations: [
@@ -10,28 +11,7 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: MainComponent,
-        children: [
-          {
-            path: 'home',
-            loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
-            data: { animation: 'home' },
-            //canActivate: [FeLoginGuard]
-          },
-          {
-            path: 'order',
-            loadChildren: () => import('./order/order.module').then(m => m.OrderModule),
-            data: { animation: 'order' },
-            //canActivate: [FeLoginGuard]
-          },
-          { path: '**', redirectTo: 'home' }
-        ]
-      },
-
-  ]),
+    MainRoutingModule,
   SharedModule
 ]})
 export class MainModule { }

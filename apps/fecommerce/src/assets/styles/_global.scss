@@ -12,6 +12,7 @@ main {
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
+  
   .scrollable-container {
     flex: 1;
     overflow: auto;
