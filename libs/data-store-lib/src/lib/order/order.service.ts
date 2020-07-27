@@ -205,7 +205,61 @@ export class OrderService {
           "description": "Post term pregnancy, unspecified as to episode of care or not applicable",
           "price": +"78.52"
         }, "quantity": 3
-      }
+      },
+      {
+        "id": 8,
+        "article": {
+          "id": 32,
+          "name": "Soup - Knorr, Chicken Noodle",
+          "description": "Poisoning by erythromycin and other macrolides",
+          "price": +"51.80"
+        }, "quantity": 3
+      },
+      {
+        "id": 9,
+        "article": {
+          "id": 31,
+          "name": "Tea - Honey Green Tea",
+          "description": "Twin birth, mate liveborn, born in hospital, delivered without mention of cesarean section",
+          "price": +"61.15"
+        },
+        "quantity": 2
+      }, {
+        "id": 10,
+        "article": {
+          "id": 30,
+          "name": "Salmon - Atlantic, No Skin",
+          "description": "Post term pregnancy, unspecified as to episode of care or not applicable",
+          "price": +"78.52"
+        }, "quantity": 3
+      },
+      {
+        "id": 8,
+        "article": {
+          "id": 32,
+          "name": "Soup - Knorr, Chicken Noodle",
+          "description": "Poisoning by erythromycin and other macrolides",
+          "price": +"51.80"
+        }, "quantity": 3
+      },
+      {
+        "id": 9,
+        "article": {
+          "id": 31,
+          "name": "Tea - Honey Green Tea",
+          "description": "Twin birth, mate liveborn, born in hospital, delivered without mention of cesarean section",
+          "price": +"61.15"
+        },
+        "quantity": 2
+      }, {
+        "id": 10,
+        "article": {
+          "id": 30,
+          "name": "Salmon - Atlantic, No Skin",
+          "description": "Post term pregnancy, unspecified as to episode of care or not applicable",
+          "price": +"78.52"
+        }, "quantity": 3
+      },
     ],
       "customer": {
         "id": 12,

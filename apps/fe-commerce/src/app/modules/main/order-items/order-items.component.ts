@@ -24,32 +24,32 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   private _subscriptions = new Subscription();
   private _substractArt = 0;
   private _currentArt: OrderArticle;
-  //public filteredlist: Observable<any[]>;
+  public filteredlist: Observable<any[]>;
   public horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   public showDeleteBtn = false;
   public waitToDeleted = false;
   public articleToDelete = null;
   public addArt = false;
   public returnUrl = 'order';
-  public filteredlist: Observable<any[]> = of([{
- "id": 1,
- "article": {
-   "id": 1,
-   "name": "Southern Comfort",
-   "description": "Eosinophilic gastroenteritis",
-   "price": 56.87
- },
- "quantity": 2
- }, {
- "id": 2,
- "article": {
-   "id": 2,
-   "name": "Stock - Veal, White",
-   "description": "Malignant neoplasm of other specified sites of nasopharynx",
-   "price": 76.19
- }, "quantity": 3
- }
- ])
+//   public filteredlist: Observable<any[]> = of([{
+//  "id": 1,
+//  "article": {
+//    "id": 1,
+//    "name": "Southern Comfort",
+//    "description": "Eosinophilic gastroenteritis",
+//    "price": 56.87
+//  },
+//  "quantity": 2
+//  }, {
+//  "id": 2,
+//  "article": {
+//    "id": 2,
+//    "name": "Stock - Veal, White",
+//    "description": "Malignant neoplasm of other specified sites of nasopharynx",
+//    "price": 76.19
+//  }, "quantity": 3
+//  }
+//  ])
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -58,7 +58,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     private _ordArtsService: OrderArticlesService,
     private _bottomSheet: MatBottomSheet) {
     this.$articles = this._storeOrdArt.pipe(select('orderArticles'));
-    //this.listenToOrderArts();
+    this.listenToOrderArts();
     this._storeOrdArt.dispatch(refreshOrderArticlesRequest());
     if (this._ordSer.currentOrder?.id) {
       this.addArt = true;
