@@ -24,9 +24,8 @@ export class ScrollableDivDirective implements AfterViewInit {
   private setMaxHeight() {
    setTimeout(() => {
     const headerExt = (document.getElementById('header').offsetHeight);
-    console.log(this.feScrollableDiv);
-    console.log(document.getElementById('main').offsetHeight);
-    const mainHei = (document.getElementById('main').offsetHeight - 192 - headerExt) + 'px';
+    console.log('main: ' +document.getElementById('main').offsetHeight);
+    const mainHei = (document.getElementById('main').offsetHeight - 192) + 'px';
     console.log(mainHei);
     this._renderer.setStyle(
       this._el.nativeElement,
