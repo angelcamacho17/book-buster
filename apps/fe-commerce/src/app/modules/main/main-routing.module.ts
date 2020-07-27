@@ -14,6 +14,12 @@ const routes: Routes = [
         //canActivate: [FeLoginGuard]
       },
       {
+        path: 'new-order',
+        loadChildren: () => import('./new-order/new-order.module').then(m => m.NewOrderModule),
+        data: { animation: 'new-order' },
+        //canActivate: [FeLoginGuard]
+      },
+      {
         path: 'order',
         loadChildren: () => import('./order/order.module').then(m => m.OrderModule),
         data: { animation: 'order' },

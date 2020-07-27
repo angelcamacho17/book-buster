@@ -18,10 +18,13 @@ export const routesAnimations =
 
     transition('main => login', slideToLeft()),
 
+    transition('home => new-order', fromBottom()),
     transition('home => order', slideToRight()),
     transition('home => edit-order', slideToRight()),
 
+    transition('new-order => home', fromTop()),
     transition('order => home', slideToLeft()),
+    
     transition('edit-order => home', slideToLeft()),
     transition('edit-order => order-items', slideToRight()),
 
@@ -130,14 +133,14 @@ function fromBottom() {
     ]),
     group([
       query(':leave', [
-        animate('150ms ease',
+        animate('2000ms ease',
         style({
           'z-index': 0,
 
       }))
       ], optional),
       query(':enter', [
-        animate('150ms ease', style({
+        animate('2000ms ease', style({
           top: '0%',
           'z-index': 10,
 

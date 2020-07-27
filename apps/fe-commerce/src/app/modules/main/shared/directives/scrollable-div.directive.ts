@@ -1,4 +1,5 @@
 import { Directive, Renderer2, ElementRef, AfterViewInit, HostListener, Input } from '@angular/core';
+import { ComponentService } from '../services/component.service';
 
 @Directive({
   selector: '[feScrollableDiv]'
@@ -9,11 +10,14 @@ export class ScrollableDivDirective implements AfterViewInit {
 
   constructor(
     private _renderer: Renderer2,
-    private _el: ElementRef
+    private _el: ElementRef,
+    private componentService: ComponentService
   ) { }
 
   ngAfterViewInit(): void {
-    this.setMaxHeight();
+    setTimeout(() => {
+      this.setMaxHeight();
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -22,18 +26,11 @@ export class ScrollableDivDirective implements AfterViewInit {
   }
 
   private setMaxHeight() {
-   setTimeout(() => {
-    const headerExt = (document.getElementById('header').offsetHeight);
-    console.log('main: ' +document.getElementById('main').offsetHeight);
-    const mainHei = (document.getElementById('main').offsetHeight - 192) + 'px';
-    console.log(mainHei);
+    const maxHeight = (this.componentService.mainElement.nativeElement.offsetHeight - 192) + 'px';
     this._renderer.setStyle(
       this._el.nativeElement,
       'max-height',
-      mainHei
-      )
-    }, );
-
+      maxHeight
+    );
   }
-
 }

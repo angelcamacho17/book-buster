@@ -3,10 +3,10 @@ import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'fe-search-results',
-  templateUrl: './fe-search-results.component.html',
-  styleUrls: ['./fe-search-results.component.scss']
+  templateUrl: './search-results.component.html',
+  styleUrls: ['./search-results.component.scss']
 })
-export class FeSearchResultsComponent implements OnInit, OnDestroy {
+export class SearchResultsComponent implements OnInit, OnDestroy {
 
   @Input() items: any;
   @Input() rowType: any;

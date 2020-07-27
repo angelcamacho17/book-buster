@@ -9,6 +9,7 @@ import { ScrollableDivDirective } from './directives/scrollable-div.directive';
 import { ArtSheetComponent } from './components/art-sheet/art-sheet.component';
 import { BaseComponent } from './components/base/base.component';
 import { SearchComponent } from './components/search/search.component';
+import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 import { SetMainHeightDirective } from './directives/set-main-height.directive';
 import { FillScrollableDirective } from './directives/fill-scrollable.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +26,8 @@ import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
     BaseComponent,
     SetMainHeightDirective,
     FillScrollableDirective,
-    SearchComponent
+    SearchComponent,
+    SearchResultsComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
     BaseComponent,
     SetMainHeightDirective,
     FillScrollableDirective,
-    SearchComponent
+    SearchComponent,
+    SearchResultsComponent
   ]
 })
 

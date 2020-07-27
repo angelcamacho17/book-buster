@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
 
   public createOrder(): void {
     this._bnService.switchCustomer(false);
-    this._router.navigate(['/']);
+    this._router.navigate(['/main/new-order']);
   }
 
   public openOrder(order: Order): void {
