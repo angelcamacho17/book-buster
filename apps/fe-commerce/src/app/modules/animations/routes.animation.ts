@@ -18,13 +18,13 @@ export const routesAnimations =
 
     transition('main => login', slideToLeft()),
 
-    transition('home => new-order', fromBottom()),
+    transition('home => new-order', slideToRight()),
     transition('home => order', slideToRight()),
     transition('home => edit-order', slideToRight()),
 
-    transition('new-order => home', fromTop()),
+    transition('new-order => home', slideToLeft()),
     transition('order => home', slideToLeft()),
-    
+
     transition('edit-order => home', slideToLeft()),
     transition('edit-order => order-items', slideToRight()),
 
