@@ -5,7 +5,7 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
 import { KeyValueStoreService, HCSClient, ConfigService, LanguageService, AuthService, getLocales } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
-  selector: 'fe-login',
+  selector: 'login',
   animations: [
     trigger('title', [
       // ...

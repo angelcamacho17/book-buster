@@ -15,7 +15,7 @@ export class CustomerSearchComponent implements OnInit {
   public emptyResults = true;
   public lastUrl = 'neworder';
   public filteredResults: Customer[] = [];
-  public customers: Customer[];
+  public customers: Customer[] = [];
   
   constructor(
     private _router: Router

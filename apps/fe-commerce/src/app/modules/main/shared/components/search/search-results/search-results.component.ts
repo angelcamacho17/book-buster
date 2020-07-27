@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 @Component({
-  selector: 'fe-search-results',
+  selector: 'search-results',
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss']
 })

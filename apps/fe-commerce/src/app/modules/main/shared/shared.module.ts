@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './components/header/header.component';
+import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { CreateButtonComponent } from './components/create-button/create-button.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { MaterialModule } from '../../material/material.module';
@@ -17,7 +17,7 @@ import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
+    MainHeaderComponent,
     CreateButtonComponent,
     DialogComponent,
     SetHeightDirective,
@@ -37,7 +37,7 @@ import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
     TranslatePipeModule
   ],
   exports: [
-    HeaderComponent,
+    MainHeaderComponent,
     CreateButtonComponent,
     DialogComponent,
     SetHeightDirective,

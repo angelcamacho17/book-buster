@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { ComponentService } from '../../services/component.service';
 
 @Component({
-  selector: 'fe-base',
+  selector: 'base-component',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.scss']
 })

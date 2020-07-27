@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'fe-search',
+    selector: 'search',
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.scss']
 })

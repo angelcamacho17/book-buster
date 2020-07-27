@@ -4,7 +4,7 @@ import { routesAnimations } from '../animations/routes.animation';
 import { ComponentService } from './shared/services/component.service';
 
 @Component({
-  selector: 'fe-main',
+  selector: 'main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   animations: [

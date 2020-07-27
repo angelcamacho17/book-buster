@@ -4,7 +4,7 @@
     "directive-selector": [
       true,
       "attribute",
-      "fe",
+      "",
       "camelCase"
     ],
     "component-selector": [
