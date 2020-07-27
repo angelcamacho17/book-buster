@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'search',
+    selector: 'fe-search',
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.scss']
 })
@@ -31,10 +31,10 @@ export class SearchComponent implements OnInit, OnDestroy {
         if (this.autoFocus) {
             const inputElement: HTMLElement = document.getElementById('input') as HTMLElement;
             inputElement.focus();
-        }        
+        }
     }
     private preventDefault = (e) => e.preventDefault();
-    
+
     private _disableScroll() {
         document.addEventListener('touchmove', this.preventDefault, { passive: false });
         document.addEventListener('touchforcechange', this.preventDefault, { passive: false });

@@ -8,6 +8,12 @@
   align-items: stretch;
   padding: 0 16px;
 
+  .content {
+    margin-top: 16px;
+    .second-card {
+      overflow: auto;
+    }
+  }
 
   .header-content {
     margin-bottom: 12px;
@@ -32,12 +38,6 @@
 
   }
 
-  .content {
-
-    .second-card {
-      overflow: auto;
-    }
-  }
   .centered {
     text-align: center;
   }

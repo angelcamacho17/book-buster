@@ -7,9 +7,12 @@ import { MaterialModule } from '../../material/material.module';
 import { SetHeightDirective } from './directives/set-height.directive';
 import { ScrollableDivDirective } from './directives/scrollable-div.directive';
 import { ArtSheetComponent } from './components/art-sheet/art-sheet.component';
-import { BaseComponent } from './components/base/base.component'
+import { BaseComponent } from './components/base/base.component';
+import { SearchComponent } from './components/search/search.component';
 import { SetMainHeightDirective } from './directives/set-main-height.directive';
 import { FillScrollableDirective } from './directives/fill-scrollable.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 
 @NgModule({
   declarations: [
@@ -21,11 +24,15 @@ import { FillScrollableDirective } from './directives/fill-scrollable.directive'
     ScrollableDivDirective,
     BaseComponent,
     SetMainHeightDirective,
-    FillScrollableDirective
+    FillScrollableDirective,
+    SearchComponent
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslatePipeModule
   ],
   exports: [
     HeaderComponent,
@@ -36,7 +43,8 @@ import { FillScrollableDirective } from './directives/fill-scrollable.directive'
     ScrollableDivDirective,
     BaseComponent,
     SetMainHeightDirective,
-    FillScrollableDirective
+    FillScrollableDirective,
+    SearchComponent
   ]
 })
 
