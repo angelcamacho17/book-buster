@@ -2,7 +2,7 @@
   <div class="page-content">
     <div class="content">
       <div class="header-extension"></div>
-      <mat-card class="second-card mat-elevation-z6" feScrollableDiv>
+      <mat-card class="second-card mat-elevation-z6" [feScrollableDiv]="footer">
         <div class="mat-title centered">
           Card 2:
         </div>
@@ -59,7 +59,7 @@
         </div>
       </mat-card>
     </div>
-    <div class="header-content" id="header-content">
+    <div class="footer-content" id="footer" #footer>
       <mat-card class="first-card mat-elevation-z6">
         <div class="mat-title centered">
           Content header: card overlay

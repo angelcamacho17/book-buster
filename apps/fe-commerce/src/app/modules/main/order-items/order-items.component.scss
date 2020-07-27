@@ -4,11 +4,12 @@
   display: -webkit-flex;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: stretch;
-  align-items: stretch;
+  justify-content: space-between;
   padding: 0 16px;
 
   .content {
+    height: auto;
+
     .header-extension {
       position: absolute;
       height: 40px;
@@ -21,15 +22,12 @@
     }
   }
 
-  .header-content {
+  .footer-content {
     margin-bottom: 12px;
     display: block !important;
-
-
-
     .first-card {
       margin-top: 8px;
-      height: 120px;
+      height: 160px;
     }
 
     .scrollable {

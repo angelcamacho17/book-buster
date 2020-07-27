@@ -1,9 +1,11 @@
-import { Directive, Renderer2, ElementRef, AfterViewInit, HostListener } from '@angular/core';
+import { Directive, Renderer2, ElementRef, AfterViewInit, HostListener, Input } from '@angular/core';
 
 @Directive({
   selector: '[feScrollableDiv]'
 })
 export class ScrollableDivDirective implements AfterViewInit {
+
+  @Input() feScrollableDiv: any;
 
   constructor(
     private _renderer: Renderer2,
@@ -22,13 +24,13 @@ export class ScrollableDivDirective implements AfterViewInit {
   private setMaxHeight() {
    setTimeout(() => {
     const headerExt = (document.getElementById('header').offsetHeight);
-    console.log(headerExt)
+    console.log(this.feScrollableDiv);
     console.log(document.getElementById('main').offsetHeight);
-    const mainHei = (document.getElementById('main').offsetHeight - 160 - headerExt) + 'px';
+    const mainHei = (document.getElementById('main').offsetHeight - 192 - headerExt) + 'px';
     console.log(mainHei);
     this._renderer.setStyle(
       this._el.nativeElement,
-      'height',
+      'max-height',
       mainHei
       )
     }, );
