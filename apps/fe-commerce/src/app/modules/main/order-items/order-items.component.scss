@@ -9,7 +9,13 @@
   padding: 0 16px;
 
   .content {
-    margin-top: 16px;
+    .header-extension {
+      position: absolute;
+      height: 40px;
+      width: 100%;
+      background: #1666d8;
+      left: 0;
+    }
     .second-card {
       overflow: auto;
     }
@@ -19,13 +25,7 @@
     margin-bottom: 12px;
     display: block !important;
 
-    .header-extension {
-      position: absolute;
-      height: 42px;
-      width: 100%;
-      background: #1666d8;
-      left: 0;
-    }
+
 
     .first-card {
       margin-top: 8px;
