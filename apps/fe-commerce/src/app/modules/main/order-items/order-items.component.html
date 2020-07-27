@@ -2,7 +2,7 @@
   <div class="page-content">
     <div class="content">
       <div class="header-extension"></div>
-      <mat-card class="card mat-elevation-z6" [feScrollableDiv]="footer">
+      <mat-card class="card mat-elevation-z6">
         <div class="list">
           <div class="list-item" *ngFor="let item of filteredlist | async;">
             <div class="content" (click)="openBottomSheet(item)">
