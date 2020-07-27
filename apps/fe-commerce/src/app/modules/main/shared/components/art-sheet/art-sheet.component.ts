@@ -3,7 +3,7 @@ import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bott
 import { OrderArticle, Article } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
-  selector: 'fe-art-sheet',
+  selector: 'art-sheet',
   templateUrl: './art-sheet.component.html',
   styleUrls: ['./art-sheet.component.scss']
 })

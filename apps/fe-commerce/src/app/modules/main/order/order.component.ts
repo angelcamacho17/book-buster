@@ -9,7 +9,7 @@ import { isUndefined } from 'util';
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
 
 @Component({
-  selector: 'fe-order',
+  selector: 'order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss']
 })

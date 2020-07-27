@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { routesAnimations } from '../animations/routes.animation';
 
 @Component({
-  selector: 'fe-main',
+  selector: 'main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   animations: [

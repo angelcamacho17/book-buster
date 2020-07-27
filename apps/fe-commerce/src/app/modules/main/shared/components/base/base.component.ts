@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'fe-base',
+  selector: 'base-component',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.scss']
 })

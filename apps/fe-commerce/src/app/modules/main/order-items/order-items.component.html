@@ -1,8 +1,8 @@
-<fe-base>
+<base-component>
   <div class="page-content">
     <div class="content">
       <div class="header-extension"></div>
-      <mat-card class="card mat-elevation-z6">
+      <mat-card class="card mat-elevation-z6" [feScrollableDiv]="footer">
         <div class="list">
           <div class="list-item" *ngFor="let item of filteredlist | async;">
             <div class="content" (click)="openBottomSheet(item)">
@@ -54,4 +54,4 @@
       </mat-card>
     </div>
   </div>
-</fe-base>
+</base-component>

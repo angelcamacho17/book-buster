@@ -1,4 +1,4 @@
-<fe-base>
+<base-component>
   <div class="home-container">
     <div class="mat-headline headline">new {{'recOrds' | translate}}</div>
     <mat-card class="card" [class.last]="lastOrder" *ngFor="let order of orders; let lastOrder = last;"
@@ -21,6 +21,6 @@
       </mat-card-content>
     </mat-card>
 
-    <fe-create-button (click)="createOrder()"></fe-create-button>
+    <create-button (click)="createOrder()"></create-button>
   </div>
-</fe-base>
+</base-component>

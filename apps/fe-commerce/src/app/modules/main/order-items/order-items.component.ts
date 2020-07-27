@@ -11,7 +11,7 @@ import { ArtSheetComponent } from '../shared/components/art-sheet/art-sheet.comp
 const speed = 10;
 
 @Component({
-  selector: 'fe-order-items',
+  selector: 'order-items',
   templateUrl: './order-items.component.html',
   styleUrls: ['./order-items.component.scss']
 })
