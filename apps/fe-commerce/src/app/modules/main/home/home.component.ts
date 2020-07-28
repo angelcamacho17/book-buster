@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, AfterContentChecked, ChangeDetectionStrategy, Renderer2 } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { setCurrentOrderRequest, clearCurrentOrderRequest, OrderService, setOrderArticlesRequest, BackNavigationService } from '@fecommerce-workspace/data-store-lib';
+import { setCurrentOrderRequest, clearCurrentOrderRequest, OrderService, setOrderArticlesRequest, BackNavigationService, Header, setHeaderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
@@ -39,12 +39,27 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
       }
       this.orders = data;
     });
+
+
     this._store.dispatch(clearCurrentOrderRequest());
     this._store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
     this._storeOrders.dispatch(refreshOrdersRequest())
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    const header: Header = {
+      title: 'home',
+      leftIcon: null,
+      rightIcon: null,
+      titClass: 'mat-display-1',
+      lastUrl: null,
+      confirmDiscard: false,
+      addArt: false,
+      centered: false
+    }
+
+    this._store.dispatch(setHeaderRequest({header}))
+  }
 
   ngAfterViewInit(): void {
     this.cardOverflows = this.checkOrdersCardOverflow();

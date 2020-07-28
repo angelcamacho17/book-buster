@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Renderer2, AfterViewInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { Order, getCurrentOrderRequest, OrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService } from '@fecommerce-workspace/data-store-lib';
+import { Order, getCurrentOrderRequest, OrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService, setHeaderRequest, Header } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -50,8 +50,9 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
         this.delete = true;
       }
     });
-    this._store.dispatch(getCurrentOrderRequest());
 
+
+    this._store.dispatch(getCurrentOrderRequest());
     this._store.dispatch(refreshOrderArticlesRequest());
     this._store.dispatch(getCurrentOrderRequest());
 
@@ -60,6 +61,18 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
+    const header: Header = {
+      title: 'orderover',
+      leftIcon: this._router.url === '/main/order/edit' ? 'close' : 'keyboard_arrow_left',
+      rightIcon: 'delete_outline',
+      titClass: 'mat-title',
+      lastUrl: this._router.url === '/main/order/edit' ? 'home' : 'neworder',
+      confirmDiscard: false,
+      addArt: false,
+      centered: true
+    }
+
+    this._store.dispatch(setHeaderRequest({header}))
     this._bnService.switchCustomer(false);
   }
 

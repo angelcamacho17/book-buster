@@ -1,3 +1,16 @@
-<div class="header">
-  Header
-</div>
+<mat-toolbar class="header-toolbar" [ngClass]="(centered | async) ? 'centered' : ''">
+  <div *ngIf="leftIcon | async" class="left-icon">
+    <mat-icon class="left-icon" (click)="goLastVisited()">
+      {{leftIcon | async}}
+    </mat-icon>
+  </div>
+  <div class="title" [ngClass]="titClass | async">
+    {{title | async}}
+  </div>
+  <mat-icon *ngIf="rightIcon | async"  class="right-icon" (click)="logout()">
+    {{rightIcon | async}}
+  </mat-icon>
+  <mat-icon *ngIf="addArt | async" class="right-icon" (click)="addArticle()">
+    {{'add'}}
+  </mat-icon>
+</mat-toolbar>

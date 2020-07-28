@@ -10,6 +10,8 @@ import { articlesReducer, articleReducer } from './article/article.reducer';
 import { orderArticlesReducer } from './order-articles/order-articles.reducer';
 import { OrderArticle } from './models/order-article.model';
 import { backNavigationReducer } from './back-navigation/back-navigation.reducer';
+import { Header } from './models/header.model';
+import { headersReducer } from './header/header.reducer';
 
 export const FEATURE_NAME = 'examples';
 
@@ -21,7 +23,8 @@ export const reducers: ActionReducerMap<AppState> = {
   article: articleReducer,
   articles: articlesReducer,
   orderArticles: orderArticlesReducer,
-  backNavigation: backNavigationReducer
+  backNavigation: backNavigationReducer,
+  header: headersReducer
 };
 
 export interface AppState {
@@ -32,5 +35,6 @@ export interface AppState {
   article: Article,
   articles: Article[],
   orderArticles: OrderArticle[],
-  backNavigation: string
+  backNavigation: string,
+  header: Header
 }
