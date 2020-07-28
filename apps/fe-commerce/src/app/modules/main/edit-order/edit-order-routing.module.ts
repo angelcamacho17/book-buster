@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { OrderComponent } from './order.component';
+import { EditOrderComponent } from './edit-order.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: OrderComponent
-  },
-  {
-    path: 'edit',
-    component: OrderComponent,
-    data: { animation: 'edit-order' },
+    component: EditOrderComponent
   },
   { path: '**', redirectTo: '' }
 ];
@@ -20,5 +15,5 @@ const routes: Routes = [
     routes)],
   exports: [RouterModule]
 })
-export class OrderRoutingModule { }
+export class EditOrderRoutingModule { }
 

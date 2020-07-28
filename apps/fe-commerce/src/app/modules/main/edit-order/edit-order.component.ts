@@ -9,11 +9,11 @@ import { isUndefined } from 'util';
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
 
 @Component({
-  selector: 'order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  selector: 'edit-order',
+  templateUrl: './edit-order.component.html',
+  styleUrls: ['./edit-order.component.scss']
 })
-export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
+export class EditOrderComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public order$: Observable<IOrder>;
   public order: IOrder;
@@ -61,18 +61,7 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    const header: IHeader = {
-      title: 'orderover',
-      leftIcon: this._router.url === '/main/order/edit' ? 'close' : 'keyboard_arrow_left',
-      rightIcon: 'delete_outline',
-      titClass: 'mat-title',
-      lastUrl: this._router.url === '/main/order/edit' ? 'home' : 'neworder',
-      confirmDiscard: false,
-      addArt: false,
-      centered: true
-    }
 
-    this._store.dispatch(setHeaderRequest({header}))
     this._bnService.switchCustomer(false);
   }
 

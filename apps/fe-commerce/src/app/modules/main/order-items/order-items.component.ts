@@ -67,20 +67,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   }
 
 
-  ngOnInit(): void {
-    const header: IHeader = {
-      title: 'orderitems',
-      leftIcon: 'keyboard_arrow_left',
-      rightIcon: null,
-      titClass: 'mat-title',
-      lastUrl: 'main/order/edit',
-      confirmDiscard: false,
-      addArt: true,
-      centered: true
-    }
-
-    this._store.dispatch(setHeaderRequest({header}))
-  }
+  ngOnInit(): void { }
 
   ngOnDestroy(): void {
     //If the time of the snackbar

@@ -47,18 +47,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
   }
 
   ngOnInit(): void {
-    const header: IHeader = {
-      title: 'home',
-      leftIcon: null,
-      rightIcon: null,
-      titClass: 'mat-display-1',
-      lastUrl: null,
-      confirmDiscard: false,
-      addArt: false,
-      centered: false
-    }
 
-    this._store.dispatch(setHeaderRequest({header}))
   }
 
   ngAfterViewInit(): void {
@@ -79,11 +68,11 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
   public openOrder(order: IOrder): void {
     this._storeOrders.dispatch(setCurrentOrderRequest({ order }))
     this._store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }));
-    if (this._ordSer.currentOrder?.id){
-      this._router.navigate(['/main/order/edit']);
-    } else {
-      this._router.navigate(['/main/order']);
-    }
+    // if (this._ordSer.currentOrder?.id){
+    this._router.navigate(['/main/edit-order']);
+    // } else {
+    //   this._router.navigate(['/main/order']);
+    // }
   }
 
   checkOrdersCardOverflow() {
