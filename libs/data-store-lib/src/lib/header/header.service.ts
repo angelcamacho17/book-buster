@@ -18,11 +18,14 @@ export class HeaderService {
     addArt: false,
     centered: false
   }
+  private cleanHeader;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    this.cleanHeader = this.header;
+  }
 
   public setHeader(header: IHeader): Observable<IHeader> {
-    this.header = null;
+    this.header = this.cleanHeader;
     this.header = header;
     return of(this.header);
   }

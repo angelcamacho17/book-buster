@@ -4,9 +4,9 @@ export interface IHeader {
   rightIcon: string,
   titClass: string,
   lastUrl: string,
-  confirmDiscard: boolean,
-  addArt: boolean,
-  centered: boolean
+  confirmDiscard?: boolean,
+  addArt?: boolean,
+  centered?: boolean
 }
 
 export interface IHeaderState {
