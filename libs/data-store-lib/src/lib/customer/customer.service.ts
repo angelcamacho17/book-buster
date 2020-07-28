@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Customer } from '../models/customer.model';
+import { ICustomer } from '../models/customer.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  private _customers: Customer[] = [
+  private _customers: ICustomer[] = [
   {
       "id": 1,
       "name": "Angel Andres Camacho",
@@ -93,22 +93,22 @@ export class CustomerService {
       "smallIcon": false
   }
   ];
-  customers = new BehaviorSubject<Customer[]>(this._customers);
+  customers = new BehaviorSubject<ICustomer[]>(this._customers);
 
   _baseUrl = 'assets/data/customers.json';
 
   constructor(private httpClient: HttpClient) { }
 
-  public all(): Observable<Customer[]> {
+  public all(): Observable<ICustomer[]> {
     return this.customers.asObservable();
   }
 
-  public append(customer: Customer): Observable<Customer[]> {
+  public append(customer: ICustomer): Observable<ICustomer[]> {
     this.customers.next({ ...this._customers, ...customer });
     return this.customers.asObservable();
   }
 
-  public replace(customer: Customer): Observable<Customer[]> {
+  public replace(customer: ICustomer): Observable<ICustomer[]> {
     const index = this._customers.findIndex(c => c.id === customer.id);
     this._customers[index].address = customer.address;
     this._customers[index].address = customer.name;
@@ -117,7 +117,7 @@ export class CustomerService {
     return this.customers.asObservable();
   }
 
-  public delete(customerId: any): Observable<Customer[]> {
+  public delete(customerId: any): Observable<ICustomer[]> {
     const index = this._customers.findIndex(c => c.id === customerId);
     this._customers.splice(index, 1);
     this.customers.next(this._customers);

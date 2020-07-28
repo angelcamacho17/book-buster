@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Customer } from '@fecommerce-workspace/data-store-lib';
+import { ICustomer } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
   selector: 'fe-customer-search',
@@ -14,16 +14,16 @@ export class CustomerSearchComponent implements OnInit {
   public shadow = false;
   public emptyResults = true;
   public lastUrl = 'neworder';
-  public filteredResults: Customer[] = [];
-  public customers: Customer[] = [];
-  
+  public filteredResults: ICustomer[] = [];
+  public customers: ICustomer[] = [];
+
   constructor(
     private _router: Router
   ) { }
 
   ngOnInit(): void {
   }
-  
+
 
   public returnUrl(): void {
     this._router.navigate(['/' + this._returnUrl]);

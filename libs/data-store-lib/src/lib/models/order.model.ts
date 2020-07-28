@@ -1,19 +1,19 @@
-import { Article } from './article.model';
-import { Customer } from './customer.model';
-import { OrderArticle } from './order-article.model';
+import { IArticle } from './article.model';
+import { ICustomer } from './customer.model';
+import { IOrderArticle } from './order-article.model';
 
-export interface Order {
+export interface IOrder {
   id?: any,
   description: string,
   amount: number,
   createdBy: string,
-  articles: OrderArticle[],
-  customer: Customer
+  articles: IOrderArticle[],
+  customer: ICustomer
 }
 
-export interface OrderState {
-  order: Order
+export interface IOrderState {
+  order: IOrder
 }
-export interface OrdersState {
-  orders: Order[]
+export interface IOrdersState {
+  orders: IOrder[]
 }

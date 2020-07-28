@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { Header, TranslationService, deleteOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { IHeader, TranslationService, deleteOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
@@ -14,8 +14,8 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class MainHeaderComponent implements OnInit, OnDestroy {
 
   private _subscriptions: Subscription;
-  private header$: Observable<Header>;
-  public header: Header;
+  private header$: Observable<IHeader>;
+  public header: IHeader;
   public title: Observable<string> = of(null);
   public leftIcon: Observable<string> = of(null);
   public rightIcon: Observable<string> = of(null);
@@ -27,7 +27,7 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
   constructor(private _router: Router,
               public dialog: MatDialog,
               private _transServ: TranslationService,
-              private _store: Store<{ header: Header }>) {
+              private _store: Store<{ header: IHeader }>) {
     this.header$ = this._store.pipe(select('header'));
     this._subscriptions = this.header$.subscribe(data => {
       this.header = data;

@@ -1,8 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
-import { BackNavigationState } from '../models/back-navigation.model';
+import { IBackNavigationState } from '../models/back-navigation.model';
 import { refreshBackNavigationDone } from './back-navigation.actions';
 
-export const initialState: BackNavigationState = {
+export const initialState: IBackNavigationState = {
     url: null
 };
 

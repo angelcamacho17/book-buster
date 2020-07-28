@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Header } from '../models/header.model';
+import { IHeader } from '../models/header.model';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Observable, of } from 'rxjs';
 })
 export class HeaderService {
 
-  private header: Header = {
+  private header: IHeader = {
     title: '',
     leftIcon: null,
     rightIcon: null,
@@ -21,13 +21,13 @@ export class HeaderService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public setHeader(header: Header): Observable<Header> {
+  public setHeader(header: IHeader): Observable<IHeader> {
     this.header = null;
     this.header = header;
     return of(this.header);
   }
 
-  public getHeader(): Observable<Header> {
+  public getHeader(): Observable<IHeader> {
     return of(this.header)
   }
 }

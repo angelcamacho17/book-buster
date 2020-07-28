@@ -1,4 +1,4 @@
-export interface Customer {
+export interface ICustomer {
   id?: number;
   name: string;
   address: string;
@@ -7,6 +7,6 @@ export interface Customer {
   email?: string
 }
 
-export interface CustomerState {
-  customers: Customer[]
+export interface ICustomerState {
+  customers: ICustomer[]
 }

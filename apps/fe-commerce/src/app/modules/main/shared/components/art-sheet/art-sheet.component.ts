@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { OrderArticle, Article } from '@fecommerce-workspace/data-store-lib';
+import { IOrderArticle, IArticle } from '@fecommerce-workspace/data-store-lib';
 
 @Component({
   selector: 'art-sheet',
@@ -8,7 +8,7 @@ import { OrderArticle, Article } from '@fecommerce-workspace/data-store-lib';
   styleUrls: ['./art-sheet.component.scss']
 })
 export class ArtSheetComponent implements OnInit {
-  @Input() article: Article;
+  @Input() article: IArticle;
 
   constructor(private _bottomSheetRef: MatBottomSheetRef<ArtSheetComponent>,
               @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {}

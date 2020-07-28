@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { Observable, Subscription, of, merge } from 'rxjs';
-import { deleteOrderArticleRequest, OrderArticle, refreshOrderArticlesRequest, OrderArticlesService, OrderService, Header, setHeaderRequest } from '@fecommerce-workspace/data-store-lib';
+import { deleteOrderArticleRequest, IOrderArticle, refreshOrderArticlesRequest, OrderArticlesService, OrderService, IHeader, setHeaderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { startWith, map, switchMap, tap } from 'rxjs/operators';
@@ -17,13 +17,13 @@ const speed = 10;
 })
 export class OrderItemsComponent implements OnInit, OnDestroy {
 
-  public $articles: Observable<OrderArticle[]>;
-  public articles: OrderArticle[] = [];
+  public $articles: Observable<IOrderArticle[]>;
+  public articles: IOrderArticle[] = [];
   public items: any = [];
   public initialPos = { x: 0, y: 0};
   private _subscriptions = new Subscription();
   private _substractArt = 0;
-  private _currentArt: OrderArticle;
+  private _currentArt: IOrderArticle;
   public filteredlist: Observable<any[]>;
   public horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   public showDeleteBtn = false;
@@ -54,7 +54,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   constructor(
     private _snackBar: MatSnackBar,
     private _ordSer: OrderService,
-    private _store: Store<{ orderArticles: OrderArticle[] }>,
+    private _store: Store<{ orderArticles: IOrderArticle[] }>,
     private _ordArtsService: OrderArticlesService,
     private _bottomSheet: MatBottomSheet) {
     this.$articles = this._store.pipe(select('orderArticles'));
@@ -68,7 +68,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    const header: Header = {
+    const header: IHeader = {
       title: 'orderitems',
       leftIcon: 'keyboard_arrow_left',
       rightIcon: null,
@@ -95,7 +95,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     }
   }
 
-  public openBottomSheet(item: OrderArticle): void {
+  public openBottomSheet(item: IOrderArticle): void {
     this._currentArt = item;
     const article = item.article;
     const ref = this._bottomSheet.open(ArtSheetComponent, {
@@ -109,11 +109,11 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     })
   }
 
-  private deleteArticle(article: OrderArticle): void {
+  private deleteArticle(article: IOrderArticle): void {
     this._store.dispatch(deleteOrderArticleRequest({orderArticleId: article.id}));
   }
 
-  public tempDelete(article: OrderArticle): void {
+  public tempDelete(article: IOrderArticle): void {
 
     this.waitToDeleted = true;
     this.articleToDelete = article;
@@ -171,7 +171,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     return total > 0 ? total : 0;
   }
 
-  private substractTemp(article: OrderArticle): void {
+  private substractTemp(article: IOrderArticle): void {
     this._substractArt = article.quantity * article.article.price;
   }
 }

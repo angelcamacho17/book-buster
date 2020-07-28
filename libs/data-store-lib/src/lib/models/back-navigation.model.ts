@@ -1,3 +1,3 @@
-export interface BackNavigationState {
+export interface IBackNavigationState {
   url: string
 }

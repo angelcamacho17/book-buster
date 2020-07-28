@@ -1,4 +1,4 @@
-export interface Header {
+export interface IHeader {
   title: string,
   leftIcon: string,
   rightIcon: string,
@@ -9,6 +9,6 @@ export interface Header {
   centered: boolean
 }
 
-export interface HeaderState {
-  header: Header
+export interface IHeaderState {
+  header: IHeader
 }

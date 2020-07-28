@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Renderer2, AfterViewInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { Order, getCurrentOrderRequest, OrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService, setHeaderRequest, Header } from '@fecommerce-workspace/data-store-lib';
+import { IOrder, getCurrentOrderRequest, IOrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService, setHeaderRequest, IHeader } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,19 +15,19 @@ import { DialogComponent } from '../shared/components/dialog/dialog.component';
 })
 export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  public order$: Observable<Order>;
-  public order: Order;
-  public $articles: Observable<OrderArticle[]>;
-  public articles: OrderArticle[] = [];
-  public orderArticles$: Observable<OrderArticle[]>;
-  public orderArticle: OrderArticle[];
+  public order$: Observable<IOrder>;
+  public order: IOrder;
+  public $articles: Observable<IOrderArticle[]>;
+  public articles: IOrderArticle[] = [];
+  public orderArticles$: Observable<IOrderArticle[]>;
+  public orderArticle: IOrderArticle[];
   private _subscriptions = new Subscription();
   public icon = 'keyboard_arrow_left';
   public lastUrl = 'article';
   public delete = false;
 
   constructor(
-    private _store: Store<{ currentOrder: Order, orderArticles: OrderArticle[] }>,
+    private _store: Store<{ currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
     private _snackBar: MatSnackBar,
     private _router: Router,
     public dialog: MatDialog,
@@ -61,7 +61,7 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    const header: Header = {
+    const header: IHeader = {
       title: 'orderover',
       leftIcon: this._router.url === '/main/order/edit' ? 'close' : 'keyboard_arrow_left',
       rightIcon: 'delete_outline',
@@ -92,8 +92,8 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
     this._router.navigate(['/home']);
   }
 
-  private updatedOrder(): Order {
-    const order: Order = {
+  private updatedOrder(): IOrder {
+    const order: IOrder = {
       id: this.order?.id,
       description: this.order.description,
       articles: this.articles,
