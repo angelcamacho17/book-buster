@@ -1,7 +1,7 @@
 {
   "name": "Commerce",
   "short_name": "Commerce",
-  "theme_color": "#1976d2",
+  "theme_color": "#1666d8",
   "background_color": "#1666d8",
   "display": "fullscreen",
   "scope": "./",
