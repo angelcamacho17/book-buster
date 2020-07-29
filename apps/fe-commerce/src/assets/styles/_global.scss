@@ -8,8 +8,10 @@ main {
   top: -1px;
   bottom: 0px;
   box-sizing: border-box;
+  height: calc(100vh - 112px);
 
   .scrollable-container {
+    flex: 1;
     overflow: auto;
   }
 }
