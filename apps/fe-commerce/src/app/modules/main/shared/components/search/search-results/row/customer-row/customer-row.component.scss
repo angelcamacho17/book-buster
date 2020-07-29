@@ -1,0 +1,56 @@
+.customer-row {
+  display: flex;
+  align-items: center;
+  max-height: 64px;
+  width: 100%;
+  box-sizing: border-box;
+
+  .avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.87);
+    margin-right: 16px;
+    .initials-sidenav {
+      position: relative;
+      display: -webkit-flex;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+    }
+  }
+
+  .item {
+    display: flex;
+    width: 100%;
+    height: 64px;
+    justify-content: space-between;
+    align-items: center;
+
+    .item-info {
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: flex-start;
+      max-height: 40px;
+      .title {
+        padding-top: 15px;
+        margin: 0 !important;
+        height: 28px;
+        color: rgba(0, 0, 0, 0.87);
+      }
+
+      .subtitle {
+        padding-bottom: 12px;
+        margin: 0 !important;
+        color: rgba(0, 0, 0, 0.6);
+      }
+    }
+  }
+}
