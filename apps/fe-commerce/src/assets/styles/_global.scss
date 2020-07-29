@@ -11,6 +11,11 @@ main {
   .scrollable-container {
     flex: 1;
     overflow: auto;
+    box-sizing: border-box;
+    padding-top: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 36px;
   }
 }
 
