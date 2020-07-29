@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OrderService, getCurrentOrderRequest, Order, Customer, BackNavigationService } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, getCurrentOrderRequest, IOrder, ICustomer, BackNavigationService } from '@fecommerce-workspace/data-store-lib';
 import { EventService } from '../../../../../services/event.service';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ export class CustomerRowComponent implements OnInit {
   constructor(
     private eventService: EventService,
     private _orderService: OrderService,
-    private _store: Store<{ currentOrder: Order }>,
+    private _store: Store<{ currentOrder: IOrder }>,
     private router: Router,
     private _backNavigationService: BackNavigationService
     ) { }
@@ -43,7 +43,7 @@ export class CustomerRowComponent implements OnInit {
     return text.charAt(index);
   }
 
-  public onSelectCustomer(customer: Customer): void {
+  public onSelectCustomer(customer: ICustomer): void {
     console.log('select customer article')
     this.eventService.customerChanged(customer);
     // this.eventService.customerChanged(customer);

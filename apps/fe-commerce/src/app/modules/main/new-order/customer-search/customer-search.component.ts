@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Customer, refreshCustomersRequest, Order, setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { ICustomer, refreshCustomersRequest, IOrder, setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
@@ -14,20 +14,20 @@ import { EventService } from '../../shared/services/event.service';
 })
 export class CustomerSearchComponent implements OnInit {
   // @Input() autoFocus = false;
-  public customers$: Observable<Customer[]>;
-  public customers: Customer[] = [];
+  public customers$: Observable<ICustomer[]>;
+  public customers: ICustomer[] = [];
   private _returnUrl = 'home';
   public hide = false;
   public shadow = false;
   public emptyResults = true;
   public lastUrl = 'neworder';
   public rowType = CustomerRowComponent;
-  public filteredResults: Customer[] = [];
+  public filteredResults: ICustomer[] = [];
   private _subscriptions$ = new Subject<any>();
   constructor(
     private eventService: EventService,
     private _router: Router,
-    private _store: Store<{ customers: Customer[] }>
+    private _store: Store<{ customers: ICustomer[] }>
   ) {
 
     this._subscribeToCustomerChange();
@@ -50,9 +50,9 @@ export class CustomerSearchComponent implements OnInit {
     ).subscribe(customer => this._onCustomerChange(customer));
   }
 
-  private _onCustomerChange(customer: Customer) {
+  private _onCustomerChange(customer: ICustomer) {
     console.log(customer)
-    const order: Order = {
+    const order: IOrder = {
       description: 'Latest order',
       articles: [],
       amount: 0,

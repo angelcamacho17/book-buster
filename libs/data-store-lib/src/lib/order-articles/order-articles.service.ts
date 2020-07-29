@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { OrderArticle } from '../models/order-article.model';
-import { Article } from '../models/article.model';
+import { IOrderArticle } from '../models/order-article.model';
+import { IArticle } from '../models/article.model';
 
 @Injectable({ providedIn: 'root' })
 export class OrderArticlesService {
 
-    private _orderArticles: OrderArticle[] = [];
+    private _orderArticles: IOrderArticle[] = [];
     // private orderArticles = new BehaviorSubject(this._orderArticles);
 
     constructor() { }
 
-    public all(): Observable<OrderArticle[]> {
+    public all(): Observable<IOrderArticle[]> {
       return of(this._orderArticles);
     }
 
-    public set(orderArticles: OrderArticle[]): Observable<OrderArticle[]> {
+    public set(orderArticles: IOrderArticle[]): Observable<IOrderArticle[]> {
         this._orderArticles = orderArticles;
         return of(this._orderArticles);
     }
 
-    public append(orderArticle: OrderArticle): Observable<OrderArticle[]> {
+    public append(orderArticle: IOrderArticle): Observable<IOrderArticle[]> {
         const lastOrderArticleId = this._orderArticles[this._orderArticles.length - 1]?.id ?? 0;
         orderArticle = { ...orderArticle, ...{ id: lastOrderArticleId + 1 } }
         this._orderArticles = this._orderArticles.concat(orderArticle);
@@ -28,13 +28,13 @@ export class OrderArticlesService {
         return of(this._orderArticles);
     }
 
-    public replace(orderArticle: OrderArticle): Observable<OrderArticle[]> {
+    public replace(orderArticle: IOrderArticle): Observable<IOrderArticle[]> {
       this.delete(orderArticle.id);
       this.append(orderArticle);
       return of(this._orderArticles);
     }
 
-    public delete(articleId: any): Observable<OrderArticle[]> {
+    public delete(articleId: any): Observable<IOrderArticle[]> {
       const articles = [];
       for (let i = 0; i < this._orderArticles.length; i++) {
         if (this._orderArticles[i].id !== articleId) {

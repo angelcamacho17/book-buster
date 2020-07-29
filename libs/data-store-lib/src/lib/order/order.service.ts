@@ -1,8 +1,7 @@
 import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Order } from '../models/order.model';
+import { IOrder } from '../models/order.model';
 import { Observable, BehaviorSubject, of, EMPTY } from 'rxjs';
-import { OrderArticle } from '../models/order-article.model';
 import { OrderArticlesService } from '../order-articles/order-articles.service';
 
 @Injectable({
@@ -13,10 +12,10 @@ export class OrderService {
   _baseUrl = 'assets/data/orders.json';
   private totalsCalculated = false;
 
-  private _orders: Array<Order> = [
+  private _orders: Array<IOrder> = [
     {
       "id": 9,
-      "description": "Other Order",
+      "description": "Other IOrder",
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
@@ -271,7 +270,7 @@ export class OrderService {
     },
     {
       "id": 12,
-      "description": "Order",
+      "description": "IOrder",
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
@@ -301,7 +300,7 @@ export class OrderService {
     },
     {
       "id": 13,
-      "description": "Order",
+      "description": "IOrder",
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
@@ -331,7 +330,7 @@ export class OrderService {
     },
     {
       "id": 14,
-      "description": "Order",
+      "description": "IOrder",
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
@@ -361,7 +360,7 @@ export class OrderService {
     },
     {
       "id": 15,
-      "description": "Order",
+      "description": "IOrder",
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
@@ -391,7 +390,7 @@ export class OrderService {
     },
     {
       "id": 16,
-      "description": "Order",
+      "description": "IOrder",
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
@@ -422,35 +421,35 @@ export class OrderService {
 
   ];
 
-  public currentOrder: Order = null;
+  public currentOrder: IOrder = null;
 
   constructor(
     private httpClient: HttpClient,
     private _ordArtsService: OrderArticlesService
   ) { }
 
-  public all(): Observable<Order[]> {
+  public all(): Observable<IOrder[]> {
     this.setOrdersTotal();
     return of(this._orders);
   }
 
-  public append(order: Order): Observable<Order[]> {
-    const lastOrderId = this._orders[this._orders.length - 1]?.id;
-    const newOrder: Order = {
-      id: lastOrderId + 1,
+  public append(order: IOrder): Observable<IOrder[]> {
+    const lastIOrderId = this._orders[this._orders.length - 1]?.id;
+    const newIOrder: IOrder = {
+      id: lastIOrderId + 1,
       description: order.description,
       amount: this.calculateTotal(order),
       createdBy: order.createdBy,
       articles: order.articles,
       customer: order.customer
     }
-    this._orders = this._orders.concat(newOrder);
+    this._orders = this._orders.concat(newIOrder);
     return of(this._orders);
   }
 
-  public replace(order: Order): Observable<Order[]> {
+  public replace(order: IOrder): Observable<IOrder[]> {
     const orders = [];
-    const editedOrder = {
+    const editedIOrder = {
       id: this.currentOrder.id,
       customer: order.customer,
       description: this.currentOrder.description,
@@ -465,15 +464,15 @@ export class OrderService {
     }
 
     this._orders = [];
-    this.currentOrder = editedOrder;
-    orders.push(editedOrder);
+    this.currentOrder = editedIOrder;
+    orders.push(editedIOrder);
     this._orders = orders;
     this._orders.sort(function(a, b){return a.id - b.id});
     return of(this._orders);
 
   }
 
-  public delete(): Observable<Order[]> {
+  public delete(): Observable<IOrder[]> {
     const orders = [];
     for (let i = 0; i < this._orders.length; i++) {
       if (this._orders[i].id !== this.currentOrder?.id) {
@@ -486,19 +485,19 @@ export class OrderService {
     return of(this._orders);
   }
 
-  public setCurrentOrder(order: Order): Observable<any> {
+  public setCurrentOrder(order: IOrder): Observable<any> {
     if (this.currentOrder === null) {
       this.currentOrder = order;
     }
     return of(this.currentOrder);
   }
 
-  public replaceCurrentOrder(order: Order): Observable<any> {
+  public replaceCurrentOrder(order: IOrder): Observable<any> {
     this.currentOrder = order;
     return of(this.currentOrder);
   }
 
-  public getCurrentOrder(): Observable<Order> {
+  public getCurrentOrder(): Observable<IOrder> {
     return of(this.currentOrder);
   }
 
@@ -517,7 +516,7 @@ export class OrderService {
     this.totalsCalculated = true;
   }
 
-  private calculateTotal(order: Order): number {
+  private calculateTotal(order: IOrder): number {
     let total = 0;
     for (const orderArticle of order.articles) {
       total = total + (orderArticle.article.price * orderArticle.quantity);
@@ -542,19 +541,19 @@ export class OrderService {
   }
 
   public all() {
-    return this.httpClient.get<Order[]>(this.getCollectionUrl());
+    return this.httpClient.get<IOrder[]>(this.getCollectionUrl());
   }
 
-  public append(order: Order) {
-    return this.httpClient.post<Order>(this.getCollectionUrl(), order);
+  public append(order: IOrder) {
+    return this.httpClient.post<IOrder>(this.getCollectionUrl(), order);
   }
 
-  public replace(car: Order) {
-    return this.httpClient.put<Order>(this.getElementUrl(car.id), car);
+  public replace(car: IOrder) {
+    return this.httpClient.put<IOrder>(this.getElementUrl(car.id), car);
   }
 
   public delete(carId: number) {
-    return this.httpClient.delete<Order>(this.getElementUrl(carId));
+    return this.httpClient.delete<IOrder>(this.getElementUrl(carId));
   }
 
  */

@@ -16,6 +16,8 @@ import { OrderArticleEffects } from './order-articles/order-articles.effects';
 import { OrderArticlesService } from './order-articles/order-articles.service';
 import { BackNavigationService } from './back-navigation/back.navigation.service';
 import { BackNavigationEffects } from './back-navigation/back-navigation.effects';
+import { HeaderEffects } from './header/header.effects';
+import { HeaderService } from './header/header.service';
 
 @NgModule({
   declarations: [DataStoreComponent],
@@ -27,7 +29,8 @@ import { BackNavigationEffects } from './back-navigation/back-navigation.effects
       CustomerEffects,
       ArticleEffects,
       OrderArticleEffects,
-      BackNavigationEffects
+      BackNavigationEffects,
+      HeaderEffects
     ])
   ],
   exports: [
@@ -39,6 +42,7 @@ import { BackNavigationEffects } from './back-navigation/back-navigation.effects
     ArticleService,
     OrderArticlesService,
     BackNavigationService,
+    HeaderService,
     {
       provide: RouterStateSerializer,
       useClass: CustomSerializer

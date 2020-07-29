@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, AfterContentChecked, ChangeDetectionStrategy, Renderer2 } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { setCurrentOrderRequest, clearCurrentOrderRequest, OrderService, setOrderArticlesRequest, BackNavigationService } from '@fecommerce-workspace/data-store-lib';
+import { setCurrentOrderRequest, clearCurrentOrderRequest, OrderService, setOrderArticlesRequest, BackNavigationService, IHeader, setHeaderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { Order } from '@fecommerce-workspace/data-store-lib';
+import { IOrder } from '@fecommerce-workspace/data-store-lib';
 import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
 import { takeUntil, map } from 'rxjs/operators';
 // import * as ordersData from '../../../assets/data/orders.json';
@@ -17,8 +17,8 @@ import { takeUntil, map } from 'rxjs/operators';
 export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked, OnDestroy {
   @ViewChild("ordersCard", { read: ElementRef }) ordersCard;
   @ViewChild("ordersCardList", { read: ElementRef }) ordersCardList;
-  public orders$: Observable<Order[]>;
-  public orders: Order[];
+  public orders$: Observable<IOrder[]>;
+  public orders: IOrder[];
   public display = false;
   public cardOverflows = false;
   private _subscriptions: Subscription;
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
     private _store: Store,
     private _router: Router,
     private _ordSer: OrderService,
-    private _storeOrders: Store<{ orders: Order[] }>,
+    private _storeOrders: Store<{ orders: IOrder[] }>,
     private _bnService: BackNavigationService,
     private _changeDetector: ChangeDetectorRef
   ) {
@@ -39,12 +39,16 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
       }
       this.orders = data;
     });
+
+
     this._store.dispatch(clearCurrentOrderRequest());
     this._store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
     this._storeOrders.dispatch(refreshOrdersRequest())
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+  }
 
   ngAfterViewInit(): void {
     this.cardOverflows = this.checkOrdersCardOverflow();
@@ -61,17 +65,17 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
     this._router.navigate(['/main/new-order']);
   }
 
-  public openOrder(order: Order): void {
+  public openOrder(order: IOrder): void {
     this._storeOrders.dispatch(setCurrentOrderRequest({ order }))
     this._store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }));
-    if (this._ordSer.currentOrder?.id){
-      this._router.navigate(['/main/order/edit']);
-    } else {
-      this._router.navigate(['/main/order']);
-    }
+    // if (this._ordSer.currentOrder?.id){
+    this._router.navigate(['/main/edit-order']);
+    // } else {
+    //   this._router.navigate(['/main/order']);
+    // }
   }
 
-  checkOrdersCardOverflow() {
+  public checkOrdersCardOverflow() {
     const cardHeight = this.ordersCard?.nativeElement.offsetHeight;
     const listHeight = this.ordersCardList?.nativeElement.offsetHeight;
     const cardScroll = this.ordersCard?.nativeElement.scrollHeight;

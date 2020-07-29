@@ -1,19 +1,19 @@
 import { createReducer, on } from '@ngrx/store';
-import { Article, ArticleState, ArticlesState } from '../models/article.model';
+import { IArticle, IArticleState, IArticlesState } from '../models/article.model';
 import { refreshArticlesDone, getArticleDone } from './article.actions';
 
-export const initialArticlesState: ArticlesState = {
+export const initialArticlesState: IArticlesState = {
     articles: []
 };
 
-export const initialArticleState: ArticleState = {
+export const initialArticleState: IArticleState = {
     article: null
 };
 
-export const articlesReducer = createReducer<Article[]>(initialArticlesState.articles,
+export const articlesReducer = createReducer<IArticle[]>(initialArticlesState.articles,
     on(refreshArticlesDone, (_, action) => action.articles)
 );
 
-export const articleReducer = createReducer<Article>(initialArticleState.article,
+export const articleReducer = createReducer<IArticle>(initialArticleState.article,
     on(getArticleDone, (_, action) => action.article)
 );

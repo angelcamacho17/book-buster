@@ -1,6 +1,8 @@
-<header #header>
-  <main-header></main-header>
-</header>
-<div [@routeAnimations]="prepareRoute(outlet)">
-  <router-outlet #outlet="outlet"></router-outlet>
+<div [style.display]="render ? 'block' : 'none'">
+  <header #header>
+    <main-header></main-header>
+  </header>
+  <div [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
 </div>

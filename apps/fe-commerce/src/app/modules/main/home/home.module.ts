@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../../material/material.module';
 import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
+import { HomeResolver } from './home.resolver';
 
 @NgModule({
   declarations: [HomeComponent],

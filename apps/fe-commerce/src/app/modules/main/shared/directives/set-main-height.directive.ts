@@ -25,6 +25,7 @@ export class SetMainHeightDirective implements AfterViewInit {
   }
 
   private setElHeight(): void {
+    console.log('HEADER: '+this.componentService?.headerElement?.nativeElement?.offsetHeight);
     const height = 'calc(100vh - ' + this.componentService.headerElement?.nativeElement?.offsetHeight + 'px)';
     this.renderer.setStyle(
       this._el.nativeElement,

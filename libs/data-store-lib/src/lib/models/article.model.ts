@@ -1,14 +1,14 @@
-export interface Article {
+export interface IArticle {
   id?: number;
   name: string;
   description: string;
   price?: number;
 }
 
-export interface ArticlesState {
-  articles: Article[];
+export interface IArticlesState {
+  articles: IArticle[];
 }
 
-export interface ArticleState {
-  article: Article;
+export interface IArticleState {
+  article: IArticle;
 }

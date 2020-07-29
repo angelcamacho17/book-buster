@@ -11,14 +11,14 @@
            (goBack)="onHeaderGoBack()"
            (returnUrl)="returnUrl()"></fe-header>
   </header> -->
-<div class="header-extension">
+<!-- <div class="header-extension">
   <fe-search (searchFocus)="showShadow($event)"
              (searchBlur)="removeShadow()"
              (userSearching)="hidePanel($event)"
              (hasSearchResults)="handleSearchResults($event)" 
              [list]="customers" 
              [autoFocus]="true"></fe-search>
-</div>
+</div> -->
 <div class="scrollable-container" [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
   <fe-search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
     [dividerClass]="'customer-divider'" class="search-results"></fe-search-results>

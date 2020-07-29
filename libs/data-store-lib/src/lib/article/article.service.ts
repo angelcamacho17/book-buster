@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Article } from '../models/article.model';
+import { IArticle } from '../models/article.model';
 import { BehaviorSubject, Observable, of, EMPTY } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class ArticleService {
-    private _articles: Article[] = [{
+    private _articles: IArticle[] = [{
         "id": 1,
         "name": "Southern Comfort",
         "description": "Eosinophilic gastroenteritis",
@@ -454,25 +454,25 @@ export class ArticleService {
 
     constructor() { }
 
-    all(): Observable<Article[]> {
+    all(): Observable<IArticle[]> {
         return this.articles.asObservable();
     }
 
-    get(articleId: number): Observable<Article> {
+    get(articleId: number): Observable<IArticle> {
       const article = this._articles.find((a) => {
         return a.id === articleId;
       });
       return of(article ?? null); // ?? -> Si la izquierda es falso, null o undefined, devuelve valor de la derecha.
     }
 
-    append(article: Article): Observable<Article[]> {
+    append(article: IArticle): Observable<IArticle[]> {
         const lastArticleId = this._articles[this._articles.length - 1].id;
         this._articles.concat({...article, ...{ id: lastArticleId + 1 }});
         this.articles.next(this._articles);
         return this.articles.asObservable();
     }
 
-    replace(article: Article): Observable<Article[]> {
+    replace(article: IArticle): Observable<IArticle[]> {
         const index = this._articles.findIndex(a => a.id === article.id);
         this._articles[index].name = article.name;
         this._articles[index].description = article.description;
@@ -481,7 +481,7 @@ export class ArticleService {
         return this.articles.asObservable();
     }
 
-    delete(articleId: any): Observable<Article[]> {
+    delete(articleId: any): Observable<IArticle[]> {
       const index = this._articles.findIndex(a => a.id === articleId);
       this._articles.splice(index, 1);
       this.articles.next(this._articles);

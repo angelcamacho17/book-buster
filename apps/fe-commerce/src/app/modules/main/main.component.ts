@@ -13,19 +13,30 @@ import { ComponentService } from './shared/services/component.service';
 })
 export class MainComponent implements OnInit, AfterViewInit {
   @ViewChild('header', { read: ElementRef }) private headerElement: ElementRef<any>;
+  public render = false;
   constructor(
     private componentService: ComponentService
-  ) { }
+    ) {
+      if (!localStorage.getItem('foo')) {
+        localStorage.setItem('foo', 'no reload');
+        location.reload();
+      } else {
+        this.render = true;
+        localStorage.removeItem('foo');
+      }
+    }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   ngAfterViewInit(): void {
     this.componentService.headerElement = this.headerElement;
     console.log(this.componentService.headerElement);
   }
 
-  prepareRoute(outlet: RouterOutlet) {
+  public prepareRoute(outlet: RouterOutlet) {
     /* tslint:disable:no-string-literal */
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
+
 }

@@ -1,12 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import { refreshCustomersDone, editCustomer, cancelCustomer } from './customer.actions';
-import { CustomerState, Customer } from '../models/customer.model';
+import { ICustomerState, ICustomer } from '../models/customer.model';
 
-export const initialState: CustomerState = {
+export const initialState: ICustomerState = {
   customers: []
 };
 
-export const customersReducer = createReducer<Customer[]>(initialState.customers,
+export const customersReducer = createReducer<ICustomer[]>(initialState.customers,
   on(refreshCustomersDone, (_, action) => action.customers),
 );
 

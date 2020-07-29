@@ -1,11 +1,11 @@
-import { Article } from './article.model';
+import { IArticle } from './article.model';
 
-export interface OrderArticle {
+export interface IOrderArticle {
     id?: number,
-    article: Article,
+    article: IArticle,
     quantity: number
 }
 
-export interface OrderArticlesState {
-    orderArticles: OrderArticle[]
+export interface IOrderArticlesState {
+    orderArticles: IOrderArticle[]
 }

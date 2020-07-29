@@ -1,4 +1,4 @@
-import { Injectable, ElementRef } from '@angular/core';
+import { Injectable, ElementRef, HostListener } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -9,4 +9,5 @@ export class ComponentService {
   public mainElement: ElementRef;
 
   constructor() { }
+
 }
