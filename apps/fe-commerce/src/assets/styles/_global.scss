@@ -5,8 +5,9 @@ main {
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
-  height: 100%;
   top: -1px;
+  bottom: 0px;
+  box-sizing: border-box;
 
   .scrollable-container {
     flex: 1;
