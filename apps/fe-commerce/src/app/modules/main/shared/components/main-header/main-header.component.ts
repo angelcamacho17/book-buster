@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, HostListener } from '@angular/core';
 import { IHeader, TranslationService, deleteOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable, of } from 'rxjs';
@@ -93,6 +93,5 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
   public addArticle(): void {
     this._router.navigate(['/article']);
   }
-
 
 }

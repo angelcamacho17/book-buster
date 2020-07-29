@@ -34,8 +34,9 @@ export class MainComponent implements OnInit, AfterViewInit {
     console.log(this.componentService.headerElement);
   }
 
-  prepareRoute(outlet: RouterOutlet) {
+  public prepareRoute(outlet: RouterOutlet) {
     /* tslint:disable:no-string-literal */
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
+
 }

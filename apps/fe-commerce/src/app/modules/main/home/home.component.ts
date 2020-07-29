@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
     // }
   }
 
-  checkOrdersCardOverflow() {
+  public checkOrdersCardOverflow() {
     const cardHeight = this.ordersCard?.nativeElement.offsetHeight;
     const listHeight = this.ordersCardList?.nativeElement.offsetHeight;
     const cardScroll = this.ordersCard?.nativeElement.scrollHeight;
