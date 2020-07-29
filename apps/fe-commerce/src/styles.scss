@@ -4,7 +4,7 @@
 @import "assets/styles/global";
 
 html {
-  //position: fixed;
+  position: fixed;
   height: 100%;
   overflow: hidden;
 }
@@ -15,5 +15,5 @@ body {
   padding: 0 !important;
   margin: 0 !important;
   overflow: hidden;
-  background: linear-gradient(180deg, #1666d8 6%, #F7F8F9 6%);;
+  background: #F7F8F9;
 }
