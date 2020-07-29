@@ -80,8 +80,7 @@ export class FeNewOrderComponent implements OnInit, OnDestroy, AfterViewInit {
           this._returnUrl = params.returnUrl;
         }
       });
-  }
-
+  }+
   private openConfirmDialog() {
     let message;
     if (this.currentOrder?.articles?.length) {

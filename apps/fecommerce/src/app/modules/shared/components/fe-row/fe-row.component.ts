@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 @Component({
   selector: 'fe-row',
   templateUrl: './fe-row.component.html',
-  styleUrls: ['./fe-row.component.css']
+  styleUrls: ['./fe-row.component.scss']
 })
 export class FeRowComponent implements OnInit {
 
