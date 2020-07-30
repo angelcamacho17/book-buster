@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     };
   }
   ngAfterViewInit(): void {
-    document.getElementById('top').focus();
+    document.getElementById('title').focus();
   }
 
   ngOnInit() {
@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     this.loginForm = this._formBuilder.group({
       key: ['', [Validators.required]],
-      user: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
 
@@ -158,7 +158,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   get key() { return this.loginForm.value.key; }
 
-  get username() { return this.loginForm.value.user; }
+  get username() { return this.loginForm.value.username; }
 
   get password() { return this.loginForm.value.password; }
 
