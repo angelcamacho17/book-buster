@@ -7,7 +7,6 @@ main {
   align-items: stretch;
   box-sizing: border-box;
   height: calc(100vh - 112px);
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 
   .scrollable-container {
     flex: 1;
