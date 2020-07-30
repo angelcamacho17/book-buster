@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     };
   }
   ngAfterViewInit(): void {
-    document.getElementById('login').focus();
+    document.getElementById('top').focus();
   }
 
   ngOnInit() {

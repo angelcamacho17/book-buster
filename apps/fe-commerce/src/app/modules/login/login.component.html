@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="top-content">
+  <div class="top-content" #top id="top">
     <img [@image]="displayImg ? 'not-hide' : 'hide'" src="assets/img/commerce-logo.png" alt="" class="logo" >
     <div [@title]="displayTitle ? 'not-hide' : 'hide'" class="title mat-display-1">
       {{'welcome' | translate}}
@@ -43,7 +43,7 @@
               [class.disabled] = "isSubmitted"
               [disabled] = "isSubmitted"
               mat-button
-              #login id="login">
+              >
               {{('sign' | translate) | uppercase}}
               <mat-progress-bar
                 mode="indeterminate"
