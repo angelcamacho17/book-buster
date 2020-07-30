@@ -6,7 +6,8 @@ export interface IHeader {
   lastUrl: string,
   confirmDiscard?: boolean,
   addArt?: boolean,
-  centered?: boolean
+  centered?: boolean,
+  flow?: string
 }
 
 export interface IHeaderState {
