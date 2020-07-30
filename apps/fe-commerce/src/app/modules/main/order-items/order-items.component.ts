@@ -82,6 +82,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   public openBottomSheet(item: IOrderArticle): void {
     this._currentArt = item;
     const article = item.article;
+    this._snackBar.dismiss();
     const ref = this._bottomSheet.open(ArtSheetComponent, {
       data: { article },
     });
