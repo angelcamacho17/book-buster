@@ -5,9 +5,8 @@
 
 html {
   position: fixed;
-  height: calc(100% + env(safe-area-inset-top));
+  height: 100%;
   overflow: hidden;
-
 }
 body {
   position: fixed;
