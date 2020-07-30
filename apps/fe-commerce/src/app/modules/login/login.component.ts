@@ -77,9 +77,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     };
   }
   ngAfterViewInit(): void {
-    setTimeout(()=>{
-      document.getElementById('dum').focus();
-    },200)
+    // setTimeout(()=>{
+    //   document.getElementById('dum').focus();
+    // },200)
+    this.loginForm.controls['username'].markAsPristine();
+    this.loginForm.controls['username'].markAsUntouched();
+    this.loginForm.controls['username'].markAsPristine();
   }
 
   ngOnInit() {
