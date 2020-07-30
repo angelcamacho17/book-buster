@@ -12,11 +12,10 @@ html {
 body {
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh + env(safe-area-inset-top));
   padding: 0;
   padding-top: env(safe-area-inset-top); /* iOS 11.2 */
   margin: 0 !important;
   overflow: hidden;
   background: #F7F8F9;
-  bottom: calc(0px - env(safe-area-inset-top));
 }
