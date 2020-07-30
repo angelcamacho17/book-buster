@@ -7,7 +7,6 @@ html {
   position: fixed;
   height: 100%;
   overflow: hidden;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 
 }
 body {
@@ -18,5 +17,4 @@ body {
   margin: 0 !important;
   overflow: hidden;
   background: #F7F8F9;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
