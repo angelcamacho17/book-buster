@@ -31,7 +31,6 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.componentService.headerElement = this.headerElement;
-    console.log(this.componentService.headerElement);
   }
 
   public prepareRoute(outlet: RouterOutlet) {
