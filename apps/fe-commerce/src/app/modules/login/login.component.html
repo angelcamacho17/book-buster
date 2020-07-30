@@ -1,6 +1,6 @@
 <div class="container">
   <div class="top-content">
-    <img [@image]="displayImg ? 'not-hide' : 'hide'" src="assets/img/commerce-logo.png" alt="" class="logo" #logo id="logo">
+    <img [@image]="displayImg ? 'not-hide' : 'hide'" src="assets/img/commerce-logo.png" alt="" class="logo" >
     <div [@title]="displayTitle ? 'not-hide' : 'hide'" class="title mat-display-1">
       {{'welcome' | translate}}
     </div>
@@ -14,7 +14,7 @@
     <div class="fields" >
       <mat-form-field color="accent" [style.display]="hideCustomerKey ? 'none': 'relative'">
         <mat-label class="mat-caption input">{{'customerkey' | translate}}</mat-label>
-        <input matInput class="input" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="key" (keyup)="cleanError($event)">
+        <input matInput #key id="key" class="input" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="key" (keyup)="cleanError($event)">
       </mat-form-field>
       <mat-error class="error mat-body-1" *ngIf="!loginForm.controls['key'].valid && loginForm.controls['key'].touched">
         {{'required' | translate }}
