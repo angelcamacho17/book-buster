@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { trigger, style, state, transition, animate } from '@angular/animations';
@@ -53,7 +53,7 @@ import { KeyValueStoreService, HCSClient, ConfigService, LanguageService, AuthSe
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
   public loginForm: FormGroup;
   public isSubmitted = false;
@@ -75,7 +75,10 @@ export class LoginComponent implements OnInit {
     this._router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
-}
+  }
+  ngAfterViewInit(): void {
+    document.getElementById('logo').focus();
+  }
 
   ngOnInit() {
 
@@ -111,6 +114,7 @@ export class LoginComponent implements OnInit {
         key
       });
     }
+
 
   }
 
