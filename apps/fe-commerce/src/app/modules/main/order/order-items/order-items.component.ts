@@ -7,9 +7,6 @@ import { startWith, map, switchMap, tap } from 'rxjs/operators';
 import {  MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ArtSheetComponent } from '../shared/components/art-sheet/art-sheet.component';
 
-
-const speed = 10;
-
 @Component({
   selector: 'order-items',
   templateUrl: './order-items.component.html',
@@ -85,6 +82,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   public openBottomSheet(item: IOrderArticle): void {
     this._currentArt = item;
     const article = item.article;
+    this._snackBar.dismiss();
     const ref = this._bottomSheet.open(ArtSheetComponent, {
       data: { article },
     });
@@ -130,7 +128,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
 
       }
       this._substractArt = 0;
-      const inputElement: HTMLElement = document.getElementById('card') as HTMLElement;
+      const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
       setTimeout(() => {
         inputElement.click();
       }, 1);

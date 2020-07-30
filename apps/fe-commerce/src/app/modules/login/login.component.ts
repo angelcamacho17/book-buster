@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { trigger, style, state, transition, animate } from '@angular/animations';
@@ -53,7 +53,7 @@ import { KeyValueStoreService, HCSClient, ConfigService, LanguageService, AuthSe
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
   public loginForm: FormGroup;
   public isSubmitted = false;
@@ -75,7 +75,15 @@ export class LoginComponent implements OnInit {
     this._router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
-}
+  }
+  ngAfterViewInit(): void {
+    // setTimeout(()=>{
+    //   document.getElementById('dum').focus();
+    // },200)
+    this.loginForm.controls['username'].markAsPristine();
+    this.loginForm.controls['username'].markAsUntouched();
+    this.loginForm.controls['username'].markAsPristine();
+  }
 
   ngOnInit() {
 
@@ -93,7 +101,7 @@ export class LoginComponent implements OnInit {
 
     this.loginForm = this._formBuilder.group({
       key: ['', [Validators.required]],
-      user: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
 
@@ -111,6 +119,7 @@ export class LoginComponent implements OnInit {
         key
       });
     }
+
 
   }
 
@@ -154,7 +163,7 @@ export class LoginComponent implements OnInit {
 
   get key() { return this.loginForm.value.key; }
 
-  get username() { return this.loginForm.value.user; }
+  get username() { return this.loginForm.value.username; }
 
   get password() { return this.loginForm.value.password; }
 

@@ -1,16 +1,16 @@
 <div class="container">
-  <div class="top-content">
-    <img [@image]="displayImg ? 'not-hide' : 'hide'" src="assets/img/commerce-logo.png" alt="" class="logo">
-    <div [@title]="displayTitle ? 'not-hide' : 'hide'" class="title mat-display-1">
+  <div class="top-content" >
+    <img [@image]="displayImg ? 'not-hide' : 'hide'" src="assets/img/commerce-logo.png" alt="" class="logo" >
+    <div [@title]="displayTitle ? 'not-hide' : 'hide'" class="title mat-display-1" #title id="title">
       {{'welcome' | translate}}
     </div>
     <div [@title]="displayTitle ? 'not-hide' : 'hide'" class="subtitle mat-headline">
       {{'signin' | translate}}
     </div>
   </div>
+  <input #dum id="dum" style="display: none;">
   <form [@content]="displayContent ? 'not-hide' : 'hide'" [formGroup]="loginForm" (ngSubmit)="onSubmit($event)" disabled="isSubmitted"
         style="width: 100%;">
-
     <div class="fields" >
       <mat-form-field color="accent" [style.display]="hideCustomerKey ? 'none': 'relative'">
         <mat-label class="mat-caption input">{{'customerkey' | translate}}</mat-label>
@@ -22,9 +22,9 @@
 
       <mat-form-field color="accent">
         <mat-label class="mat-caption input">{{'user' | translate}}</mat-label>
-        <input matInput class="input" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="user" (keyup)="cleanError($event)">
+        <input matInput class="input" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="username" (keyup)="cleanError($event)">
       </mat-form-field>
-      <mat-error class="error mat-body-1" *ngIf="!loginForm.controls['user'].valid && loginForm.controls['user'].touched">
+      <mat-error class="error mat-body-1" *ngIf="!loginForm.controls['username'].valid && loginForm.controls['username'].touched">
         {{'required' | translate }}
       </mat-error>
       <mat-form-field color="accent" style="margin-bottom: 0;">
@@ -42,7 +42,8 @@
       <button class="login-btn mat-elevation-0"
               [class.disabled] = "isSubmitted"
               [disabled] = "isSubmitted"
-              mat-button>
+              mat-button
+              >
               {{('sign' | translate) | uppercase}}
               <mat-progress-bar
                 mode="indeterminate"

@@ -4,7 +4,7 @@
 @import "assets/styles/global";
 
 html {
-  position: fixed;
+  //position: fixed;
   height: 100%;
   overflow: hidden;
 }
@@ -12,7 +12,8 @@ body {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  padding: 0 !important;
+  padding: 0;
+  //padding-top: env(safe-area-inset-top); /* iOS 11.2 */
   margin: 0 !important;
   overflow: hidden;
   background: #F7F8F9;
