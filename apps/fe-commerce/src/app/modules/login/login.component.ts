@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(()=>{
       document.getElementById('dum').focus();
-    })
+    },200)
   }
 
   ngOnInit() {
