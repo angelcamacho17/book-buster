@@ -24,8 +24,7 @@ export class CustomerRowComponent implements OnDestroy {
     private router: Router,
     private _store: Store<{ currentOrder: IOrder }>,
     private _bnService: BackNavigationService
-  ) {
-
+  ){
     if (this.item) {
       this.smaller = this.reduceLetterSize();
     }

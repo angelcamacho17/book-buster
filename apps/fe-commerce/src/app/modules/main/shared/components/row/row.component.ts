@@ -17,6 +17,7 @@ export class RowComponent implements OnInit {
   constructor(public router: Router,
               public componentFactoryResolver: ComponentFactoryResolver,
               public store: Store) {
+                console.log('row')
                }
 
   ngOnInit(): void {

@@ -10,6 +10,7 @@ import { ArtSheetComponent } from './components/art-sheet/art-sheet.component';
 import { BaseComponent } from './components/base/base.component';
 import { CustomerRowComponent } from './components/row/customer-row/customer-row.component';
 import { ArticleRowComponent } from './components/row/article-row/article-row.component';
+import { ConfirmDiscardDialogComponent } from './components/confirm-discard/confirm-discard-dialog.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 import { SetMainHeightDirective } from './directives/set-main-height.directive';
@@ -17,6 +18,7 @@ import { FillScrollableDirective } from './directives/fill-scrollable.directive'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { SetHeaderHeightDirective } from './directives/set-header-height.directive';
+import { RowComponent } from './components/row/row.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +33,11 @@ import { SetHeaderHeightDirective } from './directives/set-header-height.directi
     FillScrollableDirective,
     SetHeaderHeightDirective,
     SearchComponent,
+    SearchResultsComponent,
+    RowComponent,
     CustomerRowComponent,
     ArticleRowComponent,
-    SearchResultsComponent
+    ConfirmDiscardDialogComponent
   ],
   imports: [
     CommonModule,
@@ -54,9 +58,11 @@ import { SetHeaderHeightDirective } from './directives/set-header-height.directi
     FillScrollableDirective,
     SetHeaderHeightDirective,
     SearchComponent,
+    SearchResultsComponent,
+    RowComponent,
     CustomerRowComponent,
     ArticleRowComponent,
-    SearchResultsComponent
+    ConfirmDiscardDialogComponent
   ]
 })
 
