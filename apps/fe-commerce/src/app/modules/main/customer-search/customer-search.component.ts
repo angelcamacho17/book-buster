@@ -1,13 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { refreshCustomersRequest, setCurrentOrderRequest, getCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService } from '@fecommerce-workspace/data-store-lib';
+import { refreshCustomersRequest, setCurrentOrderRequest, getCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService, isUndefined } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
 import { EventService } from '../shared/services/event.service';
 import { CustomerRowComponent } from '../shared/components/row/customer-row/customer-row.component';
 import { MatDialog } from '@angular/material/dialog';
-import { isUndefined } from 'libs/data-store-lib/src/lib/sdp/utils/types/value.util';
 import { ConfirmDiscardDialogComponent } from '../shared/components/confirm-discard/confirm-discard-dialog.component';
 
 @Component({
@@ -15,7 +14,7 @@ import { ConfirmDiscardDialogComponent } from '../shared/components/confirm-disc
   templateUrl: './customer-search.component.html',
   styleUrls: ['./customer-search.component.scss']
 })
-export class CustomerSearchComponent implements OnInit {
+export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit {
   public customers$: Observable<ICustomer[]>;
   public customers: ICustomer[];
   public orders: IOrder[];

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { ArticleRowComponent } from '../shared/components/row/article-row/article-row.component';
 import { IArticle, OrderService, IOrder, refreshArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { Store, select } from '@ngrx/store';
   templateUrl: './article-search.component.html',
   styleUrls: ['./article-search.component.scss']
 })
-export class ArticleSearchComponent implements OnInit {
+export class ArticleSearchComponent implements OnInit, OnDestroy, AfterViewInit {
   public rowType = ArticleRowComponent;
   public articles: IArticle[] = [];
   private _articles$: Observable<IArticle[]>;
