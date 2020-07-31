@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDiscardDialogComponent } from '../shared/components/confirm-discard/confirm-discard-dialog.component';
 
 @Component({
-  selector: 'fe-customer-search',
+  selector: 'customer-search',
   templateUrl: './customer-search.component.html',
   styleUrls: ['./customer-search.component.scss']
 })
@@ -187,6 +187,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   public handleSearchResults(results: any[]): void {
+    console.log(results.length === 0);
     this.emptyResults = results.length === 0;
     this.filteredResults = results;
   }

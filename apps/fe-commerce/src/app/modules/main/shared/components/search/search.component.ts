@@ -62,6 +62,7 @@ export class SearchComponent implements OnInit, OnDestroy {
           this._userSearching = true;
           this._filteredList = this.getFilteredResults();
           this.hasSearchResults.emit(this._filteredList);
+          this.searchBlur.emit(true);
       } else {
           this._userSearching = false;
           this.hasSearchResults.emit([]);

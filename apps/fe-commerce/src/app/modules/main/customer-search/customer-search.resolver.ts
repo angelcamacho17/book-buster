@@ -12,7 +12,7 @@ export class CustomerSearchResolver implements Resolve<any> {
   resolve(): Observable<any> {
     const header: IHeader = {
       title: 'neworder',
-      leftIcon: 'keyboard_arrow_left',
+      leftIcon: 'close',
       rightIcon: null,
       titClass: 'mat-title',
       lastUrl: 'main/home',

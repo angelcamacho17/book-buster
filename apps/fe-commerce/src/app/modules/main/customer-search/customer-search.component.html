@@ -7,11 +7,11 @@
              [list]="customers"
              [autoFocus]="true"></search>
   </div>
-  <div class="search-container" [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
+  <div class="search-container" [ngClass]="(shadow || !emptyResults) ? 'shadow move-up' : ''">
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
       [dividerClass]="'customer-divider'" class="search-results"></search-results>
   <!-- needs to be added on fe-search-results [rowType]="rowType"  -->
-    <div class="no-results" *ngIf="!hide && emptyResults" [ngClass]="shadow || !emptyResults ? 'move-up' : ''">
+    <div class="no-results" *ngIf="!hide && emptyResults" [ngClass]="(shadow || !emptyResults) ? 'move-up' : ''">
       <mat-icon class="icon">search</mat-icon>
       <div class="mat-title search-text">{{'searchcus' | translate}}</div>
       <div class="mat-subheading-2 search-description">{{'cusplaceholder' | translate}}</div>

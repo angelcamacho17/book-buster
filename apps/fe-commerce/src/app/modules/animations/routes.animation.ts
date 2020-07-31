@@ -21,14 +21,23 @@ export const routesAnimations =
     transition('home => new-order', slideToRight()),
     transition('home => order', slideToRight()),
     transition('home => edit-order', slideToRight()),
+    transition('home => customer-search', fromBottom()),
 
     transition('new-order => home', slideToLeft()),
+
     transition('order => home', slideToLeft()),
 
     transition('edit-order => home', slideToLeft()),
     transition('edit-order => order-items', slideToRight()),
 
     transition('order-items => edit-order', slideToLeft()),
+
+    transition('customer-search => home', fromTop()),
+    transition('customer-search => article-search', slideToRight()),
+
+    transition('article-search => customer-search', slideToLeft()),
+
+
   ]);
 
 function slideToRight() {
@@ -133,15 +142,15 @@ function fromBottom() {
     ]),
     group([
       query(':leave', [
-        animate('2000ms ease',
+        animate('150ms ease',
         style({
           'z-index': 0,
 
       }))
       ], optional),
       query(':enter', [
-        animate('2000ms ease', style({
-          top: '0%',
+        animate('150ms ease', style({
+          top: '112px',
           'z-index': 10,
 
         }))
@@ -162,7 +171,7 @@ function fromTop() {
       style({
         position: 'fixed',
         width: '100%',
-        top: '0',
+        top: '112px',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100vh',
         background: '#F7F8F9',
@@ -171,7 +180,7 @@ function fromTop() {
     ], optional),
     query(':enter', [
       style({
-        top: 0,
+        top: '112px',
         'z-index': 0
     })
     ]),
@@ -185,7 +194,7 @@ function fromTop() {
       ], optional),
       query(':enter', [
         animate('150ms ease', style({
-          top: 0,
+          top: '112px',
           'z-index': 0,
         }))
       ])
