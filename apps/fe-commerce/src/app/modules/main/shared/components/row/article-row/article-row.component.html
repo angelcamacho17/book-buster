@@ -1,0 +1,16 @@
+<div class="article-row" (click)="openArticleDetail(item)">
+  <div class="item">
+    <div class="item-info">
+      <div class="mat-subheading-2 title">
+        {{item?.name}}
+      </div>
+      <div class="mat-body-1 subtitle text-truncate">
+        {{item?.description}}
+      </div>
+    </div>
+    <div class="mat-caption price">
+      € {{item?.price}}
+    </div>
+    <!-- <mat-divider class="divider"></mat-divider> fede -->
+  </div>
+</div>

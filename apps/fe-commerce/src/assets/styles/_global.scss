@@ -41,6 +41,14 @@ main {
   }
 }
 
+.header-extension {
+  position: absolute;
+  height: 40px;
+  width: 100%;
+  background: #1666d8;
+  left: 0;
+}
+
 .shadow {
   background: rgba(0, 0, 0, 0.15) !important;
 }

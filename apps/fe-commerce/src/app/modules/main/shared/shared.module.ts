@@ -8,6 +8,10 @@ import { SetHeightDirective } from './directives/set-height.directive';
 import { ScrollableDivDirective } from './directives/scrollable-div.directive';
 import { ArtSheetComponent } from './components/art-sheet/art-sheet.component';
 import { BaseComponent } from './components/base/base.component';
+import { CustomerRowComponent } from './components/row/customer-row/customer-row.component';
+import { ArticleRowComponent } from './components/row/article-row/article-row.component';
+import { SearchComponent } from './components/search/search.component';
+import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 import { SetMainHeightDirective } from './directives/set-main-height.directive';
 import { FillScrollableDirective } from './directives/fill-scrollable.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +30,10 @@ import { SetHeaderHeightDirective } from './directives/set-header-height.directi
     SetMainHeightDirective,
     FillScrollableDirective,
     SetHeaderHeightDirective,
+    SearchComponent,
+    CustomerRowComponent,
+    ArticleRowComponent,
+    SearchResultsComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +52,11 @@ import { SetHeaderHeightDirective } from './directives/set-header-height.directi
     BaseComponent,
     SetMainHeightDirective,
     FillScrollableDirective,
-    SetHeaderHeightDirective
+    SetHeaderHeightDirective,
+    SearchComponent,
+    CustomerRowComponent,
+    ArticleRowComponent,
+    SearchResultsComponent
   ]
 })
 
