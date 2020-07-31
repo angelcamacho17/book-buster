@@ -41,7 +41,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     private _router: Router,
     private _transServ: TranslationService,
     private _route: ActivatedRoute) {
-    this._subscriptions = this.eventService.customerChange.subscribe(customer => this.onICustomerChange(customer));
+    this._subscriptions = this.eventService.customerChange.subscribe(customer => this.onCustomerChange(customer));
 
     this.customers$ = this._store.pipe(select('customers'));
     this._subscriptions = this.customers$.subscribe(data => {
@@ -106,7 +106,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     });
   }
 
-  public onICustomerChange(customer: ICustomer) {
+  public onCustomerChange(customer: ICustomer) {
     if (this.currentIOrder === null || isUndefined(this.currentIOrder)) {
       const order: IOrder = {
         description: 'Latest order',
@@ -187,7 +187,6 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   public handleSearchResults(results: any[]): void {
-    console.log(results.length === 0);
     this.emptyResults = results.length === 0;
     this.filteredResults = results;
   }

@@ -4,8 +4,7 @@
              (searchBlur)="removeShadow()"
              (userSearching)="hidePanel($event)"
              (hasSearchResults)="handleSearchResults($event)"
-             [list]="customers"
-             [autoFocus]="true"></search>
+             [list]="customers"></search>
   </div>
   <div class="search-container" [ngClass]="(shadow || !emptyResults) ? 'shadow move-up' : ''">
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
