@@ -12,10 +12,9 @@ export class OrderItemsResolver implements Resolve<any> {
     const header: IHeader = {
       title: 'orderitems',
       leftIcon: 'keyboard_arrow_left',
-      rightIcon: null,
+      rightIcon: 'add',
       titClass: 'mat-title',
       lastUrl: 'main/edit-order',
-      addArt: true,
       centered: true
     }
 
