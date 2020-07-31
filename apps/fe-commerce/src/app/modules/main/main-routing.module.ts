@@ -55,7 +55,7 @@ const routes: Routes = [
         //canActivate: [FeLoginGuard]
       },
       {
-        path: 'article-detail',
+        path: 'article-detail/:id',
         loadChildren: () => import('./article-detail/article-detail.module').then(m => m.ArticleDetailModule),
         data: { animation: 'article-detail' },
         resolve: { ArticleDetailResolver }

@@ -11,11 +11,11 @@ export class ArticleDetailResolver implements Resolve<any> {
 
   resolve(): Observable<any> {
     const header: IHeader = {
-      title: 'neworder',
+      title: 'artdet',
       leftIcon: 'keyboard_arrow_left',
       rightIcon: null,
       titClass: 'mat-title',
-      lastUrl: 'main/customer-search',
+      lastUrl: 'main/article-search',
       centered: true
     }
 
