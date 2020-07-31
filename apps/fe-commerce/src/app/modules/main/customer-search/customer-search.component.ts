@@ -18,8 +18,8 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   public customers$: Observable<ICustomer[]>;
   public customers: ICustomer[];
   public orders: IOrder[];
-  public currentIOrder$: Observable<IOrder>;
-  public currentIOrder: IOrder;
+  public currentOrder$: Observable<IOrder>;
+  public currentOrder: IOrder;
   public rowType = CustomerRowComponent;
   private _subscriptions: Subscription;
   private _curIOrderSubs: Subscription;
@@ -37,7 +37,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   constructor(
     private eventService: EventService,
     private matDialog: MatDialog,
-    private _store: Store<{ orders: IOrder[], currentIOrder: IOrder, customers: ICustomer[] }>,
+    private _store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[] }>,
     private _router: Router,
     private _transServ: TranslationService,
     private _route: ActivatedRoute) {
@@ -48,11 +48,11 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
       this.customers = data;
     });
 
-    this.currentIOrder$ = this._store.pipe(select('currentIOrder'));
-    this._curIOrderSubs = this.currentIOrder$.subscribe((currentIOrder) => {
-      this.currentIOrder = currentIOrder;
+    this.currentOrder$ = this._store.pipe(select('currentOrder'));
+    this._curIOrderSubs = this.currentOrder$.subscribe((currentOrder) => {
+      this.currentOrder = currentOrder;
       if (this._curId === null) {
-        this._curId = currentIOrder?.id;
+        this._curId = currentOrder?.id;
         if (this._curId) {
           this.icon = 'keyboard_arrow_left';
           this._returnUrl = 'order/edit';
@@ -60,7 +60,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
           this.icon = 'close';
         }
       }
-      if (!this.currentIOrder?.id) {
+      if (!this.currentOrder?.id) {
         this.lastUrl = 'article';
       }
     })
@@ -81,7 +81,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   }
   private openConfirmDialog() {
     let message;
-    if (this.currentIOrder?.articles?.length) {
+    if (this.currentOrder?.articles?.length) {
       message =  this._transServ.get('progressord');
     } else {
       message = this._transServ.get('noarts');
@@ -97,7 +97,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this._store.dispatch(handleOrderRequest({ order: this.currentIOrder }));
+        this._store.dispatch(handleOrderRequest({ order: this.currentOrder }));
       }
       this._store.dispatch(setCurrentOrderRequest({ order: null }))
       const orderArticles = [];
@@ -107,7 +107,8 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   public onCustomerChange(customer: ICustomer) {
-    if (this.currentIOrder === null || isUndefined(this.currentIOrder)) {
+    if (this.currentOrder === null || isUndefined(this.currentOrder)) {
+      console.log('setting')
       const order: IOrder = {
         description: 'Latest order',
         articles: [],
@@ -117,13 +118,14 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
       }
       this._store.dispatch(setCurrentOrderRequest({ order }));
     } else {
+      console.log('replacing')
       const order: IOrder = {
         id: this._curId,
-        description: this.currentIOrder.description,
-        articles: this.currentIOrder.articles,
-        amount: this.currentIOrder.amount,
+        description: this.currentOrder.description,
+        articles: this.currentOrder.articles,
+        amount: this.currentOrder.amount,
         customer: customer,
-        createdBy: this.currentIOrder.createdBy
+        createdBy: this.currentOrder.createdBy
       }
       this._store.dispatch(replaceCurrentOrderRequest({ order }));
     }
@@ -133,7 +135,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
 
     if (this.icon === 'close') {
       this._store.dispatch(getCurrentOrderRequest());
-      if (this.currentIOrder != null) {
+      if (this.currentOrder != null) {
         this.openConfirmDialog();
       } else {
         this.goBack();
@@ -207,6 +209,6 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
       this._curIOrderSubs.unsubscribe();
     }
 
-    this.currentIOrder = null;
+    this.currentOrder = null;
   }
 }

@@ -44,6 +44,7 @@ export class EditOrderComponent implements OnInit, OnDestroy, AfterViewInit {
     this.order$ = this._store.pipe(select('currentOrder'));
     this._subscriptions = this.order$.subscribe(data => {
       this.order = data;
+      console.log(data);
       if (this.order?.id) {
         this.icon = 'close';
         this.lastUrl = 'home';
