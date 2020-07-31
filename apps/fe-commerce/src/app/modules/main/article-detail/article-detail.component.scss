@@ -13,13 +13,16 @@
           left: 16px;
           padding: 0 !important;
           .content {
-              .list {
-                  padding: 0;
+              .mat-list-base {
+                  padding: 0 !important;
                   .list-item {
                       height: 64px;
-
+                      box-sizing: border-box;
                       .order-title {
                           height: 24px;
+                          .title {
+                            margin-bottom: 0;
+                          }
                       }
 
                       .order-subtitle {
