@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IArticle, IOrder, IOrderArticle, getCurrentOrderRequest, getArticleRequest, setOrderArticlesRequest, replaceOrderArticleRequest, appendOrderArticleRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './article-detail.component.html',
   styleUrls: ['./article-detail.component.scss']
 })
-export class ArticleDetailComponent implements OnInit {
+export class ArticleDetailComponent implements OnInit, OnDestroy {
   public amount = 1;
   private _article$: Observable<IArticle>;
   private _currentOrder$: Observable<IOrder>;
@@ -88,11 +88,7 @@ export class ArticleDetailComponent implements OnInit {
       this._store.dispatch(appendOrderArticleRequest({ orderArticle }));
     }
     this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
-    this._router.navigate(['/article']);
-  }
-
-  public returnUrl(): void {
-    this._router.navigate(['/article']);
+    this._router.navigate(['/main/article-search']);
   }
 
   public updatedOrder(): IOrder {

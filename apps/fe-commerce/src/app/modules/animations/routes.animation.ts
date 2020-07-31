@@ -37,6 +37,9 @@ export const routesAnimations =
 
     transition('article-search => customer-search', slideToLeft()),
 
+    transition('article-search => article-detail', slideToRight()),
+    transition('article-detail => article-search', slideToLeft()),
+
 
   ]);
 
