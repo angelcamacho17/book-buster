@@ -7,7 +7,7 @@
              [list]="customers"
              [autoFocus]="true"></search>
   </div>
-  <div class="customer-search-container" [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
+  <div class="search-container" [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
       [dividerClass]="'customer-divider'" class="search-results"></search-results>
   <!-- needs to be added on fe-search-results [rowType]="rowType"  -->

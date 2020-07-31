@@ -1,7 +1,11 @@
 .search-results-list {
+    position: relative;
+    top: 64px;
     background-color: #ffffff;
     width: 100%;
     padding-top: 0;
+    height: calc(100% - 64px);
+    overflow-y: auto;
 
     .list-item {
         height: 64px;

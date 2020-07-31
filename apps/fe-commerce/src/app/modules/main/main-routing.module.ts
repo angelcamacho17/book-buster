@@ -4,6 +4,7 @@ import { MainComponent } from './main.component';
 import { HomeResolver } from './home/home.resolver';
 import { EditOrderResolver } from './edit-order/edit-order.resolver';
 import { CustomerSearchResolver } from './customer-search/customer-search.resolver';
+import { ArticleSearchResolver } from './article-search/article-search.resolver';
 import { OrderItemsResolver } from './order-items/order-items.resolver';
 
 const routes: Routes = [
@@ -43,6 +44,13 @@ const routes: Routes = [
         loadChildren: () => import('./customer-search/customer-search.module').then(m => m.CustomerSearchModule),
         data: { animation: 'customer-search' },
         resolve: { CustomerSearchResolver }
+        //canActivate: [FeLoginGuard]
+      },
+      {
+        path: 'article-search',
+        loadChildren: () => import('./article-search/article-search.module').then(m => m.ArticleSearchModule),
+        data: { animation: 'article-search' },
+        resolve: { ArticleSearchResolver }
         //canActivate: [FeLoginGuard]
       },
       { path: '**', redirectTo: 'home' }

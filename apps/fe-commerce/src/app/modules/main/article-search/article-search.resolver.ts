@@ -11,11 +11,12 @@ export class ArticleSearchResolver implements Resolve<any> {
 
   resolve(): Observable<any> {
     const header: IHeader = {
-      title: 'home',
-      leftIcon: null,
+      title: 'neworder',
+      leftIcon: 'keyboard_arrow_left',
       rightIcon: null,
-      titClass: 'mat-display-1',
-      lastUrl: null,
+      titClass: 'mat-title',
+      lastUrl: 'main/customer-search',
+      centered: true
     }
 
     this._store.dispatch(setHeaderRequest({header}))
