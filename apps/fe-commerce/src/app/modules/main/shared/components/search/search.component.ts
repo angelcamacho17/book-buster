@@ -36,13 +36,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   private preventDefault = (e) => e.preventDefault();
 
   private _disableScroll() {
-      document.addEventListener('touchmove', this.preventDefault, { passive: false });
-      document.addEventListener('touchforcechange', this.preventDefault, { passive: false });
+      // document.addEventListener('touchmove', this.preventDefault, { passive: false });
+      // document.addEventListener('touchforcechange', this.preventDefault, { passive: false });
   }
 
   private _enableScroll() {
-      document.removeEventListener('touchmove', this.preventDefault, false);
-      document.removeEventListener('touchforcechange', this.preventDefault, false);
+      // document.removeEventListener('touchmove', this.preventDefault, false);
+      // document.removeEventListener('touchforcechange', this.preventDefault, false);
   }
 
   onSearchFocus() {

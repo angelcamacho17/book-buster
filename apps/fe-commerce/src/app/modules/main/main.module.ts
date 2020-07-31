@@ -9,6 +9,7 @@ import { HomeResolver } from './home/home.resolver';
 import { EditOrderResolver } from './edit-order/edit-order.resolver';
 import { OrderItemsResolver } from './order-items/order-items.resolver';
 import { CustomerSearchResolver } from './customer-search/customer-search.resolver';
+import { ArticleDetailResolver } from './article-detail/article-detail.resolver';
 import { ArticleSearchResolver } from './article-search/article-search.resolver';
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ArticleSearchResolver } from './article-search/article-search.resolver'
     EditOrderResolver,
     OrderItemsResolver,
     CustomerSearchResolver,
-    ArticleSearchResolver
+    ArticleSearchResolver,
+    ArticleDetailResolver
   ]
 })
 export class MainModule { }
