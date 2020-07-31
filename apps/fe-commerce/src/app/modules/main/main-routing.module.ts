@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { MainComponent } from './main.component';
 import { HomeResolver } from './home/home.resolver';
-import { EditOrderResolver } from './edit-order/edit-order.resolver';
+import { OrderOverviewResolver } from './order-overview/order-overview.resolver';
 import { CustomerSearchResolver } from './customer-search/customer-search.resolver';
 import { ArticleSearchResolver } from './article-search/article-search.resolver';
 import { ArticleDetailResolver } from './article-detail/article-detail.resolver';
@@ -27,10 +27,10 @@ const routes: Routes = [
         //canActivate: [FeLoginGuard]
       },
       {
-        path: 'edit-order',
-        loadChildren: () => import('./edit-order/edit-order.module').then(m => m.EditOrderModule),
-        data: { animation: 'edit-order' },
-        resolve: { EditOrderResolver }
+        path: 'order-overview',
+        loadChildren: () => import('./order-overview/order-overview.module').then(m => m.OrderOverviewModule),
+        data: { animation: 'order-overview' },
+        resolve: { OrderOverviewResolver }
         //canActivate: [FeLoginGuard]
       },
       {

@@ -6,7 +6,7 @@ import { NewOrderModule } from './new-order/new-order.module';
 import { SharedModule } from './shared/shared.module';
 import { MainRoutingModule } from './main-routing.module';
 import { HomeResolver } from './home/home.resolver';
-import { EditOrderResolver } from './edit-order/edit-order.resolver';
+import { OrderOverviewResolver } from './order-overview/order-overview.resolver';
 import { OrderItemsResolver } from './order-items/order-items.resolver';
 import { CustomerSearchResolver } from './customer-search/customer-search.resolver';
 import { ArticleDetailResolver } from './article-detail/article-detail.resolver';
@@ -23,7 +23,7 @@ import { ArticleSearchResolver } from './article-search/article-search.resolver'
   ],
   providers: [
     HomeResolver,
-    EditOrderResolver,
+    OrderOverviewResolver,
     OrderItemsResolver,
     CustomerSearchResolver,
     ArticleSearchResolver,

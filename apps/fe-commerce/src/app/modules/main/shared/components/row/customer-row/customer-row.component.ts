@@ -70,7 +70,7 @@ export class CustomerRowComponent implements OnDestroy {
       if (this._ordSer.currentOrder?.id){
         this.router.navigate(['/order/edit']);
       } else {
-        this.router.navigate(['/main/edit-order']);
+        this.router.navigate(['/main/order-overview']);
       }
     } else {
       this.router.navigate(['/main/article-search']);

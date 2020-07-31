@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EditOrderComponent } from './edit-order.component';
+import { OrderOverviewComponent } from './order-overview.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../../material/material.module';
 import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
-import { EditOrderRoutingModule } from './edit-order-routing.module';
+import { OrderOverviewRoutingModule } from './order-overview-routing.module';
 
 
 
 @NgModule({
-  declarations: [EditOrderComponent],
+  declarations: [OrderOverviewComponent],
   imports: [
     CommonModule,
-    EditOrderRoutingModule,
+    OrderOverviewRoutingModule,
     SharedModule,
     MaterialModule,
     TranslatePipeModule
   ]
 })
-export class EditOrderModule { }
+export class OrderOverviewModule { }

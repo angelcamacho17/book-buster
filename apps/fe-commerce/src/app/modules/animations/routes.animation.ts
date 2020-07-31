@@ -20,28 +20,28 @@ export const routesAnimations =
 
     transition('home => new-order', slideToRight()),
     transition('home => order', slideToRight()),
-    transition('home => edit-order', slideToRight()),
+    transition('home => order-overview', slideToRight()),
     transition('home => customer-search', fromBottom()),
 
     transition('new-order => home', slideToLeft()),
 
     transition('order => home', slideToLeft()),
 
-    transition('edit-order => home', slideToLeft()),
-    transition('edit-order => order-items', slideToRight()),
-    transition('edit-order => article-search', slideToRight()),
-    transition('edit-order => customer-search', slideToLeft()),
+    transition('order-overview => home', slideToLeft()),
+    transition('order-overview => order-items', slideToRight()),
+    transition('order-overview => article-search', slideToRight()),
+    transition('order-overview => customer-search', slideToLeft()),
 
-    transition('order-items => edit-order', slideToLeft()),
+    transition('order-items => order-overview', slideToLeft()),
 
     transition('customer-search => home', fromTop()),
     transition('customer-search => article-search', slideToRight()),
-    transition('customer-search => edit-order', slideToRight()),
+    transition('customer-search => order-overview', slideToRight()),
 
     transition('article-search => customer-search', slideToLeft()),
 
     transition('article-search => article-detail', slideToRight()),
-    transition('article-search => edit-order', slideToRight()),
+    transition('article-search => order-overview', slideToRight()),
     transition('article-detail => article-search', slideToLeft()),
 
 

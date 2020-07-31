@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { EditOrderComponent } from './edit-order.component';
+import { Routes, RouterModule } from '@angular/router';
+import { OrderOverviewComponent } from './order-overview.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: EditOrderComponent
+    component: OrderOverviewComponent
   },
   { path: '**', redirectTo: '' }
 ];
@@ -15,5 +15,5 @@ const routes: Routes = [
     routes)],
   exports: [RouterModule]
 })
-export class EditOrderRoutingModule { }
+export class OrderOverviewRoutingModule { }
 

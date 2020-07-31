@@ -9,11 +9,11 @@ import { isUndefined } from 'util';
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
 
 @Component({
-  selector: 'edit-order',
-  templateUrl: './edit-order.component.html',
-  styleUrls: ['./edit-order.component.scss']
+  selector: 'order-overview',
+  templateUrl: './order-overview.component.html',
+  styleUrls: ['./order-overview.component.scss']
 })
-export class EditOrderComponent implements OnInit, OnDestroy, AfterViewInit {
+export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public order$: Observable<IOrder>;
   public order: IOrder;

@@ -56,9 +56,9 @@ export class ArticleSearchComponent implements OnInit, OnDestroy, AfterViewInit 
 
   public overviewOrder(): void {
     if (this._ordSer.currentOrder?.id) {
-      this._router.navigate(['/main/edit-order']);
+      this._router.navigate(['/main/order-overview']);
     } else {
-      this._router.navigate(['/main/edit-order']);
+      this._router.navigate(['/main/order-overview']);
     }
   }
 
