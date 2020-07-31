@@ -114,7 +114,7 @@ export class EditOrderComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       if (data?.result === 'SWITCH') {
         this._bnService.switchCustomer(true);
-        this._router.navigate(['/neworder'])
+        this._router.navigate(['/main/customer-search'])
         // , {
         //   state: {
         //     order: this.order

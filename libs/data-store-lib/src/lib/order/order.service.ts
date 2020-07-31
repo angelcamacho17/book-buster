@@ -15,7 +15,7 @@ export class OrderService {
   private _orders: Array<IOrder> = [
     {
       "id": 9,
-      "description": "Other IOrder",
+      "description": "Other Order",
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
@@ -270,7 +270,7 @@ export class OrderService {
     },
     {
       "id": 12,
-      "description": "IOrder",
+      "description": "Order",
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
@@ -300,7 +300,7 @@ export class OrderService {
     },
     {
       "id": 13,
-      "description": "IOrder",
+      "description": "Order",
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
@@ -330,7 +330,7 @@ export class OrderService {
     },
     {
       "id": 14,
-      "description": "IOrder",
+      "description": "Order",
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
@@ -360,7 +360,7 @@ export class OrderService {
     },
     {
       "id": 15,
-      "description": "IOrder",
+      "description": "Order",
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
@@ -390,7 +390,7 @@ export class OrderService {
     },
     {
       "id": 16,
-      "description": "IOrder",
+      "description": "Order",
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{

@@ -10,7 +10,7 @@ export interface DialogData {
 }
 
 @Component({
-  selector: 'dialog',
+  selector: 'dialog-wnd',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
@@ -18,7 +18,9 @@ export class DialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+      console.log(this.data);
+     }
 
   onNoClick(): void {
     this.dialogRef.close();

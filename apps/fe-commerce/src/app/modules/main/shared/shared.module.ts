@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { CreateButtonComponent } from './components/create-button/create-button.component';
@@ -24,7 +24,6 @@ import { RowComponent } from './components/row/row.component';
   declarations: [
     MainHeaderComponent,
     CreateButtonComponent,
-    DialogComponent,
     SetHeightDirective,
     ArtSheetComponent,
     ScrollableDivDirective,
@@ -37,6 +36,7 @@ import { RowComponent } from './components/row/row.component';
     RowComponent,
     CustomerRowComponent,
     ArticleRowComponent,
+    DialogComponent,
     ConfirmDiscardDialogComponent
   ],
   imports: [
@@ -49,7 +49,6 @@ import { RowComponent } from './components/row/row.component';
   exports: [
     MainHeaderComponent,
     CreateButtonComponent,
-    DialogComponent,
     SetHeightDirective,
     ArtSheetComponent,
     ScrollableDivDirective,
@@ -61,9 +60,15 @@ import { RowComponent } from './components/row/row.component';
     SearchResultsComponent,
     RowComponent,
     CustomerRowComponent,
+    DialogComponent,
     ArticleRowComponent,
     ConfirmDiscardDialogComponent
-  ]
+  ],
+  entryComponents: [
+    CustomerRowComponent,
+    ArticleRowComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class SharedModule { }
