@@ -1,9 +1,9 @@
 export interface IHeader {
   title: string,
-  leftIcon: string,
+  leftIcon?: string,
   rightIcon?: string,
   titClass: string,
-  lastUrl: string,
+  lastUrl?: string,
   confirmDiscard?: boolean,
   addArt?: boolean,
   centered?: boolean,

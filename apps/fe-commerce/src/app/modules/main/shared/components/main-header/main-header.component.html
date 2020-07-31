@@ -7,7 +7,7 @@
   <div class="title" [ngClass]="titClass | async">
     {{title | async}}
   </div>
-  <mat-icon [style.visibility]="!rightIcon ? 'hidden' : 'visible'"  class="right-icon" (click)="logout()">
+  <mat-icon [style.visibility]="!rightIcon ? 'hidden' : 'visible'"  class="right-icon" (click)="rightIconClicked()">
     {{rightIcon | async}}
   </mat-icon>
 </mat-toolbar>

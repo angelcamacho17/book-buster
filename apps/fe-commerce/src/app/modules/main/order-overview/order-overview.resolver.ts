@@ -1,23 +1,49 @@
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
+import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { IHeader, setHeaderRequest } from '@fecommerce-workspace/data-store-lib';
+import { IHeader, setHeaderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
 
 @Injectable()
 export class OrderOverviewResolver implements Resolve<any> {
-  constructor( private _store: Store<{}>,) {}
+  constructor(
+    private _store: Store<{}>,
+    private _orderService: OrderService
+    ) { }
 
-  resolve(): Observable<any> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
+    const flow = this._orderService.orderFlow;
+    let header;
+    if (flow === 'edit') {
+      header = this._headerEditOrderFlow();
+    } else {
+      header = this._headerNewOrderFlow();
+    }
+    
+    this._store.dispatch(setHeaderRequest({ header }))
+    return of(null);
+  }
+
+  private _headerNewOrderFlow(): IHeader {
     const header: IHeader = {
       title: 'orderover',
-      leftIcon:'close',
+      leftIcon: 'close',
       titClass: 'mat-title',
       lastUrl: 'home',
       centered: true
     }
+    return header;
+  }
 
-    this._store.dispatch(setHeaderRequest({header}))
-    return of(null);
+  private _headerEditOrderFlow(): IHeader {
+    const header: IHeader = {
+      title: 'orderover',
+      leftIcon: 'keyboard_arrow_left',
+      rightIcon: 'delete_outlined',
+      titClass: 'mat-title',
+      lastUrl: 'main/home',
+      centered: true
+    }
+    return header;
   }
 }

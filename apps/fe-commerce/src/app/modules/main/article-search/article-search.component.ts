@@ -14,8 +14,6 @@ export class ArticleSearchComponent implements OnInit, OnDestroy, AfterViewInit 
   public rowType = ArticleRowComponent;
   public articles: IArticle[] = [];
   private _articles$: Observable<IArticle[]>;
-  // private _currentOrder$: Observable<Order>;
-  // public currentOrder: Order;
   private _subscriptions: Subscription;
   public display = false;
   public navigation$: Observable<string>;
@@ -84,15 +82,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy, AfterViewInit 
     this.emptyResults = results.length === 0;
     this.filteredResults = results;
   }
-
-  // public onScroll(event): void {
-  //   if(event.srcElement.scrollTop>0){
-  //     this._hedSer.dropShadow = true;
-  //   } else {
-  //     this._hedSer.dropShadow = false;
-  //   }
-  // }
-
+  
   ngAfterViewInit(): void {
     window.scrollTo(0, 0);
   }

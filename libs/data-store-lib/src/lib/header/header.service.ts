@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IHeader } from '../models/header.model';
 import { Observable, of } from 'rxjs';
@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class HeaderService {
-
+  public rightIconClicked = new EventEmitter<boolean>();
   private header: IHeader = {
     title: '',
     leftIcon: null,
@@ -32,5 +32,9 @@ export class HeaderService {
 
   public getHeader(): Observable<IHeader> {
     return of(this.header)
+  }
+
+  public onRightIconClick() {
+    this.rightIconClicked.emit(true);
   }
 }

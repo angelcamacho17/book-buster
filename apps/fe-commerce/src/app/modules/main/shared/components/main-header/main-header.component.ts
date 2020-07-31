@@ -5,6 +5,7 @@ import { Subscription, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { HeaderService } from 'libs/data-store-lib/src/lib/header/header.service';
 
 @Component({
   selector: 'main-header',
@@ -25,9 +26,11 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
   @Output() goBack = new EventEmitter<boolean>();
 
   constructor(private _router: Router,
-              public dialog: MatDialog,
-              private _transServ: TranslationService,
-              private _store: Store<{ header: IHeader }>) {
+    public dialog: MatDialog,
+    private _transServ: TranslationService,
+    private _store: Store<{ header: IHeader }>,
+    private _headerService: HeaderService
+  ) {
     this.header$ = this._store.pipe(select('header'));
     this._subscriptions = this.header$.subscribe(data => {
       this.header = data;
@@ -58,40 +61,12 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
   }
 
   private returnLastUrl(): void {
-    this._router.navigate(['/'+ this.header.lastUrl]);
+    this._router.navigate(['/' + this.header.lastUrl]);
     //this._storeUrl.dispatch(goBackNavigationRequest());
   }
 
-  public logout(): void {
-    this._router.navigate(['/login']);
-  }
-
-  public deleteOrder(): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '280px',
-      height: '120px',
-      data: {
-        msg: this._transServ.get('deleteord'),
-        firstButton: this._transServ.get('cancel'),
-        secondButton: this._transServ.get('delete'),
-        buttonColor: 'red'
-      }
-    });
-    dialogRef.afterClosed().subscribe(data => {
-      if (data === undefined) {
-        // Is undefined when the user closes
-        // the dialog without an action
-        return;
-      }
-      if (data?.result === 'DELETE') {
-        this._store.dispatch(deleteOrderRequest());
-        this._router.navigate(['/home']);
-      }
-    });
-  }
-
-  public addArticle(): void {
-    this._router.navigate(['/article']);
+  public rightIconClicked() {
+    this._headerService.onRightIconClick();
   }
 
 }
