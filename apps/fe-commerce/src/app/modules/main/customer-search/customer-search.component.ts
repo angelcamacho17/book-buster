@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { refreshCustomersRequest, setCurrentOrderRequest, getCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService, isUndefined } from '@fecommerce-workspace/data-store-lib';
+import { refreshCustomersRequest, setCurrentOrderRequest, getCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService, isUndefined, OrderService } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
@@ -21,10 +21,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   public currentOrder$: Observable<IOrder>;
   public currentOrder: IOrder;
   public rowType = CustomerRowComponent;
-  private _subscriptions: Subscription;
-  private _curIOrderSubs: Subscription;
   private _returnUrl = 'home';
-  private _curId: number = null;
   public hide = false;
   public shadow = false;
   public emptyResults = true;
@@ -32,57 +29,52 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   public icon = 'close';
   public filteredResults: ICustomer[] = [];
   public innerHeight = null;
-  // public filteredICustomers$: Observable<ICustomer[]> = of([]);
+  private _subscriptions$ = new Subject<any>();
 
   constructor(
     private eventService: EventService,
+    private _orderService: OrderService,
     private matDialog: MatDialog,
     private _store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[] }>,
     private _router: Router,
     private _transServ: TranslationService,
     private _route: ActivatedRoute) {
-    this._subscriptions = this.eventService.customerChange.subscribe(customer => this.onCustomerChange(customer));
 
     this.customers$ = this._store.pipe(select('customers'));
-    this._subscriptions = this.customers$.subscribe(data => {
+    this.customers$.pipe(
+      takeUntil(this._subscriptions$)
+    ).subscribe(data => {
       this.customers = data;
     });
 
     this.currentOrder$ = this._store.pipe(select('currentOrder'));
-    this._curIOrderSubs = this.currentOrder$.subscribe((currentOrder) => {
+    this.currentOrder$.pipe(
+      takeUntil(this._subscriptions$)
+    ).subscribe((currentOrder) => {
       this.currentOrder = currentOrder;
-      if (this._curId === null) {
-        this._curId = currentOrder?.id;
-        if (this._curId) {
-          this.icon = 'keyboard_arrow_left';
-          this._returnUrl = 'order/edit';
-        } else {
-          this.icon = 'close';
-        }
-      }
-      if (!this.currentOrder?.id) {
-        this.lastUrl = 'article';
-      }
     })
 
     this._store.dispatch(refreshCustomersRequest());
 
   }
   ngAfterViewInit(): void {
-    window.scrollTo(0, 0);
   }
 
   ngOnInit(): void {
-    this._subscriptions = this._route.queryParams.subscribe(params => {
-        if (params.returnUrl && this.icon ==='close') {
-          this._returnUrl = params.returnUrl;
-        }
-      });
+    this.eventService.customerChange.pipe(takeUntil(this._subscriptions$)).subscribe(customer => {
+      this.onCustomerChange(customer);
+    });
+
+    this._route.queryParams.pipe(takeUntil(this._subscriptions$)).subscribe(params => {
+      if (params.returnUrl && this.icon === 'close') {
+        this._returnUrl = params.returnUrl;
+      }
+    });
   }
   private openConfirmDialog() {
     let message;
     if (this.currentOrder?.articles?.length) {
-      message =  this._transServ.get('progressord');
+      message = this._transServ.get('progressord');
     } else {
       message = this._transServ.get('noarts');
     }
@@ -107,28 +99,42 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   public onCustomerChange(customer: ICustomer) {
-    if (this.currentOrder === null || isUndefined(this.currentOrder)) {
-      console.log('setting')
-      const order: IOrder = {
-        description: 'Latest order',
-        articles: [],
-        amount: 0,
-        customer: customer,
-        createdBy: 'user'
+    const flow = this._orderService.orderFlow;
+    if (flow === 'new') {
+      if (this._orderService.switchCustomerFlow) {
+        this._replaceCustomerOnCurrentOrder(customer);
+        this._router.navigate(['/main/order-overview']);
+      } else {
+        this._setCustomerToNewOrder(customer);
+        this._router.navigate(['/main/article-search']);
       }
-      this._store.dispatch(setCurrentOrderRequest({ order }));
-    } else {
-      console.log('replacing')
-      const order: IOrder = {
-        id: this._curId,
-        description: this.currentOrder.description,
-        articles: this.currentOrder.articles,
-        amount: this.currentOrder.amount,
-        customer: customer,
-        createdBy: this.currentOrder.createdBy
-      }
-      this._store.dispatch(replaceCurrentOrderRequest({ order }));
+    } else if (flow === 'edit') {
+      this._replaceCustomerOnCurrentOrder(customer);
+      this._router.navigate(['/main/order-overview']);
     }
+  }
+
+  private _setCustomerToNewOrder(customer: ICustomer) {
+    const order: IOrder = {
+      description: 'Latest order',
+      articles: [],
+      amount: 0,
+      customer: customer,
+      createdBy: 'user'
+    }
+    this._store.dispatch(setCurrentOrderRequest({ order }));
+  }
+
+  private _replaceCustomerOnCurrentOrder(customer: ICustomer) {
+    const order: IOrder = {
+      id: this.currentOrder?.id,
+      description: this.currentOrder?.description,
+      articles: this.currentOrder?.articles,
+      amount: this.currentOrder?.amount,
+      customer: customer,
+      createdBy: this.currentOrder?.createdBy
+    }
+    this._store.dispatch(replaceCurrentOrderRequest({ order }));
   }
 
   public onHeaderGoBack() {
@@ -193,22 +199,9 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     this.filteredResults = results;
   }
 
-  // public onScroll(event): void {
-  //   if(event.srcElement.scrollTop>0){
-  //     this._hedSer.dropShadow = true;
-  //   } else {
-  //     this._hedSer.dropShadow = false;
-  //   }
-  // }
-
   ngOnDestroy(): void {
-    if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
-    }
-    if (this._curIOrderSubs) {
-      this._curIOrderSubs.unsubscribe();
-    }
-
+    this._subscriptions$.next();
+    this._subscriptions$.complete();
     this.currentOrder = null;
   }
 }

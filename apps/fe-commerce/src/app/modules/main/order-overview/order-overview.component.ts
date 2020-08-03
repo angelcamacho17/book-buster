@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Renderer2, AfterViewInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { HeaderService, IOrder, getCurrentOrderRequest, IOrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService, setHeaderRequest, IHeader, deleteOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { HeaderService, IOrder, getCurrentOrderRequest, IOrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService, setHeaderRequest, IHeader, deleteOrderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -34,7 +34,8 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     private _ordArtsService: OrderArticlesService,
     private _bnService: BackNavigationService,
     private _transServ: TranslationService,
-    private _headerService: HeaderService
+    private _headerService: HeaderService,
+    private _orderService: OrderService
   ) {
     this.$articles = this._store.pipe(select('orderArticles'));
     this._subscriptions = this.$articles.subscribe((arts) => {
@@ -62,7 +63,8 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnInit(): void {
-    this._bnService.switchCustomer(false);
+    // this._bnService.switchCustomer(false);
+    this._orderService.switchCustomerFlow = false;    // Reset flag of customer flow.
     this.subscribeToHeader();
   }
 
@@ -143,7 +145,8 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
         return;
       }
       if (data?.result === 'SWITCH') {
-        this._bnService.switchCustomer(true);
+        // this._bnService.switchCustomer(true);
+        this._orderService.switchCustomerFlow = true;
         this._router.navigate(['/main/customer-search'])
         // , {
         //   state: {

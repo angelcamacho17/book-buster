@@ -10,7 +10,8 @@ import { OrderArticlesService } from '../order-articles/order-articles.service';
 export class OrderService {
 
   _baseUrl = 'assets/data/orders.json';
-  public orderFlow = 'new';
+  public orderFlow: string;           // Used on new order flow to know where to navigate.
+  public switchCustomerFlow = false;  // Used on new order flow to know where to navigate.
   private totalsCalculated = false;
   private _orders: Array<IOrder> = [
     {

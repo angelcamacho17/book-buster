@@ -11,6 +11,7 @@ export class EventService {
   constructor() { }
 
   customerChanged(customer: ICustomer) {
+    console.log('emited')
     this.customerChange.emit(customer);
   }
 }

@@ -63,18 +63,19 @@ export class CustomerRowComponent implements OnDestroy {
     return text.charAt(index);
   }
 
-  public onSelectCustomer(customer: ICustomer): void {
+  public onSelectCustomer(event, customer: ICustomer): void {
     this.eventService.customerChanged(customer);
-    this._store.dispatch(getCurrentOrderRequest());
-    if (this._bnService.switchCus) {
-      if (this._ordSer.currentOrder?.id){
-        this.router.navigate(['/order/edit']);
-      } else {
-        this.router.navigate(['/main/order-overview']);
-      }
-    } else {
-      this.router.navigate(['/main/article-search']);
-    }
+    event.stopPropagation();
+    // this._store.dispatch(getCurrentOrderRequest());
+    // if (this._bnService.switchCus) {
+    //   if (this._ordSer.currentOrder?.id){
+    //     this.router.navigate(['/order/edit']);
+    //   } else {
+    //     this.router.navigate(['/main/order-overview']);
+    //   }
+    // } else {
+    //   this.router.navigate(['/main/article-search']);
+    // }
   }
 
   ngOnDestroy(): void {
