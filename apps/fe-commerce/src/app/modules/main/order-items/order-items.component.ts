@@ -60,7 +60,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public goToArticles(): void {
-    this._router.navigate(['/main/article-search']);
+    this._router.navigate(['/main/article-search/edit']);
   }
 
   public openBottomSheet(item: IOrderArticle): void {
@@ -143,7 +143,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   private substractTemp(article: IOrderArticle): void {
     this._substractArt = article.quantity * article.article.price;
   }
-  
+
   ngOnDestroy(): void {
     //If the time of the snackbar
     //hasnt past yet, and the user wnats tyo go back

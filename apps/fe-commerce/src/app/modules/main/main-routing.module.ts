@@ -44,7 +44,6 @@ const routes: Routes = [
       {
         path: 'article-search',
         loadChildren: () => import('./article-search/article-search.module').then(m => m.ArticleSearchModule),
-        data: { animation: 'article-search' },
         resolve: { ArticleSearchResolver }
         //canActivate: [FeLoginGuard]
       },

@@ -5,12 +5,13 @@ import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../../material/material.module';
 import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { ArticleSearchComponent } from './article-search.component';
+import { ArticleSearchRoutingModule } from './article-search-routing.module';
 
 @NgModule({
   declarations: [ArticleSearchComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: '', component: ArticleSearchComponent }]),
+    ArticleSearchRoutingModule,
     SharedModule,
     MaterialModule,
     TranslatePipeModule

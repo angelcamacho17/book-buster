@@ -52,12 +52,12 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
   }
 
   public subscribeToHeader() {
-    this._subscriptions.add(this._headerService.rightIconClicked
-      .subscribe(() => this._logout()));
+    this._subscriptions = this._headerService.rightIconClicked
+      .subscribe(() => this._logout());
   }
 
   private _logout() {
-    this._router.navigate(['/login'])
+    this._router.navigate(['/'])
   }
 
   ngAfterViewInit(): void {
