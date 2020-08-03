@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, HostListener } from '@angular/core';
-import { IHeader, TranslationService, deleteOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { IHeader, TranslationService, deleteOrderRequest, HeaderService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-import { HeaderService } from 'libs/data-store-lib/src/lib/header/header.service';
 
 @Component({
   selector: 'main-header',

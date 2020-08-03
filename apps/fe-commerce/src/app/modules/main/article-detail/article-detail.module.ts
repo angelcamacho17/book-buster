@@ -5,12 +5,13 @@ import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../../material/material.module';
 import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { ArticleDetailComponent } from './article-detail.component';
+import { ArticleDetailRoutingModule } from './article-detail-routing.module';
 
 @NgModule({
   declarations: [ArticleDetailComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: '', component:  ArticleDetailComponent}]),
+    ArticleDetailRoutingModule,
     SharedModule,
     MaterialModule,
     TranslatePipeModule
