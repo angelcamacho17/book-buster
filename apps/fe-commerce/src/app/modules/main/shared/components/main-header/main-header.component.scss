@@ -32,6 +32,11 @@
     color: #fff;
   }
 
+  .invisible {
+    visibility: hidden;
+    touch-action: none;
+  }
+
   .right-icon {
     @extend .left-icon;
     z-index: 4;

@@ -22,6 +22,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   public currentOrder: IOrder;
   public rowType = CustomerRowComponent;
   private _subscriptions: Subscription;
+  private _cusEvent: Subscription;
   private _curIOrderSubs: Subscription;
   private _returnUrl = 'home';
   private _curId: number = null;
@@ -41,7 +42,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     private _router: Router,
     private _transServ: TranslationService,
     private _route: ActivatedRoute) {
-    this._subscriptions = this.eventService.customerChange.subscribe(customer => this.onCustomerChange(customer));
+    this._cusEvent = this.eventService.customerChange.subscribe(customer => this.onCustomerChange(customer));
 
     this.customers$ = this._store.pipe(select('customers'));
     this._subscriptions = this.customers$.subscribe(data => {
@@ -107,6 +108,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   public onCustomerChange(customer: ICustomer) {
+    console.log('customer change', customer)
     if (this.currentOrder === null || isUndefined(this.currentOrder)) {
       console.log('setting')
       const order: IOrder = {
@@ -202,6 +204,9 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   // }
 
   ngOnDestroy(): void {
+    if (this._cusEvent){
+      this._cusEvent.unsubscribe();
+    }
     if (this._subscriptions) {
       this._subscriptions.unsubscribe();
     }

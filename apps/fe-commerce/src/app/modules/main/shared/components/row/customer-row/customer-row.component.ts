@@ -65,6 +65,7 @@ export class CustomerRowComponent implements OnDestroy {
 
   public onSelectCustomer(customer: ICustomer): void {
     this.eventService.customerChanged(customer);
+    console.log(customer)
     this._store.dispatch(getCurrentOrderRequest());
     if (this._bnService.switchCus) {
       if (this._ordSer.currentOrder?.id){
