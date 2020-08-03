@@ -12,6 +12,7 @@ export class OrderService {
   _baseUrl = 'assets/data/orders.json';
   public orderFlow: string;           // Used on new order flow to know where to navigate.
   public switchCustomerFlow = false;  // Used on new order flow to know where to navigate.
+  private _modifiedOrder = false;       // Used to know if the current order has been modified.
   private totalsCalculated = false;
   private _orders: Array<IOrder> = [
     {
@@ -64,46 +65,46 @@ export class OrderService {
       {
         "id": 3,
         "article": {
-        "id": 81,
-        "name": "Thyme - Fresh",
-        "description": "Inflamed seborrheic keratosis",
-        "price": +"7.14"
-      }, "quantity": 3
-    },
-    {
-      "id": 4,
-      "article": {
-        "id": 82,
-        "name": "Port - 74 Brights",
-        "description": "Frostbite of face",
-        "price": +"52.75"
-      }, "quantity": 3
-    }, {
-      "id": 5,
-      "article": {
-        "id": 83,
-        "name": "Bread - Roll, Calabrese",
-        "description": "Better eye: moderate vision impairment; lesser eye: profound vision impairment",
-        "price": +"57.68"
-      }, "quantity": 3
-    }, {
+          "id": 81,
+          "name": "Thyme - Fresh",
+          "description": "Inflamed seborrheic keratosis",
+          "price": +"7.14"
+        }, "quantity": 3
+      },
+      {
+        "id": 4,
+        "article": {
+          "id": 82,
+          "name": "Port - 74 Brights",
+          "description": "Frostbite of face",
+          "price": +"52.75"
+        }, "quantity": 3
+      }, {
+        "id": 5,
+        "article": {
+          "id": 83,
+          "name": "Bread - Roll, Calabrese",
+          "description": "Better eye: moderate vision impairment; lesser eye: profound vision impairment",
+          "price": +"57.68"
+        }, "quantity": 3
+      }, {
         "id": 6,
         "article": {
-        "id": 84,
-        "name": "Squash - Pepper",
-        "description": "Psychosexual dysfunction with other specified psychosexual dysfunctions",
-        "price": +"26.33"
-      }, "quantity": 3
-    }, {
-      "id": 7,
-      "article": {
-        "id": 85,
-        "name": "Wheat - Soft Kernal Of Wheat",
-        "description": "Other fetal and newborn aspiration without respiratory symptoms",
-        "price": +"44.40"
-      }, "quantity": 3
-    },
-    ],
+          "id": 84,
+          "name": "Squash - Pepper",
+          "description": "Psychosexual dysfunction with other specified psychosexual dysfunctions",
+          "price": +"26.33"
+        }, "quantity": 3
+      }, {
+        "id": 7,
+        "article": {
+          "id": 85,
+          "name": "Wheat - Soft Kernal Of Wheat",
+          "description": "Other fetal and newborn aspiration without respiratory symptoms",
+          "price": +"44.40"
+        }, "quantity": 3
+      },
+      ],
       "customer": {
         "id": 8,
         "name": "Morena Moreno",
@@ -134,7 +135,7 @@ export class OrderService {
           "description": "Malignant neoplasm of other specified sites of nasopharynx",
           "price": 76.19
         }, "quantity": 3
-      },{
+      }, {
         "id": 3,
         "article": {
           "id": 10,
@@ -260,7 +261,7 @@ export class OrderService {
           "price": +"78.52"
         }, "quantity": 3
       },
-    ],
+      ],
       "customer": {
         "id": 12,
         "name": "Virginia Suarez",
@@ -275,7 +276,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
-        "id":1,
+        "id": 1,
         "article": {
           "id": 31,
           "name": "Tea - Honey Green Tea",
@@ -305,7 +306,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
-        "id":1,
+        "id": 1,
         "article": {
           "id": 31,
           "name": "Tea - Honey Green Tea",
@@ -335,7 +336,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
-        "id":1,
+        "id": 1,
         "article": {
           "id": 31,
           "name": "Tea - Honey Green Tea",
@@ -365,7 +366,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
-        "id":1,
+        "id": 1,
         "article": {
           "id": 31,
           "name": "Tea - Honey Green Tea",
@@ -395,7 +396,7 @@ export class OrderService {
       "amount": null,
       "createdBy": "Federico Ribero",
       "articles": [{
-        "id":1,
+        "id": 1,
         "article": {
           "id": 31,
           "name": "Tea - Honey Green Tea",
@@ -428,6 +429,20 @@ export class OrderService {
     private httpClient: HttpClient,
     private _ordArtsService: OrderArticlesService
   ) { }
+
+  /**
+   * Set modified order flag to true in order to avoid leaving the order without saving
+   * is used to open a confirm dialog when returning from order overview, or search articles.
+   * Depending on the flow.
+   */
+  public setOrderModifiedState(state: boolean): void {
+    console.log('setting flag to: ', state)
+    this._modifiedOrder = state;
+  }
+
+  public getOrderModifiedState(): boolean {
+    return this._modifiedOrder;
+  }
 
   public all(): Observable<IOrder[]> {
     this.setOrdersTotal();
@@ -468,7 +483,7 @@ export class OrderService {
     this.currentOrder = editedIOrder;
     orders.push(editedIOrder);
     this._orders = orders;
-    this._orders.sort(function(a, b){return a.id - b.id});
+    this._orders.sort(function (a, b) { return a.id - b.id });
     return of(this._orders);
 
   }
@@ -490,11 +505,13 @@ export class OrderService {
     if (this.currentOrder === null) {
       this.currentOrder = order;
     }
+    this._modifiedOrder = true;
     return of(this.currentOrder);
   }
 
   public replaceCurrentOrder(order: IOrder): Observable<any> {
     this.currentOrder = order;
+    this._modifiedOrder = true;
     return of(this.currentOrder);
   }
 

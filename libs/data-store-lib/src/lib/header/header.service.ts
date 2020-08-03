@@ -8,6 +8,7 @@ import { Observable, of } from 'rxjs';
 })
 export class HeaderService {
   public rightIconClicked = new EventEmitter<boolean>();
+  public goBack = new EventEmitter<boolean>();
   private header: IHeader = {
     title: '',
     leftIcon: null,
@@ -32,6 +33,9 @@ export class HeaderService {
 
   public getHeader(): Observable<IHeader> {
     return of(this.header)
+  }
+  public onGoBack() {
+    this.goBack.emit(true);
   }
 
   public onRightIconClick() {

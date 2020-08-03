@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, OnDestroy, AfterViewInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { refreshCustomersRequest, setCurrentOrderRequest, getCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService, isUndefined, OrderService } from '@fecommerce-workspace/data-store-lib';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { refreshCustomersRequest, setCurrentOrderRequest, getCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService, OrderService } from '@fecommerce-workspace/data-store-lib';
+import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
 import { EventService } from '../shared/services/event.service';
@@ -21,14 +21,10 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   public currentOrder$: Observable<IOrder>;
   public currentOrder: IOrder;
   public rowType = CustomerRowComponent;
-  private _returnUrl = 'home';
   public hide = false;
   public shadow = false;
   public emptyResults = true;
-  public lastUrl = 'neworder';
-  public icon = 'close';
   public filteredResults: ICustomer[] = [];
-  public innerHeight = null;
   private _subscriptions$ = new Subject<any>();
 
   constructor(
@@ -37,8 +33,8 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     private matDialog: MatDialog,
     private _store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[] }>,
     private _router: Router,
-    private _transServ: TranslationService,
-    private _route: ActivatedRoute) {
+    private _translationService: TranslationService,
+  ) {
 
     this.customers$ = this._store.pipe(select('customers'));
     this.customers$.pipe(
@@ -54,49 +50,44 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
       this.currentOrder = currentOrder;
     })
 
+    this.eventService.customerChange.pipe(takeUntil(this._subscriptions$)).subscribe(customer => {
+      this.onCustomerChange(customer);
+    });
+
     this._store.dispatch(refreshCustomersRequest());
 
   }
   ngAfterViewInit(): void {
   }
 
-  ngOnInit(): void {
-    this.eventService.customerChange.pipe(takeUntil(this._subscriptions$)).subscribe(customer => {
-      this.onCustomerChange(customer);
-    });
+  ngOnInit(): void { }
 
-    this._route.queryParams.pipe(takeUntil(this._subscriptions$)).subscribe(params => {
-      if (params.returnUrl && this.icon === 'close') {
-        this._returnUrl = params.returnUrl;
-      }
-    });
-  }
-  private openConfirmDialog() {
-    let message;
-    if (this.currentOrder?.articles?.length) {
-      message = this._transServ.get('progressord');
-    } else {
-      message = this._transServ.get('noarts');
-    }
-    const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
-      data: {
-        title: this._transServ.get('saveord'),
-        message,
-        firstBtn: this._transServ.get('discard'),
-        secondBtn: this._transServ.get('save')
-      }
-    });
+  // private openConfirmDialog() {
+  //   let message;
+  //   if (this.currentOrder?.articles?.length) {
+  //     message = this._transServ.get('progressord');
+  //   } else {
+  //     message = this._transServ.get('noarts');
+  //   }
+  //   const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
+  //     data: {
+  //       title: this._transServ.get('saveord'),
+  //       message,
+  //       firstBtn: this._transServ.get('discard'),
+  //       secondBtn: this._transServ.get('save')
+  //     }
+  //   });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this._store.dispatch(handleOrderRequest({ order: this.currentOrder }));
-      }
-      this._store.dispatch(setCurrentOrderRequest({ order: null }))
-      const orderArticles = [];
-      this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
-      return this.goBack();
-    });
-  }
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     if (result) {
+  //       this._store.dispatch(handleOrderRequest({ order: this.currentOrder }));
+  //     }
+  //     this._store.dispatch(setCurrentOrderRequest({ order: null }))
+  //     const orderArticles = [];
+  //     this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
+  //     return this.goBack();
+  //   });
+  // }
 
   public onCustomerChange(customer: ICustomer) {
     const flow = this._orderService.orderFlow;
@@ -135,50 +126,6 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
       createdBy: this.currentOrder?.createdBy
     }
     this._store.dispatch(replaceCurrentOrderRequest({ order }));
-  }
-
-  public onHeaderGoBack() {
-
-    if (this.icon === 'close') {
-      this._store.dispatch(getCurrentOrderRequest());
-      if (this.currentOrder != null) {
-        this.openConfirmDialog();
-      } else {
-        this.goBack();
-      }
-    } else {
-      this.returnUrl();
-    }
-
-  }
-
-  public goBack() {
-    this.returnUrl();
-  }
-
-  public getInitials(customer: any): string {
-    const fullName = customer.name;
-    if (fullName) {
-      const name: string[] = fullName.split(' ');
-      let initials: string;
-      if (name.length > 2) {
-        customer.smaller = true;
-        initials = `${this.getChar(name[0], 0)}${this.getChar(name[1], 0)}${this.getChar(name[2], 0)}`;
-      } else if (name.length > 1) {
-        initials = `${this.getChar(name[0], 0)}${this.getChar(name[1], 0)}`;
-      } else {
-        initials = `${this.getChar(name[0], 0)}`;
-      }
-      return initials.toUpperCase();
-    }
-  }
-
-  private getChar(text: string, index: number) {
-    return text.charAt(index);
-  }
-
-  public returnUrl(): void {
-    this._router.navigate(['/' + this._returnUrl]);
   }
 
   public hidePanel(hide: boolean): void {

@@ -79,6 +79,8 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   }
 
   private deleteArticle(article: IOrderArticle): void {
+    console.log('order items component - delete article')
+    this._ordSer.setOrderModifiedState(true);
     this._store.dispatch(deleteOrderArticleRequest({ orderArticleId: article.id }));
   }
 

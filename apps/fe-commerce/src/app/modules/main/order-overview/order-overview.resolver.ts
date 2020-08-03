@@ -27,21 +27,22 @@ export class OrderOverviewResolver implements Resolve<any> {
   private _headerNewOrderFlow(): IHeader {
     const header: IHeader = {
       title: 'orderover',
-      leftIcon: 'close',
+      leftIcon: 'keyboard_arrow_left',
       titClass: 'mat-title',
-      lastUrl: 'home',
+      lastUrl: '/main/article-search',
       centered: true
     }
     return header;
   }
 
   private _headerEditOrderFlow(): IHeader {
+    // this._orderService.setOrderModifiedState(false);
     const header: IHeader = {
       title: 'orderover',
-      leftIcon: 'keyboard_arrow_left',
+      leftIcon: 'close',
       rightIcon: 'delete_outlined',
       titClass: 'mat-title',
-      lastUrl: 'main/home',
+      confirmDiscard: true,
       centered: true
     }
     return header;

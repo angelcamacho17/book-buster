@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, HostListener } from '@angular/core';
-import { IHeader, TranslationService, deleteOrderRequest, HeaderService } from '@fecommerce-workspace/data-store-lib';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { IHeader, TranslationService, HeaderService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
-import { Subscription, Observable, of } from 'rxjs';
+import { Subscription, Observable, of, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'main-header',
@@ -13,47 +13,49 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class MainHeaderComponent implements OnInit, OnDestroy {
 
-  private _subscriptions: Subscription;
+  private _subscriptions$ = new Subject<any>();
   private header$: Observable<IHeader>;
   public header: IHeader;
+  private _confirmDiscard;
   public title: Observable<string> = of(null);
   public leftIcon: Observable<string> = of(null);
   public rightIcon: Observable<string> = of(null);
   public titClass: Observable<string> = of(null);
   public addArt: Observable<boolean> = of(null);
   public centered: Observable<boolean> = of(null);
-  @Output() goBack = new EventEmitter<boolean>();
 
   constructor(private _router: Router,
     public dialog: MatDialog,
-    private _transServ: TranslationService,
+    private _translationService: TranslationService,
     private _store: Store<{ header: IHeader }>,
     private _headerService: HeaderService
   ) {
     this.header$ = this._store.pipe(select('header'));
-    this._subscriptions = this.header$.subscribe(data => {
+    this.header$.pipe(
+      takeUntil(this._subscriptions$)
+    ).subscribe((data) => {
       this.header = data;
-      this.title = of(this._transServ.get(this.header?.title));
-      this.titClass = of(this.header?.titClass);
-      this.rightIcon = of(this.header?.rightIcon);
-      this.leftIcon = of(this.header?.leftIcon);
-      this.addArt = of(this.header?.addArt);
-      this.centered = of(this.header?.centered);
+      this._setHeaderData(data);
     });
   }
 
-  ngOnDestroy(): void {
-    if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
-    }
+  private _setHeaderData(data: IHeader) {
+    this._confirmDiscard = data?.confirmDiscard;
+    this.title = of(this._translationService.get(data?.title));
+    this.titClass = of(data?.titClass);
+    this.rightIcon = of(data?.rightIcon);
+    this.leftIcon = of(data?.leftIcon);
+    this.addArt = of(data?.addArt);
+    this.centered = of(data?.centered);
   }
+
   ngOnInit(): void {
 
   }
 
   public goLastVisited(): void {
-    if (this.header.confirmDiscard) {
-      return this.goBack.emit(true);
+    if (this._confirmDiscard) {
+      this._headerService.onGoBack();
     } else {
       this.returnLastUrl();
     }
@@ -66,6 +68,14 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
 
   public rightIconClicked() {
     this._headerService.onRightIconClick();
+  }
+
+  ngOnDestroy(): void {
+    if (this._subscriptions$) {
+      this._subscriptions$.unsubscribe();
+    }
+    this._subscriptions$.next();
+    this._subscriptions$.complete();
   }
 
 }

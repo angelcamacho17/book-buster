@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IArticle, IOrder, IOrderArticle, getCurrentOrderRequest, getArticleRequest, setOrderArticlesRequest, replaceOrderArticleRequest, appendOrderArticleRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { IArticle, IOrder, IOrderArticle, getCurrentOrderRequest, getArticleRequest, setOrderArticlesRequest, replaceOrderArticleRequest, appendOrderArticleRequest, replaceCurrentOrderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
@@ -24,7 +24,8 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   constructor(
     private _store: Store<{ article: IArticle, currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _orderService: OrderService
   ) {
     this._article$ = this._store.pipe(select('article'));
     this._subscriptions = this._article$.subscribe(data => {
@@ -83,10 +84,12 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
         article: this.article,
         quantity: (existingOrderArticle.quantity + this.amount)
       }
-      this._store.dispatch(replaceOrderArticleRequest({ orderArticle }))
+      this._store.dispatch(replaceOrderArticleRequest({ orderArticle }));
     } else {
       this._store.dispatch(appendOrderArticleRequest({ orderArticle }));
     }
+    console.log('article detail component - add to order')
+    this._orderService.setOrderModifiedState(true);
     this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
     this._router.navigate(['/main/article-search']);
   }

@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy, Renderer2, AfterViewInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { HeaderService, IOrder, getCurrentOrderRequest, IOrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService, setHeaderRequest, IHeader, deleteOrderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
+import { Observable, Subscription, Subject } from 'rxjs';
+import { HeaderService, IOrder, getCurrentOrderRequest, IOrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService, setHeaderRequest, IHeader, deleteOrderRequest, OrderService, setCurrentOrderRequest, replaceOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { isUndefined } from 'util';
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
+import { takeUntil } from 'rxjs/operators';
+import { ConfirmDiscardDialogComponent } from '../shared/components/confirm-discard/confirm-discard-dialog.component';
 
 @Component({
   selector: 'order-overview',
@@ -15,13 +17,14 @@ import { DialogComponent } from '../shared/components/dialog/dialog.component';
 })
 export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  public order$: Observable<IOrder>;
-  public order: IOrder;
+  public currentOrder$: Observable<IOrder>;
+  public currentOrder: IOrder;
   public $articles: Observable<IOrderArticle[]>;
   public articles: IOrderArticle[] = [];
   public orderArticles$: Observable<IOrderArticle[]>;
   public orderArticle: IOrderArticle[];
   private _subscriptions = new Subscription();
+  private _subscriptions$ = new Subject<any>();
   public icon = 'keyboard_arrow_left';
   public lastUrl = 'article';
   public delete = false;
@@ -30,7 +33,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     private _store: Store<{ currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
     private _snackBar: MatSnackBar,
     private _router: Router,
-    public dialog: MatDialog,
+    private _matDialog: MatDialog,
     private _ordArtsService: OrderArticlesService,
     private _bnService: BackNavigationService,
     private _transServ: TranslationService,
@@ -42,16 +45,16 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
       this.articles = arts;
     })
 
-    this.order$ = this._store.pipe(select('currentOrder'));
-    this._subscriptions = this.order$.subscribe(data => {
-      this.order = data;
-      console.log(data);
-      if (this.order?.id) {
-        this.icon = 'close';
-        this.lastUrl = 'home';
-        this.delete = true;
-      }
+    this.currentOrder$ = this._store.pipe(select('currentOrder'));
+    this.currentOrder$.pipe(
+      takeUntil(this._subscriptions$)
+    ).subscribe(data => {
+      this.currentOrder = data;
     });
+
+    this._headerService.goBack.pipe(
+      takeUntil(this._subscriptions$)
+    ).subscribe(() => this._goBack());
 
 
     this._store.dispatch(getCurrentOrderRequest());
@@ -66,6 +69,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     // this._bnService.switchCustomer(false);
     this._orderService.switchCustomerFlow = false;    // Reset flag of customer flow.
     this.subscribeToHeader();
+    // console.log(this._orderService.getOrderModifiedState())
   }
 
   public subscribeToHeader() {
@@ -74,7 +78,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   private _deleteOrder() {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this._matDialog.open(DialogComponent, {
       width: '280px',
       height: '120px',
       data: {
@@ -103,7 +107,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     if (this.updatedOrder() === null) {
     }
     this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
-    this._store.dispatch(handleOrderRequest({ order: this.order }));
+    this._store.dispatch(handleOrderRequest({ order: this.currentOrder }));
     this._store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
     const msg = 'Order succesfully confirmed';
     this._snackBar.open(msg, '', {
@@ -115,18 +119,18 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
 
   private updatedOrder(): IOrder {
     const order: IOrder = {
-      id: this.order?.id,
-      description: this.order.description,
+      id: this.currentOrder?.id,
+      description: this.currentOrder.description,
       articles: this.articles,
       amount: this.getTotal(),
-      customer: this.order.customer,
-      createdBy: this.order.createdBy
+      customer: this.currentOrder.customer,
+      createdBy: this.currentOrder.createdBy
     };
     return order;
   }
 
   public changeCustomer(): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this._matDialog.open(DialogComponent, {
       width: '280px',
       height: '248px',
       data: {
@@ -165,7 +169,18 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   public returnUrl(): void {
-    this._router.navigate(['/home']);
+    this._router.navigate(['/main/home']);
+  }
+
+
+  private _goBack() {
+    // console.log('order modificada ', this._orderService.getOrderModifiedState());
+        
+    this.returnUrl()
+    // if (this._orderService.getOrderModifiedState()) {
+    //   this._openConfirmDialog();
+    // } else {
+    // }
   }
 
   public getTotal(): number {
@@ -174,10 +189,37 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     return total > 0 ? total : 0;
   }
 
+  private _openConfirmDialog() {
+    const message = this._transServ.get('progressord');
+    const dialogRef = this._matDialog.open(ConfirmDiscardDialogComponent, {
+      data: {
+        title: this._transServ.get('saveord'),
+        message,
+        firstBtn: this._transServ.get('discard'),
+        secondBtn: this._transServ.get('save')
+      }
+    });
+
+    dialogRef.afterClosed().pipe(
+      takeUntil(this._subscriptions$)
+    ).subscribe((result) => {
+      if (result) {
+        this._store.dispatch(replaceOrderRequest({ order: this.currentOrder }));
+      }
+      this._store.dispatch(setCurrentOrderRequest({ order: null }))
+      const orderArticles = [];
+      this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
+
+      this._router.navigate(['/main/home']);
+    });
+  }
+
   ngOnDestroy(): void {
     if (this._subscriptions) {
       this._subscriptions.unsubscribe();
     }
+    this._subscriptions$.next();
+    this._subscriptions$.complete();
   }
 
 }

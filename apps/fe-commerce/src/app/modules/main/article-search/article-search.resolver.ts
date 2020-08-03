@@ -22,7 +22,7 @@ export class ArticleSearchResolver implements Resolve<any> {
   private _headerNewOrderFlow(): IHeader {
     const header: IHeader = {
       title: 'neworder',
-      leftIcon: 'close',
+      leftIcon: 'keyboard_arrow_left',
       titClass: 'mat-title',
       lastUrl: 'main/customer-search',
       centered: true
