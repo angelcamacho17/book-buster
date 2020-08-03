@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Renderer2, AfterViewInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { IOrder, getCurrentOrderRequest, IOrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService, setHeaderRequest, IHeader } from '@fecommerce-workspace/data-store-lib';
+import { HeaderService, IOrder, getCurrentOrderRequest, IOrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService, setHeaderRequest, IHeader, deleteOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -34,7 +34,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     private _ordArtsService: OrderArticlesService,
     private _bnService: BackNavigationService,
     private _transServ: TranslationService,
-    private _renderer2: Renderer2
+    private _headerService: HeaderService
   ) {
     this.$articles = this._store.pipe(select('orderArticles'));
     this._subscriptions = this.$articles.subscribe((arts) => {
@@ -62,8 +62,37 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnInit(): void {
-
     this._bnService.switchCustomer(false);
+    this.subscribeToHeader();
+  }
+
+  public subscribeToHeader() {
+    this._subscriptions.add(this._headerService.rightIconClicked
+      .subscribe(() => this._deleteOrder()));
+  }
+
+  private _deleteOrder() {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '280px',
+      height: '120px',
+      data: {
+        msg: this._transServ.get('deleteord'),
+        firstButton: this._transServ.get('cancel'),
+        secondButton: this._transServ.get('delete'),
+        buttonColor: 'red'
+      }
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data === undefined) {
+        // Is undefined when the user closes
+        // the dialog without an action
+        return;
+      }
+      if (data?.result === 'DELETE') {
+        this._store.dispatch(deleteOrderRequest());
+        this._router.navigate(['/home']);
+      }
+    });
   }
 
   public orderConfirmed(): void {
@@ -137,7 +166,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   public getTotal(): number {
-    let total = this._ordArtsService.getTotal() ;
+    let total = this._ordArtsService.getTotal();
     total = Math.round(total * 100) / 100;
     return total > 0 ? total : 0;
   }

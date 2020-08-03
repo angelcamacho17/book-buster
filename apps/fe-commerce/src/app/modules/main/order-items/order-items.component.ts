@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { Observable, Subscription, of, merge } from 'rxjs';
-import { deleteOrderArticleRequest, IOrderArticle, refreshOrderArticlesRequest, OrderArticlesService, OrderService, IHeader, setHeaderRequest } from '@fecommerce-workspace/data-store-lib';
+import { deleteOrderArticleRequest, IOrderArticle, refreshOrderArticlesRequest, OrderArticlesService, OrderService, IHeader, setHeaderRequest, HeaderService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { startWith, map, switchMap, tap } from 'rxjs/operators';
-import {  MatBottomSheet } from '@angular/material/bottom-sheet';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ArtSheetComponent } from '../shared/components/art-sheet/art-sheet.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'order-items',
@@ -17,7 +18,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   public $articles: Observable<IOrderArticle[]>;
   public articles: IOrderArticle[] = [];
   public items: any = [];
-  public initialPos = { x: 0, y: 0};
+  public initialPos = { x: 0, y: 0 };
   private _subscriptions = new Subscription();
   private _substractArt = 0;
   private _currentArt: IOrderArticle;
@@ -28,32 +29,16 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   public articleToDelete = null;
   public addArt = false;
   public returnUrl = 'order';
-//   public filteredlist: Observable<any[]> = of([{
-//  "id": 1,
-//  "article": {
-//    "id": 1,
-//    "name": "Southern Comfort",
-//    "description": "Eosinophilic gastroenteritis",
-//    "price": 56.87
-//  },
-//  "quantity": 2
-//  }, {
-//  "id": 2,
-//  "article": {
-//    "id": 2,
-//    "name": "Stock - Veal, White",
-//    "description": "Malignant neoplasm of other specified sites of nasopharynx",
-//    "price": 76.19
-//  }, "quantity": 3
-//  }
-//  ])
 
   constructor(
     private _snackBar: MatSnackBar,
     private _ordSer: OrderService,
     private _store: Store<{ orderArticles: IOrderArticle[] }>,
     private _ordArtsService: OrderArticlesService,
-    private _bottomSheet: MatBottomSheet) {
+    private _bottomSheet: MatBottomSheet,
+    private _router: Router,
+    private _headerService: HeaderService
+  ) {
     this.$articles = this._store.pipe(select('orderArticles'));
     this.listenToOrderArts();
     this._store.dispatch(refreshOrderArticlesRequest());
@@ -64,19 +49,18 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   }
 
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.subscribeToHeader();
+  }
 
-  ngOnDestroy(): void {
-    //If the time of the snackbar
-    //hasnt past yet, and the user wnats tyo go back
-    //delete the article and dismiss snackbar
-    if(this.waitToDeleted) {
-      this.deleteArticle(this.articleToDelete);
-      this._snackBar.dismiss();
-    }
-    if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
-    }
+
+  public subscribeToHeader() {
+    this._subscriptions.add(this._headerService.rightIconClicked
+      .subscribe(() => this.goToArticles()));
+  }
+
+  public goToArticles(): void {
+    this._router.navigate(['/main/article-search']);
   }
 
   public openBottomSheet(item: IOrderArticle): void {
@@ -95,7 +79,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   }
 
   private deleteArticle(article: IOrderArticle): void {
-    this._store.dispatch(deleteOrderArticleRequest({orderArticleId: article.id}));
+    this._store.dispatch(deleteOrderArticleRequest({ orderArticleId: article.id }));
   }
 
   public tempDelete(article: IOrderArticle): void {
@@ -116,7 +100,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     config.panelClass = ['delete-art'];
 
     const ref = this._snackBar.open('Article deleted', 'UNDO', config);
-    ref.afterDismissed().subscribe((action)=> {
+    ref.afterDismissed().subscribe((action) => {
       this.waitToDeleted = false;
       this.articleToDelete = null;
       if (!action.dismissedByAction) {
@@ -140,7 +124,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
       .pipe(
         startWith([]),
         map((state) => {
-          if(state) {
+          if (state) {
             this.articles = state;
             return this.articles;
           } else {
@@ -158,5 +142,18 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
 
   private substractTemp(article: IOrderArticle): void {
     this._substractArt = article.quantity * article.article.price;
+  }
+  
+  ngOnDestroy(): void {
+    //If the time of the snackbar
+    //hasnt past yet, and the user wnats tyo go back
+    //delete the article and dismiss snackbar
+    if (this.waitToDeleted) {
+      this.deleteArticle(this.articleToDelete);
+      this._snackBar.dismiss();
+    }
+    if (this._subscriptions) {
+      this._subscriptions.unsubscribe();
+    }
   }
 }

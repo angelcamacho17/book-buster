@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { IOrder, clearCurrentOrderRequest, setOrderArticlesRequest, refreshOrdersRequest, IHeader, setHeaderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Store } from '@ngrx/store';
+import { IHeader, setHeaderRequest } from '@fecommerce-workspace/data-store-lib';
 
 @Injectable()
 export class HomeResolver implements Resolve<any> {
@@ -12,10 +12,9 @@ export class HomeResolver implements Resolve<any> {
   resolve(): Observable<any> {
     const header: IHeader = {
       title: 'home',
-      leftIcon: null,
-      rightIcon: null,
+      rightIcon: 'exit_to_app',
       titClass: 'mat-display-1',
-      lastUrl: null,
+      centered: true
     }
 
     this._store.dispatch(setHeaderRequest({header}))

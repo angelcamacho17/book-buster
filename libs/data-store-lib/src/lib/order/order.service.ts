@@ -10,8 +10,8 @@ import { OrderArticlesService } from '../order-articles/order-articles.service';
 export class OrderService {
 
   _baseUrl = 'assets/data/orders.json';
+  public orderFlow = 'new';
   private totalsCalculated = false;
-
   private _orders: Array<IOrder> = [
     {
       "id": 9,
