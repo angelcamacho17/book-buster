@@ -97,11 +97,6 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
     }
   }
 
-  private setHeaderHeight() {
-    const header = document.getElementById('header');
-    this._renderer2.setStyle(header, 'height', '60px');
-  }
-
   ngOnDestroy(): void {
     if (this._subscriptions) {
       this._subscriptions.unsubscribe();

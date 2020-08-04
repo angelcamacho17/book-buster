@@ -21,7 +21,6 @@ export class SetHeightDirective implements AfterViewInit {
 
   private setHeight(): void {
     const height = window.innerHeight - this.feSetHeight.height + 'px';
-    console.log(height);
     this.renderer.setStyle(
       this._el.nativeElement,
       'height',

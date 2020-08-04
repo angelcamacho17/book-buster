@@ -10,8 +10,6 @@ export class HomeResolver implements Resolve<any> {
     private _store: Store<{}>,
     private _orderService: OrderService
   ) {
-    console.log('home resolver')
-
     this._orderService.setOrderModifiedState(false);
   }
 

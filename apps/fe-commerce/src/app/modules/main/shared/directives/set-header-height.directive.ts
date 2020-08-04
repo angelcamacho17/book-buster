@@ -20,9 +20,6 @@ export class SetHeaderHeightDirective implements AfterViewInit {
 
   setHeaderHeight() {
     const headerHeight = this._componentService.expectedHeaderHeight - this._elementRef.nativeElement.offsetHeight;
-    console.log(headerHeight)
-    console.log(this._componentService.expectedHeaderHeight, this._elementRef.nativeElement.offsetHeight)
-    console.log(headerHeight)
     this._renderer2.setStyle(this._componentService.headerElement.nativeElement, 'height', `${headerHeight}px`);
   }
 }

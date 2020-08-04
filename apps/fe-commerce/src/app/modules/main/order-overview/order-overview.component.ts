@@ -66,10 +66,8 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnInit(): void {
-    // this._bnService.switchCustomer(false);
     this._orderService.switchCustomerFlow = false;    // Reset flag of customer flow.
     this.subscribeToHeader();
-    // console.log(this._orderService.getOrderModifiedState())
   }
 
   public subscribeToHeader() {
