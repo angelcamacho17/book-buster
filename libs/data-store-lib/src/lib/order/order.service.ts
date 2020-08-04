@@ -422,7 +422,6 @@ export class OrderService {
     },
 
   ];
-
   public currentOrder: IOrder = null;
 
   constructor(
