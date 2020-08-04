@@ -89,8 +89,8 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       this._store.dispatch(appendOrderArticleRequest({ orderArticle }));
     }
     this._orderService.setOrderModifiedState(true);
-    this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
-    this._router.navigate(['/main/article-search']);
+    this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
+    this._goToArticlesSearch();
   }
 
   public updatedOrder(): IOrder {
@@ -103,6 +103,14 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       createdBy: this.currentOrder.createdBy
     };
     return order;
+  }
+
+  private _goToArticlesSearch(): void {
+    if (this._orderService.orderFlow === 'edit') {
+      this._router.navigate(['/main/article-search/edit']);
+    } else {
+      this._router.navigate(['/main/article-search']);
+    }
   }
 
   ngOnDestroy(): void {
