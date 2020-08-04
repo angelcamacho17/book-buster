@@ -29,7 +29,7 @@ export const routesAnimations =
 
     transition('order-overview => home', slideToLeft()),
     transition('order-overview => order-items', slideToRight()),
-    transition('order-overview => article-search', slideToRight()),
+    transition('order-overview => article-search', slideToLeft()),
     transition('order-overview => customer-search', slideToLeft()),
 
     transition('order-items => order-overview', slideToLeft()),
@@ -45,6 +45,7 @@ export const routesAnimations =
     transition('article-detail => article-search', slideToLeft()),
 
     transition('article-search-edit => order-overview', slideToLeft()),
+    transition('article-search-edit => order-items', slideToLeft()),
 
   ]);
 
