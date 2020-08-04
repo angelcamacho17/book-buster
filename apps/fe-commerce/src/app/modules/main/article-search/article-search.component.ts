@@ -38,9 +38,6 @@ export class ArticleSearchComponent implements OnInit, OnDestroy, AfterViewInit 
     }
     this._store.dispatch(refreshArticlesRequest());
 
-    window.addEventListener('keyboardWillShow', (e) => {
-      console.log('keyboard will show! ', e);
-  });
   }
 
   ngOnInit(): void {

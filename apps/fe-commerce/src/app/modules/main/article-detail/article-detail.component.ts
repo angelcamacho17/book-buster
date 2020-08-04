@@ -88,7 +88,6 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     } else {
       this._store.dispatch(appendOrderArticleRequest({ orderArticle }));
     }
-    console.log('article detail component - add to order')
     this._orderService.setOrderModifiedState(true);
     this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
     this._router.navigate(['/main/article-search']);

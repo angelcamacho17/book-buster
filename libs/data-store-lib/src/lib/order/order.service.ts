@@ -435,7 +435,6 @@ export class OrderService {
    * Depending on the flow.
    */
   public setOrderModifiedState(state: boolean): void {
-    console.log('setting flag to: ', state)
     this._modifiedOrder = state;
   }
 
