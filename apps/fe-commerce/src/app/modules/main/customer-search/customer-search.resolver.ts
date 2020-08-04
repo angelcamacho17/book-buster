@@ -25,7 +25,8 @@ export class CustomerSearchResolver implements Resolve<any> {
       leftIcon: 'close',
       titClass: 'mat-title',
       lastUrl: 'main/home',
-      centered: true
+      centered: true,
+      confirmDiscard: true
     }
     return header;
   }
@@ -36,7 +37,8 @@ export class CustomerSearchResolver implements Resolve<any> {
       leftIcon: 'keyboard_arrow_left',
       titClass: 'mat-title',
       lastUrl: 'main/order-overview',
-      centered: true
+      centered: true,
+      confirmDiscard: true
     }
     return header;
   }

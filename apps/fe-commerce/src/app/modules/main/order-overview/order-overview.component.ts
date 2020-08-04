@@ -68,6 +68,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   ngOnInit(): void {
     // this._bnService.switchCustomer(false);
     this._orderService.switchCustomerFlow = false;    // Reset flag of customer flow.
+    console.log(this._orderService.getOrderModifiedState())
     this.subscribeToHeader();
     // console.log(this._orderService.getOrderModifiedState())
   }
@@ -174,13 +175,13 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
 
 
   private _goBack() {
-    // console.log('order modificada ', this._orderService.getOrderModifiedState());
-        
-    this.returnUrl()
-    // if (this._orderService.getOrderModifiedState()) {
-    //   this._openConfirmDialog();
-    // } else {
-    // }
+    console.log('order modificada ', this._orderService.getOrderModifiedState());
+
+    if (this._orderService.getOrderModifiedState()) {
+      this._openConfirmDialog();
+    } else {
+      this.returnUrl();
+    }
   }
 
   public getTotal(): number {
@@ -210,7 +211,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
       const orderArticles = [];
       this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
 
-      this._router.navigate(['/main/home']);
+      this.returnUrl();
     });
   }
 
