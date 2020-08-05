@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainComponent } from './main.component';
 import { SharedModule } from './shared/shared.module';
 import { MainRoutingModule } from './main-routing.module';
 import { HomeResolver } from './home/home.resolver';
@@ -11,9 +10,6 @@ import { ArticleDetailResolver } from './article-detail/article-detail.resolver'
 import { ArticleSearchResolver } from './article-search/article-search.resolver';
 
 @NgModule({
-  declarations: [
-    MainComponent
-  ],
   imports: [
     CommonModule,
     MainRoutingModule,

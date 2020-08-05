@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class MainHeaderComponent implements OnInit, OnDestroy {
 
-  private _subscriptions$ = new Subject<any>();
+  private _subscriptions$ = new Subscription();
   private header$: Observable<IHeader>;
   public header: IHeader;
   private _confirmDiscard;
@@ -31,9 +31,7 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
     private _headerService: HeaderService
   ) {
     this.header$ = this._store.pipe(select('header'));
-    this.header$.pipe(
-      takeUntil(this._subscriptions$)
-    ).subscribe((data) => {
+    this. _subscriptions$ = this.header$.subscribe((data) => {
       this.header = data;
       this._setHeaderData(data);
     });
@@ -74,8 +72,6 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
     if (this._subscriptions$) {
       this._subscriptions$.unsubscribe();
     }
-    this._subscriptions$.next();
-    this._subscriptions$.complete();
   }
 
 }

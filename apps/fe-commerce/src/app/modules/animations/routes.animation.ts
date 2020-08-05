@@ -162,7 +162,7 @@ function fromBottom() {
       ], optional),
       query(':enter', [
         animate('150ms ease', style({
-          top: '112px',
+          top: '0',
           'z-index': 10,
 
         }))
@@ -183,7 +183,7 @@ function fromTop() {
       style({
         position: 'fixed',
         width: '100%',
-        top: '112px',
+        top: '0',
         'box-shadow': '0px 0px 8px 2px rgba(0, 0, 0, 0.6)',
         height: '100vh',
         background: '#F7F8F9',
@@ -192,7 +192,7 @@ function fromTop() {
     ], optional),
     query(':enter', [
       style({
-        top: '112px',
+        top: '0',
         'z-index': 0
     })
     ]),
@@ -206,7 +206,7 @@ function fromTop() {
       ], optional),
       query(':enter', [
         animate('150ms ease', style({
-          top: '112px',
+          top: '0',
           'z-index': 0,
         }))
       ])
