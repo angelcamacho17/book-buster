@@ -23,7 +23,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   public articles: IOrderArticle[] = [];
   public orderArticles$: Observable<IOrderArticle[]>;
   public orderArticle: IOrderArticle[];
-  private _subscriptions: Subscription[] = [];
+  private _subscriptions = new Subscription();
   public icon = 'keyboard_arrow_left';
   public lastUrl = 'article';
   public delete = false;
@@ -40,20 +40,20 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     private _orderService: OrderService
   ) {
     this.$articles = this._store.pipe(select('orderArticles'));
-    this._subscriptions.push(
+    this._subscriptions.add(
       this.$articles.subscribe((arts) => {
         this.articles = arts;
       })
     );
 
     this.currentOrder$ = this._store.pipe(select('currentOrder'));
-    this._subscriptions.push(
+    this._subscriptions.add(
       this.currentOrder$.subscribe(data => {
         this.currentOrder = data;
       })
     );
 
-    this._subscriptions.push(
+    this._subscriptions.add(
       this._headerService.goBack.subscribe(() => this._goBack())
     );
 
@@ -68,11 +68,12 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
 
   ngOnInit(): void {
     this._orderService.switchCustomerFlow = false;    // Reset flag of customer flow.
+    console.log(this._orderService.getOrderModifiedState())
     this.subscribeToHeader();
   }
 
   public subscribeToHeader() {
-    this._subscriptions.push(
+    this._subscriptions.add(
       this._headerService.rightIconClicked
         .subscribe(() => this._deleteOrder())
     );
@@ -143,7 +144,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
       }
     });
 
-    this._subscriptions.push(
+    this._subscriptions.add(
       dialogRef.afterClosed().subscribe(data => {
         if (isUndefined(data)) {
           // Is undefined when the user closes
@@ -177,13 +178,13 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
 
 
   private _goBack() {
-    // console.log('order modificada ', this._orderService.getOrderModifiedState());
+    console.log('order modificada ', this._orderService.getOrderModifiedState());
 
-    this.returnUrl()
-    // if (this._orderService.getOrderModifiedState()) {
-    //   this._openConfirmDialog();
-    // } else {
-    // }
+    if (this._orderService.getOrderModifiedState()) {
+      this._openConfirmDialog();
+    } else {
+      this.returnUrl();
+    }
   }
 
   public getTotal(): number {
@@ -203,7 +204,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
       }
     });
 
-    this._subscriptions.push(
+    this._subscriptions.add(
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
           this._store.dispatch(replaceOrderRequest({ order: this.currentOrder }));
@@ -212,14 +213,14 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
         const orderArticles = [];
         this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
   
-        this._router.navigate(['/main/home']);
+        this.returnUrl();
       })
     );
   }
 
   ngOnDestroy(): void {
     if (this._subscriptions) {
-      this._subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
+      this._subscriptions.unsubscribe();
     }
   }
 

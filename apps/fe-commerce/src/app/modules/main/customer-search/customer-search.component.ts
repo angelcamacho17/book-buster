@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { refreshCustomersRequest, setCurrentOrderRequest, getCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService, OrderService } from '@fecommerce-workspace/data-store-lib';
+import { refreshCustomersRequest, setCurrentOrderRequest, getCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService, OrderService, HeaderService } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
@@ -25,7 +25,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   public shadow = false;
   public emptyResults = true;
   public filteredResults: ICustomer[] = [];
-  private _subscriptions: Subscription[] = [];
+  private _subscriptions = new Subscription;
 
   constructor(
     private eventService: EventService,
@@ -33,26 +33,33 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     private matDialog: MatDialog,
     private _store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[] }>,
     private _router: Router,
-    private _translationService: TranslationService,
+    private _transServ: TranslationService,
+    private _headerService: HeaderService
   ) {
 
     this.customers$ = this._store.pipe(select('customers'));
-    this._subscriptions.push(
+    this._subscriptions.add(
       this.customers$.subscribe(data => {
         this.customers = data;
       })
     );
 
     this.currentOrder$ = this._store.pipe(select('currentOrder'));
-    this._subscriptions.push(
+    this._subscriptions.add(
       this.currentOrder$.subscribe((currentOrder) => {
         this.currentOrder = currentOrder;
       })
     );
 
-    this._subscriptions.push(
+    this._subscriptions.add(
       this.eventService.customerChange.subscribe(customer => {
         this.onCustomerChange(customer);
+      })
+    );
+
+    this._subscriptions.add(
+      this._headerService.goBack.subscribe(()=>{
+        this.openConfirmDialog();
       })
     );
 
@@ -64,32 +71,38 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
 
   ngOnInit(): void { }
 
-  // private openConfirmDialog() {
-  //   let message;
-  //   if (this.currentOrder?.articles?.length) {
-  //     message = this._transServ.get('progressord');
-  //   } else {
-  //     message = this._transServ.get('noarts');
-  //   }
-  //   const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
-  //     data: {
-  //       title: this._transServ.get('saveord'),
-  //       message,
-  //       firstBtn: this._transServ.get('discard'),
-  //       secondBtn: this._transServ.get('save')
-  //     }
-  //   });
+  public openConfirmDialog() {
+    let message;
 
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     if (result) {
-  //       this._store.dispatch(handleOrderRequest({ order: this.currentOrder }));
-  //     }
-  //     this._store.dispatch(setCurrentOrderRequest({ order: null }))
-  //     const orderArticles = [];
-  //     this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
-  //     return this.goBack();
-  //   });
-  // }
+    if (!this.currentOrder) {
+      this._router.navigate(['/main/home']);
+      return;
+    }
+
+    if (this.currentOrder?.articles?.length) {
+      message = this._transServ.get('progressord');
+    } else {
+      message = this._transServ.get('noarts');
+    }
+    const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
+      data: {
+        title: this._transServ.get('saveord'),
+        message,
+        firstBtn: this._transServ.get('discard'),
+        secondBtn: this._transServ.get('save')
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this._store.dispatch(handleOrderRequest({ order: this.currentOrder }));
+      }
+      this._store.dispatch(setCurrentOrderRequest({ order: null }))
+      const orderArticles = [];
+      this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
+      this._router.navigate(['/main/home']);
+    });
+  }
 
   public onCustomerChange(customer: ICustomer) {
     const flow = this._orderService.orderFlow;
@@ -150,7 +163,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
 
   ngOnDestroy(): void {
     if (this._subscriptions) {
-      this._subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
+      this._subscriptions.unsubscribe();
     }
     this.currentOrder = null;
   }

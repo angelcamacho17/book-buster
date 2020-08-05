@@ -19,7 +19,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   public articles: IOrderArticle[] = [];
   public items: any = [];
   public initialPos = { x: 0, y: 0 };
-  private _subscriptions: Subscription[] = [];
+  private _subscriptions = new Subscription();
   private _substractArt = 0;
   private _currentArt: IOrderArticle;
   public filteredlist: Observable<any[]>;
@@ -55,7 +55,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
 
 
   public subscribeToHeader() {
-    this._subscriptions.push(
+    this._subscriptions.add(
       this._headerService.rightIconClicked
         .subscribe(() => this.goToArticles())
     );
@@ -73,7 +73,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
       data: { article },
     });
 
-    this._subscriptions.push(
+    this._subscriptions.add(
       bottomSheetRef.afterDismissed().subscribe((action) => {
         if (action === 'delete') {
           this.tempDelete(this._currentArt);
@@ -158,7 +158,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
       this._snackBar.dismiss();
     }
     if (this._subscriptions) {
-      this._subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
+      this._subscriptions.unsubscribe();
     }
   }
 }

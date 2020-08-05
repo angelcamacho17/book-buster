@@ -18,7 +18,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   article: IArticle;
   orderArticles: IOrderArticle[];
   currentOrder: IOrder;
-  private _subscriptions: Subscription[] = [];
+  private _subscriptions = new Subscription();
 
 
   constructor(
@@ -28,14 +28,14 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     private _orderService: OrderService
   ) {
     this._article$ = this._store.pipe(select('article'));
-    this._subscriptions.push(
+    this._subscriptions.add(
       this._article$.subscribe(data => {
         this.article = data;
       })
     );
 
     this._currentOrder$ = this._store.pipe(select('currentOrder'));
-    this._subscriptions.push(
+    this._subscriptions.add(
       this._currentOrder$.subscribe(data => {
         this.currentOrder = data;
       })
@@ -43,7 +43,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     this._store.dispatch(getCurrentOrderRequest())
 
     this._orderArticles$ = this._store.pipe(select('orderArticles'));
-    this._subscriptions.push(
+    this._subscriptions.add(
       this._orderArticles$.subscribe(data => {
         this.orderArticles = data;
       })
@@ -57,7 +57,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   public getArticle() {
     let articleId: number;
 
-    this._subscriptions.push(
+    this._subscriptions.add(
       this._route.paramMap.pipe(
         map((params: ParamMap) => articleId = +params.get('id'))
       ).subscribe(() => {
@@ -97,8 +97,8 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       this._store.dispatch(appendOrderArticleRequest({ orderArticle }));
     }
     this._orderService.setOrderModifiedState(true);
-    this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
-    this._router.navigate(['/main/article-search']);
+    this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
+    this._goToArticlesSearch();
   }
 
   public updatedOrder(): IOrder {
@@ -113,9 +113,17 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     return order;
   }
 
+  private _goToArticlesSearch(): void {
+    if (this._orderService.orderFlow === 'edit') {
+      this._router.navigate(['/main/article-search/edit']);
+    } else {
+      this._router.navigate(['/main/article-search']);
+    }
+  }
+
   ngOnDestroy(): void {
     if(this._subscriptions) {
-      this._subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
+      this._subscriptions.unsubscribe();
     }
   }
 }

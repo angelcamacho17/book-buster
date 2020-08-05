@@ -14,7 +14,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   public rowType = ArticleRowComponent;
   public articles: IArticle[] = [];
   private _articles$: Observable<IArticle[]>;
-  private _subscriptions: Subscription[] = [];
+  private _subscriptions = new Subscription();
   public display = false;
   public navigation$: Observable<string>;
   public hide = false;
@@ -31,7 +31,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
 
     this._articles$ = this._store.pipe(select('articles'));
 
-    this._subscriptions.push(
+    this._subscriptions.add(
       this._articles$.subscribe(data => {
         this.articles = data;
       })
@@ -79,7 +79,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this._subscriptions) {
-      this._subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
+      this._subscriptions.unsubscribe();
     }
   }
 }

@@ -71,8 +71,8 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._subscriptions$) {
-      this._subscriptions$.unsubscribe();
+    if (this._subscriptions) {
+      this._subscriptions.unsubscribe();
     }
   }
 

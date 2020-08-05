@@ -19,7 +19,7 @@ export class OrderOverviewResolver implements Resolve<any> {
     } else {
       header = this._headerNewOrderFlow();
     }
-    
+
     this._store.dispatch(setHeaderRequest({ header }))
     return of(null);
   }
