@@ -6,42 +6,37 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { IOrder } from '@fecommerce-workspace/data-store-lib';
 import { refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
 import { takeUntil, map } from 'rxjs/operators';
+import { LayoutService } from '../shared/services/layout.service';
 // import * as ordersData from '../../../assets/data/orders.json';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked, OnDestroy {
-  @ViewChild("ordersCard", { read: ElementRef }) ordersCard;
-  @ViewChild("ordersCardList", { read: ElementRef }) ordersCardList;
+export class HomeComponent implements OnInit, OnDestroy {
   public orders$: Observable<IOrder[]>;
   public orders: IOrder[];
   public display = false;
   public cardOverflows = false;
-  private _subscriptions: Subscription[] = [];
+  private _subscriptions: Subscription = new Subscription();
 
   constructor(
-    private _renderer2: Renderer2,
     private _store: Store,
     private _router: Router,
     private _ordSer: OrderService,
     private _storeOrders: Store<{ orders: IOrder[] }>,
     private _bnService: BackNavigationService,
-    private _changeDetector: ChangeDetectorRef,
-    private _headerService: HeaderService
+    private _headerService: HeaderService,
+    private _layoutService: LayoutService
   ) {
     this.orders$ = this._storeOrders.pipe(select('orders'));
-    this._subscriptions.push(
-      this.orders$.subscribe(data => {
-        if (data.length) {
-          data = data.slice().sort((a, b) => b.id - a.id)
-        }
-        this.orders = data;
-      })
-    );
+    this.subscriber$ = this.orders$.subscribe(data => {
+      if (data.length) {
+        data = data.slice().sort((a, b) => b.id - a.id)
+      }
+      this.orders = data;
+    });
 
 
     this._store.dispatch(clearCurrentOrderRequest());
@@ -50,28 +45,18 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
   }
 
   ngOnInit(): void {
+    console.log('subscriptions array', this._subscriptions)
     this.subscribeToHeader();
   }
 
   public subscribeToHeader() {
-    this._subscriptions.push(this._headerService.rightIconClicked
-      .subscribe(() => this._logout())
-    );
+    this.subscriber$ = this._headerService.rightIconClicked
+      .subscribe(() => this._logout());
   }
 
   private _logout() {
-    this._router.navigate(['/'])
+    this._router.navigate(['/login'])
   }
-
-  ngAfterViewInit(): void {
-    this.cardOverflows = this.checkOrdersCardOverflow();
-    // this.setHeaderHeight();
-  }
-
-  ngAfterContentChecked(): void {
-    this._changeDetector.detectChanges();
-  }
-
 
   public createOrder(): void {
     this._bnService.switchCustomer(false);
@@ -86,20 +71,23 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
     this._router.navigate(['/main/order-overview']);
   }
 
-  public checkOrdersCardOverflow() {
-    const cardHeight = this.ordersCard?.nativeElement.offsetHeight;
-    const listHeight = this.ordersCardList?.nativeElement.offsetHeight;
-    const cardScroll = this.ordersCard?.nativeElement.scrollHeight;
-    if (cardHeight <= listHeight) {
-      return true;
-    } else {
-      return false;
-    }
+  ngOnDestroy(): void {
+    console.log('on destroy')
+    this._subscriptions.unsubscribe();
+    // if (this._subscriptions) {
+    //   this._subscriptions.forEach((sub: Subscription) => {
+    //     if (!sub.closed) {
+    //       sub.unsubscribe();
+    //     }
+    //   });
+    // }
+
+    // this._subscriptions = [];
+
+    console.log('final result', this._subscriptions)
   }
 
-  ngOnDestroy(): void {
-    if (this._subscriptions) {
-      this._subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
-    }
+  set subscriber$(subscription: Subscription) {
+    this._subscriptions.add(subscription);
   }
 }

@@ -73,6 +73,15 @@
       background-color: #1666d8 !important;
       color: #ffffff;
       height: 50px;
+
+      .progress-bar {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        &.hidden {
+          display: none;
+        }
+      }
     }
 
     .disabled {

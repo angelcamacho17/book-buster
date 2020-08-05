@@ -16,6 +16,7 @@ export class LayoutService {
     '(min-width:1440px) and (max-width:1599px)',
     '(min-width:1600px)'];
   constructor(private breakpointObserver: BreakpointObserver) {
+    console.log('arranco el servicio')
     this.initBreakpoints();
   }
 

@@ -45,7 +45,6 @@ import { LayoutService } from './modules/main/shared/services/layout.service';
     CustomerKeyResolver,
     KeyValueStoreService,
     AuthTokenService,
-    LayoutService,
     HCSClient,
     HCSLoad,
     {

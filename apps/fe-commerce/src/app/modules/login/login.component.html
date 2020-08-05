@@ -42,19 +42,15 @@
       <button class="login-btn mat-elevation-0"
               [class.disabled] = "isSubmitted"
               [disabled] = "isSubmitted"
-              mat-button
-              >
+              mat-button>
               {{('sign' | translate) | uppercase}}
               <mat-progress-bar
                 mode="indeterminate"
                 color="accent"
-                [style.display]="isSubmitted ? 'block' : 'none'"
-                style="position: absolute;
-                       left: 0;
-                       bottom: 0;">
+                class="progress-bar"
+                [class.hidden]="!isSubmitted">
               </mat-progress-bar>
         </button>
       </div>
   </form>
 </div>
-
