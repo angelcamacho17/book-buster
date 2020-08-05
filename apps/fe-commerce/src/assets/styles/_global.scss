@@ -1,3 +1,5 @@
+@import "./responsive_mixins";
+
 main {
   position: relative;
   display: -webkit-flex;
@@ -28,6 +30,12 @@ main {
   padding: 0 16px;
   padding-bottom: 16px;
 
+  //query cuando es talbet:
+  @include tablet {
+    flex-flow: row wrap;
+    justify-content: flex-start;
+  }
+
   .content {
     height: auto;
 
@@ -40,6 +48,7 @@ main {
     }
   }
 }
+
 .search-container {
   height: 100%;
 

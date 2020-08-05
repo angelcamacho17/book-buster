@@ -23,8 +23,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   public articles: IOrderArticle[] = [];
   public orderArticles$: Observable<IOrderArticle[]>;
   public orderArticle: IOrderArticle[];
-  private _subscriptions = new Subscription();
-  private _subscriptions$ = new Subject<any>();
+  private _subscriptions: Subscription[] = [];
   public icon = 'keyboard_arrow_left';
   public lastUrl = 'article';
   public delete = false;
@@ -41,20 +40,22 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     private _orderService: OrderService
   ) {
     this.$articles = this._store.pipe(select('orderArticles'));
-    this._subscriptions = this.$articles.subscribe((arts) => {
-      this.articles = arts;
-    })
+    this._subscriptions.push(
+      this.$articles.subscribe((arts) => {
+        this.articles = arts;
+      })
+    );
 
     this.currentOrder$ = this._store.pipe(select('currentOrder'));
-    this.currentOrder$.pipe(
-      takeUntil(this._subscriptions$)
-    ).subscribe(data => {
-      this.currentOrder = data;
-    });
+    this._subscriptions.push(
+      this.currentOrder$.subscribe(data => {
+        this.currentOrder = data;
+      })
+    );
 
-    this._headerService.goBack.pipe(
-      takeUntil(this._subscriptions$)
-    ).subscribe(() => this._goBack());
+    this._subscriptions.push(
+      this._headerService.goBack.subscribe(() => this._goBack())
+    );
 
 
     this._store.dispatch(getCurrentOrderRequest());
@@ -71,8 +72,10 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   public subscribeToHeader() {
-    this._subscriptions.add(this._headerService.rightIconClicked
-      .subscribe(() => this._deleteOrder()));
+    this._subscriptions.push(
+      this._headerService.rightIconClicked
+        .subscribe(() => this._deleteOrder())
+    );
   }
 
   private _deleteOrder() {
@@ -140,26 +143,28 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
       }
     });
 
-    dialogRef.afterClosed().subscribe(data => {
-      if (isUndefined(data)) {
-        // Is undefined when the user closes
-        // the dialog without an action
-        return;
-      }
-      if (data?.result === 'SWITCH') {
-        // this._bnService.switchCustomer(true);
-        this._orderService.switchCustomerFlow = true;
-        this._router.navigate(['/main/customer-search'])
-        // , {
-        //   state: {
-        //     order: this.order
-        //   },
-        //   queryParams: {
-        //     lastUrl: 'order'
-        //   }
-        // });
-      }
-    });
+    this._subscriptions.push(
+      dialogRef.afterClosed().subscribe(data => {
+        if (isUndefined(data)) {
+          // Is undefined when the user closes
+          // the dialog without an action
+          return;
+        }
+        if (data?.result === 'SWITCH') {
+          // this._bnService.switchCustomer(true);
+          this._orderService.switchCustomerFlow = true;
+          this._router.navigate(['/main/customer-search'])
+          // , {
+          //   state: {
+          //     order: this.order
+          //   },
+          //   queryParams: {
+          //     lastUrl: 'order'
+          //   }
+          // });
+        }
+      })
+    );
   }
 
   public openItems(): void {
@@ -173,7 +178,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
 
   private _goBack() {
     // console.log('order modificada ', this._orderService.getOrderModifiedState());
-        
+
     this.returnUrl()
     // if (this._orderService.getOrderModifiedState()) {
     //   this._openConfirmDialog();
@@ -198,26 +203,24 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
       }
     });
 
-    dialogRef.afterClosed().pipe(
-      takeUntil(this._subscriptions$)
-    ).subscribe((result) => {
-      if (result) {
-        this._store.dispatch(replaceOrderRequest({ order: this.currentOrder }));
-      }
-      this._store.dispatch(setCurrentOrderRequest({ order: null }))
-      const orderArticles = [];
-      this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
-
-      this._router.navigate(['/main/home']);
-    });
+    this._subscriptions.push(
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this._store.dispatch(replaceOrderRequest({ order: this.currentOrder }));
+        }
+        this._store.dispatch(setCurrentOrderRequest({ order: null }))
+        const orderArticles = [];
+        this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
+  
+        this._router.navigate(['/main/home']);
+      })
+    );
   }
 
   ngOnDestroy(): void {
     if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
+      this._subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
     }
-    this._subscriptions$.next();
-    this._subscriptions$.complete();
   }
 
 }

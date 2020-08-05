@@ -8,7 +8,9 @@ export class EventService {
 
   customerChange = new EventEmitter<ICustomer>();
 
-  constructor() { }
+  constructor() { 
+    console.log('event service1')
+  }
 
   customerChanged(customer: ICustomer) {
     this.customerChange.emit(customer);

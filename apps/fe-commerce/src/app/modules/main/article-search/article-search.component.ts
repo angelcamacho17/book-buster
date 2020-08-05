@@ -10,11 +10,11 @@ import { Store, select } from '@ngrx/store';
   templateUrl: './article-search.component.html',
   styleUrls: ['./article-search.component.scss']
 })
-export class ArticleSearchComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ArticleSearchComponent implements OnInit, OnDestroy {
   public rowType = ArticleRowComponent;
   public articles: IArticle[] = [];
   private _articles$: Observable<IArticle[]>;
-  private _subscriptions: Subscription;
+  private _subscriptions: Subscription[] = [];
   public display = false;
   public navigation$: Observable<string>;
   public hide = false;
@@ -23,16 +23,19 @@ export class ArticleSearchComponent implements OnInit, OnDestroy, AfterViewInit 
   public lastUrl = 'neworder';
   public emptyResults = true;
   public filteredResults: IArticle[] = [];
-  constructor(private _store: Store<{ articles: IArticle[], currentOrder: IOrder }>,
-              private _ordSer: OrderService,
-              private _router: Router) {
+  constructor(
+    private _store: Store<{ articles: IArticle[], currentOrder: IOrder }>,
+    private _ordSer: OrderService,
+    private _router: Router
+  ) {
 
     this._articles$ = this._store.pipe(select('articles'));
 
-    this._subscriptions = this._articles$.subscribe(data => {
-      this.articles = data;
-
-      });
+    this._subscriptions.push(
+      this._articles$.subscribe(data => {
+        this.articles = data;
+      })
+    );
     if (this._ordSer.currentOrder?.id) {
       this.lastUrl = 'orderitems';
     }
@@ -41,12 +44,6 @@ export class ArticleSearchComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-    if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
-    }
   }
 
   public overviewOrder(): void {
@@ -79,9 +76,11 @@ export class ArticleSearchComponent implements OnInit, OnDestroy, AfterViewInit 
     this.emptyResults = results.length === 0;
     this.filteredResults = results;
   }
-  
-  ngAfterViewInit(): void {
-    window.scrollTo(0, 0);
+
+  ngOnDestroy(): void {
+    if (this._subscriptions) {
+      this._subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
+    }
   }
 }
 

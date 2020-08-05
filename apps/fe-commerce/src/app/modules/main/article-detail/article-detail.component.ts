@@ -18,7 +18,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   article: IArticle;
   orderArticles: IOrderArticle[];
   currentOrder: IOrder;
-  private _subscriptions = new Subscription();
+  private _subscriptions: Subscription[] = [];
 
 
   constructor(
@@ -28,20 +28,26 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     private _orderService: OrderService
   ) {
     this._article$ = this._store.pipe(select('article'));
-    this._subscriptions = this._article$.subscribe(data => {
-      this.article = data;
-    });
+    this._subscriptions.push(
+      this._article$.subscribe(data => {
+        this.article = data;
+      })
+    );
 
     this._currentOrder$ = this._store.pipe(select('currentOrder'));
-    this._subscriptions = this._currentOrder$.subscribe(data => {
-      this.currentOrder = data;
-    });
+    this._subscriptions.push(
+      this._currentOrder$.subscribe(data => {
+        this.currentOrder = data;
+      })
+    );
     this._store.dispatch(getCurrentOrderRequest())
 
     this._orderArticles$ = this._store.pipe(select('orderArticles'));
-    this._subscriptions = this._orderArticles$.subscribe(data => {
-      this.orderArticles = data;
-    });
+    this._subscriptions.push(
+      this._orderArticles$.subscribe(data => {
+        this.orderArticles = data;
+      })
+    );
   }
 
   ngOnInit(): void {
@@ -51,11 +57,13 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   public getArticle() {
     let articleId: number;
 
-    this._route.paramMap.pipe(
-      map((params: ParamMap) => articleId = +params.get('id'))
-    ).subscribe(() => {
-      this._store.dispatch(getArticleRequest({ articleId }));
-    })
+    this._subscriptions.push(
+      this._route.paramMap.pipe(
+        map((params: ParamMap) => articleId = +params.get('id'))
+      ).subscribe(() => {
+        this._store.dispatch(getArticleRequest({ articleId }));
+      })
+    );
   }
 
   public addQuantity() {
@@ -106,6 +114,8 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._subscriptions.unsubscribe();
+    if(this._subscriptions) {
+      this._subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
+    }
   }
 }

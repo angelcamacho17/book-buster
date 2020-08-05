@@ -21,8 +21,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
   public orders: IOrder[];
   public display = false;
   public cardOverflows = false;
-  private _subscriptions: Subscription;
-  private _subscriptions$ = new Subject<any>();
+  private _subscriptions: Subscription[] = [];
 
   constructor(
     private _renderer2: Renderer2,
@@ -35,14 +34,14 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
     private _headerService: HeaderService
   ) {
     this.orders$ = this._storeOrders.pipe(select('orders'));
-    this.orders$.pipe(
-      takeUntil(this._subscriptions$)
-    ).subscribe(data => {
-      if (data.length) {
-        data = data.slice().sort((a, b) => b.id - a.id)
-      }
-      this.orders = data;
-    });
+    this._subscriptions.push(
+      this.orders$.subscribe(data => {
+        if (data.length) {
+          data = data.slice().sort((a, b) => b.id - a.id)
+        }
+        this.orders = data;
+      })
+    );
 
 
     this._store.dispatch(clearCurrentOrderRequest());
@@ -55,8 +54,9 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
   }
 
   public subscribeToHeader() {
-    this._subscriptions = this._headerService.rightIconClicked
-      .subscribe(() => this._logout());
+    this._subscriptions.push(this._headerService.rightIconClicked
+      .subscribe(() => this._logout())
+    );
   }
 
   private _logout() {
@@ -99,9 +99,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterContentChecked
 
   ngOnDestroy(): void {
     if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
+      this._subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
     }
-    this._subscriptions$.next()
-    this._subscriptions$.complete()
   }
 }

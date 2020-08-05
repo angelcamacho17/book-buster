@@ -13,6 +13,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [],
@@ -30,7 +31,8 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
     MatSnackBarModule,
     MatDialogModule,
     MatProgressBarModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatSidenavModule
   ],
   exports: [
     MatButtonModule,
@@ -45,7 +47,8 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
     MatSnackBarModule,
     MatDialogModule,
     MatProgressBarModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatSidenavModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

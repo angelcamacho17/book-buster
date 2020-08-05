@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { refreshCustomersRequest, setCurrentOrderRequest, getCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService, OrderService } from '@fecommerce-workspace/data-store-lib';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
 import { EventService } from '../shared/services/event.service';
@@ -25,7 +25,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   public shadow = false;
   public emptyResults = true;
   public filteredResults: ICustomer[] = [];
-  private _subscriptions$ = new Subject<any>();
+  private _subscriptions: Subscription[] = [];
 
   constructor(
     private eventService: EventService,
@@ -37,22 +37,24 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   ) {
 
     this.customers$ = this._store.pipe(select('customers'));
-    this.customers$.pipe(
-      takeUntil(this._subscriptions$)
-    ).subscribe(data => {
-      this.customers = data;
-    });
+    this._subscriptions.push(
+      this.customers$.subscribe(data => {
+        this.customers = data;
+      })
+    );
 
     this.currentOrder$ = this._store.pipe(select('currentOrder'));
-    this.currentOrder$.pipe(
-      takeUntil(this._subscriptions$)
-    ).subscribe((currentOrder) => {
-      this.currentOrder = currentOrder;
-    })
+    this._subscriptions.push(
+      this.currentOrder$.subscribe((currentOrder) => {
+        this.currentOrder = currentOrder;
+      })
+    );
 
-    this.eventService.customerChange.pipe(takeUntil(this._subscriptions$)).subscribe(customer => {
-      this.onCustomerChange(customer);
-    });
+    this._subscriptions.push(
+      this.eventService.customerChange.subscribe(customer => {
+        this.onCustomerChange(customer);
+      })
+    );
 
     this._store.dispatch(refreshCustomersRequest());
 
@@ -147,8 +149,9 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   ngOnDestroy(): void {
-    this._subscriptions$.next();
-    this._subscriptions$.complete();
+    if (this._subscriptions) {
+      this._subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
+    }
     this.currentOrder = null;
   }
 }

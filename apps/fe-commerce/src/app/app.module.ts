@@ -14,6 +14,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './modules/material/material.module';
 import { SharedModule } from './modules/main/shared/shared.module';
+import { LayoutService } from './modules/main/shared/services/layout.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { SharedModule } from './modules/main/shared/shared.module';
     CustomerKeyResolver,
     KeyValueStoreService,
     AuthTokenService,
+    LayoutService,
     HCSClient,
     HCSLoad,
     {

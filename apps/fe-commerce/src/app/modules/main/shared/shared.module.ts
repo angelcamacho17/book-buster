@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { SetHeaderHeightDirective } from './directives/set-header-height.directive';
 import { RowComponent } from './components/row/row.component';
+// import { LayoutService } from './services/layout.service';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,9 @@ import { RowComponent } from './components/row/row.component';
     ArticleRowComponent,
     ConfirmDiscardDialogComponent
   ],
+  // providers: [
+  //   LayoutService
+  // ],
   entryComponents: [
     CustomerRowComponent,
     ArticleRowComponent
