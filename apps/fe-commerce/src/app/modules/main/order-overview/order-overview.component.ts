@@ -24,9 +24,6 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   public orderArticles$: Observable<IOrderArticle[]>;
   public orderArticle: IOrderArticle[];
   private _subscriptions = new Subscription();
-  public icon = 'keyboard_arrow_left';
-  public lastUrl = 'article';
-  public delete = false;
 
   constructor(
     private _store: Store<{ currentOrder: IOrder, orderArticles: IOrderArticle[] }>,

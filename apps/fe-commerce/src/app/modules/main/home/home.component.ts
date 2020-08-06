@@ -29,12 +29,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _layoutService: LayoutService
   ) {
     this.orders$ = this._storeOrders.pipe(select('orders'));
-    this._subscriptions= this.orders$.subscribe(data => {
-      if (data.length) {
-        data = data.slice().sort((a, b) => b.id - a.id)
-      }
-      this.orders = data;
-    });
+    this._subscriptions.add(
+      this.orders$.subscribe(data => {
+        if (data.length) {
+          data = data.slice().sort((a, b) => b.id - a.id)
+        }
+        this.orders = data;
+      })
+    );
 
 
     this._store.dispatch(clearCurrentOrderRequest());
@@ -48,8 +50,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public subscribeToHeader() {
-    this._subscriptions.add(this._headerService.rightIconClicked
-      .subscribe(() => this._logout())
+    this._subscriptions.add(
+      this._headerService.rightIconClicked
+        .subscribe(() => this._logout())
     );
   }
 

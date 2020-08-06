@@ -8,10 +8,12 @@ import { OrderItemsResolver } from './order-items/order-items.resolver';
 import { CustomerSearchResolver } from './customer-search/customer-search.resolver';
 import { ArticleDetailResolver } from './article-detail/article-detail.resolver';
 import { ArticleSearchResolver } from './article-search/article-search.resolver';
+import { MainComponent } from './main.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule, 
     MainRoutingModule,
     SharedModule
   ],
@@ -22,6 +24,7 @@ import { ArticleSearchResolver } from './article-search/article-search.resolver'
     CustomerSearchResolver,
     ArticleSearchResolver,
     ArticleDetailResolver
-  ]
+  ],
+  declarations: [MainComponent]
 })
 export class MainModule { }
