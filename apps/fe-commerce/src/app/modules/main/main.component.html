@@ -1,4 +1,4 @@
-<div [style.display]="render ? 'block' : 'none'">
+<div *ngIf="this.layoutService.layout === 'mobile'" [style.display]="render ? 'block' : 'none'">
   <header>
     <main-header></main-header>
   </header>
@@ -6,3 +6,21 @@
     <router-outlet #outlet="outlet"></router-outlet>
   </div>
 </div>
+
+
+<mat-drawer-container *ngIf="this.layoutService.layout === 'tablet'" class="drawer-container" autosize>
+  <!-- <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+  </mat-drawer> -->
+
+  <div class="sidenav-content">
+    <button mat-raised-button>
+      POI APP
+    </button>
+  </div>
+
+</mat-drawer-container>

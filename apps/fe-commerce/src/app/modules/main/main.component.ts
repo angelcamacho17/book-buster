@@ -14,7 +14,7 @@ import { LayoutService } from './shared/services/layout.service';
 export class MainComponent implements OnInit {
   render = false;
   constructor(
-    private _layoutService: LayoutService
+    public layoutService: LayoutService
   ) { }
 
   ngOnInit(): void {

@@ -11,10 +11,12 @@ import { ArticleSearchResolver } from './article-search/article-search.resolver'
 import { MainComponent } from './main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutService } from './shared/services/layout.service';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   imports: [
     CommonModule, 
+    MaterialModule,
     MainRoutingModule,
     SharedModule
   ],
