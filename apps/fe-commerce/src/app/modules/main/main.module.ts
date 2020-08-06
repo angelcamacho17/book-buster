@@ -10,6 +10,7 @@ import { ArticleDetailResolver } from './article-detail/article-detail.resolver'
 import { ArticleSearchResolver } from './article-search/article-search.resolver';
 import { MainComponent } from './main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutService } from './shared/services/layout.service';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedModule
   ],
   providers: [
+    LayoutService,
     HomeResolver,
     OrderOverviewResolver,
     OrderItemsResolver,

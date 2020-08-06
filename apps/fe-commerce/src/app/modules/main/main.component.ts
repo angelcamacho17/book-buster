@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { routesAnimations } from '../animations/routes.animation';
+import { LayoutService } from './shared/services/layout.service';
 
 @Component({
   selector: 'main',
@@ -12,7 +13,9 @@ import { routesAnimations } from '../animations/routes.animation';
 })
 export class MainComponent implements OnInit {
   render = false;
-  constructor() { }
+  constructor(
+    private _layoutService: LayoutService
+  ) { }
 
   ngOnInit(): void {
     this._reload();
