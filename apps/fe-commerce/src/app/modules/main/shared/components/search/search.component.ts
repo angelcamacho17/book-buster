@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
     selector: 'search',
@@ -21,7 +22,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   private _userSearching = false;
   private _filteredList: any[] = [];
   private _subscription: Subscription;
-  constructor() {
+  constructor(public deviceDetector: DeviceDetectorService) {
       this._subscription = this.inputControl.valueChanges.subscribe(
           () => this.onSearchInput()
       )

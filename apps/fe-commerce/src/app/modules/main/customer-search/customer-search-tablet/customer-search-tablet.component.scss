@@ -1,0 +1,38 @@
+.modal-search{
+  height: 422px;
+  width: 620px;
+
+  .header {
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(232,232,232,0.1);
+    align-items: center;
+    padding: 0 16px;
+
+    .title {
+      color: rgba(0, 0, 0, 0.87);
+      margin-bottom: 0;
+    }
+
+    .button {
+      color: #1666D8;
+      margin-bottom: 0;
+    }
+  }
+
+}
+
+.search-container {
+  .no-results {
+    position: relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: none;
+    text-align: center;
+  }
+}
+

@@ -9,6 +9,7 @@ import { EventService } from '../shared/services/event.service';
 import { CustomerRowComponent } from '../shared/components/row/customer-row/customer-row.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDiscardDialogComponent } from '../shared/components/confirm-discard/confirm-discard-dialog.component';
+import { LayoutService } from '../shared/services/layout.service';
 
 @Component({
   selector: 'customer-search',
@@ -26,46 +27,19 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   public shadow = false;
   public emptyResults = true;
   public filteredResults: ICustomer[] = [];
-  private _subscriptions = new Subscription;
+  public _subscriptions = new Subscription;
 
   constructor(
-    private eventService: EventService,
-    private _orderService: OrderService,
-    private matDialog: MatDialog,
-    private _store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[] }>,
-    private _router: Router,
-    private _transServ: TranslationService,
-    private _headerService: HeaderService,
-    private _location: Location
+    public eventService: EventService,
+    public orderService: OrderService,
+    public matDialog: MatDialog,
+    public store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[] }>,
+    public router: Router,
+    public transServ: TranslationService,
+    public headerService: HeaderService,
+    public location: Location,
+    public layoutService: LayoutService
   ) {
-
-    this.customers$ = this._store.pipe(select('customers'));
-    this._subscriptions.add(
-      this.customers$.subscribe(data => {
-        this.customers = data;
-      })
-    );
-
-    this.currentOrder$ = this._store.pipe(select('currentOrder'));
-    this._subscriptions.add(
-      this.currentOrder$.subscribe((currentOrder) => {
-        this.currentOrder = currentOrder;
-      })
-    );
-
-    this._subscriptions.add(
-      this.eventService.customerChange.subscribe(customer => {
-        this.onCustomerChange(customer);
-      })
-    );
-
-    this._subscriptions.add(
-      this._headerService.goBack.subscribe(()=>{
-        this.openConfirmDialog();
-      })
-    );
-
-    this._store.dispatch(refreshCustomersRequest());
 
   }
   ngAfterViewInit(): void {
@@ -77,56 +51,57 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     let message;
 
     if (!this.currentOrder) {
-      this._router.navigate(['/main/home']);
+      this.router.navigate(['/main/home']);
       return;
     }
 
     if (this.currentOrder?.articles?.length) {
-      message = this._transServ.get('progressord');
+      message = this.transServ.get('progressord');
     } else {
-      message = this._transServ.get('noarts');
+      message = this.transServ.get('noarts');
     }
     const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
       data: {
-        title: this._transServ.get('saveord'),
+        title: this.transServ.get('saveord'),
         message,
-        firstBtn: this._transServ.get('discard'),
-        secondBtn: this._transServ.get('save')
+        firstBtn: this.transServ.get('discard'),
+        secondBtn: this.transServ.get('save')
       }
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this._store.dispatch(handleOrderRequest({ order: this.currentOrder }));
+        this.store.dispatch(handleOrderRequest({ order: this.currentOrder }));
       }
-      this._store.dispatch(setCurrentOrderRequest({ order: null }))
+      this.store.dispatch(setCurrentOrderRequest({ order: null }))
       const orderArticles = [];
-      this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
-      this._router.navigate(['/main/home']);
+      this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
+      this.router.navigate(['/main/home']);
     });
   }
 
   public onCustomerChange(customer: ICustomer) {
-    const flow = this._orderService.orderFlow;
+    const flow = this.orderService.orderFlow;
     if (flow === 'new') {
       this._handleSetCustomer(customer);
     } else if (flow === 'edit') {
       this._replaceCustomerOnCurrentOrder(customer);
-      this._router.navigate(['/main/order-overview']);
+      this.router.navigate(['/main/order-overview']);
     }
   }
 
-  private _handleSetCustomer(customer: ICustomer): void {
+  public _handleSetCustomer(customer: ICustomer): void {
+    console.log(this.currentOrder);
     if (this.currentOrder) {
       this._replaceCustomerOnCurrentOrder(customer);
-      this._location.back();
+      this.location.back();
     } else {
       this._setCustomerToNewOrder(customer);
-      this._router.navigate(['/main/article-search']);
+      this.router.navigate(['/main/article-search']);
     }
   }
 
-  private _setCustomerToNewOrder(customer: ICustomer) {
+  public _setCustomerToNewOrder(customer: ICustomer) {
     const order: IOrder = {
       description: 'Latest order',
       articles: [],
@@ -134,10 +109,10 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
       customer: customer,
       createdBy: 'user'
     }
-    this._store.dispatch(setCurrentOrderRequest({ order }));
+    this.store.dispatch(setCurrentOrderRequest({ order }));
   }
 
-  private _replaceCustomerOnCurrentOrder(customer: ICustomer) {
+  public _replaceCustomerOnCurrentOrder(customer: ICustomer) {
     const order: IOrder = {
       id: this.currentOrder?.id,
       description: this.currentOrder?.description,
@@ -146,7 +121,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
       customer: customer,
       createdBy: this.currentOrder?.createdBy
     }
-    this._store.dispatch(replaceCurrentOrderRequest({ order }));
+    this.store.dispatch(replaceCurrentOrderRequest({ order }));
   }
 
   public hidePanel(hide: boolean): void {

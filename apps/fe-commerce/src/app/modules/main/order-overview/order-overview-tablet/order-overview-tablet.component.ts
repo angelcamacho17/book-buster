@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrderOverviewComponent } from '../order-overview.component';
 import { Store, select } from '@ngrx/store';
 import { IOrder, IOrderArticle, OrderArticlesService, BackNavigationService, TranslationService,
-         HeaderService, OrderService, getCurrentOrderRequest, refreshOrderArticlesRequest, deleteOrderArticleRequest } from '@fecommerce-workspace/data-store-lib';
+         HeaderService, OrderService, getCurrentOrderRequest, refreshOrderArticlesRequest, deleteOrderArticleRequest, isUndefined } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,6 +11,8 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ArtSheetComponent } from '../../shared/components/art-sheet/art-sheet.component';
 import { of, Observable, Subscription } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { CustomerSearchTabletComponent } from '../../customer-search/customer-search-tablet/customer-search-tablet.component';
+import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'order-overview-tablet',
@@ -52,6 +54,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
       super(store, snackBar, router, matDialog,
             ordArtsService, bnService, transServ,
             headerService, orderService, layoutService)
+
       this.$articles = this.store.pipe(select('orderArticles'));
       this.subscriptions.add(
         this.$articles.subscribe((arts) => {
@@ -66,22 +69,17 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
         })
       );
 
-      this.subscriptions.add(
-        this.headerService.goBack.subscribe(() => this._goBack())
-      );
-
       this.$articles = this.store.pipe(select('orderArticles'));
       this.listenToOrderArts();
 
       this.store.dispatch(refreshOrderArticlesRequest());
       this.store.dispatch(getCurrentOrderRequest());
-    }
 
+    }
 
     ngOnInit(): void {
       this.subscribeToHeader();
     }
-
 
     public subscribeToHeader() {
       this._subscriptions.add(
@@ -176,6 +174,44 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
     private substractTemp(article: IOrderArticle): void {
       this._substractArt = article.quantity * article.article.price;
+    }
+
+    public changeCustomer(): void {
+      const dialogRef = this.matDialog.open(DialogComponent, {
+        width: '280px',
+        height: '248px',
+        data: {
+          title: this.transServ.get('switchcus'),
+          msg: this.transServ.get('switchcusmes'),
+          firstButton: this.transServ.get('cancel'),
+          secondButton: this.transServ.get('switch'),
+          buttonColor: 'blue'
+        }
+      });
+
+      this.subscriptions.add(
+        dialogRef.afterClosed().subscribe(data => {
+          if (isUndefined(data)) {
+            return;
+          }
+          if (data?.result === 'SWITCH') {
+            this.orderService.switchCustomerFlow = true;
+            this._openNewCustomer();
+          }
+        })
+      );
+    }
+
+    private _openNewCustomer():void {
+      console.log('OPENING');
+      const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
+        panelClass: 'customer-modal-dialog'
+      });
+
+      this.subscriptions.add(
+        dialogRef.afterClosed().subscribe(data => {
+        })
+      );
     }
 
     ngOnDestroy(): void {
