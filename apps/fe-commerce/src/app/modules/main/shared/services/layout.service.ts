@@ -44,17 +44,23 @@ export class LayoutService {
         }
         if (state.breakpoints['(min-width:1150px) and (max-width:1439px)']) {
           console.log('lg')
-          this.layout = this._desktop;
+          this.layout = this._tablet;
+
+          //this.layout = this._desktop;
           this.onLayoutChange$.next('lg');
         }
         if (state.breakpoints['(min-width:1440px) and (max-width:1599px)']) {
           console.log('xl')
-          this.layout = this._desktop;
+          this.layout = this._tablet;
+
+         //this.layout = this._desktop;
           this.onLayoutChange$.next('xl');
         }
         if (state.breakpoints['(min-width:1600px)']) {
           console.log('xxl')
-          this.layout = this._desktop;
+          this.layout = this._tablet;
+
+          //this.layout = this._desktop;
           this.onLayoutChange$.next('xxl');
         }
       }

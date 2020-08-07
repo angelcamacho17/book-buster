@@ -53,11 +53,11 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   public subscribeToHeader() {
     this.subscriptions.add(
       this.headerService.rightIconClicked
-        .subscribe(() => this._deleteOrder())
+        .subscribe(() => this.deleteOrder())
     );
   }
 
-  public _deleteOrder() {
+  public deleteOrder() {
     const dialogRef = this.matDialog.open(DialogComponent, {
       width: '280px',
       height: '120px',

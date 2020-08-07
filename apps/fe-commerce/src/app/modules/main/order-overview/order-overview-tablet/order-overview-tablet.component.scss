@@ -113,6 +113,7 @@
     flex: 1;
     flex-direction: column;
     padding: 60px 40px;
+    padding-bottom: 0;
 
     .order-items-title {
       height: 16px;
@@ -202,6 +203,14 @@
           align-items: center;
         }
       }
+    }
+
+    .right-footer {
+      height: 104px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      filter: blur(8px);
+      padding-top: 24px;
+
     }
   }
 }
