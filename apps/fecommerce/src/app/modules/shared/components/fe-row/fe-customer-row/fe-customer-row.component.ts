@@ -65,7 +65,7 @@ export class FeCustomerRowComponent implements OnDestroy {
   }
 
   public onSelectCustomer(customer: Customer): void {
-    this.eventService.customerChanged(customer);
+    //this.eventService.customerChanged(customer);
     this._store.dispatch(getCurrentOrderRequest());
     if (this._bnService.switchCus) {
       if (this._ordSer.currentOrder?.id){
