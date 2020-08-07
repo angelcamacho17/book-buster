@@ -15,7 +15,7 @@ export class HeaderService {
     rightIcon: null,
     titClass: '',
     lastUrl: '',
-    confirmDiscard: false,
+    checkGoBack: false,
     addArt: false,
     centered: false
   }
