@@ -1,26 +1,2 @@
-<base-component>
-  <div class="scrollable-container">
-    <div class="mat-headline headline">{{'recOrds' | translate}}</div>
-    <mat-card class="card" [class.last]="lastOrder" *ngFor="let order of orders; let lastOrder = last;"
-      (click)="openOrder(order)">
-      <mat-card-content class="card-content">
-        <div class="content">
-          <div class="mat-subheading-2 order-title">
-            <div class="title">
-              {{order.id}}
-            </div>
-          </div>
-          <div class="mat-body-1 order-subtitle">
-            <div class="line">{{order.description}}</div>
-            <div class="line">{{'customer' | translate}}: {{order.customer.name}}</div>
-          </div>
-        </div>
-        <div class="mat-caption icon">
-          <mat-icon>keyboard_arrow_right</mat-icon>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <create-button (click)="createOrder()"></create-button>
-  </div>
-</base-component>
+<home-mobile *ngIf="layoutService.layout === 'mobile'"></home-mobile>
+<home-tablet *ngIf="layoutService.layout === 'tablet'"></home-tablet>

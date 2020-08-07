@@ -6,9 +6,11 @@ import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../../material/material.module';
 import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { HomeRoutingModule } from './home-routing.module';
+import { HomeMobileComponent } from './home-mobile/home-mobile.component';
+import { HomeTabletComponent } from './home-tablet/home-tablet.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, HomeMobileComponent, HomeTabletComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
