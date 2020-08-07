@@ -107,6 +107,10 @@ main {
   }
 }
 
+.customer-modal-dialog .mat-dialog-container {
+  padding: 0 !important;
+}
+
 .header-extension {
   position: absolute;
   height: 40px;

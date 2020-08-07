@@ -1,7 +1,5 @@
 .search-container {
     position: relative;
-    // bottom: 60px;
-    background: #1666d8;
     height: 50px;
     padding: 0 16px;
     padding-bottom: 16px;
@@ -33,20 +31,13 @@
         }
     }
 
-    /* .search-bar {
-        padding: 0 16px;
-        width: 100%;
+}
 
-        .input {
-            font-size: 16px !important;
-            font-weight: 500 !important;
-            line-height: inherit !important;
-            font-family: Roboto !important;
-            letter-spacing: 0.15px;
-        }
-
-        .placeholder {
-            color: rgba(0, 0, 0, 0.6);
-        }
-    } */
+.search-tablet {
+  position: relative;
+  height: 50px;
+  padding: 0;
+  margin: 24px 16px;
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 8px;
 }

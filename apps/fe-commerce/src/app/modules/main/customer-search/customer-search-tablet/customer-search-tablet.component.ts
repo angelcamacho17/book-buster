@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store, select } from '@ngrx/store';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomerSearchComponent } from '../customer-search.component';
 import { EventService } from '../../shared/services/event.service';
 import { OrderService, IOrder, ICustomer, TranslationService, HeaderService, refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 import { LayoutService } from '../../shared/services/layout.service';
+import { DialogData } from '../../shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'customer-search-tablet',
@@ -24,8 +25,9 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
     public transServ: TranslationService,
     public headerService: HeaderService,
     public location: Location,
-    public layoutService: LayoutService
-  ) {
+    public layoutService: LayoutService,
+    public dialogRef: MatDialogRef<CustomerSearchTabletComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     super(eventService, orderService, matDialog, store,
           router, transServ, headerService, location, layoutService)
 
@@ -60,5 +62,7 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
 
   ngOnInit(): void {
   }
+
+
 
 }

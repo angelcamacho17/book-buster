@@ -1,4 +1,4 @@
-<div class="search-container">
+<div class="search-container" [ngClass]="deviceDetector.isTablet() ? 'search-tablet' : ''">
 <!--     <mat-form-field class="search-bar" floatLabel="never">
         <input matInput name="input" #input id="input" aria-label="State" [matAutocomplete]="auto"
             [formControl]="stateCtrl" (click)="onFocus(º)" class="mat-subheading-2 input" color="accent">
@@ -24,3 +24,4 @@
     </div>
 
 </div>
+<mat-divider *ngIf="deviceDetector.isTablet()"></mat-divider>

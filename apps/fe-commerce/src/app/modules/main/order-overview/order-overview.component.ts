@@ -38,14 +38,9 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     public headerService: HeaderService,
     public orderService: OrderService,
     public layoutService: LayoutService
-  ) {
+  ) { }
 
-
-
-  }
-
-  ngAfterViewInit(): void {
-  }
+  ngAfterViewInit(): void { }
 
   ngOnInit(): void {
     this.orderService.switchCustomerFlow = false;    // Reset flag of customer flow.

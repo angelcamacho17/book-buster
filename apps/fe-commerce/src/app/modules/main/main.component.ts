@@ -12,7 +12,7 @@ import { LayoutService } from './shared/services/layout.service';
   ]
 })
 export class MainComponent implements OnInit, AfterViewChecked {
-  public render = false;
+  public render = true;
   public layout = 'mobile';
 
   constructor(
@@ -24,7 +24,7 @@ export class MainComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit(): void {
-    this._reload();
+    //this._reload();
   }
 
   private _reload() {

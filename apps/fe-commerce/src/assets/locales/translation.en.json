@@ -32,6 +32,7 @@
   "switchcusmes": "Customer specific prices will be recalculated after asssigning a new customer.",
   "switchcus": "Switch customer",
   "cancel": "CANCEL",
+  "next": "NEXT",
   "switch": "SWITCH",
   "progressord": "You have an order on progress, do you want to save it?",
   "noarts": "Your current order has no articles in it, do you want to save it anyway?",
