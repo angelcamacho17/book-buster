@@ -7,6 +7,7 @@
   .left-content {
     min-height: 100%;
     min-width: 438px;
+    border-right: 1px solid rgba(0,0,0,0.1);
 
     .componet-title {
       display: flex;
@@ -108,7 +109,99 @@
     }
   }
   .right-content {
+    display: flex;
     flex: 1;
-    background: blue;
+    flex-direction: column;
+    padding: 60px 40px;
+
+    .order-items-title {
+      height: 16px;
+      color: rgba(0,0,0,0.87);
+      font-family: Roboto;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      line-height: 16px;
+    }
+
+    .card {
+      border-radius: 8px;
+      padding: 0;
+      margin-top: 24px;
+      display: flex;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.1);
+      box-sizing: border-box;
+      max-height: 100%;
+      overflow: auto;
+
+      .list {
+        position: relative;
+        padding-top: 0 !important;
+        width: 100%;
+        bottom: initial;
+        -webkit-overflow-scrolling: touch;
+
+        .list-item {
+          width: 100%;
+          position: relative;
+
+          .content {
+            z-index: 2;
+            display: inline-flex;
+            padding: 10px 16px;
+            width: 100%;
+            justify-content: space-between;
+            height: 64px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            overflow: hidden;
+            box-sizing: border-box;
+
+
+            .info {
+              display: flex;
+              flex-flow: column;
+              justify-content: space-evenly;
+              color: rgba(0, 0, 0, 0.87);
+              height: 100%;
+              max-width: 224px;
+            }
+
+            .price {
+              display: flex;
+              height: 100%;
+              color: #1666d8;
+              align-self: center;
+            }
+          }
+
+          .divider {
+            position: relative;
+            color: green;
+            width: calc(100% + 16px);
+          }
+        }
+
+        .list-item:last-child {
+          .content {
+            border-bottom: none;
+          }
+        }
+        .delete-button {
+          z-index: -1;
+          position: absolute;
+          top: 0;
+          height: 64px;
+          width: 64px;
+          color: #ffffff;
+          border-top: 1px solid rgba(255, 255, 255, 0);
+          background: transparent;
+          right: 0px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
   }
 }

@@ -34,7 +34,7 @@
         </div>
       </div>
     </mat-card>
-    <mat-card class="order-items mat-elevation-z0" (click)="openItems()">
+    <mat-card class="order-items mat-elevation-z0">
       <div class="items-amount">
         <div class="title mat-subheading-2">
           {{'orderitems' | translate}}
@@ -49,5 +49,28 @@
     </mat-card>
   </div>
   <div class="right-content">
+    <div class="order-items-title">
+      {{('orderitems' | translate) | uppercase}}
+    </div>
+    <mat-card class="card mat-elevation-z0">
+      <div class="list">
+        <div class="list-item" *ngFor="let item of filteredlist | async;">
+          <div class="content" (click)="openBottomSheet(item)">
+            <div class="info">
+              <div class="mat-subheading-2 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.87);">
+                {{ item?.quantity > 1 ? item?.quantity + 'x ' : ''}} {{item?.article?.name}}
+              </div>
+              <div class="mat-body-1 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.6);">
+                {{item?.article?.description}}
+              </div>
+            </div>
+            <div class="price mat-subheading-2" style="margin: 0;">
+              € {{item?.article?.price}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </mat-card>
   </div>
 </div>
