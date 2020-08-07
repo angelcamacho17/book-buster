@@ -4,7 +4,7 @@ export interface IHeader {
   rightIcon?: string,
   titClass: string,
   lastUrl?: string,
-  confirmDiscard?: boolean,
+  checkGoBack?: boolean,
   addArt?: boolean,
   centered?: boolean,
   flow?: string
