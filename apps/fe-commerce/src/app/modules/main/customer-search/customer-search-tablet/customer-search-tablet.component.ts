@@ -33,8 +33,8 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
 
     this.customers$ = this.store.pipe(select('customers'));
     this._subscriptions.add(
-      this.customers$.subscribe(data => {
-        this.customers = data;
+      this.customers$.subscribe(customers => {
+        this.customers = customers;
       })
     );
 
