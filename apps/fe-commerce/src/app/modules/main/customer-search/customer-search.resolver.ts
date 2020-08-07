@@ -26,7 +26,7 @@ export class CustomerSearchResolver implements Resolve<any> {
       titClass: 'mat-title',
       lastUrl: 'main/home',
       centered: true,
-      confirmDiscard: true
+      checkGoBack: true
     }
     return header;
   }
@@ -38,7 +38,7 @@ export class CustomerSearchResolver implements Resolve<any> {
       titClass: 'mat-title',
       lastUrl: 'main/order-overview',
       centered: true,
-      confirmDiscard: true
+      checkGoBack: true
     }
     return header;
   }

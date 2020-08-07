@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { refreshCustomersRequest, setCurrentOrderRequest, getCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService, OrderService, HeaderService } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -34,7 +35,8 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     private _store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[] }>,
     private _router: Router,
     private _transServ: TranslationService,
-    private _headerService: HeaderService
+    private _headerService: HeaderService,
+    private _location: Location
   ) {
 
     this.customers$ = this._store.pipe(select('customers'));
@@ -107,16 +109,20 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   public onCustomerChange(customer: ICustomer) {
     const flow = this._orderService.orderFlow;
     if (flow === 'new') {
-      if (this._orderService.switchCustomerFlow) {
-        this._replaceCustomerOnCurrentOrder(customer);
-        this._router.navigate(['/main/order-overview']);
-      } else {
-        this._setCustomerToNewOrder(customer);
-        this._router.navigate(['/main/article-search']);
-      }
+      this._handleSetCustomer(customer);
     } else if (flow === 'edit') {
       this._replaceCustomerOnCurrentOrder(customer);
       this._router.navigate(['/main/order-overview']);
+    }
+  }
+
+  private _handleSetCustomer(customer: ICustomer): void {
+    if (this.currentOrder) {
+      this._replaceCustomerOnCurrentOrder(customer);
+      this._location.back();
+    } else {
+      this._setCustomerToNewOrder(customer);
+      this._router.navigate(['/main/article-search']);
     }
   }
 

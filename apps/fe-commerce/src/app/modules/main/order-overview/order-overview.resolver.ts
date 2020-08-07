@@ -42,7 +42,7 @@ export class OrderOverviewResolver implements Resolve<any> {
       leftIcon: 'close',
       rightIcon: 'delete_outlined',
       titClass: 'mat-title',
-      confirmDiscard: true,
+      checkGoBack: true,
       centered: true
     }
     return header;

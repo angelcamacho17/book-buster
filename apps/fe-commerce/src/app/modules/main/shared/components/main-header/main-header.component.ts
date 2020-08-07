@@ -17,7 +17,7 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
   public _subscriptions = new Subscription();
   public header$: Observable<IHeader>;
   public header: IHeader;
-  public _confirmDiscard;
+  public checkGoBack;
   public title: Observable<string> = of(null);
   public leftIcon: Observable<string> = of(null);
   public rightIcon: Observable<string> = of(null);
@@ -42,7 +42,7 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
   }
 
   public _setHeaderData(data: IHeader) {
-    this._confirmDiscard = data?.confirmDiscard;
+    this.checkGoBack = data?.checkGoBack;
     this.title = of(this.translationService.get(data?.title));
     this.titClass = of(data?.titClass);
     this.rightIcon = of(data?.rightIcon);
@@ -56,7 +56,7 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
   }
 
   public goLastVisited(): void {
-    if (this._confirmDiscard) {
+    if (this.checkGoBack) {
       this.headerService.onGoBack();
     } else {
       this.returnLastUrl();
