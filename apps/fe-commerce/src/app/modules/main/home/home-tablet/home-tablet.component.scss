@@ -9,6 +9,7 @@
   height: 100%;
 
   .left-side {
+    position: relative;
     flex: 0 0 438px;
     display: -webkit-flex;
     display: flex;
@@ -99,11 +100,11 @@
       }
     }
 
-    // :host.create-button {
-    //   position: absolute;
-    //   right: 16px;
-    //   bottom: 16px;
-    // }
+    .create-button {
+      position: absolute;
+      bottom: 0;
+      right: 16px;
+    }
   }
 
   .right-side {

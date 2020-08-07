@@ -13,7 +13,6 @@ export class HomeTabletComponent implements OnInit {
   public orders$: Observable<IOrder[]>;
   public orders: IOrder[];
   private _subscriptions: Subscription = new Subscription();
-
   constructor(
     private _store: Store,
     private _router: Router,
