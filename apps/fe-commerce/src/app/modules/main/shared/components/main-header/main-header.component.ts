@@ -5,6 +5,7 @@ import { Subscription, Observable, of, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs/operators';
+import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'main-header',
@@ -13,10 +14,10 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class MainHeaderComponent implements OnInit, OnDestroy {
 
-  private _subscriptions = new Subscription();
-  private header$: Observable<IHeader>;
+  public _subscriptions = new Subscription();
+  public header$: Observable<IHeader>;
   public header: IHeader;
-  private _confirmDiscard;
+  public _confirmDiscard;
   public title: Observable<string> = of(null);
   public leftIcon: Observable<string> = of(null);
   public rightIcon: Observable<string> = of(null);
@@ -24,13 +25,14 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
   public addArt: Observable<boolean> = of(null);
   public centered: Observable<boolean> = of(null);
 
-  constructor(private _router: Router,
+  constructor(public router: Router,
     public dialog: MatDialog,
-    private _translationService: TranslationService,
-    private _store: Store<{ header: IHeader }>,
-    private _headerService: HeaderService
+    public translationService: TranslationService,
+    public store: Store<{ header: IHeader }>,
+    public headerService: HeaderService,
+    public layoutService: LayoutService
   ) {
-    this.header$ = this._store.pipe(select('header'));
+    this.header$ = this.store.pipe(select('header'));
     this._subscriptions.add(
       this.header$.subscribe((data) => {
         this.header = data;
@@ -39,9 +41,9 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
     );
   }
 
-  private _setHeaderData(data: IHeader) {
+  public _setHeaderData(data: IHeader) {
     this._confirmDiscard = data?.confirmDiscard;
-    this.title = of(this._translationService.get(data?.title));
+    this.title = of(this.translationService.get(data?.title));
     this.titClass = of(data?.titClass);
     this.rightIcon = of(data?.rightIcon);
     this.leftIcon = of(data?.leftIcon);
@@ -55,19 +57,19 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
 
   public goLastVisited(): void {
     if (this._confirmDiscard) {
-      this._headerService.onGoBack();
+      this.headerService.onGoBack();
     } else {
       this.returnLastUrl();
     }
   }
 
-  private returnLastUrl(): void {
-    this._router.navigate(['/' + this.header.lastUrl]);
+  public returnLastUrl(): void {
+    this.router.navigate(['/' + this.header.lastUrl]);
     //this._storeUrl.dispatch(goBackNavigationRequest());
   }
 
   public rightIconClicked() {
-    this._headerService.onRightIconClick();
+    this.headerService.onRightIconClick();
   }
 
   ngOnDestroy(): void {

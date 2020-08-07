@@ -9,6 +9,12 @@ main {
   align-items: stretch;
   box-sizing: border-box;
   height: calc(100vh - 112px);
+  width: 100vw;
+  //query when in talbet
+  @include tablet {
+    height: 100vh;
+  }
+
   .scrollable-container {
     flex: 1;
     overflow: auto;
@@ -30,7 +36,7 @@ main {
   padding: 0 16px;
   padding-bottom: 16px;
 
-  //query cuando es talbet:
+  //query when in talbet
   @include tablet {
     flex-flow: row wrap;
     justify-content: flex-start;

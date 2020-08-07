@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { routesAnimations } from '../animations/routes.animation';
 import { LayoutService } from './shared/services/layout.service';
@@ -11,11 +11,17 @@ import { LayoutService } from './shared/services/layout.service';
     routesAnimations
   ]
 })
-export class MainComponent implements OnInit {
-  render = false;
+export class MainComponent implements OnInit, AfterViewChecked {
+  public render = false;
+  public layout = 'mobile';
+
   constructor(
     public layoutService: LayoutService
-  ) { }
+  ) {
+  }
+  ngAfterViewChecked(): void {
+    setTimeout(() => this.layout = this.layoutService.layout, 0);
+  }
 
   ngOnInit(): void {
     this._reload();

@@ -1,15 +1,2 @@
-<mat-toolbar class="header-toolbar" [ngClass]="(centered | async) ? 'centered' : ''">
-  <div *ngIf="leftIcon | async" class="left-icon">
-    <mat-icon class="left-icon" (click)="goLastVisited()">
-      {{leftIcon | async}}
-    </mat-icon>
-  </div>
-  <div class="title" [ngClass]="titClass | async">
-    {{title | async}}
-  </div>
-  <div class="right-icon-container">
-    <mat-icon [style.display]="!rightIcon ? 'none' : 'block'"  class="right-icon" (click)="rightIconClicked()">
-      {{rightIcon | async}}
-    </mat-icon>
-  </div>
-</mat-toolbar>
+<main-header-tablet *ngIf="layoutService.layout==='tablet'"></main-header-tablet>
+<main-header-mobile *ngIf="layoutService.layout==='mobile'"></main-header-mobile>

@@ -1,0 +1,22 @@
+.header-tablet {
+  display: flex;
+  padding: 16px 40px;
+  flex-direction: row;
+  height: 72px;
+  box-sizing: border-box;
+  background: #ffffff;
+
+  .logo {
+    display: flex;
+    object-fit: cover;
+    height: -webkit-fill-available;
+  }
+
+  .title {
+    display: flex;
+    margin-left: 24px;
+    margin-bottom: 0;
+
+  }
+
+}
