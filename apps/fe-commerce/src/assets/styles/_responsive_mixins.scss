@@ -4,12 +4,10 @@ $desktop-width: 960px;
 
 @mixin tablet {
   @media (min-width: #{$tblt-width-portrait})
-          and (max-width: #{$desktop-width - 1px})
           and (orientation:portrait) {
     @content;
   }
   @media (min-width: #{$tblt-width-portrait})
-          and (max-width: #{$tblt-max-width-landscape - 1px})
           and (orientation:landscape) {
     @content;
   }
