@@ -8,10 +8,24 @@
     min-height: 100%;
     min-width: 438px;
 
+    .componet-title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 38px 0;
+      margin-bottom: 0;
+
+      .icon {
+        padding-left: 26px;
+        padding-right: 16px;
+      }
+    }
+
     .customer-row {
       padding: 0;
       margin-bottom: 32px;
       border-radius: 0;
+      border: 1px solid rgba(0,0,0,0.1);
 
       .customer-info {
         display: flex;
@@ -67,20 +81,30 @@
     }
 
     .order-items {
+      height: 64px;
       padding: 10px 16px;
       display: flex;
       justify-content: space-between;
       border-radius: 0;
+      box-sizing: border-box;
+      border: 1px solid rgba(0,0,0,0.1);
 
-      .title {
-        color: rgba(0, 0, 0, 0.87);
-        margin: 0px;
+      .items-amount {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .title {
+          color: rgba(0, 0, 0, 0.87);
+          margin: 0px;
+        }
+
+        .items {
+          color: rgba(0, 0, 0, 0.6);
+          margin: 0px;
+        }
       }
 
-      .items {
-        color: rgba(0, 0, 0, 0.6);
-        margin: 0px;
-      }
     }
   }
   .right-content {
