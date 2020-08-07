@@ -28,6 +28,16 @@ export class OrderOverviewMobileComponent extends OrderOverviewComponent impleme
       super(store, snackBar, router, matDialog,
             ordArtsService, bnService, transServ,
             headerService, orderService, layoutService)
+      this.subscriptions.add(
+        this.headerService.rightIconClicked
+          .subscribe(() => this.deleteOrder())
+      );
+
+      this.subscriptions.add(
+        this.headerService.goBack
+          .subscribe(() => this._goBack())
+      );
+
       this.$articles = this.store.pipe(select('orderArticles'));
       this.subscriptions.add(
         this.$articles.subscribe((arts) => {
@@ -42,15 +52,8 @@ export class OrderOverviewMobileComponent extends OrderOverviewComponent impleme
         })
       );
 
-      this.subscriptions.add(
-        this.headerService.goBack.subscribe(() => this._goBack())
-      );
-
-
-      this.store.dispatch(getCurrentOrderRequest());
       this.store.dispatch(refreshOrderArticlesRequest());
       this.store.dispatch(getCurrentOrderRequest());
-
     }
 
   ngOnInit(): void {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MainHeaderComponent } from '../main-header.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslationService, IHeader, HeaderService } from '@fecommerce-workspace/data-store-lib';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../../services/layout.service';
 
@@ -21,6 +21,7 @@ export class MainHeaderMobileComponent extends MainHeaderComponent implements On
     public layoutService: LayoutService
     ) {
     super(router, dialog, translationService, store, headerService, layoutService);
+
   }
 
   ngOnInit(): void {

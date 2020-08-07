@@ -52,6 +52,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
       super(store, snackBar, router, matDialog,
             ordArtsService, bnService, transServ,
             headerService, orderService, layoutService)
+
       this.$articles = this.store.pipe(select('orderArticles'));
       this.subscriptions.add(
         this.$articles.subscribe((arts) => {
@@ -64,10 +65,6 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
         this.currentOrder$.subscribe(data => {
           this.currentOrder = data;
         })
-      );
-
-      this.subscriptions.add(
-        this.headerService.goBack.subscribe(() => this._goBack())
       );
 
       this.$articles = this.store.pipe(select('orderArticles'));

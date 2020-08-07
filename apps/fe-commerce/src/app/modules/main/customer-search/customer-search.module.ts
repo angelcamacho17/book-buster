@@ -6,9 +6,11 @@ import { MaterialModule } from '../../material/material.module';
 import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { CustomerSearchComponent } from './customer-search.component';
 import { CustomerSearchRoutingModule } from './customer-search-routing.module';
+import { CustomerSearchMobileComponent } from './customer-search-mobile/customer-search-mobile.component';
+import { CustomerSearchTabletComponent } from './customer-search-tablet/customer-search-tablet.component';
 
 @NgModule({
-  declarations: [CustomerSearchComponent],
+  declarations: [CustomerSearchComponent, CustomerSearchMobileComponent, CustomerSearchTabletComponent],
   imports: [
     CommonModule,
     CustomerSearchRoutingModule,
