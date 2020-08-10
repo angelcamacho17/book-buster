@@ -4,8 +4,9 @@ import { Store, select } from '@ngrx/store';
 import { OrderService, IArticle, IOrder, refreshArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../shared/services/layout.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DialogData } from '../../shared/components/dialog/dialog.component';
+import { EventService } from '../../shared/services/event.service';
 
 @Component({
   selector: 'article-search-tablet',
@@ -19,9 +20,14 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
     public ordSer: OrderService,
     public router: Router,
     public layoutService: LayoutService,
+    public matDialog: MatDialog,
+    public eventService: EventService,
     public dialogRef: MatDialogRef<ArticleSearchTabletComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-    super(store, ordSer, router, layoutService)
+    super(store, ordSer, router, layoutService);
+
+
+
   }
 
   ngOnInit(): void {
@@ -33,10 +39,23 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
         this.articles = data;
       })
     );
+
+    this._subscriptions.add(
+      this.eventService.articleSelect.subscribe(() => {
+        this._close();
+      })
+    );
+
     if (this.ordSer.currentOrder?.id) {
       this.lastUrl = 'orderitems';
     }
     this.store.dispatch(refreshArticlesRequest());
+  }
+
+  private _close(): void {
+    if (this.matDialog.open) {
+      this.matDialog.closeAll()
+    }
   }
 
 }

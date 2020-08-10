@@ -31,8 +31,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
     public layoutService: LayoutService
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   public overviewOrder(): void {
     if (this.ordSer.currentOrder?.id) {

@@ -100,7 +100,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     }
     this.orderService.setOrderModifiedState(true);
     this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
-    this._goToArticlesSearch();
+    this.goToArticlesSearch();
   }
 
   public updatedOrder(): IOrder {
@@ -115,7 +115,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     return order;
   }
 
-  private _goToArticlesSearch(): void {
+  public goToArticlesSearch(): void {
     if (this.orderService.orderFlow === 'edit') {
       this.router.navigate(['/main/article-search/edit']);
     } else {

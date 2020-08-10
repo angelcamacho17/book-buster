@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { IOrder, IOrderArticle, IArticle, OrderService, getCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { IOrder, IOrderArticle, IArticle, OrderService, getCurrentOrderRequest, setOrderArticlesRequest, replaceOrderArticleRequest, appendOrderArticleRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LayoutService } from '../../shared/services/layout.service';
 import { ArticleDetailComponent } from '../article-detail.component';
@@ -44,6 +44,35 @@ export class ArticleDetailTabletComponent extends ArticleDetailComponent impleme
   }
 
   ngOnInit(): void {
+  }
+
+  public addToOrder() {
+    let orderArticle: IOrderArticle = {
+      article: this.article,
+      quantity: this.amount
+    }
+    const orderArticles = this.currentOrder.articles;
+    if (orderArticles.length > 0) {
+      this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
+    }
+    const existingOrderArticle = this.orderArticles.find((o) => o.article.id === this.article.id);
+    if (existingOrderArticle) {
+      orderArticle = {
+        id: existingOrderArticle.id,
+        article: this.article,
+        quantity: (existingOrderArticle.quantity + this.amount)
+      }
+      this.store.dispatch(replaceOrderArticleRequest({ orderArticle }));
+    } else {
+      this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
+    }
+    this.orderService.setOrderModifiedState(true);
+    this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
+    this.goToArticlesSearch();
+  }
+
+  public goToArticlesSearch(): void {
+    this.router.navigate(['/main/order-overview']);
   }
 
 }
