@@ -73,6 +73,7 @@ export class LayoutService {
   } else if (this._deviceDetector.isMobile()) {
     this.layout = this._mobile;
   } else {
+    // just for testing porpuses
     this.layout = this._tablet;
   }
   }
