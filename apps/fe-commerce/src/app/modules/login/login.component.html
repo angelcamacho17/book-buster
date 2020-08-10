@@ -10,7 +10,7 @@
   </div>
   <input #dum id="dum" style="display: none;">
   <form [@content]="displayContent ? 'not-hide' : 'hide'" [formGroup]="loginForm" (ngSubmit)="onSubmit($event)" disabled="isSubmitted"
-        style="width: 100%;">
+        class="login-form">
     <div class="fields" >
       <mat-form-field color="accent" [style.display]="hideCustomerKey ? 'none': 'relative'">
         <mat-label class="mat-caption input">{{'customerkey' | translate}}</mat-label>

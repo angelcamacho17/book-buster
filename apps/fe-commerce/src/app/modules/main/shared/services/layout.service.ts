@@ -22,7 +22,7 @@ export class LayoutService {
     '(min-width:1440px) and (max-width:1599px)',
     '(min-width:1600px)'];
   constructor(private _breakpointObserver: BreakpointObserver,
-              private _deviceDetector: DeviceDetectorService) {
+    private _deviceDetector: DeviceDetectorService) {
     this.initBreakpoints();
   }
 
@@ -68,14 +68,18 @@ export class LayoutService {
   }
 
   private _setLayout(): void {
-  if (this._deviceDetector.isTablet()) {
-    this.layout = this._tablet;
-  } else if (this._deviceDetector.isMobile()) {
-    this.layout = this._mobile;
-  } else {
-    // just for testing porpuses
-    this.layout = this._tablet;
-  }
+    console.log('setting layout')
+    if (this._deviceDetector.isTablet()) {
+      this.layout = this._tablet;
+      console.log('tablet')
+    } else if (this._deviceDetector.isMobile()) {
+      console.log('mobile')
+      this.layout = this._mobile;
+    } else {
+      console.log('pc')
+      // just for testing purposes
+      this.layout = this._tablet;
+    }
   }
 
   getOnLayoutChange(): Observable<string> {
