@@ -48,6 +48,7 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
     this._subscriptions.add(
       this.eventService.customerChange.subscribe(customer => {
         this.onCustomerChange(customer);
+        this._close();
       })
     );
 
@@ -63,6 +64,10 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
   ngOnInit(): void {
   }
 
-
+  private _close(): void {
+    if (this.matDialog.open) {
+      this.matDialog.closeAll()
+    }
+  }
 
 }

@@ -57,10 +57,7 @@ export class CustomerRowComponent implements OnDestroy {
   }
 
   public onSelectCustomer(event, customer: ICustomer): void {
-    console.log('EMITTING')
     this.eventService.customerChanged(customer);
-    console.log('EMITTING')
-
   }
 
   ngOnDestroy(): void {
