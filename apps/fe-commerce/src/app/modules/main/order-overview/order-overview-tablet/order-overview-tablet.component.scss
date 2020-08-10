@@ -104,10 +104,31 @@
           color: rgba(0, 0, 0, 0.6);
           margin: 0px;
         }
+
+      }
+      .icon {
+        align-self: center;
+        color: rgba(0, 0, 0, 0.6);
       }
 
     }
+
+    .active {
+      background:#1666d8;
+      .items-amount {
+        .title {
+          color: rgba(255, 255, 255, 0.87);
+        }
+        .items {
+          color: rgba(255, 255, 0255, 0.6);
+        }
+      }
+      .icon {
+        color: rgba(255, 255, 0255, 0.6);
+      }
+    }
   }
+
   .right-content {
     display: flex;
     flex: 1;
