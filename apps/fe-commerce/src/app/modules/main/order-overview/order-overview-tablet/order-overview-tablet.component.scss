@@ -120,6 +120,9 @@
       height: calc(100% - 104px);
 
       .order-items-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         height: 16px;
         color: rgba(0,0,0,0.87);
         font-family: Roboto;

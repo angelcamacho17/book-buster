@@ -52,6 +52,9 @@
     <div class="content">
       <div class="order-items-title">
         {{('orderitems' | translate) | uppercase}}
+        <mat-icon (click)="openNewArticle()">
+          add
+        </mat-icon>
       </div>
       <mat-card class="card mat-elevation-z0">
         <div class="list">
@@ -75,11 +78,11 @@
       </mat-card>
     </div>
     <div class="right-footer">
-      <button mat-stroked-button
+      <!-- <button mat-stroked-button
               class="delete"
               (click)="deleteOrder()">
         {{('deletefromord' | translate) | uppercase}}
-      </button>
+      </button> -->
       <button mat-button class="confirm" (click)="orderConfirmed()">
         {{('confirm' | translate) | uppercase}}
       </button>

@@ -1,0 +1,32 @@
+<div class="modal-search">
+  <div class="header">
+    <div class="mat-body-2 button">
+      {{('cancel' | translate) | titlecase}}
+    </div>
+    <div class="mat-subheading-2 title">
+      {{('neworder' | translate) | titlecase}}
+    </div>
+    <div class="mat-body-2 button">
+      {{('next' | translate) | titlecase}}
+    </div>
+  </div>
+  <search (searchFocus)="showShadow($event)"
+             (searchBlur)="removeShadow()"
+             (userSearching)="hidePanel($event)"
+             (hasSearchResults)="handleSearchResults($event)"
+             [list]="articles"></search>
+  <div class="search-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
+    <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
+      [dividerClass]="'customer-divider'" class="search-results"></search-results>
+
+    <div class="no-results" *ngIf="!hide && emptyResults">
+      <mat-icon class="icon">search</mat-icon>
+      <div class="mat-title search-text">{{'searcharts' | translate}}</div>
+      <div class="mat-subheading-2 search-description">{{'artsplaceholder' | translate}}</div>
+    </div>
+    <div class="no-results" *ngIf="hide && emptyResults">
+      <div class="mat-title search-text">{{'nomatcharts' | translate}}</div>
+    </div>
+  </div>
+</div>
+

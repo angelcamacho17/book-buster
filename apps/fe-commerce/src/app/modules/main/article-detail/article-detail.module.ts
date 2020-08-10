@@ -6,9 +6,11 @@ import { MaterialModule } from '../../material/material.module';
 import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { ArticleDetailComponent } from './article-detail.component';
 import { ArticleDetailRoutingModule } from './article-detail-routing.module';
+import { ArticleDetailMobileComponent } from './article-detail-mobile/article-detail-mobile.component';
+import { ArticleDetailTabletComponent } from './article-detail-tablet/article-detail-tablet.component';
 
 @NgModule({
-  declarations: [ArticleDetailComponent],
+  declarations: [ArticleDetailComponent, ArticleDetailMobileComponent, ArticleDetailTabletComponent],
   imports: [
     CommonModule,
     ArticleDetailRoutingModule,
