@@ -3,6 +3,7 @@ import { IArticle, changedNavigationRequest } from '@fecommerce-workspace/data-s
 import { Router } from '@angular/router';
 import { RowComponent } from '../row.component';
 import { Store } from '@ngrx/store';
+import { EventService } from '../../../services/event.service';
 
 @Component({
   selector: 'article-row',
@@ -14,12 +15,14 @@ export class ArticleRowComponent implements OnInit {
   @Input() item: any;
 
   constructor(private _router: Router,
+              private eventService: EventService,
               private _store: Store) { }
 
   ngOnInit(): void {
   }
 
   openArticleDetail(item) {
+    this.eventService.articleSelected(item);
     this._router.navigate(['/main/article-detail', item.id]);
   }
 }

@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { LayoutService } from '../shared/services/layout.service';
 
 @Component({
   selector: 'article-detail',
@@ -12,39 +13,40 @@ import { map } from 'rxjs/operators';
 })
 export class ArticleDetailComponent implements OnInit, OnDestroy {
   public amount = 1;
-  private _article$: Observable<IArticle>;
-  private _currentOrder$: Observable<IOrder>;
-  private _orderArticles$: Observable<IOrderArticle[]>
-  article: IArticle;
-  orderArticles: IOrderArticle[];
-  currentOrder: IOrder;
-  private _subscriptions = new Subscription();
+  public article$: Observable<IArticle>;
+  public currentOrder$: Observable<IOrder>;
+  public orderArticles$: Observable<IOrderArticle[]>
+  public article: IArticle;
+  public orderArticles: IOrderArticle[];
+  public currentOrder: IOrder;
+  public subscriptions = new Subscription();
 
 
   constructor(
-    private _store: Store<{ article: IArticle, currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
-    private _route: ActivatedRoute,
-    private _router: Router,
-    private _orderService: OrderService
+    public store: Store<{ article: IArticle, currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
+    public route: ActivatedRoute,
+    public router: Router,
+    public orderService: OrderService,
+    public layoutService: LayoutService
   ) {
-    this._article$ = this._store.pipe(select('article'));
-    this._subscriptions.add(
-      this._article$.subscribe(data => {
+    this.article$ = this.store.pipe(select('article'));
+    this.subscriptions.add(
+      this.article$.subscribe(data => {
         this.article = data;
       })
     );
 
-    this._currentOrder$ = this._store.pipe(select('currentOrder'));
-    this._subscriptions.add(
-      this._currentOrder$.subscribe(data => {
+    this.currentOrder$ = this.store.pipe(select('currentOrder'));
+    this.subscriptions.add(
+      this.currentOrder$.subscribe(data => {
         this.currentOrder = data;
       })
     );
-    this._store.dispatch(getCurrentOrderRequest())
+    this.store.dispatch(getCurrentOrderRequest())
 
-    this._orderArticles$ = this._store.pipe(select('orderArticles'));
-    this._subscriptions.add(
-      this._orderArticles$.subscribe(data => {
+    this.orderArticles$ = this.store.pipe(select('orderArticles'));
+    this.subscriptions.add(
+      this.orderArticles$.subscribe(data => {
         this.orderArticles = data;
       })
     );
@@ -57,11 +59,11 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   public getArticle() {
     let articleId: number;
 
-    this._subscriptions.add(
-      this._route.paramMap.pipe(
+    this.subscriptions.add(
+      this.route.paramMap.pipe(
         map((params: ParamMap) => articleId = +params.get('id'))
       ).subscribe(() => {
-        this._store.dispatch(getArticleRequest({ articleId }));
+        this.store.dispatch(getArticleRequest({ articleId }));
       })
     );
   }
@@ -83,7 +85,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     }
     const orderArticles = this.currentOrder.articles;
     if (orderArticles.length > 0) {
-      this._store.dispatch(setOrderArticlesRequest({ orderArticles }));
+      this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
     }
     const existingOrderArticle = this.orderArticles.find((o) => o.article.id === this.article.id);
     if (existingOrderArticle) {
@@ -92,13 +94,13 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
         article: this.article,
         quantity: (existingOrderArticle.quantity + this.amount)
       }
-      this._store.dispatch(replaceOrderArticleRequest({ orderArticle }));
+      this.store.dispatch(replaceOrderArticleRequest({ orderArticle }));
     } else {
-      this._store.dispatch(appendOrderArticleRequest({ orderArticle }));
+      this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
     }
-    this._orderService.setOrderModifiedState(true);
-    this._store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
-    this._goToArticlesSearch();
+    this.orderService.setOrderModifiedState(true);
+    this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
+    this.goToArticlesSearch();
   }
 
   public updatedOrder(): IOrder {
@@ -113,17 +115,17 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     return order;
   }
 
-  private _goToArticlesSearch(): void {
-    if (this._orderService.orderFlow === 'edit') {
-      this._router.navigate(['/main/article-search/edit']);
+  public goToArticlesSearch(): void {
+    if (this.orderService.orderFlow === 'edit') {
+      this.router.navigate(['/main/article-search/edit']);
     } else {
-      this._router.navigate(['/main/article-search']);
+      this.router.navigate(['/main/article-search']);
     }
   }
 
   ngOnDestroy(): void {
-    if(this._subscriptions) {
-      this._subscriptions.unsubscribe();
+    if(this.subscriptions) {
+      this.subscriptions.unsubscribe();
     }
   }
 }

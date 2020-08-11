@@ -4,6 +4,7 @@ import { IArticle, OrderService, IOrder, refreshArticlesRequest } from '@fecomme
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
+import { LayoutService } from '../shared/services/layout.service';
 
 @Component({
   selector: 'article-search',
@@ -13,8 +14,8 @@ import { Store, select } from '@ngrx/store';
 export class ArticleSearchComponent implements OnInit, OnDestroy {
   public rowType = ArticleRowComponent;
   public articles: IArticle[] = [];
-  private _articles$: Observable<IArticle[]>;
-  private _subscriptions = new Subscription();
+  public _articles$: Observable<IArticle[]>;
+  public _subscriptions = new Subscription();
   public display = false;
   public navigation$: Observable<string>;
   public hide = false;
@@ -24,33 +25,19 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   public emptyResults = true;
   public filteredResults: IArticle[] = [];
   constructor(
-    private _store: Store<{ articles: IArticle[], currentOrder: IOrder }>,
-    private _ordSer: OrderService,
-    private _router: Router
-  ) {
+    public store: Store<{ articles: IArticle[], currentOrder: IOrder }>,
+    public ordSer: OrderService,
+    public router: Router,
+    public layoutService: LayoutService
+  ) { }
 
-    this._articles$ = this._store.pipe(select('articles'));
-
-    this._subscriptions.add(
-      this._articles$.subscribe(data => {
-        this.articles = data;
-      })
-    );
-    if (this._ordSer.currentOrder?.id) {
-      this.lastUrl = 'orderitems';
-    }
-    this._store.dispatch(refreshArticlesRequest());
-
-  }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   public overviewOrder(): void {
-    if (this._ordSer.currentOrder?.id) {
-      this._router.navigate(['/main/order-overview']);
+    if (this.ordSer.currentOrder?.id) {
+      this.router.navigate(['/main/order-overview']);
     } else {
-      this._router.navigate(['/main/order-overview']);
+      this.router.navigate(['/main/order-overview']);
     }
   }
 

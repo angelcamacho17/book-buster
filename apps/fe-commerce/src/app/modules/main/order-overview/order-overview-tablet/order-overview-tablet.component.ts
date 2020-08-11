@@ -13,6 +13,7 @@ import { of, Observable, Subscription } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { CustomerSearchTabletComponent } from '../../customer-search/customer-search-tablet/customer-search-tablet.component';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
+import { ArticleSearchTabletComponent } from '../../article-search/article-search-tablet/article-search-tablet.component';
 
 @Component({
   selector: 'order-overview-tablet',
@@ -202,10 +203,22 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
       );
     }
 
+    public openNewArticle(): void {
+      console.log('OPENING arts');
+      const dialogRef = this.matDialog.open(ArticleSearchTabletComponent, {
+        panelClass: 'modal-dialog'
+      });
+
+      this.subscriptions.add(
+        dialogRef.afterClosed().subscribe(data => {
+        })
+      );
+    }
+
     private _openNewCustomer():void {
       console.log('OPENING');
       const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
-        panelClass: 'customer-modal-dialog'
+        panelClass: 'modal-dialog'
       });
 
       this.subscriptions.add(

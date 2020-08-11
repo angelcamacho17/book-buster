@@ -1,57 +1,92 @@
 <div class="tablet-content">
   <div class="left-content">
-    <div class="mat-headline componet-title">
-      <mat-icon class="icon" [routerLink]="['/main/home']">keyboard_arrow_left</mat-icon>
-      {{'orderover' | translate}}
-    </div>
-    <mat-card class="customer-row mat-elevation-z0">
-      <div class="customer-info">
-        <div class="avatar">
-          <div class="mat-body-2 initials-sidenav" [ngClass]="currentOrder?.customer?.smallIcon ? 'mat-body-1' : ''">
-            {{ currentOrder?.customer?.initials }}</div>
-        </div>
-        <div class="item">
-          <div class="item-info">
-            <h3 class="mat-headline" class="title">
-              {{currentOrder?.customer?.name}}
-            </h3>
-            <div class="mat-body-1" class="subtitle">
-              {{currentOrder?.customer?.email}}
+    <div class="main-content">
+      <div class="mat-headline componet-title">
+        <mat-icon class="icon" [routerLink]="['/main/home']">keyboard_arrow_left</mat-icon>
+        {{'orderover' | translate}}
+      </div>
+      <mat-card class="customer-row mat-elevation-z0">
+        <div class="customer-info">
+          <div class="avatar">
+            <div class="mat-body-2 initials-sidenav" [ngClass]="currentOrder?.customer?.smallIcon ? 'mat-body-1' : ''">
+              {{ currentOrder?.customer?.initials }}</div>
+          </div>
+          <div class="item">
+            <div class="item-info">
+              <h3 class="mat-headline" class="title">
+                {{currentOrder?.customer?.name}}
+              </h3>
+              <div class="mat-body-1" class="subtitle">
+                {{currentOrder?.customer?.email}}
+              </div>
             </div>
           </div>
+          <mat-icon (click)="changeCustomer()">
+            link_off
+          </mat-icon>
         </div>
-        <mat-icon (click)="changeCustomer()">
-          link_off
+        <mat-divider></mat-divider>
+        <div class="total">
+          <h3 class="mat-headline" style="margin: 0px;">
+            {{'totalamt' | translate}}
+          </h3>
+          <div class="amount mat-body-2">
+            € {{getTotal()}}
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="order-items mat-elevation-z0 active">
+        <div class="items-amount">
+          <div class="title mat-subheading-2">
+            {{'orderitems' | translate}}
+          </div>
+          <div class="items mat-body-1">
+            {{articles?.length}} {{'items' | translate}}
+          </div>
+        </div>
+        <mat-icon class="icon">
+          keyboard_arrow_right
         </mat-icon>
-      </div>
-      <mat-divider></mat-divider>
-      <div class="total">
-        <h3 class="mat-headline" style="margin: 0px;">
-          {{'totalamt' | translate}}
-        </h3>
-        <div class="amount mat-body-2">
-          € {{getTotal()}}
+      </mat-card>
+    </div>
+    <div class="footer-content">
+      <mat-card class="card mat-elevation-z0">
+        <div class="info-total mat-subheading-2">
+          <div>
+            {{'discounts' | translate}}
+          </div>
+          <div class="mat-body-2" style="color: rgba(0, 0, 0, 0.6);">
+            € 45.13
+          </div>
         </div>
-      </div>
-    </mat-card>
-    <mat-card class="order-items mat-elevation-z0">
-      <div class="items-amount">
-        <div class="title mat-subheading-2">
-          {{'orderitems' | translate}}
+        <mat-divider></mat-divider>
+        <div class="info-total mat-subheading-2">
+          <div>
+            {{'vat' | translate}}
+          </div>
+          <div class="mat-body-2" style="color: rgba(0, 0, 0, 0.6);">
+            € 10.55
+          </div>
         </div>
-        <div class="items mat-body-1">
-          {{articles?.length}} {{'items' | translate}}
+        <mat-divider></mat-divider>
+        <div class="order-total mat-headline">
+          <div style="color: rgba(0, 0, 0, 0.87);">
+            {{'total' | translate}}
+          </div>
+          <div style="color: rgba(0, 0, 0, 0.6);">
+            € {{getTotal()}}
+          </div>
         </div>
-      </div>
-      <mat-icon style="align-self: center; color: rgba(0, 0, 0, 0.6)">
-        keyboard_arrow_right
-      </mat-icon>
-    </mat-card>
+      </mat-card>
+    </div>
   </div>
   <div class="right-content">
     <div class="content">
       <div class="order-items-title">
         {{('orderitems' | translate) | uppercase}}
+        <mat-icon (click)="openNewArticle()">
+          add
+        </mat-icon>
       </div>
       <mat-card class="card mat-elevation-z0">
         <div class="list">
@@ -75,11 +110,11 @@
       </mat-card>
     </div>
     <div class="right-footer">
-      <button mat-stroked-button
+      <!-- <button mat-stroked-button
               class="delete"
               (click)="deleteOrder()">
         {{('deletefromord' | translate) | uppercase}}
-      </button>
+      </button> -->
       <button mat-button class="confirm" (click)="orderConfirmed()">
         {{('confirm' | translate) | uppercase}}
       </button>
