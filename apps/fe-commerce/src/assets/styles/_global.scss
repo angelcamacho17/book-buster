@@ -98,13 +98,14 @@ main {
 }
 
 .scanner-button {
-  position: absolute;
+  position: absolute !important;
   height: 48px;
   width: calc(100% - 32px);
   left: 16px;
   bottom: 32px;
   background-color: #1666d8;
   color: #fff;
+  z-index: 9999;
 }
 
 .modal-dialog .mat-dialog-container {
