@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleSearchComponent } from '../article-search.component';
 import { Store, select } from '@ngrx/store';
-import { OrderService, IArticle, IOrder, refreshArticlesRequest } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, IArticle, IOrder, refreshArticlesRequest, getCurrentOrderRequest, IOrderArticle } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../shared/services/layout.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'article-search-mobile',
@@ -13,12 +14,13 @@ import { LayoutService } from '../../shared/services/layout.service';
 export class ArticleSearchMobileComponent extends ArticleSearchComponent implements OnInit {
 
   constructor(
-    public store: Store<{ articles: IArticle[], currentOrder: IOrder }>,
+    public store: Store<{ articles: IArticle[], currentOrder: IOrder, orderArticles: IOrderArticle[]  }>,
     public ordSer: OrderService,
     public router: Router,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    public snackBar: MatSnackBar
   ) {
-    super(store, ordSer, router, layoutService)
+    super(store, ordSer, router, layoutService, snackBar)
   }
 
   ngOnInit(): void {
@@ -30,10 +32,24 @@ export class ArticleSearchMobileComponent extends ArticleSearchComponent impleme
         this.articles = data;
       })
     );
-    if (this.ordSer.currentOrder?.id) {
-      this.lastUrl = 'orderitems';
-    }
+
+    this._currentOrder$ = this.store.pipe(select('currentOrder'));
+    this._subscriptions.add(this._currentOrder$.subscribe(data => {
+      this.currentOrder = data;
+    }));
+
+    this._orderArticles$ = this.store.pipe(select('orderArticles'));
+    this._subscriptions.add(this._orderArticles$.subscribe(data => {
+      this.orderArticles = data;
+    }));
+
+    this.store.dispatch(getCurrentOrderRequest());
     this.store.dispatch(refreshArticlesRequest());
+
+    setTimeout(()=>{
+      this.scanner = true;
+    }, 100);
+
   }
 
 }

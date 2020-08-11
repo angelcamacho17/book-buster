@@ -6,17 +6,19 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ZxingComponent } from './scanner/zxing/zxing.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MaterialModule,
-    ZXingScannerModule
-  ],
   declarations: [
     ScannerComponent,
     ZxingComponent
   ],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    ZXingScannerModule,
+    MaterialModule
+  ],
   exports: [
-    ScannerComponent
+    ScannerComponent,
+    ZxingComponent
   ]
 })
 export class ScannerModule {}

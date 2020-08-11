@@ -10,6 +10,8 @@ import { CustomerRowComponent } from '../shared/components/row/customer-row/cust
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDiscardDialogComponent } from '../shared/components/confirm-discard/confirm-discard-dialog.component';
 import { LayoutService } from '../shared/services/layout.service';
+import { ScanResult } from '@fecommerce-workspace/scanner';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'customer-search',
@@ -27,7 +29,9 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   public shadow = false;
   public emptyResults = true;
   public filteredResults: ICustomer[] = [];
-  public _subscriptions = new Subscription;
+  public subscriptions: Subscription = new Subscription();
+  public scanner = false;
+  public pauseScan = false;
 
   constructor(
     public eventService: EventService,
@@ -38,7 +42,8 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     public transServ: TranslationService,
     public headerService: HeaderService,
     public location: Location,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    public snackBar: MatSnackBar
   ) {
 
   }
@@ -82,6 +87,8 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
 
   public onCustomerChange(customer: ICustomer) {
     const flow = this.orderService.orderFlow;
+    console.log(customer)
+    console.log(flow)
     if (flow === 'new') {
       this._handleSetCustomer(customer);
     } else if (flow === 'edit') {
@@ -130,6 +137,34 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
 
   public showShadow(shadow: boolean): void {
     this.shadow = shadow;
+    this.scanner = false;
+  }
+
+  public loyaltyCardScanned(scanResult: ScanResult) {
+    let snack;
+    if (this.pauseScan) {
+      return;
+    }
+    const customerCode = JSON.parse(scanResult.code)?.customer;
+    this.pauseScan = true;
+
+    const customer = this.customers.find((c: any) => {
+      return c.name === customerCode.name;
+    });
+
+    if (customer) {
+      snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
+      this.onCustomerChange(customer);
+    } else {
+      snack = this.snackBar.open(`Customer could not be found.`, 'Close')
+    }
+    snack.afterDismissed().subscribe(() => {
+      this.pauseScan = false;
+    });
+  }
+
+  public showScanner() {
+    this.scanner = true;
   }
 
   public removeShadow(): void {
@@ -143,9 +178,11 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   ngOnDestroy(): void {
-    if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
+    if (this.subscriptions) {
+      this.subscriptions.unsubscribe();
     }
     this.currentOrder = null;
+    this.scanner = false;
+
   }
 }

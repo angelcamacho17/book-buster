@@ -7,6 +7,7 @@ import { CustomerSearchComponent } from '../customer-search.component';
 import { EventService } from '../../shared/services/event.service';
 import { OrderService, IOrder, ICustomer, TranslationService, HeaderService, refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 import { LayoutService } from '../../shared/services/layout.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'customer-search-mobile',
@@ -24,32 +25,33 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
     public transServ: TranslationService,
     public headerService: HeaderService,
     public location: Location,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    public snackBar: MatSnackBar
   ) {
     super(eventService, orderService, matDialog, store,
-          router, transServ, headerService, location, layoutService)
+          router, transServ, headerService, location, layoutService, snackBar)
 
           this.customers$ = this.store.pipe(select('customers'));
-          this._subscriptions.add(
+          this.subscriptions.add(
             this.customers$.subscribe(data => {
               this.customers = data;
             })
           );
 
           this.currentOrder$ = this.store.pipe(select('currentOrder'));
-          this._subscriptions.add(
+          this.subscriptions.add(
             this.currentOrder$.subscribe((currentOrder) => {
               this.currentOrder = currentOrder;
             })
           );
 
-          this._subscriptions.add(
+          this.subscriptions.add(
             this.eventService.customerChange.subscribe(customer => {
               this.onCustomerChange(customer);
             })
           );
 
-          this._subscriptions.add(
+          this.subscriptions.add(
             this.headerService.goBack.subscribe(()=>{
               this.openConfirmDialog();
             })

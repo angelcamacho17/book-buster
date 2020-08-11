@@ -19,7 +19,7 @@
                    autocomplete="off"
                    spellcheck="false">
         </mat-form-field>
-        <mat-icon *ngIf="input.value === ''" class="search-icon" >center_focus_weak</mat-icon>
+        <mat-icon *ngIf="input.value === ''" class="search-icon" (click)="customIconClick()">center_focus_weak</mat-icon>
         <mat-icon *ngIf="input.value !== ''" class="search-icon" (click)="cleanSearch()">close</mat-icon>
     </div>
 

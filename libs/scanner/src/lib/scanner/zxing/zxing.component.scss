@@ -1,0 +1,73 @@
+::ng-deep video {
+  margin-top: 66px;
+  height: 100% !important;
+  width: 100vw;
+  object-fit: contain;
+}
+
+.scanner-container {
+  display: flex;
+  position: absolute;
+  height: calc(100% + 90px) !important;
+  width: 100vw;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .center {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 100%;
+
+    .top {
+      display: flex;
+      height: 25%;
+      width: 100%;
+      top: 0;
+      background: rgba(255,255,255,0.2);
+      /* contain: layout; */
+      content: none;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    .bottom {
+      display: flex;
+      height: 40%;
+      width: 100%;
+      top: 0;
+      background: rgba(255,255,255,0.2);
+      /* contain: layout; */
+      content: none;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+
+
+    }
+
+    .focus {
+      display: flex;
+      height: 200px !important;
+      width: 99%;
+      object-fit: contain;
+      content: none;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,1);
+    }
+  }
+
+  .side {
+    display: flex;
+    height: 100%;
+    width: 10vw;
+    top: 0;
+    background: rgba(255,255,255,0.2);
+    content: none;
+    backdrop-filter: blur(8px);
+  }
+}
+
+
+
+

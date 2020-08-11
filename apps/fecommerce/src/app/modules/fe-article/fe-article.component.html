@@ -16,7 +16,8 @@
   </header> -->
 
   <main>
-    <div class="container" [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
+          class="container"
+          [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
       <fe-search-results *ngIf="!emptyResults"
                          [items]="filteredResults"
                          [rowType]="rowType"
@@ -31,8 +32,8 @@
         <div class="mat-title search-text">{{'nomatcharts' | translate}}</div>
       </div>
     <button mat-button *ngIf="!shadow" class="fe-button" (click)="overviewOrder()">{{('overview' | translate) | uppercase}}</button>
-    </div>
   </main>
+
 </div>
 <!-- <fecommerce-workspace-z-scan></fecommerce-workspace-z-scan> -->
 <router-outlet></router-outlet>

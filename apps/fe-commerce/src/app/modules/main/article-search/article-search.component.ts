@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { ArticleRowComponent } from '../shared/components/row/article-row/article-row.component';
-import { IArticle, OrderService, IOrder, refreshArticlesRequest } from '@fecommerce-workspace/data-store-lib';
+import { IArticle, OrderService, IOrder, refreshArticlesRequest, IOrderArticle, setOrderArticlesRequest, replaceOrderArticleRequest, appendOrderArticleRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { LayoutService } from '../shared/services/layout.service';
+import { ScanResult } from '@fecommerce-workspace/scanner';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'article-search',
@@ -16,7 +18,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   public articles: IArticle[] = [];
   public _articles$: Observable<IArticle[]>;
   public _subscriptions = new Subscription();
-  public display = false;
+  public scanner = false;
   public navigation$: Observable<string>;
   public hide = false;
   public nodata = false;
@@ -24,11 +26,22 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   public lastUrl = 'neworder';
   public emptyResults = true;
   public filteredResults: IArticle[] = [];
+  public display = false;
+  public displayResults = false;
+  public pauseScan = false;
+  public innerHeight = null;
+  public orderArticles: IOrderArticle[];
+  public currentOrder: IOrder;
+  public _currentOrder$: Observable<IOrder>;
+  public _orderArticles$: Observable<IOrderArticle[]>;
+
   constructor(
-    public store: Store<{ articles: IArticle[], currentOrder: IOrder }>,
+    public store: Store<{ articles: IArticle[], currentOrder: IOrder, orderArticles: IOrderArticle[]  }>,
     public ordSer: OrderService,
     public router: Router,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    public snackBar: MatSnackBar
+
   ) { }
 
   ngOnInit(): void { }
@@ -47,27 +60,105 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
 
   public showShadow(shadow: boolean): void {
     this.shadow = shadow;
+    this.scanner = false;
+  }
+
+  public showScanner() {
+    console.log('SHOWING')
+    this.scanner = true;
   }
 
 
   public removeShadow(): void {
     this.shadow = false;
     this.hide = false;
+    this.scanner = false;
   }
 
   public noDataPlaceholder(show: boolean): void {
     this.nodata = show;
   }
 
-  handleSearchResults(results: any[]): void {
+  public articleCodeScanned(scanResult: ScanResult) { // art: Article) {
+    let snack;
+    console.log(scanResult)
+    if (this.pauseScan) {
+      return;
+    }
+    let articleScanned =JSON.parse(scanResult.code) ;
+    this.pauseScan = true;
+    articleScanned = articleScanned.article;
+
+    const article = this.articles.find((a: any) => {
+      return a.description === articleScanned.description;
+    });
+
+    console.log(article)
+
+    if (article) {
+      this.addToOrder(article);
+      snack = this.snackBar.open(`Article ${article?.name} added to order.`, 'Close');
+
+    } else {
+      snack = this.snackBar.open(`Article could not be found.`, 'Close')
+    }
+
+    snack.afterDismissed().subscribe(() => {
+      this.pauseScan = false;
+    });
+
+  }
+
+  public addToOrder(article: IArticle) {
+    let orderArticle: IOrderArticle = {
+      article,
+      quantity: 1
+    }
+
+    const orderArticles = this.currentOrder.articles;
+    if (orderArticles.length > 0) {
+      this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
+    }
+    const existingOrderArticle = this.orderArticles.find((o) => o.article.id === article.id);
+
+    if (existingOrderArticle) {
+      orderArticle = {
+        id: existingOrderArticle.id,
+        article,
+        quantity: (existingOrderArticle.quantity + 1)
+      }
+      this.store.dispatch(replaceOrderArticleRequest({ orderArticle }))
+    } else {
+      this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
+    }
+
+
+    this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
+  }
+
+  public updatedOrder(): IOrder {
+    const order: IOrder = {
+      id: this.currentOrder?.id,
+      description: this.currentOrder.description,
+      articles: this.orderArticles,
+      amount: this.currentOrder.amount,
+      customer: this.currentOrder.customer,
+      createdBy: this.currentOrder.createdBy
+    };
+    return order;
+  }
+
+  public handleSearchResults(results: any[]): void {
     this.emptyResults = results.length === 0;
     this.filteredResults = results;
+    this.scanner = true;
   }
 
   ngOnDestroy(): void {
     if (this._subscriptions) {
       this._subscriptions.unsubscribe();
     }
+    this.scanner = false;
   }
 }
 

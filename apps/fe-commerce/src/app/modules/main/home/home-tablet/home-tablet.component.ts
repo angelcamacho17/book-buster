@@ -51,6 +51,19 @@ export class HomeTabletComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('subscriptions array', this._subscriptions)
+    this.subscribeToHeader();
+  }
+
+  public subscribeToHeader() {
+    this._subscriptions.add(
+      this._headerService.rightIconClicked
+        .subscribe(() => this._logout())
+    );
+  }
+
+  private _logout() {
+    this._router.navigate(['/login'])
   }
 
 
@@ -65,7 +78,7 @@ export class HomeTabletComponent implements OnInit, OnDestroy {
     this._orderService.orderFlow = 'edit';
     this._router.navigate(['/main/order-overview']);
   }
-  
+
   public deleteOrder() {
     const dialogRef = this._matDialog.open(DialogComponent, {
       width: '280px',

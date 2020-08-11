@@ -8,6 +8,8 @@ import { ArticleSearchComponent } from './article-search.component';
 import { ArticleSearchRoutingModule } from './article-search-routing.module';
 import { ArticleSearchTabletComponent } from './article-search-tablet/article-search-tablet.component';
 import { ArticleSearchMobileComponent } from './article-search-mobile/article-search-mobile.component';
+import { ScannerModule } from '@fecommerce-workspace/scanner';
+
 
 @NgModule({
   declarations: [ArticleSearchComponent, ArticleSearchTabletComponent, ArticleSearchMobileComponent],
@@ -16,7 +18,8 @@ import { ArticleSearchMobileComponent } from './article-search-mobile/article-se
     ArticleSearchRoutingModule,
     SharedModule,
     MaterialModule,
-    TranslatePipeModule
+    TranslatePipeModule,
+    ScannerModule
   ]
 })
 export class ArticleSearchModule { }

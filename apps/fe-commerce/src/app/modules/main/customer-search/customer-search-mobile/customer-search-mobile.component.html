@@ -4,9 +4,10 @@
              (searchBlur)="removeShadow()"
              (userSearching)="hidePanel($event)"
              (hasSearchResults)="handleSearchResults($event)"
+             (customIconEvent)="showScanner()"
              [list]="customers"></search>
   </div>
-  <div class="search-container" [ngClass]="(shadow || !emptyResults) ? 'shadow move-up' : ''">
+  <div *ngIf="!scanner" class="search-container" [ngClass]="(shadow || !emptyResults) ? 'shadow move-up' : ''">
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
       [dividerClass]="'customer-divider'" class="search-results"></search-results>
   <!-- needs to be added on fe-search-results [rowType]="rowType"  -->
@@ -18,5 +19,8 @@
     <div class="no-results" *ngIf="hide && emptyResults">
       <div class="mat-title search-text">{{'nomatchcus' | translate}}</div>
     </div>
+  </div>
+  <div *ngIf="scanner" class="search-container">
+    <fe-scanner (scanSuccess)="loyaltyCardScanned($event)"></fe-scanner>
   </div>
 </base-component>
