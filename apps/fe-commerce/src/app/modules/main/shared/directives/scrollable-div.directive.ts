@@ -6,15 +6,13 @@ import { ComponentService } from '../services/component.service';
 })
 export class ScrollableDivDirective implements AfterViewInit {
 
-  @Input() feScrollableDiv: any;
-
   constructor(
     private _renderer: Renderer2,
     private _el: ElementRef,
-    private componentService: ComponentService
   ) { }
 
   ngAfterViewInit(): void {
+    console.log('aiusfahsdfuhsai')
     setTimeout(() => {
       this.setMaxHeight();
     });
@@ -26,11 +24,14 @@ export class ScrollableDivDirective implements AfterViewInit {
   }
 
   private setMaxHeight() {
-    const maxHeight = 'calc(100% - 192px)';
+    const nextDiv = this._el.nativeElement.parentNode.nextSibling;
+    const elementTop = this._el.nativeElement.offsetTop;
+    const nextDivTop = nextDiv.offsetTop;
+    const maxHeight = (nextDivTop - elementTop) - 8;
     this._renderer.setStyle(
       this._el.nativeElement,
       'max-height',
-      maxHeight
+      maxHeight + 'px'
     );
   }
 }
