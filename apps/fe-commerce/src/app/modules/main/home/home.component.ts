@@ -8,4 +8,5 @@ import { LayoutService } from '../shared/services/layout.service';
 })
 export class HomeComponent {
   constructor(public layoutService: LayoutService) {}
+
 }

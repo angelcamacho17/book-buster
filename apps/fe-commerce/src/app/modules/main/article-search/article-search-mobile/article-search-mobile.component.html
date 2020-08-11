@@ -21,7 +21,7 @@
     </div>
   </div>
   <div *ngIf="scanner" class="search-container">
-    <fe-scanner *ngIf="scanner" (scanSuccess)="articleCodeScanned($event)"></fe-scanner>
+    <fe-scanner (scanSuccess)="articleCodeScanned($event)"></fe-scanner>
   </div>
   <button mat-button class="scanner-button" *ngIf="!hide && emptyResults" (click)="overviewOrder()">{{('overview' | translate) | uppercase}}</button>
 </base-component>
