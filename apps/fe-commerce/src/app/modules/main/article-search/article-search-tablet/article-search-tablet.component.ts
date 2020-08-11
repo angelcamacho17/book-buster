@@ -1,12 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ArticleSearchComponent } from '../article-search.component';
 import { Store, select } from '@ngrx/store';
-import { OrderService, IArticle, IOrder, refreshArticlesRequest } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, IArticle, IOrder, refreshArticlesRequest, IOrderArticle } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../shared/services/layout.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DialogData } from '../../shared/components/dialog/dialog.component';
 import { EventService } from '../../shared/services/event.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'article-search-tablet',
@@ -16,15 +17,16 @@ import { EventService } from '../../shared/services/event.service';
 export class ArticleSearchTabletComponent extends ArticleSearchComponent implements OnInit {
 
   constructor(
-    public store: Store<{ articles: IArticle[], currentOrder: IOrder }>,
+    public store: Store<{ articles: IArticle[], currentOrder: IOrder, orderArticles: IOrderArticle[]  }>,
     public ordSer: OrderService,
     public router: Router,
     public layoutService: LayoutService,
     public matDialog: MatDialog,
     public eventService: EventService,
+    public snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<ArticleSearchTabletComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-    super(store, ordSer, router, layoutService);
+    super(store, ordSer, router, layoutService, snackBar);
 
 
 

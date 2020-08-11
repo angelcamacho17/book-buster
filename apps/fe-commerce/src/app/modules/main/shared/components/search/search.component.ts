@@ -14,6 +14,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Output() userSearching = new EventEmitter<boolean>();
   @Output() searchBlur = new EventEmitter<boolean>();
   @Output() hasSearchResults = new EventEmitter<any[]>();
+  @Output() customIconEvent = new EventEmitter<any>();
   @Input() list: any = []
   @Input() customIcon: string;
   @Input() autoFocus = false;
@@ -44,6 +45,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   private _enableScroll() {
       // document.removeEventListener('touchmove', this.preventDefault, false);
       // document.removeEventListener('touchforcechange', this.preventDefault, false);
+  }
+
+  customIconClick() {
+    this.customIconEvent.emit();
   }
 
   onSearchFocus() {

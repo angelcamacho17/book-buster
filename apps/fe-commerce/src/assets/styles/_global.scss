@@ -95,16 +95,16 @@ main {
       color: rgba(0, 0, 0, 0.6);
     }
   }
+}
 
-  button {
-    position: absolute;
-    height: 48px;
-    width: calc(100% - 32px);
-    left: 16px;
-    bottom: 32px;
-    background-color: #1666d8;
-    color: #fff;
-  }
+.scanner-button {
+  position: absolute;
+  height: 48px;
+  width: calc(100% - 32px);
+  left: 16px;
+  bottom: 32px;
+  background-color: #1666d8;
+  color: #fff;
 }
 
 .modal-dialog .mat-dialog-container {

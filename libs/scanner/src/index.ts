@@ -4,3 +4,4 @@
 
 export * from './lib/scanner.module';
 export * from './lib/scanner/zxing/zxing.component';
+export * from './lib/scanner.interface';

@@ -4,9 +4,10 @@
              (searchBlur)="removeShadow()"
              (userSearching)="hidePanel($event)"
              (hasSearchResults)="handleSearchResults($event)"
+             (customIconEvent)="showScanner()"
              [list]="articles"></search>
   </div>
-  <div class="search-container" [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
+  <div *ngIf="!scanner" class="search-container" [ngClass]="shadow || !emptyResults ? 'shadow move-up' : ''">
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
       [dividerClass]="'customer-divider'" class="search-results"></search-results>
   <!-- needs to be added on fe-search-results [rowType]="rowType"  -->
@@ -18,7 +19,10 @@
     <div class="no-results" *ngIf="hide && emptyResults">
       <div class="mat-title search-text">{{'nomatcharts' | translate}}</div>
     </div>
-    <button mat-button *ngIf="!hide && emptyResults" (click)="overviewOrder()">{{('overview' | translate) | uppercase}}</button>
   </div>
+  <div *ngIf="scanner" class="search-container">
+    <fe-scanner *ngIf="scanner" (scanSuccess)="articleCodeScanned($event)"></fe-scanner>
+  </div>
+  <button mat-button class="scanner-button" *ngIf="!hide && emptyResults" (click)="overviewOrder()">{{('overview' | translate) | uppercase}}</button>
 </base-component>
 
