@@ -1,27 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { IOrder, OrderService, BackNavigationService, HeaderService, clearCurrentOrderRequest, setOrderArticlesRequest, refreshOrdersRequest, setCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { IOrder, OrderService, BackNavigationService, HeaderService, clearCurrentOrderRequest, setOrderArticlesRequest, refreshOrdersRequest, setCurrentOrderRequest, TranslationService, deleteOrderRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
+import { DialogComponent } from '../../shared/components/dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'home-tablet',
   templateUrl: './home-tablet.component.html',
   styleUrls: ['./home-tablet.component.scss']
 })
-export class HomeTabletComponent implements OnInit {
+export class HomeTabletComponent implements OnInit, OnDestroy {
   public orders$: Observable<IOrder[]>;
   public orders: IOrder[];
+  public currentOrder$: Observable<IOrder>;
+  public currentOrder: IOrder;
   private _subscriptions: Subscription = new Subscription();
   constructor(
-    private _store: Store,
+    public orderService: OrderService,
+    private _store: Store<{ orders: IOrder[], currentOrder: IOrder }>,
     private _router: Router,
     private _orderService: OrderService,
-    private _storeOrders: Store<{ orders: IOrder[] }>,
-    private _backNavigationService: BackNavigationService,
+    private _translationService: TranslationService,
+    private _matDialog: MatDialog,
     private _headerService: HeaderService
   ) {
-    this.orders$ = this._storeOrders.pipe(select('orders'));
+    this.orders$ = this._store.pipe(select('orders'));
     this._subscriptions.add(
       this.orders$.subscribe(data => {
         if (data.length) {
@@ -31,10 +36,18 @@ export class HomeTabletComponent implements OnInit {
       })
     );
 
+    this.currentOrder$ = this._store.pipe(select('currentOrder'));
+    this._subscriptions.add(
+      this.currentOrder$.subscribe(data => {
+        this.currentOrder = data;
+        console.log(data)
+      })
+    );
+
 
     this._store.dispatch(clearCurrentOrderRequest());
     this._store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
-    this._storeOrders.dispatch(refreshOrdersRequest())
+    this._store.dispatch(refreshOrdersRequest())
   }
 
   ngOnInit(): void {
@@ -42,9 +55,38 @@ export class HomeTabletComponent implements OnInit {
 
 
   public openOrder(order: IOrder): void {
-    this._storeOrders.dispatch(setCurrentOrderRequest({ order }))
+    this._store.dispatch(replaceCurrentOrderRequest({ order }))
     this._store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }));
-    this._orderService.orderFlow = 'edit';
-    this._router.navigate(['/main/order-overview']);
+    // this._orderService.orderFlow = 'edit';
+    // this._router.navigate(['/main/order-overview']);
+  }
+  
+  public deleteOrder() {
+    const dialogRef = this._matDialog.open(DialogComponent, {
+      width: '280px',
+      height: '120px',
+      data: {
+        msg: this._translationService.get('deleteord'),
+        firstButton: this._translationService.get('cancel'),
+        secondButton: this._translationService.get('delete'),
+        buttonColor: 'red'
+      }
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data === undefined) {
+        // Is undefined when the user closes
+        // the dialog without an action
+        return;
+      }
+      if (data?.result === 'DELETE') {
+        this._store.dispatch(deleteOrderRequest());
+        // this.router.navigate(['/home']);
+      }
+    });
+  }
+
+
+  ngOnDestroy(): void {
+    this._subscriptions.unsubscribe();
   }
 }
