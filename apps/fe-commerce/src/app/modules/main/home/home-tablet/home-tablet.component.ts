@@ -54,11 +54,16 @@ export class HomeTabletComponent implements OnInit, OnDestroy {
   }
 
 
-  public openOrder(order: IOrder): void {
+  public viewOrder(order: IOrder): void {
     this._store.dispatch(replaceCurrentOrderRequest({ order }))
     this._store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }));
-    // this._orderService.orderFlow = 'edit';
-    // this._router.navigate(['/main/order-overview']);
+  }
+
+  public openOrder(order: IOrder): void {
+    // this._store.dispatch(replaceCurrentOrderRequest({ order }))
+    // this._store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }));
+    this._orderService.orderFlow = 'edit';
+    this._router.navigate(['/main/order-overview']);
   }
   
   public deleteOrder() {

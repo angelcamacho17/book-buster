@@ -8,7 +8,7 @@
     </div>
     <div class="content">
       <mat-list role="list" class="list">
-        <div class="list-row" (click)="openOrder(order)" [class.last]="lastOrder"
+        <div class="list-row" (click)="viewOrder(order)" [class.last]="lastOrder"
           *ngFor="let order of orders; let lastOrder = last;">
           <div class="list-item">
             <div class="left-content">
@@ -103,7 +103,7 @@
           </button>
         </div>
         <div class="bottom-container-right">
-          <button mat-button class="button confirm">
+          <button mat-button class="button confirm" (click)="openOrder()">
             OPEN
           </button>
         </div>
