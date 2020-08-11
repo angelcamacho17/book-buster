@@ -37,6 +37,77 @@
     </button> -->
   </div>
   <div class="right-side">
-
+    <div class="no-results-container" *ngIf="!this.currentOrder">
+      Please select an order
+    </div>
+    <div class="results-container" *ngIf="this.currentOrder">
+      <div class="content-container">
+        <mat-card class="customer-row mat-elevation-z0">
+          <div class="customer-info">
+            <div class="avatar">
+              <div class="mat-body-2" [ngClass]="currentOrder?.customer?.smallIcon ? 'mat-body-1' : ''">
+                {{ currentOrder?.customer?.initials }}</div>
+            </div>
+            <div class="item">
+              <div class="item-info">
+                <h3 class="mat-headline" class="title">
+                  {{currentOrder?.customer?.name}}
+                </h3>
+                <div class="mat-body-1" class="subtitle">
+                  {{currentOrder?.customer?.email}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="total">
+            <h3 class="mat-headline" style="margin: 0px;">
+              {{'totalamt' | translate}}
+            </h3>
+            <div class="amount mat-body-2">
+              € {{this.currentOrder?.amount}} <!-- {{getTotal()}} -->
+            </div>
+          </div>
+        </mat-card>
+        <div class="order-items-title">
+          {{('orderitems' | translate) | uppercase}}
+        </div>
+        <mat-card class="card mat-elevation-z0" >
+          <div class="list">
+            <div class="list-item" *ngFor="let item of this.currentOrder?.articles;">
+              <div class="content">
+                <div class="info">
+                  <div class="mat-subheading-2 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.87);">
+                    {{ item?.quantity > 1 ? item?.quantity + 'x ' : ''}} {{item?.article?.name}}
+                  </div>
+                  <div class="mat-body-1 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.6);">
+                    {{item?.article?.description}}
+                  </div>
+                </div>
+                <div class="price mat-subheading-2" style="margin: 0;">
+                  € {{item?.article?.price}}
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </mat-card>
+  
+      </div>
+      
+  
+      <div class="bottom-container">
+        <div class="bottom-container-left">
+          <button mat-stroked-button class="button delete" (click)="deleteOrder()">
+            {{('delete' | translate) | uppercase}}
+          </button>
+        </div>
+        <div class="bottom-container-right">
+          <button mat-button class="button confirm">
+            OPEN
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
