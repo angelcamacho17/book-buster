@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { refreshCustomersRequest, setCurrentOrderRequest, getCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService, OrderService, HeaderService } from '@fecommerce-workspace/data-store-lib';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { takeUntil } from 'rxjs/operators';
+import { setCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService, OrderService, HeaderService } from '@fecommerce-workspace/data-store-lib';
+import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { EventService } from '../shared/services/event.service';
 import { CustomerRowComponent } from '../shared/components/row/customer-row/customer-row.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -85,30 +84,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     });
   }
 
-  public onCustomerChange(customer: ICustomer) {
-    const flow = this.orderService.orderFlow;
-    console.log(customer)
-    console.log(flow)
-    if (flow === 'new') {
-      this._handleSetCustomer(customer);
-    } else if (flow === 'edit') {
-      this._replaceCustomerOnCurrentOrder(customer);
-      this.router.navigate(['/main/order-overview']);
-    }
-  }
-
-  public _handleSetCustomer(customer: ICustomer): void {
-    console.log(this.currentOrder);
-    if (this.currentOrder) {
-      this._replaceCustomerOnCurrentOrder(customer);
-      this.location.back();
-    } else {
-      this._setCustomerToNewOrder(customer);
-      this.router.navigate(['/main/article-search']);
-    }
-  }
-
-  public _setCustomerToNewOrder(customer: ICustomer) {
+  public setCustomerToNewOrder(customer: ICustomer) {
     const order: IOrder = {
       description: 'Latest order',
       articles: [],
@@ -119,7 +95,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     this.store.dispatch(setCurrentOrderRequest({ order }));
   }
 
-  public _replaceCustomerOnCurrentOrder(customer: ICustomer) {
+  public replaceCustomerOnCurrentOrder(customer: ICustomer) {
     const order: IOrder = {
       id: this.currentOrder?.id,
       description: this.currentOrder?.description,
@@ -138,29 +114,6 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
   public showShadow(shadow: boolean): void {
     this.shadow = shadow;
     this.scanner = false;
-  }
-
-  public loyaltyCardScanned(scanResult: ScanResult) {
-    let snack;
-    if (this.pauseScan) {
-      return;
-    }
-    const customerCode = JSON.parse(scanResult.code)?.customer;
-    this.pauseScan = true;
-
-    const customer = this.customers.find((c: any) => {
-      return c.name === customerCode.name;
-    });
-
-    if (customer) {
-      snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
-      this.onCustomerChange(customer);
-    } else {
-      snack = this.snackBar.open(`Customer could not be found.`, 'Close')
-    }
-    snack.afterDismissed().subscribe(() => {
-      this.pauseScan = false;
-    });
   }
 
   public showScanner() {

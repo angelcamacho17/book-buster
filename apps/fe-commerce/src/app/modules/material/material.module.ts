@@ -19,36 +19,36 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   declarations: [],
   imports: [
     CommonModule,
+    MatAutocompleteModule,
+    MatBottomSheetModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
     MatToolbarModule,
     MatOptionModule,
-    MatAutocompleteModule,
-    MatSnackBarModule,
-    MatDialogModule,
     MatProgressBarModule,
-    MatBottomSheetModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSnackBarModule
   ],
   exports: [
+    MatAutocompleteModule,
+    MatBottomSheetModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
     MatToolbarModule,
     MatOptionModule,
-    MatAutocompleteModule,
-    MatSnackBarModule,
-    MatDialogModule,
     MatProgressBarModule,
-    MatBottomSheetModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSnackBarModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

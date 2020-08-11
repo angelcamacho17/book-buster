@@ -9,6 +9,7 @@ import { OrderService, IOrder, ICustomer, TranslationService, HeaderService, ref
 import { LayoutService } from '../../shared/services/layout.service';
 import { DialogData } from '../../shared/components/dialog/dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ScanResult } from '@fecommerce-workspace/scanner';
 
 @Component({
   selector: 'customer-search-tablet',
@@ -64,6 +65,49 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
   }
 
   ngOnInit(): void {
+  }
+
+  public onCustomerChange(customer: ICustomer) {
+    const flow = this.orderService.orderFlow;
+    if (flow === 'new') {
+      this._handleSetCustomer(customer);
+    } else if (flow === 'edit') {
+      this.replaceCustomerOnCurrentOrder(customer);
+    }
+  }
+
+  private _handleSetCustomer(customer: ICustomer): void {
+    console.log(this.currentOrder);
+    if (this.currentOrder) {
+      this.replaceCustomerOnCurrentOrder(customer);
+      this.location.back();
+    } else {
+      this.setCustomerToNewOrder(customer);
+    }
+  }
+
+
+  public loyaltyCardScanned(scanResult: ScanResult) {
+    let snack;
+    if (this.pauseScan) {
+      return;
+    }
+    const customerCode = JSON.parse(scanResult.code)?.customer;
+    this.pauseScan = true;
+
+    const customer = this.customers.find((c: any) => {
+      return c.name === customerCode.name;
+    });
+
+    if (customer) {
+      snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
+      this.onCustomerChange(customer);
+    } else {
+      snack = this.snackBar.open(`Customer could not be found.`, 'Close')
+    }
+    snack.afterDismissed().subscribe(() => {
+      this.pauseScan = false;
+    });
   }
 
   private _close(): void {

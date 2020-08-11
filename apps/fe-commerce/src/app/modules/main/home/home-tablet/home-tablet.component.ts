@@ -5,6 +5,8 @@ import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CustomerSearchTabletComponent } from '../../customer-search/customer-search-tablet/customer-search-tablet.component';
+import { ArticleSearchTabletComponent } from '../../article-search/article-search-tablet/article-search-tablet.component';
 
 @Component({
   selector: 'home-tablet',
@@ -103,6 +105,31 @@ export class HomeTabletComponent implements OnInit, OnDestroy {
     });
   }
 
+public createOrder() {
+  this.orderService.orderFlow = 'new';
+  this._openCustomerDialog();
+}
+
+  private _openCustomerDialog(): void {
+    const dialogRef = this._matDialog.open(CustomerSearchTabletComponent, {
+      panelClass: 'modal-dialog'
+    });
+
+    this._subscriptions.add(
+      dialogRef.afterClosed().subscribe(() => this._openArticlesDialog())
+    );
+  }
+
+  private _openArticlesDialog(): void {
+    const dialogRef = this._matDialog.open(ArticleSearchTabletComponent, {
+      panelClass: 'modal-dialog',
+      disableClose: true
+    });
+
+    this._subscriptions.add(
+      dialogRef.afterClosed().subscribe()
+    );
+  }
 
   ngOnDestroy(): void {
     this._subscriptions.unsubscribe();
