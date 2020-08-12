@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Observable, Subscription, of, merge } from 'rxjs';
 import { deleteOrderArticleRequest, IOrderArticle, refreshOrderArticlesRequest, OrderArticlesService, OrderService, IHeader, setHeaderRequest, HeaderService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
@@ -7,6 +7,7 @@ import { startWith, map, switchMap, tap } from 'rxjs/operators';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ArtSheetComponent } from '../shared/components/art-sheet/art-sheet.component';
 import { Router } from '@angular/router';
+import { LayoutService } from '../shared/services/layout.service';
 
 @Component({
   selector: 'order-items',
@@ -19,9 +20,9 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   public articles: IOrderArticle[] = [];
   public items: any = [];
   public initialPos = { x: 0, y: 0 };
-  private _subscriptions = new Subscription();
-  private _substractArt = 0;
-  private _currentArt: IOrderArticle;
+  public _subscriptions = new Subscription();
+  public _substractArt = 0;
+  public _currentArt: IOrderArticle;
   public filteredlist: Observable<any[]>;
   public horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   public showDeleteBtn = false;
@@ -29,20 +30,22 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   public articleToDelete = null;
   public addArt = false;
   public returnUrl = 'order';
+  @Output() artToDelete = new EventEmitter<number>();
 
   constructor(
-    private _snackBar: MatSnackBar,
-    private _ordSer: OrderService,
-    private _store: Store<{ orderArticles: IOrderArticle[] }>,
-    private _ordArtsService: OrderArticlesService,
-    private _bottomSheet: MatBottomSheet,
-    private _router: Router,
-    private _headerService: HeaderService
+    public snackBar: MatSnackBar,
+    public ordSer: OrderService,
+    public store: Store<{ orderArticles: IOrderArticle[] }>,
+    public ordArtsService: OrderArticlesService,
+    public bottomSheet: MatBottomSheet,
+    public router: Router,
+    public headerService: HeaderService,
+    public layoutService: LayoutService
   ) {
-    this.$articles = this._store.pipe(select('orderArticles'));
+    this.$articles = this.store.pipe(select('orderArticles'));
     this.listenToOrderArts();
-    this._store.dispatch(refreshOrderArticlesRequest());
-    if (this._ordSer.currentOrder?.id) {
+    this.store.dispatch(refreshOrderArticlesRequest());
+    if (this.ordSer.currentOrder?.id) {
       this.addArt = true;
       this.returnUrl = 'order/edit';
     }
@@ -56,20 +59,20 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
 
   public subscribeToHeader() {
     this._subscriptions.add(
-      this._headerService.rightIconClicked
+      this.headerService.rightIconClicked
         .subscribe(() => this.goToArticles())
     );
   }
 
   public goToArticles(): void {
-    this._router.navigate(['/main/article-search/edit']);
+    this.router.navigate(['/main/article-search/edit']);
   }
 
   public openBottomSheet(item: IOrderArticle): void {
     this._currentArt = item;
     const article = item.article;
-    this._snackBar.dismiss();
-    const bottomSheetRef = this._bottomSheet.open(ArtSheetComponent, {
+    this.snackBar.dismiss();
+    const bottomSheetRef = this.bottomSheet.open(ArtSheetComponent, {
       data: { article },
     });
 
@@ -82,9 +85,9 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     );
   }
 
-  private deleteArticle(article: IOrderArticle): void {
-    this._ordSer.setOrderModifiedState(true);
-    this._store.dispatch(deleteOrderArticleRequest({ orderArticleId: article.id }));
+  public deleteArticle(article: IOrderArticle): void {
+    this.ordSer.setOrderModifiedState(true);
+    this.store.dispatch(deleteOrderArticleRequest({ orderArticleId: article.id }));
   }
 
   public tempDelete(article: IOrderArticle): void {
@@ -96,6 +99,8 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     this.articles = this.articles.filter(obj => obj !== article);
     //Substract from total temporally
     this.substractTemp(article);
+    // Emit to listen in order overview for tablet
+    this.artToDelete.emit(this._substractArt);
 
     //Update with temporally delete
     this.filteredlist = of(this.articles);
@@ -104,7 +109,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     config.duration = 5000;
     config.panelClass = ['delete-art'];
 
-    const ref = this._snackBar.open('Article deleted', 'UNDO', config);
+    const ref = this.snackBar.open('Article deleted', 'UNDO', config);
     ref.afterDismissed().subscribe((action) => {
       this.waitToDeleted = false;
       this.articleToDelete = null;
@@ -113,10 +118,11 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
         this.listenToOrderArts();
       } else {
         this.listenToOrderArts();
-        this._store.dispatch(refreshOrderArticlesRequest());
+        this.store.dispatch(refreshOrderArticlesRequest());
 
       }
       this._substractArt = 0;
+      this.artToDelete.emit(0);
       const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
       setTimeout(() => {
         inputElement.click();
@@ -124,7 +130,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     });
   }
 
-  private listenToOrderArts(): void {
+  public listenToOrderArts(): void {
     this.filteredlist = this.$articles
       .pipe(
         startWith([]),
@@ -140,12 +146,12 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   }
 
   public getTotal(): number {
-    let total = this._ordArtsService.getTotal() - this._substractArt;
+    let total = this.ordArtsService.getTotal() - this._substractArt;
     total = Math.round(total * 100) / 100;
     return total > 0 ? total : 0;
   }
 
-  private substractTemp(article: IOrderArticle): void {
+  public substractTemp(article: IOrderArticle): void {
     this._substractArt = article.quantity * article.article.price;
   }
 
@@ -155,7 +161,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     //delete the article and dismiss snackbar
     if (this.waitToDeleted) {
       this.deleteArticle(this.articleToDelete);
-      this._snackBar.dismiss();
+      this.snackBar.dismiss();
     }
     if (this._subscriptions) {
       this._subscriptions.unsubscribe();

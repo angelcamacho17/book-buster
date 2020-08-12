@@ -35,6 +35,7 @@ export class HomeTabletComponent implements OnInit, OnDestroy {
           data = data.slice().sort((a, b) => b.id - a.id)
         }
         this.orders = data;
+        //this.orders = [];
       })
     );
 

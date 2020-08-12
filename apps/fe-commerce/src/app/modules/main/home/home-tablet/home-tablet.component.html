@@ -28,6 +28,9 @@
           </div>
           <mat-divider class="divider"></mat-divider>
         </div>
+        <div *ngIf="orders.length === 0" class="mat-body-2">
+          {{'nodata' | translate }}
+        </div>
       </mat-list>
     </div>
     <create-button (click)="createOrder()"></create-button>
