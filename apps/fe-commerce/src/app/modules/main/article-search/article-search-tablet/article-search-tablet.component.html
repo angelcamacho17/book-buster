@@ -1,20 +1,21 @@
 <div class="modal-search">
   <div class="header">
-    <div class="mat-body-2 button">
+    <div class="mat-body-2 button" (click)="close()" (touch)="close()">
       {{('cancel' | translate) | titlecase}}
     </div>
     <div class="mat-subheading-2 title">
       {{('neworder' | translate) | titlecase}}
     </div>
-    <div class="mat-body-2 button">
+    <div class="mat-body-2 button invisible">
       {{('next' | translate) | titlecase}}
     </div>
   </div>
-  <search (searchFocus)="showShadow($event)"
-             (searchBlur)="removeShadow()"
-             (userSearching)="hidePanel($event)"
-             (hasSearchResults)="handleSearchResults($event)"
-             [list]="articles"></search>
+  <search autoFocus="true"
+          (searchFocus)="showShadow($event)"
+          (searchBlur)="removeShadow()"
+          (userSearching)="hidePanel($event)"
+          (hasSearchResults)="handleSearchResults($event)"
+          [list]="articles"></search>
   <div class="search-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
       [dividerClass]="'customer-divider'" class="search-results"></search-results>

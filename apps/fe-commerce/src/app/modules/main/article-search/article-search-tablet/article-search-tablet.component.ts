@@ -44,7 +44,7 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
 
     this._subscriptions.add(
       this.eventService.articleSelect.subscribe(() => {
-        this._close();
+        this.close();
       })
     );
 
@@ -54,7 +54,7 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
     this.store.dispatch(refreshArticlesRequest());
   }
 
-  private _close(): void {
+  public close(): void {
     if (this.matDialog.open) {
       this.matDialog.closeAll()
     }

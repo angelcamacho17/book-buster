@@ -110,26 +110,26 @@ public createOrder() {
   this._openCustomerDialog();
 }
 
-  private _openCustomerDialog(): void {
-    const dialogRef = this._matDialog.open(CustomerSearchTabletComponent, {
-      panelClass: 'modal-dialog'
-    });
+private _openCustomerDialog(): void {
+  const dialogRef = this._matDialog.open(CustomerSearchTabletComponent, {
+    panelClass: 'modal-dialog'
+  });
 
-    this._subscriptions.add(
-      dialogRef.afterClosed().subscribe(() => this._openArticlesDialog())
-    );
-  }
+  this._subscriptions.add(
+    dialogRef.afterClosed().subscribe(() => this._openArticlesDialog())
+  );
+}
 
-  private _openArticlesDialog(): void {
-    const dialogRef = this._matDialog.open(ArticleSearchTabletComponent, {
-      panelClass: 'modal-dialog',
-      disableClose: true
-    });
+private _openArticlesDialog(): void {
+  const dialogRef = this._matDialog.open(ArticleSearchTabletComponent, {
+    panelClass: 'modal-dialog',
+    disableClose: true
+  });
 
-    this._subscriptions.add(
-      dialogRef.afterClosed().subscribe()
-    );
-  }
+  this._subscriptions.add(
+    dialogRef.afterClosed().subscribe()
+  );
+}
 
   ngOnDestroy(): void {
     this._subscriptions.unsubscribe();
