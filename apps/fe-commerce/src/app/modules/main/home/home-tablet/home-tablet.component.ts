@@ -78,29 +78,29 @@ export class HomeTabletComponent implements OnInit, OnDestroy {
     this._router.navigate(['/main/order-overview']);
   }
 
-  public deleteOrder() {
-    const dialogRef = this._matDialog.open(DialogComponent, {
-      width: '280px',
-      height: '120px',
-      data: {
-        msg: this._translationService.get('deleteord'),
-        firstButton: this._translationService.get('cancel'),
-        secondButton: this._translationService.get('delete'),
-        buttonColor: 'red'
-      }
-    });
-    dialogRef.afterClosed().subscribe(data => {
-      if (data === undefined) {
-        // Is undefined when the user closes
-        // the dialog without an action
-        return;
-      }
-      if (data?.result === 'DELETE') {
-        this._store.dispatch(deleteOrderRequest());
-        // this.router.navigate(['/home']);
-      }
-    });
-  }
+  // public deleteOrder() {
+  //   const dialogRef = this._matDialog.open(DialogComponent, {
+  //     width: '280px',
+  //     height: '120px',
+  //     data: {
+  //       msg: this._translationService.get('deleteord'),
+  //       firstButton: this._translationService.get('cancel'),
+  //       secondButton: this._translationService.get('delete'),
+  //       buttonColor: 'red'
+  //     }
+  //   });
+  //   dialogRef.afterClosed().subscribe(data => {
+  //     if (data === undefined) {
+  //       // Is undefined when the user closes
+  //       // the dialog without an action
+  //       return;
+  //     }
+  //     if (data?.result === 'DELETE') {
+  //       this._store.dispatch(deleteOrderRequest());
+  //       // this.router.navigate(['/home']);
+  //     }
+  //   });
+  // }
 
   public createOrder() {
     this.orderService.orderFlow = 'new';
