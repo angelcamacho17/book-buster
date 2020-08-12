@@ -46,6 +46,7 @@
   "discounts": "Discounts",
   "vat": "VAT",
   "customerkey": "Customer Key",
-  "ordersitems": "Orders items"
+  "ordersitems": "Orders items",
+  "nodata": "No data to display."
 
 }

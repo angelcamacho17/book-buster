@@ -7,6 +7,7 @@ import { Store, select } from '@ngrx/store';
 import { LayoutService } from '../shared/services/layout.service';
 import { ScanResult } from '@fecommerce-workspace/scanner';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EventService } from '../shared/services/event.service';
 
 @Component({
   selector: 'article-search',
@@ -40,7 +41,8 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
     public ordSer: OrderService,
     public router: Router,
     public layoutService: LayoutService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public eventService: EventService
 
   ) { }
 
@@ -80,32 +82,36 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   }
 
   public articleCodeScanned(scanResult: ScanResult) { // art: Article) {
-    let snack;
+    //let snack;
     console.log(scanResult)
     if (this.pauseScan) {
       return;
     }
-    let articleScanned =JSON.parse(scanResult.code) ;
+    const articleScanned =JSON.parse(scanResult.code)?.article ;
     this.pauseScan = true;
-    articleScanned = articleScanned.article;
 
-    const article = this.articles.find((a: any) => {
-      return a.description === articleScanned.description;
-    });
+    this.eventService.articleSelected(articleScanned);
+    this.router.navigate(['/main/article-detail', articleScanned.id]);
 
-    console.log(article)
+    // articleScanned = articleScanned.article;
 
-    if (article) {
-      this.addToOrder(article);
-      snack = this.snackBar.open(`Article ${article?.name} added to order.`, 'Close');
+    // const article = this.articles.find((a: any) => {
+    //   return a.description === articleScanned.description;
+    // });
 
-    } else {
-      snack = this.snackBar.open(`Article could not be found.`, 'Close')
-    }
+    // console.log(article)
 
-    snack.afterDismissed().subscribe(() => {
-      this.pauseScan = false;
-    });
+    // if (article) {
+    //   this.addToOrder(article);
+    //   snack = this.snackBar.open(`Article ${article?.name} added to order.`, 'Close');
+
+    // } else {
+    //   snack = this.snackBar.open(`Article could not be found.`, 'Close')
+    // }
+
+    // snack.afterDismissed().subscribe(() => {
+    //   this.pauseScan = false;
+    // });
 
   }
 

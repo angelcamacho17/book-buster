@@ -80,10 +80,12 @@ main {
       transform: translate(-50%, 50%);
     }
     .icon {
+      position: relative;
       width: 99px;
       height: 99px;
       font-size: 99px;
       color: rgba(0, 0, 0, 0.54);
+      left: -4px;
     }
 
     .search-text {

@@ -4,9 +4,6 @@ import { IOrder, OrderService, BackNavigationService, HeaderService, clearCurren
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { CustomerSearchTabletComponent } from '../../customer-search/customer-search-tablet/customer-search-tablet.component';
-import { ArticleSearchTabletComponent } from '../../article-search/article-search-tablet/article-search-tablet.component';
 
 @Component({
   selector: 'home-tablet',
@@ -25,7 +22,6 @@ export class HomeTabletComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _orderService: OrderService,
     private _translationService: TranslationService,
-    private _matDialog: MatDialog,
     private _headerService: HeaderService
   ) {
     this.orders$ = this._store.pipe(select('orders'));
@@ -35,6 +31,7 @@ export class HomeTabletComponent implements OnInit, OnDestroy {
           data = data.slice().sort((a, b) => b.id - a.id)
         }
         this.orders = data;
+        //this.orders = [];
       })
     );
 

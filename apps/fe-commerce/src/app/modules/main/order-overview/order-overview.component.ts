@@ -125,17 +125,8 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
           return;
         }
         if (data?.result === 'SWITCH') {
-          // this._bnService.switchCustomer(true);
           this.orderService.switchCustomerFlow = true;
           this.router.navigate(['/main/customer-search'])
-          // , {
-          //   state: {
-          //     order: this.order
-          //   },
-          //   queryParams: {
-          //     lastUrl: 'order'
-          //   }
-          // });
         }
       })
     );

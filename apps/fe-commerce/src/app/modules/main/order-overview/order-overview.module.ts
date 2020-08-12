@@ -8,6 +8,7 @@ import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
 import { OrderOverviewRoutingModule } from './order-overview-routing.module';
 import { OrderOverviewTabletComponent } from './order-overview-tablet/order-overview-tablet.component';
 import { OrderOverviewMobileComponent } from './order-overview-mobile/order-overview-mobile.component';
+import { OrderItemsModule } from '../order-items/order-items.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { OrderOverviewMobileComponent } from './order-overview-mobile/order-over
     OrderOverviewRoutingModule,
     SharedModule,
     MaterialModule,
-    TranslatePipeModule
+    TranslatePipeModule,
+    OrderItemsModule
   ]
 })
 export class OrderOverviewModule { }

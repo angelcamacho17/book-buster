@@ -26,20 +26,8 @@ import { ReturnStatement } from '@angular/compiler';
   styleUrls: ['./order-overview-tablet.component.scss']
 })
 export class OrderOverviewTabletComponent extends OrderOverviewComponent implements OnInit, OnDestroy {
-  public $articles: Observable<IOrderArticle[]>;
-  public articles: IOrderArticle[] = [];
-  public items: any = [];
-  public initialPos = { x: 0, y: 0 };
-  private _subscriptions = new Subscription();
-  private _substractArt = 0;
-  private _currentArt: IOrderArticle;
-  public filteredlist: Observable<any[]>;
-  public horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  public showDeleteBtn = false;
-  public waitToDeleted = false;
-  public articleToDelete = null;
-  public addArt = false;
-  private _cancellingOrderCreation = false;
+
+  public substractArt = 0;
 
   constructor(public store: Store<{ currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
     public snackBar: MatSnackBar,
@@ -51,12 +39,6 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     public headerService: HeaderService,
     public orderService: OrderService,
     public layoutService: LayoutService,
-    private _snackBar: MatSnackBar,
-    private _ordSer: OrderService,
-    private _ordArtsService: OrderArticlesService,
-    private _bottomSheet: MatBottomSheet,
-    private _router: Router,
-    private _headerService: HeaderService
   ) {
     super(store, snackBar, router, matDialog,
       ordArtsService, bnService, transServ,
@@ -65,6 +47,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     this.$articles = this.store.pipe(select('orderArticles'));
     this.subscriptions.add(
       this.$articles.subscribe((arts) => {
+        console.log('arts');
         this.articles = arts;
       })
     );
@@ -75,9 +58,6 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
         this.currentOrder = data;
       })
     );
-
-    this.$articles = this.store.pipe(select('orderArticles'));
-    this.listenToOrderArts();
 
     this.store.dispatch(refreshOrderArticlesRequest());
     this.store.dispatch(getCurrentOrderRequest());
@@ -129,102 +109,53 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
       this.router.navigate(['/main/home']);
     }
   }
-
-  public subscribeToHeader() {
-    this._subscriptions.add(
-      this._headerService.rightIconClicked
-        .subscribe(() => this.goToArticles())
-    );
+  public getTotal(): number {
+    let total = this.ordArtsService.getTotal() - this.substractArt;
+    total = Math.round(total * 100) / 100;
+    return total > 0 ? total : 0;
   }
 
-  public goToArticles(): void {
-    this._router.navigate(['/main/article-search/edit']);
+  public setArtToDelete(price: number) {
+    this.substractArt = price;
   }
 
-  public openBottomSheet(item: IOrderArticle): void {
-    this._currentArt = item;
-    const article = item.article;
-    this._snackBar.dismiss();
-    const bottomSheetRef = this._bottomSheet.open(ArtSheetComponent, {
-      data: { article },
+  private _openNewOrderCustomer(): void {
+    const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
+      panelClass: 'modal-dialog',
+      disableClose: true
     });
 
-    this._subscriptions.add(
-      bottomSheetRef.afterDismissed().subscribe((action) => {
-        if (action === 'delete') {
-          this.tempDelete(this._currentArt);
+    this.subscriptions.add(
+      dialogRef.afterClosed().subscribe(() => {
+        if (!this.currentOrder) {
+          this.router.navigate(['/main/home']);
+        } else {
+          this.openNewArticle();
         }
       })
     );
   }
 
-  private deleteArticle(article: IOrderArticle): void {
-    this._ordSer.setOrderModifiedState(true);
-    this.store.dispatch(deleteOrderArticleRequest({ orderArticleId: article.id }));
-  }
-
-  public tempDelete(article: IOrderArticle): void {
-
-    this.waitToDeleted = true;
-    this.articleToDelete = article;
-
-    //Delete temporally to article
-    this.articles = this.articles.filter(obj => obj !== article);
-    //Substract from total temporally
-    this.substractTemp(article);
-
-    //Update with temporally delete
-    this.filteredlist = of(this.articles);
-    const config = new MatSnackBarConfig();
-    config.horizontalPosition = this.horizontalPosition;
-    config.duration = 5000;
-    config.panelClass = ['delete-art'];
-
-    const ref = this._snackBar.open('Article deleted', 'UNDO', config);
-    ref.afterDismissed().subscribe((action) => {
-      this.waitToDeleted = false;
-      this.articleToDelete = null;
-      if (!action.dismissedByAction) {
-        this.deleteArticle(article);
-        this.listenToOrderArts();
-      } else {
-        this.listenToOrderArts();
-        this.store.dispatch(refreshOrderArticlesRequest());
-
-      }
-      this._substractArt = 0;
-      const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
-      setTimeout(() => {
-        inputElement.click();
-      }, 1);
+  public openNewArticle(): void {
+    const dialogRef = this.matDialog.open(ArticleSearchTabletComponent, {
+      panelClass: 'modal-dialog'
     });
+
+    this.subscriptions.add(
+      dialogRef.afterClosed().subscribe(data => {
+      })
+    );
   }
 
-  private listenToOrderArts(): void {
-    this.filteredlist = this.$articles
-      .pipe(
-        startWith([]),
-        map((state) => {
-          if (state) {
-            this.articles = state;
-            return this.articles;
-          } else {
-            return this.articles;
-          }
-        })
-      );
-  }
+  private _openSwitchCustomer(): void {
+    const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
+      panelClass: 'modal-dialog'
+    });
 
-  public getTotal(): number {
-    let total = this._ordArtsService.getTotal() - this._substractArt;
-    total = Math.round(total * 100) / 100;
-    return total > 0 ? total : 0;
+    this.subscriptions.add(
+      dialogRef.afterClosed().subscribe()
+    );
   }
-
-  private substractTemp(article: IOrderArticle): void {
-    this._substractArt = article.quantity * article.article.price;
-  }
-
   public changeCustomer(): void {
     const dialogRef = this.matDialog.open(DialogComponent, {
       width: '280px',
@@ -251,54 +182,12 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     );
   }
 
-  public openNewArticle(): void {
-    const dialogRef = this.matDialog.open(ArticleSearchTabletComponent, {
-      panelClass: 'modal-dialog'
-    });
-
-    this.subscriptions.add(
-      dialogRef.afterClosed().subscribe(data => {
-      })
-    );
-  }
-
-  private _openSwitchCustomer(): void {
-    const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
-      panelClass: 'modal-dialog'
-    });
-
-    this.subscriptions.add(
-      dialogRef.afterClosed().subscribe()
-    );
-  }
-
-  private _openNewOrderCustomer(): void {
-    const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
-      panelClass: 'modal-dialog',
-      disableClose: true
-    });
-
-    this.subscriptions.add(
-      dialogRef.afterClosed().subscribe(() => {
-        if (!this.currentOrder) {
-          this.router.navigate(['/main/home']);
-        } else {
-          this.openNewArticle();
-        }
-      })
-    );
-  }
-
   ngOnDestroy(): void {
     //If the time of the snackbar
     //hasnt past yet, and the user wnats tyo go back
     //delete the article and dismiss snackbar
-    if (this.waitToDeleted) {
-      this.deleteArticle(this.articleToDelete);
-      this._snackBar.dismiss();
-    }
-    if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
+    if (this.subscriptions) {
+      this.subscriptions.unsubscribe();
     }
   }
 
