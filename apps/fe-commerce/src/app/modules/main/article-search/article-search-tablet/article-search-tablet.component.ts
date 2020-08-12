@@ -26,7 +26,7 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
     public snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<ArticleSearchTabletComponent>,
   ) {
-    super(store, ordSer, router, layoutService, snackBar);
+    super(store, ordSer, router, layoutService, snackBar, eventService);
 
 
 

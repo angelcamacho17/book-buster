@@ -5,6 +5,7 @@ import { OrderService, IArticle, IOrder, refreshArticlesRequest, getCurrentOrder
 import { Router } from '@angular/router';
 import { LayoutService } from '../../shared/services/layout.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EventService } from '../../shared/services/event.service';
 
 @Component({
   selector: 'article-search-mobile',
@@ -18,9 +19,10 @@ export class ArticleSearchMobileComponent extends ArticleSearchComponent impleme
     public ordSer: OrderService,
     public router: Router,
     public layoutService: LayoutService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public eventService: EventService
   ) {
-    super(store, ordSer, router, layoutService, snackBar)
+    super(store, ordSer, router, layoutService, snackBar, eventService)
   }
 
   ngOnInit(): void {
