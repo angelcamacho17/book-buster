@@ -82,7 +82,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   }
 
   public articleCodeScanned(scanResult: ScanResult) { // art: Article) {
-    let snack;
+    //let snack;
     console.log(scanResult)
     if (this.pauseScan) {
       return;
