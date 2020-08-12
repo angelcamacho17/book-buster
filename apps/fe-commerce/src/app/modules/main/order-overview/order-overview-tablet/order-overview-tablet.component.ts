@@ -3,7 +3,7 @@ import { OrderOverviewComponent } from '../order-overview.component';
 import { Store, select } from '@ngrx/store';
 import {
   IOrder, IOrderArticle, OrderArticlesService, BackNavigationService, TranslationService,
-  HeaderService, OrderService, getCurrentOrderRequest, refreshOrderArticlesRequest, deleteOrderArticleRequest, isUndefined, clearCurrentOrderRequest, handleOrderRequest
+  HeaderService, OrderService, getCurrentOrderRequest, refreshOrderArticlesRequest, deleteOrderArticleRequest, isUndefined, clearCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest
 } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -68,11 +68,12 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     this.subscribeToHeader();
     /* New order flow */
     if (this.orderService.orderFlow === 'new' && !this.currentOrder) {
+      this.store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
       this._openNewOrderCustomer();
     }
   }
 
-  private _confirmDiscargDialog() {
+  private _confirmDiscardDialog() {
     let message;
 
     if (this.currentOrder?.articles?.length) {
@@ -104,7 +105,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   }
   goBackButton() {
     if (this.orderService.orderFlow === 'new' && this.currentOrder) {
-      this._openConfirmDialog();
+      this._confirmDiscardDialog();
     } else {
       this.router.navigate(['/main/home']);
     }
