@@ -84,7 +84,20 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     });
   }
 
-  public setCustomerToNewOrder(customer: ICustomer) {
+  public onCustomerChange(customer: ICustomer) {
+    this.handleSetCustomer(customer);
+  }
+
+  /* Used to handle the selection of a customer */
+  public handleSetCustomer(customer: ICustomer): void {
+    if (this.currentOrder) {
+      this._replaceCustomerOnCurrentOrder(customer);
+    } else {
+      this._setCustomerToNewOrder(customer);
+    }
+  }
+
+  private _setCustomerToNewOrder(customer: ICustomer) {
     const order: IOrder = {
       description: 'Latest order',
       articles: [],
@@ -95,7 +108,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     this.store.dispatch(setCurrentOrderRequest({ order }));
   }
 
-  public replaceCustomerOnCurrentOrder(customer: ICustomer) {
+  private _replaceCustomerOnCurrentOrder(customer: ICustomer) {
     const order: IOrder = {
       id: this.currentOrder?.id,
       description: this.currentOrder?.description,
@@ -106,6 +119,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     }
     this.store.dispatch(replaceCurrentOrderRequest({ order }));
   }
+  /* Used to handle the selection of a customer */
 
   public hidePanel(hide: boolean): void {
     this.hide = hide;

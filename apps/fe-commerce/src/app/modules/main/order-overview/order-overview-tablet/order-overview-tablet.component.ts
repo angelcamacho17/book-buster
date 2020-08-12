@@ -3,7 +3,7 @@ import { OrderOverviewComponent } from '../order-overview.component';
 import { Store, select } from '@ngrx/store';
 import {
   IOrder, IOrderArticle, OrderArticlesService, BackNavigationService, TranslationService,
-  HeaderService, OrderService, getCurrentOrderRequest, refreshOrderArticlesRequest, deleteOrderArticleRequest, isUndefined
+  HeaderService, OrderService, getCurrentOrderRequest, refreshOrderArticlesRequest, deleteOrderArticleRequest, isUndefined, clearCurrentOrderRequest, handleOrderRequest
 } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -16,6 +16,9 @@ import { startWith, map } from 'rxjs/operators';
 import { CustomerSearchTabletComponent } from '../../customer-search/customer-search-tablet/customer-search-tablet.component';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { ArticleSearchTabletComponent } from '../../article-search/article-search-tablet/article-search-tablet.component';
+import { EventService } from '../../shared/services/event.service';
+import { ConfirmDiscardDialogComponent } from '../../shared/components/confirm-discard/confirm-discard-dialog.component';
+import { ReturnStatement } from '@angular/compiler';
 
 @Component({
   selector: 'order-overview-tablet',
@@ -36,6 +39,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   public waitToDeleted = false;
   public articleToDelete = null;
   public addArt = false;
+  private _cancellingOrderCreation = false;
 
   constructor(public store: Store<{ currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
     public snackBar: MatSnackBar,
@@ -82,6 +86,48 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
   ngOnInit(): void {
     this.subscribeToHeader();
+    /* New order flow */
+    if (this.orderService.orderFlow === 'new' && !this.currentOrder) {
+      this._openNewOrderCustomer();
+    }
+  }
+
+  private _confirmDiscargDialog() {
+    let message;
+
+    if (this.currentOrder?.articles?.length) {
+      message = this.transServ.get('progressord');
+    } else {
+      message = this.transServ.get('noarts');
+    }
+    const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
+      data: {
+        title: this.transServ.get('saveord'),
+        message,
+        firstBtn: this.transServ.get('discard'),
+        secondBtn: this.transServ.get('save')
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('RESULT:', result)
+      return;
+      if (result) {
+        this.store.dispatch(handleOrderRequest({ order: this.currentOrder }));
+      } else {
+        // this.store.dispatch(setCurrentOrderRequest({ order: null }))
+        const orderArticles = [];
+        // this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
+      }
+      this.router.navigate(['/main/home']);
+    });
+  }
+  goBackButton() {
+    if (this.orderService.orderFlow === 'new' && this.currentOrder) {
+      this._openConfirmDialog();
+    } else {
+      this.router.navigate(['/main/home']);
+    }
   }
 
   public subscribeToHeader() {
@@ -199,14 +245,13 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
         }
         if (data?.result === 'SWITCH') {
           this.orderService.switchCustomerFlow = true;
-          this._openNewCustomer();
+          this._openSwitchCustomer();
         }
       })
     );
   }
 
   public openNewArticle(): void {
-    console.log('OPENING arts');
     const dialogRef = this.matDialog.open(ArticleSearchTabletComponent, {
       panelClass: 'modal-dialog'
     });
@@ -217,14 +262,30 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     );
   }
 
-  private _openNewCustomer(): void {
-    console.log('OPENING');
+  private _openSwitchCustomer(): void {
     const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
       panelClass: 'modal-dialog'
     });
 
     this.subscriptions.add(
       dialogRef.afterClosed().subscribe()
+    );
+  }
+
+  private _openNewOrderCustomer(): void {
+    const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
+      panelClass: 'modal-dialog',
+      disableClose: true
+    });
+
+    this.subscriptions.add(
+      dialogRef.afterClosed().subscribe(() => {
+        if (!this.currentOrder) {
+          this.router.navigate(['/main/home']);
+        } else {
+          this.openNewArticle();
+        }
+      })
     );
   }
 

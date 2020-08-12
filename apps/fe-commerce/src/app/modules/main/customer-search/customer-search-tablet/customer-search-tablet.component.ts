@@ -67,7 +67,7 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
   ngOnInit(): void {
   }
 
-  public onCustomerChange(customer: ICustomer) {
+/*   public onCustomerChange(customer: ICustomer) {
     const flow = this.orderService.orderFlow;
     if (flow === 'new') {
       this._handleSetCustomer(customer);
@@ -75,18 +75,10 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
       this.replaceCustomerOnCurrentOrder(customer);
     }
   }
-
-  private _handleSetCustomer(customer: ICustomer): void {
-    console.log(this.currentOrder);
-    if (this.currentOrder) {
-      this.replaceCustomerOnCurrentOrder(customer);
-      this.location.back();
-    } else {
-      this.setCustomerToNewOrder(customer);
-    }
+ */
+  cancel() {
+    this.matDialog.closeAll();
   }
-
-
   public loyaltyCardScanned(scanResult: ScanResult) {
     let snack;
     if (this.pauseScan) {

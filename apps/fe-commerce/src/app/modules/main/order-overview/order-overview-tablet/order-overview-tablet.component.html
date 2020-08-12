@@ -2,7 +2,7 @@
   <div class="left-content">
     <div class="main-content">
       <div class="mat-headline componet-title">
-        <mat-icon class="icon" [routerLink]="['/main/home']">keyboard_arrow_left</mat-icon>
+        <mat-icon class="icon" (click)="goBackButton()">keyboard_arrow_left</mat-icon>
         {{'orderover' | translate}}
       </div>
       <mat-card class="customer-row mat-elevation-z0">

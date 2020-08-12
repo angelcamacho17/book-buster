@@ -1,21 +1,22 @@
 
 <div class="modal-search">
   <div class="header">
-    <div class="mat-body-2 button">
+    <button (click)="cancel()" mat-button color="primary" class="mat-body-2 cancel-button">
       {{('cancel' | translate) | titlecase}}
-    </div>
+    </button>
     <div class="mat-subheading-2 title">
       {{('neworder' | translate) | titlecase}}
     </div>
-    <div class="mat-body-2 button">
+    <!-- <div class="mat-body-2 button">
       {{('next' | translate) | titlecase}}
-    </div>
+    </div> -->
   </div>
   <search (searchFocus)="showShadow($event)"
              (searchBlur)="removeShadow()"
              (userSearching)="hidePanel($event)"
              (hasSearchResults)="handleSearchResults($event)"
-             [list]="customers"></search>
+             [list]="customers"
+             [autoFocus]='true'></search>
   <div class="search-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
       [dividerClass]="'customer-divider'" class="search-results"></search-results>

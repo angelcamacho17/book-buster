@@ -9,7 +9,6 @@
         <mat-form-field floatLabel="never" class="form-field">
           <mat-placeholder class="placeholder mat-subheading-2">{{'search' | translate}}</mat-placeholder>
             <input matInput #input
-                   id="input"
                    [formControl]="inputControl"
                    (focus)="onSearchFocus()"
                    (blur)="onSearchBlur()"

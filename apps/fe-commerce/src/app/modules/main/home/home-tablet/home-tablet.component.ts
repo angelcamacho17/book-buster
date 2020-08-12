@@ -105,30 +105,10 @@ export class HomeTabletComponent implements OnInit, OnDestroy {
     });
   }
 
-public createOrder() {
-  this.orderService.orderFlow = 'new';
-  this._openCustomerDialog();
-}
-
-  private _openCustomerDialog(): void {
-    const dialogRef = this._matDialog.open(CustomerSearchTabletComponent, {
-      panelClass: 'modal-dialog'
-    });
-
-    this._subscriptions.add(
-      dialogRef.afterClosed().subscribe(() => this._openArticlesDialog())
-    );
-  }
-
-  private _openArticlesDialog(): void {
-    const dialogRef = this._matDialog.open(ArticleSearchTabletComponent, {
-      panelClass: 'modal-dialog',
-      disableClose: true
-    });
-
-    this._subscriptions.add(
-      dialogRef.afterClosed().subscribe()
-    );
+  public createOrder() {
+    this.orderService.orderFlow = 'new';
+    this._store.dispatch(clearCurrentOrderRequest());
+    this._router.navigate(['/main/order-overview']);
   }
 
   ngOnDestroy(): void {

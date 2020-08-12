@@ -49,6 +49,7 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
           this.subscriptions.add(
             this.eventService.customerChange.subscribe(customer => {
               this.onCustomerChange(customer);
+              this._goBack();
             })
           );
 
@@ -63,17 +64,16 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
 
   ngOnInit(): void {
   }
-
-  public onCustomerChange(customer: ICustomer) {
+  private _goBack() {
     const flow = this.orderService.orderFlow;
     if (flow === 'new') {
-      this._handleSetCustomer(customer);
+      this.location.back();
     } else if (flow === 'edit') {
-      this.replaceCustomerOnCurrentOrder(customer);
       this.router.navigate(['/main/order-overview']);
     }
   }
 
+  /*
   private _handleSetCustomer(customer: ICustomer): void {
     console.log(this.currentOrder);
     if (this.currentOrder) {
@@ -84,7 +84,7 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
       this.router.navigate(['/main/article-search']);
     }
   }
-
+ */
 
   public loyaltyCardScanned(scanResult: ScanResult) {
     let snack;
