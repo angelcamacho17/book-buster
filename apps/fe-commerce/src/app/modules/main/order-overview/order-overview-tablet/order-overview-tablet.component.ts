@@ -208,7 +208,10 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   public openNewArticle(): void {
     console.log('OPENING arts');
     const dialogRef = this.matDialog.open(ArticleSearchTabletComponent, {
-      panelClass: 'modal-dialog'
+      panelClass: 'modal-dialog',
+      position: {
+        top: '32px'
+      }
     });
 
     this.subscriptions.add(
@@ -220,7 +223,10 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   private _openNewCustomer(): void {
     console.log('OPENING');
     const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
-      panelClass: 'modal-dialog'
+      panelClass: 'modal-dialog',
+      position: {
+        top: '32px'
+      }
     });
 
     this.subscriptions.add(

@@ -110,7 +110,7 @@
     position: relative;
     border-left: solid 1px rgba(0, 0, 0, 0.12);
     flex: 1;
-    
+
     .no-results-container {
       position: relative;
       height: 100%;
@@ -286,9 +286,8 @@
         }
         .bottom-container-right {
           box-sizing: border-box;
-          padding-left: 16px;
-          padding-right: 41px;
-          flex: 0 1 50%;
+          padding: 16px;
+          flex: 1;
 
           .button {
             width: 100%;

@@ -4,7 +4,7 @@ import { IOrder, OrderService, BackNavigationService, HeaderService, clearCurren
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { CustomerSearchTabletComponent } from '../../customer-search/customer-search-tablet/customer-search-tablet.component';
 import { ArticleSearchTabletComponent } from '../../article-search/article-search-tablet/article-search-tablet.component';
 
@@ -111,8 +111,12 @@ public createOrder() {
 }
 
 private _openCustomerDialog(): void {
+
   const dialogRef = this._matDialog.open(CustomerSearchTabletComponent, {
-    panelClass: 'modal-dialog'
+    panelClass: 'modal-dialog',
+    position: {
+      top: '32px'
+    }
   });
 
   this._subscriptions.add(
@@ -123,7 +127,10 @@ private _openCustomerDialog(): void {
 private _openArticlesDialog(): void {
   const dialogRef = this._matDialog.open(ArticleSearchTabletComponent, {
     panelClass: 'modal-dialog',
-    disableClose: true
+    disableClose: true,
+    position: {
+      top: '32px'
+    }
   });
 
   this._subscriptions.add(
