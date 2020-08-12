@@ -2,7 +2,7 @@
   <div class="page-content">
     <div class="content" #content id="content">
       <div class="header-extension"></div>
-      <mat-card class="card mat-elevation-z6">
+      <mat-card *ngIf="(filteredlist | async).length !== 0" class="card mat-elevation-z6">
         <div class="list">
           <div class="list-item" *ngFor="let item of filteredlist | async;">
             <div class="content" (click)="openBottomSheet(item)">
@@ -20,8 +20,10 @@
             </div>
           </div>
         </div>
-
       </mat-card>
+    </div>
+    <div *ngIf="(filteredlist | async).length === 0" class="mat-body-2 no-data">
+      {{'nodata' | translate }}
     </div>
     <footer class="footer-content" #footer>
       <mat-card class="card mat-elevation-z4">

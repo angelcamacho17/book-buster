@@ -6,8 +6,8 @@
         add
       </mat-icon>
     </div>
-    <mat-card class="card mat-elevation-z0">
-      <div class="list">
+    <mat-card *ngIf="(filteredlist | async).length !== 0" class="card mat-elevation-z0">
+      <div class="list" >
         <div class="list-item" *ngFor="let item of filteredlist | async;">
           <div class="content" (click)="openBottomSheet(item)">
             <div class="info">
@@ -26,6 +26,9 @@
       </div>
 
     </mat-card>
+    <div *ngIf="(filteredlist | async).length === 0" class="mat-body-2 no-data">
+      {{'nodata' | translate }}
+    </div>
   </div>
   <div class="tablet-footer">
     <!-- <button mat-stroked-button
