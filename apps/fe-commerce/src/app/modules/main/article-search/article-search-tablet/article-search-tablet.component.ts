@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { ArticleSearchComponent } from '../article-search.component';
 import { Store, select } from '@ngrx/store';
 import { OrderService, IArticle, IOrder, refreshArticlesRequest, IOrderArticle } from '@fecommerce-workspace/data-store-lib';
@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './article-search-tablet.component.html',
   styleUrls: ['./article-search-tablet.component.scss']
 })
-export class ArticleSearchTabletComponent extends ArticleSearchComponent implements OnInit {
+export class ArticleSearchTabletComponent extends ArticleSearchComponent implements OnInit, OnDestroy {
 
   constructor(
     public store: Store<{ articles: IArticle[], currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
@@ -60,4 +60,7 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
     }
   }
 
+  ngOnDestroy(): void {
+    this._subscriptions.unsubscribe();
+  }
 }

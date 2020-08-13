@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store, select } from '@ngrx/store';
@@ -15,7 +15,7 @@ import { ScanResult } from '@fecommerce-workspace/scanner';
   templateUrl: './customer-search-mobile.component.html',
   styleUrls: ['./customer-search-mobile.component.scss']
 })
-export class CustomerSearchMobileComponent extends CustomerSearchComponent implements OnInit {
+export class CustomerSearchMobileComponent extends CustomerSearchComponent implements OnInit, OnDestroy {
 
   constructor(
     public eventService: EventService,
@@ -64,12 +64,11 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
 
   ngOnInit(): void {
   }
+
   private _goBack() {
     const flow = this.orderService.orderFlow;
     if (flow === 'new') {
       if (this.currentOrder?.id) {
-        console.log('going back')
-        console.log(this.currentOrder)
         this.location.back();
       } else {
         console.log('no current order')
@@ -114,5 +113,9 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
     snack.afterDismissed().subscribe(() => {
       this.pauseScan = false;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }
