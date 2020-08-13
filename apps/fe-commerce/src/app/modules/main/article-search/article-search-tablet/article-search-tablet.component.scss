@@ -1,4 +1,4 @@
-.modal-search{
+.modal-search {
   height: 422px;
   width: 620px;
 
@@ -8,9 +8,9 @@
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    background: rgba(232,232,232,0.1);
+    background: rgba(232, 232, 232, 0.1);
     align-items: center;
-    padding: 0 16px;
+    // padding: 0 16px;
 
     .title {
       color: rgba(0, 0, 0, 0.87);
@@ -18,15 +18,14 @@
     }
 
     .button {
-      color: #1666D8;
-      margin-bottom: 0;
+      background: rgba(232, 232, 232, 0.1);
+      color: #1666d8;
     }
 
     .invisible {
       visibility: hidden;
     }
   }
-
 }
 
 .search-container {
@@ -41,4 +40,3 @@
     text-align: center;
   }
 }
-

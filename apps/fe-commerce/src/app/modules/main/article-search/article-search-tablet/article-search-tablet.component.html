@@ -1,14 +1,14 @@
 <div class="modal-search">
   <div class="header">
-    <div class="mat-body-2 button" (click)="close()">
+    <button mat-button class="mat-body-2 button" (click)="close()">
       {{('cancel' | translate) | titlecase}}
-    </div>
+    </button>
     <div class="mat-subheading-2 title">
       {{('neworder' | translate) | titlecase}}
     </div>
-    <div class="mat-body-2 button invisible">
+    <button mat-button class="mat-body-2 button">
       {{('next' | translate) | titlecase}}
-    </div>
+    </button>
   </div>
   <search autoFocus="true"
           (searchFocus)="showShadow($event)"

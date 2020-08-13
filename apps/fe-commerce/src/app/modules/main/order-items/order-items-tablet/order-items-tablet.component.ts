@@ -55,7 +55,8 @@ export class OrderItemsTabletComponent extends OrderItemsComponent implements On
         panelClass: 'modal-dialog',
         position: {
           top: '32px'
-        }
+        },
+        autoFocus: false
       });
 
       this._subscriptions.add(

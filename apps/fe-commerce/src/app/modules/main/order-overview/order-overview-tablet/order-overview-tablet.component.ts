@@ -124,6 +124,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
       position: {
         top: '32px'
       },
+      autoFocus: false,
       disableClose: true
     });
 
@@ -143,13 +144,13 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
       panelClass: 'modal-dialog',
       position: {
         top: '32px'
-      }
+      },
+      autoFocus: false
     });
 
-    this.subscriptions.add(
-      dialogRef.afterClosed().subscribe(data => {
-      })
-    );
+    // this.subscriptions.add(
+    //   dialogRef.afterClosed().subscribe()
+    // );
   }
 
   private _openSwitchCustomer(): void {
