@@ -67,7 +67,9 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
 
   private _goBack() {
     const flow = this.orderService.orderFlow;
-    if (flow === 'new') {
+    if (this.orderService.switchCustomerFlow) {
+      return this.router.navigate(['/main/order-overview']);
+    }else if (flow === 'new') {
       if (this.currentOrder?.id) {
         this.location.back();
       } else {
