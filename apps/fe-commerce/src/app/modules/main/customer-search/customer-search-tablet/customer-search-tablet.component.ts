@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store, select } from '@ngrx/store';
@@ -16,7 +16,7 @@ import { ScanResult } from '@fecommerce-workspace/scanner';
   templateUrl: './customer-search-tablet.component.html',
   styleUrls: ['./customer-search-tablet.component.scss']
 })
-export class CustomerSearchTabletComponent extends CustomerSearchComponent implements OnInit {
+export class CustomerSearchTabletComponent extends CustomerSearchComponent implements OnInit, OnDestroy {
 
   constructor(
     public eventService: EventService,
