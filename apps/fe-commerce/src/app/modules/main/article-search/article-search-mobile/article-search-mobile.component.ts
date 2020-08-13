@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ArticleSearchComponent } from '../article-search.component';
 import { Store, select } from '@ngrx/store';
 import { OrderService, IArticle, IOrder, refreshArticlesRequest, getCurrentOrderRequest, IOrderArticle } from '@fecommerce-workspace/data-store-lib';
@@ -12,7 +12,7 @@ import { EventService } from '../../shared/services/event.service';
   templateUrl: './article-search-mobile.component.html',
   styleUrls: ['./article-search-mobile.component.scss']
 })
-export class ArticleSearchMobileComponent extends ArticleSearchComponent implements OnInit {
+export class ArticleSearchMobileComponent extends ArticleSearchComponent implements OnInit, OnDestroy {
 
   constructor(
     public store: Store<{ articles: IArticle[], currentOrder: IOrder, orderArticles: IOrderArticle[]  }>,
@@ -53,5 +53,7 @@ export class ArticleSearchMobileComponent extends ArticleSearchComponent impleme
     }, 100);
 
   }
-
+  ngOnDestroy() {
+    this._subscriptions.unsubscribe();
+  }
 }
