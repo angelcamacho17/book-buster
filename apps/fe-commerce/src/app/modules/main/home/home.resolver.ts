@@ -17,6 +17,7 @@ export class HomeResolver implements Resolve<any> {
     const header: IHeader = {
       title: 'home',
       rightIcon: 'exit_to_app',
+      rightIconClass: 'right-icon',
       titClass: 'mat-display-1',
       centered: true
     }

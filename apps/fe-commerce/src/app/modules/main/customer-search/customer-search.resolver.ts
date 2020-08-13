@@ -14,7 +14,12 @@ export class CustomerSearchResolver implements Resolve<any> {
 
   resolve(): Observable<any> {
     const flow = this.orderService.orderFlow;
-    const header = flow === 'edit' ? this._headerEditOrderFlow() : this._headerNewOrderFlow();
+    let header;
+    if (flow==='new' && this.orderService.currentOrder) {
+      header = this._headerNewOrderFlowWithCustomer();
+    } else {
+      header = flow === 'edit' ? this._headerEditOrderFlow() : this._headerNewOrderFlow();
+    }
     this._store.dispatch(setHeaderRequest({header}))
     return of(null);
   }
@@ -39,6 +44,15 @@ export class CustomerSearchResolver implements Resolve<any> {
       lastUrl: 'main/order-overview',
       centered: true,
       checkGoBack: true
+    }
+    return header;
+  }
+
+  private _headerNewOrderFlowWithCustomer(): IHeader {
+    const header: IHeader = {...
+      this._headerNewOrderFlow(),
+      rightIcon: 'keyboard_arrow_right',
+      rightIconClass: 'navigation-icon'
     }
     return header;
   }

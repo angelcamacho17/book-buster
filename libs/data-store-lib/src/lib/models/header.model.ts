@@ -7,7 +7,8 @@ export interface IHeader {
   checkGoBack?: boolean,
   addArt?: boolean,
   centered?: boolean,
-  flow?: string
+  flow?: string,
+  rightIconClass?: string
 }
 
 export interface IHeaderState {

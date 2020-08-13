@@ -13,7 +13,6 @@ export class ArticleDetailResolver implements Resolve<any> {
     const header: IHeader = {
       title: 'artdet',
       leftIcon: 'keyboard_arrow_left',
-      rightIcon: null,
       titClass: 'mat-title',
       lastUrl: 'main/article-search',
       centered: true
