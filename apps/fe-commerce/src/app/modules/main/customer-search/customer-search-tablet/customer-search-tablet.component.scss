@@ -22,8 +22,15 @@
       position: absolute;
       left: 0;
       height: 100%;
-      // background: rgba(232, 232, 232, 0.1);
-      color: #1666d8;
+      display: -webkit-flex;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .button {
+        background: rgba(232, 232, 232, 0.1);
+        color: #1666d8;
+      }
     }
 
     .invisible {
