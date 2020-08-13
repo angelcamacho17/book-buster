@@ -56,7 +56,10 @@ export class OrderItemsTabletComponent extends OrderItemsComponent implements On
         position: {
           top: '32px'
         },
-        autoFocus: false
+        autoFocus: false,
+        data: {
+          firstButton: 'cancel'
+        }
       });
 
       this._subscriptions.add(

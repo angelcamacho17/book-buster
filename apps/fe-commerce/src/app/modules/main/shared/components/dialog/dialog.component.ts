@@ -2,11 +2,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {
-  title: string;
-  msg: string;
-  firstButton: string;
-  secondButton: string;
-  buttonColor: string;
+  title?: string;
+  msg?: string;
+  firstButton?: string;
+  secondButton?: string;
+  buttonColor?: string;
 }
 
 @Component({

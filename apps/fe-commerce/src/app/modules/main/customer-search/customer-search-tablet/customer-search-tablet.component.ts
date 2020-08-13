@@ -51,7 +51,7 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
     this.subscriptions.add(
       this.eventService.customerChange.subscribe(customer => {
         this.onCustomerChange(customer);
-        this.close();
+        this.rightButtonClick();
       })
     );
 
@@ -76,9 +76,7 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
     }
   }
  */
-  cancel() {
-    this.matDialog.closeAll();
-  }
+
   public loyaltyCardScanned(scanResult: ScanResult) {
     let snack;
     if (this.pauseScan) {
@@ -102,10 +100,19 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
     });
   }
 
-  public close(): void {
-    if (this.matDialog.open) {
-      this.matDialog.closeAll()
+  public leftButtonClick(): void {
+    const actionResult = {
+      action: this.data?.firstButton
     }
+    console.log('this.data', this.data)
+    this.dialogRef.close(actionResult);
+
   }
 
+  public rightButtonClick(): void {
+    const actionResult = {
+      action: this.data?.secondButton
+    }
+    this.dialogRef.close(actionResult);
+  }
 }

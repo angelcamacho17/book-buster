@@ -45,5 +45,6 @@
   "vat": "VAT",
   "customerkey": "Customer Key",
   "ordersitems": "Orders items",
-  "nodata": "Er zijn geen gegevens om weer te geven."
+  "nodata": "Er zijn geen gegevens om weer te geven.",
+  "back": "back"
 }

@@ -1,13 +1,13 @@
 <div class="modal-search">
   <div class="header">
-    <button mat-button class="mat-body-2 button" (click)="close()">
-      {{('cancel' | translate) | titlecase}}
+    <button mat-button class="mat-body-2 button" (click)="leftIconClick()">
+      {{(this.data?.firstButton | translate) | titlecase}}
     </button>
     <div class="mat-subheading-2 title">
       {{('neworder' | translate) | titlecase}}
     </div>
-    <button mat-button class="mat-body-2 button">
-      {{('next' | translate) | titlecase}}
+    <button mat-button class="mat-body-2 button" (click)="rightIconClick()">
+      {{(this.data?.secondButton | translate) | titlecase}}
     </button>
   </div>
   <search autoFocus="true"

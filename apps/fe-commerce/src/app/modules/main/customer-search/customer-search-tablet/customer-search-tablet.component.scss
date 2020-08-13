@@ -18,21 +18,29 @@
       margin-bottom: 0;
     }
 
-    .cancel-button {
+    .button-container {
       position: absolute;
-      left: 0;
       height: 100%;
       display: -webkit-flex;
       display: flex;
       justify-content: center;
       align-items: center;
 
+      
       .button {
         background: rgba(232, 232, 232, 0.1);
         color: #1666d8;
       }
     }
 
+    .button-container.left {
+      left: 0;
+    }
+
+    .button-container.right {
+      right: 0;
+    }
+    
     .invisible {
       visibility: hidden;
     }

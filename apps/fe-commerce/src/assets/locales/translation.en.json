@@ -47,6 +47,6 @@
   "vat": "VAT",
   "customerkey": "Customer Key",
   "ordersitems": "Orders items",
-  "nodata": "No data to display."
-
+  "nodata": "No data to display.",
+  "back": "back"
 }

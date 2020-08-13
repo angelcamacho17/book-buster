@@ -1,16 +1,18 @@
 <div class="modal-search">
   <div class="header">
-    <div class="cancel-button">
-      <button (click)="cancel()" mat-button color="primary" class="mat-body-2 button">
-        {{('cancel' | translate) | titlecase}}
+    <div class="button-container left">
+      <button (click)="leftButtonClick()" mat-button color="primary" class="mat-body-2 button">
+        {{( this.data?.firstButton | translate) | titlecase }}
       </button>
     </div>
     <div class="mat-subheading-2 title">
-      {{('neworder' | translate) | titlecase}}
+      {{( 'neworder' | translate) | titlecase }}
     </div>
-    <!-- <div class="mat-body-2 button">
-      {{('next' | translate) | titlecase}}
-    </div> -->
+    <div class="button-container right">
+      <button  (click)="rightButtonClick()" mat-button class="mat-body-2 button">
+        {{( this.data?.secondButton | translate) | titlecase }}
+      </button>
+    </div>
   </div>
   <search (searchFocus)="showShadow($event)" (searchBlur)="removeShadow()" (userSearching)="hidePanel($event)"
     (hasSearchResults)="handleSearchResults($event)" [list]="customers" [autoFocus]='true'></search>

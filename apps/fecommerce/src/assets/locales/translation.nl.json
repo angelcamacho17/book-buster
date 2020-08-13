@@ -45,5 +45,6 @@
   "vat": "VAT",
   "customerkey": "Customer Key",
   "ordersitems": "Orders items",
-  "open": "open"
+  "open": "open",
+  "back": "back"
 }
