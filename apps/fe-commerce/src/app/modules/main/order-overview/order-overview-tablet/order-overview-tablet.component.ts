@@ -2,8 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrderOverviewComponent } from '../order-overview.component';
 import { Store, select } from '@ngrx/store';
 import {
-  IOrder, IOrderArticle, OrderArticlesService, BackNavigationService, TranslationService,
-  HeaderService, OrderService, getCurrentOrderRequest, refreshOrderArticlesRequest, deleteOrderArticleRequest, isUndefined, clearCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest
+  IOrder, IOrderArticle, OrderArticlesService, BackNavigationService, TranslationService, HeaderService, OrderService, getCurrentOrderRequest, refreshOrderArticlesRequest, deleteOrderArticleRequest, isUndefined, clearCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest
 } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -91,15 +90,14 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('RESULT:', result)
-      return;
+      console.log('angel ', result)
       if (result) {
         this.store.dispatch(handleOrderRequest({ order: this.currentOrder }));
-      } else {
-        // this.store.dispatch(setCurrentOrderRequest({ order: null }))
-        const orderArticles = [];
-        // this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
       }
+      
+      this.store.dispatch(clearCurrentOrderRequest())
+      const orderArticles = [];
+      this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
       this.router.navigate(['/main/home']);
     });
   }
@@ -123,6 +121,9 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   private _openNewOrderCustomer(): void {
     const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
       panelClass: 'modal-dialog',
+      position: {
+        top: '32px'
+      },
       disableClose: true
     });
 
@@ -139,7 +140,10 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
   public openNewArticle(): void {
     const dialogRef = this.matDialog.open(ArticleSearchTabletComponent, {
-      panelClass: 'modal-dialog'
+      panelClass: 'modal-dialog',
+      position: {
+        top: '32px'
+      }
     });
 
     this.subscriptions.add(
@@ -150,7 +154,10 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
   private _openSwitchCustomer(): void {
     const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
-      panelClass: 'modal-dialog'
+      panelClass: 'modal-dialog',
+      position: {
+        top: '32px'
+      }
     });
 
     this.subscriptions.add(

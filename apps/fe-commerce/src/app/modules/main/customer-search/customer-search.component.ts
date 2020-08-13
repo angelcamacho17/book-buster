@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './customer-search.component.html',
   styleUrls: ['./customer-search.component.scss']
 })
-export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CustomerSearchComponent implements OnInit, OnDestroy {
   public customers$: Observable<ICustomer[]>;
   public customers: ICustomer[];
   public orders: IOrder[];
@@ -43,11 +43,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy, AfterViewInit
     public location: Location,
     public layoutService: LayoutService,
     public snackBar: MatSnackBar
-  ) {
-
-  }
-  ngAfterViewInit(): void {
-  }
+  ) { }
 
   ngOnInit(): void { }
 

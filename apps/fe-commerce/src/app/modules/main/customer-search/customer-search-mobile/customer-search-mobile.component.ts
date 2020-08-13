@@ -30,44 +30,51 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
     public snackBar: MatSnackBar
   ) {
     super(eventService, orderService, matDialog, store,
-          router, transServ, headerService, location, layoutService, snackBar)
+      router, transServ, headerService, location, layoutService, snackBar)
 
-          this.customers$ = this.store.pipe(select('customers'));
-          this.subscriptions.add(
-            this.customers$.subscribe(data => {
-              this.customers = data;
-            })
-          );
+    this.customers$ = this.store.pipe(select('customers'));
+    this.subscriptions.add(
+      this.customers$.subscribe(data => {
+        this.customers = data;
+      })
+    );
 
-          this.currentOrder$ = this.store.pipe(select('currentOrder'));
-          this.subscriptions.add(
-            this.currentOrder$.subscribe((currentOrder) => {
-              this.currentOrder = currentOrder;
-            })
-          );
+    this.currentOrder$ = this.store.pipe(select('currentOrder'));
+    this.subscriptions.add(
+      this.currentOrder$.subscribe((currentOrder) => {
+        this.currentOrder = currentOrder;
+      })
+    );
 
-          this.subscriptions.add(
-            this.eventService.customerChange.subscribe(customer => {
-              this.onCustomerChange(customer);
-              this._goBack();
-            })
-          );
+    this.subscriptions.add(
+      this.eventService.customerChange.subscribe(customer => {
+        this.onCustomerChange(customer);
+        this._goBack();
+      })
+    );
 
-          this.subscriptions.add(
-            this.headerService.goBack.subscribe(()=>{
-              this.openConfirmDialog();
-            })
-          );
+    this.subscriptions.add(
+      this.headerService.goBack.subscribe(() => {
+        this.openConfirmDialog();
+      })
+    );
 
-          this.store.dispatch(refreshCustomersRequest());
-        }
+    this.store.dispatch(refreshCustomersRequest());
+  }
 
   ngOnInit(): void {
   }
   private _goBack() {
     const flow = this.orderService.orderFlow;
     if (flow === 'new') {
-      this.location.back();
+      if (this.currentOrder?.id) {
+        console.log('going back')
+        console.log(this.currentOrder)
+        this.location.back();
+      } else {
+        console.log('no current order')
+        this.router.navigate(['/main/article-search']);
+      }
     } else if (flow === 'edit') {
       this.router.navigate(['/main/order-overview']);
     }
