@@ -40,7 +40,7 @@ export class OrderOverviewResolver implements Resolve<any> {
     const header: IHeader = {
       title: 'orderover',
       leftIcon: 'close',
-      rightIcon: 'delete_outlined',
+      //rightIcon: 'delete_outlined',
       titClass: 'mat-title',
       checkGoBack: true,
       centered: true

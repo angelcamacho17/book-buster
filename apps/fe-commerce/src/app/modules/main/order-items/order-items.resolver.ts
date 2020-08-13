@@ -40,6 +40,7 @@ export class OrderItemsResolver implements Resolve<any> {
       title: 'orderitems',
       leftIcon: 'keyboard_arrow_left',
       rightIcon: 'add',
+      rightIconClass: 'right-icon',
       titClass: 'mat-title',
       lastUrl: 'main/order-overview',
       centered: true

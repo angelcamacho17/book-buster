@@ -21,6 +21,7 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
   public title: Observable<string> = of(null);
   public leftIcon: Observable<string> = of(null);
   public rightIcon: Observable<string> = of(null);
+  public rightIconClass: Observable<string> = of(null);
   public titClass: Observable<string> = of(null);
   public addArt: Observable<boolean> = of(null);
   public centered: Observable<boolean> = of(null);
@@ -46,6 +47,7 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
     this.title = of(this.translationService.get(data?.title));
     this.titClass = of(data?.titClass);
     this.rightIcon = of(data?.rightIcon);
+    this.rightIconClass = of(data?.rightIconClass);
     this.leftIcon = of(data?.leftIcon);
     this.addArt = of(data?.addArt);
     this.centered = of(data?.centered);

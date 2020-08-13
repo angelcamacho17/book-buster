@@ -15,7 +15,7 @@
   z-index: 1;
   touch-action: none;
 
-  .left-icon {
+  .navigation-icon {
     height: 28px;
     width: 28px;
     display: flex;
@@ -25,6 +25,10 @@
     background: rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     font-size: 22px;
+  }
+
+  .not-show {
+    display: none;
   }
 
   .title {
@@ -38,7 +42,7 @@
   }
 
   .right-icon {
-    @extend .left-icon;
+    @extend .navigation-icon ;
     z-index: 4;
     background: transparent;
     color: rgba(255, 255, 255, 0.87);

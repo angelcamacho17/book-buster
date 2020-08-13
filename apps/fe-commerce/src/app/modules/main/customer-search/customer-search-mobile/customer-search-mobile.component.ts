@@ -59,6 +59,12 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
       })
     );
 
+    this.subscriptions.add(
+      this.headerService.rightIconClicked.subscribe(()=>{
+        this.router.navigate(['/main/article-search'])
+      })
+    )
+
     this.store.dispatch(refreshCustomersRequest());
   }
 
