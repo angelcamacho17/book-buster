@@ -66,6 +66,10 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
     this.dialogRef.close(result)
   }
 
+  public onNoClick(): void {
+    this.dialogRef.close();
+  }
+
   ngOnDestroy(): void {
     this._subscriptions.unsubscribe();
   }

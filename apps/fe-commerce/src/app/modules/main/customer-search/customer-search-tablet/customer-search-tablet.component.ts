@@ -77,11 +77,14 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
   }
  */
 
-  public loyaltyCardScanned(scanResult: ScanResult) {
-    let snack;
-    if (this.pauseScan) {
-      return;
-    }
+public loyaltyCardScanned(scanResult: ScanResult) {
+  let snack;
+  if (this.pauseScan) {
+    return;
+  }
+
+  if (JSON.parse(scanResult.code)?.customer) {
+
     const customerCode = JSON.parse(scanResult.code)?.customer;
     this.pauseScan = true;
 
@@ -92,13 +95,17 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
     if (customer) {
       snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
       this.onCustomerChange(customer);
+      this.rightButtonClick();
     } else {
       snack = this.snackBar.open(`Customer could not be found.`, 'Close')
     }
-    snack.afterDismissed().subscribe(() => {
-      this.pauseScan = false;
-    });
+  } else {
+    snack = this.snackBar.open(`Customer could not be found.`, 'Close')
   }
+  snack.afterDismissed().subscribe(() => {
+    this.pauseScan = false;
+  });
+}
 
   public leftButtonClick(): void {
     const actionResult = {
@@ -109,10 +116,24 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
 
   }
 
+  public onNoClick(): void {
+    this.dialogRef.close();
+  }
+
   public rightButtonClick(): void {
     const actionResult = {
       action: this.data?.secondButton
     }
     this.dialogRef.close(actionResult);
+  }
+
+  ngOnDestroy(): void {
+    this.dialogRef.close();
+    if (this.subscriptions) {
+      this.subscriptions.unsubscribe();
+    }
+    this.currentOrder = null;
+    this.scanner = false;
+
   }
 }
