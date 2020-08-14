@@ -85,39 +85,3 @@ export class FeCustomerRowComponent implements OnDestroy {
   }
 
 }
-
-
-/**
- *
- *
- *     let currentOrder: Order = history?.state?.order;
-
-    if (isUndefined(currentOrder) || currentOrder != null) {
-      const order: Order = {
-        id: currentOrder.id,
-        description: currentOrder.description,
-        articles: currentOrder.articles,
-        amount: currentOrder.amount,
-        customer: this.item ,
-        createdBy: currentOrder.createdBy
-      }
-    } else {
-const order: Order = {
-  description: 'Latest order',
-  amount: 0,
-  createdBy: 'loggedInUser',
-  articles: [],
-  customer: this.item
-}
-    }
-if (currentOrder) {
-  currentOrder.customer = this.item
-  console.log(currentOrder);
-  this._store.dispatch(replaceCurrentOrderRequest({ order: currentOrder }));
-} else {
-  console.log(order)
-  this._store.dispatch(setCurrentOrderRequest({ order }));
-}
-console.log('current order: ', currentOrder);
-console.log('order: ', order);
- */

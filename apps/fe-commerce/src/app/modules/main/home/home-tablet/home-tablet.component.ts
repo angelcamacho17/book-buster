@@ -39,7 +39,6 @@ export class HomeTabletComponent implements OnInit, OnDestroy {
     this._subscriptions.add(
       this.currentOrder$.subscribe(data => {
         this.currentOrder = data;
-        console.log(data)
       })
     );
 
@@ -50,7 +49,6 @@ export class HomeTabletComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('subscriptions array', this._subscriptions)
     this.subscribeToHeader();
   }
 

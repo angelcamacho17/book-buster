@@ -47,7 +47,6 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     this.$articles = this.store.pipe(select('orderArticles'));
     this.subscriptions.add(
       this.$articles.subscribe((arts) => {
-        console.log('arts');
         this.articles = arts;
       })
     );
@@ -130,8 +129,6 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   private _handleCancelCustomerAction() {
     if (!this.currentOrder) {
       this.router.navigate(['/main/home']);
-    } else if (this._userWentBack) {
-      this._confirmDiscardDialog();
     }
   }
 
@@ -149,17 +146,15 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
         top: '32px'
       },
       autoFocus: false,
-      disableClose: true,
       data: dialogData
     });
 
     this.subscriptions.add(
       customerDialogRef.afterClosed().subscribe((data) => {
-        console.log('new order customer after closed result.', data)
-        if (data?.action === 'cancel') {
-          this._handleCancelCustomerAction();
-        } else {
+        if (data?.action === 'next') {
           this._handleNextCustomerAction();
+        } else {
+          this._handleCancelCustomerAction();
         }
       })
     );

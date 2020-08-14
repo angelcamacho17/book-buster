@@ -51,7 +51,7 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
     this.subscriptions.add(
       this.eventService.customerChange.subscribe(customer => {
         this.onCustomerChange(customer);
-        this.rightButtonClick();
+        this.rightButtonClick('next');
       })
     );
 
@@ -111,8 +111,6 @@ public loyaltyCardScanned(scanResult: ScanResult) {
     const actionResult = {
       action: this.data?.firstButton
     }
-    console.log('this.data', this.data)
-    console.log(this.data.firstButton)
     this.dialogRef.close(actionResult);
 
   }
@@ -121,9 +119,9 @@ public loyaltyCardScanned(scanResult: ScanResult) {
     this.dialogRef.close();
   }
 
-  public rightButtonClick(): void {
+  public rightButtonClick(action = null): void {
     const actionResult = {
-      action: this.data?.secondButton
+      action: action ?? this.data?.secondButton
     }
     this.dialogRef.close(actionResult);
   }
