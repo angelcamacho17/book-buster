@@ -51,7 +51,6 @@ export class ArticleDetailTabletComponent extends ArticleDetailComponent impleme
       article: this.article,
       quantity: this.amount
     }
-    console.log(this.currentOrder)
     const orderArticles = this.currentOrder.articles;
     if (orderArticles.length > 0) {
       this.store.dispatch(setOrderArticlesRequest({ orderArticles }));

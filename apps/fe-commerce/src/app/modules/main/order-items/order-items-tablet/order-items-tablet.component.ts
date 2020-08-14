@@ -50,7 +50,6 @@ export class OrderItemsTabletComponent extends OrderItemsComponent implements On
     }
 
     public openNewArticle(): void {
-      console.log('OPENING arts');
       const dialogRef = this.matDialog.open(ArticleSearchTabletComponent, {
         panelClass: 'modal-dialog',
         position: {

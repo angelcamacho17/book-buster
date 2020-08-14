@@ -111,8 +111,6 @@ public loyaltyCardScanned(scanResult: ScanResult) {
     const actionResult = {
       action: this.data?.firstButton
     }
-    console.log('this.data', this.data)
-    console.log(this.data.firstButton)
     this.dialogRef.close(actionResult);
 
   }

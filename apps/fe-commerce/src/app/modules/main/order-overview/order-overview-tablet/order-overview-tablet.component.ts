@@ -47,7 +47,6 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     this.$articles = this.store.pipe(select('orderArticles'));
     this.subscriptions.add(
       this.$articles.subscribe((arts) => {
-        console.log('arts');
         this.articles = arts;
       })
     );
@@ -152,7 +151,6 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
     this.subscriptions.add(
       customerDialogRef.afterClosed().subscribe((data) => {
-        console.log('new order customer after closed result.', data)
         if (data?.action === 'next') {
           this._handleNextCustomerAction();
         } else {

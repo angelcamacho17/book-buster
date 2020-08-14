@@ -66,7 +66,6 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   }
 
   public showScanner() {
-    console.log('SHOWING')
     this.scanner = true;
   }
 
@@ -83,7 +82,6 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
 
   public articleCodeScanned(scanResult: ScanResult) { // art: Article) {
     let snack;
-    console.log(scanResult)
     if (this.pauseScan) {
       return;
     }

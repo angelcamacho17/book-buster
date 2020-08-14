@@ -42,7 +42,6 @@ export class HomeMobileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('subscriptions array', this._subscriptions)
     this.subscribeToHeader();
   }
 
