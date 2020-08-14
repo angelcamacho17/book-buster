@@ -77,6 +77,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
       const dialogData: DialogData = {
         firstButton: 'cancel',
       }
+      console.log('dialog data on open', dialogData)
       this._openNewOrderCustomer(dialogData);
     }
   }
@@ -142,7 +143,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     this._openNewArticle(dialogData);
   }
   private _openNewOrderCustomer(dialogData: DialogData): void {
-    const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
+    const customerDialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
       panelClass: 'modal-dialog',
       position: {
         top: '32px'
@@ -153,9 +154,9 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     });
 
     this.subscriptions.add(
-      dialogRef.afterClosed().subscribe((result) => {
-        console.log(result)
-        if (result?.action === 'cancel') {
+      customerDialogRef.afterClosed().subscribe((data) => {
+        console.log('new order customer after closed result.', data)
+        if (data?.action === 'cancel') {
           this._handleCancelCustomerAction();
         } else {
           this._handleNextCustomerAction();
@@ -167,12 +168,12 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
   /* BEGIN Article search functionality */
   private _handleNextArticleAction() {
-    this.matDialog.closeAll();
+    // this.matDialog.closeAll();
   }
 
   private _handleBackArticleAction() {
     this._userWentBack = true;
-    this.matDialog.closeAll();
+    // this.matDialog.closeAll();
 
     const dialogData: DialogData = {
       firstButton: 'cancel',

@@ -112,6 +112,7 @@ public loyaltyCardScanned(scanResult: ScanResult) {
       action: this.data?.firstButton
     }
     console.log('this.data', this.data)
+    console.log(this.data.firstButton)
     this.dialogRef.close(actionResult);
 
   }
@@ -128,7 +129,6 @@ public loyaltyCardScanned(scanResult: ScanResult) {
   }
 
   ngOnDestroy(): void {
-    this.dialogRef.close();
     if (this.subscriptions) {
       this.subscriptions.unsubscribe();
     }
