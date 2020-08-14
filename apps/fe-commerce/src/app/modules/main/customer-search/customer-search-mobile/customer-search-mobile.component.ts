@@ -105,16 +105,23 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
     if (this.pauseScan) {
       return;
     }
-    const customerCode = JSON.parse(scanResult.code)?.customer;
-    this.pauseScan = true;
 
-    const customer = this.customers.find((c: any) => {
-      return c.name === customerCode.name;
-    });
+    if (JSON.parse(scanResult.code)?.customer) {
 
-    if (customer) {
-      snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
-      this.onCustomerChange(customer);
+      const customerCode = JSON.parse(scanResult.code)?.customer;
+      this.pauseScan = true;
+
+      const customer = this.customers.find((c: any) => {
+        return c.name === customerCode.name;
+      });
+
+      if (customer) {
+        snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
+        this.onCustomerChange(customer);
+        this._goBack();
+      } else {
+        snack = this.snackBar.open(`Customer could not be found.`, 'Close')
+      }
     } else {
       snack = this.snackBar.open(`Customer could not be found.`, 'Close')
     }

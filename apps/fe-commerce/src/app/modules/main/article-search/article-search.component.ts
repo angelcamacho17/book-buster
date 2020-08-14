@@ -82,36 +82,36 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   }
 
   public articleCodeScanned(scanResult: ScanResult) { // art: Article) {
-    //let snack;
+    let snack;
     console.log(scanResult)
     if (this.pauseScan) {
       return;
     }
-    const articleScanned =JSON.parse(scanResult.code)?.article ;
-    this.pauseScan = true;
+    if (JSON.parse(scanResult.code)?.article) {
 
-    this.eventService.articleSelected(articleScanned);
-    this.router.navigate(['/main/article-detail', articleScanned.id]);
+      const articleScanned = JSON.parse(scanResult.code)?.article ;
+      this.pauseScan = true;
 
-    // articleScanned = articleScanned.article;
+      this.eventService.articleSelected(articleScanned);
+      this.router.navigate(['/main/article-detail', articleScanned.id]);
 
-    // const article = this.articles.find((a: any) => {
-    //   return a.description === articleScanned.description;
-    // });
+      const article = this.articles.find((a: any) => {
+         return a.description === articleScanned.description;
+       });
 
-    // console.log(article)
+       if (article) {
+         this.addToOrder(article);
+         snack = this.snackBar.open(`Article ${article?.name} added to order.`, 'Close');
 
-    // if (article) {
-    //   this.addToOrder(article);
-    //   snack = this.snackBar.open(`Article ${article?.name} added to order.`, 'Close');
-
-    // } else {
-    //   snack = this.snackBar.open(`Article could not be found.`, 'Close')
-    // }
-
-    // snack.afterDismissed().subscribe(() => {
-    //   this.pauseScan = false;
-    // });
+       } else {
+         snack = this.snackBar.open(`Article could not be found.`, 'Close')
+       }
+    } else {
+      snack = this.snackBar.open(`Article could not be found.`, 'Close')
+    }
+    snack.afterDismissed().subscribe(() => {
+      this.pauseScan = false;
+    });
 
   }
 
