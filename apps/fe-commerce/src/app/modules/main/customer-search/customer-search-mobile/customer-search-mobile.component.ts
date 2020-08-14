@@ -55,7 +55,7 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
 
     this.subscriptions.add(
       this.headerService.goBack.subscribe(() => {
-        this.openConfirmDialog();
+        this._goBack(true);
       })
     );
 
@@ -71,16 +71,19 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
   ngOnInit(): void {
   }
 
-  private _goBack() {
+  private _goBack(fromHeader?: boolean) {
     const flow = this.orderService.orderFlow;
     if (this.orderService.switchCustomerFlow) {
       return this.router.navigate(['/main/order-overview']);
-    }else if (flow === 'new') {
+    } else if (flow === 'new') {
       if (this.currentOrder?.id) {
         this.location.back();
       } else {
-        console.log('no current order')
-        this.router.navigate(['/main/article-search']);
+        if (fromHeader) {
+          this.openConfirmDialog();
+        } else {
+          this.router.navigate(['/main/article-search']);
+        }
       }
     } else if (flow === 'edit') {
       this.router.navigate(['/main/order-overview']);
