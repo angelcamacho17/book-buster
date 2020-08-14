@@ -110,10 +110,6 @@ main {
   z-index: 1;
 }
 
-.modal-dialog .mat-dialog-container {
-  padding: 0 !important;
-}
-
 .header-extension {
   position: absolute;
   height: 40px;
@@ -157,6 +153,12 @@ main {
 /* Removes the padding of the search bar */
 .mat-form-field-wrapper {
   padding-bottom: 0;
+}
+
+
+/* Removes the padding of the dialog modal */
+.no-padding-dialog .mat-dialog-container {
+  padding: 0 !important;
 }
 
 /* iPhone 11 */

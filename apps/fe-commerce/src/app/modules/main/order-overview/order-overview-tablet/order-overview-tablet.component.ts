@@ -1,23 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { OrderOverviewComponent } from '../order-overview.component';
 import { Store, select } from '@ngrx/store';
 import {
-  IOrder, IOrderArticle, OrderArticlesService, BackNavigationService, TranslationService, HeaderService, OrderService, getCurrentOrderRequest, refreshOrderArticlesRequest, deleteOrderArticleRequest, isUndefined, clearCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest
+  IOrder, IOrderArticle, OrderArticlesService, BackNavigationService, TranslationService, HeaderService, OrderService,
+  getCurrentOrderRequest, refreshOrderArticlesRequest, clearCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest,
+  isUndefined
 } from '@fecommerce-workspace/data-store-lib';
-import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar, } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LayoutService } from '../../shared/services/layout.service';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { ArtSheetComponent } from '../../shared/components/art-sheet/art-sheet.component';
-import { of, Observable, Subscription } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
 import { CustomerSearchTabletComponent } from '../../customer-search/customer-search-tablet/customer-search-tablet.component';
 import { DialogComponent, DialogData } from '../../shared/components/dialog/dialog.component';
 import { ArticleSearchTabletComponent } from '../../article-search/article-search-tablet/article-search-tablet.component';
-import { EventService } from '../../shared/services/event.service';
 import { ConfirmDiscardDialogComponent } from '../../shared/components/confirm-discard/confirm-discard-dialog.component';
-import { ReturnStatement } from '@angular/compiler';
 
 @Component({
   selector: 'order-overview-tablet',
@@ -32,15 +28,16 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   constructor(public store: Store<{ currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
     public snackBar: MatSnackBar,
     public router: Router,
-    public matDialog: MatDialog,
+    private _matDialog: MatDialog,
     public ordArtsService: OrderArticlesService,
     public bnService: BackNavigationService,
     public transServ: TranslationService,
     public headerService: HeaderService,
     public orderService: OrderService,
     public layoutService: LayoutService,
+    private ngZone: NgZone
   ) {
-    super(store, snackBar, router, matDialog,
+    super(store, snackBar, router, /* matDialog, */
       ordArtsService, bnService, transServ,
       headerService, orderService, layoutService)
 
@@ -76,7 +73,6 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
       const dialogData: DialogData = {
         firstButton: 'cancel',
       }
-      console.log('dialog data on open', dialogData)
       this._openNewOrderCustomer(dialogData);
     }
   }
@@ -89,7 +85,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     } else {
       message = this.transServ.get('noarts');
     }
-    const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
+    const dialogRef = this._matDialog.open(ConfirmDiscardDialogComponent, {
       data: {
         title: this.transServ.get('saveord'),
         message,
@@ -140,24 +136,26 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     this._openNewArticle(dialogData);
   }
   private _openNewOrderCustomer(dialogData: DialogData): void {
-    const customerDialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
-      panelClass: 'modal-dialog',
-      position: {
-        top: '32px'
-      },
-      autoFocus: false,
-      data: dialogData
-    });
+    this.ngZone.run(() => {
+      const customerDialogRef = this._matDialog.open(CustomerSearchTabletComponent, {
+        panelClass: 'no-padding-dialog',
+        position: {
+          top: '32px'
+        },
+        autoFocus: false,
+        data: dialogData
+      });
 
-    this.subscriptions.add(
-      customerDialogRef.afterClosed().subscribe((data) => {
-        if (data?.action === 'next') {
-          this._handleNextCustomerAction();
-        } else {
-          this._handleCancelCustomerAction();
-        }
-      })
-    );
+      this.subscriptions.add(
+        customerDialogRef.afterClosed().subscribe((data) => {
+          if (data?.action === 'next') {
+            this._handleNextCustomerAction();
+          } else {
+            this._handleCancelCustomerAction();
+          }
+        })
+      );
+    });
   }
   /* END Customer search functionality */
 
@@ -178,8 +176,8 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   }
 
   private _openNewArticle(dialogData: DialogData): void {
-    const dialogRef = this.matDialog.open(ArticleSearchTabletComponent, {
-      panelClass: 'modal-dialog',
+    const dialogRef = this._matDialog.open(ArticleSearchTabletComponent, {
+      panelClass: 'no-padding-dialog',
       position: {
         top: '32px'
       },
@@ -203,7 +201,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
   /* BEGIN Switch customer functionality */
   public changeCustomer(): void {
-    const dialogRef = this.matDialog.open(DialogComponent, {
+    const dialogRef = this._matDialog.open(DialogComponent, {
       width: '280px',
       height: '248px',
       data: {
@@ -231,8 +229,8 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     const dialogData: DialogData = {
       firstButton: 'cancel',
     }
-    const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
-      panelClass: 'modal-dialog',
+    const dialogRef = this._matDialog.open(CustomerSearchTabletComponent, {
+      panelClass: 'no-padding-dialog',
       position: {
         top: '32px'
       },

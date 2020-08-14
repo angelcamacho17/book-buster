@@ -31,7 +31,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     public store: Store<{ currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
     public snackBar: MatSnackBar,
     public router: Router,
-    public matDialog: MatDialog,
+    // public matDialog: MatDialog,
     public ordArtsService: OrderArticlesService,
     public bnService: BackNavigationService,
     public transServ: TranslationService,
@@ -53,27 +53,27 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   public deleteOrder() {
-    const dialogRef = this.matDialog.open(DialogComponent, {
-      width: '280px',
-      height: '120px',
-      data: {
-        msg: this.transServ.get('deleteord'),
-        firstButton: this.transServ.get('cancel'),
-        secondButton: this.transServ.get('delete'),
-        buttonColor: 'red'
-      }
-    });
-    dialogRef.afterClosed().subscribe(data => {
-      if (data === undefined) {
-        // Is undefined when the user closes
-        // the dialog without an action
-        return;
-      }
-      if (data?.result === 'DELETE') {
-        this.store.dispatch(deleteOrderRequest());
-        this.router.navigate(['/home']);
-      }
-    });
+    // const dialogRef = this.matDialog.open(DialogComponent, {
+    //   width: '280px',
+    //   height: '120px',
+    //   data: {
+    //     msg: this.transServ.get('deleteord'),
+    //     firstButton: this.transServ.get('cancel'),
+    //     secondButton: this.transServ.get('delete'),
+    //     buttonColor: 'red'
+    //   }
+    // });
+    // dialogRef.afterClosed().subscribe(data => {
+    //   if (data === undefined) {
+    //     // Is undefined when the user closes
+    //     // the dialog without an action
+    //     return;
+    //   }
+    //   if (data?.result === 'DELETE') {
+    //     this.store.dispatch(deleteOrderRequest());
+    //     this.router.navigate(['/home']);
+    //   }
+    // });
   }
 
   public orderConfirmed(): void {
@@ -105,31 +105,31 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   public changeCustomer(): void {
-    const dialogRef = this.matDialog.open(DialogComponent, {
-      width: '280px',
-      height: '248px',
-      data: {
-        title: this.transServ.get('switchcus'),
-        msg: this.transServ.get('switchcusmes'),
-        firstButton: this.transServ.get('cancel'),
-        secondButton: this.transServ.get('switch'),
-        buttonColor: 'blue'
-      }
-    });
+    // const dialogRef = this.matDialog.open(DialogComponent, {
+    //   width: '280px',
+    //   height: '248px',
+    //   data: {
+    //     title: this.transServ.get('switchcus'),
+    //     msg: this.transServ.get('switchcusmes'),
+    //     firstButton: this.transServ.get('cancel'),
+    //     secondButton: this.transServ.get('switch'),
+    //     buttonColor: 'blue'
+    //   }
+    // });
 
-    this.subscriptions.add(
-      dialogRef.afterClosed().subscribe(data => {
-        if (isUndefined(data)) {
-          // Is undefined when the user closes
-          // the dialog without an action
-          return;
-        }
-        if (data?.result === 'SWITCH') {
-          this.orderService.switchCustomerFlow = true;
-          this.router.navigate(['/main/customer-search'])
-        }
-      })
-    );
+    // this.subscriptions.add(
+    //   dialogRef.afterClosed().subscribe(data => {
+    //     if (isUndefined(data)) {
+    //       // Is undefined when the user closes
+    //       // the dialog without an action
+    //       return;
+    //     }
+    //     if (data?.result === 'SWITCH') {
+    //       this.orderService.switchCustomerFlow = true;
+    //       this.router.navigate(['/main/customer-search'])
+    //     }
+    //   })
+    // );
   }
 
   public openItems(): void {
@@ -158,28 +158,28 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   public _openConfirmDialog() {
-    const message = this.transServ.get('progressord');
-    const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
-      data: {
-        title: this.transServ.get('saveord'),
-        message,
-        firstBtn: this.transServ.get('discard'),
-        secondBtn: this.transServ.get('save')
-      }
-    });
+    // const message = this.transServ.get('progressord');
+    // const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
+    //   data: {
+    //     title: this.transServ.get('saveord'),
+    //     message,
+    //     firstBtn: this.transServ.get('discard'),
+    //     secondBtn: this.transServ.get('save')
+    //   }
+    // });
 
-    this.subscriptions.add(
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.store.dispatch(replaceOrderRequest({ order: this.currentOrder }));
-        }
-        this.store.dispatch(setCurrentOrderRequest({ order: null }))
-        const orderArticles = [];
-        this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
+    // this.subscriptions.add(
+    //   dialogRef.afterClosed().subscribe((result) => {
+    //     if (result) {
+    //       this.store.dispatch(replaceOrderRequest({ order: this.currentOrder }));
+    //     }
+    //     this.store.dispatch(setCurrentOrderRequest({ order: null }))
+    //     const orderArticles = [];
+    //     this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
 
-        this.returnUrl();
-      })
-    );
+    //     this.returnUrl();
+    //   })
+    // );
   }
 
   ngOnDestroy(): void {
