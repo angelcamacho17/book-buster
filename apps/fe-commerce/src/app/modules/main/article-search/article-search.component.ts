@@ -101,7 +101,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
 
        if (article) {
          this.addToOrder(article);
-         snack = this.snackBar.open(`Article ${article?.name} added to order.`, 'Close');
+         // snack = this.snackBar.open(`Article ${article?.name} added to order.`, 'Close');
 
        } else {
          snack = this.snackBar.open(`Article could not be found.`, 'Close')
