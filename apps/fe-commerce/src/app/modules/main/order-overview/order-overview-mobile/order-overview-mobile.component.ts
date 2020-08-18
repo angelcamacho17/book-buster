@@ -23,12 +23,11 @@ export class OrderOverviewMobileComponent extends OrderOverviewComponent impleme
     public transServ: TranslationService,
     public headerService: HeaderService,
     public orderService: OrderService,
-    public layoutService: LayoutService,
-    public viewContainerRef: ViewContainerRef
+    public layoutService: LayoutService
     ) {
       super(store, snackBar, router, matDialog,
             ordArtsService, bnService, transServ,
-            headerService, orderService, layoutService, viewContainerRef)
+            headerService, orderService, layoutService)
       this.subscriptions.add(
         this.headerService.rightIconClicked
           .subscribe(() => this.deleteOrder())

@@ -38,7 +38,6 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     public headerService: HeaderService,
     public orderService: OrderService,
     public layoutService: LayoutService,
-    public viewContainerRef: ViewContainerRef
   ) { }
 
   ngAfterViewInit(): void { }
@@ -62,8 +61,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
         firstButton: this.transServ.get('cancel'),
         secondButton: this.transServ.get('delete'),
         buttonColor: 'red'
-      },
-      viewContainerRef: this.viewContainerRef
+      }
     });
     dialogRef.afterClosed().subscribe(data => {
       console.log(data);
@@ -117,8 +115,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
         firstButton: this.transServ.get('cancel'),
         secondButton: this.transServ.get('switch'),
         buttonColor: 'blue'
-      },
-      viewContainerRef: this.viewContainerRef
+      }
     });
 
     this.subscriptions.add(
@@ -169,8 +166,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
         message,
         firstBtn: this.transServ.get('discard'),
         secondBtn: this.transServ.get('save')
-      },
-      viewContainerRef: this.viewContainerRef
+      }
     });
 
     this.subscriptions.add(

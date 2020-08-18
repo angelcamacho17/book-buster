@@ -28,18 +28,19 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   constructor(public store: Store<{ currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
     public snackBar: MatSnackBar,
     public router: Router,
-    private _matDialog: MatDialog,
+    public matDialog: MatDialog,
     public ordArtsService: OrderArticlesService,
     public bnService: BackNavigationService,
     public transServ: TranslationService,
     public headerService: HeaderService,
     public orderService: OrderService,
     public layoutService: LayoutService,
-    public viewContainerRef: ViewContainerRef
+    public viewContainerRef: ViewContainerRef,
+    private _matDialog2: MatDialog
   ) {
-    super(store, snackBar, router, _matDialog,
+    super(store, snackBar, router, matDialog,
       ordArtsService, bnService, transServ,
-      headerService, orderService, layoutService, viewContainerRef)
+      headerService, orderService, layoutService)
 
     this.$articles = this.store.pipe(select('orderArticles'));
     this.subscriptions.add(
@@ -85,7 +86,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     } else {
       message = this.transServ.get('noarts');
     }
-    const dialogRef = this._matDialog.open(ConfirmDiscardDialogComponent, {
+    const dialogRef = this._matDialog2.open(ConfirmDiscardDialogComponent, {
       data: {
         title: this.transServ.get('saveord'),
         message,
@@ -136,14 +137,13 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     this._openNewArticle(dialogData);
   }
   private _openNewOrderCustomer(dialogData: DialogData): void {
-    const customerDialogRef = this._matDialog.open(CustomerSearchTabletComponent, {
+    const customerDialogRef = this._matDialog2.open(CustomerSearchTabletComponent, {
       panelClass: 'no-padding-dialog',
       position: {
         top: '32px'
       },
       autoFocus: false,
-      data: dialogData,
-      viewContainerRef: this.viewContainerRef
+      data: dialogData
     });
 
     this.subscriptions.add(
@@ -175,14 +175,13 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   }
 
   private _openNewArticle(dialogData: DialogData): void {
-    const dialogRef = this._matDialog.open(ArticleSearchTabletComponent, {
+    const dialogRef = this._matDialog2.open(ArticleSearchTabletComponent, {
       panelClass: 'no-padding-dialog',
       position: {
         top: '32px'
       },
       autoFocus: false,
-      data: dialogData,
-      viewContainerRef: this.viewContainerRef
+      data: dialogData
     });
 
     this.subscriptions.add(
@@ -201,7 +200,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
   /* BEGIN Switch customer functionality */
   public changeCustomer(): void {
-    const dialogRef = this._matDialog.open(DialogComponent, {
+    const dialogRef = this._matDialog2.open(DialogComponent, {
       width: '280px',
       height: '248px',
       data: {
@@ -229,14 +228,13 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     const dialogData: DialogData = {
       firstButton: 'cancel',
     }
-    const dialogRef = this._matDialog.open(CustomerSearchTabletComponent, {
+    const dialogRef = this._matDialog2.open(CustomerSearchTabletComponent, {
       panelClass: 'no-padding-dialog',
       position: {
         top: '32px'
       },
       autoFocus: false,
-      data: dialogData,
-      viewContainerRef: this.viewContainerRef
+      data: dialogData
     });
 
     this.subscriptions.add(
