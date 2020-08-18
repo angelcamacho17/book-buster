@@ -52,7 +52,7 @@ export class ArticleDetailTabletComponent extends ArticleDetailComponent impleme
       quantity: this.amount
     }
     const orderArticles = this.currentOrder.articles;
-    if (orderArticles.length > 0) {
+    if (orderArticles?.length > 0) {
       this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
     }
     const existingOrderArticle = this.orderArticles.find((o) => o.article.id === this.article.id);
