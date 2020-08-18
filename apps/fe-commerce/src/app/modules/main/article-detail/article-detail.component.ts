@@ -101,7 +101,6 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     } else {
       this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
     }
-    this.orderArticles
     this.orderService.setOrderModifiedState(true);
     this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
     console.log('update ',this.updatedOrder())
