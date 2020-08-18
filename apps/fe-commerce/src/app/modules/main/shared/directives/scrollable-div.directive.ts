@@ -12,10 +12,9 @@ export class ScrollableDivDirective implements AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-    console.log('aiusfahsdfuhsai')
-    setTimeout(() => {
+    // setTimeout(() => {
       this.setMaxHeight();
-    });
+    // });
   }
 
   @HostListener('window:resize', ['$event'])

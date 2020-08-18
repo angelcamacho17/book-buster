@@ -9,6 +9,7 @@
     <div class="content">
       <mat-list role="list" class="list">
         <div class="list-row" (click)="viewOrder(order)" [class.last]="lastOrder"
+          [ngClass]="this.currentOrder?.id === order.id ? 'active' : ''"
           *ngFor="let order of orders; let lastOrder = last;">
           <div class="list-item">
             <div class="left-content">
