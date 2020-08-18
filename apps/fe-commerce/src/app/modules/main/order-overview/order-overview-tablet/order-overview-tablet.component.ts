@@ -62,13 +62,11 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   ngOnInit(): void {
     this.subscribeToHeader();
     /* New order flow */
-    console.log('ngOnInit order ovewview tablet')
     this._newOrderFlow();
     this._articlesLoop();
   }
 
   private _articlesLoop() {
-    console.log('articles loop')
     if (this.orderService.addingArticlesOnNewOrder) {
       const dialogData: DialogData = {
         firstButton: 'back',
@@ -104,7 +102,8 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
         message,
         firstBtn: this.transServ.get('discard'),
         secondBtn: this.transServ.get('save')
-      }
+      },
+      panelClass: 'no-padding-dialog'
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -152,7 +151,6 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   }
 
   private _openNewOrderCustomer(dialogData: DialogData): void {
-    console.log('open new customer')
     const customerDialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
       panelClass: 'no-padding-dialog',
       position: {

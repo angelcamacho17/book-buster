@@ -66,7 +66,8 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
         message,
         firstBtn: this.transServ.get('discard'),
         secondBtn: this.transServ.get('save')
-      }
+      },
+      panelClass: 'no-padding-dialog'
     });
 
     dialogRef.afterClosed().subscribe((result) => {
