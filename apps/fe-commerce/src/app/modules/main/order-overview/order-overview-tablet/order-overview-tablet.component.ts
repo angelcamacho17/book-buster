@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone, ViewContainerRef } from '@angular/core';
 import { OrderOverviewComponent } from '../order-overview.component';
 import { Store, select } from '@ngrx/store';
 import {
@@ -35,11 +35,11 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     public headerService: HeaderService,
     public orderService: OrderService,
     public layoutService: LayoutService,
-    private ngZone: NgZone
+    public viewContainerRef: ViewContainerRef
   ) {
-    super(store, snackBar, router, /* matDialog, */
+    super(store, snackBar, router, _matDialog,
       ordArtsService, bnService, transServ,
-      headerService, orderService, layoutService)
+      headerService, orderService, layoutService, viewContainerRef)
 
     this.$articles = this.store.pipe(select('orderArticles'));
     this.subscriptions.add(
@@ -136,26 +136,25 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     this._openNewArticle(dialogData);
   }
   private _openNewOrderCustomer(dialogData: DialogData): void {
-    this.ngZone.run(() => {
-      const customerDialogRef = this._matDialog.open(CustomerSearchTabletComponent, {
-        panelClass: 'no-padding-dialog',
-        position: {
-          top: '32px'
-        },
-        autoFocus: false,
-        data: dialogData
-      });
-
-      this.subscriptions.add(
-        customerDialogRef.afterClosed().subscribe((data) => {
-          if (data?.action === 'next') {
-            this._handleNextCustomerAction();
-          } else {
-            this._handleCancelCustomerAction();
-          }
-        })
-      );
+    const customerDialogRef = this._matDialog.open(CustomerSearchTabletComponent, {
+      panelClass: 'no-padding-dialog',
+      position: {
+        top: '32px'
+      },
+      autoFocus: false,
+      data: dialogData,
+      viewContainerRef: this.viewContainerRef
     });
+
+    this.subscriptions.add(
+      customerDialogRef.afterClosed().subscribe((data) => {
+        if (data?.action === 'next') {
+          this._handleNextCustomerAction();
+        } else {
+          this._handleCancelCustomerAction();
+        }
+      })
+    );
   }
   /* END Customer search functionality */
 
@@ -182,7 +181,8 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
         top: '32px'
       },
       autoFocus: false,
-      data: dialogData
+      data: dialogData,
+      viewContainerRef: this.viewContainerRef
     });
 
     this.subscriptions.add(
@@ -235,7 +235,8 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
         top: '32px'
       },
       autoFocus: false,
-      data: dialogData
+      data: dialogData,
+      viewContainerRef: this.viewContainerRef
     });
 
     this.subscriptions.add(

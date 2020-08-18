@@ -4,7 +4,7 @@
             [formControl]="stateCtrl" (click)="onFocus(º)" class="mat-subheading-2 input" color="accent">
     </mat-form-field> -->
 
-    <div class="search-bar" [ngClass]="deviceDetector.isTablet() ? 'search-tablet' : ''">
+    <div class="search-bar" [ngClass]="deviceDetector.isTablet() || deviceDetector.isDesktop() ? 'search-tablet' : ''">
         <mat-icon class="search-icon">search</mat-icon>
         <mat-form-field floatLabel="never" class="form-field">
           <mat-placeholder class="placeholder mat-subheading-2">{{'search' | translate}}</mat-placeholder>

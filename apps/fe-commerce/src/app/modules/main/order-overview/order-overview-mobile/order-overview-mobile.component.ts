@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
 import { OrderOverviewComponent } from '../order-overview.component';
 import { Store, select } from '@ngrx/store';
 import { IOrder, IOrderArticle, OrderArticlesService, BackNavigationService, TranslationService, HeaderService, OrderService, getCurrentOrderRequest, refreshOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
@@ -23,11 +23,12 @@ export class OrderOverviewMobileComponent extends OrderOverviewComponent impleme
     public transServ: TranslationService,
     public headerService: HeaderService,
     public orderService: OrderService,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    public viewContainerRef: ViewContainerRef
     ) {
-      super(store, snackBar, router,/*  matDialog, */
+      super(store, snackBar, router, matDialog,
             ordArtsService, bnService, transServ,
-            headerService, orderService, layoutService)
+            headerService, orderService, layoutService, viewContainerRef)
       this.subscriptions.add(
         this.headerService.rightIconClicked
           .subscribe(() => this.deleteOrder())
