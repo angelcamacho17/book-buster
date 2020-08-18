@@ -64,6 +64,19 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     /* New order flow */
     console.log('ngOnInit order ovewview tablet')
     this._newOrderFlow();
+    this._articlesLoop();
+  }
+
+  private _articlesLoop() {
+    console.log('articles loop')
+    if (this.orderService.addingArticlesOnNewOrder) {
+      const dialogData: DialogData = {
+        firstButton: 'back',
+        secondButton: 'next'
+      }
+      this._openNewArticle(dialogData);
+    }
+    this.orderService.addingArticlesOnNewOrder = false;
   }
 
   private _newOrderFlow() {

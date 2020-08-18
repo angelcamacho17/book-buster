@@ -67,6 +67,7 @@ export class ArticleDetailTabletComponent extends ArticleDetailComponent impleme
       this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
     }
     this.orderService.setOrderModifiedState(true);
+    this.orderService.addingArticlesOnNewOrder = true;
     this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
     this.goToArticlesSearch();
   }

@@ -12,6 +12,7 @@ export class OrderService {
   _baseUrl = 'assets/data/orders.json';
   public orderFlow: string;           // Used on new order flow to know where to navigate.
   public switchCustomerFlow = false;  // Used on new order flow to know where to navigate.
+  public addingArticlesOnNewOrder = false;  // Used on new order flow to know where to navigate.
   private _modifiedOrder = false;       // Used to know if the current order has been modified.
   private totalsCalculated = false;
   private _orders: Array<IOrder> = [
