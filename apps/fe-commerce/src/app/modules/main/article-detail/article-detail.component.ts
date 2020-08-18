@@ -83,11 +83,13 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       article: this.article,
       quantity: this.amount
     }
-    const orderArticles = this.currentOrder.articles;
-    if (orderArticles.length > 0) {
-      this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
-    }
-    const existingOrderArticle = this.orderArticles.find((o) => o.article.id === this.article.id);
+    console.log('order articles', this.orderArticles)
+    console.log('current articles', this.currentOrder.articles);
+    const orderArticles = this.currentOrder?.articles;
+    // if (orderArticles?.length > 0) {
+    //   this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
+    // }
+    const existingOrderArticle = orderArticles.find((o) => o.article.id === this.article.id);
     if (existingOrderArticle) {
       orderArticle = {
         id: existingOrderArticle.id,
@@ -100,6 +102,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     }
     this.orderService.setOrderModifiedState(true);
     this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
+    console.log('update ',this.updatedOrder())
     this.goToArticlesSearch();
   }
 

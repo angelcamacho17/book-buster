@@ -46,31 +46,31 @@ export class ArticleDetailTabletComponent extends ArticleDetailComponent impleme
   ngOnInit(): void {
   }
 
-  public addToOrder() {
-    let orderArticle: IOrderArticle = {
-      article: this.article,
-      quantity: this.amount
-    }
-    const orderArticles = this.currentOrder.articles;
-    if (orderArticles?.length > 0) {
-      this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
-    }
-    const existingOrderArticle = this.orderArticles.find((o) => o.article.id === this.article.id);
-    if (existingOrderArticle) {
-      orderArticle = {
-        id: existingOrderArticle.id,
-        article: this.article,
-        quantity: (existingOrderArticle.quantity + this.amount)
-      }
-      this.store.dispatch(replaceOrderArticleRequest({ orderArticle }));
-    } else {
-      this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
-    }
-    this.orderService.setOrderModifiedState(true);
-    this.orderService.addingArticlesOnNewOrder = true;
-    this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
-    this.goToArticlesSearch();
-  }
+  // public addToOrder() {
+  //   let orderArticle: IOrderArticle = {
+  //     article: this.article,
+  //     quantity: this.amount
+  //   }
+  //   const orderArticles = this.currentOrder.articles;
+  //   if (orderArticles?.length > 0) {
+  //     this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
+  //   }
+  //   const existingOrderArticle = this.orderArticles.find((o) => o.article.id === this.article.id);
+  //   if (existingOrderArticle) {
+  //     orderArticle = {
+  //       id: existingOrderArticle.id,
+  //       article: this.article,
+  //       quantity: (existingOrderArticle.quantity + this.amount)
+  //     }
+  //     this.store.dispatch(replaceOrderArticleRequest({ orderArticle }));
+  //   } else {
+  //     this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
+  //   }
+  //   this.orderService.setOrderModifiedState(true);
+  //   this.orderService.addingArticlesOnNewOrder = true;
+  //   this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
+  //   this.goToArticlesSearch();
+  // }
 
   public goToArticlesSearch(): void {
     this.router.navigate(['/main/order-overview']);
