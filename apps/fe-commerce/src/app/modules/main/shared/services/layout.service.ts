@@ -68,7 +68,6 @@ export class LayoutService {
   }
 
   private _setLayout(): void {
-    console.log('setting layout')
     if (this._deviceDetector.isTablet()) {
       this.layout = this._tablet;
       // console.log('tablet')
