@@ -11,7 +11,7 @@ import { LayoutService } from './shared/services/layout.service';
     routesAnimations
   ]
 })
-export class MainComponent implements OnInit, AfterViewChecked {
+export class MainComponent implements OnInit {
   public render = true;
   public layout = 'mobile';
 
@@ -19,11 +19,9 @@ export class MainComponent implements OnInit, AfterViewChecked {
     public layoutService: LayoutService
   ) {
   }
-  ngAfterViewChecked(): void {
-    setTimeout(() => this.layout = this.layoutService.layout, 0);
-  }
 
   ngOnInit(): void {
+    this.layout = this.layoutService.layout;
     //this._reload();
   }
 

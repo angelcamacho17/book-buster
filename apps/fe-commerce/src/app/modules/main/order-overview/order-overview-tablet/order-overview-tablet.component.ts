@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone, ViewContainerRef, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { OrderOverviewComponent } from '../order-overview.component';
 import { Store, select } from '@ngrx/store';
 import {
@@ -34,9 +34,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     public transServ: TranslationService,
     public headerService: HeaderService,
     public orderService: OrderService,
-    public layoutService: LayoutService,
-    public viewContainerRef: ViewContainerRef,
-    private _matDialog2: MatDialog
+    public layoutService: LayoutService
   ) {
     super(store, snackBar, router, matDialog,
       ordArtsService, bnService, transServ,
@@ -64,6 +62,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   ngOnInit(): void {
     this.subscribeToHeader();
     /* New order flow */
+    console.log('ngOnInit order ovewview tablet')
     this._newOrderFlow();
   }
 
@@ -86,7 +85,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     } else {
       message = this.transServ.get('noarts');
     }
-    const dialogRef = this._matDialog2.open(ConfirmDiscardDialogComponent, {
+    const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
       data: {
         title: this.transServ.get('saveord'),
         message,
@@ -105,6 +104,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
       this.router.navigate(['/main/home']);
     });
   }
+
   goBackButton() {
     if (this.orderService.orderFlow === 'new' && this.currentOrder) {
       this._confirmDiscardDialog();
@@ -112,6 +112,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
       this.router.navigate(['/main/home']);
     }
   }
+
   public getTotal(): number {
     let total = this.ordArtsService.getTotal() - this.substractArt;
     total = Math.round(total * 100) / 100;
@@ -136,8 +137,10 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     }
     this._openNewArticle(dialogData);
   }
+
   private _openNewOrderCustomer(dialogData: DialogData): void {
-    const customerDialogRef = this._matDialog2.open(CustomerSearchTabletComponent, {
+    console.log('open new customer')
+    const customerDialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
       panelClass: 'no-padding-dialog',
       position: {
         top: '32px'
@@ -175,7 +178,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   }
 
   private _openNewArticle(dialogData: DialogData): void {
-    const dialogRef = this._matDialog2.open(ArticleSearchTabletComponent, {
+    const dialogRef = this.matDialog.open(ArticleSearchTabletComponent, {
       panelClass: 'no-padding-dialog',
       position: {
         top: '32px'
@@ -200,7 +203,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
   /* BEGIN Switch customer functionality */
   public changeCustomer(): void {
-    const dialogRef = this._matDialog2.open(DialogComponent, {
+    const dialogRef = this.matDialog.open(DialogComponent, {
       width: '280px',
       height: '248px',
       data: {
@@ -228,7 +231,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     const dialogData: DialogData = {
       firstButton: 'cancel',
     }
-    const dialogRef = this._matDialog2.open(CustomerSearchTabletComponent, {
+    const dialogRef = this.matDialog.open(CustomerSearchTabletComponent, {
       panelClass: 'no-padding-dialog',
       position: {
         top: '32px'
