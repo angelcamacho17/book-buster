@@ -51,7 +51,7 @@ export class OrderItemsTabletComponent extends OrderItemsComponent implements On
 
     public openNewArticle(): void {
       const dialogRef = this.matDialog.open(ArticleSearchTabletComponent, {
-        panelClass: 'modal-dialog',
+        panelClass: 'no-padding-dialog',
         position: {
           top: '32px'
         },

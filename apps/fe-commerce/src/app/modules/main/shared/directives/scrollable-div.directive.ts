@@ -27,7 +27,7 @@ export class ScrollableDivDirective implements AfterViewInit {
     const nextDiv = this._el.nativeElement.parentNode.nextSibling;
     const elementTop = this._el.nativeElement.offsetTop;
     const nextDivTop = nextDiv.offsetTop;
-    const maxHeight = (nextDivTop - elementTop) - 8;
+    const maxHeight = (nextDivTop - elementTop) - 16;
     this._renderer.setStyle(
       this._el.nativeElement,
       'max-height',
