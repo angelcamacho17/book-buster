@@ -18,7 +18,7 @@
             (hasSearchResults)="handleSearchResults($event)"
             [list]="articles"></search>
   </div>
-  <div class="search-results-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
+  <div *ngIf="!scanner" class="search-results-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
      class="search-results"></search-results>
     <div class="no-results-container" *ngIf="!hide && emptyResults">
@@ -33,6 +33,9 @@
         <div class="mat-title search-text">{{'nomatcharts' | translate}}</div>
       </div>
     </div>
+  </div>
+  <div *ngIf="scanner" class="search-results-container">
+    <fe-scanner (scanSuccess)="articleCodeScanned()"></fe-scanner>
   </div>
 </div>
 
