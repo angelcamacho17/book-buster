@@ -31,6 +31,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
   public subscriptions: Subscription = new Subscription();
   public scanner = false;
   public pauseScan = false;
+  public scannerStarted = false;
 
   constructor(
     public eventService: EventService,
@@ -122,9 +123,14 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
     this.hide = hide;
   }
 
+  public onStarted(event) {
+    this.scannerStarted = true;
+  }
+
   public showShadow(shadow: boolean): void {
     this.shadow = shadow;
     this.scanner = false;
+    this.scannerStarted = false;
   }
 
   public showScanner() {
@@ -136,6 +142,8 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
     this.shadow = false;
     this.hide = false;
     this.scanner = false;
+    this.scannerStarted = false;
+
   }
 
   public handleSearchResults(results: any[]): void {
@@ -149,6 +157,8 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
     }
     this.currentOrder = null;
     this.scanner = false;
+    this.scannerStarted = false;
+
 
   }
 }

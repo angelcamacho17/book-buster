@@ -41,6 +41,11 @@
     </div>
   </div>
   <div *ngIf="scanner">
-    <fe-scanner class="tablet-scanner" (scanSuccess)="loyaltyCardScanned($event)"></fe-scanner>
+    <div *ngIf="!scannerStarted" class="load-shadow">
+      <mat-spinner diameter="40" class="spinner"></mat-spinner>
+    </div>
+    <fe-scanner class="tablet-scanner"
+                (scanSuccess)="loyaltyCardScanned($event)"
+                (scanStarted)="onStarted($event)"></fe-scanner>
   </div>
 </div>

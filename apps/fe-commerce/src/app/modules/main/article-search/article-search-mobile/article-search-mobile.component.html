@@ -25,7 +25,11 @@
     </div>
   </div>
   <div *ngIf="scanner" class="search-container">
-    <fe-scanner (scanSuccess)="articleCodeScanned($event)"></fe-scanner>
+    <div *ngIf="!scannerStarted" class="load-shadow">
+      <mat-spinner diameter="40" class="spinner"></mat-spinner>
+    </div>
+    <fe-scanner (scanSuccess)="articleCodeScanned($event)"
+                (scanStarted)="onStarted($event)"></fe-scanner>
   </div>
   <button mat-button class="overview-button" *ngIf="!hide && emptyResults" (click)="overviewOrder()">{{('overview' | translate) | uppercase}}</button>
 </base-component>

@@ -35,6 +35,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   public currentOrder: IOrder;
   public _currentOrder$: Observable<IOrder>;
   public _orderArticles$: Observable<IOrderArticle[]>;
+  public scannerStarted = false;
 
   constructor(
     public store: Store<{ articles: IArticle[], currentOrder: IOrder, orderArticles: IOrderArticle[]  }>,
@@ -63,6 +64,8 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   public showShadow(shadow: boolean): void {
     this.shadow = shadow;
     this.scanner = false;
+    this.scannerStarted = false;
+
   }
 
   public showScanner() {
@@ -74,6 +77,12 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
     this.shadow = false;
     this.hide = false;
     this.scanner = false;
+    this.scannerStarted = false;
+
+  }
+
+  public onStarted(event) {
+    this.scannerStarted = true;
   }
 
   public noDataPlaceholder(show: boolean): void {
@@ -117,34 +126,34 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   }
 
   public addToOrder(article: IArticle) {
-    let orderArticle: IOrderArticle = {
-      article,
-      quantity: 1
-    }
+    // let orderArticle: IOrderArticle = {
+    //   article,
+    //   quantity: 1
+    // }
 
-    const orderArticles = this.currentOrder.articles;
-    if (orderArticles.length > 0) {
-      this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
-    }
-    if (this.orderArticles) {
-      const existingOrderArticle = this.orderArticles.find((o) => o.article.id === article.id);
+    // const orderArticles = this.currentOrder.articles;
+    // if (orderArticles.length > 0) {
+    //   this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
+    // }
+    // if (this.orderArticles) {
+    //   const existingOrderArticle = this.orderArticles.find((o) => o.article.id === article.id);
 
-      if (existingOrderArticle) {
-        orderArticle = {
-          id: existingOrderArticle.id,
-          article,
-          quantity: (existingOrderArticle.quantity + 1)
-        }
-        this.store.dispatch(replaceOrderArticleRequest({ orderArticle }))
-      } else {
-        this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
-      }
-    } else {
-      this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
-    }
+    //   if (existingOrderArticle) {
+    //     orderArticle = {
+    //       id: existingOrderArticle.id,
+    //       article,
+    //       quantity: (existingOrderArticle.quantity + 1)
+    //     }
+    //     this.store.dispatch(replaceOrderArticleRequest({ orderArticle }))
+    //   } else {
+    //     this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
+    //   }
+    // } else {
+    //   this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
+    // }
 
 
-    this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
+    // this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
   }
 
   public updatedOrder(): IOrder {
@@ -170,6 +179,8 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
       this._subscriptions.unsubscribe();
     }
     this.scanner = false;
+    this.scannerStarted = false;
+
   }
 }
 

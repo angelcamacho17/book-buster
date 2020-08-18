@@ -20,6 +20,7 @@ export class ScannerComponent implements OnInit {
   @Output() scanSuccess = new EventEmitter<any>();
   @Output() scanFailed = new EventEmitter<any>();
   @Output() scanError = new EventEmitter<any>();
+  @Output() scanStarted = new EventEmitter<any>();
   public devices: MediaDeviceInfo[] = [];
   public currentDevice: MediaDeviceInfo = null;
   public _subscriptions = new Subscription();
@@ -40,6 +41,13 @@ export class ScannerComponent implements OnInit {
       error: event
     }
     this.scanError.emit(result);
+  }
+
+  public onStarted(event): void {
+    const result: ScanResult = {
+      code: event
+    }
+    this.scanStarted.emit(result);
   }
 
   public onScanSuccess(event): void {

@@ -79,6 +79,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   }
 
   public addToOrder() {
+    console.log('ENTRANDO')
     let orderArticle: IOrderArticle = {
       article: this.article,
       quantity: this.amount
@@ -89,7 +90,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     // if (orderArticles?.length > 0) {
     //   this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
     // }
-    const existingOrderArticle = orderArticles.find((o) => o.article.id === this.article.id);
+    const existingOrderArticle = orderArticles?.find((o) => o.article.id === this.article.id);
     if (existingOrderArticle) {
       orderArticle = {
         id: existingOrderArticle.id,
@@ -100,6 +101,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     } else {
       this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
     }
+    this.orderArticles
     this.orderService.setOrderModifiedState(true);
     this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
     console.log('update ',this.updatedOrder())

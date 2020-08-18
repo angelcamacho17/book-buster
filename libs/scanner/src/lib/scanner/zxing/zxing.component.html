@@ -13,5 +13,6 @@
                 [formats]="formatsList"
                 cssClass="scanner"
                 (scanSuccess)="onScanSuccess($event)"
+                (autostarted)="onStarted($event)"
                 (scanError)="onScanError($event)">
   </zxing-scanner>

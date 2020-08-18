@@ -10,6 +10,7 @@ export class ZxingComponent implements OnInit {
   @ViewChild('scanner') scanner: ZXingScannerComponent;
   @Output() scanSuccess = new EventEmitter<any>();
   @Output() scanError = new EventEmitter<any>();
+  @Output() scanStarted = new EventEmitter<any>();
 
   public formatsList = [
     'CODABAR',
@@ -28,13 +29,17 @@ export class ZxingComponent implements OnInit {
   ngOnInit(): void {}
 
   onScanSuccess(event) {
-    this.scanSuccess.emit(event); 
+    this.scanSuccess.emit(event);
   }
 
   onScanError(event) {
     this.scanError.emit(event);
   }
-}   
+
+  onStarted(event) {
+    this.scanStarted.emit(event);
+  }
+}
 
 
 /*

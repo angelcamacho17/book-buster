@@ -35,7 +35,12 @@
     </div>
   </div>
   <div *ngIf="scanner" class="search-results-container">
-    <fe-scanner class="tablet-scanner" (scanSuccess)="articleCodeScanned($event)"></fe-scanner>
+    <div *ngIf="!scannerStarted" class="load-shadow">
+      <mat-spinner diameter="40" class="spinner"></mat-spinner>
+    </div>
+    <fe-scanner class="tablet-scanner"
+                (scanSuccess)="articleCodeScanned($event)"
+                (scanStarted)="onStarted($event)"></fe-scanner>
   </div>
 </div>
 
