@@ -72,5 +72,6 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
 
   ngOnDestroy(): void {
     this._subscriptions.unsubscribe();
+    this.scanner = false;
   }
 }

@@ -44,7 +44,7 @@
     justify-content: stretch;
     align-items: stretch;
     overflow: auto;
-    
+
     .search-results {
       width: 100%;
     }
@@ -54,4 +54,14 @@
       position: relative;
     }
   }
+
+  .tablet-scanner {
+    position: relative;
+    top: -66px;
+  }
+
+}
+
+.modal-search.extra-large {
+  height: 626px;
 }

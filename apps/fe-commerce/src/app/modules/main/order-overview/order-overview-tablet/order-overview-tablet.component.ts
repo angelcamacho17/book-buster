@@ -162,10 +162,10 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
     this.subscriptions.add(
       customerDialogRef.afterClosed().subscribe((data) => {
-        if (data?.action === 'next') {
-          this._handleNextCustomerAction();
-        } else {
+        if (data?.action === 'cancel') {
           this._handleCancelCustomerAction();
+        } else {
+          this._handleNextCustomerAction();
         }
       })
     );
@@ -238,6 +238,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
       })
     );
   }
+
   private _openSwitchCustomer(): void {
     const dialogData: DialogData = {
       firstButton: 'cancel',

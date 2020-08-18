@@ -85,9 +85,10 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
     if (this.pauseScan) {
       return;
     }
-    if (JSON.parse(scanResult.code)?.article) {
+    console.log(scanResult);
+    if (JSON.parse(scanResult?.code)?.article) {
 
-      const articleScanned = JSON.parse(scanResult.code)?.article ;
+      const articleScanned = JSON.parse(scanResult?.code)?.article ;
       this.pauseScan = true;
 
       this.eventService.articleSelected(articleScanned);

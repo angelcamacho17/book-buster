@@ -1,4 +1,4 @@
-<div class="modal-search">
+<div class="modal-search" [ngClass]="scanner? 'extra-large' : ''">
   <div class="header">
     <button mat-button class="mat-body-2 button" (click)="leftIconClick()">
       {{(this.data?.firstButton | translate) | titlecase}}
@@ -11,11 +11,11 @@
     </button>
   </div>
   <div class="search-container-dialog">
-    <search autoFocus="true"
-            (searchFocus)="showShadow($event)"
+    <search (searchFocus)="showShadow($event)"
             (searchBlur)="removeShadow()"
             (userSearching)="hidePanel($event)"
             (hasSearchResults)="handleSearchResults($event)"
+            (customIconEvent)="showScanner()"
             [list]="articles"></search>
   </div>
   <div *ngIf="!scanner" class="search-results-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
@@ -35,7 +35,7 @@
     </div>
   </div>
   <div *ngIf="scanner" class="search-results-container">
-    <fe-scanner (scanSuccess)="articleCodeScanned()"></fe-scanner>
+    <fe-scanner class="tablet-scanner" (scanSuccess)="articleCodeScanned($event)"></fe-scanner>
   </div>
 </div>
 

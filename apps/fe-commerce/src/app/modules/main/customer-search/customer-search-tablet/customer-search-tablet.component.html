@@ -16,10 +16,10 @@
   </div>
   <div class="search-container-dialog">
     <search (searchFocus)="showShadow($event)"
-            (searchBlur)="removeShadow()" 
+            (searchBlur)="removeShadow()"
             (userSearching)="hidePanel($event)"
-            (hasSearchResults)="handleSearchResults($event)" 
-            (customIconEvent)="showScanner()" 
+            (hasSearchResults)="handleSearchResults($event)"
+            (customIconEvent)="showScanner()"
             [list]="customers"
             [autoFocus]='true'></search>
   </div>
@@ -41,6 +41,6 @@
     </div>
   </div>
   <div *ngIf="scanner">
-    <fe-scanner (scanSuccess)="loyaltyCardScanned($event)"></fe-scanner>
+    <fe-scanner class="tablet-scanner" (scanSuccess)="loyaltyCardScanned($event)"></fe-scanner>
   </div>
 </div>

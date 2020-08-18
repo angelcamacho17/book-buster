@@ -129,11 +129,13 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
 
   public showScanner() {
     this.scanner = true;
+
   }
 
   public removeShadow(): void {
     this.shadow = false;
     this.hide = false;
+    this.scanner = false;
   }
 
   public handleSearchResults(results: any[]): void {
