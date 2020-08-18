@@ -40,6 +40,11 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
       })
     );
 
+    this._currentOrder$ = this.store.pipe(select('currentOrder'));
+    this._subscriptions.add(this._currentOrder$.subscribe(data => {
+      this.currentOrder = data;
+    }));
+
     this._subscriptions.add(
       this.eventService.articleSelect.subscribe(() => {
         this.leftIconClick();

@@ -86,31 +86,27 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
       return;
     }
     console.log(scanResult);
-    if (JSON.parse(scanResult?.code)?.article) {
 
-      const articleScanned = JSON.parse(scanResult?.code)?.article ;
-      this.pauseScan = true;
+  const articleScanned = JSON.parse(scanResult?.code)?.article ;
+  this.pauseScan = true;
 
-      this.eventService.articleSelected(articleScanned);
-      this.router.navigate(['/main/article-detail', articleScanned.id]);
+  this.eventService.articleSelected(articleScanned);
+  this.router.navigate(['/main/article-detail', articleScanned.id]);
 
-      const article = this.articles.find((a: any) => {
-         return a.description === articleScanned.description;
-       });
+  const article = this.articles.find((a: any) => {
+      return a.description === articleScanned.description;
+    });
 
-       if (article) {
-         this.addToOrder(article);
-         // snack = this.snackBar.open(`Article ${article?.name} added to order.`, 'Close');
+    if (article) {
+      this.addToOrder(article);
+      // snack = this.snackBar.open(`Article ${article?.name} added to order.`, 'Close');
 
-       } else {
-         snack = this.snackBar.open(`Article could not be found.`, 'Close')
-       }
     } else {
       snack = this.snackBar.open(`Article could not be found.`, 'Close')
     }
     snack.afterDismissed().subscribe(() => {
       this.pauseScan = false;
-    });
+    })
 
   }
 
@@ -124,15 +120,19 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
     if (orderArticles.length > 0) {
       this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
     }
-    const existingOrderArticle = this.orderArticles.find((o) => o.article.id === article.id);
+    if (this.orderArticles) {
+      const existingOrderArticle = this.orderArticles.find((o) => o.article.id === article.id);
 
-    if (existingOrderArticle) {
-      orderArticle = {
-        id: existingOrderArticle.id,
-        article,
-        quantity: (existingOrderArticle.quantity + 1)
+      if (existingOrderArticle) {
+        orderArticle = {
+          id: existingOrderArticle.id,
+          article,
+          quantity: (existingOrderArticle.quantity + 1)
+        }
+        this.store.dispatch(replaceOrderArticleRequest({ orderArticle }))
+      } else {
+        this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
       }
-      this.store.dispatch(replaceOrderArticleRequest({ orderArticle }))
     } else {
       this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
     }
