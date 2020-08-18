@@ -1,16 +1,24 @@
 .modal-search {
   height: 422px;
   width: 620px;
-
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: stretch;
+  overflow: hidden;
+  
   .header {
     position: relative;
-    height: 55px;
+    flex: 0 0 55px;
+    // height: 55px;
+    display: -webkit-flex;
     display: flex;
     flex-direction: row;
     justify-content: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     background: rgba(232, 232, 232, 0.1);
     align-items: center;
+    box-sizing: border-box;
     padding: 0 16px;
 
     .title {
@@ -25,7 +33,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-
 
       .button {
         background: rgba(232, 232, 232, 0.1);
@@ -45,21 +52,32 @@
       visibility: hidden;
     }
   }
-}
-
-.extra-large {
-  height: 626px;
-}
-
-.search-container {
-  height: calc(100% - 158px);
-
-  .no-results {
-    position: relative;
-    width: 100%;
-    top: 0;
-    left: 0;
-    transform: none;
-    text-align: center;
+  /* new search -- review fede */
+  .search-container-dialog {
+    box-sizing: border-box;
+    padding: 24px 16px;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.1);
   }
+
+  .search-results-container {
+    flex: 1;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    overflow: auto;
+    
+    .search-results {
+      width: 100%;
+    }
+
+    .no-results-container {
+      flex: 1;
+      position: relative;
+    }
+  }
+}
+
+.modal-search .extra-large {
+  height: 626px;
 }

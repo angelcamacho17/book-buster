@@ -1,3 +1,10 @@
 .header-extension {
   height: 66px;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+
+
+.search-results-container {
+  flex: 1;
 }

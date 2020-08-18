@@ -64,6 +64,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     //   }
     // });
     // dialogRef.afterClosed().subscribe(data => {
+    //   console.log(data);
     //   if (data === undefined) {
     //     // Is undefined when the user closes
     //     // the dialog without an action
@@ -170,16 +171,23 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
 
     // this.subscriptions.add(
     //   dialogRef.afterClosed().subscribe((result) => {
-    //     if (result) {
+    //     console.log(result);
+    //     if (result === true) {
     //       this.store.dispatch(replaceOrderRequest({ order: this.currentOrder }));
+    //       this._cleanCurrentorder();
+    //       this.returnUrl();
+    //     } else if (result === false){
+    //       this._cleanCurrentorder();
+    //       this.returnUrl();
     //     }
-    //     this.store.dispatch(setCurrentOrderRequest({ order: null }))
-    //     const orderArticles = [];
-    //     this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
-
-    //     this.returnUrl();
     //   })
     // );
+  }
+
+  private _cleanCurrentorder(): void {
+    this.store.dispatch(setCurrentOrderRequest({ order: null }))
+    const orderArticles = [];
+    this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
   }
 
   ngOnDestroy(): void {

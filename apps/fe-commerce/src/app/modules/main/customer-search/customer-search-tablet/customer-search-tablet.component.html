@@ -9,33 +9,38 @@
       {{( 'neworder' | translate) | titlecase }}
     </div>
     <div class="button-container right">
-      <button  (click)="rightButtonClick()" mat-button class="mat-body-2 button">
+      <button (click)="rightButtonClick()" mat-button class="mat-body-2 button">
         {{( this.data?.secondButton | translate) | titlecase }}
       </button>
     </div>
   </div>
-  <search (searchFocus)="showShadow($event)"
-          (searchBlur)="removeShadow()"
-          (userSearching)="hidePanel($event)"
-          (hasSearchResults)="handleSearchResults($event)"
-          (customIconEvent)="showScanner()"
-          [list]="customers"
-          [autoFocus]='true'></search>
-  <div *ngIf="!scanner"
-        class="search-container"
-        [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
+  <div class="search-container-dialog">
+    <search (searchFocus)="showShadow($event)"
+            (searchBlur)="removeShadow()" 
+            (userSearching)="hidePanel($event)"
+            (hasSearchResults)="handleSearchResults($event)" 
+            (customIconEvent)="showScanner()" 
+            [list]="customers"
+            [autoFocus]='true'></search>
+  </div>
+  <div *ngIf="!scanner" class="search-results-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
+    <!-- <mat-divider class="divider"></mat-divider> -->
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
       [dividerClass]="'customer-divider'" class="search-results"></search-results>
-    <div class="no-results" *ngIf="!hide && emptyResults">
-      <mat-icon class="icon">search</mat-icon>
-      <div class="mat-title search-text">{{'searchcus' | translate}}</div>
-      <div class="mat-subheading-2 search-description">{{'cusplaceholder' | translate}}</div>
+    <div class="no-results-container" *ngIf="!hide && emptyResults">
+      <div class="no-results">
+        <mat-icon class="icon">search</mat-icon>
+        <div class="mat-title search-text">{{'searchcus' | translate}}</div>
+        <div class="mat-subheading-2 search-description">{{'cusplaceholder' | translate}}</div>
+      </div>
     </div>
-    <div class="no-results" *ngIf="hide && emptyResults">
-      <div class="mat-title search-text">{{'nomatchcus' | translate}}</div>
+    <div class="no-results-container" *ngIf="hide && emptyResults">
+      <div class="no-results">
+        <div class="mat-title search-text">{{'nomatchcus' | translate}}</div>
+      </div>
     </div>
   </div>
-  <div  *ngIf="scanner" >
+  <div *ngIf="scanner">
     <fe-scanner (scanSuccess)="loyaltyCardScanned($event)"></fe-scanner>
   </div>
 </div>

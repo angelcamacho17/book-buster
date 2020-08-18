@@ -10,23 +10,28 @@
       {{(this.data?.secondButton | translate) | titlecase}}
     </button>
   </div>
-  <search autoFocus="true"
-          (searchFocus)="showShadow($event)"
-          (searchBlur)="removeShadow()"
-          (userSearching)="hidePanel($event)"
-          (hasSearchResults)="handleSearchResults($event)"
-          [list]="articles"></search>
-  <div class="search-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
+  <div class="search-container-dialog">
+    <search autoFocus="true"
+            (searchFocus)="showShadow($event)"
+            (searchBlur)="removeShadow()"
+            (userSearching)="hidePanel($event)"
+            (hasSearchResults)="handleSearchResults($event)"
+            [list]="articles"></search>
+  </div>
+  <div class="search-results-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
-      [dividerClass]="'customer-divider'" class="search-results"></search-results>
-
-    <div class="no-results" *ngIf="!hide && emptyResults">
-      <mat-icon class="icon">search</mat-icon>
-      <div class="mat-title search-text">{{'searcharts' | translate}}</div>
-      <div class="mat-subheading-2 search-description">{{'artsplaceholder' | translate}}</div>
+     class="search-results"></search-results>
+    <div class="no-results-container" *ngIf="!hide && emptyResults">
+      <div class="no-results">
+        <mat-icon class="icon">search</mat-icon>
+        <div class="mat-title search-text">{{'searcharts' | translate}}</div>
+        <div class="mat-subheading-2 search-description">{{'artsplaceholder' | translate}}</div>
+      </div>
     </div>
-    <div class="no-results" *ngIf="hide && emptyResults">
-      <div class="mat-title search-text">{{'nomatcharts' | translate}}</div>
+    <div class="no-results-container" *ngIf="hide && emptyResults">
+      <div class="no-results">
+        <div class="mat-title search-text">{{'nomatcharts' | translate}}</div>
+      </div>
     </div>
   </div>
 </div>

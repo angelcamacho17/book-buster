@@ -31,4 +31,6 @@ export class ConfirmDiscardDialogComponent implements OnInit {
   onConfirm() {
     this.matDialogRef.close(true);
   }
+
+
 }

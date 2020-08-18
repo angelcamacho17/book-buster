@@ -49,7 +49,7 @@ import { MainHeaderTabletComponent } from './components/main-header/main-header-
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslatePipeModule
+    TranslatePipeModule,
   ],
   exports: [
     MainHeaderComponent,
