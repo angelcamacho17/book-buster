@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { ArticleSearchComponent } from '../article-search.component';
 import { Store, select } from '@ngrx/store';
-import { OrderService, IArticle, IOrder, refreshArticlesRequest, IOrderArticle } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, IArticle, IOrder, refreshArticlesRequest, IOrderArticle, refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../shared/services/layout.service';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -49,6 +49,7 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
     if (this.ordSer.currentOrder?.id) {
       this.lastUrl = 'orderitems';
     }
+    this.store.dispatch(refreshCustomersRequest());
     this.store.dispatch(refreshArticlesRequest());
   }
 
