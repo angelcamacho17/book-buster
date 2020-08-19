@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { LayoutService } from '../shared/services/layout.service';
-import { OrderService, IOrder, TranslationService, HeaderService, clearCurrentOrderRequest, setOrderArticlesRequest, refreshOrdersRequest, setCurrentOrderRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, IOrder, TranslationService, HeaderService, clearCurrentOrderRequest, setOrderArticlesRequest, refreshOrdersRequest, setCurrentOrderRequest, replaceCurrentOrderRequest, IOrderArticle } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
@@ -67,12 +67,15 @@ export class HomeComponent implements OnDestroy {
 
   public openOrder(order: IOrder): void {
     this.orderService.orderFlow = 'edit';
-    this.setCurrentOrder(order);
+    if (order) {
+      this.setCurrentOrder(order);
+    }
     this.router.navigate(['/main/order-overview']);
   }
   
   public setCurrentOrder(order: IOrder) {
-    this.store.dispatch(replaceCurrentOrderRequest({ order }))
+    this.store.dispatch(setCurrentOrderRequest({ order }))
+    console.log(order?.articles)
     this.store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }))
   }
 

@@ -17,6 +17,7 @@ export class OrderArticlesService {
   }
 
   public set(orderArticles: IOrderArticle[]): Observable<IOrderArticle[]> {
+    console.log('seteado: ', orderArticles)
     this._orderArticles = orderArticles;
     return of(this._orderArticles);
   }

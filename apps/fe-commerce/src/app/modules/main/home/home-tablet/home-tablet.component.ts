@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { IOrder, OrderService, HeaderService, setOrderArticlesRequest, TranslationService, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { IOrder, OrderService, HeaderService, TranslationService } from '@fecommerce-workspace/data-store-lib';
 import { HomeComponent } from '../home.component';
 import { LayoutService } from '../../shared/services/layout.service';
 
@@ -36,6 +36,7 @@ export class HomeTabletComponent extends HomeComponent implements OnDestroy {
   }
 
   public viewOrder(order: IOrder): void {
+    this.clearCurrentOrder();
     this.setCurrentOrder(order);
   }
 
