@@ -64,14 +64,6 @@ export class HomeComponent implements OnDestroy {
   public logout() {
     this.router.navigate(['/login'])
   }
-
-  public openOrder(order: IOrder): void {
-    this.orderService.orderFlow = 'edit';
-    if (order) {
-      this.setCurrentOrder(order);
-    }
-    this.router.navigate(['/main/order-overview']);
-  }
   
   public setCurrentOrder(order: IOrder) {
     this.store.dispatch(setCurrentOrderRequest({ order }))

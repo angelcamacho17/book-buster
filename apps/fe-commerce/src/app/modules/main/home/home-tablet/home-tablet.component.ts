@@ -34,6 +34,11 @@ export class HomeTabletComponent extends HomeComponent implements OnDestroy {
     this.clearCurrentOrder();
     this.router.navigate(['/main/order-overview']);
   }
+  
+  public openOrder(order: IOrder): void {
+    this.orderService.orderFlow = 'edit';
+    this.router.navigate(['/main/order-overview']);
+  }
 
   public viewOrder(order: IOrder): void {
     this.clearCurrentOrder();

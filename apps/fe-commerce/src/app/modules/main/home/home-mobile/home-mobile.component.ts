@@ -35,6 +35,12 @@ export class HomeMobileComponent extends HomeComponent implements OnDestroy {
     this.router.navigate(['/main/customer-search']);
   }
 
+  public openOrder(order: IOrder): void {
+    this.orderService.orderFlow = 'edit';
+    this.setCurrentOrder(order);
+    this.router.navigate(['/main/order-overview']);
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
