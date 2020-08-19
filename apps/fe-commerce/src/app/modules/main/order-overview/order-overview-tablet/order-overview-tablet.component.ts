@@ -43,6 +43,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     this.$articles = this.store.pipe(select('orderArticles'));
     this.subscriptions.add(
       this.$articles.subscribe((arts) => {
+        console.log('orderarticles changed', arts)
         this.articles = arts;
       })
     );
