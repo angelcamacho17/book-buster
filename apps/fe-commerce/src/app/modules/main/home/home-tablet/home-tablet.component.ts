@@ -1,79 +1,42 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { IOrder, OrderService, BackNavigationService, HeaderService, clearCurrentOrderRequest, setOrderArticlesRequest, refreshOrdersRequest, setCurrentOrderRequest, TranslationService, deleteOrderRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
-import { Store, select } from '@ngrx/store';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { DialogComponent } from '../../shared/components/dialog/dialog.component';
+import { Store } from '@ngrx/store';
+import { IOrder, OrderService, HeaderService, setOrderArticlesRequest, TranslationService, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { HomeComponent } from '../home.component';
+import { LayoutService } from '../../shared/services/layout.service';
 
 @Component({
   selector: 'home-tablet',
   templateUrl: './home-tablet.component.html',
   styleUrls: ['./home-tablet.component.scss']
 })
-export class HomeTabletComponent implements OnInit, OnDestroy {
-  public orders$: Observable<IOrder[]>;
-  public orders: IOrder[];
-  public currentOrder$: Observable<IOrder>;
-  public currentOrder: IOrder;
-  private _subscriptions: Subscription = new Subscription();
+export class HomeTabletComponent extends HomeComponent implements OnDestroy {
   constructor(
+    public store: Store<{ orders: IOrder[], currentOrder: IOrder }>,
+    public router: Router,
     public orderService: OrderService,
-    private _store: Store<{ orders: IOrder[], currentOrder: IOrder }>,
-    private _router: Router,
-    private _orderService: OrderService,
-    private _translationService: TranslationService,
-    private _headerService: HeaderService
+    public translationService: TranslationService,
+    public headerService: HeaderService,
+    public layoutService: LayoutService
   ) {
-    this.orders$ = this._store.pipe(select('orders'));
-    this._subscriptions.add(
-      this.orders$.subscribe(data => {
-        if (data.length) {
-          data = data.slice().sort((a, b) => b.id - a.id)
-        }
-        this.orders = data;
-        //this.orders = [];
-      })
-    );
-
-    this.currentOrder$ = this._store.pipe(select('currentOrder'));
-    this._subscriptions.add(
-      this.currentOrder$.subscribe(data => {
-        this.currentOrder = data;
-      })
-    );
-
-
-    this._store.dispatch(clearCurrentOrderRequest());
-    this._store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
-    this._store.dispatch(refreshOrdersRequest())
-  }
-
-  ngOnInit(): void {
-    this.subscribeToHeader();
-  }
-
-  public subscribeToHeader() {
-    this._subscriptions.add(
-      this._headerService.rightIconClicked
-        .subscribe(() => this._logout())
+    super(
+      store,
+      router,
+      orderService,
+      translationService,
+      headerService,
+      layoutService
     );
   }
 
-  private _logout() {
-    this._router.navigate(['/login'])
+  public createOrder() {
+    this.orderService.orderFlow = 'new';
+    this.clearCurrentOrder();
+    this.router.navigate(['/main/order-overview']);
   }
-
 
   public viewOrder(order: IOrder): void {
-    this._store.dispatch(replaceCurrentOrderRequest({ order }))
-    this._store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }));
-  }
-
-  public openOrder(order: IOrder): void {
-    // this._store.dispatch(replaceCurrentOrderRequest({ order }))
-    // this._store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }));
-    this._orderService.orderFlow = 'edit';
-    this._router.navigate(['/main/order-overview']);
+    this.setCurrentOrder(order);
   }
 
   // public deleteOrder() {
@@ -100,13 +63,7 @@ export class HomeTabletComponent implements OnInit, OnDestroy {
   //   });
   // }
 
-  public createOrder() {
-    this.orderService.orderFlow = 'new';
-    this._store.dispatch(clearCurrentOrderRequest());
-    this._router.navigate(['/main/order-overview']);
-  }
-
   ngOnDestroy(): void {
-    this._subscriptions.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 }

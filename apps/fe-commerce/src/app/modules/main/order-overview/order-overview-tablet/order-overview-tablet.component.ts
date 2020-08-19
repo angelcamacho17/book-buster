@@ -162,10 +162,10 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
     this.subscriptions.add(
       customerDialogRef.afterClosed().subscribe((data) => {
-        if (data?.action === 'cancel') {
-          this._handleCancelCustomerAction();
-        } else {
+        if (data?.action === 'next') {
           this._handleNextCustomerAction();
+        } else {
+          this._handleCancelCustomerAction();
         }
       })
     );
