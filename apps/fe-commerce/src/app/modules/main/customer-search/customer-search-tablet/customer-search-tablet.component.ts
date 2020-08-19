@@ -94,7 +94,6 @@ public loyaltyCardScanned(scanResult: ScanResult) {
 
     if (customer) {
       snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
-      console.log('SELECTING CUSTOMER')
       this.onCustomerChange(customer);
       this.rightButtonClick();
     } else {

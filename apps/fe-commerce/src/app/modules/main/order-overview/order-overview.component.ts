@@ -54,6 +54,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
 
   public deleteOrder() {
     const dialogRef = this.matDialog.open(DialogComponent, {
+      panelClass: 'no-padding-dialog',
       width: '280px',
       height: '120px',
       data: {
@@ -161,6 +162,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   public _openConfirmDialog() {
     const message = this.transServ.get('progressord');
     const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
+      panelClass: 'no-padding-dialog',
       data: {
         title: this.transServ.get('saveord'),
         message,
