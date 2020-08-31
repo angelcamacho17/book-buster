@@ -24,59 +24,44 @@ export class HomeComponent implements OnDestroy {
     public translationService: TranslationService,
     public headerService: HeaderService,
     public layoutService: LayoutService
-  ) {
-    this._subscribeToOrders();
-    this._subscribeToCurrentOrder();
-    this._subscribeToHeader();
+  ) { }
 
-    this.clearCurrentOrder();
-    this.refreshOrders()
-  }
-
-  private _subscribeToOrders() {
-    this.orders$ = this.store.pipe(select('orders'));
-    this.subscriptions.add(
-      this.orders$.subscribe(data => {
-        if (data.length) {
-          data = data.slice().sort((a, b) => b.id - a.id)
-        }
-        this.orders = data;
-      })
-    )
-  }
-
-  private _subscribeToCurrentOrder() {
-    this.currentOrder$ = this.store.pipe(select('currentOrder'));
-    this.subscriptions.add(
-      this.currentOrder$.subscribe(data => {
-        this.currentOrder = data;
-      })
-    );
-  }
-
-  private _subscribeToHeader() {
-    this.subscriptions.add(
-      this.headerService.rightIconClicked
-        .subscribe(() => this.logout())
-    );
-  }
-
+  /**
+   * Logout of the app.
+   */
   public logout() {
     this.router.navigate(['/login'])
   }
-  
+
+  /**
+   * Set current order in data store
+   * @param order
+   */
   public setCurrentOrder(order: IOrder) {
     this.store.dispatch(setCurrentOrderRequest({ order }))
-    console.log(order?.articles)
-    this.store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }))
   }
 
-  public clearCurrentOrder() {
+  /**
+   * Set order articles opf the current order.
+   */
+  public setOrderArticles(order: IOrder) {
+    this.store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }))
+
+  }
+
+  /**
+   * Clear current order and order articles.
+   */
+  public clearData() {
     this.store.dispatch(clearCurrentOrderRequest());
     this.store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
   }
 
+  /**
+   * Get all the updated orders.
+   */
   public refreshOrders() {
+    console.log('here')
     this.store.dispatch(refreshOrdersRequest())
   }
 

@@ -47,11 +47,6 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     // this._loadComponent();
   }
 
-
-  public subscribeToHeader() {
-
-  }
-
   public deleteOrder() {
     const dialogRef = this.matDialog.open(DialogComponent, {
       panelClass: 'no-padding-dialog',

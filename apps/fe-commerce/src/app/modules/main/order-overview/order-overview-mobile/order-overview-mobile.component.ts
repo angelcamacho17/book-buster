@@ -58,5 +58,4 @@ export class OrderOverviewMobileComponent extends OrderOverviewComponent impleme
 
   ngOnInit(): void {
   }
-
 }

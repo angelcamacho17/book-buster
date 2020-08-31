@@ -29,6 +29,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     public orderService: OrderService,
     public layoutService: LayoutService
   ) {
+
     this.article$ = this.store.pipe(select('article'));
     this.subscriptions.add(
       this.article$.subscribe(data => {
@@ -56,7 +57,10 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     this.getArticle()
   }
 
-  public getArticle() {
+  /**
+   * Read id from url to get current article-
+   */
+  public getArticle(): void {
     let articleId: number;
 
     this.subscriptions.add(
@@ -68,28 +72,42 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     );
   }
 
-  public addQuantity() {
+  /**
+   * Add quantity to current article.
+   */
+  public addQuantity(): void {
     this.amount++;
   }
 
-  removeQuantity() {
+  /**
+   * Substract quantity to current article.
+   */
+  public removeQuantity(): void {
     if (this.amount > 0) {
       this.amount--;
     }
   }
 
-  public addToOrder() {
-    console.log('ENTRANDO')
-    let orderArticle: IOrderArticle = {
+  private createOrderArt(): IOrderArticle {
+    return {
       article: this.article,
       quantity: this.amount
     }
-    console.log('order articles', this.orderArticles)
-    console.log('current articles', this.currentOrder.articles);
+
+  }
+
+  /**
+   * Add
+   */
+  public addToOrder(): void {
+
+    // Create order article
+    let orderArticle = this.createOrderArt();
+
+    // Get order articles
     const orderArticles = this.currentOrder?.articles;
-    // if (orderArticles?.length > 0) {
-    //   this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
-    // }
+
+    // Check if this articles is already added.
     const existingOrderArticle = orderArticles?.find((o) => o.article.id === this.article.id);
     if (existingOrderArticle) {
       orderArticle = {
@@ -101,12 +119,17 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     } else {
       this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
     }
-    this.orderService.setOrderModifiedState(true);
+
+    // Update current order
     this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
-    console.log('update ',this.updatedOrder())
+
+    // Go back to article search
     this.goToArticlesSearch();
   }
 
+  /**
+   * @returns update current order
+   */
   public updatedOrder(): IOrder {
     const order: IOrder = {
       id: this.currentOrder?.id,
@@ -119,6 +142,9 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     return order;
   }
 
+  /**
+   * Got o article saearch
+   */
   public goToArticlesSearch(): void {
     if (this.orderService.orderFlow === 'edit') {
       this.router.navigate(['/main/article-search/edit']);

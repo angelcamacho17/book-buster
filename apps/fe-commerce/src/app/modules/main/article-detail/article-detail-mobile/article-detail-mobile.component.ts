@@ -43,8 +43,6 @@ export class ArticleDetailMobileComponent extends ArticleDetailComponent impleme
     );
   }
 
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

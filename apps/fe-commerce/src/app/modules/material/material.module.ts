@@ -57,7 +57,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {duration: 5000}
-    }
+    },
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

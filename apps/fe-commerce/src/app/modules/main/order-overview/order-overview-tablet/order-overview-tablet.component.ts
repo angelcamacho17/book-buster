@@ -4,7 +4,8 @@ import { Store, select } from '@ngrx/store';
 import {
   IOrder, IOrderArticle, OrderArticlesService, TranslationService, HeaderService, OrderService,
   getCurrentOrderRequest, refreshOrderArticlesRequest, clearCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest,
-  isUndefined
+  isUndefined,
+  AuthService
 } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar, } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -34,7 +35,8 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     public transServ: TranslationService,
     public headerService: HeaderService,
     public orderService: OrderService,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    public authService: AuthService
   ) {
     super(store, snackBar, router, matDialog,
       ordArtsService, transServ,
@@ -66,6 +68,17 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     /* New order flow */
     this._newOrderFlow();
     this._articlesLoop();
+  }
+
+  public subscribeToHeader() {
+    this.subscriptions.add(
+      this.headerService.rightIconClicked
+        .subscribe(() => this.logout())
+    );
+  }
+
+  public logout() {
+    this.router.navigate(['/login'])
   }
 
   private _articlesLoop() {

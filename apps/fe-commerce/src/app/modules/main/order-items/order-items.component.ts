@@ -44,21 +44,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   ) { }
 
 
-  ngOnInit(): void {
-    this.subscribeToHeader();
-  }
-
-
-  public subscribeToHeader() {
-    this._subscriptions.add(
-      this.headerService.rightIconClicked
-        .subscribe(() => this.goToArticles())
-    );
-  }
-
-  public goToArticles(): void {
-    this.router.navigate(['/main/article-search/edit']);
-  }
+  ngOnInit(): void { }
 
   public openBottomSheet(item: IOrderArticle): void {
     this._currentArt = item;

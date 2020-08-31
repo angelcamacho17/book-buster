@@ -37,17 +37,7 @@ export class OrderItemsTabletComponent extends OrderItemsComponent implements On
     }
 
 
-    ngOnInit(): void {
-      this.subscribeToHeader();
-    }
-
-
-    public subscribeToHeader() {
-      this._subscriptions.add(
-        this.headerService.rightIconClicked
-          .subscribe(() => this.goToArticles())
-      );
-    }
+    ngOnInit(): void { }
 
     public openNewArticle(): void {
       const dialogRef = this.matDialog.open(ArticleSearchTabletComponent, {

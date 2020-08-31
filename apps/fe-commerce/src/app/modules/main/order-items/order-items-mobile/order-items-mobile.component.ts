@@ -42,5 +42,10 @@ export class OrderItemsMobileComponent extends OrderItemsComponent implements On
       );
     }
 
+    public goToArticles(): void {
+      this.router.navigate(['/main/article-search/edit']);
+    }
+
+
 
 }

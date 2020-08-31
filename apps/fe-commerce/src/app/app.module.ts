@@ -14,6 +14,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './modules/material/material.module';
 import { SharedModule } from './modules/main/shared/shared.module';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [

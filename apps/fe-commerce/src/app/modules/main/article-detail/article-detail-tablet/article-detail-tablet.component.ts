@@ -20,6 +20,7 @@ export class ArticleDetailTabletComponent extends ArticleDetailComponent impleme
     public layoutService: LayoutService
   ) {
     super(store, route, router, orderService, layoutService);
+
     this.article$ = this.store.pipe(select('article'));
     this.subscriptions.add(
       this.article$.subscribe(data => {
@@ -33,7 +34,6 @@ export class ArticleDetailTabletComponent extends ArticleDetailComponent impleme
         this.currentOrder = data;
       })
     );
-    this.store.dispatch(getCurrentOrderRequest())
 
     this.orderArticles$ = this.store.pipe(select('orderArticles'));
     this.subscriptions.add(
@@ -41,37 +41,15 @@ export class ArticleDetailTabletComponent extends ArticleDetailComponent impleme
         this.orderArticles = data;
       })
     );
+    this.store.dispatch(getCurrentOrderRequest())
   }
 
   ngOnInit(): void {
   }
 
-  // public addToOrder() {
-  //   let orderArticle: IOrderArticle = {
-  //     article: this.article,
-  //     quantity: this.amount
-  //   }
-  //   const orderArticles = this.currentOrder.articles;
-  //   if (orderArticles?.length > 0) {
-  //     this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
-  //   }
-  //   const existingOrderArticle = this.orderArticles.find((o) => o.article.id === this.article.id);
-  //   if (existingOrderArticle) {
-  //     orderArticle = {
-  //       id: existingOrderArticle.id,
-  //       article: this.article,
-  //       quantity: (existingOrderArticle.quantity + this.amount)
-  //     }
-  //     this.store.dispatch(replaceOrderArticleRequest({ orderArticle }));
-  //   } else {
-  //     this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
-  //   }
-  //   this.orderService.setOrderModifiedState(true);
-  //   this.orderService.addingArticlesOnNewOrder = true;
-  //   this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
-  //   this.goToArticlesSearch();
-  // }
-
+  /**
+   * Overwrite to stay in overview.
+   */
   public goToArticlesSearch(): void {
     this.router.navigate(['/main/order-overview']);
   }

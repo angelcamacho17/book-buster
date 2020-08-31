@@ -89,12 +89,18 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
     this.nodata = show;
   }
 
-  public articleCodeScanned(scanResult: ScanResult) { // art: Article) {
+  /**
+   * Handle article scanned.
+   * @param scanResult
+   */
+  public articleCodeScanned(scanResult: ScanResult) {
     let snack;
+    // Pause scanning.
     if (this.pauseScan) {
       return;
     }
-    console.log(scanResult);
+
+    // If scanned code has article property
     if (JSON.parse(scanResult?.code)?.article) {
 
       const articleScanned = JSON.parse(scanResult?.code)?.article ;
@@ -117,6 +123,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
     } else {
       snack = this.snackBar.open(`Article could not be found.`, 'Close')
     }
+    // After snack bar closed, continue scanner.
     if (snack) {
       snack.afterDismissed().subscribe(() => {
         this.pauseScan = false;
@@ -124,38 +131,15 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
     }
 
   }
+  /**
+   * To be overright by the child classes.
+   * @param article
+   */
+  public addToOrder(article: IArticle) { }
 
-  public addToOrder(article: IArticle) {
-    // let orderArticle: IOrderArticle = {
-    //   article,
-    //   quantity: 1
-    // }
-
-    // const orderArticles = this.currentOrder.articles;
-    // if (orderArticles.length > 0) {
-    //   this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
-    // }
-    // if (this.orderArticles) {
-    //   const existingOrderArticle = this.orderArticles.find((o) => o.article.id === article.id);
-
-    //   if (existingOrderArticle) {
-    //     orderArticle = {
-    //       id: existingOrderArticle.id,
-    //       article,
-    //       quantity: (existingOrderArticle.quantity + 1)
-    //     }
-    //     this.store.dispatch(replaceOrderArticleRequest({ orderArticle }))
-    //   } else {
-    //     this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
-    //   }
-    // } else {
-    //   this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
-    // }
-
-
-    // this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
-  }
-
+  /**
+   * @returns Get updated current order.
+   */
   public updatedOrder(): IOrder {
     const order: IOrder = {
       id: this.currentOrder?.id,
@@ -168,6 +152,10 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
     return order;
   }
 
+  /**
+   * After a search, set vars to react propperly.
+   * @param results
+   */
   public handleSearchResults(results: any[]): void {
     this.emptyResults = results.length === 0;
     this.filteredResults = results;

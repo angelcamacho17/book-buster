@@ -9,6 +9,7 @@ import { ArticleSearchRoutingModule } from './article-search-routing.module';
 import { ArticleSearchTabletComponent } from './article-search-tablet/article-search-tablet.component';
 import { ArticleSearchMobileComponent } from './article-search-mobile/article-search-mobile.component';
 import { ScannerModule } from '@fecommerce-workspace/scanner';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ScannerModule } from '@fecommerce-workspace/scanner';
     MaterialModule,
     TranslatePipeModule,
     ScannerModule
-  ]
+  ],
+
 })
 export class ArticleSearchModule { }
