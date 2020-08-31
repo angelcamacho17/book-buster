@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
-import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 // import { IArticleService, IArticle, IOrder, IOrderArticle, replaceCurrentOrderRequest, appendOrderArticleRequest } from '@fecommerce-workspace/data-store-lib';
 import { Store } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
@@ -21,6 +19,7 @@ export class ScannerComponent implements OnInit {
   @Output() scanFailed = new EventEmitter<any>();
   @Output() scanError = new EventEmitter<any>();
   @Output() scanStarted = new EventEmitter<any>();
+  @Output() noCamera = new EventEmitter<any>();
   public devices: MediaDeviceInfo[] = [];
   public currentDevice: MediaDeviceInfo = null;
   public _subscriptions = new Subscription();
@@ -56,55 +55,10 @@ export class ScannerComponent implements OnInit {
     }
     this.scanSuccess.emit(result);
   }
-    // if (this.scanned) {
-    //   return;
-    // }
-    // this.scanned = true;
-    // if (this.checkIfJson(art)) {
-    //   art = JSON.parse(art);
-    //   this.artSer.articles.subscribe((data) => {
-    //     const found = data.some(el => el.id === art.id);
-    //     if (found) {
-    //       this.beep(100, 520, 200);
-    //       this.addToOrder.emit(art);
-    //       const success = this.snackBar.open('Item ' + art.name + ' added to order!', 'OK', {
-    //         duration: 2000
-    //       });
-    //       success.afterDismissed().subscribe((action) => {
-    //         this.scanned = false;
-    //       })
-    //     } else {
-    //       this.beep(999, 220, 300);
-    //       const error = this.snackBar.open('Item does not exist!', 'OK!', {
-    //         duration: 2000
-    //       });
-    //       error.afterDismissed().subscribe((action) => {
-    //         this.scanned = false;
-    //       })
-    //     }
-    //   });
-    // } else {
-    //   //window.navigator.vibrate(400);
-    //   this.beep(999, 220, 300);
-    //   const notExist = this.snackBar.open('Item does not exist!', 'OK!', {
-    //     duration: 2000
-    //   });
-    //   notExist.afterDismissed().subscribe((action) => {
-    //     this.scanned = false;
-    //   })
-    // }
-  // }
 
-  private checkIfJson(art: any) {
-    if (/^[\],:{}\s]*$/.test(art.replace(/\\["\\\/bfnrtu]/g, '@').
-      replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-      replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-      return true;
-    } else {
-      return false;
-    }
+  noCameraFound(event) {
+    this.noCamera.emit(event);
   }
-
 
   public beep(vol, freq, duration) {
     const AudioContext = window.AudioContext || window.webkitAudioContext || false;

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService } from '@fecommerce-workspace/data-store-lib';
+import { Order, getCurrentOrderRequest, OrderArticle, appendOrderRequest, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, TranslationService } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -33,7 +33,6 @@ export class FeOrderComponent implements OnInit, OnDestroy {
     private _router: Router,
     public dialog: MatDialog,
     private _ordArtsService: OrderArticlesService,
-    private _bnService: BackNavigationService,
     private _transServ: TranslationService
   ) {
 

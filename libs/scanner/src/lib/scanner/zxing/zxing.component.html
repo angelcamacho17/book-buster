@@ -1,18 +1,10 @@
-<!-- <div class="scanner-container">
-  <div class="side"></div>
-  <div class="center">
-    <div class="top"></div>
-    <div class="focus"></div>
-    <div class="bottom"></div>
-  </div>
-  <div class="side"></div>
-</div> -->
-  <zxing-scanner #scanner
-                style="height: 100%;"
-                class="scanner"
-                [formats]="formatsList"
-                cssClass="scanner"
-                (scanSuccess)="onScanSuccess($event)"
-                (autostarted)="onStarted($event)"
-                (scanError)="onScanError($event)">
-  </zxing-scanner>
+<zxing-scanner #scanner
+              style="height: 100%;"
+              class="scanner"
+              [formats]="formatsList"
+              cssClass="scanner"
+              (scanSuccess)="onScanSuccess($event)"
+              (autostarted)="onStarted($event)"
+              (scanError)="onScanError($event)"
+              (camerasNotFound)="noCameraFound($event)">
+</zxing-scanner>

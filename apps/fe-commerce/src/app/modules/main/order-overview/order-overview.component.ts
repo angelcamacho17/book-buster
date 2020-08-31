@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Renderer2, AfterViewInit, ViewChild, ComponentRef, ViewContainerRef, ComponentFactory } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription, Subject } from 'rxjs';
-import { HeaderService, IOrder, getCurrentOrderRequest, IOrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, BackNavigationService, TranslationService, setHeaderRequest, IHeader, deleteOrderRequest, OrderService, setCurrentOrderRequest, replaceOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { HeaderService, IOrder, getCurrentOrderRequest, IOrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, TranslationService, setHeaderRequest, IHeader, deleteOrderRequest, OrderService, setCurrentOrderRequest, replaceOrderRequest } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -26,6 +26,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   public orderArticles$: Observable<IOrderArticle[]>;
   public orderArticle: IOrderArticle[];
   public subscriptions = new Subscription();
+  public totalPrice = 0;
 
   constructor(
     public store: Store<{ currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
@@ -33,7 +34,6 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     public router: Router,
     public matDialog: MatDialog,
     public ordArtsService: OrderArticlesService,
-    public bnService: BackNavigationService,
     public transServ: TranslationService,
     public headerService: HeaderService,
     public orderService: OrderService,
@@ -99,7 +99,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
       id: this.currentOrder?.id,
       description: this.currentOrder.description,
       articles: this.articles,
-      amount: this.getTotal(),
+      amount: this.totalPrice,
       customer: this.currentOrder.customer,
       createdBy: this.currentOrder.createdBy
     };
@@ -142,8 +142,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     this.router.navigate(['/main/home']);
   }
 
-
-  public _goBack() {
+  public goBack() {
     console.log('order modificada ', this.orderService.getOrderModifiedState());
 
     if (this.orderService.getOrderModifiedState()) {
@@ -151,12 +150,6 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     } else {
       this.returnUrl();
     }
-  }
-
-  public getTotal(): number {
-    let total = this.ordArtsService.getTotal();
-    total = Math.round(total * 100) / 100;
-    return total > 0 ? total : 0;
   }
 
   public _openConfirmDialog() {

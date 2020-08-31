@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
 import { OrderOverviewComponent } from '../order-overview.component';
 import { Store, select } from '@ngrx/store';
-import { IOrder, IOrderArticle, OrderArticlesService, BackNavigationService, TranslationService, HeaderService, OrderService, getCurrentOrderRequest, refreshOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
+import { IOrder, IOrderArticle, OrderArticlesService, TranslationService, HeaderService, OrderService, getCurrentOrderRequest, refreshOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,14 +19,13 @@ export class OrderOverviewMobileComponent extends OrderOverviewComponent impleme
     public router: Router,
     public matDialog: MatDialog,
     public ordArtsService: OrderArticlesService,
-    public bnService: BackNavigationService,
     public transServ: TranslationService,
     public headerService: HeaderService,
     public orderService: OrderService,
     public layoutService: LayoutService
     ) {
       super(store, snackBar, router, matDialog,
-            ordArtsService, bnService, transServ,
+            ordArtsService, transServ,
             headerService, orderService, layoutService)
       this.subscriptions.add(
         this.headerService.rightIconClicked
@@ -35,12 +34,13 @@ export class OrderOverviewMobileComponent extends OrderOverviewComponent impleme
 
       this.subscriptions.add(
         this.headerService.goBack
-          .subscribe(() => this._goBack())
+          .subscribe(() => this.goBack())
       );
 
       this.$articles = this.store.pipe(select('orderArticles'));
       this.subscriptions.add(
         this.$articles.subscribe((arts) => {
+          this.totalPrice = this.ordArtsService.total;
           this.articles = arts;
         })
       );

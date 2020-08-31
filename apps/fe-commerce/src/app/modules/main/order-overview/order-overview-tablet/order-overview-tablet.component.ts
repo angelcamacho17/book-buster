@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, NgZone, ViewContainerRef, AfterViewChecke
 import { OrderOverviewComponent } from '../order-overview.component';
 import { Store, select } from '@ngrx/store';
 import {
-  IOrder, IOrderArticle, OrderArticlesService, BackNavigationService, TranslationService, HeaderService, OrderService,
+  IOrder, IOrderArticle, OrderArticlesService, TranslationService, HeaderService, OrderService,
   getCurrentOrderRequest, refreshOrderArticlesRequest, clearCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest,
   isUndefined
 } from '@fecommerce-workspace/data-store-lib';
@@ -24,26 +24,27 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
   public substractArt = 0;
   private _userWentBack = false;
+  private tempSubstraction = false;
 
   constructor(public store: Store<{ currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
     public snackBar: MatSnackBar,
     public router: Router,
     public matDialog: MatDialog,
     public ordArtsService: OrderArticlesService,
-    public bnService: BackNavigationService,
     public transServ: TranslationService,
     public headerService: HeaderService,
     public orderService: OrderService,
     public layoutService: LayoutService
   ) {
     super(store, snackBar, router, matDialog,
-      ordArtsService, bnService, transServ,
+      ordArtsService, transServ,
       headerService, orderService, layoutService)
 
     this.$articles = this.store.pipe(select('orderArticles'));
     this.subscriptions.add(
       this.$articles.subscribe((arts) => {
         console.log('orderarticles changed', arts)
+        this.totalPrice = this.ordArtsService.total;
         this.articles = arts;
       })
     );
@@ -126,14 +127,14 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     }
   }
 
-  public getTotal(): number {
-    let total = this.ordArtsService.getTotal() - this.substractArt;
-    total = Math.round(total * 100) / 100;
-    return total > 0 ? total : 0;
+  public setArtToDelete(price: number) {
+    this.totalPrice = this.totalPrice - price;
+    this.tempSubstraction = true;
   }
 
-  public setArtToDelete(price: number) {
-    this.substractArt = price;
+  public undoDelete(price: number) {
+    this.totalPrice = this.totalPrice + price;
+    this.tempSubstraction = false;
   }
 
   /* BEGIN Customer search functionality */
@@ -263,6 +264,9 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     //If the time of the snackbar
     //hasnt past yet, and the user wnats tyo go back
     //delete the article and dismiss snackbar
+    if (this.tempSubstraction) {
+      this.orderConfirmed();
+    }
     if (this.subscriptions) {
       this.subscriptions.unsubscribe();
     }

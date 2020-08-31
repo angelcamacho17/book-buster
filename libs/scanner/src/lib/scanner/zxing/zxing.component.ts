@@ -1,16 +1,13 @@
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+import { ScannerComponent } from '../scanner.component';
 
 @Component({
   selector: 'fe-zxing',
   templateUrl: './zxing.component.html',
   styleUrls: ['./zxing.component.scss']
 })
-export class ZxingComponent implements OnInit {
-  @ViewChild('scanner') scanner: ZXingScannerComponent;
-  @Output() scanSuccess = new EventEmitter<any>();
-  @Output() scanError = new EventEmitter<any>();
-  @Output() scanStarted = new EventEmitter<any>();
+export class ZxingComponent extends ScannerComponent implements OnInit {
 
   public formatsList = [
     'CODABAR',
@@ -24,36 +21,11 @@ export class ZxingComponent implements OnInit {
   ];
 
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {}
 
-  onScanSuccess(event) {
-    this.scanSuccess.emit(event);
-  }
 
-  onScanError(event) {
-    this.scanError.emit(event);
-  }
-
-  onStarted(event) {
-    this.scanStarted.emit(event);
-  }
 }
-
-
-/*
-  const matcher = ({ label }) => /back|trás|rear|video|traseira|environment|ambiente/gi.test(label);
-        navigator.mediaDevices.enumerateDevices()
-        .then((devices) => {
-          console.log('SETTING DEVICES------')
-
-          const device = this.devices.find(matcher) || null;
-          this.currentDevice = device;
-            console.log('Devices: ', devices, 'Device: ', device, "current device: ", this.currentDevice)
-            devices.forEach(data => {
-              if (data.label) {
-                this.devices.push(data);
-              }
-            });
-          }); */

@@ -450,29 +450,45 @@ export class ArticleService {
         "description": "Other fetal and newborn aspiration without respiratory symptoms",
         "price": +"44.40"
       }];
-    articles = new BehaviorSubject(this._articles);
+    public articles = new BehaviorSubject(this._articles);
 
     constructor() { }
 
-    all(): Observable<IArticle[]> {
+    /**
+     * @returns All articles
+     */
+    public getAll(): Observable<IArticle[]> {
         return this.articles.asObservable();
     }
-
-    get(articleId: number): Observable<IArticle> {
+    /**
+     * Get article
+     * @param articleId
+     * @returns article
+     */
+    public getArticle(articleId: number): Observable<IArticle> {
       const article = this._articles.find((a) => {
         return a.id === articleId;
       });
       return of(article ?? null); // ?? -> Si la izquierda es falso, null o undefined, devuelve valor de la derecha.
     }
-
-    append(article: IArticle): Observable<IArticle[]> {
+    /**
+     * Create article
+     * @param article
+     * @returns articles
+     */
+    public append(article: IArticle): Observable<IArticle[]> {
         const lastArticleId = this._articles[this._articles.length - 1].id;
         this._articles.concat({...article, ...{ id: lastArticleId + 1 }});
         this.articles.next(this._articles);
         return this.articles.asObservable();
     }
 
-    replace(article: IArticle): Observable<IArticle[]> {
+    /**
+     * Edit article
+     * @param article
+     * @returns articles
+     */
+    public replace(article: IArticle): Observable<IArticle[]> {
         const index = this._articles.findIndex(a => a.id === article.id);
         this._articles[index].name = article.name;
         this._articles[index].description = article.description;
@@ -481,7 +497,12 @@ export class ArticleService {
         return this.articles.asObservable();
     }
 
-    delete(articleId: any): Observable<IArticle[]> {
+    /**
+     * Delete article
+     * @param articleId
+     * @returns articles
+     */
+    public delete(articleId: any): Observable<IArticle[]> {
       const index = this._articles.findIndex(a => a.id === articleId);
       this._articles.splice(index, 1);
       this.articles.next(this._articles);

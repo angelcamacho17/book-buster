@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ComponentFactoryResolver } from '@angular/core';
-import { IArticle, changedNavigationRequest } from '@fecommerce-workspace/data-store-lib';
+import { IArticle } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { RowComponent } from '../row.component';
 import { Store } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { EventService } from '../../../services/event.service';
 })
 export class ArticleRowComponent implements OnInit {
 
-  @Input() item: any;
+  @Input() item: IArticle;
 
   constructor(private _router: Router,
               private eventService: EventService,

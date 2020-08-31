@@ -28,9 +28,9 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   public showDeleteBtn = false;
   public waitToDeleted = false;
   public articleToDelete = null;
-  public addArt = false;
-  public returnUrl = 'order';
+  public totalPrice = 0;
   @Output() artToDelete = new EventEmitter<number>();
+  @Output() deleteUndo = new EventEmitter<number>();
 
   constructor(
     public snackBar: MatSnackBar,
@@ -41,15 +41,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     public router: Router,
     public headerService: HeaderService,
     public layoutService: LayoutService
-  ) {
-    this.$articles = this.store.pipe(select('orderArticles'));
-    this.listenToOrderArts();
-    this.store.dispatch(refreshOrderArticlesRequest());
-    if (this.ordSer.currentOrder?.id) {
-      this.addArt = true;
-      this.returnUrl = 'order/edit';
-    }
-  }
+  ) { }
 
 
   ngOnInit(): void {
@@ -100,6 +92,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     //Substract from total temporally
     this.substractTemp(article);
     // Emit to listen in order overview for tablet
+    this.totalPrice = this._substractArt;
     this.artToDelete.emit(this._substractArt);
 
     //Update with temporally delete
@@ -117,16 +110,17 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
         this.deleteArticle(article);
         this.listenToOrderArts();
       } else {
+        this.deleteUndo.emit(this._substractArt)
         this.listenToOrderArts();
         this.store.dispatch(refreshOrderArticlesRequest());
 
       }
       this._substractArt = 0;
       this.artToDelete.emit(0);
-      const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
-      setTimeout(() => {
-        inputElement.click();
-      }, 1);
+      // const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
+      // setTimeout(() => {
+      //   inputElement.click();
+      // }, 1);
     });
   }
 
@@ -136,6 +130,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
         startWith([]),
         map((state) => {
           if (state) {
+            this.totalPrice = this.ordArtsService.total;
             this.articles = state;
             return this.articles;
           } else {
@@ -143,12 +138,6 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
           }
         })
       );
-  }
-
-  public getTotal(): number {
-    let total = this.ordArtsService.getTotal() - this._substractArt;
-    total = Math.round(total * 100) / 100;
-    return total > 0 ? total : 0;
   }
 
   public substractTemp(article: IOrderArticle): void {
@@ -160,6 +149,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     //hasnt past yet, and the user wnats tyo go back
     //delete the article and dismiss snackbar
     if (this.waitToDeleted) {
+      console.log('ART DELETED')
       this.deleteArticle(this.articleToDelete);
       this.snackBar.dismiss();
     }

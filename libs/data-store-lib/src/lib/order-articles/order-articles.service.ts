@@ -8,20 +8,41 @@ import { OrderService } from '../order/order.service';
 export class OrderArticlesService {
 
   private _orderArticles: IOrderArticle[] = [];
+  public total = 0;
   // private orderArticles = new BehaviorSubject(this._orderArticles);
 
   constructor() { }
 
-  public all(): Observable<IOrderArticle[]> {
+  /**
+   * @returns All order articles.
+   */
+  public getAll(): Observable<IOrderArticle[]> {
     return of(this._orderArticles);
   }
 
-  public set(orderArticles: IOrderArticle[]): Observable<IOrderArticle[]> {
-    console.log('seteado: ', orderArticles)
+  /**
+   * Set order articles
+   * @param orderArticles
+   * @returns order created
+   */
+
+  public setOrderArticles(orderArticles: IOrderArticle[]): Observable<IOrderArticle[]> {
     this._orderArticles = orderArticles;
     return of(this._orderArticles);
   }
 
+  /**
+   * Set total price of order articles.
+   */
+  public setTotal(): void {
+    this.total = this.getTotal()
+  }
+
+  /**
+   * Create an order article
+   * @param orderArticle
+   * @returns order articles
+   */
   public append(orderArticle: IOrderArticle): Observable<IOrderArticle[]> {
     const lastOrderArticleId = this._orderArticles[this._orderArticles.length - 1]?.id ?? 0;
     orderArticle = { ...orderArticle, ...{ id: lastOrderArticleId + 1 } }
@@ -29,12 +50,21 @@ export class OrderArticlesService {
     return of(this._orderArticles);
   }
 
+  /**
+   * Edit order article of an order
+   * @param orderArticle
+   * @returns order articles
+   */
   public replace(orderArticle: IOrderArticle): Observable<IOrderArticle[]> {
     this.delete(orderArticle.id);
     this.append(orderArticle);
     return of(this._orderArticles);
   }
 
+  /**
+   * Delete order article
+   * @returns all order articles
+   */
   public delete(articleId: any): Observable<IOrderArticle[]> {
     const articles = [];
     for (let i = 0; i < this._orderArticles.length; i++) {
@@ -49,6 +79,10 @@ export class OrderArticlesService {
     return of(this._orderArticles);
   }
 
+  /**
+   * Calculate total an order.
+   * @param order
+   */
   public getTotal(): number {
     if (this._orderArticles == null) {
       return 0;

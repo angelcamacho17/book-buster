@@ -426,28 +426,21 @@ export class OrderService {
   public currentOrder: IOrder = null;
 
   constructor(
-    private httpClient: HttpClient,
     private _ordArtsService: OrderArticlesService
   ) { }
 
   /**
-   * Set modified order flag to true in order to avoid leaving the order without saving
-   * is used to open a confirm dialog when returning from order overview, or search articles.
-   * Depending on the flow.
+   * @returns All orders
    */
-  public setOrderModifiedState(state: boolean): void {
-    this._modifiedOrder = state;
-  }
-
-  public getOrderModifiedState(): boolean {
-    return this._modifiedOrder;
-  }
-
-  public all(): Observable<IOrder[]> {
-    this.setOrdersTotal();
+  public getAll(): Observable<IOrder[]> {
     return of(this._orders);
   }
 
+  /**
+   * Create an order
+   * @param order
+   * @returns order created
+   */
   public append(order: IOrder): Observable<IOrder[]> {
     const lastIOrderId = this._orders[this._orders.length - 1]?.id;
     const newIOrder: IOrder = {
@@ -462,7 +455,13 @@ export class OrderService {
     return of(this._orders);
   }
 
-  public replace(order: IOrder): Observable<IOrder[]> {
+  /**
+   * Edit customer of an order
+   * @param order
+   * @returns order modified
+   */
+
+  public replaceCustomer(order: IOrder): Observable<IOrder[]> {
     const orders = [];
     const editedIOrder = {
       id: this.currentOrder.id,
@@ -487,6 +486,10 @@ export class OrderService {
 
   }
 
+  /**
+   * Delete order
+   * @returns all orders
+   */
   public delete(): Observable<IOrder[]> {
     const orders = [];
     for (let i = 0; i < this._orders.length; i++) {
@@ -500,6 +503,11 @@ export class OrderService {
     return of(this._orders);
   }
 
+  /**
+   * Set currrent order
+   * @param order
+   * @returns current order
+   */
   public setCurrentOrder(order: IOrder): Observable<any> {
     if (this.currentOrder === null) {
       this.currentOrder = order;
@@ -508,22 +516,35 @@ export class OrderService {
     return of(this.currentOrder);
   }
 
+  /**
+   * Modify current order.
+   * @param order
+   * @returns current order
+   */
   public replaceCurrentOrder(order: IOrder): Observable<any> {
     this.currentOrder = order;
     this._modifiedOrder = true;
     return of(this.currentOrder);
   }
-
+  /**
+   * @returns current order.
+   */
   public getCurrentOrder(): Observable<IOrder> {
     return of(this.currentOrder);
   }
 
+  /**
+   * clear current order
+   */
   public clearCurrentOrder(): Observable<any> {
     this.currentOrder = null;
     return of(null);
   }
 
-  private setOrdersTotal(): void {
+  /**
+   * Set total for every order.
+   */
+  public setOrdersTotal(): void {
     if (this.totalsCalculated) {
       return;
     }
@@ -533,6 +554,10 @@ export class OrderService {
     this.totalsCalculated = true;
   }
 
+  /**
+   * Calculate total an order.
+   * @param order
+   */
   private calculateTotal(order: IOrder): number {
     let total = 0;
     for (const orderArticle of order.articles) {
@@ -543,34 +568,19 @@ export class OrderService {
     // Substracting discounts
     total = total - 45.13
     return Math.round(total * 100) / 100;
+
+  }
+
+  /**
+   * Set modified order flag to true in order to avoid leaving the order without saving
+   * is used to open a confirm dialog when returning from order overview, or search articles.
+   * Depending on the flow.
+   */
+  public setOrderModifiedState(state: boolean): void {
+    this._modifiedOrder = state;
+  }
+
+  public getOrderModifiedState(): boolean {
+    return this._modifiedOrder;
   }
 }
-
-/**
-
-
-  private getCollectionUrl() {
-    return this._baseUrl;
-  }
-
-  private getElementUrl(elementId: any) {
-    return this._baseUrl + '/' + encodeURIComponent(String(elementId));
-  }
-
-  public all() {
-    return this.httpClient.get<IOrder[]>(this.getCollectionUrl());
-  }
-
-  public append(order: IOrder) {
-    return this.httpClient.post<IOrder>(this.getCollectionUrl(), order);
-  }
-
-  public replace(car: IOrder) {
-    return this.httpClient.put<IOrder>(this.getElementUrl(car.id), car);
-  }
-
-  public delete(carId: number) {
-    return this.httpClient.delete<IOrder>(this.getElementUrl(carId));
-  }
-
- */

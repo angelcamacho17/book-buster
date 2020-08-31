@@ -11,7 +11,7 @@ import { EventService } from '../../../services/event.service';
 })
 export class CustomerRowComponent implements OnDestroy {
   // @Output() customerChange = new EventEmitter<Customer>();
-  @Input() item: any;
+  @Input() item: ICustomer;
   public smaller: Observable<boolean>;
   public initials = '';
   private _subscriptions = new Subscription();

@@ -11,7 +11,6 @@ export * from './lib/customer/customer.actions';
 export * from './lib/order/order.actions';
 export * from './lib/article/article.actions'
 export * from './lib/order-articles/order-articles.actions';
-export * from './lib/back-navigation/back-navigation.actions';
 export * from './lib/header/header.actions';
 
 /*  Model exports  */
@@ -25,7 +24,6 @@ export * from './lib/models/header.model';
 /* Services exports */
 export * from './lib/header/header.service';
 export * from './lib/order/order.service';
-export * from './lib/back-navigation/back.navigation.service';
 export * from './lib/order-articles/order-articles.service';
 
 export * from './lib/sdp/config/config.service';

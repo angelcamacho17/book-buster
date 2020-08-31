@@ -13,7 +13,7 @@ export class CustomerEffects{
   refreshCustomers$ = createEffect(() =>this.actions$.pipe(
     ofType(refreshCustomersRequest),
     mergeMap(() => {
-      return this.customerService.all().pipe(
+      return this.customerService.getAll().pipe(
         map(customers => refreshCustomersDone({customers})),
         catchError(() => EMPTY)
       );

@@ -23,7 +23,6 @@ export class FeCustomerRowComponent implements OnDestroy {
     private _ordSer: OrderService,
     private router: Router,
     private _store: Store<{ currentOrder: Order }>,
-    private _bnService: BackNavigationService
   ) {
 
     if (this.item) {

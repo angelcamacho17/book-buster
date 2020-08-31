@@ -15,7 +15,7 @@ export class ArticleEffects {
     getArticle$ = createEffect(() => this.actions$.pipe(
         ofType(getArticleRequest),
         mergeMap((action) => {
-            return this.articleService.get(action.articleId).pipe(
+            return this.articleService.getArticle(action.articleId).pipe(
                 map(article => getArticleDone({ article })),
                 catchError(() => EMPTY)
             )
@@ -25,7 +25,7 @@ export class ArticleEffects {
     refreshArticles$ = createEffect(() => this.actions$.pipe(
         ofType(refreshArticlesRequest),
         mergeMap(() => {
-            return this.articleService.all().pipe(
+            return this.articleService.getAll().pipe(
                 map(articles => refreshArticlesDone({ articles })),
                 catchError(() => EMPTY)
             )

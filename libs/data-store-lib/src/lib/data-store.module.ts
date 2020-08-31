@@ -14,8 +14,6 @@ import { ArticleEffects } from './article/article.effects';
 import { ArticleService } from './article/article.service';
 import { OrderArticleEffects } from './order-articles/order-articles.effects';
 import { OrderArticlesService } from './order-articles/order-articles.service';
-import { BackNavigationService } from './back-navigation/back.navigation.service';
-import { BackNavigationEffects } from './back-navigation/back-navigation.effects';
 import { HeaderEffects } from './header/header.effects';
 import { HeaderService } from './header/header.service';
 
@@ -29,7 +27,6 @@ import { HeaderService } from './header/header.service';
       CustomerEffects,
       ArticleEffects,
       OrderArticleEffects,
-      BackNavigationEffects,
       HeaderEffects
     ])
   ],
@@ -41,7 +38,6 @@ import { HeaderService } from './header/header.service';
     CustomerService,
     ArticleService,
     OrderArticlesService,
-    BackNavigationService,
     HeaderService,
     {
       provide: RouterStateSerializer,

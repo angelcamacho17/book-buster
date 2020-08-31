@@ -13,7 +13,7 @@ export class OrderArticleEffects{
   refreshOrderArticles$ = createEffect(() => this.actions$.pipe(
     ofType(refreshOrderArticlesRequest),
     mergeMap(() => {
-      return this.orderArticlesService.all().pipe(
+      return this.orderArticlesService.getAll().pipe(
         map(orderArticles => {
           return refreshOrderArticlesDone({ orderArticles })
          }),
@@ -25,8 +25,11 @@ export class OrderArticleEffects{
   setOrderArticles$ = createEffect((): any => this.actions$.pipe(
     ofType(setOrderArticlesRequest),
     mergeMap((action) => {
-      return this.orderArticlesService.set(action.orderArticles).pipe(
-        map(orderArticles => refreshOrderArticlesDone({ orderArticles })),
+      return this.orderArticlesService.setOrderArticles(action.orderArticles).pipe(
+        map(orderArticles =>{
+          this.orderArticlesService.setTotal();
+          return refreshOrderArticlesDone({ orderArticles })
+        }),
         catchError(() => EMPTY)
       )
     })

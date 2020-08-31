@@ -31,7 +31,7 @@
             {{'totalamt' | translate}}
           </h3>
           <div class="amount mat-body-2">
-            € {{getTotal()}}
+            € {{totalPrice}}
           </div>
         </div>
       </mat-card>
@@ -74,11 +74,14 @@
             {{'total' | translate}}
           </div>
           <div style="color: rgba(0, 0, 0, 0.6);">
-            € {{getTotal()}}
+            € {{totalPrice}}
           </div>
         </div>
       </mat-card>
     </div>
   </div>
-  <order-items-tablet class="right-content" (artToDelete)="setArtToDelete($event)" (confirmOrder)="orderConfirmed()"></order-items-tablet>
+  <order-items-tablet class="right-content"
+                      (artToDelete)="setArtToDelete($event)"
+                      (confirmOrder)="orderConfirmed()"
+                      (deleteUndo)="undoDelete($event)"></order-items-tablet>
 </div>

@@ -27,10 +27,6 @@ export class OrderItemsMobileComponent extends OrderItemsComponent implements On
       this.$articles = this.store.pipe(select('orderArticles'));
       this.listenToOrderArts();
       this.store.dispatch(refreshOrderArticlesRequest());
-      if (this.ordSer.currentOrder?.id) {
-        this.addArt = true;
-        this.returnUrl = 'order/edit';
-      }
     }
 
 

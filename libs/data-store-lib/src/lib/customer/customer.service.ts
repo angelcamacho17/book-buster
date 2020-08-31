@@ -99,15 +99,28 @@ export class CustomerService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public all(): Observable<ICustomer[]> {
+  /**
+   * @returns All customers.
+   */
+  public getAll(): Observable<ICustomer[]> {
     return this.customers.asObservable();
   }
 
+  /**
+   * Create a customer
+   * @param customer
+   * @returns customer
+   */
   public append(customer: ICustomer): Observable<ICustomer[]> {
     this.customers.next({ ...this._customers, ...customer });
     return this.customers.asObservable();
   }
 
+  /**
+   * Edit customer
+   * @param customer
+   * @returns customer
+   */
   public replace(customer: ICustomer): Observable<ICustomer[]> {
     const index = this._customers.findIndex(c => c.id === customer.id);
     this._customers[index].address = customer.address;
@@ -117,6 +130,11 @@ export class CustomerService {
     return this.customers.asObservable();
   }
 
+  /**
+   * Delete customer
+   * @param customerId
+   * @returns customers
+   */
   public delete(customerId: any): Observable<ICustomer[]> {
     const index = this._customers.findIndex(c => c.id === customerId);
     this._customers.splice(index, 1);
@@ -125,30 +143,3 @@ export class CustomerService {
   }
 
 }
-
-/*
-
-  private getCollectionUrl() {
-    return this._baseUrl;
-  }
-
-  private getElementUrl(elementId: any) {
-    return this._baseUrl + '/' + encodeURIComponent(String(elementId));
-  }
-
-  public all() {
-    return this.httpClient.get<Customer[]>(this.getCollectionUrl());
-  }
-
-  public append(customer: Customer) {
-    return this.httpClient.post<Customer>(this.getCollectionUrl(), customer);
-  }
-
-  public replace(car: Customer) {
-    return this.httpClient.put<Customer>(this.getElementUrl(car.id), car);
-  }
-
-  public delete(carId: number) {
-    return this.httpClient.delete<Customer>(this.getElementUrl(carId));
-  }
-   */

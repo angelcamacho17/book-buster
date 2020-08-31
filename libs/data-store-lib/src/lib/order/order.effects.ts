@@ -12,16 +12,6 @@ export class OrderEffects {
     private actions$: Actions
   ) { }
 
-  /* replaceArticlesOnCurrentOrder$ = createEffect(() => this.actions$.pipe(
-    ofType(replaceArticlesOnCurrentOrder),
-    mergeMap((action) => {
-      return this.orderService.replaceArticles(action.orderArticles).pipe(
-        map((order) => refreshOrderDone({ order })),
-        catchError(() => EMPTY)
-      );
-    })
-  )); */
-
   refreshOrder = createEffect(() => this.actions$.pipe(
     ofType(refreshOrderRequest),
     mergeMap(() => {
@@ -37,7 +27,8 @@ export class OrderEffects {
   refreshOrders$ = createEffect(() => this.actions$.pipe(
     ofType(refreshOrdersRequest),
     mergeMap(() => {
-      return this.orderService.all().pipe(
+      this.orderService.setOrdersTotal();
+      return this.orderService.getAll().pipe(
         map(orders => refreshOrdersDone({ orders })),
         catchError(() => EMPTY)
       );
@@ -95,7 +86,7 @@ export class OrderEffects {
     mergeMap((action) => {
 
       if (this.orderService.currentOrder?.id) {
-        return this.orderService.replace(action.order).pipe(
+        return this.orderService.replaceCustomer(action.order).pipe(
           map(() => refreshOrdersRequest()),
           catchError(() => EMPTY)
         );
@@ -121,7 +112,7 @@ export class OrderEffects {
   replaceOrder$ = createEffect((): any => this.actions$.pipe(
     ofType(replaceOrderRequest),
     mergeMap((action) => {
-      return this.orderService.replace(action.order).pipe(
+      return this.orderService.replaceCustomer(action.order).pipe(
         map(() => refreshOrdersRequest()),
         catchError(() => EMPTY)
       );

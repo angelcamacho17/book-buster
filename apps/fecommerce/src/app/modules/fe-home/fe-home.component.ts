@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, AfterContentChecked, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { setCurrentOrderRequest, clearCurrentOrderRequest, OrderService, setOrderArticlesRequest, BackNavigationService } from '@fecommerce-workspace/data-store-lib';
+import { setCurrentOrderRequest, clearCurrentOrderRequest, OrderService, setOrderArticlesRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Order } from '@fecommerce-workspace/data-store-lib';
@@ -28,7 +28,6 @@ export class FeHomeComponent implements OnInit, AfterViewInit, AfterContentCheck
     private _router: Router,
     private _ordSer: OrderService,
     private _storeOrders: Store<{ orders: Order[] }>,
-    private _bnService: BackNavigationService,
     private _changeDetector: ChangeDetectorRef
   ) {
     this.orders$ = this._storeOrders.pipe(select('orders'));
@@ -82,7 +81,7 @@ export class FeHomeComponent implements OnInit, AfterViewInit, AfterContentCheck
 
   private _setHeaderHeight() {
     const header = document.getElementById('header');
-    
+
   }
 
   ngOnDestroy(): void {

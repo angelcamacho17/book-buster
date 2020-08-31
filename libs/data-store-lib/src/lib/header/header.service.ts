@@ -25,19 +25,33 @@ export class HeaderService {
     this.cleanHeader = this.header;
   }
 
+  /**
+   * set header options
+   * @param header
+   */
   public setHeader(header: IHeader): Observable<IHeader> {
     this.header = this.cleanHeader;
     this.header = header;
     return of(this.header);
   }
 
+  /**
+   * @returns header options
+   */
   public getHeader(): Observable<IHeader> {
     return of(this.header)
   }
+
+  /**
+   * Emits go back button action
+   */
   public onGoBack() {
     this.goBack.emit(true);
   }
 
+  /**
+   * Emits right button action
+   */
   public onRightIconClick() {
     this.rightIconClicked.emit(true);
   }
