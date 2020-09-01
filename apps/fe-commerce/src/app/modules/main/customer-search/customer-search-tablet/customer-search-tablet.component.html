@@ -16,7 +16,7 @@
   </div>
   <div class="search-container-dialog">
     <search (searchFocus)="showShadow($event)"
-            (searchBlur)="removeShadow()"
+            (searchBlur)="searchStarted()"
             (userSearching)="hidePanel($event)"
             (hasSearchResults)="handleSearchResults($event)"
             (customIconEvent)="showScanner()"

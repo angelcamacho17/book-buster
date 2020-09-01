@@ -1,7 +1,7 @@
 <base-component>
   <div class="header-extension">
     <search (searchFocus)="showShadow($event)"
-             (searchBlur)="removeShadow()"
+             (searchBlur)="searchStarted()"
              (userSearching)="hidePanel($event)"
              (hasSearchResults)="handleSearchResults($event)"
              (customIconEvent)="showScanner()"

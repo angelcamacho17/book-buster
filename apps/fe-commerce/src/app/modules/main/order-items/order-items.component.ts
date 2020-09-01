@@ -46,6 +46,10 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void { }
 
+  /**
+   * Open bottom sheet of the article detail.
+   * @param item
+   */
   public openBottomSheet(item: IOrderArticle): void {
     this._currentArt = item;
     const article = item.article;
@@ -63,13 +67,22 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   * Delete the article permantly.
+   * @param article
+   */
   public deleteArticle(article: IOrderArticle): void {
     this.ordSer.setOrderModifiedState(true);
     this.store.dispatch(deleteOrderArticleRequest({ orderArticleId: article.id }));
   }
 
+  /**
+   * Handle tempoaraly delete, before permanent delete.
+   * @param article
+   */
   public tempDelete(article: IOrderArticle): void {
 
+    // Raised flag in case to get out before the close of the snackbar.
     this.waitToDeleted = true;
     this.articleToDelete = article;
 
@@ -92,6 +105,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     ref.afterDismissed().subscribe((action) => {
       this.waitToDeleted = false;
       this.articleToDelete = null;
+      // If there is not UNDO action, delete permantly.
       if (!action.dismissedByAction) {
         this.deleteArticle(article);
         this.listenToOrderArts();
@@ -103,13 +117,12 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
       }
       this._substractArt = 0;
       this.artToDelete.emit(0);
-      // const inputElement: HTMLElement = document.getElementById('content') as HTMLElement;
-      // setTimeout(() => {
-      //   inputElement.click();
-      // }, 1);
     });
   }
 
+  /**
+   * Handle articles live list and total price.
+   */
   public listenToOrderArts(): void {
     this.filteredlist = this.$articles
       .pipe(
@@ -126,14 +139,18 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
       );
   }
 
+  /**
+   * Set article to delete.
+   * @param article
+   */
   public substractTemp(article: IOrderArticle): void {
     this._substractArt = article.quantity * article.article.price;
   }
 
   ngOnDestroy(): void {
-    //If the time of the snackbar
-    //hasnt past yet, and the user wnats tyo go back
-    //delete the article and dismiss snackbar
+    // If the time of the snackbar
+    // hasnt past yet, and the user wnats tyo go back
+    // delete the article and dismiss snackbar
     if (this.waitToDeleted) {
       console.log('ART DELETED')
       this.deleteArticle(this.articleToDelete);

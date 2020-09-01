@@ -39,6 +39,9 @@ export class OrderItemsTabletComponent extends OrderItemsComponent implements On
 
     ngOnInit(): void { }
 
+    /**
+     * Open article search to add another article to the current order.
+     */
     public openNewArticle(): void {
       const dialogRef = this.matDialog.open(ArticleSearchTabletComponent, {
         panelClass: 'no-padding-dialog',
@@ -57,10 +60,17 @@ export class OrderItemsTabletComponent extends OrderItemsComponent implements On
       );
     }
 
+    /**
+     * Emit event to confirm order.
+     */
     public orderConfirmed(): void {
       this.confirmOrder.emit(true);
     }
 
+    /**
+     * Emit total price of the article to delete.
+     * @param price
+     */
     public onArtToDelete(price: number): void {
       this.artToDelete.emit(price);
     }

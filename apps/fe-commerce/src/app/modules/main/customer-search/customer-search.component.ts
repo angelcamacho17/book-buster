@@ -82,6 +82,43 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
     });
   }
 
+    /**
+   * Handle customer scanner.
+   * @param scanResult
+   */
+  public loyaltyCardScanned(scanResult: ScanResult): void {
+    let snack;
+    // Pause scann to avoid errors.
+    if (this.pauseScan) {
+      return;
+    }
+
+    // Check if the code has a customer.
+    if (JSON.parse(scanResult.code)?.customer) {
+
+      const customerCode = JSON.parse(scanResult.code)?.customer;
+      this.pauseScan = true;
+
+      const customer = this.customers.find((c: any) => {
+        return c.name === customerCode.name;
+      });
+
+      if (customer) {
+        snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
+        this.handleCustomerScanned(customer)
+      } else {
+        snack = this.snackBar.open(`Customer could not be found.`, 'Close')
+      }
+    } else {
+      snack = this.snackBar.open(`Customer could not be found.`, 'Close')
+    }
+    snack.afterDismissed().subscribe(() => {
+      this.pauseScan = false;
+    });
+  }
+
+  public handleCustomerScanned(customer: ICustomer): void { }
+
   public onCustomerChange(customer: ICustomer) {
     this.handleSetCustomer(customer);
   }
@@ -95,6 +132,10 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Setting customer to the new current order.
+   * @param customer
+   */
   private _setCustomerToNewOrder(customer: ICustomer) {
     const order: IOrder = {
       description: 'Latest order',
@@ -106,6 +147,10 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
     this.store.dispatch(setCurrentOrderRequest({ order }));
   }
 
+  /**
+   * Replacing customer of the current order.
+   * @param customer
+   */
   private _replaceCustomerOnCurrentOrder(customer: ICustomer) {
     const order: IOrder = {
       id: this.currentOrder?.id,
@@ -117,28 +162,46 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
     }
     this.store.dispatch(replaceCurrentOrderRequest({ order }));
   }
-  /* Used to handle the selection of a customer */
 
+  /* Used to handle the states of the component */
+
+  /**
+   * Hide scanner and show initial state of the search.
+   * @param hide
+   */
   public hidePanel(hide: boolean): void {
     this.hide = hide;
   }
 
+  /**
+   * Finish laoding state.
+   * @param event
+   */
   public onStarted(event) {
     this.scannerStarted = true;
   }
 
+  /**
+   * On focus of the search, show shadow state.
+   * @param shadow
+   */
   public showShadow(shadow: boolean): void {
     this.shadow = shadow;
     this.scanner = false;
     this.scannerStarted = false;
   }
 
+  /**
+   * Show scanner.
+   */
   public showScanner() {
     this.scanner = true;
-
   }
 
-  public removeShadow(): void {
+  /**
+   * On start seaching, set state.
+   */
+  public searchStarted(): void {
     this.shadow = false;
     this.hide = false;
     this.scanner = false;
@@ -146,6 +209,10 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
 
   }
 
+  /**
+   * After a search, set vars to react propperly.
+   * @param results
+   */
   public handleSearchResults(results: any[]): void {
     this.emptyResults = results.length === 0;
     this.filteredResults = results;

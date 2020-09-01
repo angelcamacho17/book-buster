@@ -45,49 +45,9 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
     public snackBar: MatSnackBar,
     public eventService: EventService
 
-  ) { }
+    ) { }
 
   ngOnInit(): void { }
-
-  public overviewOrder(): void {
-    if (this.ordSer.currentOrder?.id) {
-      this.router.navigate(['/main/order-overview']);
-    } else {
-      this.router.navigate(['/main/order-overview']);
-    }
-  }
-
-  public hidePanel(hide: boolean): void {
-    this.hide = hide;
-  }
-
-  public showShadow(shadow: boolean): void {
-    this.shadow = shadow;
-    this.scanner = false;
-    this.scannerStarted = false;
-
-  }
-
-  public showScanner() {
-    this.scanner = true;
-  }
-
-
-  public removeShadow(): void {
-    this.shadow = false;
-    this.hide = false;
-    this.scanner = false;
-    this.scannerStarted = false;
-
-  }
-
-  public onStarted(event) {
-    this.scannerStarted = true;
-  }
-
-  public noDataPlaceholder(show: boolean): void {
-    this.nodata = show;
-  }
 
   /**
    * Handle article scanned.
@@ -110,16 +70,16 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
       this.router.navigate(['/main/article-detail', articleScanned.id]);
 
       const article = this.articles.find((a: any) => {
-         return a.description === articleScanned.description;
-       });
+          return a.description === articleScanned.description;
+        });
 
-       if (article) {
-         this.addToOrder(article);
-         // snack = this.snackBar.open(`Article ${article?.name} added to order.`, 'Close');
+        if (article) {
+          this.addToOrder(article);
+          // snack = this.snackBar.open(`Article ${article?.name} added to order.`, 'Close');
 
-       } else {
-         snack = this.snackBar.open(`Article could not be found.`, 'Close')
-       }
+        } else {
+          snack = this.snackBar.open(`Article could not be found.`, 'Close')
+        }
     } else {
       snack = this.snackBar.open(`Article could not be found.`, 'Close')
     }
@@ -131,6 +91,63 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
     }
 
   }
+
+  /**
+   * Handle navigation after select.
+   */
+  public overviewOrder(): void {
+    this.router.navigate(['/main/order-overview']);
+  }
+
+  /**
+   * Hide scanner and show initial state of the search.
+   * @param hide
+   */
+  public hidePanel(hide: boolean): void {
+    this.hide = hide;
+  }
+
+  /**
+   * On searching, show shadow state.
+   * @param shadow
+   */
+  public showShadow(shadow: boolean): void {
+    this.shadow = shadow;
+    this.scanner = false;
+    this.scannerStarted = false;
+
+  }
+
+  /**
+   * Show scanner.
+   */
+  public showScanner() {
+    this.scanner = true;
+  }
+
+  /**
+   * On start seaching, set state.
+   */
+  public searchStarted(): void {
+    this.shadow = false;
+    this.hide = false;
+    this.scanner = false;
+    this.scannerStarted = false;
+
+  }
+
+  /**
+   * Finish laoding state.
+   * @param event
+   */
+  public onStarted(event) {
+    this.scannerStarted = true;
+  }
+
+  public noDataPlaceholder(show: boolean): void {
+    this.nodata = show;
+  }
+
   /**
    * To be overright by the child classes.
    * @param article

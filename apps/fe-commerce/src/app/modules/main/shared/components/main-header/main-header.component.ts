@@ -57,6 +57,9 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
 
   }
 
+  /**
+   * handle go to last url visited.
+   */
   public goLastVisited(): void {
     if (this.checkGoBack) {
       this.headerService.onGoBack();
@@ -65,11 +68,17 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Return last url.
+   */
   public returnLastUrl(): void {
     this.router.navigate(['/' + this.header.lastUrl]);
     //this._storeUrl.dispatch(goBackNavigationRequest());
   }
 
+  /**
+   * Right icon click
+   */
   public rightIconClicked() {
     this.headerService.onRightIconClick();
   }

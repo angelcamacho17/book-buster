@@ -47,6 +47,9 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     // this._loadComponent();
   }
 
+  /**
+   * Delete the current order.
+   */
   public deleteOrder() {
     const dialogRef = this.matDialog.open(DialogComponent, {
       panelClass: 'no-padding-dialog',
@@ -73,12 +76,15 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     });
   }
 
+  /**
+   * On order confirmed.
+   */
   public orderConfirmed(): void {
     // if (isUndefined(this.order?.id) || this.order?.id == null) {
     // }
-    if (this.updatedOrder() === null) {
+    if (this.getUpdatedOrder() === null) {
     }
-    this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }))
+    this.store.dispatch(replaceCurrentOrderRequest({ order: this.getUpdatedOrder() }))
     this.store.dispatch(handleOrderRequest({ order: this.currentOrder }));
     this.store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
     const msg = 'Order succesfully confirmed';
@@ -89,7 +95,10 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     this.router.navigate(['/home']);
   }
 
-  public updatedOrder(): IOrder {
+  /**
+   * Get updated order with updated articles.
+   */
+  public getUpdatedOrder(): IOrder {
     const order: IOrder = {
       id: this.currentOrder?.id,
       description: this.currentOrder.description,
@@ -101,6 +110,9 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     return order;
   }
 
+  /**
+   * Change customer dialog.
+   */
   public changeCustomer(): void {
     const dialogRef = this.matDialog.open(DialogComponent, {
       width: '280px',
@@ -129,25 +141,36 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     );
   }
 
+  /**
+   * Go to order items.
+   */
   public openItems(): void {
     this.router.navigate(['/main/order-items']);
   }
 
+  /**
+   * Return to home.
+   */
   public returnUrl(): void {
     this.router.navigate(['/main/home']);
   }
 
+  /**
+   * Go back and handle if there is a current order.
+   */
   public goBack() {
-    console.log('order modificada ', this.orderService.getOrderModifiedState());
 
     if (this.orderService.getOrderModifiedState()) {
-      this._openConfirmDialog();
+      this.openConfirmDialog();
     } else {
       this.returnUrl();
     }
   }
 
-  public _openConfirmDialog() {
+  /**
+   * Open confirm/discard current order.
+   */
+  public openConfirmDialog() {
     const message = this.transServ.get('progressord');
     const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
       panelClass: 'no-padding-dialog',
@@ -174,6 +197,9 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
     );
   }
 
+  /**
+   * Reset current order values.
+   */
   private _cleanCurrentorder(): void {
     this.store.dispatch(setCurrentOrderRequest({ order: null }))
     const orderArticles = [];

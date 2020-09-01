@@ -71,67 +71,46 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
   ngOnInit(): void {
   }
 
-  private _goBack(fromHeader?: boolean) {
+  /**
+   * Manage routing depending on the flow and the moment.
+   * @param leftIconAction
+   */
+  private _goBack(leftIconAction?: boolean) {
+    // Read current flow
     const flow = this.orderService.orderFlow;
+
+    // If the action performing is the switch customer
     if (this.orderService.switchCustomerFlow) {
       return this.router.navigate(['/main/order-overview']);
+      // If is not, go back to last location.
     } else if (flow === 'new') {
+      // If the order exists
       if (this.currentOrder?.id) {
         this.location.back();
       } else {
-        if (fromHeader) {
+        // The action comes from the header
+        if (leftIconAction) {
           this.openConfirmDialog();
         } else {
           this.router.navigate(['/main/article-search']);
         }
       }
+      // If edit flow, just one location to go back
     } else if (flow === 'edit') {
       this.router.navigate(['/main/order-overview']);
     }
   }
 
-  /*
-  private _handleSetCustomer(customer: ICustomer): void {
-    console.log(this.currentOrder);
-    if (this.currentOrder) {
-      this.replaceCustomerOnCurrentOrder(customer);
-      this.location.back();
-    } else {
-      this.setCustomerToNewOrder(customer);
-      this.router.navigate(['/main/article-search']);
-    }
+  /**
+   * Handle customer selection.
+   * @param customer
+   */
+  public handleCustomerScanned(customer: ICustomer): void {
+    this.onCustomerChange(customer);
+    // Handle routing.
+    this._goBack();
   }
- */
 
-  public loyaltyCardScanned(scanResult: ScanResult) {
-    let snack;
-    if (this.pauseScan) {
-      return;
-    }
-
-    if (JSON.parse(scanResult.code)?.customer) {
-
-      const customerCode = JSON.parse(scanResult.code)?.customer;
-      this.pauseScan = true;
-
-      const customer = this.customers.find((c: any) => {
-        return c.name === customerCode.name;
-      });
-
-      if (customer) {
-        snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
-        this.onCustomerChange(customer);
-        this._goBack();
-      } else {
-        snack = this.snackBar.open(`Customer could not be found.`, 'Close')
-      }
-    } else {
-      snack = this.snackBar.open(`Customer could not be found.`, 'Close')
-    }
-    snack.afterDismissed().subscribe(() => {
-      this.pauseScan = false;
-    });
-  }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();

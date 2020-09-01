@@ -13,11 +13,19 @@ export class ArtSheetComponent implements OnInit {
   constructor(private _bottomSheetRef: MatBottomSheetRef<ArtSheetComponent>,
               @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {}
 
+
+  /**
+   * Dismiss sheet.
+   * @param event
+   */
   public close(event: MouseEvent): void {
     this._bottomSheetRef.dismiss();
     event.preventDefault();
   }
 
+  /**
+   * Delete article.
+   */
   public deleteArticle(): void {
     this._bottomSheetRef.dismiss('delete');
   }

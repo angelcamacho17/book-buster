@@ -21,10 +21,17 @@ export class DialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
      }
 
+  /**
+   * Click outsite.
+   */
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  /**
+   * Click in close button.
+   * @param result
+   */
   onClick(result: string): void {
     this.dialogRef.close({result});
   }

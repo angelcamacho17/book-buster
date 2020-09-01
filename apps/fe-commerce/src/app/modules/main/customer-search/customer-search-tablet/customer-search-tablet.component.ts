@@ -67,46 +67,19 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
   ngOnInit(): void {
   }
 
-/*   public onCustomerChange(customer: ICustomer) {
-    const flow = this.orderService.orderFlow;
-    if (flow === 'new') {
-      this._handleSetCustomer(customer);
-    } else if (flow === 'edit') {
-      this.replaceCustomerOnCurrentOrder(customer);
-    }
-  }
- */
-
-public loyaltyCardScanned(scanResult: ScanResult) {
-  let snack;
-  if (this.pauseScan) {
-    return;
+  /**
+   * Handle customer selection.
+   * @param customer
+   */
+  public handleCustomerScanned(customer: ICustomer): void {
+    this.onCustomerChange(customer);
+    // Handle routing.
+    this.rightButtonClick('next');
   }
 
-  if (JSON.parse(scanResult.code)?.customer) {
-
-    const customerCode = JSON.parse(scanResult.code)?.customer;
-    this.pauseScan = true;
-
-    const customer = this.customers.find((c: any) => {
-      return c.name === customerCode.name;
-    });
-
-    if (customer) {
-      snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
-      this.onCustomerChange(customer);
-      this.rightButtonClick('next');
-    } else {
-      snack = this.snackBar.open(`Customer could not be found.`, 'Close')
-    }
-  } else {
-    snack = this.snackBar.open(`Customer could not be found.`, 'Close')
-  }
-  snack.afterDismissed().subscribe(() => {
-    this.pauseScan = false;
-  });
-}
-
+  /**
+   * Listen left icon header click.
+   */
   public leftButtonClick(): void {
     const actionResult = {
       action: this.data?.firstButton
@@ -115,10 +88,16 @@ public loyaltyCardScanned(scanResult: ScanResult) {
 
   }
 
+  /**
+   * Listen click outside of the dialog.
+   */
   public onNoClick(): void {
     this.dialogRef.close();
   }
 
+  /**
+   * Listen right icon header click.
+   */
   public rightButtonClick(action = null): void {
     const actionResult = {
       action: action ?? this.data?.secondButton

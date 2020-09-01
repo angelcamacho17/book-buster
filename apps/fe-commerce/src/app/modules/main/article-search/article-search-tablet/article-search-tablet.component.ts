@@ -58,6 +58,9 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
     this.store.dispatch(refreshArticlesRequest());
   }
 
+  /**
+   * Listen left icon header click.
+   */
   public leftIconClick(): void {
     const result = {
       action: this.data?.firstButton
@@ -65,6 +68,9 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
     this.dialogRef.close(result)
   }
 
+  /**
+   * Listen right icon header click
+   */
   public rightIconClick(): void {
     const result = {
       action: this.data?.secondButton
@@ -72,6 +78,9 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
     this.dialogRef.close(result)
   }
 
+  /**
+   * Listen click outside od the dialog.
+   */
   public onNoClick(): void {
     this.dialogRef.close();
   }

@@ -34,7 +34,9 @@ export class OrderItemsMobileComponent extends OrderItemsComponent implements On
       this.subscribeToHeader();
     }
 
-
+    /**
+     * Listen to right icon click of the header.
+     */
     public subscribeToHeader() {
       this._subscriptions.add(
         this.headerService.rightIconClicked
@@ -42,10 +44,11 @@ export class OrderItemsMobileComponent extends OrderItemsComponent implements On
       );
     }
 
+    /**
+     * Navigate to articles search on edit flow.
+     */
     public goToArticles(): void {
       this.router.navigate(['/main/article-search/edit']);
     }
-
-
 
 }

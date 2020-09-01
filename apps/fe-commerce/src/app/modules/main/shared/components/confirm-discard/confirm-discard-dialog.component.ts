@@ -24,10 +24,16 @@ export class ConfirmDiscardDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Discard order-
+   */
   onDiscard() {
     this.matDialogRef.close(false);
   }
 
+  /**
+   * Confirm order.
+   */
   onConfirm() {
     this.matDialogRef.close(true);
   }
