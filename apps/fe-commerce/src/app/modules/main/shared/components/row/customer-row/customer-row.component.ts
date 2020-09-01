@@ -23,6 +23,9 @@ export class CustomerRowComponent implements OnDestroy {
     }
   }
 
+  /**
+   * Handle letter size.
+   */
   private reduceLetterSize(): Observable<boolean> {
     const fullName = this.item.name;
     if (fullName) {
@@ -36,6 +39,9 @@ export class CustomerRowComponent implements OnDestroy {
     }
   }
 
+  /**
+   * get initials per customer.
+   */
   public getInitials(): string {
     const fullName = this.item.name;
     if (fullName) {
@@ -52,10 +58,20 @@ export class CustomerRowComponent implements OnDestroy {
     }
   }
 
+  /**
+   * Get first letter.
+   * @param text
+   * @param index
+   */
   private getChar(text: string, index: number) {
     return text.charAt(index);
   }
 
+  /**
+   * Emit customer select event.
+   * @param event
+   * @param customer
+   */
   public onSelectCustomer(event, customer: ICustomer): void {
     this.eventService.customerChanged(customer);
   }

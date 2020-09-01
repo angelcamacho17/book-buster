@@ -23,6 +23,9 @@ export class RowComponent implements OnInit {
     this.loadComponent();
   }
 
+  /**
+   * Load dynamicly row component.
+   */
   private loadComponent(): void {
 
     this.dynHost.clear();

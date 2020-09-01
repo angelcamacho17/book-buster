@@ -52,23 +52,35 @@ export class SearchComponent implements OnInit, AfterContentInit, OnDestroy {
         // document.removeEventListener('touchforcechange', this.preventDefault, false);
     }
 
-    customIconClick() {
+    /**
+     * Emit event to open scanner.
+     */
+    public customIconClick() {
         this.customIconEvent.emit();
     }
 
-    onSearchFocus() {
+    /**
+     * Emit event on search focus.
+     */
+    public onSearchFocus() {
         this.searchFocus.emit(true);
 
         this._disableScroll();
     }
 
-    onSearchBlur() {
+    /**
+     * Emit on blur event.
+     */
+    public onSearchBlur() {
         this.searchBlur.emit(true);
 
         this._enableScroll();
     }
 
-    onSearchInput() {
+    /**
+     * Handle on typing event.
+     */
+    public onSearchInput() {
         if (this.input.length >= 3) {
             this._userSearching = true;
             this._filteredList = this.getFilteredResults();
@@ -81,11 +93,17 @@ export class SearchComponent implements OnInit, AfterContentInit, OnDestroy {
         this.userSearching.emit(this._userSearching);
     }
 
-    cleanSearch() {
+    /**
+     * Clear search.
+     */
+    public cleanSearch() {
         this.inputControl.setValue('');
     }
 
-    getFilteredResults(): any[] {
+    /**
+     * Filter results.
+     */
+    public getFilteredResults(): any[] {
         return this.list.filter((resource) => {
             return resource.name.toLowerCase().indexOf(this.input.toLowerCase()) > -1;
         })

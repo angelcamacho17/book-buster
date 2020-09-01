@@ -21,6 +21,10 @@ export class ArticleRowComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Emit article select event.
+   * @param item
+   */
   openArticleDetail(item) {
     this.eventService.articleSelected(item);
     this._router.navigate(['/main/article-detail', item.id]);
