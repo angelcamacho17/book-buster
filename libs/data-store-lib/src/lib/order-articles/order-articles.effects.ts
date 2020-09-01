@@ -38,6 +38,7 @@ export class OrderArticleEffects{
   appendArticle$ = createEffect(():any => this.actions$.pipe(
     ofType(appendOrderArticleRequest),
     mergeMap((action) => {
+      this.orderArticlesService.setTotal();
       return this.orderArticlesService.append(action.orderArticle).pipe(
         map(() => refreshOrderArticlesRequest()),
         catchError(() => EMPTY)
@@ -48,6 +49,7 @@ export class OrderArticleEffects{
   replaceArticle$ = createEffect(():any => this.actions$.pipe(
     ofType(replaceOrderArticleRequest),
     mergeMap((action) => {
+      this.orderArticlesService.setTotal();
       return this.orderArticlesService.replace(action.orderArticle).pipe(
         map(() => refreshOrderArticlesRequest()),
         catchError(() => EMPTY)
@@ -59,6 +61,7 @@ export class OrderArticleEffects{
     this.actions$.pipe(
     ofType(deleteOrderArticleRequest),
     mergeMap((action) => {
+      this.orderArticlesService.setTotal();
       return this.orderArticlesService.delete(action.orderArticleId).pipe(
         map(() => refreshOrderArticlesRequest()),
         catchError(() => EMPTY)

@@ -1,5 +1,4 @@
 import { Directive, Renderer2, ElementRef, AfterViewInit, HostListener, Input } from '@angular/core';
-import { ComponentService } from '../services/component.service';
 
 @Directive({
   selector: '[feScrollableDiv]'

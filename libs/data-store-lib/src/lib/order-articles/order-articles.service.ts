@@ -17,6 +17,7 @@ export class OrderArticlesService {
    * @returns All order articles.
    */
   public getAll(): Observable<IOrderArticle[]> {
+    this.setTotal()
     return of(this._orderArticles);
   }
 
@@ -84,6 +85,7 @@ export class OrderArticlesService {
    * @param order
    */
   public getTotal(): number {
+
     if (this._orderArticles == null) {
       return 0;
     }

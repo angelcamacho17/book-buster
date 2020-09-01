@@ -1,5 +1,4 @@
 import { Directive, HostListener, Renderer2, ElementRef, Input, AfterViewInit } from '@angular/core';
-import { ComponentService } from '../services/component.service';
 
 @Directive({
   selector: '[feSetMainHeight]'
@@ -10,8 +9,7 @@ export class SetMainHeightDirective implements AfterViewInit {
 
   constructor(
     private renderer: Renderer2,
-    private _el: ElementRef,
-    private componentService: ComponentService) { }
+    private _el: ElementRef,) { }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -25,12 +23,6 @@ export class SetMainHeightDirective implements AfterViewInit {
   }
 
   private setElHeight(): void {
-    const height = 'calc(100vh - ' + this.componentService.headerElement?.nativeElement?.offsetHeight + 'px)';
-    this.renderer.setStyle(
-      this._el.nativeElement,
-      'height',
-      height
-    );
   }
 
 }

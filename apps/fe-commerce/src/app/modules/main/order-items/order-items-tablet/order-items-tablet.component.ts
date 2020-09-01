@@ -74,4 +74,17 @@ export class OrderItemsTabletComponent extends OrderItemsComponent implements On
     public onArtToDelete(price: number): void {
       this.artToDelete.emit(price);
     }
+
+    ngOnDestroy(): void {
+      // If the time of the snackbar
+      // hasnt past yet, and the user wnats tyo go back
+      // delete the article and dismiss snackbar
+      if (this.waitToDeleted) {
+        this.deleteArticle(this.articleToDelete);
+        this.snackBar.dismiss();
+      }
+      if (this._subscriptions) {
+        this._subscriptions.unsubscribe();
+      }
+    }
 }

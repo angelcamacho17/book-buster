@@ -122,6 +122,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
    * Show scanner.
    */
   public showScanner() {
+    console.log('here')
     this.scanner = true;
   }
 
@@ -176,7 +177,6 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   public handleSearchResults(results: any[]): void {
     this.emptyResults = results.length === 0;
     this.filteredResults = results;
-    this.scanner = true;
   }
 
   ngOnDestroy(): void {

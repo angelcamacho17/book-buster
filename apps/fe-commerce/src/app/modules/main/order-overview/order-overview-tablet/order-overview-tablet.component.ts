@@ -45,7 +45,6 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     this.$articles = this.store.pipe(select('orderArticles'));
     this.subscriptions.add(
       this.$articles.subscribe((arts) => {
-        console.log('orderarticles changed', arts)
         this.totalPrice = this.ordArtsService.total;
         this.articles = arts;
       })
@@ -112,6 +111,8 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
         firstButton: 'cancel',
       }
       this._openNewOrderCustomer(dialogData);
+    } else if(this.currentOrder) {
+      this.orderService.addingArticlesOnNewOrder = true;
     }
   }
 
@@ -163,7 +164,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
    * @param price
    */
   public setArtToDelete(price: number) {
-    this.totalPrice = this.totalPrice - price;
+    this.totalPrice = ((Math.round((this.totalPrice - price)* 100) / 100) > 0) ? Math.round((this.totalPrice - price)* 100) / 100 : 0;
     this.tempSubstraction = true;
   }
 
@@ -172,7 +173,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
    * @param price
    */
   public undoDelete(price: number) {
-    this.totalPrice = this.totalPrice + price;
+    this.totalPrice = Math.round((this.totalPrice + price)* 100) / 100;
     this.tempSubstraction = false;
   }
 

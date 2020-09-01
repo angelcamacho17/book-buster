@@ -82,17 +82,17 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   public orderConfirmed(): void {
     // if (isUndefined(this.order?.id) || this.order?.id == null) {
     // }
-    if (this.getUpdatedOrder() === null) {
-    }
-    this.store.dispatch(replaceCurrentOrderRequest({ order: this.getUpdatedOrder() }))
-    this.store.dispatch(handleOrderRequest({ order: this.currentOrder }));
-    this.store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
-    const msg = 'Order succesfully confirmed';
-    this.snackBar.open(msg, '', {
-      duration: 5000,
-    });
+    if (this.getUpdatedOrder() !== null) {
+      console.log(this.getUpdatedOrder());
+      this.store.dispatch(replaceCurrentOrderRequest({ order: this.getUpdatedOrder() }))
+      this.store.dispatch(handleOrderRequest({ order: this.currentOrder }));
+      const msg = 'Order succesfully confirmed';
+      this.snackBar.open(msg, '', {
+        duration: 5000,
+      });
 
-    this.router.navigate(['/home']);
+      this.router.navigate(['/home']);
+    }
   }
 
   /**

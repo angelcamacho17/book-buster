@@ -56,6 +56,7 @@ export class SearchComponent implements OnInit, AfterContentInit, OnDestroy {
      * Emit event to open scanner.
      */
     public customIconClick() {
+        console.log('CLICK')
         this.customIconEvent.emit();
     }
 

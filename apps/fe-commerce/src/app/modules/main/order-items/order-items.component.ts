@@ -144,7 +144,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
    * @param article
    */
   public substractTemp(article: IOrderArticle): void {
-    this._substractArt = article.quantity * article.article.price;
+    this._substractArt = Math.round((article.quantity * article.article.price)* 100) / 100;
   }
 
   ngOnDestroy(): void {
@@ -152,7 +152,6 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     // hasnt past yet, and the user wnats tyo go back
     // delete the article and dismiss snackbar
     if (this.waitToDeleted) {
-      console.log('ART DELETED')
       this.deleteArticle(this.articleToDelete);
       this.snackBar.dismiss();
     }
