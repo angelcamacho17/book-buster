@@ -1,0 +1,31 @@
+.header-extension {
+  height: 66px;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+
+.search-container {
+
+  .load-shadow {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+
+    .spinner {
+      position: absolute;
+    }
+  }
+
+}
+
+
+.search-results-container {
+  flex: 1;
+}

@@ -1,0 +1,35 @@
+.header-tablet {
+  display: flex;
+  padding: 16px 40px;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 72px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.6);
+
+  .left-content {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+
+    .logo {
+      display: flex;
+      object-fit: cover;
+      height: 100%;
+    }
+
+    .title {
+      display: flex;
+      margin-left: 24px;
+      margin-bottom: 0;
+
+    }
+  }
+
+  .right-content {
+
+  }
+
+
+}

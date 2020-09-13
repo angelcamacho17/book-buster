@@ -1,0 +1,16 @@
+<div class="dialog">
+  <div>
+    <div class="mat-title title">
+        {{data?.title}}
+    </div>
+    <p class="mat-subheading-2" style="color: rgba(0, 0, 0, 0.6)">{{data?.msg}}</p>
+  </div>
+  <div class="buttons">
+    <button mat-flat-button (click)="onClick(data.firstButton)">
+      {{data?.firstButton | uppercase}}
+    </button>
+    <button mat-flat-button [ngClass]="data?.buttonColor" (click)="onClick(data.secondButton)">
+      {{data?.secondButton | uppercase}}
+    </button>
+  </div>
+</div>

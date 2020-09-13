@@ -1,0 +1,87 @@
+<div class="tablet-content">
+  <div class="left-content">
+    <div class="main-content">
+      <div class="mat-headline componet-title">
+        <mat-icon class="icon" (click)="goBackButton()">keyboard_arrow_left</mat-icon>
+        {{'orderover' | translate}}
+      </div>
+      <mat-card class="customer-row mat-elevation-z0">
+        <div class="customer-info">
+          <div class="avatar">
+            <div class="mat-body-2 initials-sidenav" [ngClass]="currentOrder?.customer?.smallIcon ? 'mat-body-1' : ''">
+              {{ currentOrder?.customer?.initials }}</div>
+          </div>
+          <div class="item">
+            <div class="item-info">
+              <h3 class="mat-headline" class="title">
+                {{currentOrder?.customer?.name}}
+              </h3>
+              <div class="mat-body-1" class="subtitle">
+                {{currentOrder?.customer?.email}}
+              </div>
+            </div>
+          </div>
+          <mat-icon (click)="changeCustomer()">
+            link_off
+          </mat-icon>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="total">
+          <h3 class="mat-headline" style="margin: 0px;">
+            {{'totalamt' | translate}}
+          </h3>
+          <div class="amount mat-body-2">
+            € {{totalPrice}}
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="order-items mat-elevation-z0 active">
+        <div class="items-amount">
+          <div class="title mat-subheading-2">
+            {{'orderitems' | translate}}
+          </div>
+          <div class="items mat-body-1">
+            {{articles?.length}} {{'items' | translate}}
+          </div>
+        </div>
+        <mat-icon class="icon">
+          keyboard_arrow_right
+        </mat-icon>
+      </mat-card>
+    </div>
+    <div class="footer-content">
+      <mat-card class="card mat-elevation-z0">
+        <div class="info-total mat-subheading-2">
+          <div>
+            {{'discounts' | translate}}
+          </div>
+          <div class="mat-body-2" style="color: rgba(0, 0, 0, 0.6);">
+            € 45.13
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="info-total mat-subheading-2">
+          <div>
+            {{'vat' | translate}}
+          </div>
+          <div class="mat-body-2" style="color: rgba(0, 0, 0, 0.6);">
+            € 10.55
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="order-total mat-headline">
+          <div style="color: rgba(0, 0, 0, 0.87);">
+            {{'total' | translate}}
+          </div>
+          <div style="color: rgba(0, 0, 0, 0.6);">
+            € {{totalPrice}}
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <order-items-tablet class="right-content"
+                      (artToDelete)="setArtToDelete($event)"
+                      (confirmOrder)="orderConfirmed()"
+                      (deleteUndo)="undoDelete($event)"></order-items-tablet>
+</div>

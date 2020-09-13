@@ -1,0 +1,17 @@
+<mat-toolbar class="header-toolbar" [ngClass]="(centered | async) ? 'centered' : ''">
+  <div class="light"></div>
+  <div *ngIf="leftIcon | async" class="icon">
+    <mat-icon class="navigation-icon" (click)="goLastVisited()">
+      {{leftIcon | async}}
+    </mat-icon>
+  </div>
+  <div class="title" [ngClass]="titClass | async">
+    {{title | async}}
+  </div>
+  <div class="right-icon-container">
+    <mat-icon [ngClass]="(rightIcon | async)===undefined ? 'not-show' : (rightIconClass | async)"
+              (click)="rightIconClicked()">
+      {{rightIcon | async}}
+    </mat-icon>
+  </div>
+</mat-toolbar>

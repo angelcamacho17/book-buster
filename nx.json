@@ -22,17 +22,13 @@
     "fe-commerce": {
       "tags": []
     },
-    "fecommerce": {
-      "tags": []
-    },
-    "fecommerce-e2e": {
-      "tags": [],
-      "implicitDependencies": ["fecommerce"]
-    },
     "data-store-lib": {
       "tags": []
     },
     "scanner": {
+      "tags": []
+    },
+    "book-buster": {
       "tags": []
     }
   },

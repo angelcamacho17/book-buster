@@ -1,0 +1,10 @@
+.drawer-container {
+  height: 100%;
+  .sidenav-content {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 72px);
+  }
+}

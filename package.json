@@ -27,7 +27,7 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "postinstall": "node ./decorate-angular-cli.js"
+    "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
   },
   "private": true,
   "dependencies": {
@@ -79,6 +79,7 @@
     "ts-node": "~8.10.2",
     "tslint": "~6.1.2",
     "typescript": "~3.9.7",
-    "eslint-plugin-cypress": "^2.10.3"
+    "eslint-plugin-cypress": "^2.10.3",
+    "codelyzer": "~5.0.1"
   }
 }
