@@ -8,7 +8,7 @@ main {
   justify-content: stretch;
   align-items: stretch;
   box-sizing: border-box;
-  height: calc(100vh - 112px);
+  height: calc(100% - 112px);
   width: 100vw;
   //query when in talbet
   @include tablet {
