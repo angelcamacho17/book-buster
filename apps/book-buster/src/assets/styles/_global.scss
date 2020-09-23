@@ -1,6 +1,6 @@
 @import "./responsive_mixins";
 
-main {
+.main {
   position: relative;
   display: -webkit-flex;
   display: flex;
@@ -16,7 +16,7 @@ main {
   // }
 
   .scrollable-container {
-    flex: 1;
+    height: calc(100vh - 112px);
     overflow: auto;
     box-sizing: border-box;
     padding-top: 24px;
