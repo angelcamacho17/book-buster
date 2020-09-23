@@ -12,10 +12,7 @@ import { Subscription, Observable } from 'rxjs';
 })
 export class HomeComponent implements OnDestroy {
   public subscriptions = new Subscription();
-  public orders$: Observable<IOrder[]>;
-  public orders: IOrder[];
-  public currentOrder$: Observable<IOrder>;
-  public currentOrder: IOrder;
+  public categories = ['Software', 'Medicine', 'Culture', 'Love', 'Math', 'Science']
 
   constructor(
     public store: Store<{ orders: IOrder[], currentOrder: IOrder }>,
@@ -27,42 +24,10 @@ export class HomeComponent implements OnDestroy {
   ) { }
 
   /**
-   * Logout of the app.
+   * Post a book.
    */
-  public logout() {
-    this.router.navigate(['/login'])
-  }
+  public postBook() {
 
-  /**
-   * Set current order in data store
-   * @param order
-   */
-  public setCurrentOrder(order: IOrder) {
-    this.store.dispatch(setCurrentOrderRequest({ order }))
-  }
-
-  /**
-   * Set order articles opf the current order.
-   */
-  public setOrderArticles(order: IOrder) {
-    this.store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }))
-
-  }
-
-  /**
-   * Clear current order and order articles.
-   */
-  public clearData() {
-    this.store.dispatch(clearCurrentOrderRequest());
-    this.store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
-  }
-
-  /**
-   * Get all the updated orders.
-   */
-  public refreshOrders() {
-    console.log('here')
-    this.store.dispatch(refreshOrdersRequest())
   }
 
   ngOnDestroy(): void {

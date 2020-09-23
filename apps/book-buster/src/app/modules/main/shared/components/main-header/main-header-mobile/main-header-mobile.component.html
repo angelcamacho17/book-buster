@@ -1,5 +1,4 @@
 <mat-toolbar class="header-toolbar" [ngClass]="(centered | async) ? 'centered' : ''">
-  <div class="light"></div>
   <div *ngIf="leftIcon | async" class="icon">
     <mat-icon class="navigation-icon" (click)="goLastVisited()">
       {{leftIcon | async}}
