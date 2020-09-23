@@ -30,6 +30,13 @@ export class HomeComponent implements OnDestroy {
 
   }
 
+  /**
+   * Logout of the app.
+   */
+  public logout() {
+    this.router.navigate(['/login'])
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

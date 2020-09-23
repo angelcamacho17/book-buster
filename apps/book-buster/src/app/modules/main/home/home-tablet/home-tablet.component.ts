@@ -27,7 +27,10 @@ export class HomeTabletComponent extends HomeComponent implements OnDestroy {
       headerService,
       layoutService
     );
-
+    this.subscriptions.add(
+      this.headerService.rightIconClicked
+      .subscribe(() => this.logout())
+    );
   }
 
 

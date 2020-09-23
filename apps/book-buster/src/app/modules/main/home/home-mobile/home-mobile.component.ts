@@ -27,6 +27,10 @@ export class HomeMobileComponent extends HomeComponent implements OnDestroy {
       headerService,
       layoutService
     );
+    this.subscriptions.add(
+      this.headerService.rightIconClicked
+      .subscribe(() => this.logout())
+    );
   }
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();

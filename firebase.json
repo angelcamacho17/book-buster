@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "y",
+    "public": "dist/apps/book-buster",
     "ignore": [
       "firebase.json",
       "**/.*",
