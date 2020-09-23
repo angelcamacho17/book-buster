@@ -1,43 +1,42 @@
-<div class="tablet-content" id="content">
+<div class="tablet-content">
   <div class="content">
     <div class="order-items-title">
-      {{('orderitems' | translate) | uppercase}}
+      {{ ('orderitems' | translate) | uppercase }}
       <mat-icon (click)="openNewArticle()">
         add
       </mat-icon>
     </div>
-    <mat-card *ngIf="(filteredlist | async).length !== 0" class="card mat-elevation-z0">
+    <mat-card *ngIf="this.currentOrder?.articlesLines && this.currentOrder.articlesLines.length !== 0" class="card mat-elevation-z0">
       <div class="list" >
-        <div class="list-item" *ngFor="let item of filteredlist | async;">
+        <div class="list-item" *ngFor="let item of this.currentOrder.articlesLines;">
           <div class="content" (click)="openBottomSheet(item)">
             <div class="info">
               <div class="mat-subheading-2 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.87);">
-                {{ item?.quantity > 1 ? item?.quantity + 'x ' : ''}} {{item?.article?.name}}
+                {{ item?.qty > 1 ? item?.qty + 'x ' : '' }} {{ item?.article?.name }}
               </div>
               <div class="mat-body-1 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.6);">
-                {{item?.article?.description}}
+                <!-- {{item?.article?.documentNr}} -->
               </div>
             </div>
             <div class="price mat-subheading-2" style="margin: 0;">
-              € {{item?.article?.price}}
+              € {{ item?.article?.salesPrice?.excl | number : '1.2-2' }}
             </div>
           </div>
         </div>
       </div>
-
     </mat-card>
-    <div *ngIf="(filteredlist | async).length === 0" class="mat-body-2 no-data">
-      {{'nodata' | translate }}
+    <div *ngIf="!this.currentOrder?.articlesLines || this.currentOrder.articlesLines.length === 0" class="mat-body-2 no-data">
+      {{ 'nodata' | translate }}
     </div>
   </div>
-  <div class="tablet-footer">
-    <!-- <button mat-stroked-button
+  <!-- <div class="tablet-footer">
+    <button mat-stroked-button
             class="delete"
             (click)="deleteOrder()">
       {{('deletefromord' | translate) | uppercase}}
-    </button> -->
+    </button>
     <button mat-button class="confirm" (click)="orderConfirmed()">
       {{('confirm' | translate) | uppercase}}
     </button>
-  </div>
+  </div> -->
 </div>

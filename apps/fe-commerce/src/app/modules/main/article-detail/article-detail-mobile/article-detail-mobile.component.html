@@ -1,5 +1,6 @@
 <base-component>
-    <div class="page-content">
+    <loading-spinner *ngIf="loading"></loading-spinner>
+    <div class="page-content" *ngIf="!loading && initState">
         <div class="content" #content id="content">
             <div class="header-extension"></div>
             <mat-card class="card mat-elevation-z6">
@@ -8,13 +9,12 @@
                         <mat-list-item class="list-item">
                             <div mat-line class="order-title">
                                 <div class="mat-subheading-2 title">
-                                    <!-- {{article.name}} -->
-                                    {{'artcode' | translate}}
+                                  {{'artcode' | translate}}
                                 </div>
                             </div>
                             <div mat-line class="order-subtitle">
                                 <div class="mat-body-1 line">
-                                    {{article?.id}} - {{article?.name}}
+                                    {{this.article?.code}} - {{this.article?.name}}
                                     <!-- {{article.description}} -->
                                 </div>
                             </div>
@@ -29,7 +29,7 @@
                             </div>
                             <div mat-line class="order-subtitle">
                                 <div class="mat-body-1 line">
-                                    {{article?.description}}
+                                    {{this.article?.salesPrice.excl}}
                                     <!-- {{article.description}} -->
                                 </div>
                             </div>
@@ -47,17 +47,17 @@
                         {{'quantity' | translate}}
                     </div>
                     <div class="mat-title right">
-                        <button mat-icon-button (click)="removeQuantity()">
+                        <button mat-icon-button class="button" (click)="removeQuantity()">
                             <mat-icon class="icon">remove_circle_outline</mat-icon>
                         </button>
                         <div class="amount">{{amount}}</div>
-                        <button mat-icon-button (click)="addQuantity()">
+                        <button mat-icon-button class="button"(click)="addQuantity()">
                             <mat-icon class="icon">add_circle_outline</mat-icon>
                         </button>
                     </div>
                 </div>
             </mat-card>
-            <button mat-button color="primary" class="add-button" [disabled]="amount === 0"
+            <button disabled="article" mat-button color="primary" class="add-button" [disabled]="amount === 0"
                 (click)="addToOrder()">{{('addTo' | translate) | uppercase}}</button>
         </footer>
     </div>

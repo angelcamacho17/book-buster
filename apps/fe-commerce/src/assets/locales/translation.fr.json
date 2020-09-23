@@ -26,6 +26,8 @@
   "totalamt": "Total amount",
   "total": "Total",
   "items": "items",
+  "logoutInactive": "Votre connexion a été interrompue car le délai d’inactivité a été dépassé. Veuillez vous reconnecter.",
+  "logoutUser": "L’utilisateur est déjà connecté. Veuillez contacter votre administrateur.",
   "confirm": "confirm",
   "orderitems": "Order items",
   "switchcusmes": "Customer specific prices will be recalculated after asssigning a new customer.",
@@ -46,5 +48,7 @@
   "customerkey": "Customer Key",
   "ordersitems": "Orders items",
   "nodata": "No data to display.",
-  "back": "back"
+  "back": "back",
+  "orderConfirmed": "Order succesfully confirmed.",
+  "needArts": "You must add at least one article."
 }

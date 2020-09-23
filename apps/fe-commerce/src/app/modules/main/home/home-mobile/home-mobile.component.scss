@@ -1,6 +1,6 @@
 
 .header-extension {
-  background: #645fce;
+  background: #1666d8;
   padding-bottom: 16px;
   .input {
       height: 48px;
@@ -20,18 +20,20 @@
       border: 1px solid rgba(0, 0, 0, 0.12);
       height: 81px;
       padding-left: 16px;
-      padding-top: 11px;
+      padding-top: 8px;
       padding-bottom: 8px;
-      padding-right: 23.13px;
+      padding-right: 24px;
       margin-bottom: 16px;
       box-sizing: border-box;
       .card-content {
+          width: 100%;
           display: -webkit-flex;
           display: flex;
           flex-flow: row nowrap;
           justify-content: space-between;
           align-content: center;
           .content {
+              width: calc(100% - 24px);
               .order-title {
                   margin: 0 !important;
                   padding: 0 !important;
@@ -62,6 +64,7 @@
 
       .icon {
           align-self: center;
+          margin-right: -8px;
       }
 
       &.last {

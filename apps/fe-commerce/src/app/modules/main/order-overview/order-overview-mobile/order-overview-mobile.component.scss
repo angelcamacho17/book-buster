@@ -15,7 +15,7 @@
           .avatar {
             background-color: rgba(0, 0, 0, 0.1);
             height: 40px;
-            width: 55.28px;
+            width: 40px !important;
             border-radius: 50%;
             display: flex;
             flex-flow: column wrap;
@@ -27,16 +27,21 @@
 
           .item {
             display: flex;
-            width: 100%;
+            width: calc(100% - 80px);
             height: 71px;
             justify-content: space-between;
             align-items: center;
             margin-left: 16px;
 
             .item-info {
+              width: 100%;
               .title {
                 display: flex;
                 margin: 0 !important;
+                width: calc(100% - 55px);
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
                 height: 28px;
                 color: rgba(0, 0, 0, 0.87);
                 align-items: center;
@@ -82,7 +87,7 @@
     .fe-button {
       height: 48px;
       width: 100%;
-      background-color: #645fce;
+      background-color: #1666d8;
       color: #fff;
     }
   }

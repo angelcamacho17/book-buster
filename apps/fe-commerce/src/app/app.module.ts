@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DataStoreModule, ConfigService, CustomerKeyResolver, SDPInitializer, SDP_INITIALIZER, SDP_PRIORITY_INITIALIZER, KeyValueStoreService, SDP_LOCALES, getLocales, LanguageService, MyHammerConfig, AuthTokenService, HCSClient, HcsModule, KeyvaluestoreModule, LanguageModule, TranslatePipeModule, FeAuthGuard, FeLoginGuard, HCSLoad } from '@fecommerce-workspace/data-store-lib';
+import { DataStoreModule, ConfigService, CustomerKeyResolver, SDPInitializer, SDP_INITIALIZER, SDP_PRIORITY_INITIALIZER, KeyValueStoreService, SDP_LOCALES, getLocales, LanguageService, MyHammerConfig, AuthTokenService, HCSClient, HcsModule, KeyvaluestoreModule, LanguageModule, TranslatePipeModule, FeAuthGuard, FeLoginGuard, HCSLoad, FeOrderGuard } from '@fecommerce-workspace/data-store-lib';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { FormsModule } from '@angular/forms';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -41,6 +41,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   providers: [
     FeAuthGuard,
     FeLoginGuard,
+    FeOrderGuard,
     ConfigService,
     CustomerKeyResolver,
     KeyValueStoreService,

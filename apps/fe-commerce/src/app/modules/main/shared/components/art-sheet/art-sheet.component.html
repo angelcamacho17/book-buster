@@ -16,7 +16,7 @@
       description
     </mat-icon>
     <div class="text text-truncate">
-      {{article?.description}}
+      {{article?.name}}
     </div>
   </div>
   <div class="description mat-body-2">
@@ -24,7 +24,7 @@
       payment
     </mat-icon>
     <div class="text">
-      € {{article?.price}}
+      € {{article?.salesPrice?.excl}}
     </div>
   </div>
   <button mat-stroked-button

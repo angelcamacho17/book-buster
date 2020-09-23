@@ -23,6 +23,7 @@ main {
     padding-left: 16px;
     padding-right: 16px;
     padding-bottom: 36px;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -49,7 +50,7 @@ main {
       position: absolute;
       height: 40px;
       width: 100%;
-      background: #645fce;
+      background: #1666d8;
       left: 0;
     }
   }
@@ -61,16 +62,16 @@ main {
   width: calc(100% - 32px);
   left: 16px;
   bottom: 32px;
-  background-color: #645fce;
+  background-color: #1666d8;
   color: #fff;
-  z-index: 1;
+  z-index: 2;
 }
 
 .header-extension {
   position: absolute;
   height: 40px;
   width: 100%;
-  background: #645fce;
+  background: #1666d8;
   left: 0;
 }
 
@@ -103,7 +104,7 @@ main {
 /* Set progress spinner colors */
 
 .mat-progress-spinner circle, .mat-spinner circle {
-  stroke: #645fce;
+  stroke: #1666d8;
   z-index: 1;
 }
 
@@ -156,6 +157,7 @@ main {
     color: rgba(0, 0, 0, 0.6);
   }
 }
+
 
 /* iPhone 11 */
 @media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {

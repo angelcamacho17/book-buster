@@ -1,6 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { LayoutService } from '../shared/services/layout.service';
-import { OrderService, IOrder, TranslationService, HeaderService, clearCurrentOrderRequest, setOrderArticlesRequest, refreshOrdersRequest, setCurrentOrderRequest, replaceCurrentOrderRequest, IOrderArticle } from '@fecommerce-workspace/data-store-lib';
+import { IOrder,IArticleLine } from '@fecommerce-workspace/data-store-lib';
+import { clearCurrentOrderRequest, refreshOrdersRequest, getOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, TranslationService, HeaderService, AuthService } from '@fecommerce-workspace/data-store-lib';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
@@ -13,9 +15,11 @@ import { Subscription, Observable } from 'rxjs';
 export class HomeComponent implements OnDestroy {
   public subscriptions = new Subscription();
   public orders$: Observable<IOrder[]>;
-  public orders: IOrder[];
+  public orders: IOrder[] = [];
   public currentOrder$: Observable<IOrder>;
   public currentOrder: IOrder;
+  public loading = true;
+  public previewLoading = true;
 
   constructor(
     public store: Store<{ orders: IOrder[], currentOrder: IOrder }>,
@@ -23,46 +27,73 @@ export class HomeComponent implements OnDestroy {
     public orderService: OrderService,
     public translationService: TranslationService,
     public headerService: HeaderService,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    public authService: AuthService
   ) { }
 
   /**
    * Logout of the app.
    */
   public logout() {
-    this.router.navigate(['/login'])
+    this.authService.logout();
   }
 
-  /**
+   /**
    * Set current order in data store
    * @param order
    */
   public setCurrentOrder(order: IOrder) {
-    this.store.dispatch(setCurrentOrderRequest({ order }))
+    this.store.dispatch(getOrderRequest({ orderId: order?.uuid}))
   }
 
-  /**
-   * Set order articles opf the current order.
-   */
-  public setOrderArticles(order: IOrder) {
-    this.store.dispatch(setOrderArticlesRequest({ orderArticles: order?.articles }))
-
-  }
-
-  /**
+ /**
    * Clear current order and order articles.
    */
   public clearData() {
     this.store.dispatch(clearCurrentOrderRequest());
-    this.store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
   }
 
   /**
    * Get all the updated orders.
    */
   public refreshOrders() {
-    console.log('here')
     this.store.dispatch(refreshOrdersRequest())
+  }
+
+  /**
+   * Subscribe to orders reducer.
+   */
+  public subscribeToOrders() {
+    this.orders$ = this.store.pipe(select('orders'));
+    this.subscriptions.add(
+      this.orders$.subscribe((data: any) => {
+        this.orders = data?.body?.data?.orders;
+        this.loading = false;
+      })
+    )
+  }
+
+  /**
+   * Subscribe to current order reducer.
+   */
+  public subscribeToCurrentOrder() {
+    this.currentOrder$ = this.store.pipe(select('currentOrder'));
+    this.subscriptions.add(
+      this.currentOrder$.subscribe((data: any) => {
+        this.currentOrder = data;
+        this.previewLoading = false;
+      })
+    );
+  }
+
+  /**
+   * Subscribe to header events.
+   */
+  public subscribeToHeader() {
+    this.subscriptions.add(
+      this.headerService.rightIconClicked
+        .subscribe(() => this.logout())
+    );
   }
 
   ngOnDestroy(): void {

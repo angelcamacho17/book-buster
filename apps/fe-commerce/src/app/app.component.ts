@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { routesAnimations } from './modules/animations/routes.animation';
 
@@ -10,11 +10,17 @@ import { routesAnimations } from './modules/animations/routes.animation';
     routesAnimations
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'fe-commerce';
 
   prepareRoute(outlet: RouterOutlet) {
     /* tslint:disable:no-string-literal */
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+
+  ngOnDestroy(): void {
+    if (localStorage.getItem('CAMERA_ALLOWED')){
+      localStorage.removeItem('CAMERA_ALLOWED');
+    }
   }
 }

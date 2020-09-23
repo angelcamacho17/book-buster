@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { IOrder, clearCurrentOrderRequest, setOrderArticlesRequest, refreshOrdersRequest, IHeader, setHeaderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
+import { Store } from '@ngrx/store';
+import { IHeader, setHeaderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
 
 @Injectable()
 export class CustomerSearchResolver implements Resolve<any> {

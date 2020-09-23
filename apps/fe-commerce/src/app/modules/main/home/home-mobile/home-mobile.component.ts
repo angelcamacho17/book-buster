@@ -1,7 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
-import { OrderService, IOrder, HeaderService, TranslationService } from '@fecommerce-workspace/data-store-lib';
+import { Store } from '@ngrx/store';
+import { IOrder,IArticleLine } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, TranslationService, HeaderService, AuthService } from '@fecommerce-workspace/data-store-lib';
 import { HomeComponent } from '../home.component';
 import { LayoutService } from '../../shared/services/layout.service';
 
@@ -12,12 +13,13 @@ import { LayoutService } from '../../shared/services/layout.service';
 })
 export class HomeMobileComponent extends HomeComponent implements OnDestroy {
   constructor(
-    public store: Store<{ orders: IOrder[], currentOrder: IOrder }>,
+    public store: Store<{ orders: IOrder[], currentOrder: IOrder, orderArticles: IArticleLine[] }>,
     public router: Router,
     public orderService: OrderService,
     public translationService: TranslationService,
     public headerService: HeaderService,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    public authService: AuthService
   ) {
     super(
       store,
@@ -25,41 +27,27 @@ export class HomeMobileComponent extends HomeComponent implements OnDestroy {
       orderService,
       translationService,
       headerService,
-      layoutService
+      layoutService,
+      authService
     );
-    this.orders$ = this.store.pipe(select('orders'));
-    this.subscriptions.add(
-      this.orders$.subscribe(data => {
-        console.log('SETTINGS ORDERS', this.orders)
-        if (data.length) {
-          data = data.slice().sort((a, b) => b.id - a.id)
-        }
-        this.orders = data;
-      })
+    setTimeout(() => {
+      this.loading = true;
 
-      )
+    });
 
-      this.currentOrder$ = this.store.pipe(select('currentOrder'));
-      this.subscriptions.add(
-      this.currentOrder$.subscribe(data => {
+    this.subscribeToOrders();
+    this.subscribeToCurrentOrder();
+    this.subscribeToHeader();
 
-        this.currentOrder = data;
-      })
-      );
-
-      this.subscriptions.add(
-        this.headerService.rightIconClicked
-        .subscribe(() => this.logout())
-      );
-
-      this.clearData();
-      this.refreshOrders();
+    this.clearData();
+    this.refreshOrders();
   }
 
   /**
    * Create order-
    */
   public createOrder() {
+    // this.store.dispatch(appendOrderRequest({order: null}))
     this.orderService.orderFlow = 'new';
     this.clearData();
     this.router.navigate(['/main/customer-search']);
@@ -72,7 +60,6 @@ export class HomeMobileComponent extends HomeComponent implements OnDestroy {
   public openOrder(order: IOrder): void {
     this.orderService.orderFlow = 'edit';
     this.setCurrentOrder(order);
-    this.setOrderArticles(order);
     this.router.navigate(['/main/order-overview']);
   }
 

@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ArticleRowComponent } from '../shared/components/row/article-row/article-row.component';
-import { IArticle, OrderService, IOrder, refreshArticlesRequest, IOrderArticle, setOrderArticlesRequest, replaceOrderArticleRequest, appendOrderArticleRequest, replaceCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { IArticle, OrderService, IOrder, refreshArticlesRequest, IArticleLine, getArticlesRequest, getScannedArticleRequest } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { LayoutService } from '../shared/services/layout.service';
 import { ScanResult } from '@fecommerce-workspace/scanner';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,8 +18,10 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   public rowType = ArticleRowComponent;
   public articles: IArticle[] = [];
   public _articles$: Observable<IArticle[]>;
+  public articleScanned: IArticle;
+  public _articleScanned$: Observable<IArticle>;
   public _subscriptions = new Subscription();
-  public scanner = false;
+  public scanner = true;
   public navigation$: Observable<string>;
   public hide = false;
   public nodata = false;
@@ -27,18 +29,17 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   public lastUrl = 'neworder';
   public emptyResults = true;
   public filteredResults: IArticle[] = [];
-  public display = false;
-  public displayResults = false;
+  public loading = true;
   public pauseScan = false;
-  public innerHeight = null;
-  public orderArticles: IOrderArticle[];
+  public orderArticles: IArticleLine[];
   public currentOrder: IOrder;
   public _currentOrder$: Observable<IOrder>;
-  public _orderArticles$: Observable<IOrderArticle[]>;
+  public _orderArticles$: Observable<IArticleLine[]>;
   public scannerStarted = false;
+  public firstCall = true;
 
   constructor(
-    public store: Store<{ articles: IArticle[], currentOrder: IOrder, orderArticles: IOrderArticle[]  }>,
+    public store: Store<{ article: IArticle, articles: IArticle[], currentOrder: IOrder, orderArticles: IArticleLine[]  }>,
     public ordSer: OrderService,
     public router: Router,
     public layoutService: LayoutService,
@@ -47,48 +48,8 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
 
     ) { }
 
-  ngOnInit(): void { }
-
-  /**
-   * Handle article scanned.
-   * @param scanResult
-   */
-  public articleCodeScanned(scanResult: ScanResult) {
-    let snack;
-    // Pause scanning.
-    if (this.pauseScan) {
-      return;
-    }
-
-    // If scanned code has article property
-    if (JSON.parse(scanResult?.code)?.article) {
-
-      const articleScanned = JSON.parse(scanResult?.code)?.article ;
-      this.pauseScan = true;
-
-      this.eventService.articleSelected(articleScanned);
-      this.router.navigate(['/main/article-detail', articleScanned.id]);
-
-      const article = this.articles.find((a: any) => {
-          return a.description === articleScanned.description;
-        });
-
-        if (article) {
-          this.addToOrder(article);
-          // snack = this.snackBar.open(`Article ${article?.name} added to order.`, 'Close');
-
-        } else {
-          snack = this.snackBar.open(`Article could not be found.`, 'Close')
-        }
-    } else {
-      snack = this.snackBar.open(`Article could not be found.`, 'Close')
-    }
-    // After snack bar closed, continue scanner.
-    if (snack) {
-      snack.afterDismissed().subscribe(() => {
-        this.pauseScan = false;
-      });
-    }
+  ngOnInit(): void {
+    localStorage.setItem('CAMERA_ALLOWED', 'true')
 
   }
 
@@ -97,6 +58,41 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
    */
   public overviewOrder(): void {
     this.router.navigate(['/main/order-overview']);
+  }
+  /**
+   * Handle article scanned.
+   * @param scanResult
+   */
+  public articleCodeScanned(scanResult: ScanResult) {
+    // Pause scanning.
+    if (this.pauseScan) {
+      return;
+    }
+    this.pauseScan = true;
+
+    this.store.dispatch(getScannedArticleRequest({ barcode: scanResult.code?.code }))
+    return;
+  }
+
+  /**
+   * Handle article scanned
+   * @param article
+   */
+  public handleScannRes(article: any) {
+    let snack;
+
+    if (article !== undefined && article !== null && article?.uuid) {
+      this.router.navigate(['/main/article-detail/', article.uuid]);
+    } else {
+      snack = this.snackBar.open(`Article could not be found.`, 'Close')
+    }
+    this.pauseScan = false;
+    // After snack bar closed, continue scanner.
+    if(snack) {
+      snack.afterDismissed().subscribe(() => {
+        this.pauseScan = false;
+      });
+    }
   }
 
   /**
@@ -121,11 +117,25 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   /**
    * Show scanner.
    */
-  public showScanner() {
-    console.log('here')
-    this.scanner = true;
+  public showScanner(event?) {
+    if (localStorage.getItem('CAMERA_ALLOWED') && localStorage.getItem('CAMERA_ALLOWED')==='false'){
+      const msg = 'Refresh your page to allow the camera';
+      const snackRef = this.snackBar.open(msg, 'REFRESH', {
+        duration: 5000,
+      });
+      snackRef.afterDismissed().subscribe((action)=>{
+        if (action.dismissedByAction) {
+          this.loading = true;
+          setTimeout(() => {
+            location.reload();
+          }, 0);
+          event.stopImmediatePropagation();
+        }
+      });
+    } else {
+      this.scanner = true;
+    }
   }
-
   /**
    * On start seaching, set state.
    */
@@ -142,6 +152,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
    * @param event
    */
   public onStarted(event) {
+
     this.scannerStarted = true;
   }
 
@@ -160,31 +171,69 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
    */
   public updatedOrder(): IOrder {
     const order: IOrder = {
-      id: this.currentOrder?.id,
-      description: this.currentOrder.description,
-      articles: this.orderArticles,
-      amount: this.currentOrder.amount,
+      uuid: this.currentOrder?.uuid,
+      documentNr: this.currentOrder?.documentNr,
+      articlesLines: this.orderArticles,
+      total: this.currentOrder.total,
       customer: this.currentOrder.customer,
-      createdBy: this.currentOrder.createdBy
+      created: this.currentOrder.created
     };
     return order;
   }
 
+   /**
+  * After a search, set vars to react propperly.
+  * @param query
+  */
+ public handleSearchResults(query: any): void {
+  this.emptyResults = query.length === 0;
+  if (query.length > 2) {
+    this.loading = true;
+    this.store.dispatch(getArticlesRequest({ filter: query }))
+  } else {
+    setTimeout(() => {
+      this.loading = false;
+    })
+    this.filteredResults = [];
+    this.articles = [];
+  }
+}
+
   /**
-   * After a search, set vars to react propperly.
-   * @param results
+   * Permission response.
    */
-  public handleSearchResults(results: any[]): void {
-    this.emptyResults = results.length === 0;
-    this.filteredResults = results;
+  public handlePermission(event) {
+    if (event === false) {
+      localStorage.setItem('CAMERA_ALLOWED', 'false')
+
+      this.noCameraFound(false);
+      const msg = 'You need to allow the camera to access the scanner';
+      this.snackBar.open(msg, '', {
+        duration: 2000,
+      });
+    } else {
+      localStorage.setItem('CAMERA_ALLOWED', 'true')
+    }
+  }
+
+  /**
+   * No camera found.
+   * @param event
+   */
+  public noCameraFound(event) {
+    this.scanner = false;
+    this.loading = false;
   }
 
   ngOnDestroy(): void {
+    this.filteredResults = [];
     if (this._subscriptions) {
       this._subscriptions.unsubscribe();
     }
+    this.store.dispatch(refreshArticlesRequest());
     this.scanner = false;
     this.scannerStarted = false;
+    localStorage.setItem('CAMERA_ALLOWED', 'true')
 
   }
 }

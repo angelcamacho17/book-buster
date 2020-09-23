@@ -26,7 +26,7 @@
 
   .item {
     display: flex;
-    width: 100%;
+    width: calc(100% - 56px);
     height: 64px;
     justify-content: space-between;
     align-items: center;
@@ -40,7 +40,6 @@
       align-items: flex-start;
       max-height: 40px;
       .title {
-        padding-top: 15px;
         margin: 0 !important;
         height: 28px;
         color: rgba(0, 0, 0, 0.87);

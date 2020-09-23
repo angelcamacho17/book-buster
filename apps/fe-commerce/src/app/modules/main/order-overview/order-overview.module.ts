@@ -9,7 +9,7 @@ import { OrderOverviewRoutingModule } from './order-overview-routing.module';
 import { OrderOverviewTabletComponent } from './order-overview-tablet/order-overview-tablet.component';
 import { OrderOverviewMobileComponent } from './order-overview-mobile/order-overview-mobile.component';
 import { OrderItemsModule } from '../order-items/order-items.module';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -27,10 +27,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   providers: [
     {
       provide: MatDialogRef,
-      useValue: {}
-    },
-    {
-      provide: MAT_DIALOG_DATA,
       useValue: {}
     }
  ],

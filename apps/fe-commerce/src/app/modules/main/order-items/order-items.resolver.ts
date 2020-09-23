@@ -12,30 +12,13 @@ export class OrderItemsResolver implements Resolve<any> {
   ) { }
 
   resolve(): Observable<any> {
-    const flow = this._orderService.orderFlow;
-    let header;
-    if (flow === 'edit') {
-      header = this._headerEditOrderFlow();
-    } else {
-      header = this._headerNewOrderFlow();
-    }
+    const header = this._headerOrderFlow();
 
     this._store.dispatch(setHeaderRequest({ header }))
     return of(null);
   }
 
-  private _headerNewOrderFlow(): IHeader {
-    const header: IHeader = {
-      title: 'orderitems',
-      leftIcon: 'keyboard_arrow_left',
-      titClass: 'mat-title',
-      lastUrl: 'main/order-overview',
-      centered: true
-    }
-    return header;
-  }
-
-  private _headerEditOrderFlow(): IHeader {
+  private _headerOrderFlow(): IHeader {
     const header: IHeader = {
       title: 'orderitems',
       leftIcon: 'keyboard_arrow_left',

@@ -1,9 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { IOrder, OrderService, HeaderService, TranslationService, clearCurrentOrderRequest, setOrderArticlesRequest, refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
+import { IOrder,IArticleLine } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, TranslationService, HeaderService, AuthService } from '@fecommerce-workspace/data-store-lib';
 import { HomeComponent } from '../home.component';
 import { LayoutService } from '../../shared/services/layout.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'home-tablet',
@@ -11,13 +13,19 @@ import { LayoutService } from '../../shared/services/layout.service';
   styleUrls: ['./home-tablet.component.scss']
 })
 export class HomeTabletComponent extends HomeComponent implements OnDestroy {
+  public initials = '';
+  public orderArticles: IArticleLine[] = [];
+  public orderArticles$: Observable<IArticleLine[]>;
+  public totalPrice = 0;
+
   constructor(
     public store: Store<{ orders: IOrder[], currentOrder: IOrder }>,
     public router: Router,
     public orderService: OrderService,
     public translationService: TranslationService,
     public headerService: HeaderService,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    public authService: AuthService
   ) {
     super(
       store,
@@ -25,35 +33,17 @@ export class HomeTabletComponent extends HomeComponent implements OnDestroy {
       orderService,
       translationService,
       headerService,
-      layoutService
+      layoutService,
+      authService
     );
-    this.orders$ = this.store.pipe(select('orders'));
-    this.subscriptions.add(
-      this.orders$.subscribe(data => {
-        console.log('SETTINGS ORDERS', this.orders)
-        if (data.length) {
-          data = data.slice().sort((a, b) => b.id - a.id)
-        }
-        this.orders = data;
-      })
-
-      )
-
-      this.currentOrder$ = this.store.pipe(select('currentOrder'));
-      this.subscriptions.add(
-      this.currentOrder$.subscribe(data => {
-
-        this.currentOrder = data;
-      })
-      );
-
-      this.subscriptions.add(
-        this.headerService.rightIconClicked
-        .subscribe(() => this.logout())
-      );
-
-      this.clearData();
-      this.refreshOrders();
+    setTimeout(() => {
+      this.loading = true;
+    });
+    this.subscribeToOrders();
+    this.subscribeToCurrentOrder();
+    this.subscribeToHeader();
+    this.clearData();
+    this.refreshOrders();
   }
 
   /**
@@ -79,9 +69,53 @@ export class HomeTabletComponent extends HomeComponent implements OnDestroy {
    * @param order
    */
   public previewOrder(order: IOrder): void {
+    setTimeout(() => {
+      this.previewLoading = true;
+    });
     this.clearData();
     this.setCurrentOrder(order);
-    this.setOrderArticles(order);
+  }
+
+  /**
+   * Subscribe to current order reducer.
+   */
+  public subscribeToCurrentOrder() {
+    this.currentOrder$ = this.store.pipe(select('currentOrder'));
+    this.subscriptions.add(
+      this.currentOrder$.subscribe((data: any) => {
+        this.currentOrder = data;
+        this.initials = this.getInitials()
+        this.previewLoading = false;
+      })
+    );
+  }
+
+  /**
+   * get initials per customer.
+   */
+  public getInitials(): string {
+    const fullName = this.currentOrder?.customer?.name;
+    if (fullName) {
+      const name: string[] = fullName.split(' ');
+      let initials: string;
+      if (name.length > 2) {
+        initials = `${this.getChar(name[0], 0)}${this.getChar(name[1], 0)}${this.getChar(name[2], 0)}`;
+      } else if (name.length > 1) {
+        initials = `${this.getChar(name[0], 0)}${this.getChar(name[1], 0)}`;
+      } else {
+        initials = `${this.getChar(name[0], 0)}`;
+      }
+      return initials.toUpperCase();
+    }
+  }
+
+  /**
+   * Get first letter.
+   * @param text
+   * @param index
+   */
+  private getChar(text: string, index: number) {
+    return text.charAt(index);
   }
 
   ngOnDestroy(): void {

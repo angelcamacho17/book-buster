@@ -38,6 +38,7 @@
       }
     }
     .content {
+      position: relative;
       flex: 1;
       overflow: auto;
       width: 100%;
@@ -50,7 +51,7 @@
           .list-item {
             box-sizing: border-box;
             padding: 11px 16px 8px;
-            height: 81px;
+            height: 80px;
             display: -webkit-flex;
             display: flex;
             flex-flow: row wrap;
@@ -146,7 +147,7 @@
             .avatar {
               background-color: rgba(0, 0, 0, 0.1);
               height: 40px;
-              width: 55.28px;
+              width: 45.44px;
               border-radius: 50%;
               display: flex;
               flex-flow: column wrap;
@@ -243,7 +244,7 @@
                 .price {
                   display: flex;
                   height: 100%;
-                  color: #645fce;
+                  color: #1666d8;
                   align-self: center;
                 }
               }
@@ -294,7 +295,7 @@
             height: 48px;
             width: 100%;
             color: #fff;
-            background-color: #645fce;
+            background-color: #1666d8;
           }
         }
       }

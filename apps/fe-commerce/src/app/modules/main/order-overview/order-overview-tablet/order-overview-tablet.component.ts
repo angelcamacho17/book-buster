@@ -1,11 +1,9 @@
-import { Component, OnInit, OnDestroy, NgZone, ViewContainerRef, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrderOverviewComponent } from '../order-overview.component';
 import { Store, select } from '@ngrx/store';
 import {
-  IOrder, IOrderArticle, OrderArticlesService, TranslationService, HeaderService, OrderService,
-  getCurrentOrderRequest, refreshOrderArticlesRequest, clearCurrentOrderRequest, handleOrderRequest, setOrderArticlesRequest,
-  isUndefined,
-  AuthService
+  IOrder, IArticleLine, TranslationService, HeaderService, OrderService,
+  getCurrentOrderRequest, AuthService
 } from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar, } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -26,12 +24,12 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
   public substractArt = 0;
   private _userWentBack = false;
   private tempSubstraction = false;
+  public vat = 0;
 
-  constructor(public store: Store<{ currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
+  constructor(public store: Store<{ currentOrder: IOrder, orderArticles: IArticleLine[] }>,
     public snackBar: MatSnackBar,
     public router: Router,
     public matDialog: MatDialog,
-    public ordArtsService: OrderArticlesService,
     public transServ: TranslationService,
     public headerService: HeaderService,
     public orderService: OrderService,
@@ -39,40 +37,29 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     public authService: AuthService
   ) {
     super(store, snackBar, router, matDialog,
-      ordArtsService, transServ,
-      headerService, orderService, layoutService)
-
-    this.$articles = this.store.pipe(select('orderArticles'));
-    this.subscriptions.add(
-      this.$articles.subscribe((arts) => {
-        this.totalPrice = this.ordArtsService.total;
-        this.articles = arts;
-      })
-    );
+      transServ,headerService, orderService,
+      layoutService, authService)
 
     this.currentOrder$ = this.store.pipe(select('currentOrder'));
     this.subscriptions.add(
-      this.currentOrder$.subscribe(data => {
+      this.currentOrder$.subscribe((data: any) => {
         this.currentOrder = data;
+        this.initials = this.getInitials();
       })
     );
 
-    this.store.dispatch(refreshOrderArticlesRequest());
     this.store.dispatch(getCurrentOrderRequest());
-
   }
 
   ngOnInit(): void {
-    this.subscribeToHeader();
     /* New order flow */
     this._newOrderFlow();
     this._articlesLoop();
+    this._subscribeToHeader();
+
   }
 
-  /**
-   * Listen to right icon click.
-   */
-  public subscribeToHeader() {
+  private _subscribeToHeader() {
     this.subscriptions.add(
       this.headerService.rightIconClicked
         .subscribe(() => this.logout())
@@ -83,7 +70,17 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
    * Logout from the app.
    */
   public logout() {
-    this.router.navigate(['/login'])
+    this.authService.logout();
+  }
+
+  /**
+   * Listen to right icon click.
+   */
+  public subscribeToHeader() {
+    this.subscriptions.add(
+      this.headerService.rightIconClicked
+        .subscribe(() => this.logout())
+    );
   }
 
   /**
@@ -105,58 +102,20 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
    */
   private _newOrderFlow() {
     if (this.orderService.orderFlow === 'new' && !this.currentOrder) {
-      this.store.dispatch(setOrderArticlesRequest({ orderArticles: [] }));
-
       const dialogData: DialogData = {
         firstButton: 'cancel',
       }
       this._openNewOrderCustomer(dialogData);
-    } else if(this.currentOrder) {
+    } else if (this.orderService.orderFlow === 'new' && this.currentOrder) {
       this.orderService.addingArticlesOnNewOrder = true;
     }
-  }
-
-  /**
-   * Open dialog to select if you want to save the current order.
-   */
-  private _confirmDiscardDialog() {
-    let message;
-
-    if (this.currentOrder?.articles?.length) {
-      message = this.transServ.get('progressord');
-    } else {
-      message = this.transServ.get('noarts');
-    }
-    const dialogRef = this.matDialog.open(ConfirmDiscardDialogComponent, {
-      data: {
-        title: this.transServ.get('saveord'),
-        message,
-        firstBtn: this.transServ.get('discard'),
-        secondBtn: this.transServ.get('save')
-      },
-      panelClass: 'no-padding-dialog'
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.store.dispatch(handleOrderRequest({ order: this.currentOrder }));
-      }
-      this.store.dispatch(clearCurrentOrderRequest())
-      const orderArticles = [];
-      this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
-      this.router.navigate(['/main/home']);
-    });
   }
 
   /**
    * Handle go back navigation.
    */
   public goBackButton() {
-    if (this.orderService.orderFlow === 'new' && this.currentOrder) {
-      this._confirmDiscardDialog();
-    } else {
-      this.router.navigate(['/main/home']);
-    }
+    this.router.navigate(['/main/home']);
   }
 
   /**
@@ -164,8 +123,13 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
    * @param price
    */
   public setArtToDelete(price: number) {
-    this.totalPrice = ((Math.round((this.totalPrice - price)* 100) / 100) > 0) ? Math.round((this.totalPrice - price)* 100) / 100 : 0;
-    this.tempSubstraction = true;
+    this.totalPrice = ((Math.round((this.totalPrice - price) * 100) / 100) > 0) ? Math.round((this.totalPrice - price) * 100) / 100 : 0;
+    if (price !== 0) {
+      this.tempSubstraction = true;
+    } else {
+      this.tempSubstraction = false;
+    }
+
   }
 
   /**
@@ -173,7 +137,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
    * @param price
    */
   public undoDelete(price: number) {
-    this.totalPrice = Math.round((this.totalPrice + price)* 100) / 100;
+    this.totalPrice = Math.round((this.totalPrice + price) * 100) / 100;
     this.tempSubstraction = false;
   }
 
@@ -283,7 +247,7 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
 
     this.subscriptions.add(
       dialogRef.afterClosed().subscribe(data => {
-        if (isUndefined(data)) {
+        if (data === undefined) {
           return;
         }
         if (data?.result === 'SWITCH') {
@@ -320,9 +284,9 @@ export class OrderOverviewTabletComponent extends OrderOverviewComponent impleme
     //If the time of the snackbar
     //hasnt past yet, and the user wnats tyo go back
     //delete the article and dismiss snackbar
-    if (this.tempSubstraction) {
-      this.orderConfirmed();
-    }
+    // if (this.tempSubstraction) {
+    //   this.orderConfirmed();
+    // }
     if (this.subscriptions) {
       this.subscriptions.unsubscribe();
     }

@@ -1,18 +1,19 @@
 <base-component>
   <div class="scrollable-container">
+    <loading-state *ngIf="loading"></loading-state>
     <div class="mat-headline headline">{{'recOrds' | translate}}</div>
     <mat-card class="card" [class.last]="lastOrder" *ngFor="let order of orders; let lastOrder = last;"
       (click)="openOrder(order)">
       <mat-card-content class="card-content">
         <div class="content">
-          <div class="mat-subheading-2 order-title">
+          <div class="mat-subheading-2 order-title text-truncate">
             <div class="title">
-              {{order.id}}
+              {{ order.uuid }}
             </div>
           </div>
-          <div class="mat-body-1 order-subtitle">
-            <div class="line">{{order.description}}</div>
-            <div class="line">{{'customer' | translate}}: {{order.customer.name}}</div>
+          <div class="mat-body-1 order-subtitle text-truncate">
+            <div class="line text-truncate">{{ order.documentNr }}</div>
+            <div class="line text-truncate">{{ 'customer' | translate }}: <span class="text-truncate">{{ order.customer.name }}</span></div>
           </div>
         </div>
         <div class="mat-caption icon">
@@ -21,7 +22,7 @@
       </mat-card-content>
     </mat-card>
 
-    <div *ngIf="orders.length === 0" class="mat-body-2">
+    <div *ngIf="!orders && !loading" class="mat-body-2">
       {{'nodata' | translate }}
     </div>
 

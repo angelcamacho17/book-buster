@@ -1,61 +1,62 @@
 <div class="page-content">
-  <div class="content" #content id="content">
-      <mat-card class="card mat-elevation-z6">
-          <div class="content">
-              <mat-list class="list">
-                  <mat-list-item class="list-item">
-                      <div mat-line class="order-title">
-                          <div class="mat-subheading-2 title">
-                              <!-- {{article.name}} -->
-                              {{'artcode' | translate}}
-                          </div>
-                      </div>
-                      <div mat-line class="order-subtitle">
-                          <div class="mat-body-1 line">
-                              {{article?.id}} - {{article?.name}}
-                              <!-- {{article.description}} -->
-                          </div>
-                      </div>
-                      <mat-divider class="divider"></mat-divider>
-                  </mat-list-item>
-                  <mat-list-item class="list-item">
-                      <div mat-line class="order-title">
-                          <div class="mat-subheading-2 title">
-                              <!-- {{article.name}} -->
-                              {{'artname' | translate}}
-                          </div>
-                      </div>
-                      <div mat-line class="order-subtitle">
-                          <div class="mat-body-1 line">
-                              {{article?.description}}
-                              <!-- {{article.description}} -->
-                          </div>
-                      </div>
-                      <mat-divider class="divider"></mat-divider>
-                  </mat-list-item>
-              </mat-list>
-          </div>
-      </mat-card>
-  </div>
-  <footer>
-      <mat-card class="quantity-card">
-          <div class="content">
+    <div class="content" #content id="content">
+        <mat-card class="card mat-elevation-z6">
+            <div class="content">
+                <mat-list class="list">
+                    <mat-list-item class="list-item">
+                        <div mat-line class="order-title">
+                            <div class="mat-subheading-2 title">
+                                <!-- {{article.name}} -->
+                                {{'artcode' | translate}}
+                            </div>
+                        </div>
+                        <div mat-line class="order-subtitle">
+                            <div class="mat-body-1 line">
+                                {{article?.uuid}} {{ article ? '-' : ''}} {{article?.name}}
+                                <!-- {{article.description}} -->
+                            </div>
+                        </div>
+                        <mat-divider class="divider"></mat-divider>
+                    </mat-list-item>
+                    <mat-list-item class="list-item">
+                        <div mat-line class="order-title">
+                            <div class="mat-subheading-2 title">
+                                <!-- {{article.name}} -->
+                                {{'artname' | translate}}
+                            </div>
+                        </div>
+                        <div mat-line class="order-subtitle">
+                            <div class="mat-body-1 line">
+                                {{article?.name}}
+                                <!-- {{article.description}} asd-->
+                            </div>
+                        </div>
+                        <mat-divider class="divider"></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </mat-card>
+    </div>
+    <loading-state *ngIf="loading"></loading-state>
+    <footer>
+        <mat-card class="quantity-card">
+            <div class="content">
 
-              <div class="mat-subheading-2 left">
-                  {{'quantity' | translate}}
-              </div>
-              <div class="mat-title right">
-                  <button mat-icon-button (click)="removeQuantity()">
-                      <mat-icon class="icon">remove_circle_outline</mat-icon>
-                  </button>
-                  <div class="amount">{{amount}}</div>
-                  <button mat-icon-button (click)="addQuantity()">
-                      <mat-icon class="icon">add_circle_outline</mat-icon>
-                  </button>
-              </div>
-          </div>
-      </mat-card>
-      <button mat-button color="primary" class="add-button" [disabled]="amount === 0"
-          (click)="addToOrder()">{{('addTo' | translate) | uppercase}}</button>
-  </footer>
+                <div class="mat-subheading-2 left">
+                    {{'quantity' | translate}}
+                </div>
+                <div class="mat-title right">
+                    <button mat-icon-button class="button" (click)="removeQuantity()">
+                        <mat-icon class="icon">remove_circle_outline</mat-icon>
+                    </button>
+                    <div class="amount">{{amount}}</div>
+                    <button mat-icon-button class="button" (click)="addQuantity()">
+                        <mat-icon class="icon">add_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </mat-card>
+        <button mat-button color="primary" class="add-button" [disabled]="amount === 0"
+            (click)="addToOrder()">{{('addTo' | translate) | uppercase}}</button>
+    </footer>
 </div>

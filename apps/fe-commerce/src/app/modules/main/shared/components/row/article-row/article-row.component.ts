@@ -27,6 +27,6 @@ export class ArticleRowComponent implements OnInit {
    */
   openArticleDetail(item) {
     this.eventService.articleSelected(item);
-    this._router.navigate(['/main/article-detail', item.id]);
+    this._router.navigate(['/main/article-detail', item.uuid]);
   }
 }

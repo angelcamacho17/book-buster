@@ -1,7 +1,8 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, AfterViewInit, OnChanges, DoCheck } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { ICustomer } from '@fecommerce-workspace/data-store-lib';
 import { EventService } from '../../../services/event.service';
+import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
 
 @Component({
@@ -9,11 +10,11 @@ import { EventService } from '../../../services/event.service';
   templateUrl: './customer-row.component.html',
   styleUrls: ['./customer-row.component.scss']
 })
-export class CustomerRowComponent implements OnDestroy {
+export class CustomerRowComponent implements OnDestroy, DoCheck, AfterViewInit {
   // @Output() customerChange = new EventEmitter<Customer>();
   @Input() item: ICustomer;
   public smaller: Observable<boolean>;
-  public initials = '';
+  public initials = of('');
   private _subscriptions = new Subscription();
   constructor(
     private eventService: EventService
@@ -21,6 +22,14 @@ export class CustomerRowComponent implements OnDestroy {
     if (this.item) {
       this.smaller = this.reduceLetterSize();
     }
+  }
+
+  ngDoCheck(): void {
+
+    this.initials = of(this.getInitials());
+  }
+
+  ngAfterViewInit(): void {
   }
 
   /**
@@ -43,7 +52,7 @@ export class CustomerRowComponent implements OnDestroy {
    * get initials per customer.
    */
   public getInitials(): string {
-    const fullName = this.item.name;
+    const fullName = this.item?.name;
     if (fullName) {
       const name: string[] = fullName.split(' ');
       let initials: string;

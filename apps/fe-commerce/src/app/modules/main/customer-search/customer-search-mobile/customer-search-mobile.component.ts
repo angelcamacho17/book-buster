@@ -8,7 +8,6 @@ import { EventService } from '../../shared/services/event.service';
 import { OrderService, IOrder, ICustomer, TranslationService, HeaderService, refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 import { LayoutService } from '../../shared/services/layout.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ScanResult } from '@fecommerce-workspace/scanner';
 
 @Component({
   selector: 'customer-search-mobile',
@@ -21,7 +20,7 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
     public eventService: EventService,
     public orderService: OrderService,
     public matDialog: MatDialog,
-    public store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[] }>,
+    public store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[], customer: ICustomer }>,
     public router: Router,
     public transServ: TranslationService,
     public headerService: HeaderService,
@@ -34,8 +33,27 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
 
     this.customers$ = this.store.pipe(select('customers'));
     this.subscriptions.add(
-      this.customers$.subscribe(data => {
-        this.customers = data;
+      this.customers$.subscribe((res: any) => {
+        this.loading = false;
+        if (res?.body?.data?.customers?.length === 0 || res?.body?.data?.customers?.length === undefined) {
+          this.emptyResults = true;
+        } else {
+          this.emptyResults = false;
+        }
+        this.filteredResults = res?.body?.data?.customers;
+        this.customers = this.filteredResults;
+      })
+    );
+
+    this._customerScanned$ = this.store.pipe(select('customer'));
+    this.subscriptions.add(
+      this._customerScanned$.subscribe((customer: ICustomer) => {
+        // Workaround to avoid trigger this without calling it.
+        if(!this.firstCall) {
+          this.handleCustomerScanned(customer)
+        } else {
+          this.firstCall = false;
+        }
       })
     );
 
@@ -65,7 +83,10 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
       })
     )
 
-    this.store.dispatch(refreshCustomersRequest());
+    this.filteredResults = [];
+    this.emptyResults = true;
+
+    //this.store.dispatch(refreshCustomersRequest());
   }
 
   ngOnInit(): void {
@@ -76,29 +97,13 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
    * @param leftIconAction
    */
   private _goBack(leftIconAction?: boolean) {
-    // Read current flow
-    const flow = this.orderService.orderFlow;
-
-    // If the action performing is the switch customer
-    if (this.orderService.switchCustomerFlow) {
-      return this.router.navigate(['/main/order-overview']);
-      // If is not, go back to last location.
-    } else if (flow === 'new') {
-      // If the order exists
-      if (this.currentOrder?.id) {
-        this.location.back();
-      } else {
-        // The action comes from the header
-        if (leftIconAction) {
-          this.openConfirmDialog();
-        } else {
-          this.router.navigate(['/main/article-search']);
-        }
-      }
-      // If edit flow, just one location to go back
-    } else if (flow === 'edit') {
+    // The action comes from the header
+    if (leftIconAction) {
+      this.openConfirmDialog();
+    } else {
       this.router.navigate(['/main/order-overview']);
     }
+    return ;
   }
 
   /**
@@ -106,13 +111,23 @@ export class CustomerSearchMobileComponent extends CustomerSearchComponent imple
    * @param customer
    */
   public handleCustomerScanned(customer: ICustomer): void {
-    this.onCustomerChange(customer);
-    // Handle routing.
-    this._goBack();
+    let snack ;
+    if(customer) {
+      snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
+      this.onCustomerChange(customer);
+      // Handle routing.
+      this._goBack();
+    } else {
+      snack = this.snackBar.open(`Customer could not be found.`, 'Close')
+    }
+    snack.afterDismissed().subscribe(() => {
+      this.pauseScan = false;
+    });
   }
 
-
   ngOnDestroy(): void {
+    this.scanner = false;
+    this.scannerStarted = false;
     this.subscriptions.unsubscribe();
   }
 }

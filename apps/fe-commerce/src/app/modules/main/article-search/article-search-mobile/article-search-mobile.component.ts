@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ArticleSearchComponent } from '../article-search.component';
 import { Store, select } from '@ngrx/store';
-import { OrderService, IArticle, IOrder, refreshArticlesRequest, getCurrentOrderRequest, IOrderArticle } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, IArticle, IOrder, refreshArticlesRequest, getCurrentOrderRequest, IArticleLine } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../shared/services/layout.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,7 +15,7 @@ import { EventService } from '../../shared/services/event.service';
 export class ArticleSearchMobileComponent extends ArticleSearchComponent implements OnInit, OnDestroy {
 
   constructor(
-    public store: Store<{ articles: IArticle[], currentOrder: IOrder, orderArticles: IOrderArticle[]  }>,
+    public store: Store<{ article: IArticle, articles: IArticle[], currentOrder: IOrder, orderArticles: IArticleLine[]  }>,
     public ordSer: OrderService,
     public router: Router,
     public layoutService: LayoutService,
@@ -26,12 +26,29 @@ export class ArticleSearchMobileComponent extends ArticleSearchComponent impleme
   }
 
   ngOnInit(): void {
-
     this._articles$ = this.store.pipe(select('articles'));
-
     this._subscriptions.add(
-      this._articles$.subscribe(data => {
-        this.articles = data;
+      this._articles$.subscribe((res: any) => {
+        this.loading = false;
+        if (res?.body?.data?.articles?.length === 0 || res?.body?.data?.articles?.length === undefined) {
+          this.emptyResults = true;
+        } else {
+          this.emptyResults = false;
+        }
+        this.filteredResults = res?.body?.data?.articles;
+        this.articles = this.filteredResults;
+      })
+    );
+
+    this._articleScanned$ = this.store.pipe(select('article'));
+    this._subscriptions.add(
+      this._articleScanned$.subscribe((article: IArticle) => {
+        // Workaround to avoid trigger this without calling it.
+        if(!this.firstCall) {
+          this.handleScannRes(article)
+        } else {
+           this.firstCall = false;
+        }
       })
     );
 
@@ -41,19 +58,20 @@ export class ArticleSearchMobileComponent extends ArticleSearchComponent impleme
     }));
 
     this._orderArticles$ = this.store.pipe(select('orderArticles'));
-    this._subscriptions.add(this._orderArticles$.subscribe(data => {
-      this.orderArticles = data;
+    this._subscriptions.add(this._orderArticles$.subscribe((res: any) => {
+      this.orderArticles = res;
     }));
 
     this.store.dispatch(getCurrentOrderRequest());
-    this.store.dispatch(refreshArticlesRequest());
-
+    // this.store.dispatch(refreshArticlesRequest());
     setTimeout(()=>{
-      this.scanner = true;
-    }, 100);
+      this.showScanner()
+    }, )
 
   }
   ngOnDestroy() {
+    this.scanner = false;
+    this.scannerStarted = false;
     this._subscriptions.unsubscribe();
   }
 }

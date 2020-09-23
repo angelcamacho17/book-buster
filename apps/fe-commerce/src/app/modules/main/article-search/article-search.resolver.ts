@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { IOrder, clearCurrentOrderRequest, setOrderArticlesRequest, refreshOrdersRequest, IHeader, setHeaderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
+import { Store } from '@ngrx/store';
+import { IHeader, setHeaderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
 
 @Injectable()
 export class ArticleSearchResolver implements Resolve<any> {
@@ -24,7 +24,7 @@ export class ArticleSearchResolver implements Resolve<any> {
       title: 'neworder',
       leftIcon: 'keyboard_arrow_left',
       titClass: 'mat-title',
-      lastUrl: 'main/customer-search',
+      lastUrl: 'main/order-items',
       centered: true
     }
     return header;

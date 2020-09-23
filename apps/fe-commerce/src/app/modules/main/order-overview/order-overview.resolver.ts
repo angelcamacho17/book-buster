@@ -12,37 +12,17 @@ export class OrderOverviewResolver implements Resolve<any> {
     ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    const flow = this._orderService.orderFlow;
-    let header;
-    if (flow === 'edit') {
-      header = this._headerEditOrderFlow();
-    } else {
-      header = this._headerNewOrderFlow();
-    }
-
+    const header = this._headerOrderFlow();
     this._store.dispatch(setHeaderRequest({ header }))
     return of(null);
   }
 
-  private _headerNewOrderFlow(): IHeader {
-    const header: IHeader = {
-      title: 'orderover',
-      leftIcon: 'keyboard_arrow_left',
-      titClass: 'mat-title',
-      lastUrl: '/main/article-search',
-      centered: true
-    }
-    return header;
-  }
-
-  private _headerEditOrderFlow(): IHeader {
-    // this._orderService.setOrderModifiedState(false);
+  private _headerOrderFlow(): IHeader {
     const header: IHeader = {
       title: 'orderover',
       leftIcon: 'close',
-      //rightIcon: 'delete_outlined',
       titClass: 'mat-title',
-      checkGoBack: true,
+      lastUrl: '/main',
       centered: true
     }
     return header;

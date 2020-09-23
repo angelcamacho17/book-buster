@@ -126,12 +126,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public onSubmit(event) {
     this.isSubmitted = true;
 
-    setTimeout(()=> {
-      this._router.navigate(['/main/home']).then(() => {
-        this.isSubmitted = false;
-      });
-    },2000)
-    return;
+    // setTimeout(()=> {
+    //   this._router.navigate(['/main/home']).then(() => {
+    //     this.isSubmitted = false;
+    //   });
+    // },2000)
+    // return;
     this._hcs.login(this.username, this.password, { customerKey: this.key }).subscribe(
       (loginDetails) => {
         localStorage.setItem('CUSTOMER_KEY', this.key);

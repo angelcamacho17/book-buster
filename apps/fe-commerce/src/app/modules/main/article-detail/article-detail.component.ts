@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IArticle, IOrder, IOrderArticle, getCurrentOrderRequest, getArticleRequest, setOrderArticlesRequest, replaceOrderArticleRequest, appendOrderArticleRequest, replaceCurrentOrderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
-import { Observable, Subscription } from 'rxjs';
+import { IArticle, IOrder, IArticleLine, getArticleRequest, OrderService, clearArticleRequest } from '@fecommerce-workspace/data-store-lib';
+import { Observable, Subscription, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { map } from 'rxjs/operators';
@@ -15,46 +15,27 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   public amount = 1;
   public article$: Observable<IArticle>;
   public currentOrder$: Observable<IOrder>;
-  public orderArticles$: Observable<IOrderArticle[]>
-  public article: IArticle;
-  public orderArticles: IOrderArticle[];
+  public article: IArticle = null;
+  public x: IArticle;
+  public name: Observable<string>;
+  public code: Observable<string>;
+  public price: Observable<number>;
+  public orderArticles: IArticleLine[];
   public currentOrder: IOrder;
   public subscriptions = new Subscription();
-
+  public loading = true;
+  public loadingCurrentOrder = true;
+  public initState = false;
 
   constructor(
-    public store: Store<{ article: IArticle, currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
+    public store: Store<{ article: IArticle, currentOrder: IOrder }>,
     public route: ActivatedRoute,
     public router: Router,
     public orderService: OrderService,
     public layoutService: LayoutService
-  ) {
-
-    this.article$ = this.store.pipe(select('article'));
-    this.subscriptions.add(
-      this.article$.subscribe(data => {
-        this.article = data;
-      })
-    );
-
-    this.currentOrder$ = this.store.pipe(select('currentOrder'));
-    this.subscriptions.add(
-      this.currentOrder$.subscribe(data => {
-        this.currentOrder = data;
-      })
-    );
-    this.store.dispatch(getCurrentOrderRequest())
-
-    this.orderArticles$ = this.store.pipe(select('orderArticles'));
-    this.subscriptions.add(
-      this.orderArticles$.subscribe(data => {
-        this.orderArticles = data;
-      })
-    );
-  }
+  ) { }
 
   ngOnInit(): void {
-    this.getArticle()
   }
 
   /**
@@ -88,43 +69,12 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  private createOrderArt(): IOrderArticle {
+  private createOrderArt(): IArticleLine {
     return {
+      articleId: this.article.uuid,
       article: this.article,
-      quantity: this.amount
+      qty: this.amount
     }
-
-  }
-
-  /**
-   * Add
-   */
-  public addToOrder(): void {
-
-    // Create order article
-    let orderArticle = this.createOrderArt();
-
-    // Get order articles
-    const orderArticles = this.currentOrder?.articles;
-
-    // Check if this articles is already added.
-    const existingOrderArticle = orderArticles?.find((o) => o.article.id === this.article.id);
-    if (existingOrderArticle) {
-      orderArticle = {
-        id: existingOrderArticle.id,
-        article: this.article,
-        quantity: (existingOrderArticle.quantity + this.amount)
-      }
-      this.store.dispatch(replaceOrderArticleRequest({ orderArticle }));
-    } else {
-      this.store.dispatch(appendOrderArticleRequest({ orderArticle }));
-    }
-
-    // Update current order
-    this.store.dispatch(replaceCurrentOrderRequest({ order: this.updatedOrder() }));
-
-    // Go back to article search
-    this.goToArticlesSearch();
   }
 
   /**
@@ -132,12 +82,12 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
    */
   public updatedOrder(): IOrder {
     const order: IOrder = {
-      id: this.currentOrder?.id,
-      description: this.currentOrder.description,
-      articles: this.orderArticles,
-      amount: this.currentOrder.amount,
-      customer: this.currentOrder.customer,
-      createdBy: this.currentOrder.createdBy
+      uuid: this.currentOrder?.uuid,
+      documentNr: this.currentOrder?.documentNr,
+      articlesLines: this.orderArticles,
+      total: this.currentOrder?.total,
+      customer: this.currentOrder?.customer,
+      created: this.currentOrder?.created
     };
     return order;
   }
@@ -153,8 +103,29 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  public subscribeToArticle() {
+    this.article$ = this.store.pipe(select('article'));
+    this.subscriptions.add(
+      this.article$.subscribe((res: any) => {
+        this.article = res?.body?.data;
+        this.loading = false;
+      })
+    );
+  }
+
+  public subscribeToCurrentOrder() {
+    this.currentOrder$ = this.store.pipe(select('currentOrder'));
+    this.subscriptions.add(
+      this.currentOrder$.subscribe((data: any) => {
+        this.currentOrder = data;
+        this.loadingCurrentOrder = false;
+      })
+    );
+  }
+
   ngOnDestroy(): void {
-    if(this.subscriptions) {
+    this.store.dispatch(clearArticleRequest());
+    if (this.subscriptions) {
       this.subscriptions.unsubscribe();
     }
   }

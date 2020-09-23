@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { setCurrentOrderRequest, replaceCurrentOrderRequest, IOrder, ICustomer, setOrderArticlesRequest, handleOrderRequest, TranslationService, OrderService, HeaderService } from '@fecommerce-workspace/data-store-lib';
+import { setCurrentOrderRequest, IOrder, ICustomer, handleOrderRequest, TranslationService, OrderService, HeaderService, getCustomersRequest, getCustomerScannedRequest, createOrderRequest, switchCustomerRequest } from '@fecommerce-workspace/data-store-lib';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { EventService } from '../shared/services/event.service';
@@ -11,6 +11,8 @@ import { ConfirmDiscardDialogComponent } from '../shared/components/confirm-disc
 import { LayoutService } from '../shared/services/layout.service';
 import { ScanResult } from '@fecommerce-workspace/scanner';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogComponent } from '../shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'customer-search',
@@ -19,7 +21,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CustomerSearchComponent implements OnInit, OnDestroy {
   public customers$: Observable<ICustomer[]>;
-  public customers: ICustomer[];
+  public customers: ICustomer[] = [];
+  public customereScanned: ICustomer;
+  public _customerScanned$: Observable<ICustomer>;
   public orders: IOrder[];
   public currentOrder$: Observable<IOrder>;
   public currentOrder: IOrder;
@@ -30,14 +34,16 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
   public filteredResults: ICustomer[] = [];
   public subscriptions: Subscription = new Subscription();
   public scanner = false;
+  public loading = false;
   public pauseScan = false;
   public scannerStarted = false;
+  public firstCall = true;
 
   constructor(
     public eventService: EventService,
     public orderService: OrderService,
     public matDialog: MatDialog,
-    public store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[] }>,
+    public store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[], customer: ICustomer }>,
     public router: Router,
     public transServ: TranslationService,
     public headerService: HeaderService,
@@ -46,17 +52,20 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
     public snackBar: MatSnackBar
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    localStorage.setItem('CAMERA_ALLOWED', 'true')
+
+  }
 
   public openConfirmDialog() {
     let message;
-
+    console.log('OPEN')
     if (!this.currentOrder) {
       this.router.navigate(['/main/home']);
       return;
     }
 
-    if (this.currentOrder?.articles?.length) {
+    if (this.currentOrder?.articlesLines?.length) {
       message = this.transServ.get('progressord');
     } else {
       message = this.transServ.get('noarts');
@@ -76,47 +85,28 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
         this.store.dispatch(handleOrderRequest({ order: this.currentOrder }));
       }
       this.store.dispatch(setCurrentOrderRequest({ order: null }))
-      const orderArticles = [];
-      this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
       this.router.navigate(['/main/home']);
     });
   }
 
-    /**
-   * Handle customer scanner.
-   * @param scanResult
-   */
+  /**
+ * Handle customer scanner.
+ * @param scanResult
+ */
   public loyaltyCardScanned(scanResult: ScanResult): void {
-    let snack;
     // Pause scann to avoid errors.
     if (this.pauseScan) {
       return;
     }
-
-    // Check if the code has a customer.
-    if (JSON.parse(scanResult.code)?.customer) {
-
-      const customerCode = JSON.parse(scanResult.code)?.customer;
-      this.pauseScan = true;
-
-      const customer = this.customers.find((c: any) => {
-        return c.name === customerCode.name;
-      });
-
-      if (customer) {
-        snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
-        this.handleCustomerScanned(customer)
-      } else {
-        snack = this.snackBar.open(`Customer could not be found.`, 'Close')
-      }
-    } else {
-      snack = this.snackBar.open(`Customer could not be found.`, 'Close')
-    }
-    snack.afterDismissed().subscribe(() => {
-      this.pauseScan = false;
-    });
+    this.pauseScan = true;
+    this.store.dispatch(getCustomerScannedRequest({ barcode: scanResult.code?.code }))
+    return;
   }
 
+  /**
+   * Handle customer scanned
+   * @param customer
+   */
   public handleCustomerScanned(customer: ICustomer): void { }
 
   public onCustomerChange(customer: ICustomer) {
@@ -125,10 +115,12 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
 
   /* Used to handle the selection of a customer */
   public handleSetCustomer(customer: ICustomer): void {
-    if (this.currentOrder) {
-      this._replaceCustomerOnCurrentOrder(customer);
-    } else {
-      this._setCustomerToNewOrder(customer);
+    if (customer) {
+      if (this.currentOrder) {
+        this._replaceCustomerOnCurrentOrder(customer);
+      } else {
+        this._setCustomerToNewOrder(customer);
+      }
     }
   }
 
@@ -137,14 +129,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
    * @param customer
    */
   private _setCustomerToNewOrder(customer: ICustomer) {
-    const order: IOrder = {
-      description: 'Latest order',
-      articles: [],
-      amount: 0,
-      customer: customer,
-      createdBy: 'user'
-    }
-    this.store.dispatch(setCurrentOrderRequest({ order }));
+    this.store.dispatch(createOrderRequest({ customer }));
   }
 
   /**
@@ -152,15 +137,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
    * @param customer
    */
   private _replaceCustomerOnCurrentOrder(customer: ICustomer) {
-    const order: IOrder = {
-      id: this.currentOrder?.id,
-      description: this.currentOrder?.description,
-      articles: this.currentOrder?.articles,
-      amount: this.currentOrder?.amount,
-      customer: customer,
-      createdBy: this.currentOrder?.createdBy
-    }
-    this.store.dispatch(replaceCurrentOrderRequest({ order }));
+    this.store.dispatch(switchCustomerRequest({ orderId: this.currentOrder.uuid, customer }));
   }
 
   /* Used to handle the states of the component */
@@ -194,8 +171,40 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
   /**
    * Show scanner.
    */
-  public showScanner() {
-    this.scanner = true;
+  public showScanner(event?) {
+    if (localStorage.getItem('CAMERA_ALLOWED') && localStorage.getItem('CAMERA_ALLOWED')==='false'){
+      const msg = 'Refresh your page to allow the camera';
+      const snackRef = this.snackBar.open(msg, 'REFRESH', {
+        duration: 2000,
+      });
+      snackRef.afterDismissed().subscribe((action)=>{
+        if (action.dismissedByAction) {
+          this.loading = true;
+          setTimeout(() => {
+            location.reload();
+          }, 0);
+          event.stopImmediatePropagation();
+        }
+      });
+    } else {
+      this.scanner = true;
+    }
+  }
+
+  /**
+   * Permission response.
+   */
+  public handlePermission(event) {
+    if (event === false) {
+      localStorage.setItem('CAMERA_ALLOWED', 'false')
+      this.noCameraFound(false);
+      const msg = 'You need to allow the camera to access the scanner';
+      this.snackBar.open(msg, '', {
+        duration: 2000,
+      });
+    } else {
+      localStorage.setItem('CAMERA_ALLOWED', 'true')
+    }
   }
 
   /**
@@ -210,12 +219,56 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * After a search, set vars to react propperly.
-   * @param results
+  * After a search, set vars to react propperly.
+  * @param query
+  */
+  public handleSearchResults(query: any): void {
+    this.emptyResults = query.length === 0;
+    if (query.length > 2) {
+      this.loading = true;
+      this.store.dispatch(getCustomersRequest({ filter: query }))
+    } else {
+      this.emptyResults = true;
+      setTimeout(() => {
+        this.loading = false;
+      })
+      this.filteredResults = [];
+      this.customers = [];
+    }
+  }
+
+  /**
+   * Return filter results.
+   * @param query
    */
-  public handleSearchResults(results: any[]): void {
-    this.emptyResults = results.length === 0;
-    this.filteredResults = results;
+  private getFilteredResults(query): any[] {
+    if (this.customers?.length && query) {
+      return this.customers.filter((resource) => {
+        return resource.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+      })
+    } else {
+      this.filteredResults = [];
+      this.customers = []
+      return this.customers;
+    }
+  }
+
+  /**
+   * Check results to handle state.
+   * @param query
+   */
+  private checkResults(query) {
+    this.emptyResults = this.filteredResults.length === 0;
+    this.hide = query.length > 0;
+  }
+
+  /**
+   * No camera found.
+   * @param event
+   */
+  public noCameraFound(event) {
+    this.scanner = false;
+    this.loading = false;
   }
 
   ngOnDestroy(): void {
@@ -226,6 +279,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
     this.scanner = false;
     this.scannerStarted = false;
 
+    localStorage.setItem('CAMERA_ALLOWED', 'true')
 
   }
 }

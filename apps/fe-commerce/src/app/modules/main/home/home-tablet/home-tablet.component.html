@@ -7,19 +7,21 @@
       </div>
     </div>
     <div class="content">
+      <loading-state *ngIf="loading"></loading-state>
+
       <mat-list role="list" class="list">
         <div class="list-row" (click)="previewOrder(order)" [class.last]="lastOrder"
-          [ngClass]="this.currentOrder?.id === order.id ? 'active' : ''"
+          [ngClass]="this.currentOrder?.uuid === order?.uuid ? 'active' : ''"
           *ngFor="let order of orders; let lastOrder = last;">
           <div class="list-item">
             <div class="left-content">
               <div class="mat-subheading-2 order-title">
                 <div class="title">
-                  {{order.id}}
+                  {{order.uuid}}
                 </div>
               </div>
               <div class="mat-body-1 order-subtitle">
-                <div class="line">{{order.description}}</div>
+                <div class="line">{{order.documentNr}}</div>
                 <div class="line">{{'customer' | translate}}: {{order.customer.name}}</div>
               </div>
             </div>
@@ -29,7 +31,7 @@
           </div>
           <mat-divider class="divider"></mat-divider>
         </div>
-        <div *ngIf="orders.length === 0" class="mat-body-2">
+        <div *ngIf="orders?.length === 0" class="mat-body-2">
           {{'nodata' | translate }}
         </div>
       </mat-list>
@@ -41,16 +43,18 @@
     </button> -->
   </div>
   <div class="right-side">
-    <div class="no-results-container" *ngIf="!this.currentOrder">
+    <loading-state *ngIf="previewLoading"></loading-state>
+
+    <div class="no-results-container" *ngIf="!this.currentOrder && !previewLoading">
       Please select an order
     </div>
     <div class="results-container" *ngIf="this.currentOrder">
       <div class="content-container">
-        <mat-card  *ngIf="this.currentOrder?.articles?.length !== 0" class="customer-row mat-elevation-z0">
+        <mat-card class="customer-row mat-elevation-z0">
           <div class="customer-info">
             <div class="avatar">
               <div class="mat-body-2" [ngClass]="currentOrder?.customer?.smallIcon ? 'mat-body-1' : ''">
-                {{ currentOrder?.customer?.initials }}</div>
+                {{ initials }}</div>
             </div>
             <div class="item">
               <div class="item-info">
@@ -69,36 +73,35 @@
               {{'totalamt' | translate}}
             </h3>
             <div class="amount mat-body-2">
-              € {{this.currentOrder?.amount}} <!-- {{getTotal()}} -->
+              € {{ orderService.getTotal() | number : '1.2-2' }}
             </div>
           </div>
         </mat-card>
         <div class="order-items-title">
           {{('orderitems' | translate) | uppercase}}
         </div>
-        <mat-card class="card mat-elevation-z0" feScrollableDiv>
+        <mat-card class="card mat-elevation-z0" *ngIf="this.currentOrder?.articlesLines" feScrollableDiv>
           <div class="list">
-            <div class="list-item" *ngFor="let item of this.currentOrder?.articles;">
+            <div class="list-item" *ngFor="let item of this.currentOrder?.articlesLines;">
               <div class="content">
                 <div class="info">
                   <div class="mat-subheading-2 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.87);">
-                    {{ item?.quantity > 1 ? item?.quantity + 'x ' : ''}} {{item?.article?.name}}
+                    {{ item?.qty > 1 ? item?.qty + 'x ' : '' }} {{ item?.article?.name }}
                   </div>
                   <div class="mat-body-1 text-truncate" style="margin: 0; color: rgba(0, 0, 0, 0.6);">
-                    {{item?.article?.description}}
+                    {{ item?.article?.code }}
                   </div>
                 </div>
                 <div class="price mat-subheading-2" style="margin: 0;">
-                  € {{item?.article?.price}}
+                  € {{ item?.article?.salesPrice?.excl | number : '1.2-2' }}
                 </div>
               </div>
             </div>
           </div>
-
         </mat-card>
 
-        <div *ngIf="this.currentOrder?.articles?.length === 0" class="mat-body-2">
-          {{'nodata' | translate }}
+        <div *ngIf="!this.currentOrder.articlesLines" class="mat-body-2">
+          {{ 'nodata' | translate }}
         </div>
 
       </div>

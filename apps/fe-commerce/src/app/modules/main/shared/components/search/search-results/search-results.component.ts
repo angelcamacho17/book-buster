@@ -10,7 +10,7 @@ import { LayoutService } from '../../../services/layout.service';
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
 
-  @Input() items: any;
+  @Input() items: any[] = [];
   @Input() rowType: any;
   @Input() dividerClass: string;
   public items$: Observable<any[]> = of(this.items);
@@ -18,10 +18,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   constructor(public layoutService: LayoutService) { }
 
   ngOnInit(): void {
-
+    this.items = []
   }
 
   ngOnDestroy() {
+    this.items = []
   }
 
 }

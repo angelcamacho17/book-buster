@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { IOrder, IOrderArticle, IArticle, OrderService, getCurrentOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { IOrder, IArticleLine, IArticle, OrderService, getCurrentOrderRequest, handleArticleLineRequest } from '@fecommerce-workspace/data-store-lib';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LayoutService } from '../../shared/services/layout.service';
 import { ArticleDetailComponent } from '../article-detail.component';
@@ -13,36 +13,41 @@ import { ArticleDetailComponent } from '../article-detail.component';
 export class ArticleDetailMobileComponent extends ArticleDetailComponent implements OnInit {
 
   constructor(
-    public store: Store<{ article: IArticle, currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
+    public store: Store<{ article: IArticle, currentOrder: IOrder, orderArticles: IArticleLine[] }>,
     public route: ActivatedRoute,
     public router: Router,
     public orderService: OrderService,
     public layoutService: LayoutService
   ) {
     super(store, route, router, orderService, layoutService);
-    this.article$ = this.store.pipe(select('article'));
-    this.subscriptions.add(
-      this.article$.subscribe(data => {
-        this.article = data;
-      })
-    );
+    setTimeout(() => {
+      this.loading = true;
+      this.loadingCurrentOrder = true;
+      this.initState = true;
+    });
 
-    this.currentOrder$ = this.store.pipe(select('currentOrder'));
-    this.subscriptions.add(
-      this.currentOrder$.subscribe(data => {
-        this.currentOrder = data;
-      })
-    );
-    this.store.dispatch(getCurrentOrderRequest())
-
-    this.orderArticles$ = this.store.pipe(select('orderArticles'));
-    this.subscriptions.add(
-      this.orderArticles$.subscribe(data => {
-        this.orderArticles = data;
-      })
-    );
+    this.subscribeToCurrentOrder();
+        
+    this.subscribeToArticle();
+    this.store.dispatch(getCurrentOrderRequest());
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getArticle()
+  }
 
+
+  /**
+  * Add article to order.
+  */
+  public addToOrder() {
+    const articleLine: IArticleLine = {
+      article: this.article,
+      qty: this.amount
+    }
+    const orderId = this.currentOrder.uuid;
+    this.store.dispatch(handleArticleLineRequest({ orderId, articleLine }));
+    this.orderService.addingArticlesOnNewOrder = true;
+    this.goToArticlesSearch();
+  }
 }

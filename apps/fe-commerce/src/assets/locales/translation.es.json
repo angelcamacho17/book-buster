@@ -46,5 +46,10 @@
   "customerkey": "Customer Key",
   "ordersitems": "Orders items",
   "nodata": "No hay información disponible.",
-  "back": "back"
+  "back": "back",
+  "logoutInactive": "Ha transcurrido demasiado tiempo sin actividad. Por favor, inicie sesión de nuevo.",
+  "logoutUser": "Ya se inició sesión con este usuario. Por favor, contacte con su administrador.",
+  "orderConfirmed": "Order succesfully confirmed.",
+  "needArts": "You must add at least one article."
+
 }

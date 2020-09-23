@@ -20,10 +20,10 @@
             (userSearching)="hidePanel($event)"
             (hasSearchResults)="handleSearchResults($event)"
             (customIconEvent)="showScanner()"
-            [list]="customers"
             [autoFocus]='true'></search>
   </div>
   <div *ngIf="!scanner" class="search-results-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
+    <loading-state *ngIf="loading"></loading-state>
     <!-- <mat-divider class="divider"></mat-divider> -->
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
       [dividerClass]="'customer-divider'" class="search-results"></search-results>
@@ -41,11 +41,11 @@
     </div>
   </div>
   <div *ngIf="scanner">
-    <div *ngIf="!scannerStarted" class="load-shadow">
-      <mat-spinner diameter="40" class="spinner"></mat-spinner>
-    </div>
+    <loading-state *ngIf="!scannerStarted"></loading-state>
     <fe-scanner class="tablet-scanner"
                 (scanSuccess)="loyaltyCardScanned($event)"
-                (scanStarted)="onStarted($event)"></fe-scanner>
+                (scanStarted)="onStarted($event)"
+                (permission)="handlePermission($event)"
+                (noCamera)="noCameraFound($event)"></fe-scanner>
   </div>
 </div>

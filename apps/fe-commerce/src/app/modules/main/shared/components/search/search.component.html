@@ -8,7 +8,8 @@
         <mat-icon class="search-icon">search</mat-icon>
         <mat-form-field floatLabel="never" class="form-field">
           <mat-placeholder class="placeholder mat-subheading-2">{{'search' | translate}}</mat-placeholder>
-            <input matInput #input
+            <input matInput #search
+                   id="search"
                    [formControl]="inputControl"
                    (focus)="onSearchFocus()"
                    (blur)="onSearchBlur()"
@@ -16,10 +17,11 @@
                    autocorrect="off"
                    autocapitalize="none"
                    autocomplete="off"
-                   spellcheck="false">
+                   spellcheck="false"
+                   >
         </mat-form-field>
-        <mat-icon *ngIf="input.value === ''" class="search-icon" (click)="customIconClick()">center_focus_weak</mat-icon>
-        <mat-icon *ngIf="input.value !== ''" class="search-icon" (click)="cleanSearch()">close</mat-icon>
+        <mat-icon *ngIf="search.value === '' && !noScanner" class="search-icon" (click)="customIconClick()">center_focus_weak</mat-icon>
+        <mat-icon *ngIf="search.value !== ''" class="search-icon" (click)="cleanSearch()">close</mat-icon>
     </div>
 
 </div>

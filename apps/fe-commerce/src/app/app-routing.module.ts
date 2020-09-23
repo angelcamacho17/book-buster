@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { FeLoginGuard, FeAuthGuard } from '@fecommerce-workspace/data-store-lib';
 
 
 const routes: Routes = [
@@ -8,13 +9,13 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule),
     data: { animation: 'login' },
-    //canActivate: [FeLoginGuard]
+    canActivate: [FeLoginGuard]
   },
   {
     path: 'main',
     loadChildren: () => import('./modules/main/main.module').then(m => m.MainModule),
     data: { animation: 'main' },
-    //canActivate: [FeAuthGuard]
+    canActivate: [FeAuthGuard]
   },
   { path: '**', redirectTo: 'main' }
 ];

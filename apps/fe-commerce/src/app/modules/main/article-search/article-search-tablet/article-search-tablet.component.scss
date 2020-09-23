@@ -23,7 +23,7 @@
 
     .button {
       background: rgba(232, 232, 232, 0.1);
-      color: #645fce;
+      color: #1666d8;
     }
 
     .invisible {
@@ -39,6 +39,7 @@
   }
 
   .search-results-container {
+    position: relative;
     flex: 1;
     display: -webkit-flex;
     display: flex;
@@ -59,23 +60,6 @@
   .tablet-scanner {
     position: relative;
     top: -66px;
-  }
-
-  .load-shadow {
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-
-    .spinner {
-      position: absolute;
-    }
   }
 
 }

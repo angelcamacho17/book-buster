@@ -15,10 +15,10 @@
             (searchBlur)="searchStarted()"
             (userSearching)="hidePanel($event)"
             (hasSearchResults)="handleSearchResults($event)"
-            (customIconEvent)="showScanner()"
-            [list]="articles"></search>
+            (customIconEvent)="showScanner()"></search>
   </div>
   <div *ngIf="!scanner" class="search-results-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
+    <loading-state *ngIf="loading"></loading-state>
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
      class="search-results"></search-results>
     <div class="no-results-container" *ngIf="!hide && emptyResults">
@@ -35,12 +35,13 @@
     </div>
   </div>
   <div *ngIf="scanner" class="search-results-container">
-    <div *ngIf="!scannerStarted" class="load-shadow">
-      <mat-spinner diameter="40" class="spinner"></mat-spinner>
-    </div>
+    <loading-state *ngIf="!scannerStarted"></loading-state>
     <fe-scanner class="tablet-scanner"
                 (scanSuccess)="articleCodeScanned($event)"
-                (scanStarted)="onStarted($event)"></fe-scanner>
+                (scanStarted)="onStarted($event)"
+                (permission)="handlePermission($event)"
+                (noCamera)="noCameraFound($event)"></fe-scanner>
   </div>
+
 </div>
 

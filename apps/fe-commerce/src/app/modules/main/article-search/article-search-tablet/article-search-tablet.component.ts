@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { ArticleSearchComponent } from '../article-search.component';
 import { Store, select } from '@ngrx/store';
-import { OrderService, IArticle, IOrder, refreshArticlesRequest, IOrderArticle, refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, IArticle, IOrder, refreshArticlesRequest, IArticleLine, refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../shared/services/layout.service';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ArticleSearchTabletComponent extends ArticleSearchComponent implements OnInit, OnDestroy {
 
   constructor(
-    public store: Store<{ articles: IArticle[], currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
+    public store: Store<{ article: IArticle, articles: IArticle[], currentOrder: IOrder, orderArticles: IArticleLine[]  }>,
     public ordSer: OrderService,
     public router: Router,
     public layoutService: LayoutService,
@@ -35,10 +35,30 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
     this._articles$ = this.store.pipe(select('articles'));
 
     this._subscriptions.add(
-      this._articles$.subscribe(data => {
-        this.articles = data;
+      this._articles$.subscribe((res: any) => {
+        this.loading = false;
+        if (res?.body?.data?.articles?.length === 0 || res?.body?.data?.articles?.length === undefined) {
+          this.emptyResults = true;
+        } else {
+          this.emptyResults = false;
+        }
+        this.filteredResults = res?.body?.data?.articles;
       })
     );
+
+    this._articleScanned$ = this.store.pipe(select('article'));
+    this._subscriptions.add(
+      this._articleScanned$.subscribe((article: IArticle) => {
+         // Workaround to avoid trigger this without calling it.
+         if(!this.firstCall) {
+           this.handleScannRes(article);
+           this.checkToClose(article);
+         } else {
+            this.firstCall = false;
+         }
+      })
+    );
+
 
     this._currentOrder$ = this.store.pipe(select('currentOrder'));
     this._subscriptions.add(this._currentOrder$.subscribe(data => {
@@ -51,11 +71,16 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
       })
     );
 
-    if (this.ordSer.currentOrder?.id) {
+    if (this.ordSer.currentOrder?.uuid) {
       this.lastUrl = 'orderitems';
     }
     this.store.dispatch(refreshCustomersRequest());
-    this.store.dispatch(refreshArticlesRequest());
+    // this.store.dispatch(refreshArticlesRequest());
+
+    setTimeout(()=>{
+      this.showScanner()
+    }, )
+
   }
 
   /**
@@ -85,8 +110,47 @@ export class ArticleSearchTabletComponent extends ArticleSearchComponent impleme
     this.dialogRef.close();
   }
 
+  /**
+   * Handle article scanned
+   * @param article
+   */
+  public handleScannRes(article: any) {
+    let snack;
+
+    if (article !== undefined && article !== null && article?.uuid) {
+      this.router.navigate(['/main/article-detail/', article.uuid]);
+      this.dialogRef.close();
+    } else {
+      snack = this.snackBar.open(`Article could not be found.`, 'Close')
+    }
+    this.pauseScan = false;
+    // After snack bar closed, continue scanner.
+    if(snack) {
+      snack.afterDismissed().subscribe(() => {
+        this.pauseScan = false;
+      });
+    }
+  }
+
+  /**
+   * Check if the article existe and close the dialog
+   * @param article
+   */
+  public checkToClose(article: IArticle): void {
+    // if (article !== undefined && article !== null && article?.uuid) {
+    //   this.dialogRef.close();
+    // }
+  }
+
   ngOnDestroy(): void {
-    this._subscriptions.unsubscribe();
     this.scanner = false;
+    this.scannerStarted = false;
+    this.emptyResults = true;
+    this.filteredResults = [];
+    if (this._subscriptions) {
+      this._subscriptions.unsubscribe();
+    }
+    this.store.dispatch(refreshArticlesRequest());
+
   }
 }

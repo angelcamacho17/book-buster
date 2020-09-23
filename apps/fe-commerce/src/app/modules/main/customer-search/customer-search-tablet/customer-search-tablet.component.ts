@@ -22,7 +22,7 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
     public eventService: EventService,
     public orderService: OrderService,
     public matDialog: MatDialog,
-    public store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[] }>,
+    public store: Store<{ orders: IOrder[], currentOrder: IOrder, customers: ICustomer[], customer: ICustomer }>,
     public router: Router,
     public transServ: TranslationService,
     public headerService: HeaderService,
@@ -36,8 +36,26 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
 
     this.customers$ = this.store.pipe(select('customers'));
     this.subscriptions.add(
-      this.customers$.subscribe(customers => {
-        this.customers = customers;
+      this.customers$.subscribe((res: any) => {
+        this.loading = false;
+        if (res?.body?.data?.customers?.length === 0 || res?.body?.data?.customers?.length === undefined) {
+          this.emptyResults = true;
+        } else {
+          this.emptyResults = false;
+        }
+        this.filteredResults = res?.body?.data?.customers;
+      })
+    );
+
+    this._customerScanned$ = this.store.pipe(select('customer'));
+    this.subscriptions.add(
+      this._customerScanned$.subscribe((customer: ICustomer) => {
+        // Workaround to avoid trigger this without calling it.
+        if(!this.firstCall) {
+          this.handleCustomerScanned(customer)
+        } else {
+          this.firstCall = false;
+        }
       })
     );
 
@@ -61,7 +79,9 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
       })
     );
 
-    this.store.dispatch(refreshCustomersRequest());
+    this.filteredResults = [];
+    this.emptyResults = true;
+    //this.store.dispatch(refreshCustomersRequest());
   }
 
   ngOnInit(): void {
@@ -72,9 +92,18 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
    * @param customer
    */
   public handleCustomerScanned(customer: ICustomer): void {
-    this.onCustomerChange(customer);
-    // Handle routing.
-    this.rightButtonClick('next');
+    let snack;
+    if (customer){
+      snack = this.snackBar.open(`Customer ${customer?.name} selected.`, 'Close');
+      this.onCustomerChange(customer);
+      // Handle routing.
+      this.rightButtonClick('next');
+    } else {
+      snack = this.snackBar.open(`Customer could not be found.`, 'Close')
+    }
+    snack.afterDismissed().subscribe(() => {
+      this.pauseScan = false;
+    });
   }
 
   /**
@@ -106,11 +135,12 @@ export class CustomerSearchTabletComponent extends CustomerSearchComponent imple
   }
 
   ngOnDestroy(): void {
+    this.scanner = false;
+    this.scannerStarted = false;
     if (this.subscriptions) {
       this.subscriptions.unsubscribe();
     }
     this.currentOrder = null;
-    this.scanner = false;
 
   }
 }

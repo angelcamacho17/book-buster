@@ -28,6 +28,8 @@
   "items": "items",
   "confirm": "confirm",
   "orderitems": "Order items",
+  "logoutUser": "Deze gebruiker is al ingelogd. Neem contact op met je beheerder.",
+  "logoutInactive": "Je bent uitgelogd vanwege langdurige inactiviteit. Log opnieuw in.",
   "switchcusmes": "Customer specific prices will be recalculated after asssigning a new customer.",
   "switchcus": "Switch customer",
   "cancel": "CANCEL",
@@ -46,5 +48,7 @@
   "customerkey": "Customer Key",
   "ordersitems": "Orders items",
   "nodata": "Er zijn geen gegevens om weer te geven.",
-  "back": "back"
+  "back": "back",
+  "orderConfirmed": "Order succesfully confirmed.",
+  "needArts": "You must add at least one article."
 }

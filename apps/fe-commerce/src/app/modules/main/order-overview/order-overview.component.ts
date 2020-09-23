@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy, Renderer2, AfterViewInit, ViewChild, ComponentRef, ViewContainerRef, ComponentFactory } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Observable, Subscription, Subject } from 'rxjs';
-import { HeaderService, IOrder, getCurrentOrderRequest, IOrderArticle, handleOrderRequest, setOrderArticlesRequest, refreshOrderArticlesRequest, replaceCurrentOrderRequest, OrderArticlesService, TranslationService, setHeaderRequest, IHeader, deleteOrderRequest, OrderService, setCurrentOrderRequest, replaceOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import {
+  HeaderService, IOrder, IArticleLine,
+  TranslationService, deleteOrderRequest,
+  OrderService, setCurrentOrderRequest, AuthService
+} from '@fecommerce-workspace/data-store-lib';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { isUndefined } from 'util';
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
-import { takeUntil } from 'rxjs/operators';
 import { ConfirmDiscardDialogComponent } from '../shared/components/confirm-discard/confirm-discard-dialog.component';
 import { LayoutService } from '../shared/services/layout.service';
-// import { OrderOverviewTabletComponent } from './order-overview-tablet/order-overview-tablet.component';
-// import { OrderOverviewMobileComponent } from './order-overview-mobile/order-overview-mobile.component';
 
 @Component({
   selector: 'order-overview',
@@ -21,30 +21,31 @@ import { LayoutService } from '../shared/services/layout.service';
 export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
   public currentOrder$: Observable<IOrder>;
   public currentOrder: IOrder;
-  public $articles: Observable<IOrderArticle[]>;
-  public articles: IOrderArticle[] = [];
-  public orderArticles$: Observable<IOrderArticle[]>;
-  public orderArticle: IOrderArticle[];
+  public orderArticles: IArticleLine[] = [];
+  public orderArticles$: Observable<IArticleLine[]>;
   public subscriptions = new Subscription();
   public totalPrice = 0;
+  public initials = '';
+  public loading = true;
 
   constructor(
-    public store: Store<{ currentOrder: IOrder, orderArticles: IOrderArticle[] }>,
+    public store: Store<{ currentOrder: IOrder, orderArticles: IArticleLine[] }>,
     public snackBar: MatSnackBar,
     public router: Router,
     public matDialog: MatDialog,
-    public ordArtsService: OrderArticlesService,
     public transServ: TranslationService,
     public headerService: HeaderService,
     public orderService: OrderService,
     public layoutService: LayoutService,
+    public authService: AuthService
   ) { }
 
-  ngAfterViewInit(): void { }
+  ngAfterViewInit(): void {
+
+  }
 
   ngOnInit(): void {
     this.orderService.switchCustomerFlow = false;    // Reset flag of customer flow.
-    // this._loadComponent();
   }
 
   /**
@@ -63,7 +64,6 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
       }
     });
     dialogRef.afterClosed().subscribe(data => {
-      console.log(data);
       if (data === undefined) {
         // Is undefined when the user closes
         // the dialog without an action
@@ -80,19 +80,12 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
    * On order confirmed.
    */
   public orderConfirmed(): void {
-    // if (isUndefined(this.order?.id) || this.order?.id == null) {
-    // }
-    if (this.getUpdatedOrder() !== null) {
-      console.log(this.getUpdatedOrder());
-      this.store.dispatch(replaceCurrentOrderRequest({ order: this.getUpdatedOrder() }))
-      this.store.dispatch(handleOrderRequest({ order: this.currentOrder }));
-      const msg = 'Order succesfully confirmed';
-      this.snackBar.open(msg, '', {
-        duration: 5000,
-      });
+    const msg = this.transServ.get('orderConfirmed');
+    this.snackBar.open(msg, '', {
+      duration: 5000,
+    });
+    this.router.navigate(['/home']);
 
-      this.router.navigate(['/home']);
-    }
   }
 
   /**
@@ -100,12 +93,12 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
    */
   public getUpdatedOrder(): IOrder {
     const order: IOrder = {
-      id: this.currentOrder?.id,
-      description: this.currentOrder.description,
-      articles: this.articles,
-      amount: this.totalPrice,
-      customer: this.currentOrder.customer,
-      createdBy: this.currentOrder.createdBy
+      uuid: this.currentOrder?.uuid,
+      documentNr: this.currentOrder?.documentNr,
+      articlesLines: this.orderArticles,
+      total: this.currentOrder?.total,
+      customer: this.currentOrder?.customer,
+      created: this.currentOrder?.created
     };
     return order;
   }
@@ -128,7 +121,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
 
     this.subscriptions.add(
       dialogRef.afterClosed().subscribe(data => {
-        if (isUndefined(data)) {
+        if (data === undefined) {
           // Is undefined when the user closes
           // the dialog without an action
           return;
@@ -159,12 +152,7 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
    * Go back and handle if there is a current order.
    */
   public goBack() {
-
-    if (this.orderService.getOrderModifiedState()) {
-      this.openConfirmDialog();
-    } else {
-      this.returnUrl();
-    }
+    this.returnUrl();
   }
 
   /**
@@ -184,13 +172,10 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
 
     this.subscriptions.add(
       dialogRef.afterClosed().subscribe((result) => {
-        console.log(result);
         if (result === true) {
-          this.store.dispatch(replaceOrderRequest({ order: this.currentOrder }));
-          this._cleanCurrentorder();
+          this.store.dispatch(setCurrentOrderRequest({ order: this.currentOrder }));
           this.returnUrl();
-        } else if (result === false){
-          this._cleanCurrentorder();
+        } else if (result === false) {
           this.returnUrl();
         }
       })
@@ -198,12 +183,31 @@ export class OrderOverviewComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   /**
-   * Reset current order values.
+   * get initials per customer.
    */
-  private _cleanCurrentorder(): void {
-    this.store.dispatch(setCurrentOrderRequest({ order: null }))
-    const orderArticles = [];
-    this.store.dispatch(setOrderArticlesRequest({ orderArticles }));
+  public getInitials(): string {
+    const fullName = this.currentOrder?.customer?.name;
+    if (fullName) {
+      const name: string[] = fullName.split(' ');
+      let initials: string;
+      if (name?.length > 2) {
+        initials = `${this.getChar(name[0], 0)}${this.getChar(name[1], 0)}${this.getChar(name[2], 0)}`;
+      } else if (name?.length > 1) {
+        initials = `${this.getChar(name[0], 0)}${this.getChar(name[1], 0)}`;
+      } else {
+        initials = `${this.getChar(name[0], 0)}`;
+      }
+      return initials.toUpperCase();
+    }
+  }
+
+  /**
+   * Get first letter.
+   * @param text
+   * @param index
+   */
+  private getChar(text: string, index: number) {
+    return text.charAt(index);
   }
 
   ngOnDestroy(): void {
