@@ -171,12 +171,12 @@
       },
       "root": "apps/book-buster",
       "sourceRoot": "apps/book-buster/src",
-      "prefix": "fecommerce-workspace",
+      "prefix": "",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/book-buster",
+            "outputPath": "dist",
             "index": "apps/book-buster/src/index.html",
             "main": "apps/book-buster/src/main.ts",
             "polyfills": "apps/book-buster/src/polyfills.ts",
@@ -184,7 +184,9 @@
             "aot": true,
             "assets": [
               "apps/book-buster/src/favicon.ico",
-              "apps/book-buster/src/assets"
+              "apps/book-buster/src/assets",
+              "apps/book-buster/src/.htaccess",
+              "apps/book-buster/src/manifest.webmanifest"
             ],
             "styles": ["apps/book-buster/src/styles.scss"],
             "scripts": []
@@ -216,7 +218,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "apps/book-buster/ngsw-config.json"
             }
           }
         },
@@ -251,9 +255,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/book-buster/jest.config.js",
-            "tsConfig": "apps/book-buster/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "apps/book-buster/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       }
