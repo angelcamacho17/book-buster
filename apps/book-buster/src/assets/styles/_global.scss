@@ -11,9 +11,9 @@ main {
   height: calc(100% - 112px);
   width: 100vw;
   //query when in talbet
-  @include tablet {
-    height: 100vh;
-  }
+  // @include tablet {
+  //   height: 100vh;
+  // }
 
   .scrollable-container {
     flex: 1;
