@@ -3,12 +3,14 @@
   "neworder": "New order",
   "artdet": "Article detail",
   "nomatchcus": "No matching customers",
+  "nomatchbook": "No matching books",
   "nomatcharts": "No matching articles",
   "searchcus": "Search customers",
   "searcharts": "Search articles",
   "search": "Search",
   "artsplaceholder": "Find stock, sales & … info",
   "cusplaceholder": "Find name, contact & company info",
+  "booksplaceholder": "Find title, author & book info",
   "artcode": "Article code",
   "artname": "Article name",
   "quantity": "Quantity",
@@ -50,5 +52,7 @@
   "customerkey": "Customer key",
   "ordersitems": "Orders items",
   "nodata": "No data to display.",
-  "back": "Back"
+  "back": "Back",
+  "lookbook": "Look for a book",
+  "searchbooks": "Search Books"
 }

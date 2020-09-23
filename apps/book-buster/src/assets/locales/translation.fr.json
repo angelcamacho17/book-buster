@@ -4,6 +4,8 @@
   "artdet": "Article Detail",
   "nomatchcus": "no matching customers",
   "nomatcharts": "no matching articles",
+  "nomatchbook": "No matching books",
+  "booksplaceholder": "Find title, author & book info",
   "searchcus": "Search customer",
   "searcharts": "Search articles",
   "artsplaceholder": "Find stock, sales & … info",
@@ -25,6 +27,7 @@
   "orderover": "Order overview",
   "totalamt": "Total amount",
   "total": "Total",
+  "lookbook": "Look for a book",
   "items": "items",
   "confirm": "confirm",
   "orderitems": "Order items",
@@ -46,5 +49,6 @@
   "customerkey": "Customer Key",
   "ordersitems": "Orders items",
   "nodata": "No data to display.",
-  "back": "back"
+  "back": "back",
+  "searchbooks": "Search Books"
 }

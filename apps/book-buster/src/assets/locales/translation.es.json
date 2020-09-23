@@ -7,6 +7,8 @@
   "searchcus": "Search customer",
   "searcharts": "Search articles",
   "artsplaceholder": "Find stock, sales & … info",
+  "nomatchbook": "No matching books",
+  "booksplaceholder": "Find title, author & book info",
   "cusplaceholder": "Find name, contact & company info",
   "artcode": "Article code",
   "artname": "Article name",
@@ -24,6 +26,7 @@
   "incorrectpas": "Incorrect user name or password",
   "orderover": "Order overview",
   "totalamt": "Total amount",
+  "lookbook": "Look for a book",
   "total": "Total",
   "items": "items",
   "confirm": "confirm",
@@ -46,5 +49,6 @@
   "customerkey": "Customer Key",
   "ordersitems": "Orders items",
   "nodata": "No hay información disponible.",
-  "back": "back"
+  "back": "back",
+  "searchbooks": "Search Books"
 }

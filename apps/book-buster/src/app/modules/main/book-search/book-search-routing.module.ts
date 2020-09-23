@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CustomerSearchComponent } from './customer-search.component';
+import { BookSearchComponent } from './book-search.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: CustomerSearchComponent
+    component: BookSearchComponent
   },
   { path: '**', redirectTo: '' }
 ];
@@ -16,5 +16,5 @@ const routes: Routes = [
     routes)],
   exports: [RouterModule]
 })
-export class CustomerSearchRoutingModule { }
+export class BookSearchRoutingModule { }
 

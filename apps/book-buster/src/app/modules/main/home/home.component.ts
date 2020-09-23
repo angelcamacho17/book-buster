@@ -31,6 +31,14 @@ export class HomeComponent implements OnDestroy {
   }
 
   /**
+   * Open category search
+   */
+  public openCategory(category: string) {
+    console.log(category);
+    this.router.navigate(['/main/book-search'])
+  }
+
+  /**
    * Logout of the app.
    */
   public logout() {

@@ -23,7 +23,7 @@
     height: 1px;
     -webkit-box-shadow:0px 1px 27px 19px rgba(255, 255, 255, 0.75);
     -moz-box-shadow: 0px 1px 27px 19px rgba(255, 255, 255, 0.75);
-    box-shadow: 0px 1px 27px 19px rgba(255, 255, 255, 0.75); 
+    box-shadow: 0px 1px 27px 19px rgba(255, 255, 255, 0.75);
   }
 
   .navigation-icon {
@@ -33,7 +33,7 @@
     justify-content: center;
     align-items: center;
     color: #645fce;
-    background: rgba(255, 255, 255, 0.3);
+    background: transparent;
     border-radius: 50%;
     font-size: 22px;
   }
@@ -55,7 +55,6 @@
   .right-icon {
     @extend .navigation-icon ;
     z-index: 4;
-    background: transparent;
     color: #645fce;
   }
 

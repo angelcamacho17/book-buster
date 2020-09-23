@@ -26,6 +26,7 @@
   "totalamt": "Total amount",
   "total": "Total",
   "items": "items",
+  "lookbook": "Look for a book",
   "confirm": "confirm",
   "orderitems": "Order items",
   "switchcusmes": "Customer specific prices will be recalculated after asssigning a new customer.",
@@ -46,5 +47,8 @@
   "customerkey": "Customer Key",
   "ordersitems": "Orders items",
   "nodata": "Er zijn geen gegevens om weer te geven.",
-  "back": "back"
+  "back": "back",
+  "searchbooks": "Search Books",
+  "nomatchbook": "No matching books",
+  "booksplaceholder": "Find title, author & book info"
 }

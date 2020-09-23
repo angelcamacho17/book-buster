@@ -21,6 +21,8 @@ import { SetHeaderHeightDirective } from './directives/set-header-height.directi
 import { RowComponent } from './components/row/row.component';
 import { MainHeaderMobileComponent } from './components/main-header/main-header-mobile/main-header-mobile.component';
 import { MainHeaderTabletComponent } from './components/main-header/main-header-tablet/main-header-tablet.component';
+import { LoadingStateComponent } from './components/loading-state/loading-state.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 // import { LayoutService } from './services/layout.service';
 
 @NgModule({
@@ -42,7 +44,9 @@ import { MainHeaderTabletComponent } from './components/main-header/main-header-
     DialogComponent,
     ConfirmDiscardDialogComponent,
     MainHeaderMobileComponent,
-    MainHeaderTabletComponent
+    MainHeaderTabletComponent,
+    LoadingStateComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -67,11 +71,10 @@ import { MainHeaderTabletComponent } from './components/main-header/main-header-
     CustomerRowComponent,
     DialogComponent,
     ArticleRowComponent,
-    ConfirmDiscardDialogComponent
+    ConfirmDiscardDialogComponent,
+    LoadingStateComponent,
+    LoadingSpinnerComponent
   ],
-  // providers: [
-  //   LayoutService
-  // ],
   entryComponents: [
     CustomerRowComponent,
     ArticleRowComponent

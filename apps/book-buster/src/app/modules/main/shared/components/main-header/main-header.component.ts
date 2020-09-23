@@ -72,6 +72,7 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
    * Return last url.
    */
   public returnLastUrl(): void {
+    console.log(this.header.lastUrl)
     this.router.navigate(['/' + this.header.lastUrl]);
     //this._storeUrl.dispatch(goBackNavigationRequest());
   }
