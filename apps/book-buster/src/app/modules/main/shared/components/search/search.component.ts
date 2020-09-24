@@ -33,7 +33,7 @@ export class SearchComponent implements OnInit, AfterContentInit, OnDestroy {
             return event;
           })
           // Time in milliseconds between key events
-          , debounceTime(500)
+          , debounceTime(0)
 
           // If previous query is diffent from current
           , distinctUntilChanged()

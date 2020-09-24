@@ -47,7 +47,7 @@ export class BookService {
    * @param filter 
    */
   public onSearchBook(filter: string): Observable<IBook[]> {
-    return of(this._books.filter(book => book.title.includes(filter)));
+    return of(this._books.filter(book => book.title.toLowerCase().includes(filter.toLowerCase())));
   }
 
 }
