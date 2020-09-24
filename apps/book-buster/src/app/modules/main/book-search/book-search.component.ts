@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IBook } from '@fecommerce-workspace/data';
+import { IBook, searchBookRequest } from '@fecommerce-workspace/data';
 import { ScanResult } from '@fecommerce-workspace/scanner';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BookRowComponent } from '../shared/components/row/book-row/book-row.component';
 import { LayoutService } from '../shared/services/layout.service';
@@ -13,6 +15,7 @@ import { LayoutService } from '../shared/services/layout.service';
 })
 export class BookSearchComponent implements OnInit {
 
+  public books$: Observable<IBook[]>;
   public books: IBook[] = [];
   public rowType = BookRowComponent;
   public hide = false;
@@ -29,7 +32,8 @@ export class BookSearchComponent implements OnInit {
 
   constructor(
     public layoutService: LayoutService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public store: Store<{ books: IBook[], currentBook: IBook }>,
     ) { }
 
   ngOnInit(): void {
@@ -132,9 +136,10 @@ export class BookSearchComponent implements OnInit {
   */
   public handleSearchResults(query: any): void {
     this.emptyResults = query.length === 0;
-    if (query.length > 2) {
+    if (query.length > 0) {
       this.loading = true;
-      //this.store.dispatch(getCustomersRequest({ filter: query }))
+      console.log('DISPATHCI')
+      this.store.dispatch(searchBookRequest({ filter: query }))
     } else {
       this.emptyResults = true;
       setTimeout(() => {

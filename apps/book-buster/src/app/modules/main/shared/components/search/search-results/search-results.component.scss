@@ -10,6 +10,9 @@
     .list-item {
         height: 64px;
         padding: 0 !important;
+        background: rgba(0,0,0, 0.87);
+        color: rgba(255, 255, 255, 0.87);
+
         .list-row {
             position: relative;
             height: 100%;
@@ -20,10 +23,13 @@
         .divider {
             width: calc(100% - 16px);
             left: 16px;
+            background: rgba(255, 255, 255, 0.87);
+
         }
         .customer-divider {
             width: calc(100% - 72px);
             left: 72px;
+            background: rgba(255, 255, 255, 0.87);
         }
     }
 

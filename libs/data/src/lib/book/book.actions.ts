@@ -9,9 +9,8 @@ export const getBookRequest = createAction('[Book] Get Book Request', props<{ bo
 export const refreshBooksRequest = createAction('[Book] Refresh Books Request');
 export const refreshBooksDone = createAction('[Book] Refresh Books Done', props<{ books: IBook[] }>());
 export const handleBookRequest = createAction('[Book] Handle Book Request', props<{ book: IBook }>());
+export const searchBookRequest = createAction('[Book] Book Search Request', props<{ filter: string }>());
 export const deleteBookRequest = createAction('[Book] Delete Book Request');
-export const editArticleLineFromBookRequest = createAction('[Book] Edit Article Line from Book Request', props<{ bookId: number, articleLineId: number, quantity: number }>());
-export const deleteArticleLineFromBookRequest = createAction('[Book] Delete Article Line from Book Request', props<{ bookId: number, articleLineId: number }>());
 
 // Current Book
 export const refreshBookRequest = createAction('[Current Book] Refresh Book Request');
