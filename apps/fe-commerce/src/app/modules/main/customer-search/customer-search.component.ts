@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { setCurrentOrderRequest, IOrder, ICustomer, handleOrderRequest, TranslationService, OrderService, HeaderService, getCustomersRequest, getCustomerScannedRequest, createOrderRequest, switchCustomerRequest } from '@fecommerce-workspace/data-store-lib';
+import { setCurrentOrderRequest, IOrder, ICustomer, handleOrderRequest, TranslationService, OrderService, HeaderService, getCustomersRequest, getCustomerScannedRequest, createOrderRequest, switchCustomerRequest } from '@fecommerce-workspace/data';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { EventService } from '../shared/services/event.service';

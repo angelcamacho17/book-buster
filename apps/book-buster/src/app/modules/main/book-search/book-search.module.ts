@@ -5,7 +5,7 @@ import { BookSearchMobileComponent } from './book-search-mobile/book-search-mobi
 import { BookSearchTabletComponent } from './book-search-tablet/book-search-tablet.component';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../../material/material.module';
-import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
+import { TranslatePipeModule } from '@fecommerce-workspace/data';
 import { BookSearchRoutingModule } from './book-search-routing.module';
 import { ScannerModule } from '@fecommerce-workspace/scanner';
 

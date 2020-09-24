@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { IHeader, TranslationService, HeaderService } from '@fecommerce-workspace/data-store-lib';
+import { IHeader, TranslationService, HeaderService } from '@fecommerce-workspace/data';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable, of, Subject } from 'rxjs';
 import { Router } from '@angular/router';

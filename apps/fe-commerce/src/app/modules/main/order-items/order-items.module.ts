@@ -4,7 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { MaterialModule } from '../../material/material.module';
-import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
+import { TranslatePipeModule } from '@fecommerce-workspace/data';
 import { OrderItemsComponent } from './order-items.component';
 import { OrderItemsRoutingModule } from './order-items-routing.module';
 import { OrderItemsTabletComponent } from './order-items-tablet/order-items-tablet.component';

@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import {
   IOrder, IArticleLine, TranslationService, HeaderService, OrderService,
   getCurrentOrderRequest, AuthService
-} from '@fecommerce-workspace/data-store-lib';
+} from '@fecommerce-workspace/data';
 import { MatSnackBar, } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';

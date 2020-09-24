@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IBook } from '@fecommerce-workspace/data-store-lib';
+import { IBook } from '@fecommerce-workspace/data';
 import { ScanResult } from '@fecommerce-workspace/scanner';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BookRowComponent } from '../shared/components/row/book-row/book-row.component';

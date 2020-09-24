@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { OrderService, HeaderService, IOrder } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, HeaderService, IOrder } from '@fecommerce-workspace/data';
 import { Store } from '@ngrx/store';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';

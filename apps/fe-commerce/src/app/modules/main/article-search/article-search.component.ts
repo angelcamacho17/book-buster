@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ArticleRowComponent } from '../shared/components/row/article-row/article-row.component';
-import { IArticle, OrderService, IOrder, refreshArticlesRequest, IArticleLine, getArticlesRequest, getScannedArticleRequest } from '@fecommerce-workspace/data-store-lib';
+import { IArticle, OrderService, IOrder, refreshArticlesRequest, IArticleLine, getArticlesRequest, getScannedArticleRequest } from '@fecommerce-workspace/data';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';

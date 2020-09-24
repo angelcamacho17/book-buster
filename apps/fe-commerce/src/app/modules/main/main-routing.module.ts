@@ -7,7 +7,7 @@ import { ArticleSearchResolver } from './article-search/article-search.resolver'
 import { ArticleDetailResolver } from './article-detail/article-detail.resolver';
 import { OrderItemsResolver } from './order-items/order-items.resolver';
 import { MainComponent } from './main.component';
-import { FeAuthGuard, FeOrderGuard } from '@fecommerce-workspace/data-store-lib';
+import { FeAuthGuard, FeOrderGuard } from '@fecommerce-workspace/data';
 
 const routes: Routes = [
   {

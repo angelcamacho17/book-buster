@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { IArticleLine, IArticle } from '@fecommerce-workspace/data-store-lib';
+import { IArticleLine, IArticle } from '@fecommerce-workspace/data';
 
 @Component({
   selector: 'art-sheet',

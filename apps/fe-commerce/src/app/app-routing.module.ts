@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { FeLoginGuard, FeAuthGuard } from '@fecommerce-workspace/data-store-lib';
+import { FeLoginGuard, FeAuthGuard } from '@fecommerce-workspace/data';
 
 
 const routes: Routes = [

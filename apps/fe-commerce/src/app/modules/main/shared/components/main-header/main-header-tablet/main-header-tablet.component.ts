@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MainHeaderComponent } from '../main-header.component';
 import { MatDialog } from '@angular/material/dialog';
-import { TranslationService, IHeader, HeaderService } from '@fecommerce-workspace/data-store-lib';
+import { TranslationService, IHeader, HeaderService } from '@fecommerce-workspace/data';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../../services/layout.service';

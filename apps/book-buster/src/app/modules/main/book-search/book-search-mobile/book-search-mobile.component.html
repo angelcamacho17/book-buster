@@ -4,8 +4,7 @@
              (searchBlur)="searchStarted()"
              (userSearching)="hidePanel($event)"
              (hasSearchResults)="handleSearchResults($event)"
-             (customIconEvent)="showScanner()"
-             [autoFocus]='true'></search>
+             (customIconEvent)="showScanner()"></search>
   </div>
   <div *ngIf="!scanner" class="search-results-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"

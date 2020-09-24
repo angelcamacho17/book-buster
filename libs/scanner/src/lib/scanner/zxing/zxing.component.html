@@ -1,4 +1,5 @@
 <zxing-scanner #scanner
+              id="scanner"
               style="height: 100%;"
               class="scanner"
               [formats]="formatsList"
@@ -6,5 +7,8 @@
               (scanSuccess)="onScanSuccess($event)"
               (autostarted)="onStarted($event)"
               (scanError)="onScanError($event)"
+              (camerasFound)="onCamerasFound($event)"
+              [(device)]="currentDevice"
+              (permissionResponse)="onHasPermission($event)"
               (camerasNotFound)="noCameraFound($event)">
 </zxing-scanner>

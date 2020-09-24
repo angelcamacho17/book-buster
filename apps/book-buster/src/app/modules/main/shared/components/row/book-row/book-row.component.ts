@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IBook } from '@fecommerce-workspace/data-store-lib';
+import { IBook } from '@fecommerce-workspace/data';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
 

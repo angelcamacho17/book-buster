@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { routesAnimations } from '../animations/routes.animation';
 import { LayoutService } from './shared/services/layout.service';
 import { Subscription } from 'rxjs';
-import { HCSClient, AuthService, TranslationService, OrderService } from '@fecommerce-workspace/data-store-lib';
+import { HCSClient, AuthService, TranslationService, OrderService } from '@fecommerce-workspace/data';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({

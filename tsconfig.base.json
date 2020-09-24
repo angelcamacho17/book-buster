@@ -16,10 +16,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@fecommerce-workspace/data-store-lib": [
+      "@fecommerce-workspace/data": [
         "libs/data-store-lib/src/index.ts"
       ],
-      "@fecommerce-workspace/scanner": ["libs/scanner/src/index.ts"]
+      "@fecommerce-workspace/scanner": ["libs/scanner/src/index.ts"],
+      "@fecommerce-workspace/data": ["libs/data/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

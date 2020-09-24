@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IArticle, IOrder, IArticleLine, getArticleRequest, OrderService, clearArticleRequest } from '@fecommerce-workspace/data-store-lib';
+import { IArticle, IOrder, IArticleLine, getArticleRequest, OrderService, clearArticleRequest } from '@fecommerce-workspace/data';
 import { Observable, Subscription, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';

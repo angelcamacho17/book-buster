@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { IOrder, OrderService, HeaderService, TranslationService, clearCurrentOrderRequest, setOrderArticlesRequest, refreshOrdersRequest } from '@fecommerce-workspace/data-store-lib';
+import { IOrder, OrderService, HeaderService, TranslationService, clearCurrentOrderRequest, refreshOrdersRequest } from '@fecommerce-workspace/data';
 import { HomeComponent } from '../home.component';
 import { LayoutService } from '../../shared/services/layout.service';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-// import { IArticleService, IArticle, IOrder, IOrderArticle, replaceCurrentOrderRequest, appendOrderArticleRequest } from '@fecommerce-workspace/data-store-lib';
+// import { IArticleService, IArticle, IOrder, IOrderArticle, replaceCurrentOrderRequest, appendOrderArticleRequest } from '@fecommerce-workspace/data';
 import { Store } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 import { ScanResult } from '../scanner.interface';
@@ -20,6 +20,7 @@ export class ScannerComponent implements OnInit {
   @Output() scanError = new EventEmitter<any>();
   @Output() scanStarted = new EventEmitter<any>();
   @Output() noCamera = new EventEmitter<any>();
+  @Output() permission = new EventEmitter<any>();
   public devices: MediaDeviceInfo[] = [];
   public currentDevice: MediaDeviceInfo = null;
   public _subscriptions = new Subscription();
@@ -54,6 +55,11 @@ export class ScannerComponent implements OnInit {
       code: event
     }
     this.scanSuccess.emit(result);
+  }
+
+  public onHasPermission(event): void {
+    this.permission.emit(event);
+
   }
 
   noCameraFound(event) {

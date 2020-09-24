@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrderOverviewComponent } from '../order-overview.component';
 import { Store, select } from '@ngrx/store';
-import { IOrder, IArticleLine, TranslationService, HeaderService, OrderService, getCurrentOrderRequest, AuthService } from '@fecommerce-workspace/data-store-lib';
+import { IOrder, IArticleLine, TranslationService, HeaderService, OrderService, getCurrentOrderRequest, AuthService } from '@fecommerce-workspace/data';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';

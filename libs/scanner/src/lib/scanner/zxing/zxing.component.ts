@@ -19,13 +19,35 @@ export class ZxingComponent extends ScannerComponent implements OnInit {
     'EAN_13',
     'QR_CODE'
   ];
+  availableDevices: MediaDeviceInfo[];
+  currentDevice: MediaDeviceInfo = null;
+  hasDevices: boolean;
+  hasPermission: boolean;
+
+  qrResultString: string;
 
 
   constructor() {
     super();
   }
 
-  ngOnInit(): void {}
+  onCamerasFound(devices: MediaDeviceInfo[]): void {
+    this.availableDevices = devices;
+    this.hasDevices = Boolean(devices && devices.length);
+  }
+
+  onCodeResult(resultString: string) {
+    this.qrResultString = resultString;
+  }
+
+  onDeviceSelectChange(selected: string) {
+    const device = this.availableDevices.find(x => x.deviceId === selected);
+    this.currentDevice = device || null;
+  }
+
+  ngOnInit(): void {
+
+  }
 
 
 }

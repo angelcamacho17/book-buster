@@ -5,7 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomerSearchComponent } from '../customer-search.component';
 import { EventService } from '../../shared/services/event.service';
-import { OrderService, IOrder, ICustomer, TranslationService, HeaderService, refreshCustomersRequest } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, IOrder, ICustomer, TranslationService, HeaderService, refreshCustomersRequest } from '@fecommerce-workspace/data';
 import { LayoutService } from '../../shared/services/layout.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 

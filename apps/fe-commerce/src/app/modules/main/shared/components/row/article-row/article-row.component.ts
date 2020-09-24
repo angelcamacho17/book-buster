@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ComponentFactoryResolver } from '@angular/core';
-import { IArticle } from '@fecommerce-workspace/data-store-lib';
+import { IArticle } from '@fecommerce-workspace/data';
 import { Router } from '@angular/router';
 import { RowComponent } from '../row.component';
 import { Store } from '@ngrx/store';

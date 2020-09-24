@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { IHeader, setHeaderRequest, OrderService } from '@fecommerce-workspace/data-store-lib';
+import { IHeader, setHeaderRequest, OrderService } from '@fecommerce-workspace/data';
 
 @Injectable()
 export class ArticleSearchResolver implements Resolve<any> {

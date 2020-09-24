@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import {
   IOrder, IArticleLine, IArticle, OrderService, getCurrentOrderRequest, handleArticleLineRequest
-} from '@fecommerce-workspace/data-store-lib';
+} from '@fecommerce-workspace/data';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LayoutService } from '../../shared/services/layout.service';
 import { ArticleDetailComponent } from '../article-detail.component';

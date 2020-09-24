@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ArticleSearchComponent } from '../article-search.component';
 import { Store, select } from '@ngrx/store';
-import { OrderService, IArticle, IOrder, refreshArticlesRequest, getCurrentOrderRequest, IArticleLine } from '@fecommerce-workspace/data-store-lib';
+import { OrderService, IArticle, IOrder, refreshArticlesRequest, getCurrentOrderRequest, IArticleLine } from '@fecommerce-workspace/data';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../shared/services/layout.service';
 import { MatSnackBar } from '@angular/material/snack-bar';

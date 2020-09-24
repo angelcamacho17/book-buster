@@ -5,7 +5,7 @@ import {
   HeaderService, IOrder, IArticleLine,
   TranslationService, deleteOrderRequest,
   OrderService, setCurrentOrderRequest, AuthService
-} from '@fecommerce-workspace/data-store-lib';
+} from '@fecommerce-workspace/data';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';

@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { trigger, style, state, transition, animate } from '@angular/animations';
-import { KeyValueStoreService, HCSClient, ConfigService, LanguageService, AuthService, getLocales } from '@fecommerce-workspace/data-store-lib';
+import { KeyValueStoreService, HCSClient, ConfigService, LanguageService, AuthService, getLocales } from '@fecommerce-workspace/data';
 
 @Component({
   selector: 'login',

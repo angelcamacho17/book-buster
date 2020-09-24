@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Observable, Subscription, of, merge } from 'rxjs';
-import { IArticleLine, OrderService, HeaderService, IOrder, deleteArticleLineFromOrderRequest } from '@fecommerce-workspace/data-store-lib';
+import { IArticleLine, OrderService, HeaderService, IOrder, deleteArticleLineFromOrderRequest } from '@fecommerce-workspace/data';
 import { Store, select } from '@ngrx/store';
 import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';

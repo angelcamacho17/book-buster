@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, AfterViewInit, OnChanges, DoCheck } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
-import { ICustomer } from '@fecommerce-workspace/data-store-lib';
+import { ICustomer } from '@fecommerce-workspace/data';
 import { EventService } from '../../../services/event.service';
 import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 

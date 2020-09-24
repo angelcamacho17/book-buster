@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { ICustomer, IArticle } from '@fecommerce-workspace/data-store-lib';
+import { ICustomer, IArticle } from '@fecommerce-workspace/data';
 
 @Injectable({
   providedIn: 'root'

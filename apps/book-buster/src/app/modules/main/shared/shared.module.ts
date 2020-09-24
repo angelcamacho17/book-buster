@@ -16,7 +16,7 @@ import { SearchResultsComponent } from './components/search/search-results/searc
 import { SetMainHeightDirective } from './directives/set-main-height.directive';
 import { FillScrollableDirective } from './directives/fill-scrollable.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslatePipeModule } from '@fecommerce-workspace/data-store-lib';
+import { TranslatePipeModule } from '@fecommerce-workspace/data';
 import { SetHeaderHeightDirective } from './directives/set-header-height.directive';
 import { RowComponent } from './components/row/row.component';
 import { MainHeaderMobileComponent } from './components/main-header/main-header-mobile/main-header-mobile.component';
