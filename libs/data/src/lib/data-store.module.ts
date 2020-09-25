@@ -16,6 +16,8 @@ import { HeaderEffects } from './header/header.effects';
 import { HeaderService } from './header/header.service';
 import { BookEffects } from './book/book.effects';
 import { BookService } from './book/book.service';
+import { UserEffects } from './user/user.effects';
+import { UserService } from './user/user.service';
 
 @NgModule({
   declarations: [DataStoreComponent],
@@ -27,7 +29,8 @@ import { BookService } from './book/book.service';
       CustomerEffects,
       ArticleEffects,
       HeaderEffects,
-      BookEffects
+      BookEffects,
+      UserEffects
     ])
   ],
   exports: [
@@ -38,6 +41,7 @@ import { BookService } from './book/book.service';
     CustomerService,
     ArticleService,
     HeaderService,
+    UserService,
     BookService,
     {
       provide: RouterStateSerializer,

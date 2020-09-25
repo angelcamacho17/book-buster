@@ -5,7 +5,12 @@
     </mat-icon>
   </div>
   <div class="title" [ngClass]="titClass | async">
-    {{title | async}}
+    <mat-icon *ngIf="profIcon | async"
+              (click)="onToggle()"
+              style="height: 40px; width: 40px; font-size: 40px; margin-right: 8px;">account_circle</mat-icon>
+    <span class="text">
+      {{title | async}}
+    </span>
   </div>
   <div class="right-icon-container">
     <mat-icon [ngClass]="(rightIcon | async)===undefined ? 'not-show' : (rightIconClass | async)"

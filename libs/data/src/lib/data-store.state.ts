@@ -11,6 +11,8 @@ import { IHeader } from './models/header.model';
 import { headersReducer } from './header/header.reducer';
 import { IBook } from './models/book.model';
 import { booksReducer, currentBookReducer } from './book/book.reducer';
+import { IUser } from './models/user.model';
+import { userReducer, usersReducer } from './user/user.reducer';
 
 export const FEATURE_NAME = 'examples';
 
@@ -24,7 +26,9 @@ export const reducers: ActionReducerMap<AppState> = {
   articles: articlesReducer,
   header: headersReducer,
   books: booksReducer,
-  currentBook: currentBookReducer
+  currentBook: currentBookReducer,
+  user: userReducer,
+  users: usersReducer
 };
 
 export interface AppState {
@@ -37,5 +41,7 @@ export interface AppState {
   articles: IArticle[],
   header: IHeader,
   books: IBook[],
-  currentBook: IBook
+  currentBook: IBook,
+  users: IUser[],
+  user: IUser
 }

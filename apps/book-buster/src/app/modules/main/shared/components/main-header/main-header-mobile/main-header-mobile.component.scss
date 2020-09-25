@@ -43,8 +43,21 @@
   }
 
   .title {
+    display: flex;
+    align-items: center;
     margin: 0;
     color: #645fce;
+
+    .profile {
+      height: 40px;
+      width: 40px;
+      font-size: 40px;
+      margin-right: 8px;
+    }
+
+    .text {
+      color:rgba(255, 255, 255, 0.87);;
+    }
   }
 
   .invisible {

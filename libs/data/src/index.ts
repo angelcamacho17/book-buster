@@ -9,6 +9,7 @@ export * from './lib/data-store.module';
 /*  Actions exports */
 export * from './lib/customer/customer.actions';
 export * from './lib/book/book.actions';
+export * from './lib/user/user.actions';
 export * from './lib/order/order.actions';
 export * from './lib/article/article.actions'
 export * from './lib/header/header.actions';
@@ -16,6 +17,7 @@ export * from './lib/header/header.actions';
 /*  Model exports  */
 export * from './lib/models/article.model';
 export * from './lib/models/book.model';
+export * from './lib/models/user.model';
 export * from './lib/models/customer.model';
 export * from './lib/models/order.model';
 export * from './lib/models/back-navigation.model';

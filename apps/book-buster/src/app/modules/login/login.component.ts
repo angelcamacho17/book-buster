@@ -2,7 +2,9 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { trigger, style, state, transition, animate } from '@angular/animations';
-import { KeyValueStoreService, HCSClient, ConfigService, LanguageService, AuthService, getLocales } from '@fecommerce-workspace/data';
+import { KeyValueStoreService, HCSClient, ConfigService, LanguageService, AuthService, getLocales, setCurrentUserRequest } from '@fecommerce-workspace/data';
+import { Store } from '@ngrx/store';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'login',
@@ -68,7 +70,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   constructor(private _router: Router,
               private _formBuilder: FormBuilder,
               private _authService: AuthService,
-              private _store: KeyValueStoreService,
+              private _keyStore: KeyValueStoreService,
+              private _store: Store,
               private _hcs: HCSClient,
               private _lgs: LanguageService,
               private _config: ConfigService) {
@@ -110,9 +113,17 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.isSubmitted = true;
 
     setTimeout(()=> {
-      this._router.navigate(['/main/home']).then(() => {
-        this.isSubmitted = false;
-      });
+      this._router.navigate(['/main/home'])
+
+    // this._hcs.login(this.username, this.password).subscribe(
+    //   (user) => {
+    //     this.isSubmitted = false;
+    //     this._store.dispatch(setCurrentUserRequest({user}))
+
+    //     },
+    //     (err)=> {
+    //       console.log(err);
+    //     })
     },2000)
     return;
     // this._hcs.login(this.username, this.password, { customerKey: this.key }).subscribe(

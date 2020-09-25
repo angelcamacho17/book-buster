@@ -20,6 +20,10 @@ export class MainComponent implements OnInit {
   ) {
   }
 
+  public tog() {
+    console.log('HEREE')
+  }
+
   ngOnInit(): void {
     this.layout = this.layoutService.layout;
     //this._reload();

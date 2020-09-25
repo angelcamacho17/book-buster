@@ -1,6 +1,7 @@
 export interface IHeader {
   title: string,
   leftIcon?: string,
+  profIcon?: boolean,
   rightIcon?: string,
   titClass: string,
   lastUrl?: string,

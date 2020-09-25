@@ -1,12 +1,17 @@
 <!-- <div *ngIf="this.layout === 'mobile'" [style.display]="render ? 'block' : 'none'">  -->
 <div *ngIf="this.layout === 'mobile'" >
-  <header>
-    <main-header></main-header>
-  </header>
+  <mat-drawer-container class="drawer" hasBackdrop="true">
+  <mat-drawer #drawer class="sidenav" mode="over">I'm a drawer</mat-drawer>
   <!-- <div [@routeAnimations]="prepareRoute(outlet)"> -->
-    <div>
-    <router-outlet #outlet="outlet"></router-outlet>
-  </div>
+    <mat-drawer-content>
+      <header>
+        <main-header (toggle)="drawer.toggle()"></main-header>
+      </header>
+      <router-outlet #outlet="outlet">
+
+      </router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
 </div>
 
 

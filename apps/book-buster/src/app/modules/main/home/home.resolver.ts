@@ -17,7 +17,8 @@ export class HomeResolver implements Resolve<any> {
       rightIcon: 'exit_to_app',
       rightIconClass: 'right-icon',
       titClass: 'mat-display-1',
-      centered: true
+      centered: true,
+      profIcon: true
     }
 
     this._store.dispatch(setHeaderRequest({ header }))
