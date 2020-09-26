@@ -1,7 +1,21 @@
 <!-- <div *ngIf="this.layout === 'mobile'" [style.display]="render ? 'block' : 'none'">  -->
 <div *ngIf="this.layout === 'mobile'" >
   <mat-drawer-container class="drawer" hasBackdrop="true">
-  <mat-drawer #drawer class="sidenav" mode="over">I'm a drawer</mat-drawer>
+  <mat-drawer #drawer class="sidenav" mode="over">
+    <div class="head">
+      <span>
+        <mat-icon style="height: 40px; 
+        width: 40px; 
+        font-size: 40px; 
+        margin-right: 8px;">
+          account_circle
+        </mat-icon>
+      </span>
+      <span class="mat-display-1 name">Angel</span>
+    </div>
+    <div class="mat-title option">Rented</div>
+    <div class="mat-title option">Posted</div>
+  </mat-drawer>
   <!-- <div [@routeAnimations]="prepareRoute(outlet)"> -->
     <mat-drawer-content>
       <header>

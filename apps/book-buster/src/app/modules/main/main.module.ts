@@ -13,7 +13,8 @@ import { BookSearchResolver } from './book-search/book-search.resolver';
     CommonModule,
     MaterialModule,
     MainRoutingModule,
-    SharedModule
+    SharedModule,
+    MaterialModule
   ],
   providers: [
     LayoutService,
