@@ -4,6 +4,7 @@ import { OrderService, IOrder, TranslationService, HeaderService } from '@fecomm
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'home',
@@ -12,15 +13,14 @@ import { Subscription, Observable } from 'rxjs';
 })
 export class HomeComponent implements OnDestroy {
   public subscriptions = new Subscription();
-  public categories = ['Software', 'Medicine', 'Culture', 'Love', 'Math', 'Science']
 
   constructor(
-    public store: Store<{ orders: IOrder[], currentOrder: IOrder }>,
     public router: Router,
     public orderService: OrderService,
     public translationService: TranslationService,
     public headerService: HeaderService,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    public mainSer: MainService
   ) { }
 
   /**

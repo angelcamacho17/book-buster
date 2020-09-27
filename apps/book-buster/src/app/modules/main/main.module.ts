@@ -9,6 +9,8 @@ import { MaterialModule } from '../material/material.module';
 import { BookSearchResolver } from './book-search/book-search.resolver';
 import { PostBooksResolver } from './post-books/post-books.resolver';
 import { RentBooksResolver } from './rent-books/rent-books.resolver';
+import { BookResolver } from './book/book.resolver';
+import { MainService } from './main.service'
 
 @NgModule({
   imports: [
@@ -20,10 +22,12 @@ import { RentBooksResolver } from './rent-books/rent-books.resolver';
   ],
   providers: [
     LayoutService,
+    MainService,
     HomeResolver,
     BookSearchResolver,
     PostBooksResolver,
-    RentBooksResolver
+    RentBooksResolver,
+    BookResolver
   ],
   declarations: [MainComponent]
 })

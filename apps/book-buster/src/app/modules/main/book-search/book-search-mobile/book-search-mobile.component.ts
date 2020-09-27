@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IBook, refreshBooksRequest } from '@fecommerce-workspace/data';
 import { select, Store } from '@ngrx/store';
+import { MainService } from '../../main.service';
 import { LayoutService } from '../../shared/services/layout.service';
 import { BookSearchComponent } from '../book-search.component';
 
@@ -14,13 +15,12 @@ export class BookSearchMobileComponent extends BookSearchComponent implements On
 
   constructor(layoutSer: LayoutService, 
               snackBar: MatSnackBar,
-              store: Store<{ books: IBook[], currentBook: IBook }>,
+              mainSer: MainService
     ) {
-    super(layoutSer, snackBar, store);
+    super(layoutSer, snackBar, mainSer);
 
-    this.books$ = this.store.pipe(select('books'));
     this.subscriptions.add(
-      this.books$.subscribe((data: any) => {
+      this.mainSer.books$.subscribe((data: any) => {
         this.loading = false;
         if (data.length === 0 || data.length === undefined) {
           this.emptyResults = true;

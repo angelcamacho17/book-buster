@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { OrderService, IOrder, HeaderService, TranslationService } from '@fecommerce-workspace/data';
 import { HomeComponent } from '../home.component';
 import { LayoutService } from '../../shared/services/layout.service';
+import { MainService } from '../../main.service';
 
 @Component({
   selector: 'home-mobile',
@@ -12,20 +13,20 @@ import { LayoutService } from '../../shared/services/layout.service';
 })
 export class HomeMobileComponent extends HomeComponent implements OnDestroy {
   constructor(
-    public store: Store<{ orders: IOrder[], currentOrder: IOrder }>,
     public router: Router,
     public orderService: OrderService,
     public translationService: TranslationService,
     public headerService: HeaderService,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    public mainSer: MainService
   ) {
     super(
-      store,
       router,
       orderService,
       translationService,
       headerService,
-      layoutService
+      layoutService,
+      mainSer
     );
     this.subscriptions.add(
       this.headerService.rightIconClicked

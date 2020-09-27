@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IBook } from '@fecommerce-workspace/data';
 import { Store } from '@ngrx/store';
+import { MainService } from '../../main.service';
 import { LayoutService } from '../../shared/services/layout.service';
 import { BookSearchComponent } from '../book-search.component';
 
@@ -14,9 +15,10 @@ export class BookSearchTabletComponent extends BookSearchComponent implements On
 
   constructor(layoutSer: LayoutService, 
     snackBar: MatSnackBar,
-    store: Store<{ books: IBook[], currentBook: IBook }>,
+    mainSer: MainService
+
 ) {
-super(layoutSer, snackBar, store);
+super(layoutSer, snackBar, mainSer);
 }
 
   ngOnInit(): void {

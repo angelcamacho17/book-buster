@@ -5,6 +5,7 @@ import { ScanResult } from '@fecommerce-workspace/scanner';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { MainService } from '../main.service';
 import { BookRowComponent } from '../shared/components/row/book-row/book-row.component';
 import { LayoutService } from '../shared/services/layout.service';
 
@@ -33,7 +34,7 @@ export class BookSearchComponent implements OnInit {
   constructor(
     public layoutService: LayoutService,
     public snackBar: MatSnackBar,
-    public store: Store<{ books: IBook[], currentBook: IBook }>,
+    public mainSer: MainService
     ) { }
 
   ngOnInit(): void {
@@ -138,8 +139,7 @@ export class BookSearchComponent implements OnInit {
     this.emptyResults = query.length === 0;
     if (query.length > 0) {
       this.loading = true;
-      console.log('DISPATHCI')
-      this.store.dispatch(searchBookRequest({ filter: query }))
+      this.mainSer.filterBooks(query);
     } else {
       this.emptyResults = true;
       setTimeout(() => {
