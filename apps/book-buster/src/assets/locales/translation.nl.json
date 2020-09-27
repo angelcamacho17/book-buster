@@ -50,5 +50,6 @@
   "back": "back",
   "searchbooks": "Search Books",
   "nomatchbook": "No matching books",
-  "booksplaceholder": "Find title, author & book info"
+  "booksplaceholder": "Find title, author & book info",
+  "book": "Book to rent"
 }
