@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterContentChecked, AfterViewInit, AfterViewChecked } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit, AfterContentChecked, AfterViewInit, AfterViewChecked, ViewChild } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { routesAnimations } from '../animations/routes.animation';
 import { LayoutService } from './shared/services/layout.service';
 
@@ -14,14 +14,21 @@ import { LayoutService } from './shared/services/layout.service';
 export class MainComponent implements OnInit {
   public render = true;
   public layout = 'mobile';
+  @ViewChild('drawer') drawer;
 
   constructor(
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    public router: Router
   ) {
   }
 
   public tog() {
     console.log('HEREE')
+  }
+
+  public routeTo(url: string) {
+    this.drawer.toggle();
+    this.router.navigate(['/main/' + url]);
   }
 
   ngOnInit(): void {

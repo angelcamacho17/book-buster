@@ -54,5 +54,7 @@
   "nodata": "No data to display.",
   "back": "Back",
   "lookbook": "Look for a book",
-  "searchbooks": "Search Books"
+  "searchbooks": "Search Books",
+  "postedbooks": "Posted Books",
+  "rentedbooks": "Rented Books"
 }

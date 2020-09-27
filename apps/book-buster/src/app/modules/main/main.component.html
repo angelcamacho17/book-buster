@@ -13,8 +13,8 @@
       </span>
       <span class="mat-display-1 name">Angel</span>
     </div>
-    <div class="mat-title option">Rented</div>
-    <div class="mat-title option">Posted</div>
+    <div class="mat-title option" (click)='routeTo("rent")' >Rented</div>
+    <div class="mat-title option" (click)='routeTo("post")' >Posted</div>
   </mat-drawer>
   <!-- <div [@routeAnimations]="prepareRoute(outlet)"> -->
     <mat-drawer-content>
