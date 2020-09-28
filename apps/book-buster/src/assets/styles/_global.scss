@@ -67,6 +67,13 @@ main {
   z-index: 2;
 }
 
+.app-btn {
+  margin-top: 32px;
+  background-color: #645fce !important;
+  color: rgba(255, 255, 255, 0.87);
+  height: 50px;
+}
+
 .header-extension {
   position: absolute;
   height: 40px;
@@ -80,6 +87,10 @@ main {
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
+}
+
+.no-btm {
+  margin-bottom: 0 !important;
 }
 
 .delete-art {

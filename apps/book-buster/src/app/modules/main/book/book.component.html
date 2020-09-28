@@ -1,3 +1,22 @@
-<h2>
-    {{book.title}}
-</h2>
+<base-component>
+    <div class="scrollable-container">
+        <div class="content">
+            <div class="mat-display-1 title no-btm">
+                {{book.title}}
+            </div> 
+            <div class="rate">
+                <mat-icon color="primary">star</mat-icon>
+                <mat-icon color="primary">star</mat-icon>
+                <mat-icon color="primary">star</mat-icon>
+                <mat-icon color="primary">star</mat-icon>
+                <mat-icon color="primary">star_border</mat-icon>
+            </div>
+        </div>
+        <footer>
+            <button class="app-btn mat-elevation-0"
+                  mat-button>
+                  {{('rent' | translate) | uppercase}}
+            </button>
+        </footer>
+    </div>
+</base-component>

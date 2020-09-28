@@ -1,0 +1,21 @@
+.book-row {
+    display: flex;
+    width: auto;
+    padding: 8px 16px;
+    justify-content: space-between;
+    align-items: center;
+
+    .info {
+        display: flex;
+        box-sizing: border-box;
+        flex-flow: column;
+        justify-content: space-around;
+        height: -webkit-fill-available;
+
+    }
+
+    .price {
+        display: flex;
+        width: 24px;
+    }
+}

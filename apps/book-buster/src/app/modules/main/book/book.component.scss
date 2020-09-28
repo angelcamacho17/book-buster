@@ -1,0 +1,22 @@
+.scrollable-container {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    width: 100%;
+
+    .content {
+        .title {
+            color: rgba(255, 255, 255, 0.87);
+        }
+    }
+
+    footer {
+        .app-btn {
+            margin-top: 32px;
+            background-color: #645fce !important;
+            color: rgba(255, 255, 255, 0.87);
+            height: 50px;
+            width: 100%;
+        }
+    }
+}

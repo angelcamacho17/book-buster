@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookComponent } from './book.component';
 import { BookRoutingModule } from './book-routing.module';
+import { SharedModule } from '../shared/shared.module';
+import { TranslatePipeModule } from '@fecommerce-workspace/data';
+import { MaterialModule } from '../../material/material.module';
 
 
 
@@ -9,7 +12,10 @@ import { BookRoutingModule } from './book-routing.module';
   declarations: [BookComponent],
   imports: [
     CommonModule,
-    BookRoutingModule
+    BookRoutingModule,
+    SharedModule,
+    TranslatePipeModule,
+    MaterialModule
   ]
 })
 export class BookModule { }

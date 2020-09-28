@@ -21,9 +21,9 @@ export class BookResolver implements Resolve<any> {
   private _headerNewOrderFlow(): IHeader {
     const header: IHeader = {
       title: 'book',
-      leftIcon: 'close',
+      leftIcon: 'keyboard_arrow_left',
       titClass: 'mat-title',
-      lastUrl: 'main/home',
+      lastUrl: 'main/book-search',
       centered: true,
     }
     return header;
