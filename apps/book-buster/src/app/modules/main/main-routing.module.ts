@@ -5,6 +5,7 @@ import { BookSearchResolver } from './book-search/book-search.resolver';
 import { PostBooksResolver } from './post-books/post-books.resolver';
 import { RentBooksResolver } from './rent-books/rent-books.resolver';
 import { BookResolver } from './book/book.resolver';
+import { BookGuard } from './book/book.guard';
 import { MainComponent } from './main.component';
 
 const routes: Routes = [
@@ -45,8 +46,8 @@ const routes: Routes = [
         path: 'book-to-rent',
         loadChildren: () => import('./book/book.module').then(m => m.BookModule),
         data: { animation: 'book-to-rent' },
-        resolve: { BookResolver }
-        //canActivate: [FeLoginGuard]
+        resolve: { BookResolver },
+        canActivate: [BookGuard]
       },
       { path: '**', redirectTo: 'home' }
     ]

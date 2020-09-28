@@ -10,7 +10,8 @@ import { BookSearchResolver } from './book-search/book-search.resolver';
 import { PostBooksResolver } from './post-books/post-books.resolver';
 import { RentBooksResolver } from './rent-books/rent-books.resolver';
 import { BookResolver } from './book/book.resolver';
-import { MainService } from './main.service'
+import { MainService } from './main.service';
+import { BookGuard } from './book/book.guard';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { MainService } from './main.service'
     MaterialModule
   ],
   providers: [
+    BookGuard,
     LayoutService,
     MainService,
     HomeResolver,

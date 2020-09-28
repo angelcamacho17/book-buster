@@ -1,5 +1,5 @@
 <base-component>
-    <div class="scrollable-container">
+    <div class="book-page">
         <div class="content">
             <div class="mat-display-1 title no-btm">
                 {{book.title}}
@@ -11,12 +11,54 @@
                 <mat-icon color="primary">star</mat-icon>
                 <mat-icon color="primary">star_border</mat-icon>
             </div>
+            <img src="assets/img/revival.jpg" class="book-img" >
+
+            <div class="book-info">
+                <span *ngIf="book?.author">
+                    <div class="label mat-body-2">
+                        Author :
+                    </div> 
+                    <div class="value mat-body-2">
+                        {{ book.author }}
+                    </div>
+                </span>
+                <span *ngIf="book?.edition">
+                    <div class="label mat-body-2">
+                        Edition :
+                    </div> 
+                    <div class="value mat-body-2">
+                        {{ book.edition }}
+                    </div>
+                </span>
+                <span *ngIf="book?.editorial">
+                    <div class="label mat-body-2">
+                        Editorial :
+                    </div> 
+                    <div class="value mat-body-2">
+                        {{ book.editorial }}
+                    </div>
+                </span>
+                <span *ngIf="book?.price">
+                    <div class="label mat-body-2">
+                        Price :
+                    </div> 
+                    <div class="value mat-body-2">
+                        {{ book?.price }}
+                    </div>
+                </span>
+                <span *ngIf="book?.year">
+                    <div class="label mat-body-2">
+                        Year :
+                    </div> 
+                    <div class="value mat-body-2">
+                        {{ book?.year }}
+                    </div>
+                </span>
+            </div>
         </div>
-        <footer>
-            <button class="app-btn mat-elevation-0"
-                  mat-button>
-                  {{('rent' | translate) | uppercase}}
-            </button>
-        </footer>
+        <button class="app-btn mat-elevation-0"
+                mat-button>
+                {{('rent' | translate) | uppercase}}
+        </button>
     </div>
 </base-component>

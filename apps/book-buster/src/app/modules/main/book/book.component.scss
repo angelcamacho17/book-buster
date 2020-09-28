@@ -1,22 +1,61 @@
-.scrollable-container {
+.book-page{
+    height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+    padding-top: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+    -webkit-overflow-scrolling: touch;
     display: flex;
     flex-flow: column;
     justify-content: space-between;
     width: 100%;
+    padding-bottom: 16px;
 
     .content {
+        display: flex;
+        flex-flow: column;
+        overflow: auto;
+
         .title {
             color: rgba(255, 255, 255, 0.87);
         }
+        .rate {
+            margin: 8px 0;
+        }
+        .book-img {
+            height: calc(100vh - 328px);
+            object-fit: cover;
+            margin-bottom: 16px;
+        }
+        .book-info {
+            display: flex;
+            flex-flow: column;
+            margin-bottom: 8px;
+            flex: none;
+
+            
+            span {
+                display: flex;
+                width: auto;
+                justify-content: space-between;
+                margin-bottom: 8px;
+                .label {
+                    color: rgba(255, 255, 255, 0.87);
+                }
+                .value {
+                    color: rgba(255, 255, 255, 0.6);
+                }
+            }
+
+        }
     }
 
-    footer {
-        .app-btn {
-            margin-top: 32px;
-            background-color: #645fce !important;
-            color: rgba(255, 255, 255, 0.87);
-            height: 50px;
-            width: 100%;
-        }
+    .app-btn {
+        margin-top: 32px;
+        background-color: #645fce !important;
+        color: rgba(255, 255, 255, 0.87);
+        height: 50px;
+        width: 100%;
     }
 }
