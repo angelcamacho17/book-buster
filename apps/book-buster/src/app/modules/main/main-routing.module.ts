@@ -3,8 +3,9 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { HomeResolver } from './home/home.resolver';
 import { BookSearchResolver } from './book-search/book-search.resolver';
 import { PostBooksResolver } from './post-books/post-books.resolver';
-import { RentBooksResolver } from './rent-books/rent-books.resolver';
+import { RentedBooksResolver } from './rented-books/rented-books.resolver';
 import { BookResolver } from './book/book.resolver';
+import { RentBookResolver } from './rent-book/rent-book.resolver';
 import { BookGuard } from './book/book.guard';
 import { MainComponent } from './main.component';
 
@@ -36,10 +37,10 @@ const routes: Routes = [
         //canActivate: [FeLoginGuard]
       },
       {
-        path: 'rent',
-        loadChildren: () => import('./rent-books/rent-books.module').then(m => m.RentBooksModule),
-        data: { animation: 'rent-search' },
-        resolve: { RentBooksResolver }
+        path: 'rented',
+        loadChildren: () => import('./rented-books/rented-books.module').then(m => m.RentedBooksModule),
+        data: { animation: 'rented-search' },
+        resolve: { RentedBooksResolver }
         //canActivate: [FeLoginGuard]
       },
       {
@@ -47,6 +48,13 @@ const routes: Routes = [
         loadChildren: () => import('./book/book.module').then(m => m.BookModule),
         data: { animation: 'book-to-rent' },
         resolve: { BookResolver },
+        canActivate: [BookGuard]
+      },
+      {
+        path: 'rent-book',
+        loadChildren: () => import('./rent-book/rent-book.module').then(m => m.RentBookModule),
+        data: { animation: 'rent-book' },
+        resolve: { RentBookResolver },
         canActivate: [BookGuard]
       },
       { path: '**', redirectTo: 'home' }

@@ -5,7 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { IOrder, clearCurrentOrderRequest, refreshOrdersRequest, IHeader, setHeaderRequest, OrderService } from '@fecommerce-workspace/data';
 
 @Injectable()
-export class RentBooksResolver implements Resolve<any> {
+export class RentBookResolver implements Resolve<any> {
   orders$: Observable<unknown>;
   constructor(
     private _store: Store<{}>,
@@ -20,10 +20,10 @@ export class RentBooksResolver implements Resolve<any> {
 
   private _headerNewOrderFlow(): IHeader {
     const header: IHeader = {
-      title: 'rentedbooks',
-      leftIcon: 'close',
+      title: 'rentbook',
+      leftIcon: 'keyboard_arrow_left',
       titClass: 'mat-title',
-      lastUrl: 'main/home',
+      lastUrl: 'main/book-to-rent',
       centered: true,
     }
     return header;

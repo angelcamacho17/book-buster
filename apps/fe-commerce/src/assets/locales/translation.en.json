@@ -52,5 +52,6 @@
   "nodata": "No data to display.",
   "back": "Back",
   "orderConfirmed": "Order succesfully confirmed.",
-  "needArts": "You must add at least one article."
+  "needArts": "You must add at least one article.",
+  "rentbook": "Let's rent"
 }
