@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-
+import { MainGuard } from './guards/main.guard';
+import { NotSupportedGuard } from './guards/not-supported.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,7 +15,13 @@ const routes: Routes = [
     path: 'main',
     loadChildren: () => import('./modules/main/main.module').then(m => m.MainModule),
     data: { animation: 'main' },
-    //canActivate: [FeAuthGuard]
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'not-supported',
+    loadChildren: () => import('./modules/not-supported/not-supported.module').then(m => m.NotSupportedModule),
+    data: { animation: 'not-supported' },
+    canActivate: [NotSupportedGuard]
   },
   { path: '**', redirectTo: 'main' }
 ];

@@ -14,6 +14,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './modules/material/material.module';
 import { SharedModule } from './modules/main/shared/shared.module';
+import { MainGuard } from './guards/main.guard';
+import { NotSupportedGuard } from './guards/not-supported.guard';
 
 @NgModule({
   declarations: [
@@ -38,8 +40,8 @@ import { SharedModule } from './modules/main/shared/shared.module';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
-    FeAuthGuard,
-    FeLoginGuard,
+    MainGuard,
+    NotSupportedGuard,
     ConfigService,
     CustomerKeyResolver,
     KeyValueStoreService,
