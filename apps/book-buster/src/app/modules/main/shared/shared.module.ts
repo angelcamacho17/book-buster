@@ -18,6 +18,7 @@ import { FillScrollableDirective } from './directives/fill-scrollable.directive'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipeModule } from '@fecommerce-workspace/data';
 import { SetHeaderHeightDirective } from './directives/set-header-height.directive';
+import { ScrollerDirective } from './directives/scroller.directive';
 import { RowComponent } from './components/row/row.component';
 import { MainHeaderMobileComponent } from './components/main-header/main-header-mobile/main-header-mobile.component';
 import { MainHeaderTabletComponent } from './components/main-header/main-header-tablet/main-header-tablet.component';
@@ -47,6 +48,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     MainHeaderTabletComponent,
     LoadingStateComponent,
     LoadingSpinnerComponent,
+    ScrollerDirective
   ],
   imports: [
     CommonModule,
@@ -73,7 +75,9 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     ArticleRowComponent,
     ConfirmDiscardDialogComponent,
     LoadingStateComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    ScrollerDirective
+
   ],
   entryComponents: [
     CustomerRowComponent,

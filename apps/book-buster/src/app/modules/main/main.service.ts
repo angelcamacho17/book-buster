@@ -6,7 +6,7 @@ import { IBook } from '@fecommerce-workspace/data';
 })
 export class MainService {
   
-  public categories = ['Software', 'Medicine', 'Culture', 'Love', 'Math', 'Science'];
+  public categories = ['Software', 'Medicine', 'Culture', 'Love', 'Math', 'Science', 'Software', 'Medicine', 'Culture', 'Love', 'Math', 'Science','Software', 'Medicine', 'Culture', 'Love', 'Math', 'Science'];
   public books: IBook[] = [
     {
       title: 'Un saco de huesos',
