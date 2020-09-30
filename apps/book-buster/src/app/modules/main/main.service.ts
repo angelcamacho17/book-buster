@@ -42,7 +42,7 @@ export class MainService {
       password: '123'
     },
   ]
-  public categories = ['Software', 'Medicine', 'Culture', 'Love', 'Math', 'Science', 'Software', 'Medicine', 'Culture', 'Love', 'Math', 'Science','Software', 'Medicine', 'Culture', 'Love', 'Math', 'Science'];
+  public categories = ['Software', 'Medicine', 'Culture', 'Love', 'Math', 'Science'];
   public books: IBook[] = [
     {
       title: 'Un saco de huesos',

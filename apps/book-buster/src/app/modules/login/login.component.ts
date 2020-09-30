@@ -2,9 +2,6 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { trigger, style, state, transition, animate } from '@angular/animations';
-import { KeyValueStoreService, HCSClient, ConfigService, LanguageService, AuthService, getLocales, setCurrentUserRequest } from '@fecommerce-workspace/data';
-import { Store } from '@ngrx/store';
-import { catchError } from 'rxjs/operators';
 import { MainService } from '../main/main.service';
 
 @Component({
@@ -87,7 +84,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     this.hideCustomerKey = false;
-    let key = '';
     setTimeout(() => {
       this.displayImg = true;
       setTimeout(() => {
@@ -145,7 +141,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   showPassword() {
     this.hidePassword = !this.hidePassword;
-    event.stopPropagation();
   }
 
   get username() { return this.loginForm.value.username; }
