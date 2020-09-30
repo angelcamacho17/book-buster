@@ -7,9 +7,4 @@ export class ScrollerDirective {
   constructor(
     private _elementRef: ElementRef,
   ) { }
-
-  @HostListener('touchstart') scrolling() {
-    const element = this._elementRef.nativeElement;
-    disableBodyScroll(element);
-    }
 }
