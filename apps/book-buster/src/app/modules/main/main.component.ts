@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentChecked, AfterViewInit, AfterViewChecked, ViewChild } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { routesAnimations } from '../animations/routes.animation';
+import { MainService } from './main.service';
 import { LayoutService } from './shared/services/layout.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class MainComponent implements OnInit {
 
   constructor(
     public layoutService: LayoutService,
-    public router: Router
+    public router: Router,
+    public mainSer: MainService
   ) {
   }
 

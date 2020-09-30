@@ -9,7 +9,7 @@ import { IUser } from '../../models/user.model';
 })
 export class MainService {
 
-  public currentUser: IUser = null;
+  public currentUser: IUser = JSON.parse(localStorage.getItem('USER'));
   public users: IUser[] = [
     {
       name: 'angel',
@@ -129,6 +129,7 @@ export class MainService {
   public login(username: string, password: string): Observable<boolean> {
     for (const user of this.users) {
       if (user.name === username && user.password === password) {
+        localStorage.setItem('USER', JSON.stringify(user));
         this.currentUser = user;
         return of(true);
       } 
@@ -146,6 +147,7 @@ export class MainService {
    * @param password 
    */
   public logout(): void {
+    localStorage.removeItem('USER')
     this._router.navigate(['/login']);
   }
 }

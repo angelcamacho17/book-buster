@@ -11,7 +11,7 @@
           account_circle
         </mat-icon>
       </span>
-      <span class="mat-display-1 name">Angel</span>
+      <span class="mat-display-1 name">{{ mainSer?.currentUser?.name | titlecase}}</span>
     </div>
     <div class="mat-title option" (click)='routeTo("rented")' >Rented</div>
     <div class="mat-title option" (click)='routeTo("posted")' >Posted</div>
