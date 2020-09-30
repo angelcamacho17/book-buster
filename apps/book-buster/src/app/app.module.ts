@@ -15,7 +15,9 @@ import { environment } from '../environments/environment';
 import { MaterialModule } from './modules/material/material.module';
 import { SharedModule } from './modules/main/shared/shared.module';
 import { MainGuard } from './guards/main.guard';
+import { LoginGuard } from './guards/login.guard';
 import { NotSupportedGuard } from './guards/not-supported.guard';
+import { MainService } from './modules/main/main.service';
 
 @NgModule({
   declarations: [
@@ -41,8 +43,10 @@ import { NotSupportedGuard } from './guards/not-supported.guard';
   ],
   providers: [
     MainGuard,
+    LoginGuard,
     NotSupportedGuard,
     ConfigService,
+    MainService,
     CustomerKeyResolver,
     KeyValueStoreService,
     AuthTokenService,

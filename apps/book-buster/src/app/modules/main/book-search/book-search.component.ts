@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IBook, searchBookRequest } from '@fecommerce-workspace/data';
 import { ScanResult } from '@fecommerce-workspace/scanner';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IBook } from '../../../models/book.model';
 import { MainService } from '../main.service';
 import { BookRowComponent } from '../shared/components/row/book-row/book-row.component';
 import { LayoutService } from '../shared/services/layout.service';

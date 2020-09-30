@@ -42,7 +42,8 @@ export class HomeComponent implements OnDestroy {
    * Logout of the app.
    */
   public logout() {
-    this.router.navigate(['/login'])
+    this.mainSer.clearUser();
+    this.mainSer.logout()
   }
 
   ngOnDestroy(): void {

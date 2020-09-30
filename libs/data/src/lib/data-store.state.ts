@@ -9,7 +9,7 @@ import { IArticle } from './models/article.model';
 import { articlesReducer, articleReducer } from './article/article.reducer';
 import { IHeader } from './models/header.model';
 import { headersReducer } from './header/header.reducer';
-import { IBook } from './models/book.model';
+import { IBook } from './models/xbook.model';
 import { booksReducer, currentBookReducer } from './book/book.reducer';
 import { IUser } from './models/user.model';
 import { userReducer, usersReducer } from './user/user.reducer';

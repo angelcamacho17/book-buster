@@ -16,7 +16,6 @@ export * from './lib/header/header.actions';
 
 /*  Model exports  */
 export * from './lib/models/article.model';
-export * from './lib/models/book.model';
 export * from './lib/models/user.model';
 export * from './lib/models/customer.model';
 export * from './lib/models/order.model';

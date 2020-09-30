@@ -1,7 +1,7 @@
 import { Route } from '@angular/compiler/src/core';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { IBook } from '@fecommerce-workspace/data';
+import { IBook } from '../../../../../../models/book.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { MainService } from '../../../../main.service';

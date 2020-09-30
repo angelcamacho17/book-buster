@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IBook } from '@fecommerce-workspace/data';
 import { isThisTypeNode } from 'typescript';
+import { IBook } from '../../../models/book.model';
 import { MainService } from '../main.service';
 
 @Component({

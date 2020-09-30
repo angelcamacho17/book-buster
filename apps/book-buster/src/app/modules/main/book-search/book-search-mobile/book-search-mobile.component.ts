@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IBook, refreshBooksRequest } from '@fecommerce-workspace/data';
+import { refreshBooksRequest } from '@fecommerce-workspace/data';
 import { select, Store } from '@ngrx/store';
 import { MainService } from '../../main.service';
 import { LayoutService } from '../../shared/services/layout.service';

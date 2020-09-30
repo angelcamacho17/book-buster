@@ -25,7 +25,6 @@ import { BookGuard } from './book/book.guard';
   providers: [
     BookGuard,
     LayoutService,
-    MainService,
     HomeResolver,
     BookSearchResolver,
     PostBooksResolver,

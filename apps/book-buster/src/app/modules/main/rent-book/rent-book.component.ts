@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IBook } from '@fecommerce-workspace/data';
 import { MainService } from '../main.service';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { Router } from '@angular/router';
+import { IBook } from '../../../models/book.model';
 
 @Component({
   selector: 'rent-book',

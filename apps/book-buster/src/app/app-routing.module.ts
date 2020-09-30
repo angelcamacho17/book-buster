@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { LoginGuard } from './guards/login.guard';
 import { MainGuard } from './guards/main.guard';
 import { NotSupportedGuard } from './guards/not-supported.guard';
 
@@ -9,7 +10,7 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule),
     data: { animation: 'login' },
-    //canActivate: [FeLoginGuard]
+    canActivate: [LoginGuard]
   },
   {
     path: 'main',

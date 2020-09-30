@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IBook } from '../models/book.model';
+import { IBook } from '../models/xbook.model';
 
 // App Books
 export const appendBookRequest = createAction('[Book] Append Book Request', props<{ book: IBook }>());

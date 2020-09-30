@@ -1,1 +1,10 @@
-<p>rent-books works!</p>
+<base-component>
+  <div scroller class="scrollable-container">
+    <div class="mat-display-1 headline">What to read ?</div>
+    <mat-card class="card" *ngFor="let book of mainSer.rentedBooks" (click)="checkBook(book)">
+      <mat-card-content class="card-content mat-headline">
+        
+      </mat-card-content>
+    </mat-card>
+  </div>
+</base-component>

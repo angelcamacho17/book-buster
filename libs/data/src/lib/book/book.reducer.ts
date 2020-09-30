@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { refreshBooksDone, refreshBookDone, refreshBookSetted } from './book.actions';
-import { IBook, IBookState, IBooksState } from '../models/book.model';
+import { IBook, IBookState, IBooksState } from '../models/xbook.model';
 
 export const initialBooks: IBooksState = {
   books: []

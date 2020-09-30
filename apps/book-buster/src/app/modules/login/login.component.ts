@@ -5,6 +5,7 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
 import { KeyValueStoreService, HCSClient, ConfigService, LanguageService, AuthService, getLocales, setCurrentUserRequest } from '@fecommerce-workspace/data';
 import { Store } from '@ngrx/store';
 import { catchError } from 'rxjs/operators';
+import { MainService } from '../main/main.service';
 
 @Component({
   selector: 'login',
@@ -69,12 +70,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   constructor(private _router: Router,
               private _formBuilder: FormBuilder,
-              private _authService: AuthService,
-              private _keyStore: KeyValueStoreService,
-              private _store: Store,
-              private _hcs: HCSClient,
-              private _lgs: LanguageService,
-              private _config: ConfigService) {
+              private _mainSer: MainService) {
     this._router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
@@ -113,17 +109,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.isSubmitted = true;
 
     setTimeout(()=> {
-      this._router.navigate(['/main/home'])
-
-    // this._hcs.login(this.username, this.password).subscribe(
-    //   (user) => {
-    //     this.isSubmitted = false;
-    //     this._store.dispatch(setCurrentUserRequest({user}))
-
-    //     },
-    //     (err)=> {
-    //       console.log(err);
-    //     })
+      this._mainSer.login(this.username, this.password).subscribe((res)=>{
+        this.isSubmitted = false;
+        if(res) {
+          this._router.navigate(['/main/home'])
+        } else {
+          this.errorMessage = 'Your credentials are wrong, please check them.';
+        }
+      })
     },2000)
     return;
     // this._hcs.login(this.username, this.password, { customerKey: this.key }).subscribe(

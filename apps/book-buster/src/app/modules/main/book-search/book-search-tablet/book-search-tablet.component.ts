@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IBook } from '@fecommerce-workspace/data';
 import { Store } from '@ngrx/store';
 import { MainService } from '../../main.service';
 import { LayoutService } from '../../shared/services/layout.service';
