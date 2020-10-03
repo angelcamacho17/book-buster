@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { IBook } from '../../models/book.model';
@@ -79,7 +80,8 @@ export class MainService {
   public postedBooks: IBook[] = [];
   public books$ = new EventEmitter<IBook[]>();
   public currentBook = null;
-  constructor(private _router: Router) { }
+  constructor(private _router: Router,
+              private _snackBar: MatSnackBar) { }
 
 
   /**
@@ -103,6 +105,15 @@ export class MainService {
    * @param book 
    */
   public rentBook(book: IBook): void{
+    book.rentedBy = this.currentUser;
+    localStorage.setItem('RENTED_BOOKS_' + book.title + '_' + this.currentUser.name, JSON.stringify(book));
+    const snackRef = this._snackBar.open('You just rent ' + book.title + '!', 'CHECK OUT')
+    snackRef.afterDismissed().subscribe((res) => {
+      if (res.dismissedByAction) {
+        this._router.navigate(['main/rented'])
+      }
+    })
+    this._router.navigate(['main/home']);
     this.rentedBooks.push(book);
   }
 

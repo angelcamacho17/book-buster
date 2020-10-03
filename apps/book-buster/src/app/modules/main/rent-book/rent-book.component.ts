@@ -21,6 +21,7 @@ export class RentBookComponent implements OnInit, OnDestroy {
   }
 
   public letsRent() {
+    this.mainSer.rentBook(this.book);
     this._router.navigate(['/main/home'])
   }
   

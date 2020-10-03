@@ -44,6 +44,13 @@ const routes: Routes = [
         //canActivate: [FeLoginGuard]
       },
       {
+        path: 'posted',
+        loadChildren: () => import('./post-books/post-books.module').then(m => m.PostBooksModule),
+        data: { animation: 'post-search' },
+        resolve: { PostBooksResolver }
+        //canActivate: [FeLoginGuard]
+      },
+      {
         path: 'book-to-rent',
         loadChildren: () => import('./book/book.module').then(m => m.BookModule),
         data: { animation: 'book-to-rent' },
