@@ -5,6 +5,7 @@ import { MainRoutingModule } from './main-routing.module';
 import { HomeResolver } from './home/home.resolver';
 import { MainComponent } from './main.component';
 import { LayoutService } from './shared/services/layout.service';
+import { CheckoutService } from './shared/services/checkout.service';
 import { MaterialModule } from '../material/material.module';
 import { BookSearchResolver } from './book-search/book-search.resolver';
 import { PostBooksResolver } from './post-books/post-books.resolver';
@@ -26,6 +27,7 @@ import { BookGuard } from './book/book.guard';
     BookGuard,
     LayoutService,
     HomeResolver,
+    CheckoutService,
     BookSearchResolver,
     PostBooksResolver,
     RentedBooksResolver,
