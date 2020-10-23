@@ -4,7 +4,6 @@ import { CheckoutService } from '../../services/checkout.service';
 import { get } from 'scriptjs';
 // import * as mercadopago from 'mercadopago';
 // Mercado Pago SDK
-const mercadopago = require ('mercadopago');
 
 @Component({
   selector: 'app-mercadopago-button',
@@ -27,9 +26,9 @@ export class MercadoPagoButtonComponent implements OnInit {
   };
 
   constructor(private checkoutService: CheckoutService) { 
-    mercadopago.configure({
-      access_token: 'APP_USR-2504148716483876-101015-d42aa249a35ed682634ddad6032c14b3-480104190'
-    });
+    // mercadopago.configure({
+    //   access_token: 'APP_USR-2504148716483876-101015-d42aa249a35ed682634ddad6032c14b3-480104190'
+    // });
   }
 
   ngOnInit(): void {
@@ -39,34 +38,34 @@ export class MercadoPagoButtonComponent implements OnInit {
     // });
   }
 
-  onBuy() {
-    const preference = {
-      items: [
-        {
-          title: 'My Item',
-          unit_price: 100,
-          quantity: 1,
-        }
-      ]
-    };
+  // onBuy() {
+  //   const preference = {
+  //     items: [
+  //       {
+  //         title: 'My Item',
+  //         unit_price: 100,
+  //         quantity: 1,
+  //       }
+  //     ]
+  //   };
     
-    mercadopago.preferences.create(preference)
-    .then(function(response){
-    // This value replaces the String "<%= global.id %>" in your HTML
-      console.log(response.body.id);
-    }).catch(function(error){
-      console.log(error);
-    });
-    // this.checkoutService.goCheckOut(this.preference).then(result => {
-    //   // Read result of the Cloud Function.
-    //   this.init_point = result.data.result;
-    //   console.log(this.init_point);
-    //   window.location.href = this.init_point;
-    // }).catch(error => {
-    //   console.log('ERROR')
-    //   console.log(error);
-    //   return error
-    // });
-  }
+  //   mercadopago.preferences.create(preference)
+  //   .then(function(response){
+  //   // This value replaces the String "<%= global.id %>" in your HTML
+  //     console.log(response.body.id);
+  //   }).catch(function(error){
+  //     console.log(error);
+  //   });
+  //   // this.checkoutService.goCheckOut(this.preference).then(result => {
+  //   //   // Read result of the Cloud Function.
+  //   //   this.init_point = result.data.result;
+  //   //   console.log(this.init_point);
+  //   //   window.location.href = this.init_point;
+  //   // }).catch(error => {
+  //   //   console.log('ERROR')
+  //   //   console.log(error);
+  //   //   return error
+  //   // });
+  // }
 
 }
