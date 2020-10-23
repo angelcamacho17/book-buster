@@ -1,6 +1,13 @@
-<form action="/procesar-pago" method="POST">
+<!-- <form action="/procesar-pago" method="POST">
     <button type="button" (click)="onBuy()" 
     class="mercadopago-button" id="mercadopago-button">
     Buy now
+    
 </button>
-</form>
+</form> -->
+<form method="POST">
+    <script
+     src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+     data-preference-id='<%= global.id %>'>
+    </script>
+  </form>

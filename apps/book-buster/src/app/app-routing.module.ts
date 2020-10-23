@@ -32,7 +32,7 @@ const routes: Routes = [
     routes,
     {
       useHash: true,
-      preloadingStrategy: PreloadAllModules
+      //preloadingStrategy: PreloadAllModules
     })],
   exports: [RouterModule]
 })
