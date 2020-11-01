@@ -1,12 +1,24 @@
 <base-component>
-  <div class="scrollable-container">
-    <app-mercadopago-button></app-mercadopago-button>
-    <div class="mat-display-1 headline">What to read ?</div>
-    <mat-card class="card" *ngFor="let category of mainSer.categories" (click)="openCategory(category)">
-      <mat-card-content class="card-content mat-headline">
-        {{category}}
-      </mat-card-content>
-    </mat-card>
+<div class="header-extension">
+  <search (searchFocus)="showShadow($event)"
+           (searchBlur)="searchStarted()"
+           (userSearching)="hidePanel($event)"
+           (hasSearchResults)="handleSearchResults($event)"
+           (customIconEvent)="showScanner()"></search>
+</div>
+<!-- <app-mercadopago-button></app-mercadopago-button> -->
+  <div class="scrollable-container search-results-container">
+    <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
+      [dividerClass]="'customer-divider'" class="search-results"></search-results>
+
+    <div class="no-results-container" *ngIf="!hide && emptyResults">
+      <div class="mat-display-1 headline">What to read ?</div>
+      <mat-card class="card" *ngFor="let category of mainSer.categories" (click)="openCategory(category)">
+        <mat-card-content class="card-content mat-headline">
+          {{category}}
+        </mat-card-content>
+      </mat-card>
+    </div>
 
     <create-button (click)="postBook()"></create-button>
   </div>

@@ -1,11 +1,17 @@
 
 .header-extension {
-  background: #645fce;
-  padding-bottom: 16px;
-  .input {
-      height: 48px;
+    height: 66px;
+    box-sizing: border-box;
+    padding: 0 16px;
+    z-index: 5;
   }
-}
+  
+  
+  .search-results-container {
+    flex: 1;
+    overflow: auto;
+  }
+  
 
 .scrollable-container {
   .headline {

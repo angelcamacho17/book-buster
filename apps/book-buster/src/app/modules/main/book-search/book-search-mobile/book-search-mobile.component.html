@@ -6,7 +6,7 @@
              (hasSearchResults)="handleSearchResults($event)"
              (customIconEvent)="showScanner()"></search>
   </div>
-  <div *ngIf="!scanner" class="search-results-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
+  <div class="search-results-container" [ngClass]="(shadow || !emptyResults) ? 'shadow' : ''">
     <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
       [dividerClass]="'customer-divider'" class="search-results"></search-results>
   <!-- needs to be added on fe-search-results [rowType]="rowType"  -->
@@ -22,14 +22,6 @@
         <div class="mat-title search-text">{{'nomatchbook' | translate}}</div>
       </div>
     </div>
-  </div>
-  <div *ngIf="scanner" class="search-container">
-  <loading-state *ngIf="!scannerStarted"></loading-state>
-    <fe-scanner (scanSuccess)="bookScanned($event)"
-                (scanStarted)="onStarted($event)"
-                (scanError)="handlePermission($event)"
-                (permission)="handlePermission($event)"
-                (noCamera)="noCameraFound($event)"></fe-scanner>
   </div>
   <loading-state *ngIf="loading"></loading-state>
 </base-component>
