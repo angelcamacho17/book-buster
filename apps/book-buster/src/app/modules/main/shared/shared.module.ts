@@ -24,7 +24,7 @@ import { MainHeaderMobileComponent } from './components/main-header/main-header-
 import { MainHeaderTabletComponent } from './components/main-header/main-header-tablet/main-header-tablet.component';
 import { LoadingStateComponent } from './components/loading-state/loading-state.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
-import { MercadoPagoButtonComponent } from './components/mercadopago-button/mercadopago-button.component';
+// import { MercadoPagoButtonComponent } from './components/mercadopago-button/mercadopago-button.component';
 // import { LayoutService } from './services/layout.service';
 
 @NgModule({
@@ -50,7 +50,7 @@ import { MercadoPagoButtonComponent } from './components/mercadopago-button/merc
     LoadingStateComponent,
     LoadingSpinnerComponent,
     ScrollerDirective,
-    MercadoPagoButtonComponent
+    // MercadoPagoButtonComponent
   ],
   imports: [
     CommonModule,
@@ -79,7 +79,7 @@ import { MercadoPagoButtonComponent } from './components/mercadopago-button/merc
     LoadingStateComponent,
     LoadingSpinnerComponent,
     ScrollerDirective,
-    MercadoPagoButtonComponent
+    // MercadoPagoButtonComponent
   ],
   entryComponents: [
     CustomerRowComponent,

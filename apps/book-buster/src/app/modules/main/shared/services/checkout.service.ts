@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
-import '@firebase/functions';
+// import { Injectable } from '@angular/core';
+// import * as firebase from 'firebase/app';
+// import '@firebase/functions';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class CheckoutService {
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class CheckoutService {
 
-  constructor() { }
+//   constructor() { }
 
-  goCheckOut(products) {
-    const CheckOut = firebase.functions().httpsCallable('checkout');
-    return  CheckOut(products);
-  }
+//   goCheckOut(products) {
+//     const CheckOut = firebase.functions().httpsCallable('checkout');
+//     return  CheckOut(products);
+//   }
   
-}
+// }

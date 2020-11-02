@@ -18,10 +18,10 @@ import { MainGuard } from './guards/main.guard';
 import { LoginGuard } from './guards/login.guard';
 import { NotSupportedGuard } from './guards/not-supported.guard';
 import { MainService } from './modules/main/main.service';
-import * as firebase from 'firebase/app';
-import '@firebase/functions';
+// import * as firebase from 'firebase/app';
+// import '@firebase/functions';
 
-firebase.initializeApp(environment.production)
+// firebase.initializeApp(environment.production)
 
 @NgModule({
   declarations: [
