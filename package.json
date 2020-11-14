@@ -68,6 +68,6 @@
     "typescript": "~3.9.7"
   },
   "engines": {
-    "node": "8"
+    "node": "12"
   }
 }
