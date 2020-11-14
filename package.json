@@ -85,5 +85,8 @@
     "ts-node": "~8.10.2",
     "tslint": "~6.1.2",
     "typescript": "~3.9.7"
+  },
+  "engines": {
+    "node": "8"
   }
 }
