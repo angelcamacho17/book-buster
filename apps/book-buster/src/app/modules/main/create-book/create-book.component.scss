@@ -1,0 +1,131 @@
+.book-page{
+    height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+    padding-top: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 16px;
+
+    .content {
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+        overflow: auto;
+        
+        .create-form {
+            width: 100%;
+            max-width: 438px;
+            height: 100%;
+            .fields {
+                display: flex;
+                flex-flow: column;
+                justify-content: space-between;
+                height: 100%;
+              .data {
+                display: flex;
+                flex-flow: column;
+                  .mat-form-field {
+                    display: inline-block;
+                    position: relative;
+                    text-align: left;
+                    font-size: 14px;
+                    border-radius: 8px;
+                    border: rgba(255, 255, 255, 0.3) 1px solid;
+                    color: rgba(255, 255, 255, 0.087);
+                    height: 50px;
+                    padding: 3px 16px;
+                    margin-top: 8px;
+                    margin-bottom: 8px;
+            
+                    .label {
+                      color: rgba(255, 255, 255, 0.6);
+                    }
+            
+                    .input {
+                      color: rgba(255, 255, 255, 0.87);
+                      font-family: "Roboto";
+                      font-weight: 400;
+                      line-height: 1.125;
+                      font-family: "Roboto", "Open Sans";
+                      font-size: 16px;
+                    }
+            
+                    .visibility-icon {
+                      color:rgba(255, 255, 255, 0.6);
+                      vertical-align: sub !important;
+                    }
+                  }
+            
+                  
+                  .disabled {
+                      margin-top: 32px;
+                      background-color: rgba(255, 255, 255, 0.2) !important;
+                      color: rgba(255, 255, 255, 0.87);
+                      
+                    }
+                    
+                    .mat-form-field-label-wrapper {
+                        top: -16px !important;
+                        padding-top: 0.84375em;
+                    }
+              }
+
+                .app-btn {
+                    margin-top: 32px;
+                    background-color: #645fce !important;
+                    color: rgba(255, 255, 255, 0.87);
+                    height: 50px;
+            
+                    .progress-bar {
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    &.hidden {
+                        display: none;
+                    }
+                    }
+                }
+            }
+            
+            .no-account {
+              margin: 12px 0;
+              color: rgba(255, 255, 255, 0.6);
+        
+              span {
+                text-decoration: underline;
+                color: white;
+                cursor: pointer;
+        
+              }
+            }
+          }
+    }
+}
+ul,
+li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+}
+
+#file-label {
+      display: inline-flex;
+      vertical-align: middle;
+      font-size: 12px;
+      line-height: 18px;
+}
+
+#file-label mat-icon {
+      font-size: 18px;
+      text-align: center;
+}
+
+#file-label a {
+      cursor: pointer;
+}

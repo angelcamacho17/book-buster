@@ -59,5 +59,8 @@
   "rentedbooks": "Rented Books",
   "book": "Book to rent",
   "rent": "Rent",
-  "rentbook": "Let's rent"
+  "post": "post",
+  "postBook": "Post a book!",
+  "rentbook": "Let's rent",
+  "email": "email"
 }

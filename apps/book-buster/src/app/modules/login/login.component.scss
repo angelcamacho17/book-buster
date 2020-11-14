@@ -108,6 +108,18 @@
         padding-top: 0.84375em;
       }
     }
+
+    .no-account {
+      margin: 12px 0;
+      color: rgba(255, 255, 255, 0.6);
+
+      span {
+        text-decoration: underline;
+        color: white;
+        cursor: pointer;
+
+      }
+    }
   }
 
 }

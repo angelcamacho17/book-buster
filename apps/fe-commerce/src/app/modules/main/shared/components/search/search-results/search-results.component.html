@@ -1,6 +1,0 @@
-<mat-list role="list" class="search-results-list" [ngClass]="layoutService.layout === 'tablet' ? 'tablet' : '' ">
-    <mat-list-item *ngFor="let item of items; let index=i" class="list-item">
-        <row [item]="item" [itemType]="rowType" class="list-row"></row>
-        <mat-divider class="divider" [ngClass]="dividerClass"></mat-divider>
-    </mat-list-item>
-</mat-list>

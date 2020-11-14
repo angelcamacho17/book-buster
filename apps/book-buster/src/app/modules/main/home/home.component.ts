@@ -43,6 +43,7 @@ export class HomeComponent implements OnDestroy {
    * Post a book.
    */
   public postBook() {
+    this.router.navigate(['/main/create-book'])
 
   }
 

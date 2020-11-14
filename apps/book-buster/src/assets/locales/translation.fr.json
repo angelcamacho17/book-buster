@@ -45,6 +45,7 @@
   "deletefromord": "DELETE FROM ORDER",
   "addTo": "add to order",
   "discounts": "Discounts",
+  "post": "post",
   "vat": "VAT",
   "customerkey": "Customer Key",
   "ordersitems": "Orders items",
@@ -52,6 +53,8 @@
   "back": "back",
   "searchbooks": "Search Books",
   "book": "Book to rent",
+  "postBook": "Post a book!",
   "rent": "Rent",
-  "rentbook": "Let's rent"
+  "rentbook": "Let's rent",
+  "email": "email"
 }

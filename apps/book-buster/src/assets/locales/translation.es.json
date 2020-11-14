@@ -46,12 +46,15 @@
   "addTo": "add to order",
   "discounts": "Discounts",
   "vat": "VAT",
+  "post": "post",
   "customerkey": "Customer Key",
   "ordersitems": "Orders items",
   "nodata": "No hay información disponible.",
   "back": "back",
   "searchbooks": "Search Books",
   "book": "Book to rent",
+  "postBook": "Post a book!",
   "rent": "Rent",
-  "rentbook": "Let's rent"
+  "rentbook": "Let's rent",
+  "email": "email"
 }

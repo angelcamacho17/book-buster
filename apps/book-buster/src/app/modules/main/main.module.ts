@@ -14,6 +14,7 @@ import { RentBookResolver } from './rent-book/rent-book.resolver';
 import { BookResolver } from './book/book.resolver';
 import { MainService } from './main.service';
 import { BookGuard } from './book/book.guard';
+import { CreateBookResolver } from './create-book/create-book.resolver';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { BookGuard } from './book/book.guard';
     BookGuard,
     LayoutService,
     HomeResolver,
+    CreateBookResolver,
     // CheckoutService,
     BookSearchResolver,
     PostBooksResolver,

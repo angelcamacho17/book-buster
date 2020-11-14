@@ -51,7 +51,10 @@
   "searchbooks": "Search Books",
   "nomatchbook": "No matching books",
   "booksplaceholder": "Find title, author & book info",
+  "postBook": "Post a book!",
   "book": "Book to rent",
+  "post": "post",
   "rent": "Rent",
-  "rentbook": "Let's rent"
+  "rentbook": "Let's rent",
+  "email": "email"
 }

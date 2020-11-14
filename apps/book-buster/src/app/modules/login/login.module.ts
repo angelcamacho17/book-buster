@@ -5,14 +5,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipeModule } from '@fecommerce-workspace/data';
 import { MaterialModule } from '../material/material.module';
 import { LoginComponent } from './login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: '', component: LoginComponent }]),
+    RouterModule.forChild([
+      { path: '', component: LoginComponent },
+      { path: 'register', component: RegisterComponent }
+    ]),
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

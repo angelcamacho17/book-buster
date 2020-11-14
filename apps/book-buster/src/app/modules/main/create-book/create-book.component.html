@@ -1,0 +1,75 @@
+
+<base-component>
+<div class="book-page">
+    <div class="content">
+        <form [formGroup]="createForm" (ngSubmit)="onSubmit()" disabled="isSubmitted"
+          class="create-form">
+      <div class="fields" >
+        <div class="data">
+            <mat-form-field color="accent">
+              <mat-label class="mat-caption input">Title</mat-label>
+              <input matInput class="input" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="title" (keyup)="cleanError($event)">
+            </mat-form-field>
+            <mat-error class="error mat-body-1" *ngIf="!createForm.controls['title'].valid && createForm.controls['title'].touched">
+              {{'required' | translate }}
+            </mat-error>
+            <mat-form-field color="accent">
+                <mat-label class="mat-caption input">Author</mat-label>
+                <input matInput class="input" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="author" (keyup)="cleanError($event)">
+              </mat-form-field>
+              <mat-error class="error mat-body-1" *ngIf="!createForm.controls['author'].valid && createForm.controls['author'].touched">
+                {{'required' | translate }}
+              </mat-error>
+    
+              <mat-form-field color="accent">
+                <mat-label class="mat-caption input">Year</mat-label>
+                <input matInput class="input" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="year" (keyup)="cleanError($event)">
+              </mat-form-field>
+              <mat-error class="error mat-body-1" *ngIf="!createForm.controls['year'].valid && createForm.controls['year'].touched">
+                {{'required' | translate }}
+              </mat-error>
+    
+              <mat-form-field color="accent">
+                <mat-label class="mat-caption input">Price per day</mat-label>
+                <input matInput class="input" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="price" (keyup)="cleanError($event)">
+              </mat-form-field>
+              <mat-error class="error mat-body-1" *ngIf="!createForm.controls['price'].valid && createForm.controls['price'].touched">
+                {{'required' | translate }}
+              </mat-error>
+    
+              <!-- <mat-label class="mat-caption input">Upload image</mat-label>
+              <input type="file"class="input" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="img" (keyup)="cleanError($event)">
+              <mat-form-field color="accent">
+              </mat-form-field>
+              <mat-error class="error mat-body-1" *ngIf="!createForm.controls['img'].valid && createForm.controls['img'].touched">
+                {{'required' | translate }}
+              </mat-error> -->
+              <div style="margin: 24px 0; text-align: center;">
+                  <button mat-button color="accent" >
+                    <mat-icon>file_upload</mat-icon>
+                            Upload image
+                    </button>
+                    <br/>
+                <input type="file" id="fileUpload" name="fileUpload" multiple="multiple" 
+                
+                style="display:none;"/>
+              </div>
+        </div>
+          
+          <button class="app-btn mat-elevation-0"
+          [class.disabled] = "isSubmitted"
+          [disabled] = "isSubmitted"
+          mat-button>
+          {{('post' | translate) | uppercase}}
+          <mat-progress-bar
+                mode="indeterminate"
+                color="accent"
+                class="progress-bar"
+                [class.hidden]="!isSubmitted">
+            </mat-progress-bar>
+        </button>
+        </div>
+    </form>
+</div>
+</div>
+</base-component>

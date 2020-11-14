@@ -4,6 +4,7 @@ import { HomeResolver } from './home/home.resolver';
 import { BookSearchResolver } from './book-search/book-search.resolver';
 import { PostBooksResolver } from './post-books/post-books.resolver';
 import { RentedBooksResolver } from './rented-books/rented-books.resolver';
+import { CreateBookResolver } from './create-book/create-book.resolver';
 import { BookResolver } from './book/book.resolver';
 import { RentBookResolver } from './rent-book/rent-book.resolver';
 import { BookGuard } from './book/book.guard';
@@ -34,6 +35,13 @@ const routes: Routes = [
         loadChildren: () => import('./post-books/post-books.module').then(m => m.PostBooksModule),
         data: { animation: 'post-search' },
         resolve: { PostBooksResolver }
+        //canActivate: [FeLoginGuard]
+      },
+      {
+        path: 'create-book',
+        loadChildren: () => import('./create-book/create-book.module').then(m => m.CreateBookModule),
+        data: { animation: 'create-search' },
+        resolve: { CreateBookResolver }
         //canActivate: [FeLoginGuard]
       },
       {

@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="top-content" >
+        <h1 class="mat-display-3 main-title" >Sign Up</h1>
+    </div>
+    <input #dum id="dum" style="display: none;">
+    <form [formGroup]="signForm" (ngSubmit)="onSubmit()" disabled="isSubmitted"
+          class="login-form">
+      <div class="fields" >
+  
+        <mat-form-field color="accent">
+          <mat-label class="mat-caption input">{{'user' | translate}}</mat-label>
+          <input matInput class="input" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="username" (keyup)="cleanError($event)">
+        </mat-form-field>
+        <mat-error class="error mat-body-1" *ngIf="!signForm.controls['username'].valid && signForm.controls['username'].touched">
+          {{'required' | translate }}
+        </mat-error>
+        <mat-form-field color="accent">
+            <mat-label class="mat-caption input">{{'email' | translate}}</mat-label>
+            <input matInput class="input" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" formControlName="email" (keyup)="cleanError($event)">
+          </mat-form-field>
+          <mat-error class="error mat-body-1" *ngIf="!signForm.controls['email'].valid && signForm.controls['email'].touched">
+            {{'required' | translate }}
+          </mat-error>
+        <mat-form-field color="accent" style="margin-bottom: 0;">
+          <mat-label class="mat-caption input">{{'password' | translate}}</mat-label>
+          <input matInput class="input"  [type]="hidePassword ? 'password' : 'text'" formControlName="password" (keyup)="cleanError($event)">
+          <mat-icon class="visibility-icon" matSuffix (click)="showPassword()">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+        <mat-error class="error mat-body-1" style="margin-top: 8px;" *ngIf="!signForm.controls['password'].valid && signForm.controls['password'].touched">
+          {{'required' | translate }}
+  
+        </mat-error>
+        <mat-form-field color="accent" style="margin-bottom: 0;">
+            <mat-label class="mat-caption input">Confirm Password</mat-label>
+            <input matInput class="input"  [type]="hidePassword ? 'password' : 'text'" formControlName="confirmPass" (keyup)="cleanError($event)">
+            <mat-icon class="visibility-icon" matSuffix (click)="showPassword()">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </mat-form-field>
+          <mat-error class="error mat-body-1" style="margin-top: 8px;" *ngIf="!signForm.controls['confirmPass'].valid && signForm.controls['confirmPass'].touched">
+            {{'required' | translate }}
+    
+          </mat-error>
+        <mat-error class="error mat-body-1" style="margin-top: 8px;" *ngIf="signForm.valid && errorMessage!==''">
+          {{'incorrectpas' | translate}}
+        </mat-error>
+        <button class="app-btn mat-elevation-0"
+                [class.disabled] = "isSubmitted"
+                [disabled] = "isSubmitted"
+                mat-button>
+                {{('sign' | translate) | uppercase}}
+                <mat-progress-bar
+                  mode="indeterminate"
+                  color="accent"
+                  class="progress-bar"
+                  [class.hidden]="!isSubmitted">
+                </mat-progress-bar>
+          </button>
+          <div class="no-account">
+            Already have an account? <span routerLink="/login">login</span>
+          </div>
+        </div>
+    </form>
+  </div>
+  
