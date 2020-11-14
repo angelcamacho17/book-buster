@@ -9,7 +9,6 @@ import { OrderService, IOrder, ICustomer, TranslationService, HeaderService, ref
 import { LayoutService } from '../../shared/services/layout.service';
 import { DialogData } from '../../shared/components/dialog/dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ScanResult } from '@fecommerce-workspace/scanner';
 
 @Component({
   selector: 'customer-search-tablet',

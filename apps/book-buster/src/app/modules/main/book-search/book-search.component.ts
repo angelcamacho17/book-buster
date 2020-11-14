@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ScanResult } from '@fecommerce-workspace/scanner';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IBook } from '../../../models/book.model';
@@ -43,7 +42,7 @@ export class BookSearchComponent implements OnInit {
    * Handle book scanner.
    * @param scanResult
    */
-  public bookScanned(scanResult: ScanResult): void {
+  public bookScanned(scanResult): void {
     // Pause scann to avoid errors.
     if (this.pauseScan) {
       return;

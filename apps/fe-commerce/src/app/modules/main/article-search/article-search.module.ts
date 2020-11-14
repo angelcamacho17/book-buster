@@ -8,9 +8,6 @@ import { ArticleSearchComponent } from './article-search.component';
 import { ArticleSearchRoutingModule } from './article-search-routing.module';
 import { ArticleSearchTabletComponent } from './article-search-tablet/article-search-tablet.component';
 import { ArticleSearchMobileComponent } from './article-search-mobile/article-search-mobile.component';
-import { ScannerModule } from '@fecommerce-workspace/scanner';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
 
 @NgModule({
   declarations: [ArticleSearchComponent, ArticleSearchTabletComponent, ArticleSearchMobileComponent],
@@ -20,7 +17,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     SharedModule,
     MaterialModule,
     TranslatePipeModule,
-    ScannerModule
   ],
 
 })

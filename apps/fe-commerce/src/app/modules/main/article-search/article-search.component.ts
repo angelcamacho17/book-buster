@@ -5,7 +5,6 @@ import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LayoutService } from '../shared/services/layout.service';
-import { ScanResult } from '@fecommerce-workspace/scanner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EventService } from '../shared/services/event.service';
 
@@ -63,7 +62,7 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
    * Handle article scanned.
    * @param scanResult
    */
-  public articleCodeScanned(scanResult: ScanResult) {
+  public articleCodeScanned(scanResult) {
     // Pause scanning.
     if (this.pauseScan) {
       return;

@@ -19,7 +19,6 @@
       "@fecommerce-workspace/data": [
         "libs/data-store-lib/src/index.ts"
       ],
-      "@fecommerce-workspace/scanner": ["libs/scanner/src/index.ts"],
       "@fecommerce-workspace/data": ["libs/data/src/index.ts"]
     },
     "types": ["node", "jest"]

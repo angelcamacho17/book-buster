@@ -36,11 +36,6 @@
   </div>
   <div *ngIf="scanner" class="search-results-container">
     <loading-state *ngIf="!scannerStarted"></loading-state>
-    <fe-scanner class="tablet-scanner"
-                (scanSuccess)="articleCodeScanned($event)"
-                (scanStarted)="onStarted($event)"
-                (permission)="handlePermission($event)"
-                (noCamera)="noCameraFound($event)"></fe-scanner>
   </div>
 
 </div>

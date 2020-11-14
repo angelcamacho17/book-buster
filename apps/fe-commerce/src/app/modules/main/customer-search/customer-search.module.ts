@@ -7,7 +7,6 @@ import { TranslatePipeModule } from '@fecommerce-workspace/data';
 import { CustomerSearchComponent } from './customer-search.component';
 import { CustomerSearchRoutingModule } from './customer-search-routing.module';
 import { CustomerSearchMobileComponent } from './customer-search-mobile/customer-search-mobile.component';
-import { ScannerModule } from '@fecommerce-workspace/scanner';
 import { CustomerSearchTabletComponent } from './customer-search-tablet/customer-search-tablet.component';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { CustomerSearchTabletComponent } from './customer-search-tablet/customer
     SharedModule,
     MaterialModule,
     TranslatePipeModule,
-    ScannerModule
   ]
 })
 export class CustomerSearchModule { }

@@ -132,36 +132,6 @@
         }
       }
     },
-    "scanner": {
-      "projectType": "library",
-      "root": "libs/scanner",
-      "sourceRoot": "libs/scanner/src",
-      "prefix": "fecommerce-workspace",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/scanner/tsconfig.lib.json",
-              "libs/scanner/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/scanner/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/scanner/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "book-buster": {
       "projectType": "application",
       "schematics": {

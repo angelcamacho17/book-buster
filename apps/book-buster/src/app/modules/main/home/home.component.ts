@@ -7,7 +7,6 @@ import { Subscription, Observable } from 'rxjs';
 import { MainService } from '../main.service';
 import { BookRowComponent } from '../shared/components/row/book-row/book-row.component';
 import { IBook } from '../../../models/book.model';
-import { ScanResult } from '@fecommerce-workspace/scanner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -67,7 +66,7 @@ export class HomeComponent implements OnDestroy {
    * Handle book scanner.
    * @param scanResult
    */
-  public bookScanned(scanResult: ScanResult): void {
+  public bookScanned(scanResult): void {
     // Pause scann to avoid errors.
     if (this.pauseScan) {
       return;

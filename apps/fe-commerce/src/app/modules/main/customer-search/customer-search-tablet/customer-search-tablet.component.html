@@ -42,10 +42,5 @@
   </div>
   <div *ngIf="scanner">
     <loading-state *ngIf="!scannerStarted"></loading-state>
-    <fe-scanner class="tablet-scanner"
-                (scanSuccess)="loyaltyCardScanned($event)"
-                (scanStarted)="onStarted($event)"
-                (permission)="handlePermission($event)"
-                (noCamera)="noCameraFound($event)"></fe-scanner>
   </div>
 </div>

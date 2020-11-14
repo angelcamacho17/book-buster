@@ -7,7 +7,6 @@ import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../../material/material.module';
 import { TranslatePipeModule } from '@fecommerce-workspace/data';
 import { BookSearchRoutingModule } from './book-search-routing.module';
-import { ScannerModule } from '@fecommerce-workspace/scanner';
 
 @NgModule({
   declarations: [BookSearchComponent, BookSearchMobileComponent, BookSearchTabletComponent],
@@ -17,7 +16,6 @@ import { ScannerModule } from '@fecommerce-workspace/scanner';
     SharedModule,
     MaterialModule,
     TranslatePipeModule,
-    ScannerModule
   ]
 })
 export class BookSearchModule { }

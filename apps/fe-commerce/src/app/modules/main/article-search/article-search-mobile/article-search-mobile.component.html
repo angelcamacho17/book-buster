@@ -25,10 +25,6 @@
 </div>
 <div *ngIf="scanner" class="search-container">
   <loading-state *ngIf="!scannerStarted"></loading-state>
-  <fe-scanner (scanSuccess)="articleCodeScanned($event)"
-  (scanStarted)="onStarted($event)"
-  (permission)="handlePermission($event)"
-  (noCamera)="noCameraFound($event)"></fe-scanner>
 </div>
 <loading-state *ngIf="loading"></loading-state>
 <button mat-button

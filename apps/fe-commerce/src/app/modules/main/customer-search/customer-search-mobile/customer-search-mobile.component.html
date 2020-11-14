@@ -26,11 +26,6 @@
   </div>
   <div *ngIf="scanner" class="search-container">
   <loading-state *ngIf="!scannerStarted"></loading-state>
-    <fe-scanner (scanSuccess)="loyaltyCardScanned($event)"
-                (scanStarted)="onStarted($event)"
-                (scanError)="handlePermission($event)"
-                (permission)="handlePermission($event)"
-                (noCamera)="noCameraFound($event)"></fe-scanner>
   </div>
   <loading-state *ngIf="loading"></loading-state>
 </base-component>

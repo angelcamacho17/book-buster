@@ -9,10 +9,7 @@ import { CustomerRowComponent } from '../shared/components/row/customer-row/cust
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDiscardDialogComponent } from '../shared/components/confirm-discard/confirm-discard-dialog.component';
 import { LayoutService } from '../shared/services/layout.service';
-import { ScanResult } from '@fecommerce-workspace/scanner';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DialogComponent } from '../shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'customer-search',
@@ -93,7 +90,7 @@ export class CustomerSearchComponent implements OnInit, OnDestroy {
  * Handle customer scanner.
  * @param scanResult
  */
-  public loyaltyCardScanned(scanResult: ScanResult): void {
+  public loyaltyCardScanned(scanResult): void {
     // Pause scann to avoid errors.
     if (this.pauseScan) {
       return;
