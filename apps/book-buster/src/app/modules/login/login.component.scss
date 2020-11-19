@@ -5,7 +5,7 @@
   flex-direction: column;
   position: absolute;
   padding: 36px 16px;
-  height: calc(100% - 72px) !important;
+  height: calc(100% - 72px);
   width: calc(100% - 32px) !important;
   justify-content: space-between;
   top: 0px;
@@ -122,4 +122,10 @@
     }
   }
 
+}
+
+@media (max-height: 650px) {
+  .container {
+    height: auto;
+  }
 }

@@ -8,7 +8,6 @@
       {{'signin' | translate}}
     </div>
   </div>
-  <input #dum id="dum" style="display: none;">
   <form [@content]="displayContent ? 'not-hide' : 'hide'" [formGroup]="loginForm" (ngSubmit)="onSubmit($event)" disabled="isSubmitted"
         class="login-form">
     <div class="fields" >
