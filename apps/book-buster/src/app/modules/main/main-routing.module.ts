@@ -9,6 +9,7 @@ import { BookResolver } from './book/book.resolver';
 import { RentBookResolver } from './rent-book/rent-book.resolver';
 import { BookGuard } from './book/book.guard';
 import { MainComponent } from './main.component';
+import { EventDetailResolver } from './event-detail/event-detail.resolver';
 
 const routes: Routes = [
   {
@@ -35,6 +36,13 @@ const routes: Routes = [
         loadChildren: () => import('./post-books/post-books.module').then(m => m.PostBooksModule),
         data: { animation: 'post-search' },
         resolve: { PostBooksResolver }
+        //canActivate: [FeLoginGuard]
+      },
+      {
+        path: 'post-detail',
+        loadChildren: () => import('./event-detail/event-detail.module').then(m => m.EventDetailModule),
+        data: { animation: 'post-search' },
+        resolve: { EventDetailResolver }
         //canActivate: [FeLoginGuard]
       },
       {

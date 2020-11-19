@@ -54,6 +54,7 @@
   "postBook": "Post a book!",
   "book": "Book to rent",
   "post": "post",
+  "detailPost": "Post detail",
   "rent": "Rent",
   "rentbook": "Let's rent",
   "email": "email"

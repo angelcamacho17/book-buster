@@ -10,6 +10,7 @@ import { MaterialModule } from '../material/material.module';
 import { BookSearchResolver } from './book-search/book-search.resolver';
 import { PostBooksResolver } from './post-books/post-books.resolver';
 import { RentedBooksResolver } from './rented-books/rented-books.resolver';
+import { EventDetailResolver } from './event-detail/event-detail.resolver';
 import { RentBookResolver } from './rent-book/rent-book.resolver';
 import { BookResolver } from './book/book.resolver';
 import { MainService } from './main.service';
@@ -34,7 +35,8 @@ import { CreateBookResolver } from './create-book/create-book.resolver';
     PostBooksResolver,
     RentedBooksResolver,
     BookResolver,
-    RentBookResolver
+    RentBookResolver,
+    EventDetailResolver
   ],
   declarations: [MainComponent]
 })

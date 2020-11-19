@@ -1,0 +1,85 @@
+.book-page{
+    height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+    padding-top: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 24px;
+
+    .content {
+        display: flex;
+        flex-flow: column;
+        overflow: auto;
+
+        .book-row {
+            .top-content {
+                display: flex;
+                 margin-bottom: 16px;
+                .title {
+                    color: rgba(255, 255, 255, 0.87);
+                }
+                .rate {
+                    margin: 8px 0;
+                }
+                .book-img {
+                    height: 50%;
+                    width: 100px;
+                    object-fit: cover;
+                    margin-bottom: 16px;
+                    margin-right: 16px;
+                }
+            }
+            
+            .info {
+                font-size: 18px;
+                color: rgba(255, 255, 255, 0.87);
+                .row {
+                    display: flex;
+                    justify-content: space-between;
+                    align-self: center;
+                    margin: 12px 0;
+
+                    .label {
+                        font-weight: 700;
+                    }
+                }
+            }
+
+        }
+        
+        .font-color {
+            color: rgba(255, 255, 255, 0.87);
+        }
+
+        .icon-color {
+            color: #645fce !important;
+        }
+    
+    }
+
+    footer {
+        
+        .total-to-pay {
+            font-size: 32px !important;
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.87);
+        }
+
+        .app-btn {
+            font-size: 32px !important;
+            margin-top: 32px;
+            background-color: #645fce !important;
+            color: rgba(255, 255, 255, 0.87);
+            height: 50px;
+            width: 100%;
+        }
+    }
+
+}

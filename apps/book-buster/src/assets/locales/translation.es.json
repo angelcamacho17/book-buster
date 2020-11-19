@@ -43,6 +43,7 @@
   "deleteord": "Delete this order?",
   "delete": "DELETE",
   "deletefromord": "DELETE FROM ORDER",
+  "detailPost": "Post detail",
   "addTo": "add to order",
   "discounts": "Discounts",
   "vat": "VAT",

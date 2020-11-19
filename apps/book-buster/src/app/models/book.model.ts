@@ -1,6 +1,7 @@
 import { IUser } from './user.model';
 
 export interface IBook {
+  id: number,
   title: string,
   author: string,
   year: number,
@@ -9,6 +10,8 @@ export interface IBook {
   price: number,
   owner: IUser,
   rentedBy?: IUser
+  startDate?: Date,
+  finalDate?: Date,
 }
 
 export interface IBookState {

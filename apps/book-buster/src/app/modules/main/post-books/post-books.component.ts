@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { IBook } from '../../../models/book.model';
 import { MainService } from '../main.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { MainService } from '../main.service';
 export class PostBooksComponent implements OnInit {
   public posted = [];
 
-  constructor(public mainSer: MainService) {
+  constructor(public mainSer: MainService, private router: Router) {
     for(const book of this.mainSer.books){
       if (book.owner === this.mainSer.currentUser)
         this.posted.push(book);
@@ -20,8 +22,9 @@ export class PostBooksComponent implements OnInit {
    * Check rented book status.
    * @param book 
    */
-  public checkBook(book) {
-    
+  public checkBook(book: IBook) {
+    console.log(book)
+    this.router.navigate(['main/post-detail/' + book.id])
   }
 
   ngOnInit(): void {

@@ -44,6 +44,7 @@
   "delete": "DELETE",
   "deletefromord": "DELETE FROM ORDER",
   "addTo": "add to order",
+  "detailPost": "Post detail",
   "discounts": "Discounts",
   "post": "post",
   "vat": "VAT",

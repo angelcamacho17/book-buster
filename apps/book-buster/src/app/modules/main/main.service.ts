@@ -46,6 +46,7 @@ export class MainService {
   public categories = ['Software', 'Medicine', 'Culture', 'Love', 'Math', 'Science'];
   public books: IBook[] = [
     {
+      id: 1,
       title: 'Un saco de huesos',
       author: 'Stephen King',
       year: 1998,
@@ -53,6 +54,7 @@ export class MainService {
       owner: this.users[5]
     },
     {
+      id: 2,
       title: 'It',
       author: 'Stephen King',
       year: 1998,
@@ -61,6 +63,7 @@ export class MainService {
 
     },
     {
+      id: 3,
       title: 'Revival',
       author: 'Stephen King',
       year: 1998,
@@ -69,6 +72,7 @@ export class MainService {
 
     },
     {
+      id: 4,
       title: 'Cujo',
       author: 'Stephen King',
       year: 1998,

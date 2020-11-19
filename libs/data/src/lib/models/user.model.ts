@@ -1,4 +1,4 @@
-import { IBook } from './xbook.model';
+import { IBook } from './book.model';
 
 export interface IUser {
   name: string,
