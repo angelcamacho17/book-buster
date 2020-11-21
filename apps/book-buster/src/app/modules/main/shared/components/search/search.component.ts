@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit, AfterContentInit, OnDestroy {
     @Output() searchBlur = new EventEmitter<boolean>();
     @Output() hasSearchResults = new EventEmitter<any>();
     @Output() customIconEvent = new EventEmitter<any>();
-    @Input() list: any = []
+    @Input() list: any = [];
     @Input() customIcon: string;
     @Input() autoFocus = false;
     public noScanner = false;
@@ -100,7 +100,6 @@ export class SearchComponent implements OnInit, AfterContentInit, OnDestroy {
      */
     public onSearchFocus() {
         this.searchFocus.emit(true);
-
     }
 
     /**

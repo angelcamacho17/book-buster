@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { LayoutService } from '../../../services/layout.service';
+import { MainService } from '../../../../main.service';
 
 @Component({
   selector: 'search-results',
@@ -15,7 +16,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   @Input() dividerClass: string;
   public items$: Observable<any[]> = of(this.items);
 
-  constructor(public layoutService: LayoutService) { }
+  constructor(public layoutService: LayoutService, private mainSer: MainService) { }
 
   ngOnInit(): void {
 

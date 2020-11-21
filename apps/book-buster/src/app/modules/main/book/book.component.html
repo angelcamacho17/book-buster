@@ -11,7 +11,7 @@
                 <mat-icon color="primary">star</mat-icon>
                 <mat-icon color="primary">star_border</mat-icon>
             </div>
-            <img src="assets/img/revival.jpg" class="book-img" >
+            <img [src]="book?.img" class="book-img" >
 
             <div class="book-info">
                 <span *ngIf="book?.author">

@@ -43,7 +43,7 @@ export class MainService {
       password: '123'
     },
   ]
-  public categories = ['Software', 'Medicine', 'Culture', 'Love', 'Math', 'Science'];
+  public categories = ['Software', 'Culture', 'Love', 'Math', 'Science'];
   public books: IBook[] = [
     {
       id: 1,
@@ -51,7 +51,9 @@ export class MainService {
       author: 'Stephen King',
       year: 1998,
       price: 4.5,
-      owner: this.users[5]
+      owner: this.users[5],
+      img: 'assets/img/saco_de_huesos.jpg'
+
     },
     {
       id: 2,
@@ -59,7 +61,8 @@ export class MainService {
       author: 'Stephen King',
       year: 1998,
       price: 4.5,
-      owner: this.users[1]
+      owner: this.users[1],
+      img: 'assets/img/it.jpg'
 
     },
     {
@@ -68,7 +71,8 @@ export class MainService {
       author: 'Stephen King',
       year: 1998,
       price: 4.5,
-      owner: this.users[2]
+      owner: this.users[2],
+      img: 'assets/img/revival.jpg'
 
     },
     {
@@ -77,7 +81,17 @@ export class MainService {
       author: 'Stephen King',
       year: 1998,
       price: 4.5,
-      owner: this.users[3]
+      owner: this.users[3],
+      img: 'assets/img/cujo.jpg'
+    },
+    {
+      id: 4,
+      title: 'Algebra de Baldor',
+      author: 'Baldor',
+      year: 1998,
+      price: 4.5,
+      owner: this.users[3],
+      img: 'assets/img/baldor.jpg'
     },
   ]
   public rentedBooks: IBook[] = [];

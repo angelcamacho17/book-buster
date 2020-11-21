@@ -1,4 +1,5 @@
 <base-component>
+
 <div class="header-extension">
   <search (searchFocus)="showShadow($event)"
            (searchBlur)="searchStarted()"
@@ -6,10 +7,11 @@
            (hasSearchResults)="handleSearchResults($event)"
            (customIconEvent)="showScanner()"></search>
 </div>
+<search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
+[dividerClass]="'customer-divider'" class="search-results"></search-results>
 <!-- <app-mercadopago-button></app-mercadopago-button> -->
   <div class="scrollable-container search-results-container">
-    <search-results *ngIf="!emptyResults" [items]="filteredResults" [rowType]="rowType"
-      [dividerClass]="'customer-divider'" class="search-results"></search-results>
+    <
 
     <div class="no-results-container" *ngIf="!hide && emptyResults">
       <div class="mat-display-1 headline">What to read ?</div>

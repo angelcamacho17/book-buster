@@ -12,6 +12,7 @@ export interface IBook {
   rentedBy?: IUser
   startDate?: Date,
   finalDate?: Date,
+  img: string
 }
 
 export interface IBookState {

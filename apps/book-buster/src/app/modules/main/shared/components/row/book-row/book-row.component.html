@@ -1,10 +1,15 @@
 <div (click)="bookSelected()" class="book-row">
   <span class="info">
-    <div class="mat-subheading-2 no-btm">
-      {{item?.title}} 
-    </div>
-    <div class="mat-caption no-btm">
-      {{item?.author}}
+    <span>
+      <img [src]="item?.img" class="book-img" >
+    </span>
+    <div class="text">
+      <div class="mat-subheading-2 no-btm">
+        {{item?.title}} 
+      </div>
+      <div class="mat-caption no-btm">
+        {{item?.author}}
+      </div>
     </div>
   </span>
   <span class="mat-subheading-1 no-btm price">

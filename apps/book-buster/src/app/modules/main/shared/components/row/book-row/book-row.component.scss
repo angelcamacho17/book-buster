@@ -5,12 +5,27 @@
     justify-content: space-between;
     align-items: center;
 
+    
     .info {
         display: flex;
         box-sizing: border-box;
-        flex-flow: column;
-        justify-content: space-around;
+        flex-flow: row;
+        align-items: center;
         height: -webkit-fill-available;
+
+        .text {
+            display: flex;
+            box-sizing: border-box;
+            flex-flow: column;
+            justify-content: space-around;
+            height: -webkit-fill-available;
+        }
+        
+        .book-img {
+            height: 102px;
+            width: 75px;
+            margin-right: 16px;
+        }
 
     }
 
