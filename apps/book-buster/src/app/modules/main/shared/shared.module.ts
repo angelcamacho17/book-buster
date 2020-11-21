@@ -24,6 +24,7 @@ import { MainHeaderMobileComponent } from './components/main-header/main-header-
 import { MainHeaderTabletComponent } from './components/main-header/main-header-tablet/main-header-tablet.component';
 import { LoadingStateComponent } from './components/loading-state/loading-state.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { BookRowComponent } from './components/row/book-row/book-row.component';
 // import { MercadoPagoButtonComponent } from './components/mercadopago-button/mercadopago-button.component';
 // import { LayoutService } from './services/layout.service';
 
@@ -50,6 +51,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     LoadingStateComponent,
     LoadingSpinnerComponent,
     ScrollerDirective,
+    BookRowComponent,
     // MercadoPagoButtonComponent
   ],
   imports: [
@@ -72,6 +74,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     SearchComponent,
     SearchResultsComponent,
     RowComponent,
+    BookRowComponent,
     CustomerRowComponent,
     DialogComponent,
     ArticleRowComponent,

@@ -38,12 +38,18 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.isSubmitted = true;
-    const signupRequest = {
-      username: this.signForm.value.username,
-      email: this.signForm.value.email,
-      password: this.signForm.value.password,
-      confirmPass: this.signForm.value.confirmPass
-  };
+    
+    setTimeout(()=> {
+      localStorage.setItem('NEW_USER_' + this.signForm.value.username, JSON.stringify({
+        name: this.signForm.value.username,
+        mail: this.signForm.value.email,
+        password: this.signForm.value.password,
+
+
+      }
+        ))
+      this._router.navigate(['/']);
+    },2000)
 
 
 

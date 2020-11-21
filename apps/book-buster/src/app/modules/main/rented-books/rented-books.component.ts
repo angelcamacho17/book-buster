@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MainService } from '../main.service';
+import { BookRowComponent } from '../shared/components/row/book-row/book-row.component';
 
 @Component({
   selector: 'rented-books',
@@ -9,6 +10,8 @@ import { MainService } from '../main.service';
 export class RentedBooksComponent implements OnInit, OnDestroy {
 
   public rentedBooks = [];
+  public rowType = BookRowComponent;
+
   constructor(public mainSer: MainService) { }
   
   ngOnInit(): void {
@@ -17,6 +20,7 @@ export class RentedBooksComponent implements OnInit, OnDestroy {
         this.rentedBooks.push(JSON.parse(localStorage.getItem('RENTED_BOOKS_' + book.title + '_' + this.mainSer.currentUser.name)));
       }
     }
+    this.mainSer.checkTrans = true;
   }
   
   /**
@@ -29,6 +33,8 @@ export class RentedBooksComponent implements OnInit, OnDestroy {
   
   ngOnDestroy(): void {
     this.rentedBooks = [];
+    this.mainSer.checkTrans = false;
+
   }
 
 }

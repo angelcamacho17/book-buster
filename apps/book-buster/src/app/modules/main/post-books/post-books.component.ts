@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IBook } from '../../../models/book.model';
 import { MainService } from '../main.service';
@@ -8,7 +8,7 @@ import { MainService } from '../main.service';
   templateUrl: './post-books.component.html',
   styleUrls: ['./post-books.component.scss']
 })
-export class PostBooksComponent implements OnInit {
+export class PostBooksComponent implements OnInit, OnDestroy {
   public posted = [];
 
   constructor(public mainSer: MainService, private router: Router) {
@@ -17,6 +17,10 @@ export class PostBooksComponent implements OnInit {
         this.posted.push(book);
     }
    }
+  ngOnDestroy(): void {
+    this.mainSer.checkTrans = false;
+
+  }
 
   /**
    * Check rented book status.
@@ -28,6 +32,8 @@ export class PostBooksComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.mainSer.checkTrans = true;
+
   }
 
 }

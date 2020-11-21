@@ -11,6 +11,7 @@ import { IUser } from '../../models/user.model';
 export class MainService {
 
   public currentUser: IUser = JSON.parse(localStorage.getItem('USER'));
+  public checkTrans = false;
   public users: IUser[] = [
     {
       name: 'angel',
@@ -85,7 +86,7 @@ export class MainService {
       img: 'assets/img/cujo.jpg'
     },
     {
-      id: 4,
+      id: 5,
       title: 'Algebra de Baldor',
       author: 'Baldor',
       year: 1998,
@@ -93,6 +94,67 @@ export class MainService {
       owner: this.users[3],
       img: 'assets/img/baldor.jpg'
     },
+
+    {
+      id: 6,
+      title: 'Lo inconsciente',
+      author: 'Sigmund Freud',
+      year: 1998,
+      price: 4.5,
+      owner: this.users[3],
+      img: 'assets/img/freud.jpg'
+    },
+
+    {
+      id: 6,
+      title: 'Ingenieria de Software',
+      author: 'Sommerville',
+      year: 1998,
+      price: 4.5,
+      owner: this.users[3],
+      img: 'assets/img/sommerville.jpg'
+    },
+
+    {
+      id: 7,
+      title: 'Arquitectura del computador',
+      author: 'Alcalde',
+      year: 1998,
+      price: 4.5,
+      owner: this.users[3],
+      img: 'assets/img/arquitectura.jpg'
+    },
+
+    {
+      id: 8,
+      title: 'La relativilidad',
+      author: 'Albert Einstein',
+      year: 1998,
+      price: 4.5,
+      owner: this.users[3],
+      img: 'assets/img/relativo.jpg'
+    },
+
+    {
+      id: 9,
+      title: 'Etica de la profesion docente',
+      author: 'Christine Wanjru',
+      year: 1998,
+      price: 4.5,
+      owner: this.users[3],
+      img: 'assets/img/etica.jpg'
+    },
+
+    {
+      id: 10,
+      title: 'Fisica',
+      author: 'Tippens',
+      year: 1998,
+      price: 4.5,
+      owner: this.users[3],
+      img: 'assets/img/fisica.jpg'
+    },
+    
   ]
   public rentedBooks: IBook[] = [];
   public postedBooks: IBook[] = [];
@@ -162,6 +224,14 @@ export class MainService {
         this.currentUser = user;
         return of(true);
       } 
+    }
+    if (localStorage.getItem('NEW_USER_' + username)) {
+      const newUser = JSON.parse(localStorage.getItem('NEW_USER_' + username));
+      if (newUser.password === password) {
+        localStorage.setItem('USER', localStorage.getItem('NEW_USER_' + username));
+        this.currentUser = JSON.parse(localStorage.getItem('NEW_USER_' + username));
+        return of(true);
+      }
     }
     return of(false);
   }

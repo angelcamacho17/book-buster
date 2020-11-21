@@ -22,7 +22,7 @@ export class EventDetailResolver implements Resolve<any> {
       title: 'detailPost',
       leftIcon: 'close',
       titClass: 'mat-title',
-      lastUrl: 'main/posted',
+      lastUrl: 'main/rented',
       centered: true,
     }
     return header;

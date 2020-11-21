@@ -28,7 +28,11 @@ export class BookRowComponent implements OnInit {
    */
   public bookSelected(): void{
     this._mainSer.setCurrentBook(this.item);
-    this._router.navigate(['/main/book-to-rent'])
+    if (this._mainSer.checkTrans) {
+      this._router.navigate(['/main/post-detail/' + this.item.id])
+    } else {
+      this._router.navigate(['/main/book-to-rent'])
+    }
   }
 
 }
