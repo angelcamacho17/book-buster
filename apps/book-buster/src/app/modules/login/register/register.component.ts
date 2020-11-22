@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     if (this.signForm.value.password !== this.signForm.value.confirmPass) {
       this.isSubmitted = false;
+      this.errorMessage = 'd';
       return;
     }
     this.isSubmitted = true;
@@ -46,8 +47,14 @@ export class RegisterComponent implements OnInit {
         password: this.signForm.value.password,
 
 
-      }
-        ))
+      }))
+      localStorage.setItem('NEW_USER_' + this.signForm.value.email, JSON.stringify({
+        name: this.signForm.value.username,
+        mail: this.signForm.value.email,
+        password: this.signForm.value.password,
+
+
+      }))
       this._router.navigate(['/']);
     },2000)
 
