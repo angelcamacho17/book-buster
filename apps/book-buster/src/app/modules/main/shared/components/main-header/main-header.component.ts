@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs/operators';
 import { LayoutService } from '../../services/layout.service';
-import {Location} from '@angular/common';
 
 @Component({
   selector: 'main-header',
@@ -35,7 +34,6 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
     public store: Store<{ header: IHeader }>,
     public headerService: HeaderService,
     public layoutService: LayoutService,
-    private _location: Location
   ) {
     this.header$ = this.store.pipe(select('header'));
     this._subscriptions.add(
