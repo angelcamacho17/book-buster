@@ -161,7 +161,9 @@ export class MainService {
   public books$ = new EventEmitter<IBook[]>();
   public currentBook = null;
   constructor(private _router: Router,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar) { 
+                this.loadBooks(); 
+  }
 
 
   /**
@@ -195,6 +197,33 @@ export class MainService {
     })
     this._router.navigate(['main/home']);
     this.rentedBooks.push(book);
+  }
+
+  /**
+   * Create book
+   * @param book 
+   */
+  public createBook(book: IBook): void {
+    if (localStorage.getItem('ADDED_BOOKS')){ 
+      const total = parseInt(localStorage.getItem('ADDED_BOOKS')) + 1;
+      localStorage.setItem('ADDED_BOOKS', (total).toString());
+      localStorage.setItem('BOOK_' + total.toString(), JSON.stringify(book));
+    } else {
+      localStorage.setItem('ADDED_BOOKS', '1')
+      localStorage.setItem('BOOK_1', JSON.stringify(book));
+    }
+
+    localStorage.setItem('POSTED_BOOKS_' + book.title + '_' + this.currentUser.name, JSON.stringify(book));
+    this.books.push(book);
+
+    const snackRef = this._snackBar.open('You just post ' + book.title + '!', 'CHECK OUT')
+    snackRef.afterDismissed().subscribe((res) => {
+      if (res.dismissedByAction) {
+        this._router.navigate(['main/posted'])
+      }
+    })
+
+    this._router.navigate(['main/home']);
   }
 
   /**
@@ -248,5 +277,29 @@ export class MainService {
   public logout(): void {
     localStorage.removeItem('USER')
     this._router.navigate(['/login']);
+  }
+
+  /**
+   * Load books in localstorage
+   */
+  private loadBooks(): void {
+    if (localStorage.getItem('ADDED_BOOKS')){
+      for(let i = 0; i <= parseInt(localStorage.getItem('ADDED_BOOKS')); i++) {
+        if (localStorage.getItem('BOOK_' + i)){
+          const localStoBook: any = JSON.parse(localStorage.getItem('BOOK_' + i));
+          console.log(localStoBook);
+          const book: IBook = {
+            id: localStoBook.id,
+            title: localStoBook.title,
+            author: localStoBook.author,
+            price: localStoBook.price,
+            owner: localStoBook.owner,
+            img: localStoBook.img,
+            year: localStoBook.year
+          }
+          this.books.push(book)
+        }
+      }
+    }
   }
 }

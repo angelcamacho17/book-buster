@@ -1,7 +1,5 @@
 <base-component>
-  <div scroller class="scrollable-container">
-    <mat-card class="card" *ngFor="let book of posted" (click)="checkBook(book)">
-      {{book?.title}}
-    </mat-card>
-  </div>
+<search-results [items]="posted" [rowType]="rowType"
+[dividerClass]="'customer-divider'" class="search-results"></search-results>
 </base-component>
+

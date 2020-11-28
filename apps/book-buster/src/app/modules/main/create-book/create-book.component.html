@@ -2,7 +2,7 @@
 <base-component>
 <div class="book-page">
     <div class="content">
-        <form [formGroup]="createForm" (ngSubmit)="onSubmit()" disabled="isSubmitted"
+        <form [formGroup]="createForm" disabled="isSubmitted"
           class="create-form">
       <div class="fields" >
         <div class="data">
@@ -44,21 +44,34 @@
               <mat-error class="error mat-body-1" *ngIf="!createForm.controls['img'].valid && createForm.controls['img'].touched">
                 {{'required' | translate }}
               </mat-error> -->
+
+              <div class="avatar-upload">
+                <div class="avatar-edit">
+                  <input style="display: none" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" />
+                </div>
+                <div class="avatar-preview">
+                  <!-- <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                  </div> -->
+                  <img id="imagePreview" *ngIf="imageUrl" [src]="imageUrl" alt="">
+                </div>
+              </div>
+              
               <div style="margin: 24px 0; text-align: center;">
-                  <button mat-button color="accent" >
+                  <button (click)="fileInput.click()" mat-button color="accent" >
                     <mat-icon>file_upload</mat-icon>
                             Upload image
                     </button>
                     <br/>
-                <input type="file" id="fileUpload" name="fileUpload" multiple="multiple" 
+                <!-- <input type="file" id="fileUpload" name="fileUpload" multiple="multiple" 
                 
-                style="display:none;"/>
+                style="display:none;"/> -->
               </div>
         </div>
           
           <button class="app-btn mat-elevation-0"
           [class.disabled] = "isSubmitted"
           [disabled] = "isSubmitted"
+          (click)="onSubmit()"
           mat-button>
           {{('post' | translate) | uppercase}}
           <mat-progress-bar

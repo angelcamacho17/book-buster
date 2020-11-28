@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IBook } from '../../../models/book.model';
 import { MainService } from '../main.service';
+import { BookRowComponent } from '../shared/components/row/book-row/book-row.component';
 
 @Component({
   selector: 'post-books',
@@ -10,14 +11,14 @@ import { MainService } from '../main.service';
 })
 export class PostBooksComponent implements OnInit, OnDestroy {
   public posted = [];
+  public rowType = BookRowComponent;
 
   constructor(public mainSer: MainService, private router: Router) {
-    for(const book of this.mainSer.books){
-      if (book.owner === this.mainSer.currentUser)
-        this.posted.push(book);
-    }
+    
    }
   ngOnDestroy(): void {
+    
+
     this.mainSer.checkTrans = false;
 
   }
@@ -32,6 +33,12 @@ export class PostBooksComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    for(const book of this.mainSer.books) {
+      if(localStorage.getItem('POSTED_BOOKS_' + book.title + '_' + this.mainSer.currentUser.name)) {
+        console.log(book);
+        this.posted.push(JSON.parse(localStorage.getItem('POSTED_BOOKS_' + book.title + '_' + this.mainSer.currentUser.name)));
+      }
+    }
     this.mainSer.checkTrans = true;
 
   }

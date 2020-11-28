@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs/operators';
 import { LayoutService } from '../../services/layout.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'main-header',
@@ -33,7 +34,8 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
     public translationService: TranslationService,
     public store: Store<{ header: IHeader }>,
     public headerService: HeaderService,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    private _location: Location
   ) {
     this.header$ = this.store.pipe(select('header'));
     this._subscriptions.add(
@@ -83,8 +85,11 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
    * Return last url.
    */
   public returnLastUrl(): void {
-    console.log(this.header.lastUrl)
-    this.router.navigate(['/' + this.header.lastUrl]);
+    if (this.header.lastUrl === 'loc') {
+      this.router.navigate(['/' + this.header.lastUrl]);
+    } else {
+      this.router.navigate(['/' + this.header.lastUrl]);
+    }
     //this._storeUrl.dispatch(goBackNavigationRequest());
   }
 
