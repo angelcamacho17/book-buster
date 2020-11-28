@@ -6,6 +6,7 @@
     padding-top: 0;
     max-height: calc(100% - 64px);
     overflow-y: auto;
+    overflow-x: hidden;
 
     .list-item {
         height: 132px;
