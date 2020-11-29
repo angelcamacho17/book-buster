@@ -45,18 +45,20 @@
                 {{'required' | translate }}
               </mat-error> -->
 
-              <div class="avatar-upload">
+              <!-- <div class="avatar-upload">
                 <div class="avatar-edit">
-                  <input style="display: none" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" />
                 </div>
                 <div class="avatar-preview">
-                  <!-- <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
-                  </div> -->
                   <img id="imagePreview" *ngIf="imageUrl" [src]="imageUrl" alt="">
                 </div>
+              </div> -->
+              <input style="display: none" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" />
+              
+              <div class="image">
+                <img class="book-image" *ngIf="imageUrl" [src]="imageUrl" alt="">
               </div>
               
-              <div style="margin: 24px 0; text-align: center;">
+              <div style="text-align: center; margin-bottom: 24px;">
                   <button (click)="fileInput.click()" mat-button color="accent" >
                     <mat-icon>file_upload</mat-icon>
                             Upload image

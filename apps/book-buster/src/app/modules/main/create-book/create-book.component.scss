@@ -21,7 +21,7 @@
         .create-form {
             width: 100%;
             max-width: 438px;
-            height: 100%;
+            
             .fields {
                 display: flex;
                 flex-flow: column;
@@ -30,6 +30,7 @@
               .data {
                 display: flex;
                 flex-flow: column;
+                margin-bottom: 12px;
                   .mat-form-field {
                     display: inline-block;
                     position: relative;
@@ -62,6 +63,18 @@
                     }
                   }
             
+                  .image {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .book-image {
+                      height: 100px;
+                      width: 80px;
+                      border: 2px solid #645fce;
+                      border-radius: 4px;
+                    }
+                  }
+
                   
                   .disabled {
                       margin-top: 32px;
@@ -78,7 +91,7 @@
                     .avatar-upload {
                       position: relative;
                       max-width: 205px;
-                      margin: 10px auto 30px;
+                      margin: 10px auto 10px;
                       
                       .avatar-edit {
                         position: absolute;
@@ -159,7 +172,6 @@
                 }
 
                 .app-btn {
-                    margin-top: 32px;
                     background-color: #645fce !important;
                     color: rgba(255, 255, 255, 0.87);
                     height: 50px;
