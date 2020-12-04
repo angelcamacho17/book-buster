@@ -46,6 +46,13 @@ const routes: Routes = [
         //canActivate: [FeLoginGuard]
       },
       {
+        path: 'rent-detail',
+        loadChildren: () => import('./event-detail/event-detail.module').then(m => m.EventDetailModule),
+        data: { animation: 'post-search' },
+        resolve: { EventDetailResolver }
+        //canActivate: [FeLoginGuard]
+      },
+      {
         path: 'create-book',
         loadChildren: () => import('./create-book/create-book.module').then(m => m.CreateBookModule),
         data: { animation: 'create-search' },

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IBook } from '../../../models/book.model';
 import { MainService } from '../main.service';
 
@@ -13,15 +13,14 @@ export class EventDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private mainSer: MainService,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       if (params.id) {
-        console.log(params.id === 3)
-        console.log(this.mainSer.books.filter(book => book.id == params.id))
         this.book = this.mainSer.books.filter(book => book.id == params.id)[0];
-        console.log('my book ', this.book);
+        console.log(this.router.url);
       }
     })
   }
