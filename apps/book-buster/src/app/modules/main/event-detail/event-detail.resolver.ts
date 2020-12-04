@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
+import { Resolve, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { IOrder, clearCurrentOrderRequest, refreshOrdersRequest, IHeader, setHeaderRequest, OrderService } from '@fecommerce-workspace/data';
@@ -9,6 +9,7 @@ export class EventDetailResolver implements Resolve<any> {
   orders$: Observable<unknown>;
   constructor(
     private _store: Store<{}>,
+    private _router: Router,
     ) {}
 
   resolve(): Observable<any> {
@@ -18,8 +19,12 @@ export class EventDetailResolver implements Resolve<any> {
   }
 
   private _headerNewOrderFlow(): IHeader {
+    let title = 'detailPost';
+    if (this._router.url.toString().includes('rent')) {
+      title = 'detailRent';
+    }
     const header: IHeader = {
-      title: 'detailPost',
+      title,
       leftIcon: 'close',
       titClass: 'mat-title',
       lastUrl: 'loc',

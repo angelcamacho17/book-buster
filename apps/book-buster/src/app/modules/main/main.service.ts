@@ -204,6 +204,7 @@ export class MainService {
    * @param book 
    */
   public createBook(book: IBook): void {
+    book.owner = this.currentUser;
     if (localStorage.getItem('ADDED_BOOKS')){ 
       const total = parseInt(localStorage.getItem('ADDED_BOOKS')) + 1;
       localStorage.setItem('ADDED_BOOKS', (total).toString());

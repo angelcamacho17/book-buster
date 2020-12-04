@@ -7,10 +7,10 @@
                 <img [src]="book?.img"  class="book-img" >
                 <div>
                     <div class="mat-title title no-btm">
-                        {{book.title}}
+                        {{book?.title}}
                     </div> 
                     <div class="mat-subheading-1 title no-btm">
-                        {{book.author}}
+                        {{book?.author}}
                     </div> 
                     <div class="rate">
                         <mat-icon color="primary">star</mat-icon>
@@ -22,12 +22,21 @@
                 </div>
             </div>
             <div class="info">
-                <div class="row">
+                <div class="row" *ngIf="router.url.toString().includes('post')">
                     <div class="label">
                         Rented by:
                     </div>
                     <div class="value">
-                        Angel Camacho
+                        {{book?.rentedBy ? book?.rentedBy?.name : 'No one yet'}}
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="router.url.toString().includes('rent')">
+                    <div class="label">
+                        Owner:
+                    </div>
+                    <div class="value">
+                        {{book?.rentedBy ? book?.owner?.name : 'No one yet'}}
                     </div>
                 </div>
                 <div class="row">

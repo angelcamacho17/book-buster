@@ -20,7 +20,6 @@ export class EventDetailComponent implements OnInit {
     this.route.params.subscribe((params) => {
       if (params.id) {
         this.book = this.mainSer.books.filter(book => book.id == params.id)[0];
-        console.log(this.router.url);
       }
     })
   }

@@ -27,12 +27,19 @@ export class BookRowComponent implements OnInit {
    * Set book selected
    */
   public bookSelected(): void{
+    console.log('==-------------------------');
+    console.log('==-------------------------');
     this._mainSer.setCurrentBook(this.item);
+    console.log(this.item);
+    console.log('==-------------------------');
+    console.log('==-------------------------');
     if (this._mainSer.checkTrans) {
-      if (this._router.url.includes('post'))
-      this._router.navigate(['/main/post-detail/' + this.item.id])
-      else 
-      this._router.navigate(['/main/rent-detail/' + this.item.id])
+      if (this._router.url.includes('post')) {
+        this._router.navigate(['/main/post-detail/' + this.item.id])
+      }
+      else {
+        this._router.navigate(['/main/rent-detail/' + this.item.id])
+      }
 
     } else {
       this._router.navigate(['/main/book-to-rent'])
